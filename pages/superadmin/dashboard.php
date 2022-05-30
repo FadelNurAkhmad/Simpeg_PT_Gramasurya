@@ -16,17 +16,17 @@
 <?php
 include "../../config/koneksi.php";
 
-$jmlpeg	= mysql_query("SELECT * FROM tb_pegawai WHERE status_mut='' ORDER BY id_peg DESC");
-$jpeg	= mysql_num_rows($jmlpeg);
+$jmlpeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' ORDER BY id_peg DESC");
+$jpeg	= mysqli_num_rows($jmlpeg);
 
-$jmlhar	= mysql_query("SELECT * FROM tb_penghargaan");
-$jhar	= mysql_num_rows($jmlhar);
+$jmlhar	= mysqli_query($koneksi, "SELECT * FROM tb_penghargaan");
+$jhar	= mysqli_num_rows($jmlhar);
 
-$jmltug	= mysql_query("SELECT * FROM tb_penugasan");
-$jtug	= mysql_num_rows($jmltug);
+$jmltug	= mysqli_query($koneksi, "SELECT * FROM tb_penugasan");
+$jtug	= mysqli_num_rows($jmltug);
 
-$jmldik	= mysql_query("SELECT * FROM tb_diklat");
-$jdik	= mysql_num_rows($jmldik);
+$jmldik	= mysqli_query($koneksi, "SELECT * FROM tb_diklat");
+$jdik	= mysqli_num_rows($jmldik);
 ?>
 <!-- begin row -->
 <div class="row">
@@ -121,11 +121,11 @@ $jdik	= mysql_num_rows($jmldik);
 							$nowg	= date('Y-m-d');
 							$blng	= date('Y-m-d', strtotime('+1 months', strtotime($nowg)));
 
-							$tampilKgb	= mysql_query("SELECT * FROM tb_kgb WHERE tgl_kgb BETWEEN '$nowg' AND '$blng'");
-							while ($kgb	= mysql_fetch_array($tampilKgb)) {
+							$tampilKgb	= mysqli_query($koneksi, "SELECT * FROM tb_kgb WHERE tgl_kgb BETWEEN '$nowg' AND '$blng'");
+							while ($kgb	= mysqli_fetch_array($tampilKgb, MYSQLI_ASSOC)) {
 								$idg = $kgb['id_peg'];
-								$tampilPegg	= mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$idg'");
-								while ($pegg	= mysql_fetch_array($tampilPegg)) {
+								$tampilPegg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$idg'");
+								while ($pegg	= mysqli_fetch_array($tampilPegg, MYSQLI_ASSOC)) {
 							?>
 									<tr>
 										<td><?php echo $pegg['nip']; ?></td>
@@ -172,11 +172,11 @@ $jdik	= mysql_num_rows($jmldik);
 							$nowp	= date('Y-m-d');
 							$blnp	= date('Y-m-d', strtotime('+1 months', strtotime($nowp)));
 
-							$tampilKpb	= mysql_query("SELECT * FROM tb_kpb WHERE tgl_kpb BETWEEN '$nowp' AND '$blnp'");
-							while ($kpb	= mysql_fetch_array($tampilKpb)) {
+							$tampilKpb	= mysqli_query($koneksi, "SELECT * FROM tb_kpb WHERE tgl_kpb BETWEEN '$nowp' AND '$blnp'");
+							while ($kpb	= mysqli_fetch_array($tampilKpb, MYSQLI_ASSOC)) {
 								$idp = $kpb['id_peg'];
-								$tampilPegp	= mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$idp'");
-								while ($pegp	= mysql_fetch_array($tampilPegp)) {
+								$tampilPegp	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$idp'");
+								while ($pegp	= mysqli_fetch_array($tampilPegp, MYSQLI_ASSOC)) {
 							?>
 									<tr>
 										<td><?php echo $pegp['nip']; ?></td>
@@ -243,8 +243,8 @@ $jdik	= mysql_num_rows($jmldik);
 						<tbody>
 							<?php
 							$datenow = date("Y");
-							$nowpen	= mysql_query("SELECT * FROM tb_pegawai WHERE tgl_pensiun LIKE '$datenow%' ORDER BY tgl_pensiun");
-							while ($now	= mysql_fetch_array($nowpen)) {
+							$nowpen	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE tgl_pensiun LIKE '$datenow%' ORDER BY tgl_pensiun");
+							while ($now	= mysqli_fetch_array($nowpen, MYSQLI_ASSOC)) {
 							?>
 								<tr>
 									<td><?php echo $now['nip']; ?></td>
@@ -285,8 +285,8 @@ $jdik	= mysql_num_rows($jmldik);
 						<tbody>
 							<?php
 							$dateone = date("Y") + 1;
-							$onepen	= mysql_query("SELECT * FROM tb_pegawai WHERE tgl_pensiun LIKE '$dateone%' ORDER BY tgl_pensiun");
-							while ($one	= mysql_fetch_array($onepen)) {
+							$onepen	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE tgl_pensiun LIKE '$dateone%' ORDER BY tgl_pensiun");
+							while ($one	= mysqli_fetch_array($onepen, MYSQLI_ASSOC)) {
 							?>
 								<tr>
 									<td><?php echo $one['nip']; ?></td>
@@ -327,8 +327,8 @@ $jdik	= mysql_num_rows($jmldik);
 						<tbody>
 							<?php
 							$datetwo = date("Y") + 2;
-							$twopen	= mysql_query("SELECT * FROM tb_pegawai WHERE tgl_pensiun LIKE '$datetwo%' ORDER BY tgl_pensiun");
-							while ($two	= mysql_fetch_array($twopen)) {
+							$twopen	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE tgl_pensiun LIKE '$datetwo%' ORDER BY tgl_pensiun");
+							while ($two	= mysqli_fetch_array($twopen, MYSQLI_ASSOC)) {
 							?>
 								<tr>
 									<td><?php echo $two['nip']; ?></td>
@@ -409,13 +409,13 @@ $jdik	= mysql_num_rows($jmldik);
 			series: [
 				<?php
 				$sql   = "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY jabatan ORDER BY jabatan DESC";
-				$query = mysql_query($sql)  or die(mysql_error());
-				while ($ret = mysql_fetch_array($query)) {
+				$query = mysqli_query($koneksi, $sql)  or die(mysqli_error($koneksi));
+				while ($ret = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 					$jab	= $ret['jabatan'];
 
 					$sql_jumlah   = "SELECT * FROM tb_pegawai WHERE status_mut='' AND jabatan='$jab'";
-					$query_jumlah = mysql_query($sql_jumlah) or die(mysql_error());
-					$data = mysql_num_rows($query_jumlah);
+					$query_jumlah = mysqli_query($koneksi, $sql_jumlah) or die(mysqli_error($koneksi));
+					$data = mysqli_num_rows($query_jumlah);
 				?> {
 						name: '<?php echo $jab; ?>',
 						data: [<?php echo $data; ?>]
@@ -450,13 +450,13 @@ $jdik	= mysql_num_rows($jmldik);
 			series: [
 				<?php
 				$sql   = "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY urut_pangkat ORDER BY urut_pangkat DESC";
-				$query = mysql_query($sql)  or die(mysql_error());
-				while ($ret = mysql_fetch_array($query)) {
+				$query = mysqli_query($koneksi, $sql)  or die(mysqli_error($koneksi));
+				while ($ret = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 					$gol	= $ret['urut_pangkat'];
 
 					$sql_jumlah   = "SELECT * FROM tb_pegawai WHERE status_mut='' AND urut_pangkat='$gol'";
-					$query_jumlah = mysql_query($sql_jumlah) or die(mysql_error());
-					$data = mysql_num_rows($query_jumlah);
+					$query_jumlah = mysqli_query($koneksi, $sql_jumlah) or die(mysqli_error($koneksi));
+					$data = mysqli_num_rows($query_jumlah);
 				?> {
 						name: '<?php echo $gol; ?>',
 						data: [<?php echo $data; ?>]
@@ -491,13 +491,13 @@ $jdik	= mysql_num_rows($jmldik);
 			series: [
 				<?php
 				$sql   = "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY sekolah ORDER BY sekolah DESC";
-				$query = mysql_query($sql)  or die(mysql_error());
-				while ($ret = mysql_fetch_array($query)) {
+				$query = mysqli_query($koneksi, $sql)  or die(mysqli_error($koneksi));
+				while ($ret = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 					$sek	= $ret['sekolah'];
 
 					$sql_jumlah   = "SELECT * FROM tb_pegawai WHERE status_mut='' AND sekolah='$sek'";
-					$query_jumlah = mysql_query($sql_jumlah) or die(mysql_error());
-					$data = mysql_num_rows($query_jumlah);
+					$query_jumlah = mysqli_query($koneksi, $sql_jumlah) or die(mysqli_error($koneksi));
+					$data = mysqli_num_rows($query_jumlah);
 				?> {
 						name: '<?php echo $sek; ?>',
 						data: [<?php echo $data; ?>]
