@@ -45,7 +45,8 @@
         <div class="invoice-date">
             <strong>Periode</strong>
             <div class="invoice-detail">
-                2022-01-02 &nbsp; <b>s/d</b> &nbsp; 2022-12-03
+                2022-12-03
+                <!-- 2022-01-02 &nbsp; <b>s/d</b> &nbsp; 2022-12-03 -->
             </div>
         </div>
     </div>

@@ -68,6 +68,7 @@ $jmlpeg		= mysql_num_rows($tampilPeg);
 	<link href="../../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css" rel="stylesheet" />
 	<link href="../../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css" rel="stylesheet" />
 	<link href="../../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css" rel="stylesheet" />
+
 	<!-- ================== END PAGE LEVEL STYLE ================== -->
 
 	<!-- ================== BEGIN BASE JS ================== -->
@@ -193,7 +194,7 @@ $jmlpeg		= mysql_num_rows($tampilPeg);
 						</ul>
 					</li>
 					<li class="has-sub">
-						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-filing bg-grey"></i><span>Kepegawaian &nbsp; <span class="label label-warning m-l-5">10</span></span></a>
+						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-filing bg-grey"></i><span>Kepegawaian &nbsp; <span class="label label-warning m-l-5">9</span></span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-master-data-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jabatan</a></li>
 							<li><a href="index.php?page=form-master-data-pangkat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pangkat</a></li>
@@ -205,7 +206,7 @@ $jmlpeg		= mysql_num_rows($tampilPeg);
 							<!-- <li><a href="index.php?page=form-master-data-seminar"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Seminar</a></li> -->
 							<li><a href="index.php?page=form-master-data-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Cuti</a></li>
 							<!-- <li><a href="index.php?page=form-master-data-lat-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Latihan Jabatan</a></li> -->
-							<li><a href="index.php?page=form-master-data-gaji-pegawai"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Gaji Pegawai</a></li>
+							<!-- <li><a href="index.php?page=form-master-data-gaji-pegawai"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Gaji Pegawai</a></li> -->
 							<li><a href="index.php?page=form-master-data-tunjangan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Tunjangan</a></li>
 							<li><a href="index.php?page=form-master-data-kawin"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Izin Kawin</a></li>
 						</ul>
@@ -243,7 +244,7 @@ $jmlpeg		= mysql_num_rows($tampilPeg);
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-printer"></i><span>Report</span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=nominatif"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Nominatif</a></li>
-							<li><a href="index.php?page=daftar-urut-kepangkatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;DUK</a></li>
+							<!-- <li><a href="index.php?page=daftar-urut-kepangkatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;DUK</a></li> -->
 							<li><a href="index.php?page=bezetting"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Bezetting</a></li>
 							<li><a href="index.php?page=keadaan-pegawai"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Keadaan Pegawai</a></li>
 							<li><a href="index.php?page=pre-pensiun"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pensiun</a></li>
@@ -1016,6 +1017,7 @@ $jmlpeg		= mysql_num_rows($tampilPeg);
 	<script src="../../assets/js/form-plugins.demo.min.js"></script>
 	<script src="../../assets/js/dashboard.min.js"></script>
 	<script src="../../assets/js/apps.min.js"></script>
+
 	<!-- ================== END PAGE LEVEL JS ================== -->
 
 	<script>
@@ -1026,24 +1028,6 @@ $jmlpeg		= mysql_num_rows($tampilPeg);
 		});
 	</script>
 
-
-	<!-- <script>
-		$(document).ready(function() {
-			$("#nipp").change(function() {
-				var nip = $("#nipp").val();
-				$.ajax({
-					type: "POST",
-					data: "nip=" + nip,
-					url: "json_presensi.php",
-					dataType: "json",
-					success: function(data) {
-						$("#nama_pegawaii").val(data.nama_pegawai);
-					}
-				});
-
-			});
-		});
-	</script>> -->
 </body>
 
 </html>

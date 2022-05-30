@@ -108,7 +108,7 @@ $jmlpeg		= mysql_num_rows($tampilPeg);
 					<li>
 						<form action="index.php?page=direct-search" method="POST" enctype="multipart/form-data" class="navbar-form full-width">
 							<div class="form-group">
-								<input type="text" name="nama" class="form-control" placeholder="Enter name" required />
+								<input type="text" name="nama" class="form-control" placeholder="Masukan Nama Pegawai" required />
 								<button type="submit" name="search" value="search" class="btn btn-search"><i class="ion-ios-search-strong"></i></button>
 							</div>
 						</form>
@@ -183,23 +183,35 @@ $jmlpeg		= mysql_num_rows($tampilPeg);
 						</ul>
 					</li>
 					<li class="has-sub">
-						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-filing bg-info"></i><span>Kepegawaian &nbsp; <span class="label label-warning m-l-5">11</span></span></a>
+						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-filing bg-info"></i><span>Kepegawaian &nbsp; <span class="label label-warning m-l-5">9</span></span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-master-data-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jabatan</a></li>
 							<li><a href="index.php?page=form-master-data-pangkat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pangkat</a></li>
 							<li><a href="index.php?page=form-master-data-hukuman"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Hukuman</a></li>
-							<li><a href="index.php?page=form-master-data-diklat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Diklat</a></li>
+							<li><a href="index.php?page=form-master-data-dokumen"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Dokumen Pegawai</a></li>
+							<!-- <li><a href="index.php?page=form-master-data-diklat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Diklat</a></li> -->
 							<li><a href="index.php?page=form-master-data-penghargaan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Penghargaan</a></li>
 							<li><a href="index.php?page=form-master-data-penugasan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Penugasan</a></li>
-							<li><a href="index.php?page=form-master-data-seminar"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Seminar</a></li>
+							<!-- <li><a href="index.php?page=form-master-data-seminar"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Seminar</a></li> -->
 							<li><a href="index.php?page=form-master-data-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Cuti</a></li>
-							<li><a href="index.php?page=form-master-data-lat-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Latihan Jabatan</a></li>
+							<!-- <li><a href="index.php?page=form-master-data-lat-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Latihan Jabatan</a></li> -->
 							<li><a href="index.php?page=form-master-data-tunjangan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Tunjangan</a></li>
 							<li><a href="index.php?page=form-master-data-kawin"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Izin Kawin</a></li>
 						</ul>
 					</li>
-					<li><a href="index.php?page=form-master-data-mutasi"><i class="ion-arrow-swap bg-grey"></i><span>Mutasi</span></a></li>
+					<!-- <li><a href="index.php?page=form-master-data-mutasi"><i class="ion-arrow-swap bg-grey"></i><span>Mutasi</span></a></li> -->
 					<li><a href="index.php?page=form-master-data-skp"><i class="ion-social-buffer bg-warning"></i><span>SKP</span></a></li>
+					<li class="has-sub">
+						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-compose bg-primary"></i><span>Presensi</span></a>
+						<ul class="sub-menu">
+							<li><a href="index.php?page=form-view-data-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Presensi</a></li>
+							<li><a href="index.php?page=form-view-data-attlog"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Attlog</a></li>
+							<li><a href="index.php?page=form-view-rekap-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Rekap Presensi</a></li>
+							<li><a href="index.php?page=form-view-pengaturan-mesin"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pengaturan Mesin</a></li>
+							<li><a href="index.php?page=form-view-hari-jam-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Hari/Jam Kerja</a></li>
+							<li><a href="index.php?page=form-view-shift-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Shift</a></li>
+						</ul>
+					</li>
 					<li class="has-sub">
 						<a href="javascript:;"><i class="ion-arrow-shrink bg-info"></i><span>Rekapitulasi</span> <span class="badge bg-danger pull-right"><span class="ion-stats-bars"></span></span></a>
 						<ul class="sub-menu">
@@ -213,7 +225,7 @@ $jmlpeg		= mysql_num_rows($tampilPeg);
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-printer"></i><span>Report</span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=nominatif"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Nominatif</a></li>
-							<li><a href="index.php?page=daftar-urut-kepangkatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;DUK</a></li>
+							<!-- <li><a href="index.php?page=daftar-urut-kepangkatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;DUK</a></li> -->
 							<li><a href="index.php?page=bezetting"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Bezetting</a></li>
 							<li><a href="index.php?page=keadaan-pegawai"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Keadaan Pegawai</a></li>
 							<li><a href="index.php?page=pre-pensiun"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pensiun</a></li>
@@ -440,6 +452,22 @@ $jmlpeg		= mysql_num_rows($tampilPeg);
 					include "../../pages/admin/kepeg/hukum/delete-data-hukuman.php";
 					break;
 
+				case 'form-master-data-dokumen':
+					include "../../pages/admin/kepeg/dokumen/form-master-data-dokumen.php";
+					break;
+				case 'master-data-dokumen':
+					include "../../pages/admin/kepeg/dokumen/master-data-dokumen.php";
+					break;
+				case 'form-edit-data-dokumen':
+					include "../../pages/admin/kepeg/dokumen/form-edit-data-dokumen.php";
+					break;
+				case 'edit-data-dokumen':
+					include "../../pages/admin/kepeg/dokumen/edit-data-dokumen.php";
+					break;
+				case 'delete-data-dokumen':
+					include "../../pages/admin/kepeg/dokumen/delete-data-dokumen.php";
+					break;
+
 				case 'form-master-data-diklat':
 					include "../../pages/admin/kepeg/diklat/form-master-data-diklat.php";
 					break;
@@ -610,6 +638,57 @@ $jmlpeg		= mysql_num_rows($tampilPeg);
 					break;
 				case 'detail-data-skp':
 					include "../../pages/admin/skp/detail-data-skp.php";
+					break;
+
+				case 'form-view-data-presensi':
+					include "../../pages/admin/presensi/data_presensi/form-view-data-presensi.php";
+					break;
+				case 'form-edit-data-presensi':
+					include "../../pages/admin/presensi/data_presensi/form-edit-data-presensi.php";
+					break;
+				case 'form-master-data-presensi':
+					include "../../pages/admin/presensi/data_presensi/form-master-data-presensi.php";
+					break;
+				case 'master-data-presensi':
+					include "../../pages/admin/presensi/data_presensi/master-data-presensi.php";
+					break;
+
+				case 'form-view-pengaturan-mesin':
+					include "../../pages/admin/presensi/mesin/form-view-pengaturan-mesin.php";
+					break;
+				case 'form-master-pengaturan-mesin':
+					include "../../pages/admin/presensi/mesin/form-master-pengaturan-mesin.php";
+					break;
+				case 'form-edit-pengaturan-mesin':
+					include "../../pages/admin/presensi/mesin/form-edit-pengaturan-mesin.php";
+					break;
+
+				case 'form-view-shift-kerja':
+					include "../../pages/admin/presensi/shift/form-view-shift-kerja.php";
+					break;
+				case 'form-master-shift-kerja':
+					include "../../pages/admin/presensi/shift/form-master-shift-kerja.php";
+					break;
+				case 'form-edit-shift-kerja':
+					include "../../pages/admin/presensi/shift/form-edit-shift-kerja.php";
+					break;
+
+				case 'form-view-hari-jam-kerja':
+					include "../../pages/admin/presensi/hari_jam_kerja/form-view-hari-jam-kerja.php";
+					break;
+				case 'form-master-hari-jam-kerja':
+					include "../../pages/admin/presensi/hari_jam_kerja/form-master-hari-jam-kerja.php";
+					break;
+				case 'form-edit-hari-jam-kerja':
+					include "../../pages/admin/presensi/hari_jam_kerja/form-edit-hari-jam-kerja.php";
+					break;
+
+				case 'form-view-rekap-presensi':
+					include "../../pages/admin/presensi/rekap/form-view-rekap-presensi.php";
+					break;
+
+				case 'form-view-data-attlog':
+					include "../../pages/admin/presensi/attlog/form-view-data-attlog.php";
 					break;
 
 				case 'rekap-golongan':

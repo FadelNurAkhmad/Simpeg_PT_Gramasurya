@@ -8,11 +8,11 @@
         $_SESSION['pesan'] = "";
         ?>
     </li>
-    <li><a href="index.php?page=form-master-data-presensi" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Tambah Data Presensi</a></li>
+    <li><a href="index.php?page=form-master-shift-kerja" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Tambah Shift Kerja</a></li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">List<small> Data Presensi&nbsp;</small></h1>
+<h1 class="page-header">Shift<small> Kerja&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";
@@ -30,7 +30,7 @@ $tampilDataPre    = mysql_query("SELECT * FROM tb_presensi ORDER BY id_presensi 
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Results <span class="text-info"><?php echo mysql_num_rows($tampilDataPre); ?></span> rows for "Data Presensi"</h4>
+                <h4 class="panel-title">Results <span class="text-info"><?php echo mysql_num_rows($tampilDataPre); ?></span> rows for "Shift Kerja"</h4>
             </div>
             <div class="alert alert-success fade in">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
@@ -41,13 +41,7 @@ $tampilDataPre    = mysql_query("SELECT * FROM tb_presensi ORDER BY id_presensi 
                     <thead>
                         <tr>
                             <th width="4%">No</th>
-                            <th>Tanggal</th>
-                            <th>Periode Bulan/Tahun</th>
-                            <th>Nama Pegawai</th>
-                            <th>Hadir</th>
-                            <th>Sakit</th>
-                            <th>Ijin</th>
-                            <th>Tanpa Keterangan</th>
+                            <th>Nama Shift</th>
                             <th width="10%">Action</th>
                         </tr>
                     </thead>
@@ -59,15 +53,17 @@ $tampilDataPre    = mysql_query("SELECT * FROM tb_presensi ORDER BY id_presensi 
                         ?>
                             <tr>
                                 <td><?php echo $no ?></td>
-                                <td><?php echo $dataPre['tanggal']; ?></td>
-                                <td><?php echo $dataPre['bulan'] . ' / ' . $dataPre['tahun']; ?></td>
-                                <td>Raharjo</td>
-                                <td><?php echo $dataPre['hadir']; ?></td>
-                                <td><?php echo $dataPre['sakit']; ?></td>
-                                <td><?php echo $dataPre['ijin']; ?></td>
-                                <td><?php echo $dataPre['tanpa_keterangan']; ?></td>
+                                <td>Pagi</td>
                                 <td class="text-center">
-                                    <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-presensi&id_presensi=<?= $dataPre['id_presensi'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
+                                    <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-shift-kerja" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
+                                    <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $dataPre['id_presensi'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo $no ?></td>
+                                <td>Malam</td>
+                                <td class="text-center">
+                                    <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-shift-kerja" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
                                     <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $dataPre['id_presensi'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
                                 </td>
                             </tr>

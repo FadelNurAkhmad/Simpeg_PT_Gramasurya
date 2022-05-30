@@ -2,45 +2,45 @@
 <ol class="breadcrumb pull-right">
 	<li>
 		<?php
-			if (isset($_SESSION['pesan']) && $_SESSION['pesan'] <> '') {
-				echo "<span class='pesan'><div class='btn btn-sm btn-inverse m-b-10'><i class='fa fa-bell text-warning'></i>&nbsp; ".$_SESSION['pesan']." &nbsp; &nbsp; &nbsp;</div></span>";
-			}
-			$_SESSION['pesan'] ="";
+		if (isset($_SESSION['pesan']) && $_SESSION['pesan'] <> '') {
+			echo "<span class='pesan'><div class='btn btn-sm btn-inverse m-b-10'><i class='fa fa-bell text-warning'></i>&nbsp; " . $_SESSION['pesan'] . " &nbsp; &nbsp; &nbsp;</div></span>";
+		}
+		$_SESSION['pesan'] = "";
 		?>
 	</li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Riwayat <small>Penugasan LN <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
+<h1 class="page-header">Riwayat <small>Penugasan <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
-	include "../../config/koneksi.php";
-	function kdauto($tabel, $inisial){
-		$struktur   = mysql_query("SELECT * FROM $tabel");
-		$field      = mysql_field_name($struktur,0);
-		$panjang    = mysql_field_len($struktur,0);
-		$qry  = mysql_query("SELECT max(".$field.") FROM ".$tabel);
-		$row  = mysql_fetch_array($qry);
-		if ($row[0]=="") {
-		$angka=0;
-		}
-		else {
-		$angka= substr($row[0], strlen($inisial));
-		}
-		$angka++;
-		$angka      =strval($angka);
-		$tmp  ="";
-		for($i=1; $i<=($panjang-strlen($inisial)-strlen($angka)); $i++) {
-		$tmp=$tmp."0";
-		}
-		return $inisial.$tmp.$angka;
-		}
-	$id_penugasan	=kdauto("tb_penugasan","");
+include "../../config/koneksi.php";
+function kdauto($tabel, $inisial)
+{
+	$struktur   = mysql_query("SELECT * FROM $tabel");
+	$field      = mysql_field_name($struktur, 0);
+	$panjang    = mysql_field_len($struktur, 0);
+	$qry  = mysql_query("SELECT max(" . $field . ") FROM " . $tabel);
+	$row  = mysql_fetch_array($qry);
+	if ($row[0] == "") {
+		$angka = 0;
+	} else {
+		$angka = substr($row[0], strlen($inisial));
+	}
+	$angka++;
+	$angka      = strval($angka);
+	$tmp  = "";
+	for ($i = 1; $i <= ($panjang - strlen($inisial) - strlen($angka)); $i++) {
+		$tmp = $tmp . "0";
+	}
+	return $inisial . $tmp . $angka;
+}
+$id_penugasan	= kdauto("tb_penugasan", "");
 ?>
 <!-- begin row -->
 <div class="row">
 	<!-- begin col-12 -->
-    <div class="col-md-12">
+	<div class="col-md-12">
 		<!-- begin panel -->
 		<div class="panel panel-inverse" data-sortable-id="form-stuff-1">
 			<div class="panel-heading">
@@ -53,18 +53,18 @@
 				<h4 class="panel-title">Form master data penugasan</h4>
 			</div>
 			<div class="panel-body">
-				<form action="index.php?page=master-data-penugasan&id_penugasan=<?=$id_penugasan?>" class="form-horizontal" method="POST" enctype="multipart/form-data" >
+				<form action="index.php?page=master-data-penugasan&id_penugasan=<?= $id_penugasan ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label class="col-md-3 control-label">Pegawai</label>
 						<div class="col-md-6">
 							<?php
-								$data = mysql_query("SELECT * FROM tb_pegawai ORDER BY nama ASC");        
-								echo '<select name="id_peg" class="default-select2 form-control">';    
-								echo '<option value="">...</option>';    
-									while ($row = mysql_fetch_array($data)) {    
-									echo '<option value="'.$row['id_peg'].'">'.$row['nama'].'_'.$row['nip'].'</option>';    
-									}    
-								echo '</select>';
+							$data = mysql_query("SELECT * FROM tb_pegawai ORDER BY nama ASC");
+							echo '<select name="id_peg" class="default-select2 form-control">';
+							echo '<option value="">...</option>';
+							while ($row = mysql_fetch_array($data)) {
+								echo '<option value="' . $row['id_peg'] . '">' . $row['nama'] . '_' . $row['nip'] . '</option>';
+							}
+							echo '</select>';
 							?>
 						</div>
 					</div>
@@ -107,7 +107,14 @@
 	<!-- end col-6 -->
 </div>
 <!-- end row -->
-<script> // 500 = 0,5 s
-	$(document).ready(function(){setTimeout(function(){$(".pesan").fadeIn('slow');}, 500);});
-	setTimeout(function(){$(".pesan").fadeOut('slow');}, 7000);
+<script>
+	// 500 = 0,5 s
+	$(document).ready(function() {
+		setTimeout(function() {
+			$(".pesan").fadeIn('slow');
+		}, 500);
+	});
+	setTimeout(function() {
+		$(".pesan").fadeOut('slow');
+	}, 7000);
 </script>

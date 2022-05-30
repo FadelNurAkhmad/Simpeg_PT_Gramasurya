@@ -41,7 +41,9 @@ $diff = $today->diff($birthday);
 			<li class=""><a href="#sekolah" data-toggle="tab"><span class="visible-xs">Pend</span><span class="hidden-xs"><i class="ion-university fa-lg text-inverse"></i> Pendidikan</span></a></li>
 			<li class=""><a href="#bahasa" data-toggle="tab"><span class="visible-xs">Bhs</span><span class="hidden-xs"><i class="fa fa-language fa-lg text-warning"></i> Bahasa</span></a></li>
 			<li class=""><a href="#skp" data-toggle="tab"><span class="visible-xs">SKP</span><span class="hidden-xs"><i class="ion-social-buffer fa-lg text-info"></i> SKP</span></a></li>
-			<li class=""><a href="#kgb" data-toggle="tab"><span class="visible-xs">Gaji</span><span class="hidden-xs"><i class="fa fa-pencil text-inverse"></i> Gaji</span></a></li>
+			<!-- <li class=""><a href="#kgb" data-toggle="tab"><span class="visible-xs">Gaji</span><span class="hidden-xs"><i class="fa fa-pencil text-inverse"></i> Gaji</span></a></li> -->
+			<li class=""><a href="#dokumen" data-toggle="tab"><span class="visible-xs">Dokumen</span><span class="hidden-xs"><i class="fa fa-folder-open text-success"></i> Dokumen</span></a></li>
+			<li class=""><a href="#presensi" data-toggle="tab"><span class="visible-xs">Presensi</span><span class="hidden-xs"><i class="fa fa-calendar-check-o text-danger"></i> Presensi</span></a></li>
 		</ul>
 		<div class="tab-content">
 			<div class="tab-pane fade active in" id="profile">
@@ -614,6 +616,172 @@ $diff = $today->diff($birthday);
 					</table>
 				</div>
 			</div>
+			<div class="tab-pane fade" id="dokumen">
+				<div class="alert alert-success fade in">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+					<i class="fa fa-info fa-2x pull-left"></i> Folder ini dapat digunakan untuk menyimpan dokumen kepegawaian apapun ...
+				</div>
+				<a type="button" class="btn btn-sm btn-warning m-b-10" data-toggle="modal" data-target="#dok"><i class="fa fa-plus-circle"></i> Add Dokumen&nbsp;</a>
+
+				<div class="table-responsive">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th width="10%">No #</th>
+								<th>Nama Dokumen</th>
+								<th>File</th>
+								<th width="10%">
+									<center><i class="fa fa-code fa-lg"></i></center>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							$no = 0;
+							$tampilDokumen	= mysql_query("SELECT * FROM tb_dokumen WHERE id_peg='$id_peg'");
+							while ($dok = mysql_fetch_array($tampilDokumen)) {
+								$no++
+							?>
+								<tr>
+									<td><?= $no ?></td>
+									<td><?php echo $dok['dokumen']; ?></td>
+									<td><?php
+										if ($dok['file'] == "") {
+											echo "-";
+										} else {
+											echo "<a href='../../assets/file/$dok[file]' target='_blank' title='download'><i class='fa fa-file-pdf-o fa-lg text-danger'></i></a>";
+										}
+										?>
+									</td>
+									<td class="tools">
+										<a href="index.php?page=form-edit-data-dokumen&id_dokumen=<?= $dok['id_dokumen']; ?>" title="edit" type="button" class="btn btn-info btn-icon btn-sm"><i class="fa fa-edit fa-lg"></i></a>&nbsp;
+										<a href="index.php?page=delete-data-dokumen&id_dokumen=<?= $dok['id_dokumen'] ?>" title="delete" type="button" class="btn btn-danger btn-icon btn-sm" onclick="return confirm('Are you sure you want to delete == Data Dokumen == from Database?');"><i class="fa fa-trash-o fa-lg"></i></a>
+									</td>
+								</tr>
+							<?php
+							}
+							?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- Modal Dokumen -->
+			<div id="dok" class="modal fade">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">
+								<i class="ion-ios-gear text-danger"></i>
+								Upload Dokumen Kepegawaian
+							</h4>
+						</div>
+						<div class="col-sm-12">
+							<div class="modal-body">
+								<form action="index.php?page=master-data-dokumen&id_dokumen=<?= $id_dokumen ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+									<div class="form-group">
+										<label class="col-md-3 control-label">Nama Dokumen</label>
+										<div class="col-md-6">
+											<input type="text" name="dokumen" maxlength="128" class="form-control" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">File</label>
+										<div class="col-md-6">
+											<input type="file" name="file" maxlength="255" class="form-control" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label"></label>
+										<div class="col-md-6">
+											<p>* Max size 500 KB</p>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label"></label>
+										<div class="col-md-6">
+											<button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>&nbsp;
+											<a type="button" class="btn btn-default active" data-dismiss="modal" aria-hidden="true"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="modal-footer no-margin-top">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="presensi">
+				<div class="alert alert-success fade in">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+					<i class="fa fa-info fa-2x pull-left"></i> Folder ini dapat digunakan untuk melihat rekap presensi ...
+				</div>
+				<div class="row ">
+					<div class="col-6 col-md-8">
+						<label class="col-md-1 control-label">Periode</label>
+						<div class="col-md-3">
+							<div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								<input type="text" name="periode_awal" placeholder="Dari" class="form-control" />
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="input-group date" id="datepicker-disabled-past2" data-date-format="yyyy-mm-dd">
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								<input type="text" name="periode_akhir" placeholder="Sampai" class="form-control" />
+							</div>
+						</div>
+						<div class="col-sm-4 m-b-10">
+							<a type="button" class="btn btn-primary btn-sm m-r-5" data-toggle="modal" data-target="#jab"><i class="fa fa-floppy-o"></i> Submit&nbsp;</a>
+							<a href="#" class="btn btn-sm btn-success" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a>
+						</div>
+					</div>
+				</div>
+				<div class="table-responsive">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th rowspan="3" width="4%">No</th>
+								<th rowspan="3">Nama</th>
+								<th colspan="3">Tanggal</th>
+								<th colspan="3">Tanggal</th>
+							</tr>
+							<tr>
+								<th colspan="3">23-Mei</th>
+								<th colspan="3">24-Mei</th>
+							</tr>
+							<tr>
+								<th>Datang</th>
+								<th>Pulang</th>
+								<th>Ket</th>
+
+								<th>Datang</th>
+								<th>Pulang</th>
+								<th>Ket</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							$no = 0;
+							// while ($peg    = mysql_fetch_array($tampilPeg)) {
+							$no++
+							?>
+							<tr>
+								<td><?php echo $no ?></td>
+								<td>Parjo Raharjo</td>
+								<td>06:28:00</td>
+								<td>17:10:00</td>
+								<td>-</td>
+
+								<td>08:09:00</td>
+								<td>16:29:00</td>
+								<td>-</td>
+							</tr>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-2">
@@ -629,17 +797,17 @@ $diff = $today->diff($birthday);
 			<div id="collapseOne" class="panel-collapse collapse in">
 				<div class="panel-body">
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#pensiun" class="btn btn-default"><i class="fa fa-calendar"></i> Pensiun</a></p>
-					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#naikpangkat" class="btn btn-default"><i class="fa fa-calendar"></i> Naik Pangkat</a></p>
-					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#naikgaji" class="btn btn-default"><i class="fa fa-calendar"></i> Naik Gaji</a></p>
+					<!-- <p class="pull-right"><a type="button" data-toggle="modal" data-target="#naikpangkat" class="btn btn-default"><i class="fa fa-calendar"></i> Naik Pangkat</a></p> -->
+					<!-- <p class="pull-right"><a type="button" data-toggle="modal" data-target="#naikgaji" class="btn btn-default"><i class="fa fa-calendar"></i> Naik Gaji</a></p> -->
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#jabatan" class="btn btn-default"><i class="fa fa-star"></i> Jabatan</a></p>
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#pangkat" class="btn btn-default"><i class="fa fa-star"></i> Kepangkatan</a></p>
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#hukuman" class="btn btn-default"><i class="fa fa-gavel"></i> Hukuman</a></p>
-					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#diklat" class="btn btn-default"><i class="fa fa-graduation-cap"></i> Diklat</a></p>
+					<!-- <p class="pull-right"><a type="button" data-toggle="modal" data-target="#diklat" class="btn btn-default"><i class="fa fa-graduation-cap"></i> Diklat</a></p> -->
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#harga" class="btn btn-default"><i class="fa fa-certificate"></i> Penghargaan</a></p>
-					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#tugas" class="btn btn-default"><i class="fa fa-flag"></i> Penugasan LN</a></p>
-					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#seminar" class="btn btn-default"><i class="fa fa-desktop"></i> Seminar</a></p>
+					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#tugas" class="btn btn-default"><i class="fa fa-flag"></i> Penugasan</a></p>
+					<!-- <p class="pull-right"><a type="button" data-toggle="modal" data-target="#seminar" class="btn btn-default"><i class="fa fa-desktop"></i> Seminar</a></p> -->
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#cuti" class="btn btn-default"><i class="fa fa-calendar"></i> Cuti</a></p>
-					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#latjab" class="btn btn-default"><i class="fa fa-book"></i> Latihan Jabatan</a></p>
+					<!-- <p class="pull-right"><a type="button" data-toggle="modal" data-target="#latjab" class="btn btn-default"><i class="fa fa-book"></i> Latihan Jabatan</a></p> -->
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#mutasi" class="btn btn-default"><i class="fa fa-exchange"></i> Mutasi</a></p>
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#tunjangan" class="btn btn-default"><i class="fa fa-money"></i> Tunjangan</a></p>
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#kawin" class="btn btn-default"><i class="fa fa-book"></i> Izin Kawin</a></p>

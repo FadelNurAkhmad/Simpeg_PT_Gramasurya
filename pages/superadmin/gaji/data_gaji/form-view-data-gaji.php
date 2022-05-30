@@ -133,20 +133,20 @@ $tampilPeg    = mysql_query("SELECT * FROM tb_pegawai ORDER BY id_peg DESC");
                             <td>11-02-2022</td>
                             <td>Januari/2022</td>
                             <td>1900018237</td>
-                            <td>Joko Sulaiman</td>
+                            <td>Raharjo</td>
                             <td>Rp. 2.300.000</td>
                             <td class="text-center">
                                 <a type="button" class="btn btn-success btn-icon btn-sm" href="index.php?page=detail-data-gaji" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
                                 <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-gaji" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
-                                <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $peg['id_peg'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
+                                <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
                             </td>
                         </tr>
                         <!-- #modal-dialog -->
-                        <div id="Del<?php echo $peg['id_peg'] ?>" class="modal fade" role="dialog">
+                        <div id="Del" class="modal fade" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete <u><?php echo $peg['nama'] ?></u> from Database?</h5>
+                                        <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete from Database?</h5>
                                     </div>
                                     <div class="modal-body" align="center">
                                         <a href="index.php?page=delete-data-pegawai&id_peg=<?= $peg['id_peg'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>

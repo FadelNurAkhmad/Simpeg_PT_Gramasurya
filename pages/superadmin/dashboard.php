@@ -73,7 +73,7 @@ $jdik	= mysql_num_rows($jmldik);
 			<div class="stats-progress progress">
 				<div class="progress-bar" style="width: 90%;"></div>
 			</div>
-			<div class="stats-desc">Total Data Penugasan LN</div>
+			<div class="stats-desc">Total Data Penugasan</div>
 		</div>
 	</div>
 	<!-- end col-3 -->
@@ -86,7 +86,7 @@ $jdik	= mysql_num_rows($jmldik);
 			<div class="stats-progress progress">
 				<div class="progress-bar" style="width: 90%;"></div>
 			</div>
-			<div class="stats-desc">Total Data CUTI</div>
+			<div class="stats-desc">Total Data Cuti</div>
 		</div>
 	</div>
 	<!-- end col-3 -->
