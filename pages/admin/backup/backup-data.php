@@ -30,13 +30,13 @@
 	jika hanya tabel-table tertentu, masukan nama table dipisahkan dengan tanda KOMA (,) 
 	*/
 	function backup_tables($host,$user,$pass,$name,$nama_file,$tables ='*')	{
-		$link = mysql_connect($host,$user,$pass);
-		mysql_select_db($name,$link);
+		$link = mysqli_connect($host,$user,$pass);
+		mysqli_select_db($name,$link);
 			
 		if($tables == '*'){
 			$tables = array();
-			$result = mysql_query('SHOW TABLES');
-			while($row = mysql_fetch_row($result)){
+			$result = mysqli_query('SHOW TABLES');
+			while($row = mysqli_fetch_row($result, MYSQLI_ASSOC)){
 				$tables[] = $row[0];
 			}
 		}
@@ -45,11 +45,11 @@
 		}
 				
 		foreach($tables as $table){
-			$result = mysql_query('SELECT * FROM '.$table);
-			$num_fields = mysql_num_fields($result);
+			$result = mysqli_query('SELECT * FROM '.$table);
+			$num_fields = mysqli_num_fields($result);
 																
 			$return.= 'DROP TABLE '.$table.';'; //menyisipkan query drop table untuk nanti hapus table yang lama
-			$row2 = mysql_fetch_row(mysql_query('SHOW CREATE TABLE '.$table));
+			$row2 = mysqli_fetch_row(mysqli_query('SHOW CREATE TABLE '.$table), MYSQLI_ASSOC);
 			$return.= "\n\n".$row2[1].";\n\n";
 					
 			for ($i = 0; $i < $num_fields; $i++) {

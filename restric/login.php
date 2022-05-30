@@ -6,9 +6,9 @@
 	$op 			= $_GET['op'];
 
 	if($op=="in"){
-		$sql = mysql_query("SELECT * FROM tb_user WHERE id_user='$id_user' AND password='$password'");
-		if(mysql_num_rows($sql)==1){
-			$qry = mysql_fetch_array($sql);
+		$sql = mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user='$id_user' AND password='$password'");
+		if(mysqli_num_rows($sql)==1){
+			$qry = mysqli_fetch_array($sql, MYSQLI_ASSOC);
 			$_SESSION['id_user']	= $qry['id_user'];
 			$_SESSION['nama_user']	= $qry['nama_user'];
 			$_SESSION['hak_akses']	= $qry['hak_akses'];
