@@ -7,8 +7,8 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tampilPan	= mysql_query("SELECT * FROM tb_pangkat WHERE id_pangkat='$id_pangkat'");
-	$hasil	= mysql_fetch_array ($tampilPan);
+	$tampilPan	= mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_pangkat='$id_pangkat'");
+	$hasil	= mysqli_fetch_array ($tampilPan, MYSQLI_ASSOC);
 		$id_peg	=$hasil['id_peg'];
 				
 	if ($_POST['edit'] == "edit") {
@@ -26,7 +26,7 @@
 			header("location:index.php?page=form-edit-data-pangkat&id_pangkat=$id_pangkat");
 		}		
 		else{
-		$update= mysql_query ("UPDATE tb_pangkat SET pangkat='$pangkat', gol='$gol', jns_pangkat='$jns_pangkat', tmt_pangkat='$tmt_pangkat', pejabat_sk='$pejabat_sk', no_sk='$no_sk', tgl_sk='$tgl_sk', file='$file' WHERE id_pangkat='$id_pangkat'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_pangkat SET pangkat='$pangkat', gol='$gol', jns_pangkat='$jns_pangkat', tmt_pangkat='$tmt_pangkat', pejabat_sk='$pejabat_sk', no_sk='$no_sk', tgl_sk='$tgl_sk', file='$file' WHERE id_pangkat='$id_pangkat'");
 			if($update){
 				$_SESSION['pesan'] = "Good! edit data pangkat success ...";
 				header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");

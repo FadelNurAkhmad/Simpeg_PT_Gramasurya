@@ -34,12 +34,12 @@
 	$sheet->setCellValue("G3", "Telp");
 	$sheet->setCellValue("H3", "Periode KGB");
 	
-	$expKgb	=mysql_query("SELECT * FROM tb_kgb WHERE tgl_kgb LIKE '$tahun%' ORDER BY tgl_kgb");
+	$expKgb	=mysqli_query($koneksi, "SELECT * FROM tb_kgb WHERE tgl_kgb LIKE '$tahun%' ORDER BY tgl_kgb");
 	$i	=4; //Dimulai dengan baris ke dua
 	$no	=1;
-	while($ekgb	=mysql_fetch_array($expKgb)){
-	$expPeg	=mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$ekgb[id_peg]'");
-	while($epeg	=mysql_fetch_array($expPeg)){
+	while($ekgb	=mysqli_fetch_array($expKgb, MYSQLI_ASSOC)){
+	$expPeg	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$ekgb[id_peg]'");
+	while($epeg	=mysqli_fetch_array($expPeg, MYSQLI_ASSOC)){
 	   $sheet->setCellValue( "A" . $i, $no);
 	   $sheet->setCellValue( "B" . $i, $epeg['nip'] );
 	   $sheet->setCellValue( "C" . $i, $epeg['nama'] );
@@ -85,10 +85,10 @@
 					<?php
 						include "../../config/koneksi.php";
 						$no=0;
-						$tampilKgb	=mysql_query("SELECT * FROM tb_kgb WHERE tgl_kgb LIKE '$tahun%' ORDER BY tgl_kgb");
-						while($kgb	=mysql_fetch_array($tampilKgb)){
-							$tampilPeg	=mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$kgb[id_peg]'");
-							while($peg	=mysql_fetch_array($tampilPeg)){						
+						$tampilKgb	=mysqli_query($koneksi, "SELECT * FROM tb_kgb WHERE tgl_kgb LIKE '$tahun%' ORDER BY tgl_kgb");
+						while($kgb	=mysqli_fetch_array($tampilKgb, MYSQLI_ASSOC)){
+							$tampilPeg	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$kgb[id_peg]'");
+							while($peg	=mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC)){						
 						$no++
 					?>
 					<tr>

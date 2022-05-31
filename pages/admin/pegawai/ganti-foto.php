@@ -7,8 +7,8 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tampilPeg	= mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
-	$hasil	= mysql_fetch_array ($tampilPeg);
+	$tampilPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
+	$hasil	= mysqli_fetch_array ($tampilPeg, MYSQLI_ASSOC);
 				
 	if ($_POST['edit'] == "edit") {
 		$foto			=$_FILES['foto']['name'];
@@ -19,7 +19,7 @@
 			header("location:index.php?page=form-ganti-foto&id_peg=$id_peg");
 		}		
 		else{
-		$update= mysql_query ("UPDATE tb_pegawai SET foto='$foto' WHERE id_peg='$id_peg'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_pegawai SET foto='$foto' WHERE id_peg='$id_peg'");
 		if($update){
 				$_SESSION['pesan'] = "Good! ganti foto $hasil[nip] success ...";
 				header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");

@@ -7,8 +7,8 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tampilskp	= mysql_query("SELECT * FROM tb_skp WHERE id_skp='$id_skp'");
-	$hasil	= mysql_fetch_array ($tampilskp);
+	$tampilskp	= mysqli_query($koneksi, "SELECT * FROM tb_skp WHERE id_skp='$id_skp'");
+	$hasil	= mysqli_fetch_array ($tampilskp, MYSQLI_ASSOC);
 		$id_peg	=$hasil['id_peg'];
 				
 	if ($_POST['edit'] == "edit") {
@@ -31,7 +31,7 @@
 			header("location:index.php?page=form-edit-data-skp&id_skp=$id_skp");
 		}		
 		else{
-		$update= mysql_query ("UPDATE tb_skp SET periode_awal='$periode_awal', periode_akhir='$periode_akhir', penilai='$penilai', atasan_penilai='$atasan_penilai', nilai_orientasi='$nilai_orientasi', nilai_integritas='$nilai_integritas', nilai_komitmen='$nilai_komitmen', nilai_disiplin='$nilai_disiplin', nilai_kerjasama='$nilai_kerjasama', nilai_kepemimpinan='$nilai_kepemimpinan', hasil_penilaian='$hasil_penilaian' WHERE id_skp='$id_skp'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_skp SET periode_awal='$periode_awal', periode_akhir='$periode_akhir', penilai='$penilai', atasan_penilai='$atasan_penilai', nilai_orientasi='$nilai_orientasi', nilai_integritas='$nilai_integritas', nilai_komitmen='$nilai_komitmen', nilai_disiplin='$nilai_disiplin', nilai_kerjasama='$nilai_kerjasama', nilai_kepemimpinan='$nilai_kepemimpinan', hasil_penilaian='$hasil_penilaian' WHERE id_skp='$id_skp'");
 		
 		if($update){
 				$_SESSION['pesan'] = "Good! edit data SKP success ...";

@@ -23,7 +23,7 @@
 		
 		else{
 		$insert = "INSERT INTO tb_penugasan (id_penugasan, id_peg, tujuan, tahun, lama, alasan) VALUES ('$id_penugasan', '$id_peg', '$tujuan', '$tahun', '$lama', '$alasan')";
-		$query = mysql_query ($insert);
+		$query = mysqli_query ($koneksi, $insert);
 		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert data penugasan success ...";

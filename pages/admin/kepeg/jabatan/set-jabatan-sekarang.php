@@ -9,13 +9,13 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tP=mysql_query("SElECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
-	$jkP=mysql_fetch_array($tP);
+	$tP=mysqli_query($koneksi, "SElECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
+	$jkP=mysqli_fetch_array($tP, MYSQLI_ASSOC);
 	$jk=$jkP['jk'];
 		
-	$update1= mysql_query ("UPDATE tb_jabatan SET status_jab='' WHERE id_peg='$id_peg'");
-	$update2= mysql_query ("UPDATE tb_jabatan SET status_jab='Aktif', jk_jab='$jk' WHERE id_jab='$id_jab'");
-	$update3= mysql_query ("UPDATE tb_pegawai SET jabatan='$jabatan' WHERE id_peg='$id_peg'");	
+	$update1= mysqli_query ($koneksi, "UPDATE tb_jabatan SET status_jab='' WHERE id_peg='$id_peg'");
+	$update2= mysqli_query ($koneksi, "UPDATE tb_jabatan SET status_jab='Aktif', jk_jab='$jk' WHERE id_jab='$id_jab'");
+	$update3= mysqli_query ($koneksi, "UPDATE tb_pegawai SET jabatan='$jabatan' WHERE id_peg='$id_peg'");	
 		if($update1){
 			$_SESSION['pesan'] = "Good! setup jabatan sekarang success ...";
 			header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");

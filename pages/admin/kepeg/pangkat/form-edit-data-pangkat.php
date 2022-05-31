@@ -3,11 +3,11 @@
 	$id_pangkat = $_GET['id_pangkat'];
 	
 	include "../../config/koneksi.php";
-	$query   =mysql_query("SELECT * FROM tb_pangkat WHERE id_pangkat='$id_pangkat'");
-	$data    =mysql_fetch_array($query);
+	$query   =mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_pangkat='$id_pangkat'");
+	$data    =mysqli_fetch_array($query, MYSQLI_ASSOC);
 		
-	$tampilPeg   =mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
-	$peg    =mysql_fetch_array($tampilPeg);
+	$tampilPeg   =mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
+	$peg    =mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 	}
 	else {
 		die ("Error. No ID Selected!");	
@@ -54,10 +54,10 @@
 						<label class="col-md-3 control-label">Golongan</label>
 						<div class="col-md-6">
 							<?php
-								$dataG = mysql_query("SELECT * FROM tb_mastergol ORDER BY nama_mastergol DESC");      
+								$dataG = mysqli_query($koneksi, "SELECT * FROM tb_mastergol ORDER BY nama_mastergol DESC");      
 								echo '<select name="gol" class="default-select2 form-control">';    
 								echo '<option value="'.$data['gol'].'">...</option>';    
-									while ($rowg = mysql_fetch_array($dataG)) {    
+									while ($rowg = mysqli_fetch_array($dataG, MYSQLI_ASSOC)) {    
 									echo '<option value="'.$rowg['nama_mastergol'].'">'.$rowg['nama_mastergol'].'</option>';    
 									}    
 								echo '</select>';

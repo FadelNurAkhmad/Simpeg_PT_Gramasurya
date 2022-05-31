@@ -16,7 +16,7 @@
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";
-$tampilDataPre    = mysql_query("SELECT * FROM tb_presensi ORDER BY id_presensi DESC");
+$tampilDataPre    = mysqli_query($koneksi, "SELECT * FROM tb_presensi ORDER BY id_presensi DESC");
 ?>
 <div class="row">
     <!-- begin col-12 -->
@@ -30,7 +30,7 @@ $tampilDataPre    = mysql_query("SELECT * FROM tb_presensi ORDER BY id_presensi 
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Results <span class="text-info"><?php echo mysql_num_rows($tampilDataPre); ?></span> rows for "Shift Kerja"</h4>
+                <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilDataPre); ?></span> rows for "Shift Kerja"</h4>
             </div>
             <div class="alert alert-success fade in">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
@@ -48,7 +48,7 @@ $tampilDataPre    = mysql_query("SELECT * FROM tb_presensi ORDER BY id_presensi 
                     <tbody>
                         <?php
                         $no = 0;
-                        while ($dataPre    = mysql_fetch_array($tampilDataPre)) {
+                        while ($dataPre    = mysqli_fetch_array($tampilDataPre, MYSQLI_ASSOC)) {
                             $no++;
                         ?>
                             <tr>

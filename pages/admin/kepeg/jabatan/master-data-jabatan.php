@@ -26,7 +26,7 @@
 		
 		else{
 		$insert = "INSERT INTO tb_jabatan (id_jab, id_peg, jabatan, eselon, no_sk, tgl_sk, tmt_jabatan, sampai_tgl, file) VALUES ('$id_jab', '$id_peg', '$jabatan', '$eselon', '$no_sk', '$tgl_sk', '$tmt_jabatan', '$sampai_tgl', '$file')";
-		$query = mysql_query ($insert);
+		$query = mysqli_query ($koneksi, $insert);
 		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert data jabatan success ...";

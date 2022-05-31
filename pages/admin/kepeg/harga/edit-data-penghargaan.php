@@ -7,8 +7,8 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tampilHar	= mysql_query("SELECT * FROM tb_penghargaan WHERE id_penghargaan='$id_penghargaan'");
-	$hasil	= mysql_fetch_array ($tampilHar);
+	$tampilHar	= mysqli_query($koneksi, "SELECT * FROM tb_penghargaan WHERE id_penghargaan='$id_penghargaan'");
+	$hasil	= mysqli_fetch_array ($tampilHar, MYSQLI_ASSOC);
 		$id_peg	=$hasil['id_peg'];
 				
 	if ($_POST['edit'] == "edit") {
@@ -21,7 +21,7 @@
 			header("location:index.php?page=form-edit-data-penghargaan&id_penghargaan=$id_penghargaan");
 		}		
 		else{
-		$update= mysql_query ("UPDATE tb_penghargaan SET penghargaan='$penghargaan', tahun='$tahun', pemberi='$pemberi' WHERE id_penghargaan='$id_penghargaan'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_penghargaan SET penghargaan='$penghargaan', tahun='$tahun', pemberi='$pemberi' WHERE id_penghargaan='$id_penghargaan'");
 			if($update){
 				$_SESSION['pesan'] = "Good! edit data penghargaan success ...";
 				header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");
