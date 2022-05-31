@@ -7,8 +7,8 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tampilUsr	= mysql_query("SELECT * FROM tb_user WHERE id_user='$id_user'");
-	$hasil	= mysql_fetch_array ($tampilUsr);
+	$tampilUsr	= mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user='$id_user'");
+	$hasil	= mysqli_fetch_array ($tampilUsr, MYSQLI_ASSOC);
 				
 	if ($_POST['edit'] == "edit") {
 	$nama_user	=$_POST['nama_user'];
@@ -21,7 +21,7 @@
 			header("location:index.php?page=form-edit-data-user&id_user=$id_user");
 		}
 		else{
-		$update= mysql_query ("UPDATE tb_user SET nama_user='$nama_user', password='$password', hak_akses='$hak_akses', avatar='$avatar' WHERE id_user='$id_user'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_user SET nama_user='$nama_user', password='$password', hak_akses='$hak_akses', avatar='$avatar' WHERE id_user='$id_user'");
 			if($update){
 				$_SESSION['pesan'] = "Good! Edit user $id_user success ...";
 				header("location:index.php?page=form-view-data-user");

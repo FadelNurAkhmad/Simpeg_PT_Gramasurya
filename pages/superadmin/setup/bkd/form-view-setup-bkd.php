@@ -1,7 +1,7 @@
 <?php
 include "../../config/koneksi.php";
-$query	= mysql_query("SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
-$data	= mysql_fetch_array($query);
+$query	= mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
+$data	= mysqli_fetch_array($query, MYSQLI_ASSOC);
 ?>
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
@@ -50,8 +50,8 @@ $data	= mysql_fetch_array($query);
 						<tr>
 							<td class="field">Kepala</td>
 							<td><?php
-								$kepala	= mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$data[kepala]'");
-								$kep	= mysql_fetch_array($kepala);
+								$kepala	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$data[kepala]'");
+								$kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 								echo $kep['nama']
 								?>
 							</td>

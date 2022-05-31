@@ -1,7 +1,7 @@
 <?php	
 	include "../../config/koneksi.php";
-	$query	=mysql_query("SELECT * FROM tb_setup_sekda WHERE id_setup_sekda='1'");
-	$data	=mysql_fetch_array($query);	
+	$query	=mysqli_query($koneksi, "SELECT * FROM tb_setup_sekda WHERE id_setup_sekda='1'");
+	$data	=mysqli_fetch_array($query, MYSQLI_ASSOC);	
 ?>
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
@@ -48,8 +48,8 @@
 						<tr>
 							<td class="field">Sekretasis Daerah</td>
 							<td><?php
-								$sekda	=mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$data[sekda]'");
-								$sek	=mysql_fetch_array($sekda);
+								$sekda	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$data[sekda]'");
+								$sek	=mysqli_fetch_array($sekda, MYSQLI_ASSOC);
 								echo $sek['nama']
 								?>
 							</td>

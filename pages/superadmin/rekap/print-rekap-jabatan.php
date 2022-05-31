@@ -63,14 +63,14 @@ $pdf->SetFont('helvetica', '', 10);
 
 	include "../../../config/koneksi.php";
 	
-	$kepala	=mysql_query("SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
-	$kep	=mysql_fetch_array($kepala);
+	$kepala	=mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
+	$kep	=mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 	
-	$namakepala	=mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$kep[kepala]'");
-	$nama		=mysql_fetch_array($namakepala);
+	$namakepala	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$kep[kepala]'");
+	$nama		=mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 	
-	$pangkat=mysql_query("SELECT * FROM tb_pangkat WHERE id_peg='$kep[kepala]' AND status_pan='Aktif'");
-	$pan	=mysql_fetch_array($pangkat);
+	$pangkat=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[kepala]' AND status_pan='Aktif'");
+	$pan	=mysqli_fetch_array($pangkat, MYSQLI_ASSOC);
 	
 $head ='<table border="0" cellspacing="0" cellpadding="3">
 			<tr>
@@ -103,14 +103,14 @@ $html ='<table border="1" cellspacing="0" cellpadding="3">
 				<td width="165"><b>JUMLAH PEGAWAI</b></td>	
 			</tr>';
 			$no=0;
-			$rekapjab	=mysql_query("SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY jabatan ORDER BY jabatan DESC");
-			while($jab=mysql_fetch_array($rekapjab)){
+			$rekapjab	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY jabatan ORDER BY jabatan DESC");
+			while($jab=mysqli_fetch_array($rekapjab, MYSQLI_ASSOC)){
 			$no++;
 			$html .='<tr>
 				<td align="center">'.$no.'</td>
 				<td>'.$jab['jabatan'].'</td>';
-				$jml=mysql_query("SELECT * FROM tb_pegawai WHERE status_mut='' AND jabatan='$jab[jabatan]'");
-				$html .='<td>'.mysql_num_rows($jml).'</td>
+				$jml=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' AND jabatan='$jab[jabatan]'");
+				$html .='<td>'.mysqli_num_rows($jml).'</td>
 			</tr>';
 			}			
 $html .='</table><br /><br />';

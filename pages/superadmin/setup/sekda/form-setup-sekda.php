@@ -3,8 +3,8 @@
 	$id_setup_sekda = $_GET['id_setup_sekda'];
 	
 	include "../../config/koneksi.php";
-	$query   =mysql_query("SELECT * FROM tb_setup_sekda WHERE id_setup_sekda='$id_setup_sekda'");
-	$data    =mysql_fetch_array($query);
+	$query   =mysqli_query($koneksi, "SELECT * FROM tb_setup_sekda WHERE id_setup_sekda='$id_setup_sekda'");
+	$data    =mysqli_fetch_array($query, MYSQLI_ASSOC);
 	}
 	else {
 		die ("Error. No ID Selected!");	
@@ -58,10 +58,10 @@
 						<label class="col-md-3 control-label">Sekretasis Daerah</label>
 						<div class="col-md-6">
 							<?php
-								$sekda = mysql_query("SELECT * FROM tb_pegawai WHERE status_mut=''");        
+								$sekda = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut=''");        
 								echo '<select name="sekda" class="default-select2 form-control">';    
 								echo '<option value="'.$data['sekda'].'">...</option>';    
-									while ($row = mysql_fetch_array($sekda)) {    
+									while ($row = mysqli_fetch_array($sekda, MYSQLI_ASSOC)) {    
 									echo '<option value="'.$row['id_peg'].'">'.$row['nama'].'_'.$row['nip'].'</option>';    
 									}    
 								echo '</select>';

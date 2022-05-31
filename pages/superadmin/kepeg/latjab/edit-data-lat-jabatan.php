@@ -7,8 +7,8 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tampilLat	= mysql_query("SELECT * FROM tb_lat_jabatan WHERE id_lat_jabatan='$id_lat_jabatan'");
-	$hasil	= mysql_fetch_array ($tampilLat);
+	$tampilLat	= mysqli_query($koneksi, "SELECT * FROM tb_lat_jabatan WHERE id_lat_jabatan='$id_lat_jabatan'");
+	$hasil	= mysqli_fetch_array ($tampilLat, MYSQLI_ASSOC);
 		$id_peg	=$hasil['id_peg'];
 				
 	if ($_POST['edit'] == "edit") {
@@ -22,7 +22,7 @@
 			header("location:index.php?page=form-edit-data-lat-jabatan&id_lat_jabatan=$id_lat_jabatan");
 		}		
 		else{
-		$update= mysql_query ("UPDATE tb_lat_jabatan SET nama_pelatih='$nama_pelatih', tahun_lat='$tahun_lat', jml_jam='$jml_jam', file='$file' WHERE id_lat_jabatan='$id_lat_jabatan'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_lat_jabatan SET nama_pelatih='$nama_pelatih', tahun_lat='$tahun_lat', jml_jam='$jml_jam', file='$file' WHERE id_lat_jabatan='$id_lat_jabatan'");
 			if($update){
 				$_SESSION['pesan'] = "Good! edit data lat jabatan success ...";
 				header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");

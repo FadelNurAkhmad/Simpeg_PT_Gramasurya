@@ -1,7 +1,7 @@
 <?php
 include "../../config/koneksi.php";
-$kepala	= mysql_query("SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
-$kep	= mysql_fetch_array($kepala);
+$kepala	= mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
+$kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 ?>
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
@@ -43,26 +43,26 @@ $kep	= mysql_fetch_array($kepala);
 				<tbody>
 					<?php
 					$no = 0;
-					$idPeg = mysql_query("SELECT * FROM tb_pegawai WHERE status_kepeg='PNS' AND status_mut='' ORDER BY urut_pangkat DESC");
-					while ($peg = mysql_fetch_array($idPeg)) {
+					$idPeg = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_kepeg='PNS' AND status_mut='' ORDER BY urut_pangkat DESC");
+					while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 						$no++
 					?>
 						<td><?= $no; ?></td>
 						<td><?php echo $peg['nama']; ?><br /><?php echo $peg['tempat_lhr']; ?>, <?php echo $peg['tgl_lhr']; ?></td>
 						<td><?php echo $peg['nip']; ?></td>
 						<td><?php
-							$idPan = mysql_query("SELECT * FROM tb_pangkat WHERE (id_peg='$peg[id_peg]' AND status_pan='Aktif')");
-							$hpan = mysql_fetch_array($idPan);
+							$idPan = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE (id_peg='$peg[id_peg]' AND status_pan='Aktif')");
+							$hpan = mysqli_fetch_array($idPan, MYSQLI_ASSOC);
 							?>
 							<?php echo $hpan['pangkat']; ?><br /><?php echo $hpan['gol']; ?></td>
 						<td><?php
-							$idJab = mysql_query("SELECT * FROM tb_jabatan WHERE (id_peg='$peg[id_peg]' AND status_jab='Aktif')");
-							$hjab = mysql_fetch_array($idJab);
+							$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE (id_peg='$peg[id_peg]' AND status_jab='Aktif')");
+							$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
 							?>
 							<?php echo $hjab['jabatan']; ?></td>
 						<td><?php
-							$idSek = mysql_query("SELECT * FROM tb_sekolah WHERE (id_peg='$peg[id_peg]' AND status='Akhir')");
-							$hsek = mysql_fetch_array($idSek);
+							$idSek = mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE (id_peg='$peg[id_peg]' AND status='Akhir')");
+							$hsek = mysqli_fetch_array($idSek, MYSQLI_ASSOC);
 							?>
 							<?php echo $hsek['tingkat']; ?>
 						</td>

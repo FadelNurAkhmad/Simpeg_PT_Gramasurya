@@ -17,11 +17,11 @@
 include "../../config/koneksi.php";
 function kdauto($tabel, $inisial)
 {
-    $struktur   = mysql_query("SELECT * FROM $tabel");
-    $field      = mysql_field_name($struktur, 0);
-    $panjang    = mysql_field_len($struktur, 0);
-    $qry  = mysql_query("SELECT max(" . $field . ") FROM " . $tabel);
-    $row  = mysql_fetch_array($qry);
+    $struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
+    $field      = mysqli_field_name($struktur, 0);
+    $panjang    = mysqli_field_len($struktur, 0);
+    $qry  = mysqli_query($koneksi, "SELECT max(" . $field . ") FROM " . $tabel);
+    $row  = mysqli_fetch_array($qry, MYSQLI_ASSOC);
     if ($row[0] == "") {
         $angka = 0;
     } else {
@@ -58,10 +58,10 @@ $id_jabatan    = kdauto("tb_gaji_jabatan", "");
                         <label class="col-md-3 control-label">Nama Jabatan</label>
                         <div class="col-md-6">
                             <?php
-                            $dataJ = mysql_query("SELECT * FROM tb_masterjab ORDER BY nama_masterjab");
+                            $dataJ = mysqli_query($koneksi, "SELECT * FROM tb_masterjab ORDER BY nama_masterjab");
                             echo '<select name="nama_jabatan" class="default-select2 form-control">';
                             echo '<option value="">...</option>';
-                            while ($rowj = mysql_fetch_array($dataJ)) {
+                            while ($rowj = mysqli_fetch_array($dataJ, MYSQLI_ASSOC)) {
                                 echo '<option value="' . $rowj['nama_masterjab'] . '">' . $rowj['nama_masterjab'] . '</option>';
                             }
                             echo '</select>';

@@ -50,7 +50,7 @@
 		else{
 		$insert = "INSERT INTO tb_kawin (id_kawin, no_kawin, tgl_izin, id_peg, bangsa1, nama_wali_bapak1, kerja_wali_bapak1, alamat_wali_bapak1, nama_wali_ibu1, kerja_wali_ibu1, alamat_wali_ibu1, nama, tmp_lahir, tgl_lahir, pekerjaan, nik, pangkat, gol, jab, instansi, bangsa2, agama, alamat, nama_wali_bapak2, kerja_wali_bapak2, alamat_wali_bapak2, nama_wali_ibu2, kerja_wali_ibu2, alamat_wali_ibu2, tmp_kawin, tgl_kawin, tgl_ditetapkan)
 		VALUES ('$id_kawin', '$no_kawin', '$tgl_izin', '$id_peg', '$bangsa1', '$nama_wali_bapak1', '$kerja_wali_bapak1', '$alamat_wali_bapak1', '$nama_wali_ibu1', '$kerja_wali_ibu1', '$alamat_wali_ibu1', '$nama', '$tmp_lahir', '$tgl_lahir', '$pekerjaan', '$nik', '$pangkat', '$gol', '$jab', '$instansi', '$bangsa2', '$agama', '$alamat', '$nama_wali_bapak2', '$kerja_wali_bapak2', '$alamat_wali_bapak2', '$nama_wali_ibu2', '$kerja_wali_ibu2', '$alamat_wali_ibu2', '$tmp_kawin', '$tgl_kawin', '$tgl_ditetapkan')";
-		$query = mysql_query ($insert);
+		$query = mysqli_query ($koneksi, $insert);
 		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert data izin kawin success ...";

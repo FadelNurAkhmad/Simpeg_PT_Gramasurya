@@ -30,7 +30,7 @@ if ($_POST['search'] == "search") {
 				<tbody>
 					<?php
 					$no = 0;
-					while ($peg	= mysqli_fetch_array($tampilPeg)) {
+					while ($peg	= mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC)) {
 						$no++
 					?>
 						<tr>
@@ -44,7 +44,7 @@ if ($_POST['search'] == "search") {
 							<td><?php echo $peg['pangkat'] ?></td>
 							<td><?php
 								$unit	= mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
-								$uni	= mysqli_fetch_array($unit);
+								$uni	= mysqli_fetch_array($unit, MYSQLI_ASSOC);
 								echo $uni['nama']
 								?>
 							</td>

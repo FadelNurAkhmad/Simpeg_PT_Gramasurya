@@ -7,8 +7,8 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tampilSem	= mysql_query("SELECT * FROM tb_seminar WHERE id_seminar='$id_seminar'");
-	$hasil	= mysql_fetch_array ($tampilSem);
+	$tampilSem	= mysqli_query($koneksi, "SELECT * FROM tb_seminar WHERE id_seminar='$id_seminar'");
+	$hasil	= mysqli_fetch_array ($tampilSem, MYSQLI_ASSOC);
 		$id_peg	=$hasil['id_peg'];
 				
 	if ($_POST['edit'] == "edit") {
@@ -26,7 +26,7 @@
 			header("location:index.php?page=form-edit-data-seminar&id_seminar=$id_seminar");
 		}		
 		else{
-		$update= mysql_query ("UPDATE tb_seminar SET seminar='$seminar', tempat='$tempat', penyelenggara='$penyelenggara', tgl_mulai='$tgl_mulai', tgl_selesai='$tgl_selesai', no_piagam='$no_piagam', tgl_piagam='$tgl_piagam', file='$file' WHERE id_seminar='$id_seminar'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_seminar SET seminar='$seminar', tempat='$tempat', penyelenggara='$penyelenggara', tgl_mulai='$tgl_mulai', tgl_selesai='$tgl_selesai', no_piagam='$no_piagam', tgl_piagam='$tgl_piagam', file='$file' WHERE id_seminar='$id_seminar'");
 			if($update){
 				$_SESSION['pesan'] = "Good! edit data seminar success ...";
 				header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");

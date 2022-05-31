@@ -18,7 +18,7 @@
             header("location:index.php?page=form-master-data-dokumen");
         } else {
             $insert = "INSERT INTO tb_dokumen (id_dokumen, id_peg, dokumen, file) VALUES ('$id_dokumen', '$id_peg', '$dokumen', '$file')";
-            $query = mysql_query($insert);
+            $query = mysqli_query($koneksi, $insert);
 
             if ($query) {
                 $_SESSION['pesan'] = "Good! Insert data dokumen success ...";

@@ -7,8 +7,8 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$setup	= mysql_query("SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='$id_setup_bkd'");
-	$hasil	= mysql_fetch_array ($setup);
+	$setup	= mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='$id_setup_bkd'");
+	$hasil	= mysqli_fetch_array ($setup, MYSQLI_ASSOC);
 				
 	if ($_POST['setup'] == "setup") {
 	$kab	=$_POST['kab'];
@@ -20,7 +20,7 @@
 			header("location:index.php?page=form-setup-bkd&id_setup_bkd=$id_setup_bkd");
 		}
 		else{
-		$update= mysql_query ("UPDATE tb_setup_bkd SET kab='$kab', alamat='$alamat', kepala='$kepala' WHERE id_setup_bkd='$id_setup_bkd'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_setup_bkd SET kab='$kab', alamat='$alamat', kepala='$kepala' WHERE id_setup_bkd='$id_setup_bkd'");
 			if($update){
 				$_SESSION['pesan'] = "Good! setup BKD success ...";
 				header("location:index.php?page=form-view-setup-bkd");

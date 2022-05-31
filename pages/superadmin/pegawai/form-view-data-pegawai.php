@@ -36,12 +36,12 @@
 	$sheet->setCellValue("S3", "Unit Kerja");
 	$sheet->setCellValue("T3", "Tgl. Pensiun");
 
-	$expPeg	=mysql_query("SELECT * FROM tb_pegawai ORDER BY id_peg");
+	$expPeg	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY id_peg");
 	$i	=4; //Dimulai dengan baris ke dua
 	$no	=1;
-	while($peg	=mysql_fetch_array($expPeg)){
-	$expUni	=mysql_query("SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
-	$uni	=mysql_fetch_array($expUni);
+	while($peg	=mysqli_fetch_array($expPeg, MYSQLI_ASSOC)){
+	$expUni	=mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
+	$uni	=mysqli_fetch_array($expUni, MYSQLI_ASSOC);
 	   $sheet->setCellValue( "A" . $i, $no);
 	   $sheet->setCellValue( "B" . $i, $peg['id_peg'] );
 	   $sheet->setCellValue( "C" . $i, $peg['nip'] );
@@ -89,7 +89,7 @@
 <!-- end page-header -->
 <?php
 	include "../../config/koneksi.php";
-	$tampilPeg	=mysql_query("SELECT * FROM tb_pegawai ORDER BY id_peg DESC");
+	$tampilPeg	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY id_peg DESC");
 ?>
 <div class="row">
 	<!-- begin col-12 -->
@@ -103,7 +103,7 @@
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
-				<h4 class="panel-title">Results <span class="text-info"><?php echo mysql_num_rows($tampilPeg);?></span> rows for "Data Pegawai"</h4>
+				<h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilPeg);?></span> rows for "Data Pegawai"</h4>
 			</div>
             <div class="alert alert-success fade in">
 				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
@@ -125,7 +125,7 @@
 					<tbody>
 						<?php
 							$no=0;
-							while($peg	=mysql_fetch_array($tampilPeg)){
+							while($peg	=mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC)){
 							$no++
 						?>
 						<tr>
@@ -147,8 +147,8 @@
 							<td><?php echo $peg['nama']?></td>
 							<td><?php echo $peg['jk']?><br /><?php echo $peg['tempat_lhr']?>, <?php echo $peg['tgl_lhr']?></td>
 							<td><?php
-								$unit	=mysql_query("SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
-								$uni	=mysql_fetch_array($unit);
+								$unit	=mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
+								$uni	=mysqli_fetch_array($unit, MYSQLI_ASSOC);
 								echo $uni['nama']
 								?>
 							</td>

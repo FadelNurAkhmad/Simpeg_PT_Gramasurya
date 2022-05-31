@@ -8,7 +8,7 @@
 	$avatar		=$_FILES['avatar']['name'];
 	
 	include "../../config/koneksi.php";
-	$cekuser	=mysql_num_rows (mysql_query("SELECT id_user FROM tb_user WHERE id_user='$_POST[id_user]'"));
+	$cekuser	=mysqli_num_rows (mysqli_query($koneksi, "SELECT id_user FROM tb_user WHERE id_user='$_POST[id_user]'"));
 	
 		if (empty($_POST['id_user']) || empty($_POST['nama_user']) || empty($_POST['password']) || empty($_POST['hak_akses'])) {
 			$_SESSION['pesan'] = "Oops! Please fill all column ...";
@@ -21,7 +21,7 @@
 		
 		else{
 		$insert = "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, avatar) VALUES ('$id_user', '$nama_user', '$password', '$hak_akses', '$avatar')";
-		$query = mysql_query ($insert);
+		$query = mysqli_query ($koneksi, $insert);
 		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert User success ...";

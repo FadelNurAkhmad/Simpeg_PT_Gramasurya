@@ -20,8 +20,8 @@
 	$date_reg	=date("Ymd");
 	
 	include "../../config/koneksi.php";
-	$ceknik	=mysql_num_rows (mysql_query("SELECT nik FROM tb_suamiistri WHERE nik='$_POST[nik]'"));
-	$ceksi	=mysql_num_rows (mysql_query("SELECT status_hub FROM tb_suamiistri WHERE id_peg='$_POST[id_peg]' AND (status_hub='Suami' OR status_hub='Istri')"));
+	$ceknik	=mysqli_num_rows (mysqli_query($koneksi, "SELECT nik FROM tb_suamiistri WHERE nik='$_POST[nik]'"));
+	$ceksi	=mysqli_num_rows (mysqli_query($koneksi, "SELECT status_hub FROM tb_suamiistri WHERE id_peg='$_POST[id_peg]' AND (status_hub='Suami' OR status_hub='Istri')"));
 	
 		if (empty($_POST['id_peg']) || empty($_POST['nik']) || empty($_POST['nama']) || empty($_POST['tmp_lhr']) || empty($_POST['tgl_lhr']) || empty($_POST['pendidikan']) || empty($_POST['pekerjaan']) || empty($_POST['status_hub'])) {
 			$_SESSION['pesan'] = "Oops! Please fill all column ...";
@@ -38,7 +38,7 @@
 		
 		else{
 		$insert = "INSERT INTO tb_suamiistri (id_si, id_peg, nik, nama, tmp_lhr, tgl_lhr, pendidikan, pekerjaan, status_hub, date_reg) VALUES ('$id_si', '$id_peg', '$nik', '$nama', '$tmp_lhr', '$tgl_lhr', '$pendidikan', '$pekerjaan', '$status_hub', '$date_reg')";
-		$query = mysql_query ($insert);
+		$query = mysqli_query ($koneksi, $insert);
 		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert data suami / istri success ...";

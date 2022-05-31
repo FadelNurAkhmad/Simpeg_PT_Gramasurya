@@ -18,7 +18,7 @@
             header("location:index.php?page=form-master-data-gaji-jabatan");
         } else {
             $insert = "INSERT INTO tb_gaji_jabatan (id_jabatan, nama_jabatan, gapok, tunjangan) VALUES ('$id_jabatan','$nama_jabatan', '$gapok', '$tunjangan')";
-            $query = mysql_query($insert);
+            $query = mysqli_query($koneksi, $insert);
 
             if ($query) {
                 $_SESSION['pesan'] = "Good! Insert data gaji jabatan success ...";

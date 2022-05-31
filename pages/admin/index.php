@@ -13,7 +13,7 @@ if ($_SESSION['hak_akses'] != "Admin") {
 }
 include "../../config/koneksi.php";
 $tampilUsr	= mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user='$_SESSION[id_user]'");
-$usr		= mysqli_fetch_array($tampilUsr);
+$usr		= mysqli_fetch_array($tampilUsr, MYSQLI_ASSOC);
 
 $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut=''");
 $jmlpeg		= mysqli_num_rows($tampilPeg);

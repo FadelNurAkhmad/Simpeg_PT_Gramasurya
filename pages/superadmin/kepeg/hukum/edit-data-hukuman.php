@@ -7,8 +7,8 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tampilHuk	= mysql_query("SELECT * FROM tb_hukuman WHERE id_hukuman='$id_hukuman'");
-	$hasil	= mysql_fetch_array ($tampilHuk);
+	$tampilHuk	= mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE id_hukuman='$id_hukuman'");
+	$hasil	= mysqli_fetch_array ($tampilHuk, MYSQLI_ASSOC);
 		$id_peg	=$hasil['id_peg'];
 				
 	if ($_POST['edit'] == "edit") {
@@ -20,13 +20,13 @@
 	$no_pulih		=$_POST['no_pulih'];
 	$tgl_pulih		=$_POST['tgl_pulih'];
 	
-	$tP=mysql_query("SElECT * FROM tb_pangkat WHERE id_peg='$id_peg' AND status_pan='Aktif'");
-	$gp=mysql_fetch_array($tP);
+	$tP=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' AND status_pan='Aktif'");
+	$gp=mysqli_fetch_array($tP, MYSQLI_ASSOC);
 	$gol		=$gp['gol'];
 	$pangkat	=$gp['pangkat'];
 	
-	$tJ=mysql_query("SElECT * FROM tb_jabatan WHERE id_peg='$id_peg' AND status_jab='Aktif'");
-	$esl=mysql_fetch_array($tJ);
+	$tJ=mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$id_peg' AND status_jab='Aktif'");
+	$esl=mysqli_fetch_array($tJ, MYSQLI_ASSOC);
 	$eselon		=$esl['eselon'];
 	
 		if (empty($_POST['hukuman']) || empty($_POST['pejabat_sk']) || empty($_POST['no_sk']) || empty($_POST['tgl_sk'])) {
@@ -34,7 +34,7 @@
 			header("location:index.php?page=form-edit-data-hukuman&id_hukuman=$id_hukuman");
 		}		
 		else{
-		$update= mysql_query ("UPDATE tb_hukuman SET hukuman='$hukuman', pejabat_sk='$pejabat_sk', no_sk='$no_sk', tgl_sk='$tgl_sk', pejabat_pulih='$pejabat_pulih', no_pulih='$no_pulih', tgl_pulih='$tgl_pulih', gol='$gol', pangkat='$pangkat', eselon='$eselon' WHERE id_hukuman='$id_hukuman'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_hukuman SET hukuman='$hukuman', pejabat_sk='$pejabat_sk', no_sk='$no_sk', tgl_sk='$tgl_sk', pejabat_pulih='$pejabat_pulih', no_pulih='$no_pulih', tgl_pulih='$tgl_pulih', gol='$gol', pangkat='$pangkat', eselon='$eselon' WHERE id_hukuman='$id_hukuman'");
 			if($update){
 				$_SESSION['pesan'] = "Good! edit data hukuman success ...";
 				header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");

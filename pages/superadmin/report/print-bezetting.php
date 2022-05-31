@@ -63,14 +63,14 @@ $pdf->SetFont('helvetica', '', 8);
 	
 	include "../../../config/koneksi.php";
 	
-	$kepala	=mysql_query("SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
-	$kep	=mysql_fetch_array($kepala);
+	$kepala	=mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
+	$kep	=mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 	
-	$namakepala	=mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$kep[kepala]'");
-	$nama		=mysql_fetch_array($namakepala);
+	$namakepala	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$kep[kepala]'");
+	$nama		=mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 	
-	$pangkat=mysql_query("SELECT * FROM tb_pangkat WHERE id_peg='$kep[kepala]' AND status_pan='Aktif'");
-	$pan	=mysql_fetch_array($pangkat);
+	$pangkat=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[kepala]' AND status_pan='Aktif'");
+	$pan	=mysqli_fetch_array($pangkat, MYSQLI_ASSOC);
 	
 $header = '<p align="center"><font size="12"><b>DAFTAR BEZETTING PNS</b></font><br />
 			<font size="9" style="text-transform:uppercase">PEMERINTAH KABUPATEN '.$kep['kab'].' PERIODE BULAN '.date ('m').' TAHUN '.date ('Y').'<font></p>';
@@ -97,20 +97,20 @@ $html ='<table border="1" cellspacing="0" cellpadding="3">
 				<th width="40">8</th>
 			</tr>';
 			$no=1;
-			$idPeg=mysql_query("SELECT * FROM tb_pegawai WHERE status_mut='' AND status_kepeg='PNS' ORDER BY urut_pangkat DESC");
-			while($peg=mysql_fetch_array($idPeg)) {
+			$idPeg=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' AND status_kepeg='PNS' ORDER BY urut_pangkat DESC");
+			while($peg=mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 			$html .='<tr>
 					<td align="center">'.$no++.'</td>
 					<td>'.$peg['nama'].'<br />'.$peg['tempat_lhr'].','.$peg['tgl_lhr'].'</td>
 					<td>'.$peg['nip'].'</td>';
-					$idPan=mysql_query("SELECT * FROM tb_pangkat WHERE (id_peg='$peg[id_peg]' AND status_pan='Aktif')");
-					$hpan=mysql_fetch_array($idPan);
+					$idPan=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE (id_peg='$peg[id_peg]' AND status_pan='Aktif')");
+					$hpan=mysqli_fetch_array($idPan, MYSQLI_ASSOC);
 					$html .='<td align="center">'.$hpan['pangkat'].'<br />'.$hpan['gol'].'</td>';
-					$idJab=mysql_query("SELECT * FROM tb_jabatan WHERE (id_peg='$peg[id_peg]' AND status_jab='Aktif')");
-					$hjab=mysql_fetch_array($idJab);
+					$idJab=mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE (id_peg='$peg[id_peg]' AND status_jab='Aktif')");
+					$hjab=mysqli_fetch_array($idJab, MYSQLI_ASSOC);
 					$html .='<td>'.$hjab['jabatan'].'</td>';
-					$idSek=mysql_query("SELECT * FROM tb_sekolah WHERE (id_peg='$peg[id_peg]' AND status='Akhir')");
-					$hsek=mysql_fetch_array($idSek);								
+					$idSek=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE (id_peg='$peg[id_peg]' AND status='Akhir')");
+					$hsek=mysqli_fetch_array($idSek, MYSQLI_ASSOC);								
 					$html .='<td align="center">'.$hsek['tingkat'].'</td>';
 					$lhr	= new DateTime($peg['tgl_lhr']);
 						$today	= new DateTime();										

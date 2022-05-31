@@ -7,8 +7,8 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tampilKaw	= mysql_query("SELECT * FROM tb_kawin WHERE id_kawin='$id_kawin'");
-	$hasil	= mysql_fetch_array ($tampilKaw);
+	$tampilKaw	= mysqli_query($koneksi, "SELECT * FROM tb_kawin WHERE id_kawin='$id_kawin'");
+	$hasil	= mysqli_fetch_array ($tampilKaw, MYSQLI_ASSOC);
 		$id_peg	=$hasil['id_peg'];
 				
 	if ($_POST['edit'] == "edit") {
@@ -48,7 +48,7 @@
 			header("location:index.php?page=form-edit-data-kawin&id_kawin=$id_kawin");
 		}		
 		else{
-		$update= mysql_query ("UPDATE tb_kawin SET no_kawin='$no_kawin', tgl_izin='$tgl_izin', bangsa1='$bangsa1', nama_wali_bapak1='$nama_wali_bapak1', kerja_wali_bapak1='$kerja_wali_bapak1', alamat_wali_bapak1='$alamat_wali_bapak1', nama_wali_ibu1='$nama_wali_ibu1', kerja_wali_ibu1='$kerja_wali_ibu1', alamat_wali_ibu1='$alamat_wali_ibu1', nama='$nama', tmp_lahir='$tmp_lahir', tgl_lahir='$tgl_lahir', pekerjaan='$pekerjaan', nik='$nik', pangkat='$pangkat', gol='$gol', jab='$jab', instansi='$instansi', bangsa2='$bangsa2', agama='$agama', alamat='$alamat', nama_wali_bapak2='$nama_wali_bapak2', kerja_wali_bapak2='$kerja_wali_bapak2', alamat_wali_bapak2='$alamat_wali_bapak2', nama_wali_ibu2='$nama_wali_ibu2', kerja_wali_ibu2='$kerja_wali_ibu2', alamat_wali_ibu2='$alamat_wali_ibu2', tmp_kawin='$tmp_kawin', tgl_kawin='$tgl_kawin', tgl_ditetapkan='$tgl_ditetapkan' WHERE id_kawin='$id_kawin'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_kawin SET no_kawin='$no_kawin', tgl_izin='$tgl_izin', bangsa1='$bangsa1', nama_wali_bapak1='$nama_wali_bapak1', kerja_wali_bapak1='$kerja_wali_bapak1', alamat_wali_bapak1='$alamat_wali_bapak1', nama_wali_ibu1='$nama_wali_ibu1', kerja_wali_ibu1='$kerja_wali_ibu1', alamat_wali_ibu1='$alamat_wali_ibu1', nama='$nama', tmp_lahir='$tmp_lahir', tgl_lahir='$tgl_lahir', pekerjaan='$pekerjaan', nik='$nik', pangkat='$pangkat', gol='$gol', jab='$jab', instansi='$instansi', bangsa2='$bangsa2', agama='$agama', alamat='$alamat', nama_wali_bapak2='$nama_wali_bapak2', kerja_wali_bapak2='$kerja_wali_bapak2', alamat_wali_bapak2='$alamat_wali_bapak2', nama_wali_ibu2='$nama_wali_ibu2', kerja_wali_ibu2='$kerja_wali_ibu2', alamat_wali_ibu2='$alamat_wali_ibu2', tmp_kawin='$tmp_kawin', tgl_kawin='$tgl_kawin', tgl_ditetapkan='$tgl_ditetapkan' WHERE id_kawin='$id_kawin'");
 			if($update){
 				$_SESSION['pesan'] = "Good! edit data izin kawin success ...";
 				header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");

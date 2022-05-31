@@ -6,8 +6,8 @@
 		die ("Error. No ID Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$query	=mysql_query("SELECT * FROM tb_skp WHERE id_skp='$id_skp'");
-	$data	=mysql_fetch_array($query);
+	$query	=mysqli_query($koneksi, "SELECT * FROM tb_skp WHERE id_skp='$id_skp'");
+	$data	=mysqli_fetch_array($query, MYSQLI_ASSOC);
 		$orientasi		=$data['nilai_orientasi'];
 		$integritas		=$data['nilai_integritas'];
 		$komitmen		=$data['nilai_komitmen'];
@@ -17,8 +17,8 @@
 		$jml_nilai	=$orientasi+$integritas+$komitmen+$disiplin+$kerjasama+$kepemimpinan;
 		$rata		=$jml_nilai/6;
 	
-	$tampilPeg   =mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
-	$peg    =mysql_fetch_array($tampilPeg);
+	$tampilPeg   =mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
+	$peg    =mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 ?>
 <!-- begin page-header -->
 <h1 class="page-header">Detail <small>SKP</small></h1>

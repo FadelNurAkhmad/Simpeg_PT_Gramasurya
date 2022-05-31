@@ -122,10 +122,10 @@ $jdik	= mysqli_num_rows($jmldik);
 							$blng	= date('Y-m-d', strtotime('+1 months', strtotime($nowg)));
 
 							$tampilKgb	= mysqli_query($koneksi, "SELECT * FROM tb_kgb WHERE tgl_kgb BETWEEN '$nowg' AND '$blng'");
-							while ($kgb	= mysqli_fetch_array($tampilKgb)) {
+							while ($kgb	= mysqli_fetch_array($tampilKgb, MYSQLI_ASSOC)) {
 								$idg = $kgb['id_peg'];
 								$tampilPegg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$idg'");
-								while ($pegg	= mysqli_fetch_array($tampilPegg)) {
+								while ($pegg	= mysqli_fetch_array($tampilPegg, MYSQLI_ASSOC)) {
 							?>
 									<tr>
 										<td><?php echo $pegg['nip']; ?></td>
@@ -173,10 +173,10 @@ $jdik	= mysqli_num_rows($jmldik);
 							$blnp	= date('Y-m-d', strtotime('+1 months', strtotime($nowp)));
 
 							$tampilKpb	= mysqli_query($koneksi, "SELECT * FROM tb_kpb WHERE tgl_kpb BETWEEN '$nowp' AND '$blnp'");
-							while ($kpb	= mysqli_fetch_array($tampilKpb)) {
+							while ($kpb	= mysqli_fetch_array($tampilKpb, MYSQLI_ASSOC)) {
 								$idp = $kpb['id_peg'];
 								$tampilPegp	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$idp'");
-								while ($pegp	= mysqli_fetch_array($tampilPegp)) {
+								while ($pegp	= mysqli_fetch_array($tampilPegp, MYSQLI_ASSOC)) {
 							?>
 									<tr>
 										<td><?php echo $pegp['nip']; ?></td>
@@ -244,7 +244,7 @@ $jdik	= mysqli_num_rows($jmldik);
 							<?php
 							$datenow = date("Y");
 							$nowpen	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE tgl_pensiun LIKE '$datenow%' ORDER BY tgl_pensiun");
-							while ($now	= mysqli_fetch_array($nowpen)) {
+							while ($now	= mysqli_fetch_array($nowpen, MYSQLI_ASSOC)) {
 							?>
 								<tr>
 									<td><?php echo $now['nip']; ?></td>
@@ -286,7 +286,7 @@ $jdik	= mysqli_num_rows($jmldik);
 							<?php
 							$dateone = date("Y") + 1;
 							$onepen	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE tgl_pensiun LIKE '$dateone%' ORDER BY tgl_pensiun");
-							while ($one	= mysqli_fetch_array($onepen)) {
+							while ($one	= mysqli_fetch_array($onepen, MYSQLI_ASSOC)) {
 							?>
 								<tr>
 									<td><?php echo $one['nip']; ?></td>
@@ -328,7 +328,7 @@ $jdik	= mysqli_num_rows($jmldik);
 							<?php
 							$datetwo = date("Y") + 2;
 							$twopen	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE tgl_pensiun LIKE '$datetwo%' ORDER BY tgl_pensiun");
-							while ($two	= mysqli_fetch_array($twopen)) {
+							while ($two	= mysqli_fetch_array($twopen, MYSQLI_ASSOC)) {
 							?>
 								<tr>
 									<td><?php echo $two['nip']; ?></td>
@@ -410,7 +410,7 @@ $jdik	= mysqli_num_rows($jmldik);
 				<?php
 				$sql   = "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY jabatan ORDER BY jabatan DESC";
 				$query = mysqli_query($koneksi, $sql)  or die(mysqli_error($koneksi));
-				while ($ret = mysqli_fetch_array($query)) {
+				while ($ret = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 					$jab	= $ret['jabatan'];
 
 					$sql_jumlah   = "SELECT * FROM tb_pegawai WHERE status_mut='' AND jabatan='$jab'";
@@ -451,7 +451,7 @@ $jdik	= mysqli_num_rows($jmldik);
 				<?php
 				$sql   = "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY urut_pangkat ORDER BY urut_pangkat DESC";
 				$query = mysqli_query($koneksi, $sql)  or die(mysqli_error($koneksi));
-				while ($ret = mysqli_fetch_array($query)) {
+				while ($ret = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 					$gol	= $ret['urut_pangkat'];
 
 					$sql_jumlah   = "SELECT * FROM tb_pegawai WHERE status_mut='' AND urut_pangkat='$gol'";
@@ -492,7 +492,7 @@ $jdik	= mysqli_num_rows($jmldik);
 				<?php
 				$sql   = "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY sekolah ORDER BY sekolah DESC";
 				$query = mysqli_query($koneksi, $sql)  or die(mysqli_error($koneksi));
-				while ($ret = mysqli_fetch_array($query)) {
+				while ($ret = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 					$sek	= $ret['sekolah'];
 
 					$sql_jumlah   = "SELECT * FROM tb_pegawai WHERE status_mut='' AND sekolah='$sek'";

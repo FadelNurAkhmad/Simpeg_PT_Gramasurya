@@ -34,7 +34,7 @@
 		
 		else{
 		$insert = "INSERT INTO tb_tunjangan (id_tunjangan, no_tunjangan, tgl_tunjangan, id_peg, jns_tunjangan, tgl_terhitung, akta_kawin, no_akta_kawin, tgl_akta_kawin, akta_lahir, no_akta_lahir, tgl_akta_lahir, tembusan1, tembusan2, tembusan3, tembusan4, tembusan5) VALUES ('$id_tunjangan', '$no_tunjangan', '$tgl_tunjangan', '$id_peg', '$jns_tunjangan', '$tgl_terhitung', '$akta_kawin', '$no_akta_kawin', '$tgl_akta_kawin', '$akta_lahir', '$no_akta_lahir', '$tgl_akta_lahir', '$tembusan1', '$tembusan2', '$tembusan3', '$tembusan4', '$tembusan5')";
-		$query = mysql_query ($insert);
+		$query = mysqli_query ($koneksi, $insert);
 		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert data tunjangan success ...";

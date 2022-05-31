@@ -21,16 +21,16 @@
 				<tbody>
 					<?php
 						$no=0;
-						$rekapjab	=mysql_query("SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY jabatan ORDER BY jabatan DESC");
-						while($jab=mysql_fetch_array($rekapjab)){
+						$rekapjab	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY jabatan ORDER BY jabatan DESC");
+						while($jab=mysqli_fetch_array($rekapjab, MYSQLI_ASSOC)){
 						$no++
 					?>
 					<tr>
 						<td><?=$no?></td>
 						<td><?=$jab['jabatan']?></td>
 						<td><?php
-								$jml=mysql_query("SELECT * FROM tb_pegawai WHERE status_mut='' AND jabatan='$jab[jabatan]'");
-								echo mysql_num_rows($jml);
+								$jml=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' AND jabatan='$jab[jabatan]'");
+								echo mysqli_num_rows($jml);
 							?>
 						</td>
 					</tr>
@@ -83,13 +83,13 @@
 						[
 						<?php 
 						$sql   = "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY jabatan ORDER BY jabatan DESC";
-						$query = mysql_query( $sql )  or die(mysql_error());
-							while( $ret = mysql_fetch_array( $query ) ){
+						$query = mysqli_query($koneksi, $sql )  or die(mysqli_error($koneksi));
+							while( $ret = mysqli_fetch_array( $query, MYSQLI_ASSOC) ){
 									$jab	=$ret['jabatan'];
 									
 									$sql_jumlah   = "SELECT * FROM tb_pegawai WHERE status_mut='' AND jabatan='$jab'";        
-									$query_jumlah = mysql_query( $sql_jumlah ) or die(mysql_error());
-									$data = mysql_num_rows( $query_jumlah );																									
+									$query_jumlah = mysqli_query($koneksi, $sql_jumlah ) or die(mysqli_error($koneksi));
+									$data = mysqli_num_rows( $query_jumlah );																									
 							?>
 								{
 									name: '<?php echo $jab; ?>',

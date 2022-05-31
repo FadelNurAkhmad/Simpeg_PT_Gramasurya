@@ -3,8 +3,8 @@ if (isset($_GET['id_jabatan'])) {
     $id_jabatan = $_GET['id_jabatan'];
 
     include "../../config/koneksi.php";
-    $query   = mysql_query("SELECT * FROM tb_gaji_jabatan WHERE id_jabatan='$id_jabatan'");
-    $data    = mysql_fetch_array($query);
+    $query   = mysqli_query($koneksi, "SELECT * FROM tb_gaji_jabatan WHERE id_jabatan='$id_jabatan'");
+    $data    = mysqli_fetch_array($query, MYSQLI_ASSOC);
 } else {
     die("Error. No ID Selected!");
 }
@@ -44,10 +44,10 @@ if (isset($_GET['id_jabatan'])) {
                         <label class="col-md-3 control-label">Nama Jabatan</label>
                         <div class="col-md-6">
                             <?php
-                            $dataJ = mysql_query("SELECT * FROM tb_masterjab ORDER BY nama_masterjab");
+                            $dataJ = mysqli_query($koneksi, "SELECT * FROM tb_masterjab ORDER BY nama_masterjab");
                             echo '<select name="nama_jabatan" class="default-select2 form-control">';
                             echo '<option value="' . $data['nama_jabatan'] . '">...</option>';
-                            while ($rowj = mysql_fetch_array($dataJ)) {
+                            while ($rowj = mysqli_fetch_array($dataJ, MYSQLI_ASSOC)) {
                                 echo '<option value="' . $rowj['nama_masterjab'] . '">' . $rowj['nama_masterjab'] . '</option>';
                             }
                             echo '</select>';

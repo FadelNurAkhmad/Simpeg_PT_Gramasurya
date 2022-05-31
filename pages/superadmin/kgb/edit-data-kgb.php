@@ -7,8 +7,8 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tampilTun	= mysql_query("SELECT * FROM tb_spkgb WHERE id_spkgb='$id_spkgb'");
-	$hasil	= mysql_fetch_array ($tampilTun);
+	$tampilTun	= mysqli_query($koneksi, "SELECT * FROM tb_spkgb WHERE id_spkgb='$id_spkgb'");
+	$hasil	= mysqli_fetch_array ($tampilTun, MYSQLI_ASSOC);
 		$id_peg	=$hasil['id_peg'];
 				
 	if ($_POST['edit'] == "edit") {
@@ -43,7 +43,7 @@
 			header("location:index.php?page=form-edit-data-kgb&id_spkgb=$id_spkgb");
 		}		
 		else{
-		$update= mysql_query ("UPDATE tb_spkgb SET no_kgb='$no_kgb', tgl='$tgl', pejabat_lama='$pejabat_lama', no_lama='$no_lama', tgl_lama='$tgl_lama', tgl_berlaku_lama='$tgl_berlaku_lama', mk_lama='$mk_lama', gaji_lama='$gaji_lama', gaji_baru='$gaji_baru', terbilang_gajibaru='$terbilang_gajibaru', mk_baru='$mk_baru', gol_baru='$gol_baru', tgl_terhitung='$tgl_terhitung', tembusan1='$tembusan1', tembusan2='$tembusan2', tembusan3='$tembusan3', tembusan4='$tembusan4', tembusan5='$tembusan5', tembusan6='$tembusan6', tembusan7='$tembusan7', tembusan8='$tembusan8', tembusan9='$tembusan9', tembusan10='$tembusan10', tembusan11='$tembusan11', tembusan12='$tembusan12' WHERE id_spkgb='$id_spkgb'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_spkgb SET no_kgb='$no_kgb', tgl='$tgl', pejabat_lama='$pejabat_lama', no_lama='$no_lama', tgl_lama='$tgl_lama', tgl_berlaku_lama='$tgl_berlaku_lama', mk_lama='$mk_lama', gaji_lama='$gaji_lama', gaji_baru='$gaji_baru', terbilang_gajibaru='$terbilang_gajibaru', mk_baru='$mk_baru', gol_baru='$gol_baru', tgl_terhitung='$tgl_terhitung', tembusan1='$tembusan1', tembusan2='$tembusan2', tembusan3='$tembusan3', tembusan4='$tembusan4', tembusan5='$tembusan5', tembusan6='$tembusan6', tembusan7='$tembusan7', tembusan8='$tembusan8', tembusan9='$tembusan9', tembusan10='$tembusan10', tembusan11='$tembusan11', tembusan12='$tembusan12' WHERE id_spkgb='$id_spkgb'");
 			if($update){
 				$_SESSION['pesan'] = "Good! edit data KGB success ...";
 				header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");

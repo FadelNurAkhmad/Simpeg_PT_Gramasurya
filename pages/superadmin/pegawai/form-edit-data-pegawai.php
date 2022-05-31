@@ -3,8 +3,8 @@
 	$id_peg = $_GET['id_peg'];
 	
 	include "../../config/koneksi.php";
-	$query   =mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
-	$data    =mysql_fetch_array($query);
+	$query   =mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
+	$data    =mysqli_fetch_array($query, MYSQLI_ASSOC);
 	}
 	else {
 		die ("Error. No ID Selected!");	
@@ -157,10 +157,10 @@
 						<label class="col-md-3 control-label">Unit Kerja</label>
 						<div class="col-md-6">
 							<?php
-								$unit = mysql_query("SELECT * FROM tb_unit ORDER BY nama");        
+								$unit = mysqli_query($koneksi, "SELECT * FROM tb_unit ORDER BY nama");        
 								echo '<select name="id_unit" class="default-select2 form-control">';    
 								echo '<option value="'.$data['unit_kerja'].'">...</option>';    
-									while ($rowunit = mysql_fetch_array($unit)) {    
+									while ($rowunit = mysqli_fetch_array($unit, MYSQLI_ASSOC)) {    
 									echo '<option value="'.$rowunit['id_unit'].'">'.$rowunit['nama'].'</option>';    
 									}    
 								echo '</select>';

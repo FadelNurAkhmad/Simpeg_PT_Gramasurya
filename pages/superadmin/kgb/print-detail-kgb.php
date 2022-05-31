@@ -60,8 +60,8 @@ $pdf->SetFont('helvetica', '', 8.7);
 		die ("Error. No ID Selected! ");	
 	}
 	
-	$query	=mysql_query("SELECT * FROM tb_spkgb WHERE id_spkgb='$id_spkgb'");
-	$data	=mysql_fetch_array($query);
+	$query	=mysqli_query($koneksi, "SELECT * FROM tb_spkgb WHERE id_spkgb='$id_spkgb'");
+	$data	=mysqli_fetch_array($query, MYSQLI_ASSOC);
 	list($y1,$m1,$d1)	=explode ("-",$data['tgl']);
 	list($y2,$m2,$d2)	=explode ("-",$data['tgl_lama']);
 	list($y3,$m3,$d3)	=explode ("-",$data['tgl_berlaku_lama']);
@@ -219,17 +219,17 @@ $pdf->SetFont('helvetica', '', 8.7);
 		$m4 ="Desember";
 	}
 	
-	$tampilPeg   =mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
-	$peg    =mysql_fetch_array($tampilPeg);
+	$tampilPeg   =mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
+	$peg    =mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 	
-	$tampilUni   =mysql_query("SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
-	$uni    =mysql_fetch_array($tampilUni);
+	$tampilUni   =mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
+	$uni    =mysqli_fetch_array($tampilUni, MYSQLI_ASSOC);
 	
-	$tampilSet	=mysql_query("SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
-	$set	=mysql_fetch_array($tampilSet);
+	$tampilSet	=mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
+	$set	=mysqli_fetch_array($tampilSet, MYSQLI_ASSOC);
 	
-	$kepala	=mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$set[kepala]'");
-	$kep	=mysql_fetch_array($kepala);
+	$kepala	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$set[kepala]'");
+	$kep	=mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 	
 $head ='<table border="0" cellspacing="0" cellpadding="2">
 			<tr>

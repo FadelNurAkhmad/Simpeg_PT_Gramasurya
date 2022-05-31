@@ -4,8 +4,8 @@ include "../../config/koneksi.php";
 if (isset($_GET['id_user'])) {
 	$id_user = $_GET['id_user'];
 	
-	$query   =mysql_query("SELECT * FROM tb_user WHERE id_user='$id_user'");
-	$data    =mysql_fetch_array($query);
+	$query   =mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user='$id_user'");
+	$data    =mysqli_fetch_array($query, MYSQLI_ASSOC);
 	}
 	else {
 		die ("Error. No ID Selected! ");	
@@ -18,7 +18,7 @@ if (isset($_GET['id_user'])) {
 		}
 		
 		else{
-			$delete		=mysql_query("DELETE FROM tb_user WHERE id_user='$id_user'");
+			$delete		=mysqli_query($koneksi, "DELETE FROM tb_user WHERE id_user='$id_user'");
 			if($delete){
 				$_SESSION['pesan'] = "Good! Delete user $data[id_user] success ...";
 				header("location:index.php?page=form-view-data-user");
@@ -28,6 +28,6 @@ if (isset($_GET['id_user'])) {
 			}
 		}
 	}
-	mysql_close($Open);
+	mysqli_close($koneksi);
 ?>
 </div>
