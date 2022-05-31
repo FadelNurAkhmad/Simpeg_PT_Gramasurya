@@ -12,11 +12,11 @@ if ($_SESSION['hak_akses'] != "Pegawai") {
 		<button type='button' onclick=location.href='../../'>Back</button>");
 }
 include "../../config/koneksi.php";
-$tampilUsr	= mysql_query("SELECT * FROM tb_user WHERE id_user='$_SESSION[id_user]'");
-$usr		= mysql_fetch_array($tampilUsr);
+$tampilUsr	= mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user='$_SESSION[id_user]'");
+$usr		= mysqli_fetch_array($tampilUsr);
 
-$tampilPeg	= mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$usr[id_peg]'");
-$peg		= mysql_fetch_array($tampilPeg);
+$tampilPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$usr[id_peg]'");
+$peg		= mysqli_fetch_array($tampilPeg);
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
