@@ -5,11 +5,11 @@
 	
 	include "../../config/koneksi.php";
 	function kdauto($tabel, $inisial){
-		$struktur   = mysql_query("SELECT * FROM $tabel");
-		$field      = mysql_field_name($struktur,0);
-		$panjang    = mysql_field_len($struktur,0);
-		$qry  = mysql_query("SELECT max(".$field.") FROM ".$tabel);
-		$row  = mysql_fetch_array($qry);
+		$struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
+		$field      = mysqli_field_name($struktur,0);
+		$panjang    = mysqli_field_len($struktur,0);
+		$qry  = mysqli_query($koneksi, "SELECT max(".$field.") FROM ".$tabel);
+		$row  = mysqli_fetch_array($qry, MYSQLI_ASSOC);
 		if ($row[0]=="") {
 		$angka=0;
 		}
@@ -26,7 +26,7 @@
 		}
 	$id_masterjab		=kdauto("tb_masterjab","");
 
-	$cekname	=mysql_num_rows (mysql_query("SELECT nama_masterjab FROM tb_masterjab WHERE nama_masterjab='$_POST[nama_masterjab]'"));
+	$cekname	=mysqli_num_rows (mysqli_query($koneksi, "SELECT nama_masterjab FROM tb_masterjab WHERE nama_masterjab='$_POST[nama_masterjab]'"));
 	
 		if (empty($_POST['nama_masterjab'])) {
 			$_SESSION['pesan'] = "Oops! Please fill all column ...";
@@ -39,7 +39,7 @@
 		
 		else{
 		$insert = "INSERT INTO tb_masterjab (id_masterjab, nama_masterjab) VALUES ('$id_masterjab', '$nama_masterjab')";
-		$query = mysql_query ($insert);
+		$query = mysqli_query ($koneksi, $insert);
 		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert master nama jabatan success ...";

@@ -21,16 +21,16 @@
 				<tbody>
 					<?php
 						$no=0;
-						$rekapgol	=mysql_query("SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY urut_pangkat ORDER BY urut_pangkat DESC");
-						while($gol=mysql_fetch_array($rekapgol)){
+						$rekapgol	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY urut_pangkat ORDER BY urut_pangkat DESC");
+						while($gol=mysqli_fetch_array($rekapgol, MYSQLI_ASSOC)){
 						$no++
 					?>
 					<tr>
 						<td><?=$no?></td>
 						<td><?=$gol['urut_pangkat']?></td>
 						<td><?php
-								$jml=mysql_query("SELECT * FROM tb_pegawai WHERE status_mut='' AND urut_pangkat='$gol[urut_pangkat]'");
-								echo mysql_num_rows($jml);
+								$jml=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' AND urut_pangkat='$gol[urut_pangkat]'");
+								echo mysqli_num_rows($jml);
 							?>
 						</td>
 					</tr>
@@ -83,13 +83,13 @@
 						[
 						<?php 
 						$sql   = "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY urut_pangkat ORDER BY urut_pangkat DESC";
-						$query = mysql_query( $sql )  or die(mysql_error());
-							while( $ret = mysql_fetch_array( $query ) ){
+						$query = mysqli_query($koneksi, $sql )  or die(mysqli_error());
+							while( $ret = mysqli_fetch_array( $query, MYSQLI_ASSOC ) ){
 									$gol	=$ret['urut_pangkat'];
 									
 									$sql_jumlah   = "SELECT * FROM tb_pegawai WHERE status_mut='' AND urut_pangkat='$gol'";        
-									$query_jumlah = mysql_query( $sql_jumlah ) or die(mysql_error());
-									$data = mysql_num_rows( $query_jumlah );																									
+									$query_jumlah = mysqli_query( $koneksi, $sql_jumlah ) or die(mysqli_error());
+									$data = mysqli_num_rows( $query_jumlah );																									
 							?>
 								{
 									name: '<?php echo $gol; ?>',

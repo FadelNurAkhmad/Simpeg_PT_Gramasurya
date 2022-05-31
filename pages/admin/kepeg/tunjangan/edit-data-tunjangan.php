@@ -7,8 +7,8 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tampilTun	= mysql_query("SELECT * FROM tb_tunjangan WHERE id_tunjangan='$id_tunjangan'");
-	$hasil	= mysql_fetch_array ($tampilTun);
+	$tampilTun	= mysqli_query($koneksi, "SELECT * FROM tb_tunjangan WHERE id_tunjangan='$id_tunjangan'");
+	$hasil	= mysqli_fetch_array ($tampilTun, MYSQLI_ASSOC);
 		$id_peg	=$hasil['id_peg'];
 				
 	if ($_POST['edit'] == "edit") {
@@ -33,7 +33,7 @@
 			header("location:index.php?page=form-edit-data-tunjangan&id_tunjangan=$id_tunjangan");
 		}		
 		else{
-		$update= mysql_query ("UPDATE tb_tunjangan SET no_tunjangan='$no_tunjangan', tgl_tunjangan='$tgl_tunjangan', jns_tunjangan='$jns_tunjangan', tgl_terhitung='$tgl_terhitung', akta_kawin='$akta_kawin', no_akta_kawin='$no_akta_kawin', tgl_akta_kawin='$tgl_akta_kawin', akta_lahir='$akta_lahir', no_akta_lahir='$no_akta_lahir', tgl_akta_lahir='$tgl_akta_lahir', tembusan1='$tembusan1', tembusan2='$tembusan2', tembusan3='$tembusan3', tembusan4='$tembusan4', tembusan5='$tembusan5' WHERE id_tunjangan='$id_tunjangan'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_tunjangan SET no_tunjangan='$no_tunjangan', tgl_tunjangan='$tgl_tunjangan', jns_tunjangan='$jns_tunjangan', tgl_terhitung='$tgl_terhitung', akta_kawin='$akta_kawin', no_akta_kawin='$no_akta_kawin', tgl_akta_kawin='$tgl_akta_kawin', akta_lahir='$akta_lahir', no_akta_lahir='$no_akta_lahir', tgl_akta_lahir='$tgl_akta_lahir', tembusan1='$tembusan1', tembusan2='$tembusan2', tembusan3='$tembusan3', tembusan4='$tembusan4', tembusan5='$tembusan5' WHERE id_tunjangan='$id_tunjangan'");
 			if($update){
 				$_SESSION['pesan'] = "Good! edit data tunjangan success ...";
 				header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");

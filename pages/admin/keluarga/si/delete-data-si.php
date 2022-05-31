@@ -4,8 +4,8 @@ include "../../config/koneksi.php";
 if (isset($_GET['id_si'])) {
 	$id_si = $_GET['id_si'];
 	
-	$query   =mysql_query("SELECT * FROM tb_suamiistri WHERE id_si='$id_si'");
-	$data    =mysql_fetch_array($query);
+	$query   =mysqli_query($koneksi, "SELECT * FROM tb_suamiistri WHERE id_si='$id_si'");
+	$data    =mysqli_fetch_array($query, MYSQLI_ASSOC);
 		$id_peg	=$data['id_peg'];
 	}
 	else {
@@ -13,7 +13,7 @@ if (isset($_GET['id_si'])) {
 	}
 	
 	if (!empty($id_si) && $id_si != "") {
-		$delete	=mysql_query("DELETE FROM tb_suamiistri WHERE id_si='$id_si'");		
+		$delete	=mysqli_query($koneksi, "DELETE FROM tb_suamiistri WHERE id_si='$id_si'");		
 		if($delete){
 			$_SESSION['pesan'] = "Good! delete suami istri success ...";
 			header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");
@@ -22,6 +22,6 @@ if (isset($_GET['id_si'])) {
 			echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
 		}
 	}
-	mysql_close($Open);
+	mysqli_close($Open);
 ?>
 </div>

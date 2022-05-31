@@ -32,7 +32,7 @@
 		else{
 		$insert = "INSERT INTO tb_skp (id_skp, id_peg, periode_awal, periode_akhir, penilai, atasan_penilai, nilai_orientasi, nilai_integritas, nilai_komitmen, nilai_disiplin, nilai_kerjasama, nilai_kepemimpinan, hasil_penilaian)
 					VALUES ('$id_skp', '$id_peg', '$periode_awal', '$periode_akhir', '$penilai', '$atasan_penilai', '$nilai_orientasi', '$nilai_integritas', '$nilai_komitmen', '$nilai_disiplin', '$nilai_kerjasama', '$nilai_kepemimpinan', '$hasil_penilaian')";
-		$query = mysql_query ($insert);
+		$query = mysqli_query ($koneksi, $insert);
 		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert data SKP success ...";

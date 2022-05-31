@@ -42,8 +42,8 @@
 					<?php
 						include "../../config/koneksi.php";
 						$no=0;
-						$tampilPeg	=mysql_query("SELECT * FROM tb_pegawai WHERE status_mut='' ORDER BY tgl_pensiun");
-						while($peg	=mysql_fetch_array($tampilPeg)){
+						$tampilPeg	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' ORDER BY tgl_pensiun");
+						while($peg	=mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC)){
 						$no++
 					?>
 					<tr>

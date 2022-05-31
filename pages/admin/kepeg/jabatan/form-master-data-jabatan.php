@@ -16,11 +16,11 @@
 <?php
 	include "../../config/koneksi.php";
 	function kdauto($tabel, $inisial){
-		$struktur   = mysql_query("SELECT * FROM $tabel");
-		$field      = mysql_field_name($struktur,0);
-		$panjang    = mysql_field_len($struktur,0);
-		$qry  = mysql_query("SELECT max(".$field.") FROM ".$tabel);
-		$row  = mysql_fetch_array($qry);
+		$struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
+		$field      = mysqli_field_name($struktur,0);
+		$panjang    = mysqli_field_len($struktur,0);
+		$qry  = mysqli_query($koneksi, "SELECT max(".$field.") FROM ".$tabel);
+		$row  = mysqli_fetch_array($qry, MYSQLI_ASSOC);
 		if ($row[0]=="") {
 		$angka=0;
 		}
@@ -58,10 +58,10 @@
 						<label class="col-md-3 control-label">Pegawai</label>
 						<div class="col-md-6">
 							<?php
-								$data = mysql_query("SELECT * FROM tb_pegawai ORDER BY nama ASC");        
+								$data = mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY nama ASC");        
 								echo '<select name="id_peg" class="default-select2 form-control">';    
 								echo '<option value="">...</option>';    
-									while ($row = mysql_fetch_array($data)) {    
+									while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)) {    
 									echo '<option value="'.$row['id_peg'].'">'.$row['nama'].'_'.$row['nip'].'</option>';    
 									}    
 								echo '</select>';
@@ -72,10 +72,10 @@
 						<label class="col-md-3 control-label">Jabatan</label>
 						<div class="col-md-4">
 							<?php
-								$dataJ = mysql_query("SELECT * FROM tb_masterjab ORDER BY nama_masterjab");      
+								$dataJ = mysqli_query($koneksi, "SELECT * FROM tb_masterjab ORDER BY nama_masterjab");      
 								echo '<select name="jabatan" class="default-select2 form-control">';    
 								echo '<option value="">...</option>';    
-									while ($rowj = mysql_fetch_array($dataJ)) {    
+									while ($rowj = mysqli_fetch_array($dataJ, MYSQLI_ASSOC)) {    
 									echo '<option value="'.$rowj['nama_masterjab'].'">'.$rowj['nama_masterjab'].'</option>';    
 									}    
 								echo '</select>';
@@ -89,10 +89,10 @@
 						<label class="col-md-3 control-label">Eselon</label>
 						<div class="col-md-4">
 							<?php
-								$dataE = mysql_query("SELECT * FROM tb_masteresl ORDER BY nama_masteresl DESC");      
+								$dataE = mysqli_query($koneksi, "SELECT * FROM tb_masteresl ORDER BY nama_masteresl DESC");      
 								echo '<select name="eselon" class="default-select2 form-control">';    
 								echo '<option value="">...</option>';    
-									while ($rowe = mysql_fetch_array($dataE)) {    
+									while ($rowe = mysqli_fetch_array($dataE, MYSQLI_ASSOC)) {    
 									echo '<option value="'.$rowe['nama_masteresl'].'">'.$rowe['nama_masteresl'].'</option>';    
 									}    
 								echo '</select>';
@@ -186,8 +186,8 @@
 								<tbody>
 									<?php
 										$no=0;
-										$tampilJ	=mysql_query("SELECT * FROM tb_masterjab ORDER BY nama_masterjab ASC");
-										while($jab=mysql_fetch_array($tampilJ)){
+										$tampilJ	=mysqli_query($koneksi, "SELECT * FROM tb_masterjab ORDER BY nama_masterjab ASC");
+										while($jab=mysqli_fetch_array($tampilJ, MYSQLI_ASSOC)){
 										$no++;
 									?>	
 										<tr>
@@ -266,8 +266,8 @@
 								<tbody>
 									<?php
 										$no=0;
-										$tampilE	=mysql_query("SELECT * FROM tb_masteresl ORDER BY nama_masteresl DESC");
-										while($esl=mysql_fetch_array($tampilE)){
+										$tampilE	=mysqli_query($koneksi, "SELECT * FROM tb_masteresl ORDER BY nama_masteresl DESC");
+										while($esl=mysqli_fetch_array($tampilE, MYSQLI_ASSOC)){
 										$no++;
 									?>	
 										<tr>

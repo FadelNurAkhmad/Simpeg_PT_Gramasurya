@@ -7,8 +7,8 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tampilDik	= mysql_query("SELECT * FROM tb_diklat WHERE id_diklat='$id_diklat'");
-	$hasil	= mysql_fetch_array ($tampilDik);
+	$tampilDik	= mysqli_query($koneksi, "SELECT * FROM tb_diklat WHERE id_diklat='$id_diklat'");
+	$hasil	= mysqli_fetch_array ($tampilDik, MYSQLI_ASSOC);
 		$id_peg	=$hasil['id_peg'];
 				
 	if ($_POST['edit'] == "edit") {
@@ -27,7 +27,7 @@
 			header("location:index.php?page=form-edit-data-diklat&id_diklat=$id_diklat");
 		}		
 		else{
-		$update= mysql_query ("UPDATE tb_diklat SET diklat='$diklat', jml_jam='$jml_jam', penyelenggara='$penyelenggara', tempat='$tempat', angkatan='$angkatan', tahun='$tahun', no_sttpp='$no_sttpp', tgl_sttpp='$tgl_sttpp', file='$file' WHERE id_diklat='$id_diklat'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_diklat SET diklat='$diklat', jml_jam='$jml_jam', penyelenggara='$penyelenggara', tempat='$tempat', angkatan='$angkatan', tahun='$tahun', no_sttpp='$no_sttpp', tgl_sttpp='$tgl_sttpp', file='$file' WHERE id_diklat='$id_diklat'");
 			if($update){
 				$_SESSION['pesan'] = "Good! edit data diklat success ...";
 				header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");

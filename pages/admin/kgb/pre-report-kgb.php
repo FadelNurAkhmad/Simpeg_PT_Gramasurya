@@ -44,10 +44,10 @@
 						list($y,$m,$d)	=explode ("-",date('Y-m-d'));
 						$now	="$y"."-"."$m";
 						$no=0;
-						$tampilKgb	=mysql_query("SELECT * FROM tb_kgb WHERE tgl_kgb LIKE '$now%' ORDER BY tgl_kgb");
-						while($kgb	=mysql_fetch_array($tampilKgb)){
-							$tampilPeg	=mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$kgb[id_peg]'");
-							while($peg	=mysql_fetch_array($tampilPeg)){
+						$tampilKgb	=mysqli_query($koneksi, "SELECT * FROM tb_kgb WHERE tgl_kgb LIKE '$now%' ORDER BY tgl_kgb");
+						while($kgb	=mysqli_fetch_array($tampilKgb, MYSQLI_ASSOC)){
+							$tampilPeg	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$kgb[id_peg]'");
+							while($peg	=mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC)){
 						$no++						
 					?>
 					<tr>

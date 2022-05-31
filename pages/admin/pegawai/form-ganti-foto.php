@@ -3,8 +3,8 @@
 	$id_peg = $_GET['id_peg'];
 	
 	include "../../config/koneksi.php";
-	$query   =mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
-	$data    =mysql_fetch_array($query);
+	$query   =mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
+	$data    =mysqli_fetch_array($query, MYSQLI_ASSOC);
 	}
 	else {
 		die ("Error. No ID Selected!");	

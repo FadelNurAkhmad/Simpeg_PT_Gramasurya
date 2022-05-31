@@ -3,11 +3,11 @@
 	$id_jab = $_GET['id_jab'];
 	
 	include "../../config/koneksi.php";
-	$query   =mysql_query("SELECT * FROM tb_jabatan WHERE id_jab='$id_jab'");
-	$data    =mysql_fetch_array($query);
+	$query   =mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_jab='$id_jab'");
+	$data    =mysqli_fetch_array($query, MYSQLI_ASSOC);
 		
-	$tampilPeg   =mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
-	$peg    =mysql_fetch_array($tampilPeg);
+	$tampilPeg   =mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
+	$peg    =mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 	}
 	else {
 		die ("Error. No ID Selected!");	
@@ -48,10 +48,10 @@
 						<label class="col-md-3 control-label">Jabatan</label>
 						<div class="col-md-6">
 							<?php
-								$dataJ = mysql_query("SELECT * FROM tb_masterjab ORDER BY nama_masterjab");      
+								$dataJ = mysqli_query($koneksi, "SELECT * FROM tb_masterjab ORDER BY nama_masterjab");      
 								echo '<select name="jabatan" class="default-select2 form-control">';    
 								echo '<option value="'.$data['jabatan'].'">...</option>';    
-									while ($rowj = mysql_fetch_array($dataJ)) {    
+									while ($rowj = mysqli_fetch_array($dataJ, MYSQLI_ASSOC)) {    
 									echo '<option value="'.$rowj['nama_masterjab'].'">'.$rowj['nama_masterjab'].'</option>';    
 									}    
 								echo '</select>';
@@ -62,10 +62,10 @@
 						<label class="col-md-3 control-label">Eselon</label>
 						<div class="col-md-6">
 							<?php
-								$dataE = mysql_query("SELECT * FROM tb_masteresl ORDER BY nama_masteresl DESC");      
+								$dataE = mysqli_query($koneksi, "SELECT * FROM tb_masteresl ORDER BY nama_masteresl DESC");      
 								echo '<select name="eselon" class="default-select2 form-control">';    
 								echo '<option value="'.$data['eselon'].'">...</option>';    
-									while ($rowe = mysql_fetch_array($dataE)) {    
+									while ($rowe = mysqli_fetch_array($dataE, MYSQLI_ASSOC)) {    
 									echo '<option value="'.$rowe['nama_masteresl'].'">'.$rowe['nama_masteresl'].'</option>';    
 									}    
 								echo '</select>';

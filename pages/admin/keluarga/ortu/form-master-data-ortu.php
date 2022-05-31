@@ -16,11 +16,11 @@
 <?php
 	include "../../config/koneksi.php";
 	function kdauto($tabel, $inisial){
-		$struktur   = mysql_query("SELECT * FROM $tabel");
-		$field      = mysql_field_name($struktur,0);
-		$panjang    = mysql_field_len($struktur,0);
-		$qry  = mysql_query("SELECT max(".$field.") FROM ".$tabel);
-		$row  = mysql_fetch_array($qry);
+		$struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
+		$field      = mysqli_field_name($struktur,0);
+		$panjang    = mysqli_field_len($struktur,0);
+		$qry  = mysql_query($koneksi, "SELECT max(".$field.") FROM ".$tabel);
+		$row  = mysql_fetch_array($qry, MYSQLI_ASSOC);
 		if ($row[0]=="") {
 		$angka=0;
 		}

@@ -3,8 +3,8 @@
 	$id_mastergol = $_GET['id_mastergol'];
 	
 	include "../../config/koneksi.php";
-	$query   =mysql_query("SELECT * FROM tb_mastergol WHERE id_mastergol='$id_mastergol'");
-	$data    =mysql_fetch_array($query);
+	$query   =mysqli_query($koneksi, "SELECT * FROM tb_mastergol WHERE id_mastergol='$id_mastergol'");
+	$data    =mysqli_fetch_array($query, MYSQLI_ASSOC);
 	}
 	else {
 		die ("Error. No ID Selected!");	

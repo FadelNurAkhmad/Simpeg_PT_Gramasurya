@@ -4,8 +4,8 @@ include "../../config/koneksi.php";
 if (isset($_GET['id_skp'])) {
 	$id_skp = $_GET['id_skp'];
 	
-	$query   =mysql_query("SELECT * FROM tb_skp WHERE id_skp='$id_skp'");
-	$data    =mysql_fetch_array($query);
+	$query   =mysqli_query($koneksi, "SELECT * FROM tb_skp WHERE id_skp='$id_skp'");
+	$data    =mysqli_fetch_array($query, MYSQLI_ASSOC);
 		$id_peg	=$data['id_peg'];
 	}
 	else {
@@ -13,7 +13,7 @@ if (isset($_GET['id_skp'])) {
 	}
 	
 	if (!empty($id_skp) && $id_skp != "") {
-		$delete	=mysql_query("DELETE FROM tb_skp WHERE id_skp='$id_skp'");		
+		$delete	=mysqli_query($koneksi, "DELETE FROM tb_skp WHERE id_skp='$id_skp'");		
 		if($delete){
 			$_SESSION['pesan'] = "Good! delete SKP success ...";
 			header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");
@@ -22,6 +22,6 @@ if (isset($_GET['id_skp'])) {
 			echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
 		}
 	}
-	mysql_close($Open);
+	mysqli_close($Open);
 ?>
 </div>

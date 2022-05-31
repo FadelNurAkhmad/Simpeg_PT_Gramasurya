@@ -10,13 +10,13 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tP=mysql_query("SElECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
-	$jkP=mysql_fetch_array($tP);
+	$tP=mysqli_query($koneksi, "SElECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
+	$jkP=mysqli_fetch_array($tP, MYSQLI_ASSOC);
 	$jk=$jkP['jk'];
 		
-	$update1= mysql_query ("UPDATE tb_pangkat SET status_pan='' WHERE id_peg='$id_peg'");
-	$update2= mysql_query ("UPDATE tb_pangkat SET status_pan='Aktif', jk_pan='$jk' WHERE id_pangkat='$id_pangkat'");
-	$update3= mysql_query ("UPDATE tb_pegawai SET urut_pangkat='$gol', pangkat='$pangkat' WHERE id_peg='$id_peg'");
+	$update1= mysqli_query ($koneksi, "UPDATE tb_pangkat SET status_pan='' WHERE id_peg='$id_peg'");
+	$update2= mysqli_query ($koneksi, "UPDATE tb_pangkat SET status_pan='Aktif', jk_pan='$jk' WHERE id_pangkat='$id_pangkat'");
+	$update3= mysqli_query ($koneksi, "UPDATE tb_pegawai SET urut_pangkat='$gol', pangkat='$pangkat' WHERE id_peg='$id_peg'");
 		if($update1){
 			$_SESSION['pesan'] = "Good! setup pangkat sekarang success ...";
 			header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");

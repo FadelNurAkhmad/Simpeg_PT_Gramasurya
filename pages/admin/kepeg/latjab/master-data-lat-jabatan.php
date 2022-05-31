@@ -15,7 +15,7 @@
 	$file			=$_FILES['file']['name'];
 	
 	include "../../config/koneksi.php";
-	$cekid	=mysql_num_rows (mysql_query("SELECT id_peg FROM tb_lat_jabatan WHERE id_peg='$_POST[id_peg]'"));
+	$cekid	=mysqli_num_rows (mysqli_query($koneksi, "SELECT id_peg FROM tb_lat_jabatan WHERE id_peg='$_POST[id_peg]'"));
 	
 		if (empty($_POST['id_peg']) || empty($_POST['nama_pelatih']) || empty($_POST['tahun_lat']) || empty($_POST['jml_jam'])) {
 			$_SESSION['pesan'] = "Oops! Please fill all column ...";
@@ -28,7 +28,7 @@
 		
 		else{
 		$insert = "INSERT INTO tb_lat_jabatan (id_lat_jabatan, id_peg, nama_pelatih, tahun_lat, jml_jam, file) VALUES ('$id_lat_jabatan', '$id_peg', '$nama_pelatih', '$tahun_lat', '$jml_jam', '$file')";
-		$query = mysql_query ($insert);
+		$query = mysqli_query ($koneksi, $insert);
 		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert data lat jabatan success ...";

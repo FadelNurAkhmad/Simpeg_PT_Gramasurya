@@ -22,7 +22,7 @@
 		
 		else{
 		$insert = "INSERT INTO tb_penghargaan (id_penghargaan, id_peg, penghargaan, tahun, pemberi) VALUES ('$id_penghargaan', '$id_peg', '$penghargaan', '$tahun', '$pemberi')";
-		$query = mysql_query ($insert);
+		$query = mysqli_query ($koneksi, $insert);
 		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert data penghargaan success ...";

@@ -1,7 +1,7 @@
 <?php
 	include "../../config/koneksi.php";
-	$kepala	=mysql_query("SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
-	$kep	=mysql_fetch_array($kepala);
+	$kepala	=mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
+	$kep	=mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 ?>
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
@@ -75,8 +75,8 @@
 								<td></td>
 								<td>- PRIA</td>
 								<td><?php
-									$pegL1=mysql_query("SELECT * FROM tb_pangkat WHERE jk_pan='Laki-laki' AND status_pan='Aktif' AND gol LIKE 'I/%'");
-									$jL1=mysql_num_rows($pegL1);
+									$pegL1=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE jk_pan='Laki-laki' AND status_pan='Aktif' AND gol LIKE 'I/%'");
+									$jL1=mysqli_num_rows($pegL1);
 										if ($jL1==0){
 										echo "-";
 										}
@@ -86,8 +86,8 @@
 									?>				
 								</td>
 								<td><?php
-									$pegL2=mysql_query("SELECT * FROM tb_pangkat WHERE jk_pan='Laki-laki' AND status_pan='Aktif' AND gol LIKE 'II/%'");
-									$jL2=mysql_num_rows($pegL2);	
+									$pegL2=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE jk_pan='Laki-laki' AND status_pan='Aktif' AND gol LIKE 'II/%'");
+									$jL2=mysqli_num_rows($pegL2);	
 										if ($jL2==0){
 										echo "-";
 										}
@@ -97,8 +97,8 @@
 									?>				
 								</td>
 								<td><?php
-									$pegL3=mysql_query("SELECT * FROM tb_pangkat WHERE jk_pan='Laki-laki' AND status_pan='Aktif' AND gol LIKE 'III/%'");
-									$jL3=mysql_num_rows($pegL3);	
+									$pegL3=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE jk_pan='Laki-laki' AND status_pan='Aktif' AND gol LIKE 'III/%'");
+									$jL3=mysqli_num_rows($pegL3);	
 										if ($jL3==0){
 										echo "-";
 										}
@@ -108,8 +108,8 @@
 									?>				
 								</td>
 								<td><?php
-									$pegL4=mysql_query("SELECT * FROM tb_pangkat WHERE jk_pan='Laki-laki' AND status_pan='Aktif' AND gol LIKE 'IV/%'");
-									$jL4=mysql_num_rows($pegL4);	
+									$pegL4=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE jk_pan='Laki-laki' AND status_pan='Aktif' AND gol LIKE 'IV/%'");
+									$jL4=mysqli_num_rows($pegL4);	
 										if ($jL4==0){
 										echo "-";
 										}
@@ -119,8 +119,8 @@
 									?>				
 								</td>
 								<td><?php
-									$pegL=mysql_query("SELECT * FROM tb_pangkat WHERE jk_pan='Laki-laki' AND status_pan='Aktif' AND gol !=''");
-									$jL=mysql_num_rows($pegL);	
+									$pegL=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE jk_pan='Laki-laki' AND status_pan='Aktif' AND gol !=''");
+									$jL=mysqli_num_rows($pegL);	
 										if ($jL==0){
 										echo "-";
 										}
@@ -130,8 +130,8 @@
 									?>				
 								</td>
 								<td><?php
-									$eL2=mysql_query("SELECT * FROM tb_jabatan WHERE jk_jab='Laki-laki' AND status_jab='Aktif' AND eselon LIKE 'II/%'");
-									$jeL2=mysql_num_rows($eL2);	
+									$eL2=mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE jk_jab='Laki-laki' AND status_jab='Aktif' AND eselon LIKE 'II/%'");
+									$jeL2=mysqli_num_rows($eL2);	
 										if ($jeL2==0){
 										echo "-";
 										}
@@ -141,8 +141,8 @@
 									?>				
 								</td>
 								<td><?php
-									$eL3=mysql_query("SELECT * FROM tb_jabatan WHERE jk_jab='Laki-laki' AND status_jab='Aktif' AND eselon LIKE 'III/%'");
-									$jeL3=mysql_num_rows($eL3);	
+									$eL3=mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE jk_jab='Laki-laki' AND status_jab='Aktif' AND eselon LIKE 'III/%'");
+									$jeL3=mysqli_num_rows($eL3);	
 										if ($jeL3==0){
 										echo "-";
 										}
@@ -152,8 +152,8 @@
 									?>				
 								</td>
 								<td><?php
-									$eL4=mysql_query("SELECT * FROM tb_jabatan WHERE jk_jab='Laki-laki' AND status_jab='Aktif' AND eselon LIKE 'IV/%'");
-									$jeL4=mysql_num_rows($eL4);	
+									$eL4=mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE jk_jab='Laki-laki' AND status_jab='Aktif' AND eselon LIKE 'IV/%'");
+									$jeL4=mysqli_num_rows($eL4);	
 										if ($jeL4==0){
 										echo "-";
 										}
@@ -163,8 +163,8 @@
 									?>				
 								</td>
 								<td><?php
-									$eL5=mysql_query("SELECT * FROM tb_jabatan WHERE jk_jab='Laki-laki' AND status_jab='Aktif' AND eselon LIKE 'V/%'");
-									$jeL5=mysql_num_rows($eL5);	
+									$eL5=mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE jk_jab='Laki-laki' AND status_jab='Aktif' AND eselon LIKE 'V/%'");
+									$jeL5=mysqli_num_rows($eL5);	
 										if ($jeL5==0){
 										echo "-";
 										}
@@ -175,8 +175,8 @@
 								</td>
 								<td>
 								<?php
-									$pegSl=mysql_query("SELECT * FROM tb_pangkat WHERE jk_pan='Laki-laki' AND status_pan='Aktif' AND pangkat LIKE 'staf%'");
-									$jSl=mysql_num_rows($pegSl);
+									$pegSl=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE jk_pan='Laki-laki' AND status_pan='Aktif' AND pangkat LIKE 'staf%'");
+									$jSl=mysqli_num_rows($pegSl);
 										if ($jSl==0){
 										echo "-";
 										}
@@ -191,8 +191,8 @@
 								<td></td>
 								<td>- WANITA</td>
 								<td><?php
-									$pegP1=mysql_query("SELECT * FROM tb_pangkat WHERE jk_pan='Perempuan' AND status_pan='Aktif' AND gol LIKE 'I/%'");
-									$jP1=mysql_num_rows($pegP1);	
+									$pegP1=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE jk_pan='Perempuan' AND status_pan='Aktif' AND gol LIKE 'I/%'");
+									$jP1=mysqli_num_rows($pegP1);	
 										if ($jP1==0){
 										echo "-";
 										}
@@ -202,8 +202,8 @@
 									?>				
 								</td>
 								<td><?php
-									$pegP2=mysql_query("SELECT * FROM tb_pangkat WHERE jk_pan='Perempuan' AND status_pan='Aktif' AND gol LIKE 'II/%'");
-									$jP2=mysql_num_rows($pegP2);	
+									$pegP2=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE jk_pan='Perempuan' AND status_pan='Aktif' AND gol LIKE 'II/%'");
+									$jP2=mysqli_num_rows($pegP2);	
 										if ($jP2==0){
 										echo "-";
 										}
@@ -213,8 +213,8 @@
 									?>				
 								</td>
 								<td><?php
-									$pegP3=mysql_query("SELECT * FROM tb_pangkat WHERE jk_pan='Perempuan' AND status_pan='Aktif' AND gol LIKE 'III/%'");
-									$jP3=mysql_num_rows($pegP3);	
+									$pegP3=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE jk_pan='Perempuan' AND status_pan='Aktif' AND gol LIKE 'III/%'");
+									$jP3=mysqli_num_rows($pegP3);	
 										if ($jP3==0){
 										echo "-";
 										}
@@ -224,8 +224,8 @@
 									?>				
 								</td>
 								<td><?php
-									$pegP4=mysql_query("SELECT * FROM tb_pangkat WHERE jk_pan='Perempuan' AND status_pan='Aktif' AND gol LIKE 'IV/%'");
-									$jP4=mysql_num_rows($pegP4);	
+									$pegP4=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE jk_pan='Perempuan' AND status_pan='Aktif' AND gol LIKE 'IV/%'");
+									$jP4=mysqli_num_rows($pegP4);	
 										if ($jP4==0){
 										echo "-";
 										}
@@ -235,8 +235,8 @@
 									?>				
 								</td>
 								<td><?php
-									$pegP=mysql_query("SELECT * FROM tb_pangkat WHERE jk_pan='Perempuan' AND status_pan='Aktif' AND gol !=''");
-									$jP=mysql_num_rows($pegP);	
+									$pegP=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE jk_pan='Perempuan' AND status_pan='Aktif' AND gol !=''");
+									$jP=mysqli_num_rows($pegP);	
 										if ($jP==0){
 										echo "-";
 										}
@@ -246,8 +246,8 @@
 									?>				
 								</td>
 								<td><?php
-									$eP2=mysql_query("SELECT * FROM tb_jabatan WHERE jk_jab='Perempuan' AND status_jab='Aktif' AND eselon LIKE 'II/%'");
-									$jeP2=mysql_num_rows($eP2);	
+									$eP2=mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE jk_jab='Perempuan' AND status_jab='Aktif' AND eselon LIKE 'II/%'");
+									$jeP2=mysqli_num_rows($eP2);	
 										if ($jeP2==0){
 										echo "-";
 										}
@@ -257,8 +257,8 @@
 									?>				
 								</td>
 								<td><?php
-									$eP3=mysql_query("SELECT * FROM tb_jabatan WHERE jk_jab='Perempuan' AND status_jab='Aktif' AND eselon LIKE 'III/%'");
-									$jeP3=mysql_num_rows($eP3);	
+									$eP3=mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE jk_jab='Perempuan' AND status_jab='Aktif' AND eselon LIKE 'III/%'");
+									$jeP3=mysqli_num_rows($eP3);	
 										if ($jeP3==0){
 										echo "-";
 										}
@@ -268,8 +268,8 @@
 									?>				
 								</td>
 								<td><?php
-									$eP4=mysql_query("SELECT * FROM tb_jabatan WHERE jk_jab='Perempuan' AND status_jab='Aktif' AND eselon LIKE 'IV/%'");
-									$jeP4=mysql_num_rows($eP4);	
+									$eP4=mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE jk_jab='Perempuan' AND status_jab='Aktif' AND eselon LIKE 'IV/%'");
+									$jeP4=mysqli_num_rows($eP4);	
 										if ($jeP4==0){
 										echo "-";
 										}
@@ -279,8 +279,8 @@
 									?>				
 								</td>
 								<td><?php
-									$eP5=mysql_query("SELECT * FROM tb_jabatan WHERE jk_jab='Perempuan' AND status_jab='Aktif' AND eselon LIKE 'V/%'");
-									$jeP5=mysql_num_rows($eP5);	
+									$eP5=mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE jk_jab='Perempuan' AND status_jab='Aktif' AND eselon LIKE 'V/%'");
+									$jeP5=mysqli_num_rows($eP5);	
 										if ($jeP5==0){
 										echo "-";
 										}
@@ -291,8 +291,8 @@
 								</td>
 								<td>
 								<?php
-									$pegSp=mysql_query("SELECT * FROM tb_pangkat WHERE jk_pan='Perempuan' AND status_pan='Aktif' AND pangkat LIKE 'staf%'");
-									$jSp=mysql_num_rows($pegSp);
+									$pegSp=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE jk_pan='Perempuan' AND status_pan='Aktif' AND pangkat LIKE 'staf%'");
+									$jSp=mysqli_num_rows($pegSp);
 										if ($jSp==0){
 										echo "-";
 										}
@@ -322,8 +322,8 @@
 								<td></td>
 								<td>- SD/MI</td>
 								<td><?php
-									$sd1=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND gol LIKE 'I/%'");
-									$jsd1=mysql_num_rows($sd1);
+									$sd1=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND gol LIKE 'I/%'");
+									$jsd1=mysqli_num_rows($sd1);
 										if ($jsd1==0){
 										echo "-";
 										}
@@ -333,8 +333,8 @@
 									?>
 								</td>
 								<td><?php
-									$sd2=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir'AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND gol LIKE 'II/%'");
-									$jsd2=mysql_num_rows($sd2);
+									$sd2=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir'AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND gol LIKE 'II/%'");
+									$jsd2=mysqli_num_rows($sd2);
 										if ($jsd2==0){
 										echo "-";
 										}
@@ -344,8 +344,8 @@
 									?>
 								</td>
 								<td><?php
-									$sd3=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND gol LIKE 'III/%'");
-									$jsd3=mysql_num_rows($sd3);
+									$sd3=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND gol LIKE 'III/%'");
+									$jsd3=mysqli_num_rows($sd3);
 										if ($jsd3==0){
 										echo "-";
 										}
@@ -355,8 +355,8 @@
 									?>
 								</td>
 								<td><?php
-									$sd4=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND gol LIKE 'IV/%'");
-									$jsd4=mysql_num_rows($sd4);
+									$sd4=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND gol LIKE 'IV/%'");
+									$jsd4=mysqli_num_rows($sd4);
 										if ($jsd4==0){
 										echo "-";
 										}
@@ -366,8 +366,8 @@
 									?>
 								</td>
 								<td><?php
-									$sd=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%')");
-									$jsd=mysql_num_rows($sd);
+									$sd=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%')");
+									$jsd=mysqli_num_rows($sd);
 										if ($jsd==0){
 										echo "-";
 										}
@@ -377,8 +377,8 @@
 									?>
 								</td>
 								<td><?php
-									$sde2=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND eselon LIKE 'II/%'");
-									$jsde2=mysql_num_rows($sde2);
+									$sde2=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND eselon LIKE 'II/%'");
+									$jsde2=mysqli_num_rows($sde2);
 										if ($jsde2==0){
 										echo "-";
 										}
@@ -388,8 +388,8 @@
 									?>
 								</td>
 								<td><?php
-									$sde3=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND eselon LIKE 'III/%'");
-									$jsde3=mysql_num_rows($sde3);
+									$sde3=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND eselon LIKE 'III/%'");
+									$jsde3=mysqli_num_rows($sde3);
 										if ($jsde3==0){
 										echo "-";
 										}
@@ -399,8 +399,8 @@
 									?>
 								</td>
 								<td><?php
-									$sde4=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND eselon LIKE 'IV/%'");
-									$jsde4=mysql_num_rows($sde4);
+									$sde4=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND eselon LIKE 'IV/%'");
+									$jsde4=mysqli_num_rows($sde4);
 										if ($jsde4==0){
 										echo "-";
 										}
@@ -410,8 +410,8 @@
 									?>
 								</td>
 								<td><?php
-									$sde5=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND eselon LIKE 'V/%'");
-									$jsde5=mysql_num_rows($sde5);
+									$sde5=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND eselon LIKE 'V/%'");
+									$jsde5=mysqli_num_rows($sde5);
 										if ($jsde5==0){
 										echo "-";
 										}
@@ -421,8 +421,8 @@
 									?>
 								</td>
 								<td><?php
-									$sds=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND pangkat LIKE 'Staff%'");
-									$jsds=mysql_num_rows($sds);
+									$sds=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SD%' OR tingkat LIKE 'MI%') AND pangkat LIKE 'Staff%'");
+									$jsds=mysqli_num_rows($sds);
 										if ($jsds==0){
 										echo "-";
 										}
@@ -437,8 +437,8 @@
 								<td></td>
 								<td>- SMP/MTS</td>
 								<td><?php
-									$smp1=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND gol LIKE 'I/%'");
-									$jsmp1=mysql_num_rows($smp1);
+									$smp1=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND gol LIKE 'I/%'");
+									$jsmp1=mysqli_num_rows($smp1);
 										if ($jsmp1==0){
 										echo "-";
 										}
@@ -448,8 +448,8 @@
 									?>
 								</td>
 								<td><?php
-									$smp2=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND gol LIKE 'II/%'");
-									$jsmp2=mysql_num_rows($smp2);
+									$smp2=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND gol LIKE 'II/%'");
+									$jsmp2=mysqli_num_rows($smp2);
 										if ($jsmp2==0){
 										echo "-";
 										}
@@ -459,8 +459,8 @@
 									?>
 								</td>
 								<td><?php
-									$smp3=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND gol LIKE 'III/%'");
-									$jsmp3=mysql_num_rows($smp3);
+									$smp3=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND gol LIKE 'III/%'");
+									$jsmp3=mysqli_num_rows($smp3);
 										if ($jsmp3==0){
 										echo "-";
 										}
@@ -470,8 +470,8 @@
 									?>
 								</td>
 								<td><?php
-									$smp4=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND gol LIKE 'IV/%'");
-									$jsmp4=mysql_num_rows($smp4);
+									$smp4=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND gol LIKE 'IV/%'");
+									$jsmp4=mysqli_num_rows($smp4);
 										if ($jsmp4==0){
 										echo "-";
 										}
@@ -481,8 +481,8 @@
 									?>
 								</td>
 								<td><?php
-									$smp=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%')");
-									$jsmp=mysql_num_rows($smp);
+									$smp=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%')");
+									$jsmp=mysqli_num_rows($smp);
 										if ($jsmp==0){
 										echo "-";
 										}
@@ -492,8 +492,8 @@
 									?>
 								</td>
 								<td><?php
-									$smpe2=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND eselon LIKE 'II/%'");
-									$jsmpe2=mysql_num_rows($smpe2);
+									$smpe2=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND eselon LIKE 'II/%'");
+									$jsmpe2=mysqli_num_rows($smpe2);
 										if ($jsmpe2==0){
 										echo "-";
 										}
@@ -503,8 +503,8 @@
 									?>
 								</td>
 								<td><?php
-									$smpe3=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND eselon LIKE 'III/%'");
-									$jsmpe3=mysql_num_rows($smpe3);
+									$smpe3=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND eselon LIKE 'III/%'");
+									$jsmpe3=mysqli_num_rows($smpe3);
 										if ($jsmpe3==0){
 										echo "-";
 										}
@@ -514,8 +514,8 @@
 									?>
 								</td>
 								<td><?php
-									$smpe4=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND eselon LIKE 'IV/%'");
-									$jsmpe4=mysql_num_rows($smpe4);
+									$smpe4=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND eselon LIKE 'IV/%'");
+									$jsmpe4=mysqli_num_rows($smpe4);
 										if ($jsmpe4==0){
 										echo "-";
 										}
@@ -525,8 +525,8 @@
 									?>
 								</td>
 								<td><?php
-									$smpe5=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND eselon LIKE 'V/%'");
-									$jsmpe5=mysql_num_rows($smpe5);
+									$smpe5=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND eselon LIKE 'V/%'");
+									$jsmpe5=mysqli_num_rows($smpe5);
 										if ($jsmpe5==0){
 										echo "-";
 										}
@@ -536,8 +536,8 @@
 									?>
 								</td>
 								<td><?php
-									$smps=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND pangkat LIKE 'Staff%'");
-									$jsmps=mysql_num_rows($smps);
+									$smps=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMP%' OR tingkat LIKE 'MTS%') AND pangkat LIKE 'Staff%'");
+									$jsmps=mysqli_num_rows($smps);
 										if ($jsmps==0){
 										echo "-";
 										}
@@ -552,8 +552,8 @@
 								<td></td>
 								<td>- SMK/SMA/MA</td>
 								<td><?php
-									$sma1=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND gol LIKE 'I/%'");
-									$jsma1=mysql_num_rows($sma1);
+									$sma1=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND gol LIKE 'I/%'");
+									$jsma1=mysqli_num_rows($sma1);
 										if ($jsma1==0){
 										echo "-";
 										}
@@ -563,8 +563,8 @@
 									?>
 								</td>
 								<td><?php
-									$sma2=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND gol LIKE 'II/%'");
-									$jsma2=mysql_num_rows($sma2);
+									$sma2=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND gol LIKE 'II/%'");
+									$jsma2=mysqli_num_rows($sma2);
 										if ($jsma2==0){
 										echo "-";
 										}
@@ -574,8 +574,8 @@
 									?>
 								</td>
 								<td><?php
-									$sma3=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND gol LIKE 'III/%'");
-									$jsma3=mysql_num_rows($sma3);
+									$sma3=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND gol LIKE 'III/%'");
+									$jsma3=mysqli_num_rows($sma3);
 										if ($jsma3==0){
 										echo "-";
 										}
@@ -585,8 +585,8 @@
 									?>
 								</td>
 								<td><?php
-									$sma4=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND gol LIKE 'IV/%'");
-									$jsma4=mysql_num_rows($sma4);
+									$sma4=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND gol LIKE 'IV/%'");
+									$jsma4=mysqli_num_rows($sma4);
 										if ($jsma4==0){
 										echo "-";
 										}
@@ -596,8 +596,8 @@
 									?>
 								</td>
 								<td><?php
-									$sma=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%')");
-									$jsma=mysql_num_rows($sma);
+									$sma=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%')");
+									$jsma=mysqli_num_rows($sma);
 										if ($jsma==0){
 										echo "-";
 										}
@@ -607,8 +607,8 @@
 									?>
 								</td>
 								<td><?php
-									$smae2=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND eselon LIKE 'II/%'");
-									$jsmae2=mysql_num_rows($smae2);
+									$smae2=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND eselon LIKE 'II/%'");
+									$jsmae2=mysqli_num_rows($smae2);
 										if ($jsmae2==0){
 										echo "-";
 										}
@@ -618,8 +618,8 @@
 									?>
 								</td>
 								<td><?php
-									$smae3=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND eselon LIKE 'III/%'");
-									$jsmae3=mysql_num_rows($smae3);
+									$smae3=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND eselon LIKE 'III/%'");
+									$jsmae3=mysqli_num_rows($smae3);
 										if ($jsmae3==0){
 										echo "-";
 										}
@@ -629,8 +629,8 @@
 									?>
 								</td>
 								<td><?php
-									$smae4=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND eselon LIKE 'IV/%'");
-									$jsmae4=mysql_num_rows($smae4);
+									$smae4=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND eselon LIKE 'IV/%'");
+									$jsmae4=mysqli_num_rows($smae4);
 										if ($jsmae4==0){
 										echo "-";
 										}
@@ -640,8 +640,8 @@
 									?>
 								</td>
 								<td><?php
-									$smae5=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND eselon LIKE 'V/%'");
-									$jsmae5=mysql_num_rows($smae5);
+									$smae5=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND eselon LIKE 'V/%'");
+									$jsmae5=mysqli_num_rows($smae5);
 										if ($jsmae5==0){
 										echo "-";
 										}
@@ -651,8 +651,8 @@
 									?>
 								</td>
 								<td><?php
-									$smas=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND pangkat LIKE 'Staff%'");
-									$jsmas=mysql_num_rows($smas);
+									$smas=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'SMA%' OR tingkat LIKE 'SMK%' OR tingkat LIKE 'MA%') AND pangkat LIKE 'Staff%'");
+									$jsmas=mysqli_num_rows($smas);
 										if ($jsmas==0){
 										echo "-";
 										}
@@ -667,8 +667,8 @@
 								<td></td>
 								<td>- D2/D3</td>
 								<td><?php
-									$d1=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND gol LIKE 'I/%'");
-									$jd1=mysql_num_rows($d1);
+									$d1=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND gol LIKE 'I/%'");
+									$jd1=mysqli_num_rows($d1);
 										if ($jd1==0){
 										echo "-";
 										}
@@ -678,8 +678,8 @@
 									?>
 								</td>
 								<td><?php
-									$d2=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND gol LIKE 'II/%'");
-									$jd2=mysql_num_rows($d2);
+									$d2=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND gol LIKE 'II/%'");
+									$jd2=mysqli_num_rows($d2);
 										if ($jd2==0){
 										echo "-";
 										}
@@ -689,8 +689,8 @@
 									?>
 								</td>
 								<td><?php
-									$d3=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND gol LIKE 'III/%'");
-									$jd3=mysql_num_rows($d3);
+									$d3=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND gol LIKE 'III/%'");
+									$jd3=mysqli_num_rows($d3);
 										if ($jd3==0){
 										echo "-";
 										}
@@ -700,8 +700,8 @@
 									?>
 								</td>
 								<td><?php
-									$d4=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND gol LIKE 'IV/%'");
-									$jd4=mysql_num_rows($d4);
+									$d4=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND gol LIKE 'IV/%'");
+									$jd4=mysqli_num_rows($d4);
 										if ($jd4==0){
 										echo "-";
 										}
@@ -711,8 +711,8 @@
 									?>
 								</td>
 								<td><?php
-									$d=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%')");
-									$jd=mysql_num_rows($d);
+									$d=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%')");
+									$jd=mysqli_num_rows($d);
 										if ($jd==0){
 										echo "-";
 										}
@@ -722,8 +722,8 @@
 									?>
 								</td>
 								<td><?php
-									$de2=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND eselon LIKE 'II/%'");
-									$jde2=mysql_num_rows($de2);
+									$de2=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND eselon LIKE 'II/%'");
+									$jde2=mysqli_num_rows($de2);
 										if ($jde2==0){
 										echo "-";
 										}
@@ -733,8 +733,8 @@
 									?>
 								</td>
 								<td><?php
-									$de3=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND eselon LIKE 'III/%'");
-									$jde3=mysql_num_rows($de3);
+									$de3=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND eselon LIKE 'III/%'");
+									$jde3=mysqli_num_rows($de3);
 										if ($jde3==0){
 										echo "-";
 										}
@@ -744,8 +744,8 @@
 									?>
 								</td>
 								<td><?php
-									$de4=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND eselon LIKE 'IV/%'");
-									$jde4=mysql_num_rows($de4);
+									$de4=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND eselon LIKE 'IV/%'");
+									$jde4=mysqli_num_rows($de4);
 										if ($jde4==0){
 										echo "-";
 										}
@@ -755,8 +755,8 @@
 									?>
 								</td>
 								<td><?php
-									$de5=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND eselon LIKE 'V/%'");
-									$jde5=mysql_num_rows($de5);
+									$de5=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND eselon LIKE 'V/%'");
+									$jde5=mysqli_num_rows($de5);
 										if ($jde5==0){
 										echo "-";
 										}
@@ -766,8 +766,8 @@
 									?>
 								</td>
 								<td><?php
-									$ds=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND pangkat LIKE 'Staff%'");
-									$jds=mysql_num_rows($ds);
+									$ds=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'D2%' OR tingkat LIKE 'D3%') AND pangkat LIKE 'Staff%'");
+									$jds=mysqli_num_rows($ds);
 										if ($jds==0){
 										echo "-";
 										}
@@ -782,8 +782,8 @@
 								<td></td>
 								<td>- S1/D4</td>
 								<td><?php
-									$s11=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND gol LIKE 'I/%'");
-									$js11=mysql_num_rows($s11);
+									$s11=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND gol LIKE 'I/%'");
+									$js11=mysqli_num_rows($s11);
 										if ($js11==0){
 										echo "-";
 										}
@@ -793,8 +793,8 @@
 									?>
 								</td>
 								<td><?php
-									$s12=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND gol LIKE 'II/%'");
-									$js12=mysql_num_rows($s12);
+									$s12=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND gol LIKE 'II/%'");
+									$js12=mysqli_num_rows($s12);
 										if ($js12==0){
 										echo "-";
 										}
@@ -804,8 +804,8 @@
 									?>
 								</td>
 								<td><?php
-									$s13=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND gol LIKE 'III/%'");
-									$js13=mysql_num_rows($s13);
+									$s13=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND gol LIKE 'III/%'");
+									$js13=mysqli_num_rows($s13);
 										if ($js13==0){
 										echo "-";
 										}
@@ -815,8 +815,8 @@
 									?>
 								</td>
 								<td><?php
-									$s14=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND gol LIKE 'IV/%'");
-									$js14=mysql_num_rows($s14);
+									$s14=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND gol LIKE 'IV/%'");
+									$js14=mysqli_num_rows($s14);
 										if ($js14==0){
 										echo "-";
 										}
@@ -826,8 +826,8 @@
 									?>
 								</td>
 								<td><?php
-									$s1=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%')");
-									$js1=mysql_num_rows($s1);
+									$s1=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%')");
+									$js1=mysqli_num_rows($s1);
 										if ($js1==0){
 										echo "-";
 										}
@@ -837,8 +837,8 @@
 									?>
 								</td>
 								<td><?php
-									$s1e2=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND eselon LIKE 'II/%'");
-									$js1e2=mysql_num_rows($s1e2);
+									$s1e2=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND eselon LIKE 'II/%'");
+									$js1e2=mysqli_num_rows($s1e2);
 										if ($js1e2==0){
 										echo "-";
 										}
@@ -848,8 +848,8 @@
 									?>
 								</td>
 								<td><?php
-									$s1e3=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND eselon LIKE 'III/%'");
-									$js1e3=mysql_num_rows($s1e3);
+									$s1e3=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND eselon LIKE 'III/%'");
+									$js1e3=mysqli_num_rows($s1e3);
 										if ($js1e3==0){
 										echo "-";
 										}
@@ -859,8 +859,8 @@
 									?>
 								</td>
 								<td><?php
-									$s1e4=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND eselon LIKE 'IV/%'");
-									$js1e4=mysql_num_rows($s1e4);
+									$s1e4=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND eselon LIKE 'IV/%'");
+									$js1e4=mysqli_num_rows($s1e4);
 										if ($js1e4==0){
 										echo "-";
 										}
@@ -870,8 +870,8 @@
 									?>
 								</td>
 								<td><?php
-									$s1e5=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND eselon LIKE 'V/%'");
-									$js1e5=mysql_num_rows($s1e5);
+									$s1e5=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND eselon LIKE 'V/%'");
+									$js1e5=mysqli_num_rows($s1e5);
 										if ($js1e5==0){
 										echo "-";
 										}
@@ -881,8 +881,8 @@
 									?>
 								</td>
 								<td><?php
-									$s1s=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND pangkat LIKE 'Staff%'");
-									$js1s=mysql_num_rows($s1s);
+									$s1s=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S1%' OR tingkat LIKE 'D4%') AND pangkat LIKE 'Staff%'");
+									$js1s=mysqli_num_rows($s1s);
 										if ($js1s==0){
 										echo "-";
 										}
@@ -897,8 +897,8 @@
 								<td></td>
 								<td>- S2/S3</td>
 								<td><?php
-									$s21=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND gol LIKE 'I/%'");
-									$js21=mysql_num_rows($s21);
+									$s21=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND gol LIKE 'I/%'");
+									$js21=mysqli_num_rows($s21);
 										if ($js21==0){
 										echo "-";
 										}
@@ -908,8 +908,8 @@
 									?>
 								</td>
 								<td><?php
-									$s22=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND gol LIKE 'II/%'");
-									$js22=mysql_num_rows($s22);
+									$s22=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND gol LIKE 'II/%'");
+									$js22=mysqli_num_rows($s22);
 										if ($js22==0){
 										echo "-";
 										}
@@ -919,8 +919,8 @@
 									?>
 								</td>
 								<td><?php
-									$s23=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND gol LIKE 'III/%'");
-									$js23=mysql_num_rows($s23);
+									$s23=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND gol LIKE 'III/%'");
+									$js23=mysqli_num_rows($s23);
 										if ($js23==0){
 										echo "-";
 										}
@@ -930,8 +930,8 @@
 									?>
 								</td>
 								<td><?php
-									$s24=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND gol LIKE 'IV/%'");
-									$js24=mysql_num_rows($s24);
+									$s24=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND gol LIKE 'IV/%'");
+									$js24=mysqli_num_rows($s24);
 										if ($js24==0){
 										echo "-";
 										}
@@ -941,8 +941,8 @@
 									?>
 								</td>
 								<td><?php
-									$s2=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%')");
-									$js2=mysql_num_rows($s2);
+									$s2=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%')");
+									$js2=mysqli_num_rows($s2);
 										if ($js2==0){
 										echo "-";
 										}
@@ -952,8 +952,8 @@
 									?>
 								</td>
 								<td><?php
-									$s2e2=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND eselon LIKE 'II/%'");
-									$js2e2=mysql_num_rows($s2e2);
+									$s2e2=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND eselon LIKE 'II/%'");
+									$js2e2=mysqli_num_rows($s2e2);
 										if ($js2e2==0){
 										echo "-";
 										}
@@ -963,8 +963,8 @@
 									?>
 								</td>
 								<td><?php
-									$s2e3=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND eselon LIKE 'III/%'");
-									$js2e3=mysql_num_rows($s2e3);
+									$s2e3=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND eselon LIKE 'III/%'");
+									$js2e3=mysqli_num_rows($s2e3);
 										if ($js2e3==0){
 										echo "-";
 										}
@@ -974,8 +974,8 @@
 									?>
 								</td>
 								<td><?php
-									$s2e4=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND eselon LIKE 'IV/%'");
-									$js2e4=mysql_num_rows($s2e4);
+									$s2e4=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND eselon LIKE 'IV/%'");
+									$js2e4=mysqli_num_rows($s2e4);
 										if ($js2e4==0){
 										echo "-";
 										}
@@ -985,8 +985,8 @@
 									?>
 								</td>
 								<td><?php
-									$s2e5=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND eselon LIKE 'V/%'");
-									$js2e5=mysql_num_rows($s2e5);
+									$s2e5=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND eselon LIKE 'V/%'");
+									$js2e5=mysqli_num_rows($s2e5);
 										if ($js2e5==0){
 										echo "-";
 										}
@@ -996,8 +996,8 @@
 									?>
 								</td>
 								<td><?php
-									$s2s=mysql_query("SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND pangkat LIKE 'Staff%'");
-									$js2s=mysql_num_rows($s2s);
+									$s2s=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE status='Akhir' AND (tingkat LIKE 'S2%' OR tingkat LIKE 'S3%') AND pangkat LIKE 'Staff%'");
+									$js2s=mysqli_num_rows($s2s);
 										if ($js2s==0){
 										echo "-";
 										}
@@ -1030,8 +1030,8 @@
 								<td></td>
 								<td>- MASUK</td>
 								<td><?php
-									$mg1=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'I/%'");
-									$jmg1=mysql_num_rows($mg1);
+									$mg1=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'I/%'");
+									$jmg1=mysqli_num_rows($mg1);
 										if ($jmg1==0){
 										echo "-";
 										}
@@ -1041,8 +1041,8 @@
 									?>
 								</td>
 								<td><?php
-									$mg2=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'II/%'");
-									$jmg2=mysql_num_rows($mg2);
+									$mg2=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'II/%'");
+									$jmg2=mysqli_num_rows($mg2);
 										if ($jmg2==0){
 										echo "-";
 										}
@@ -1052,8 +1052,8 @@
 									?>
 								</td>
 								<td><?php
-									$mg3=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'III/%'");
-									$jmg3=mysql_num_rows($mg3);
+									$mg3=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'III/%'");
+									$jmg3=mysqli_num_rows($mg3);
 										if ($jmg3==0){
 										echo "-";
 										}
@@ -1063,8 +1063,8 @@
 									?>
 								</td>
 								<td><?php
-									$mg4=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'IV/%'");
-									$jmg4=mysql_num_rows($mg4);
+									$mg4=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'IV/%'");
+									$jmg4=mysqli_num_rows($mg4);
 										if ($jmg4==0){
 										echo "-";
 										}
@@ -1074,8 +1074,8 @@
 									?>
 								</td>
 								<td><?php
-									$mg=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%'");
-									$jmg=mysql_num_rows($mg);
+									$mg=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%'");
+									$jmg=mysqli_num_rows($mg);
 										if ($jmg==0){
 										echo "-";
 										}
@@ -1085,8 +1085,8 @@
 									?>
 								</td>
 								<td><?php
-									$me2=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'II/%'");
-									$jme2=mysql_num_rows($me2);
+									$me2=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'II/%'");
+									$jme2=mysqli_num_rows($me2);
 										if ($jme2==0){
 										echo "-";
 										}
@@ -1096,8 +1096,8 @@
 									?>
 								</td>
 								<td><?php
-									$me3=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'III/%'");
-									$jme3=mysql_num_rows($me3);
+									$me3=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'III/%'");
+									$jme3=mysqli_num_rows($me3);
 										if ($jme3==0){
 										echo "-";
 										}
@@ -1107,8 +1107,8 @@
 									?>
 								</td>
 								<td><?php
-									$me4=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'IV/%'");
-									$jme4=mysql_num_rows($me4);
+									$me4=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'IV/%'");
+									$jme4=mysqli_num_rows($me4);
 										if ($jme4==0){
 										echo "-";
 										}
@@ -1118,8 +1118,8 @@
 									?>
 								</td>
 								<td><?php
-									$me5=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'V/%'");
-									$jme5=mysql_num_rows($me5);
+									$me5=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'V/%'");
+									$jme5=mysqli_num_rows($me5);
 										if ($jme5==0){
 										echo "-";
 										}
@@ -1129,8 +1129,8 @@
 									?>
 								</td>
 								<td><?php
-									$ms=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
-									$jms=mysql_num_rows($ms);
+									$ms=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Masuk' AND tgl_mutasi LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
+									$jms=mysqli_num_rows($ms);
 										if ($jms==0){
 										echo "-";
 										}
@@ -1145,8 +1145,8 @@
 								<td></td>
 								<td>- KELUAR</td>
 								<td><?php
-									$mkg1=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'I/%'");
-									$jmkg1=mysql_num_rows($mkg1);
+									$mkg1=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'I/%'");
+									$jmkg1=mysqli_num_rows($mkg1);
 										if ($jmkg1==0){
 										echo "-";
 										}
@@ -1156,8 +1156,8 @@
 									?>
 								</td>
 								<td><?php
-									$mkg2=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'II/%'");
-									$jmkg2=mysql_num_rows($mkg2);
+									$mkg2=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'II/%'");
+									$jmkg2=mysqli_num_rows($mkg2);
 										if ($jmkg2==0){
 										echo "-";
 										}
@@ -1167,8 +1167,8 @@
 									?>
 								</td>
 								<td><?php
-									$mkg3=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'III/%'");
-									$jmkg3=mysql_num_rows($mkg3);
+									$mkg3=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'III/%'");
+									$jmkg3=mysqli_num_rows($mkg3);
 										if ($jmkg3==0){
 										echo "-";
 										}
@@ -1178,8 +1178,8 @@
 									?>
 								</td>
 								<td><?php
-									$mkg4=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'IV/%'");
-									$jmkg4=mysql_num_rows($mkg4);
+									$mkg4=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'IV/%'");
+									$jmkg4=mysqli_num_rows($mkg4);
 										if ($jmkg4==0){
 										echo "-";
 										}
@@ -1189,8 +1189,8 @@
 									?>
 								</td>
 								<td><?php
-									$mkg=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%'");
-									$jmkg=mysql_num_rows($mkg);
+									$mkg=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%'");
+									$jmkg=mysqli_num_rows($mkg);
 										if ($jmkg==0){
 										echo "-";
 										}
@@ -1200,8 +1200,8 @@
 									?>
 								</td>
 								<td><?php
-									$mke2=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'II/%'");
-									$jmke2=mysql_num_rows($mke2);
+									$mke2=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'II/%'");
+									$jmke2=mysqli_num_rows($mke2);
 										if ($jmke2==0){
 										echo "-";
 										}
@@ -1211,8 +1211,8 @@
 									?>
 								</td>
 								<td><?php
-									$mke3=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'III/%'");
-									$jmke3=mysql_num_rows($mke3);
+									$mke3=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'III/%'");
+									$jmke3=mysqli_num_rows($mke3);
 										if ($jmke3==0){
 										echo "-";
 										}
@@ -1222,8 +1222,8 @@
 									?>
 								</td>
 								<td><?php
-									$mke4=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'IV/%'");
-									$jmke4=mysql_num_rows($mke4);
+									$mke4=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'IV/%'");
+									$jmke4=mysqli_num_rows($mke4);
 										if ($jmke4==0){
 										echo "-";
 										}
@@ -1233,8 +1233,8 @@
 									?>
 								</td>
 								<td><?php
-									$mke5=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'V/%'");
-									$jmke5=mysql_num_rows($mke5);
+									$mke5=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'V/%'");
+									$jmke5=mysqli_num_rows($mke5);
 										if ($jmke5==0){
 										echo "-";
 										}
@@ -1244,8 +1244,8 @@
 									?>
 								</td>
 								<td><?php
-									$mks=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
-									$jmks=mysql_num_rows($mks);
+									$mks=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Keluar' AND tgl_mutasi LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
+									$jmks=mysqli_num_rows($mks);
 										if ($jmks==0){
 										echo "-";
 										}
@@ -1260,8 +1260,8 @@
 								<td></td>
 								<td>- PINDAH ANTAR INSTANSI</td>
 								<td><?php
-									$mpg1=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'I/%'");
-									$jmpg1=mysql_num_rows($mpg1);
+									$mpg1=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'I/%'");
+									$jmpg1=mysqli_num_rows($mpg1);
 										if ($jmpg1==0){
 										echo "-";
 										}
@@ -1271,8 +1271,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpg2=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'II/%'");
-									$jmpg2=mysql_num_rows($mpg2);
+									$mpg2=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'II/%'");
+									$jmpg2=mysqli_num_rows($mpg2);
 										if ($jmpg2==0){
 										echo "-";
 										}
@@ -1282,8 +1282,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpg3=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'III/%'");
-									$jmpg3=mysql_num_rows($mpg3);
+									$mpg3=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'III/%'");
+									$jmpg3=mysqli_num_rows($mpg3);
 										if ($jmpg3==0){
 										echo "-";
 										}
@@ -1293,8 +1293,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpg4=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'IV/%'");
-									$jmpg4=mysql_num_rows($mpg4);
+									$mpg4=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'IV/%'");
+									$jmpg4=mysqli_num_rows($mpg4);
 										if ($jmpg4==0){
 										echo "-";
 										}
@@ -1304,8 +1304,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpg=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%'");
-									$jmpg=mysql_num_rows($mpg);
+									$mpg=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%'");
+									$jmpg=mysqli_num_rows($mpg);
 										if ($jmpg==0){
 										echo "-";
 										}
@@ -1315,8 +1315,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpe2=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'II/%'");
-									$jmpe2=mysql_num_rows($mpe2);
+									$mpe2=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'II/%'");
+									$jmpe2=mysqli_num_rows($mpe2);
 										if ($jmpe2==0){
 										echo "-";
 										}
@@ -1326,8 +1326,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpe3=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'III/%'");
-									$jmpe3=mysql_num_rows($mpe3);
+									$mpe3=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'III/%'");
+									$jmpe3=mysqli_num_rows($mpe3);
 										if ($jmpe3==0){
 										echo "-";
 										}
@@ -1337,8 +1337,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpe4=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'IV/%'");
-									$jmpe4=mysql_num_rows($mpe4);
+									$mpe4=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'IV/%'");
+									$jmpe4=mysqli_num_rows($mpe4);
 										if ($jmpe4==0){
 										echo "-";
 										}
@@ -1348,8 +1348,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpe5=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'V/%'");
-									$jmpe5=mysql_num_rows($mpe5);
+									$mpe5=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'V/%'");
+									$jmpe5=mysqli_num_rows($mpe5);
 										if ($jmpe5==0){
 										echo "-";
 										}
@@ -1359,8 +1359,8 @@
 									?>
 								</td>
 								<td><?php
-									$mps=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
-									$jmps=mysql_num_rows($mps);
+									$mps=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pindah Antar Instansi' AND tgl_mutasi LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
+									$jmps=mysqli_num_rows($mps);
 										if ($jmps==0){
 										echo "-";
 										}
@@ -1375,8 +1375,8 @@
 								<td></td>
 								<td>- PENSIUN</td>
 								<td><?php
-									$mpng1=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'I/%'");
-									$jmpng1=mysql_num_rows($mpng1);
+									$mpng1=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'I/%'");
+									$jmpng1=mysqli_num_rows($mpng1);
 										if ($jmpng1==0){
 										echo "-";
 										}
@@ -1386,8 +1386,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpng2=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'II/%'");
-									$jmpng2=mysql_num_rows($mpng2);
+									$mpng2=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'II/%'");
+									$jmpng2=mysqli_num_rows($mpng2);
 										if ($jmpng2==0){
 										echo "-";
 										}
@@ -1397,8 +1397,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpng3=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'III/%'");
-									$jmpng3=mysql_num_rows($mpng3);
+									$mpng3=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'III/%'");
+									$jmpng3=mysqli_num_rows($mpng3);
 										if ($jmpng3==0){
 										echo "-";
 										}
@@ -1408,8 +1408,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpng4=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'IV/%'");
-									$jmpng4=mysql_num_rows($mpng4);
+									$mpng4=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'IV/%'");
+									$jmpng4=mysqli_num_rows($mpng4);
 										if ($jmpng4==0){
 										echo "-";
 										}
@@ -1419,8 +1419,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpng=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%'");
-									$jmpng=mysql_num_rows($mpng);
+									$mpng=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%'");
+									$jmpng=mysqli_num_rows($mpng);
 										if ($jmpng==0){
 										echo "-";
 										}
@@ -1430,8 +1430,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpne2=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'II/%'");
-									$jmpne2=mysql_num_rows($mpne2);
+									$mpne2=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'II/%'");
+									$jmpne2=mysqli_num_rows($mpne2);
 										if ($jmpne2==0){
 										echo "-";
 										}
@@ -1441,8 +1441,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpne3=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'III/%'");
-									$jmpne3=mysql_num_rows($mpne3);
+									$mpne3=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'III/%'");
+									$jmpne3=mysqli_num_rows($mpne3);
 										if ($jmpne3==0){
 										echo "-";
 										}
@@ -1452,8 +1452,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpne4=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'IV/%'");
-									$jmpne4=mysql_num_rows($mpne4);
+									$mpne4=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'IV/%'");
+									$jmpne4=mysqli_num_rows($mpne4);
 										if ($jmpne4==0){
 										echo "-";
 										}
@@ -1463,8 +1463,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpne5=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'V/%'");
-									$jmpne5=mysql_num_rows($mpne5);
+									$mpne5=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'V/%'");
+									$jmpne5=mysqli_num_rows($mpne5);
 										if ($jmpne5==0){
 										echo "-";
 										}
@@ -1474,8 +1474,8 @@
 									?>
 								</td>
 								<td><?php
-									$mpns=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
-									$jmpns=mysql_num_rows($mpns);
+									$mpns=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Pensiun' AND tgl_mutasi LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
+									$jmpns=mysqli_num_rows($mpns);
 										if ($jmpns==0){
 										echo "-";
 										}
@@ -1490,8 +1490,8 @@
 								<td></td>
 								<td>- WAFAT</td>
 								<td><?php
-									$mwafg1=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'I/%'");
-									$jmwafg1=mysql_num_rows($mwafg1);
+									$mwafg1=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'I/%'");
+									$jmwafg1=mysqli_num_rows($mwafg1);
 										if ($jmwafg1==0){
 										echo "-";
 										}
@@ -1501,8 +1501,8 @@
 									?>
 								</td>
 								<td><?php
-									$mwafg2=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'II/%'");
-									$jmwafg2=mysql_num_rows($mwafg2);
+									$mwafg2=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'II/%'");
+									$jmwafg2=mysqli_num_rows($mwafg2);
 										if ($jmwafg2==0){
 										echo "-";
 										}
@@ -1512,8 +1512,8 @@
 									?>
 								</td>
 								<td><?php
-									$mwafg3=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'III/%'");
-									$jmwafg3=mysql_num_rows($mwafg3);
+									$mwafg3=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'III/%'");
+									$jmwafg3=mysqli_num_rows($mwafg3);
 										if ($jmwafg3==0){
 										echo "-";
 										}
@@ -1523,8 +1523,8 @@
 									?>
 								</td>
 								<td><?php
-									$mwafg4=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'IV/%'");
-									$jmwafg4=mysql_num_rows($mwafg4);
+									$mwafg4=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'IV/%'");
+									$jmwafg4=mysqli_num_rows($mwafg4);
 										if ($jmwafg4==0){
 										echo "-";
 										}
@@ -1534,8 +1534,8 @@
 									?>
 								</td>
 								<td><?php
-									$mwafg=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%'");
-									$jmwafg=mysql_num_rows($mwafg);
+									$mwafg=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%'");
+									$jmwafg=mysqli_num_rows($mwafg);
 										if ($jmwafg==0){
 										echo "-";
 										}
@@ -1545,8 +1545,8 @@
 									?>
 								</td>
 								<td><?php
-									$mwafe2=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'II/%'");
-									$jmwafe2=mysql_num_rows($mwafe2);
+									$mwafe2=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'II/%'");
+									$jmwafe2=mysqli_num_rows($mwafe2);
 										if ($jmwafe2==0){
 										echo "-";
 										}
@@ -1556,8 +1556,8 @@
 									?>
 								</td>
 								<td><?php
-									$mwafe3=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'III/%'");
-									$jmwafe3=mysql_num_rows($mwafe3);
+									$mwafe3=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'III/%'");
+									$jmwafe3=mysqli_num_rows($mwafe3);
 										if ($jmwafe3==0){
 										echo "-";
 										}
@@ -1567,8 +1567,8 @@
 									?>
 								</td>
 								<td><?php
-									$mwafe4=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'IV/%'");
-									$jmwafe4=mysql_num_rows($mwafe4);
+									$mwafe4=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'IV/%'");
+									$jmwafe4=mysqli_num_rows($mwafe4);
 										if ($jmwafe4==0){
 										echo "-";
 										}
@@ -1578,8 +1578,8 @@
 									?>
 								</td>
 								<td><?php
-									$mwafe5=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'V/%'");
-									$jmwafe5=mysql_num_rows($mwafe5);
+									$mwafe5=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'V/%'");
+									$jmwafe5=mysqli_num_rows($mwafe5);
 										if ($jmwafe5==0){
 										echo "-";
 										}
@@ -1589,8 +1589,8 @@
 									?>
 								</td>
 								<td><?php
-									$mwafs=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
-									$jmwafs=mysql_num_rows($mwafs);
+									$mwafs=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Wafat' AND tgl_mutasi LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
+									$jmwafs=mysqli_num_rows($mwafs);
 										if ($jmwafs==0){
 										echo "-";
 										}
@@ -1605,8 +1605,8 @@
 								<td></td>
 								<td>- KENAIKAN PANGKAT</td>
 								<td><?php
-									$mnaikg1=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'I/%'");
-									$jmnaikg1=mysql_num_rows($mnaikg1);
+									$mnaikg1=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'I/%'");
+									$jmnaikg1=mysqli_num_rows($mnaikg1);
 										if ($jmnaikg1==0){
 										echo "-";
 										}
@@ -1616,8 +1616,8 @@
 									?>
 								</td>
 								<td><?php
-									$mnaikg2=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'II/%'");
-									$jmnaikg2=mysql_num_rows($mnaikg2);
+									$mnaikg2=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'II/%'");
+									$jmnaikg2=mysqli_num_rows($mnaikg2);
 										if ($jmnaikg2==0){
 										echo "-";
 										}
@@ -1627,8 +1627,8 @@
 									?>
 								</td>
 								<td><?php
-									$mnaikg3=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'III/%'");
-									$jmnaikg3=mysql_num_rows($mnaikg3);
+									$mnaikg3=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'III/%'");
+									$jmnaikg3=mysqli_num_rows($mnaikg3);
 										if ($jmnaikg3==0){
 										echo "-";
 										}
@@ -1638,8 +1638,8 @@
 									?>
 								</td>
 								<td><?php
-									$mnaikg4=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'IV/%'");
-									$jmnaikg4=mysql_num_rows($mnaikg4);
+									$mnaikg4=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND gol LIKE 'IV/%'");
+									$jmnaikg4=mysqli_num_rows($mnaikg4);
 										if ($jmnaikg4==0){
 										echo "-";
 										}
@@ -1649,8 +1649,8 @@
 									?>
 								</td>
 								<td><?php
-									$mnaikg=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%'");
-									$jmnaikg=mysql_num_rows($mnaikg);
+									$mnaikg=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%'");
+									$jmnaikg=mysqli_num_rows($mnaikg);
 										if ($jmnaikg==0){
 										echo "-";
 										}
@@ -1660,8 +1660,8 @@
 									?>
 								</td>
 								<td><?php
-									$mnaike2=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'II/%'");
-									$jmnaike2=mysql_num_rows($mnaike2);
+									$mnaike2=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'II/%'");
+									$jmnaike2=mysqli_num_rows($mnaike2);
 										if ($jmnaike2==0){
 										echo "-";
 										}
@@ -1671,8 +1671,8 @@
 									?>
 								</td>
 								<td><?php
-									$mnaike3=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'III/%'");
-									$jmnaike3=mysql_num_rows($mnaike3);
+									$mnaike3=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'III/%'");
+									$jmnaike3=mysqli_num_rows($mnaike3);
 										if ($jmnaike3==0){
 										echo "-";
 										}
@@ -1682,8 +1682,8 @@
 									?>
 								</td>
 								<td><?php
-									$mnaike4=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'IV/%'");
-									$jmnaike4=mysql_num_rows($mnaike4);
+									$mnaike4=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'IV/%'");
+									$jmnaike4=mysqli_num_rows($mnaike4);
 										if ($jmnaike4==0){
 										echo "-";
 										}
@@ -1693,8 +1693,8 @@
 									?>
 								</td>
 								<td><?php
-									$mnaike5=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'V/%'");
-									$jmnaike5=mysql_num_rows($mnaike5);
+									$mnaike5=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND eselon LIKE 'V/%'");
+									$jmnaike5=mysqli_num_rows($mnaike5);
 										if ($jmnaike5==0){
 										echo "-";
 										}
@@ -1704,8 +1704,8 @@
 									?>
 								</td>
 								<td><?php
-									$mnaiks=mysql_query("SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
-									$jmnaiks=mysql_num_rows($mnaiks);
+									$mnaiks=mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE jns_mutasi='Kenaikan Pangkat' AND tgl_mutasi LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
+									$jmnaiks=mysqli_num_rows($mnaiks);
 										if ($jmnaiks==0){
 										echo "-";
 										}
@@ -1735,8 +1735,8 @@
 								<td></td>
 								<td>- TEGURAN LISAN</td>
 								<td><?php
-									$hlisg1=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'I/%'");
-									$jhlisg1=mysql_num_rows($hlisg1);
+									$hlisg1=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'I/%'");
+									$jhlisg1=mysqli_num_rows($hlisg1);
 										if ($jhlisg1==0){
 										echo "-";
 										}
@@ -1746,8 +1746,8 @@
 									?>
 								</td>
 								<td><?php
-									$hlisg2=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'II/%'");
-									$jhlisg2=mysql_num_rows($hlisg2);
+									$hlisg2=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'II/%'");
+									$jhlisg2=mysqli_num_rows($hlisg2);
 										if ($jhlisg2==0){
 										echo "-";
 										}
@@ -1757,8 +1757,8 @@
 									?>
 								</td>
 								<td><?php
-									$hlisg3=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'III/%'");
-									$jhlisg3=mysql_num_rows($hlisg3);
+									$hlisg3=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'III/%'");
+									$jhlisg3=mysqli_num_rows($hlisg3);
 										if ($jhlisg3==0){
 										echo "-";
 										}
@@ -1768,8 +1768,8 @@
 									?>
 								</td>
 								<td><?php
-									$hlisg4=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'IV/%'");
-									$jhlisg4=mysql_num_rows($hlisg4);
+									$hlisg4=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'IV/%'");
+									$jhlisg4=mysqli_num_rows($hlisg4);
 										if ($jhlisg4==0){
 										echo "-";
 										}
@@ -1779,8 +1779,8 @@
 									?>
 								</td>
 								<td><?php
-									$hlisg=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%'");
-									$jhlisg=mysql_num_rows($hlisg);
+									$hlisg=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%'");
+									$jhlisg=mysqli_num_rows($hlisg);
 										if ($jhlisg==0){
 										echo "-";
 										}
@@ -1790,8 +1790,8 @@
 									?>
 								</td>
 								<td><?php
-									$hlise2=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'II/%'");
-									$jhlise2=mysql_num_rows($hlise2);
+									$hlise2=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'II/%'");
+									$jhlise2=mysqli_num_rows($hlise2);
 										if ($jhlise2==0){
 										echo "-";
 										}
@@ -1801,8 +1801,8 @@
 									?>
 								</td>
 								<td><?php
-									$hlise3=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'III/%'");
-									$jhlise3=mysql_num_rows($hlise3);
+									$hlise3=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'III/%'");
+									$jhlise3=mysqli_num_rows($hlise3);
 										if ($jhlise3==0){
 										echo "-";
 										}
@@ -1812,8 +1812,8 @@
 									?>
 								</td>
 								<td><?php
-									$hlise4=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'IV/%'");
-									$jhlise4=mysql_num_rows($hlise4);
+									$hlise4=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'IV/%'");
+									$jhlise4=mysqli_num_rows($hlise4);
 										if ($jhlise4==0){
 										echo "-";
 										}
@@ -1823,8 +1823,8 @@
 									?>
 								</td>
 								<td><?php
-									$hlise5=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'V/%'");
-									$jhlise5=mysql_num_rows($hlise5);
+									$hlise5=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'V/%'");
+									$jhlise5=mysqli_num_rows($hlise5);
 										if ($jhlise5==0){
 										echo "-";
 										}
@@ -1834,8 +1834,8 @@
 									?>
 								</td>
 								<td><?php
-									$hliss=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
-									$jhliss=mysql_num_rows($hliss);
+									$hliss=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Lisan' AND tgl_sk LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
+									$jhliss=mysqli_num_rows($hliss);
 										if ($jhliss==0){
 										echo "-";
 										}
@@ -1850,8 +1850,8 @@
 								<td></td>
 								<td>- TEGURAN TERTULIS</td>
 								<td><?php
-									$hterg1=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'I/%'");
-									$jhterg1=mysql_num_rows($hterg1);
+									$hterg1=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'I/%'");
+									$jhterg1=mysqli_num_rows($hterg1);
 										if ($jhterg1==0){
 										echo "-";
 										}
@@ -1861,8 +1861,8 @@
 									?>
 								</td>
 								<td><?php
-									$hterg2=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'II/%'");
-									$jhterg2=mysql_num_rows($hterg2);
+									$hterg2=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'II/%'");
+									$jhterg2=mysqli_num_rows($hterg2);
 										if ($jhterg2==0){
 										echo "-";
 										}
@@ -1872,8 +1872,8 @@
 									?>
 								</td>
 								<td><?php
-									$hterg3=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'III/%'");
-									$jhterg3=mysql_num_rows($hterg3);
+									$hterg3=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'III/%'");
+									$jhterg3=mysqli_num_rows($hterg3);
 										if ($jhterg3==0){
 										echo "-";
 										}
@@ -1883,8 +1883,8 @@
 									?>
 								</td>
 								<td><?php
-									$hterg4=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'IV/%'");
-									$jhterg4=mysql_num_rows($hterg4);
+									$hterg4=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'IV/%'");
+									$jhterg4=mysqli_num_rows($hterg4);
 										if ($jhterg4==0){
 										echo "-";
 										}
@@ -1894,8 +1894,8 @@
 									?>
 								</td>
 								<td><?php
-									$hterg=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%'");
-									$jhterg=mysql_num_rows($hterg);
+									$hterg=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%'");
+									$jhterg=mysqli_num_rows($hterg);
 										if ($jhterg==0){
 										echo "-";
 										}
@@ -1905,8 +1905,8 @@
 									?>
 								</td>
 								<td><?php
-									$htere2=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'II/%'");
-									$jhtere2=mysql_num_rows($htere2);
+									$htere2=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'II/%'");
+									$jhtere2=mysqli_num_rows($htere2);
 										if ($jhtere2==0){
 										echo "-";
 										}
@@ -1916,8 +1916,8 @@
 									?>
 								</td>
 								<td><?php
-									$htere3=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'III/%'");
-									$jhtere3=mysql_num_rows($htere3);
+									$htere3=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'III/%'");
+									$jhtere3=mysqli_num_rows($htere3);
 										if ($jhtere3==0){
 										echo "-";
 										}
@@ -1927,8 +1927,8 @@
 									?>
 								</td>
 								<td><?php
-									$htere4=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'IV/%'");
-									$jhtere4=mysql_num_rows($htere4);
+									$htere4=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'IV/%'");
+									$jhtere4=mysqli_num_rows($htere4);
 										if ($jhtere4==0){
 										echo "-";
 										}
@@ -1938,8 +1938,8 @@
 									?>
 								</td>
 								<td><?php
-									$htere5=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'V/%'");
-									$jhtere5=mysql_num_rows($htere5);
+									$htere5=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'V/%'");
+									$jhtere5=mysqli_num_rows($htere5);
 										if ($jhtere5==0){
 										echo "-";
 										}
@@ -1949,8 +1949,8 @@
 									?>
 								</td>
 								<td><?php
-									$hters=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
-									$jhters=mysql_num_rows($hters);
+									$hters=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Teguran Tertulis' AND tgl_sk LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
+									$jhters=mysqli_num_rows($hters);
 										if ($jhters==0){
 										echo "-";
 										}
@@ -1965,8 +1965,8 @@
 								<td></td>
 								<td>- TUNDA KENAIKAN BERKALA</td>
 								<td><?php
-									$hberg1=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'I/%'");
-									$jhberg1=mysql_num_rows($hberg1);
+									$hberg1=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'I/%'");
+									$jhberg1=mysqli_num_rows($hberg1);
 										if ($jhberg1==0){
 										echo "-";
 										}
@@ -1976,8 +1976,8 @@
 									?>
 								</td>
 								<td><?php
-									$hberg2=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'II/%'");
-									$jhberg2=mysql_num_rows($hberg2);
+									$hberg2=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'II/%'");
+									$jhberg2=mysqli_num_rows($hberg2);
 										if ($jhberg2==0){
 										echo "-";
 										}
@@ -1987,8 +1987,8 @@
 									?>
 								</td>
 								<td><?php
-									$hberg3=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'III/%'");
-									$jhberg3=mysql_num_rows($hberg3);
+									$hberg3=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'III/%'");
+									$jhberg3=mysqli_num_rows($hberg3);
 										if ($jhberg3==0){
 										echo "-";
 										}
@@ -1998,8 +1998,8 @@
 									?>
 								</td>
 								<td><?php
-									$hberg4=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'IV/%'");
-									$jhberg4=mysql_num_rows($hberg4);
+									$hberg4=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'IV/%'");
+									$jhberg4=mysqli_num_rows($hberg4);
 										if ($jhberg4==0){
 										echo "-";
 										}
@@ -2009,8 +2009,8 @@
 									?>
 								</td>
 								<td><?php
-									$hberg=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%'");
-									$jhberg=mysql_num_rows($hberg);
+									$hberg=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%'");
+									$jhberg=mysqli_num_rows($hberg);
 										if ($jhberg==0){
 										echo "-";
 										}
@@ -2020,8 +2020,8 @@
 									?>
 								</td>
 								<td><?php
-									$hbere2=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'II/%'");
-									$jhbere2=mysql_num_rows($hbere2);
+									$hbere2=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'II/%'");
+									$jhbere2=mysqli_num_rows($hbere2);
 										if ($jhbere2==0){
 										echo "-";
 										}
@@ -2031,8 +2031,8 @@
 									?>
 								</td>
 								<td><?php
-									$hbere3=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'III/%'");
-									$jhbere3=mysql_num_rows($hbere3);
+									$hbere3=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'III/%'");
+									$jhbere3=mysqli_num_rows($hbere3);
 										if ($jhbere3==0){
 										echo "-";
 										}
@@ -2042,8 +2042,8 @@
 									?>
 								</td>
 								<td><?php
-									$hbere4=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'IV/%'");
-									$jhbere4=mysql_num_rows($hbere4);
+									$hbere4=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'IV/%'");
+									$jhbere4=mysqli_num_rows($hbere4);
 										if ($jhbere4==0){
 										echo "-";
 										}
@@ -2053,8 +2053,8 @@
 									?>
 								</td>
 								<td><?php
-									$hbere5=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'V/%'");
-									$jhbere5=mysql_num_rows($hbere5);
+									$hbere5=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'V/%'");
+									$jhbere5=mysqli_num_rows($hbere5);
 										if ($jhbere5==0){
 										echo "-";
 										}
@@ -2064,8 +2064,8 @@
 									?>
 								</td>
 								<td><?php
-									$hbers=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
-									$jhbers=mysql_num_rows($hbers);
+									$hbers=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Berkala' AND tgl_sk LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
+									$jhbers=mysqli_num_rows($hbers);
 										if ($jhbers==0){
 										echo "-";
 										}
@@ -2080,8 +2080,8 @@
 								<td></td>
 								<td>- TUNDA KENAIKAN PANGKAT</td>
 								<td><?php
-									$hpg1=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'I/%'");
-									$jhpg1=mysql_num_rows($hpg1);
+									$hpg1=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'I/%'");
+									$jhpg1=mysqli_num_rows($hpg1);
 										if ($jhpg1==0){
 										echo "-";
 										}
@@ -2091,8 +2091,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpg2=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'II/%'");
-									$jhpg2=mysql_num_rows($hpg2);
+									$hpg2=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'II/%'");
+									$jhpg2=mysqli_num_rows($hpg2);
 										if ($jhpg2==0){
 										echo "-";
 										}
@@ -2102,8 +2102,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpg3=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'III/%'");
-									$jhpg3=mysql_num_rows($hpg3);
+									$hpg3=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'III/%'");
+									$jhpg3=mysqli_num_rows($hpg3);
 										if ($jhpg3==0){
 										echo "-";
 										}
@@ -2113,8 +2113,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpg4=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'IV/%'");
-									$jhpg4=mysql_num_rows($hpg4);
+									$hpg4=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'IV/%'");
+									$jhpg4=mysqli_num_rows($hpg4);
 										if ($jhpg4==0){
 										echo "-";
 										}
@@ -2124,8 +2124,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpg=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%'");
-									$jhpg=mysql_num_rows($hpg);
+									$hpg=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%'");
+									$jhpg=mysqli_num_rows($hpg);
 										if ($jhpg==0){
 										echo "-";
 										}
@@ -2135,8 +2135,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpe2=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'II/%'");
-									$jhpe2=mysql_num_rows($hpe2);
+									$hpe2=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'II/%'");
+									$jhpe2=mysqli_num_rows($hpe2);
 										if ($jhpe2==0){
 										echo "-";
 										}
@@ -2146,8 +2146,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpe3=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'III/%'");
-									$jhpe3=mysql_num_rows($hpe3);
+									$hpe3=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'III/%'");
+									$jhpe3=mysqli_num_rows($hpe3);
 										if ($jhpe3==0){
 										echo "-";
 										}
@@ -2157,8 +2157,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpe4=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'IV/%'");
-									$jhpe4=mysql_num_rows($hpe4);
+									$hpe4=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'IV/%'");
+									$jhpe4=mysqli_num_rows($hpe4);
 										if ($jhpe4==0){
 										echo "-";
 										}
@@ -2168,8 +2168,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpe5=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'V/%'");
-									$jhpe5=mysql_num_rows($hpe5);
+									$hpe5=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'V/%'");
+									$jhpe5=mysqli_num_rows($hpe5);
 										if ($jhpe5==0){
 										echo "-";
 										}
@@ -2179,8 +2179,8 @@
 									?>
 								</td>
 								<td><?php
-									$hps=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
-									$jhps=mysql_num_rows($hps);
+									$hps=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Tunda Kenaikan Pangkat' AND tgl_sk LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
+									$jhps=mysqli_num_rows($hps);
 										if ($jhps==0){
 										echo "-";
 										}
@@ -2195,8 +2195,8 @@
 								<td></td>
 								<td>- PEMBERHENTIAN</td>
 								<td><?php
-									$hpemg1=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'I/%'");
-									$jhpemg1=mysql_num_rows($hpemg1);
+									$hpemg1=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'I/%'");
+									$jhpemg1=mysqli_num_rows($hpemg1);
 										if ($jhpemg1==0){
 										echo "-";
 										}
@@ -2206,8 +2206,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpemg2=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'II/%'");
-									$jhpemg2=mysql_num_rows($hpemg2);
+									$hpemg2=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'II/%'");
+									$jhpemg2=mysqli_num_rows($hpemg2);
 										if ($jhpemg2==0){
 										echo "-";
 										}
@@ -2217,8 +2217,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpemg3=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'III/%'");
-									$jhpemg3=mysql_num_rows($hpemg3);
+									$hpemg3=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'III/%'");
+									$jhpemg3=mysqli_num_rows($hpemg3);
 										if ($jhpemg3==0){
 										echo "-";
 										}
@@ -2228,8 +2228,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpemg4=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'IV/%'");
-									$jhpemg4=mysql_num_rows($hpemg4);
+									$hpemg4=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND gol LIKE 'IV/%'");
+									$jhpemg4=mysqli_num_rows($hpemg4);
 										if ($jhpemg4==0){
 										echo "-";
 										}
@@ -2239,8 +2239,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpemg=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%'");
-									$jhpemg=mysql_num_rows($hpemg);
+									$hpemg=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%'");
+									$jhpemg=mysqli_num_rows($hpemg);
 										if ($jhpemg==0){
 										echo "-";
 										}
@@ -2250,8 +2250,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpeme2=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'II/%'");
-									$jhpeme2=mysql_num_rows($hpeme2);
+									$hpeme2=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'II/%'");
+									$jhpeme2=mysqli_num_rows($hpeme2);
 										if ($jhpeme2==0){
 										echo "-";
 										}
@@ -2261,8 +2261,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpeme3=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'III/%'");
-									$jhpeme3=mysql_num_rows($hpeme3);
+									$hpeme3=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'III/%'");
+									$jhpeme3=mysqli_num_rows($hpeme3);
 										if ($jhpeme3==0){
 										echo "-";
 										}
@@ -2272,8 +2272,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpeme4=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'IV/%'");
-									$jhpeme4=mysql_num_rows($hpeme4);
+									$hpeme4=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'IV/%'");
+									$jhpeme4=mysqli_num_rows($hpeme4);
 										if ($jhpeme4==0){
 										echo "-";
 										}
@@ -2283,8 +2283,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpeme5=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'V/%'");
-									$jhpeme5=mysql_num_rows($hpeme5);
+									$hpeme5=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND eselon LIKE 'V/%'");
+									$jhpeme5=mysqli_num_rows($hpeme5);
 										if ($jhpeme5==0){
 										echo "-";
 										}
@@ -2294,8 +2294,8 @@
 									?>
 								</td>
 								<td><?php
-									$hpems=mysql_query("SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
-									$jhpems=mysql_num_rows($hpems);
+									$hpems=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE hukuman='Pemberhentian' AND tgl_sk LIKE '$skrg%' AND pangkat LIKE 'Staff%'");
+									$jhpems=mysqli_num_rows($hpems);
 										if ($jhpems==0){
 										echo "-";
 										}
@@ -2314,8 +2314,8 @@
 								<td></td>
 								<td></td>
 								<td><?php
-									$ptt=mysql_query("SELECT * FROM tb_pegawai WHERE status_kepeg='PTT' ");
-									$jptt=mysql_num_rows($ptt);
+									$ptt=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_kepeg='PTT' ");
+									$jptt=mysqli_num_rows($ptt);
 										if ($jptt==0){
 										echo "-";
 										}
@@ -2339,8 +2339,8 @@
 								<td></td>
 								<td></td>
 								<td><?php
-									$pttl=mysql_query("SELECT * FROM tb_pegawai WHERE status_kepeg='PTT' AND jk='Laki-laki'");
-									$jpttl=mysql_num_rows($pttl);
+									$pttl=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_kepeg='PTT' AND jk='Laki-laki'");
+									$jpttl=mysqli_num_rows($pttl);
 										if ($jpttl==0){
 										echo "-";
 										}
@@ -2364,8 +2364,8 @@
 								<td></td>
 								<td></td>
 								<td><?php
-									$pttp=mysql_query("SELECT * FROM tb_pegawai WHERE status_kepeg='PTT' AND jk='Perempuan'");
-									$jpttp=mysql_num_rows($pttp);
+									$pttp=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_kepeg='PTT' AND jk='Perempuan'");
+									$jpttp=mysqli_num_rows($pttp);
 										if ($jpttp==0){
 										echo "-";
 										}
