@@ -13,10 +13,10 @@ if ($_SESSION['hak_akses'] != "Pegawai") {
 }
 include "../../config/koneksi.php";
 $tampilUsr	= mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user='$_SESSION[id_user]'");
-$usr		= mysqli_fetch_array($tampilUsr);
+$usr		= mysqli_fetch_array($tampilUsr, MYSQLI_ASSOC);
 
 $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$usr[id_peg]'");
-$peg		= mysqli_fetch_array($tampilPeg);
+$peg		= mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->

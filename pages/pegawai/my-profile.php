@@ -3,10 +3,10 @@ include "../../config/koneksi.php";
 
 $id_peg	 = $_SESSION['id_peg'];
 $query   = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
-$data    = mysqli_fetch_array($query);
+$data    = mysqli_fetch_array($query, MYSQLI_ASSOC);
 
 $queryPan	= mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' AND status_pan='Aktif'");
-$selpan		= mysqli_fetch_array($queryPan);
+$selpan		= mysqli_fetch_array($queryPan, MYSQLI_ASSOC);
 
 $birthday	= new DateTime($data['tgl_lhr']);
 $today		= new DateTime();
@@ -138,7 +138,7 @@ $diff = $today->diff($birthday);
 												<td class="field">Unit Kerja</td>
 												<td><?php
 													$seluni	= mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$data[unit_kerja]'");
-													$uni = mysqli_fetch_array($seluni);
+													$uni = mysqli_fetch_array($seluni, MYSQLI_ASSOC);
 													echo $uni['nama'];
 													?>
 												</td>
@@ -173,7 +173,7 @@ $diff = $today->diff($birthday);
 						<tbody>
 							<?php
 							$tampilSi	= mysqli_query($koneksi, "SELECT * FROM tb_suamiistri WHERE id_peg='$id_peg'");
-							while ($si = mysqli_fetch_array($tampilSi)) {
+							while ($si = mysqli_fetch_array($tampilSi, MYSQLI_ASSOC)) {
 							?>
 								<tr>
 									<td><?php echo $si['nik']; ?></td>
@@ -207,7 +207,7 @@ $diff = $today->diff($birthday);
 						<tbody>
 							<?php
 							$tampilAna	= mysqli_query($koneksi, "SELECT * FROM tb_anak WHERE id_peg='$id_peg' ORDER BY tgl_lhr DESC");
-							while ($ana = mysqli_fetch_array($tampilAna)) {
+							while ($ana = mysqli_fetch_array($tampilAna, MYSQLI_ASSOC)) {
 							?>
 								<tr>
 									<td><?php echo $ana['nik']; ?></td>
@@ -241,7 +241,7 @@ $diff = $today->diff($birthday);
 						<tbody>
 							<?php
 							$tampilOrt	= mysqli_query($koneksi, "SELECT * FROM tb_ortu WHERE id_peg='$id_peg' ORDER BY tgl_lhr DESC");
-							while ($ort = mysqli_fetch_array($tampilOrt)) {
+							while ($ort = mysqli_fetch_array($tampilOrt, MYSQLI_ASSOC)) {
 							?>
 								<tr>
 									<td><?php echo $ort['nik']; ?></td>
@@ -275,7 +275,7 @@ $diff = $today->diff($birthday);
 						<tbody>
 							<?php
 							$tampilSek	= mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE id_peg='$id_peg' ORDER BY tgl_ijazah DESC");
-							while ($sek = mysqli_fetch_array($tampilSek)) {
+							while ($sek = mysqli_fetch_array($tampilSek, MYSQLI_ASSOC)) {
 							?>
 								<tr>
 									<td><?php echo $sek['tingkat']; ?></td>
@@ -313,7 +313,7 @@ $diff = $today->diff($birthday);
 						<tbody>
 							<?php
 							$tampilBhs	= mysqli_query($koneksi, "SELECT * FROM tb_bahasa WHERE id_peg='$id_peg'");
-							while ($bhs = mysqli_fetch_array($tampilBhs)) {
+							while ($bhs = mysqli_fetch_array($tampilBhs, MYSQLI_ASSOC)) {
 							?>
 								<tr>
 									<td><?php echo $bhs['jns_bhs']; ?></td>
@@ -351,7 +351,7 @@ $diff = $today->diff($birthday);
 							<?php
 							$no = 0;
 							$tampilSkp	= mysqli_query($koneksi, "SELECT * FROM tb_skp WHERE id_peg='$id_peg' ORDER BY periode_akhir");
-							while ($skp = mysqli_fetch_array($tampilSkp)) {
+							while ($skp = mysqli_fetch_array($tampilSkp, MYSQLI_ASSOC)) {
 								$id_skp	= $skp['id_skp'];
 								$no++
 							?>
@@ -363,7 +363,7 @@ $diff = $today->diff($birthday);
 									<td><?php echo $skp['atasan_penilai']; ?></td>
 									<td><?php
 										$nilai	= mysqli_query($koneksi, "SELECT * FROM tb_skp WHERE id_skp='$id_skp'");
-										while ($nskp = mysqli_fetch_array($nilai)) {
+										while ($nskp = mysqli_fetch_array($nilai, MYSQLI_ASSOC)) {
 											$orientasi		= $nskp['nilai_orientasi'];
 											$integritas		= $nskp['nilai_integritas'];
 											$komitmen		= $nskp['nilai_komitmen'];
@@ -405,7 +405,7 @@ $diff = $today->diff($birthday);
 							<?php
 							$no = 0;
 							$tampilKgb	= mysqli_query($koneksi, "SELECT * FROM tb_spkgb WHERE id_peg='$id_peg' ORDER BY tgl DESC");
-							while ($kgb = mysqli_fetch_array($tampilKgb)) {
+							while ($kgb = mysqli_fetch_array($tampilKgb, MYSQLI_ASSOC)) {
 								$no++
 							?>
 								<tr>
@@ -443,7 +443,7 @@ $diff = $today->diff($birthday);
 							<?php
 							$no = 0;
 							$tampilDokumen	= mysqli_query($koneksi, "SELECT * FROM tb_dokumen WHERE id_peg='$id_peg'");
-							while ($dok = mysqli_fetch_array($tampilDokumen)) {
+							while ($dok = mysqli_fetch_array($tampilDokumen, MYSQLI_ASSOC)) {
 								$no++
 							?>
 								<tr>
@@ -530,7 +530,7 @@ $diff = $today->diff($birthday);
 						<tbody>
 							<?php
 							$no = 0;
-							// while ($peg    = mysql_fetch_array($tampilPeg)) {
+							// while ($peg    = mysql_fetch_array($tampilPeg, MYSQLI_ASSOC)) {
 							$no++
 							?>
 							<tr>
@@ -600,7 +600,7 @@ $diff = $today->diff($birthday);
 									<tbody>
 										<?php
 										$tampilPens	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
-										$pens	= mysqli_fetch_array($tampilPens);
+										$pens	= mysqli_fetch_array($tampilPens, MYSQLI_ASSOC);
 										$lahir	= $pens['tgl_lhr'];
 										$pensiun = $pens['tgl_pensiun'];
 										?>
@@ -638,7 +638,7 @@ $diff = $today->diff($birthday);
 									<tbody>
 										<?php
 										$tampilNp	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
-										$np	= mysqli_fetch_array($tampilNp);
+										$np	= mysqli_fetch_array($tampilNp, MYSQLI_ASSOC);
 										$naikpangkat	= $np['tgl_naikpangkat'];
 										$naikpensiun	= $np['tgl_pensiun'];
 
@@ -685,7 +685,7 @@ $diff = $today->diff($birthday);
 									<tbody>
 										<?php
 										$tampilGj	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
-										$ng	= mysqli_fetch_array($tampilGj);
+										$ng	= mysqli_fetch_array($tampilGj, MYSQLI_ASSOC);
 										$naikgaji	= $ng['tgl_naikgaji'];
 										$naikpens	= $ng['tgl_pensiun'];
 
@@ -736,7 +736,7 @@ $diff = $today->diff($birthday);
 										<?php
 										$no = 0;
 										$tampilJab	= mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$id_peg' ORDER BY tmt_jabatan DESC");
-										while ($jab = mysqli_fetch_array($tampilJab)) {
+										while ($jab = mysqli_fetch_array($tampilJab, MYSQLI_ASSOC)) {
 											$no++
 										?>
 											<tr>
@@ -805,7 +805,7 @@ $diff = $today->diff($birthday);
 										<?php
 										$no = 0;
 										$tampilPan	= mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' ORDER BY tgl_sk");
-										while ($pangkat = mysqli_fetch_array($tampilPan)) {
+										while ($pangkat = mysqli_fetch_array($tampilPan, MYSQLI_ASSOC)) {
 											$no++
 										?>
 											<tr>
@@ -876,7 +876,7 @@ $diff = $today->diff($birthday);
 										<?php
 										$no = 0;
 										$tampilHuk	= mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE id_peg='$id_peg' ORDER BY tgl_sk");
-										while ($hukum = mysqli_fetch_array($tampilHuk)) {
+										while ($hukum = mysqli_fetch_array($tampilHuk, MYSQLI_ASSOC)) {
 											$no++
 										?>
 											<tr>
@@ -929,7 +929,7 @@ $diff = $today->diff($birthday);
 										<?php
 										$no = 0;
 										$tampilDik	= mysqli_query($koneksi, "SELECT * FROM tb_diklat WHERE id_peg='$id_peg' ORDER BY tahun");
-										while ($dik = mysqli_fetch_array($tampilDik)) {
+										while ($dik = mysqli_fetch_array($tampilDik, MYSQLI_ASSOC)) {
 											$no++
 										?>
 											<tr>
@@ -985,7 +985,7 @@ $diff = $today->diff($birthday);
 										<?php
 										$no = 0;
 										$tampilHar	= mysqli_query($koneksi, "SELECT * FROM tb_penghargaan WHERE id_peg='$id_peg' ORDER BY tahun");
-										while ($har = mysqli_fetch_array($tampilHar)) {
+										while ($har = mysqli_fetch_array($tampilHar, MYSQLI_ASSOC)) {
 											$no++
 										?>
 											<tr>
@@ -1031,7 +1031,7 @@ $diff = $today->diff($birthday);
 										<?php
 										$no = 0;
 										$tampilTug	= mysqli_query($koneksi, "SELECT * FROM tb_penugasan WHERE id_peg='$id_peg' ORDER BY tahun");
-										while ($tug = mysqli_fetch_array($tampilTug)) {
+										while ($tug = mysqli_fetch_array($tampilTug, MYSQLI_ASSOC)) {
 											$no++
 										?>
 											<tr>
@@ -1080,7 +1080,7 @@ $diff = $today->diff($birthday);
 										<?php
 										$no = 0;
 										$tampilSem	= mysqli_query($koneksi, "SELECT * FROM tb_seminar WHERE id_peg='$id_peg' ORDER BY tgl_selesai");
-										while ($sem = mysqli_fetch_array($tampilSem)) {
+										while ($sem = mysqli_fetch_array($tampilSem, MYSQLI_ASSOC)) {
 											$no++
 										?>
 											<tr>
@@ -1137,7 +1137,7 @@ $diff = $today->diff($birthday);
 										<?php
 										$no = 0;
 										$tampilCut	= mysqli_query($koneksi, "SELECT * FROM tb_cuti WHERE id_peg='$id_peg' ORDER BY tgl_suratcuti");
-										while ($cut = mysqli_fetch_array($tampilCut)) {
+										while ($cut = mysqli_fetch_array($tampilCut, MYSQLI_ASSOC)) {
 											$no++
 										?>
 											<tr>
@@ -1183,7 +1183,7 @@ $diff = $today->diff($birthday);
 									<tbody>
 										<?php
 										$tampilLatjab	= mysqli_query($koneksi, "SELECT * FROM tb_lat_jabatan WHERE id_peg='$id_peg' ORDER BY tahun_lat");
-										while ($latjab = mysqli_fetch_array($tampilLatjab)) {
+										while ($latjab = mysqli_fetch_array($tampilLatjab, MYSQLI_ASSOC)) {
 										?>
 											<tr>
 												<td><?php echo $latjab['nama_pelatih']; ?></td>
@@ -1234,7 +1234,7 @@ $diff = $today->diff($birthday);
 										<?php
 										$no = 0;
 										$tampilMut	= mysqli_query($koneksi, "SELECT * FROM tb_mutasi WHERE id_peg='$id_peg'");
-										while ($mut = mysqli_fetch_array($tampilMut)) {
+										while ($mut = mysqli_fetch_array($tampilMut, MYSQLI_ASSOC)) {
 											$no++
 										?>
 											<tr>
@@ -1281,7 +1281,7 @@ $diff = $today->diff($birthday);
 										<?php
 										$no = 0;
 										$tampilTun	= mysqli_query($koneksi, "SELECT * FROM tb_tunjangan WHERE id_peg='$id_peg' ORDER BY tgl_tunjangan DESC");
-										while ($tun = mysqli_fetch_array($tampilTun)) {
+										while ($tun = mysqli_fetch_array($tampilTun, MYSQLI_ASSOC)) {
 											$no++
 										?>
 											<tr>
@@ -1330,7 +1330,7 @@ $diff = $today->diff($birthday);
 										<?php
 										$no = 0;
 										$tampilKaw	= mysqli_query($koneksi, "SELECT * FROM tb_kawin WHERE id_peg='$id_peg' ORDER BY tgl_izin DESC");
-										while ($kaw = mysqli_fetch_array($tampilKaw)) {
+										while ($kaw = mysqli_fetch_array($tampilKaw, MYSQLI_ASSOC)) {
 											$no++
 										?>
 											<tr>
