@@ -14,13 +14,15 @@
 <h1 class="page-header">Riwayat <small>Anak <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
-	include "../../config/koneksi.php";
 	function kdauto($tabel, $inisial){
+		include "../../config/koneksi.php";
+		
 		$struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
-		$field      = mysqli_field_name($struktur,0);
-		$panjang    = mysqli_field_len($struktur,0);
+		$fieldInfo = mysqli_fetch_field_direct($struktur, 0);
+		$field      = $fieldInfo->name;
+		$panjang    = $fieldInfo->length;
 		$qry  = mysqli_query($koneksi, "SELECT max(".$field.") FROM ".$tabel);
-		$row  = mysqli_fetch_array($qry, MYSQLI_ASSOC);
+		$row  = mysqli_fetch_array($qry);
 		if ($row[0]=="") {
 		$angka=0;
 		}
@@ -28,7 +30,7 @@
 		$angka= substr($row[0], strlen($inisial));
 		}
 		$angka++;
-		$angka      =strval($angka);
+		$angka =strval($angka);
 		$tmp  ="";
 		for($i=1; $i<=($panjang-strlen($inisial)-strlen($angka)); $i++) {
 		$tmp=$tmp."0";
@@ -58,10 +60,10 @@
 						<label class="col-md-3 control-label">Pegawai</label>
 						<div class="col-md-6">
 							<?php
-								$data = mysql_query("SELECT * FROM tb_pegawai ORDER BY nama ASC");        
+								$data = mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY nama ASC");        
 								echo '<select name="id_peg" class="default-select2 form-control">';    
 								echo '<option value="">...</option>';    
-									while ($row = mysql_fetch_array($data)) {    
+									while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)) {    
 									echo '<option value="'.$row['id_peg'].'">'.$row['nama'].'_'.$row['nip'].'</option>';    
 									}    
 								echo '</select>';
