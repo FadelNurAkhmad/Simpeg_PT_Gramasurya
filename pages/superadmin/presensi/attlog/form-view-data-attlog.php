@@ -1,74 +1,74 @@
 <?php
-$filename    = "Daftar Pegawai";
+// $filename    = "Daftar Pegawai";
 
-include "../../config/koneksi.php";
-include "../../assets/plugins/PHPExcel-1.8.1/Classes/PHPExcel.php";
-include "../../assets/plugins/PHPExcel-1.8.1/Classes/PHPExcel/Writer/Excel2007.php";
+// include "../../config/koneksi.php";
+// include "../../assets/plugins/PHPExcel-1.8.1/Classes/PHPExcel.php";
+// include "../../assets/plugins/PHPExcel-1.8.1/Classes/PHPExcel/Writer/Excel2007.php";
 
-$excel    = new PHPExcel;
+// $excel    = new PHPExcel;
 
-$excel->getProperties()->setCreator("Raja Putra Media");
-$excel->getProperties()->setLastModifiedBy("Raja Putra Media");
-$excel->getProperties()->setTitle("Raja Putra Media Report");
-$excel->removeSheetByIndex(0);
+// $excel->getProperties()->setCreator("Raja Putra Media");
+// $excel->getProperties()->setLastModifiedBy("Raja Putra Media");
+// $excel->getProperties()->setTitle("Raja Putra Media Report");
+// $excel->removeSheetByIndex(0);
 
-$sheet = $excel->createSheet();
-$sheet->setTitle('Daftar Pegawai');
-$sheet->setCellValue("A1", "DAFTAR PEGAWAI");
-$sheet->setCellValue("A3", "No. Urut");
-$sheet->setCellValue("B3", "ID");
-$sheet->setCellValue("C3", "NIP");
-$sheet->setCellValue("D3", "Nama");
-$sheet->setCellValue("E3", "Tempat Lahir");
-$sheet->setCellValue("F3", "Tgl. Lahir");
-$sheet->setCellValue("G3", "Agama");
-$sheet->setCellValue("H3", "Jenis Kelamin");
-$sheet->setCellValue("I3", "Gol Darah");
-$sheet->setCellValue("J3", "Status Nikah");
-$sheet->setCellValue("K3", "Status");
-$sheet->setCellValue("L3", "Alamat");
-$sheet->setCellValue("M3", "Telp");
-$sheet->setCellValue("N3", "Email");
-$sheet->setCellValue("O3", "Gol/Ruang");
-$sheet->setCellValue("P3", "Pangkat");
-$sheet->setCellValue("Q3", "Jabatan");
-$sheet->setCellValue("R3", "Pendidikan");
-$sheet->setCellValue("S3", "Unit Kerja");
-$sheet->setCellValue("T3", "Tgl. Pensiun");
+// $sheet = $excel->createSheet();
+// $sheet->setTitle('Daftar Pegawai');
+// $sheet->setCellValue("A1", "DAFTAR PEGAWAI");
+// $sheet->setCellValue("A3", "No. Urut");
+// $sheet->setCellValue("B3", "ID");
+// $sheet->setCellValue("C3", "NIP");
+// $sheet->setCellValue("D3", "Nama");
+// $sheet->setCellValue("E3", "Tempat Lahir");
+// $sheet->setCellValue("F3", "Tgl. Lahir");
+// $sheet->setCellValue("G3", "Agama");
+// $sheet->setCellValue("H3", "Jenis Kelamin");
+// $sheet->setCellValue("I3", "Gol Darah");
+// $sheet->setCellValue("J3", "Status Nikah");
+// $sheet->setCellValue("K3", "Status");
+// $sheet->setCellValue("L3", "Alamat");
+// $sheet->setCellValue("M3", "Telp");
+// $sheet->setCellValue("N3", "Email");
+// $sheet->setCellValue("O3", "Gol/Ruang");
+// $sheet->setCellValue("P3", "Pangkat");
+// $sheet->setCellValue("Q3", "Jabatan");
+// $sheet->setCellValue("R3", "Pendidikan");
+// $sheet->setCellValue("S3", "Unit Kerja");
+// $sheet->setCellValue("T3", "Tgl. Pensiun");
 
-$expPeg    = mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY id_peg");
-$i    = 4; //Dimulai dengan baris ke dua
-$no    = 1;
-while ($peg    = mysqli_fetch_array($expPeg, MYSQLI_ASSOC)) {
-    $expUni    = mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
-    $uni    = mysqli_fetch_array($expUni, MYSQLI_ASSOC);
-    $sheet->setCellValue("A" . $i, $no);
-    $sheet->setCellValue("B" . $i, $peg['id_peg']);
-    $sheet->setCellValue("C" . $i, $peg['nip']);
-    $sheet->setCellValue("D" . $i, $peg['nama']);
-    $sheet->setCellValue("E" . $i, $peg['tempat_lhr']);
-    $sheet->setCellValue("F" . $i, $peg['tgl_lhr']);
-    $sheet->setCellValue("G" . $i, $peg['agama']);
-    $sheet->setCellValue("H" . $i, $peg['jk']);
-    $sheet->setCellValue("I" . $i, $peg['gol_darah']);
-    $sheet->setCellValue("J" . $i, $peg['status_nikah']);
-    $sheet->setCellValue("K" . $i, $peg['status_kepeg']);
-    $sheet->setCellValue("L" . $i, $peg['alamat']);
-    $sheet->setCellValue("M" . $i, $peg['telp']);
-    $sheet->setCellValue("N" . $i, $peg['email']);
-    $sheet->setCellValue("O" . $i, $peg['urut_pangkat']);
-    $sheet->setCellValue("P" . $i, $peg['pangkat']);
-    $sheet->setCellValue("Q" . $i, $peg['jabatan']);
-    $sheet->setCellValue("R" . $i, $peg['sekolah']);
-    $sheet->setCellValue("S" . $i, $uni['nama']);
-    $sheet->setCellValue("T" . $i, $peg['tgl_pensiun']);
-    $no++;
-    $i++;
-}
+// $expPeg    = mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY id_peg");
+// $i    = 4; //Dimulai dengan baris ke dua
+// $no    = 1;
+// while ($peg    = mysqli_fetch_array($expPeg, MYSQLI_ASSOC)) {
+//     $expUni    = mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
+//     $uni    = mysqli_fetch_array($expUni, MYSQLI_ASSOC);
+//     $sheet->setCellValue("A" . $i, $no);
+//     $sheet->setCellValue("B" . $i, $peg['id_peg']);
+//     $sheet->setCellValue("C" . $i, $peg['nip']);
+//     $sheet->setCellValue("D" . $i, $peg['nama']);
+//     $sheet->setCellValue("E" . $i, $peg['tempat_lhr']);
+//     $sheet->setCellValue("F" . $i, $peg['tgl_lhr']);
+//     $sheet->setCellValue("G" . $i, $peg['agama']);
+//     $sheet->setCellValue("H" . $i, $peg['jk']);
+//     $sheet->setCellValue("I" . $i, $peg['gol_darah']);
+//     $sheet->setCellValue("J" . $i, $peg['status_nikah']);
+//     $sheet->setCellValue("K" . $i, $peg['status_kepeg']);
+//     $sheet->setCellValue("L" . $i, $peg['alamat']);
+//     $sheet->setCellValue("M" . $i, $peg['telp']);
+//     $sheet->setCellValue("N" . $i, $peg['email']);
+//     $sheet->setCellValue("O" . $i, $peg['urut_pangkat']);
+//     $sheet->setCellValue("P" . $i, $peg['pangkat']);
+//     $sheet->setCellValue("Q" . $i, $peg['jabatan']);
+//     $sheet->setCellValue("R" . $i, $peg['sekolah']);
+//     $sheet->setCellValue("S" . $i, $uni['nama']);
+//     $sheet->setCellValue("T" . $i, $peg['tgl_pensiun']);
+//     $no++;
+//     $i++;
+// }
 
-$writer    = new PHPExcel_Writer_Excel2007($excel);
-$file    = "../../assets/excel/$filename.xlsx";
-$writer->save("$file");
+// $writer    = new PHPExcel_Writer_Excel2007($excel);
+// $file    = "../../assets/excel/$filename.xlsx";
+// $writer->save("$file");
 ?>
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
