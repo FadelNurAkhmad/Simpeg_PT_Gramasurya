@@ -47,17 +47,18 @@
 		foreach($tables as $table){
 			$result = mysqli_query($link, 'SELECT * FROM '.$table);
 			$num_fields = mysqli_num_fields($result);
+
 																
-			$return.= 'DROP TABLE '.$table.';'; //menyisipkan query drop table untuk nanti hapus table yang lama
+			$return = 'DROP TABLE '.$table.';'; //menyisipkan query drop table untuk nanti hapus table yang lama
 			$row2 = mysqli_fetch_row(mysqli_query($link, 'SHOW CREATE TABLE '.$table));
-			$return.= "\n\n".$row2[1].";\n\n";
+			$return .= "\n\n".$row2[1].";\n\n";
 					
 			for ($i = 0; $i < $num_fields; $i++) {
 				while($row = mysqli_fetch_row($result)){	//menyisipkan query Insert. untuk nanti memasukan data yang lama ketable yang baru dibuat
 				$return.= 'INSERT INTO '.$table.' VALUES(';
 					for($j=0; $j<$num_fields; $j++) { //akan menelusuri setiap baris query didalam
 						$row[$j] = addslashes($row[$j]);
-						$row[$j] = ereg_replace("\n","\\n",$row[$j]);
+						$row[$j] = preg_replace("\n","\\n",$row[$j]);
 						if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } else { $return.= '""'; }
 						if ($j<($num_fields-1)) { $return.= ','; }
 					}

@@ -1,38 +1,38 @@
 <?php
-	$filename	="Daftar Unit Kerja";
+	// $filename	="Daftar Unit Kerja";
 	
-	include "../../config/koneksi.php";
-	include "../../assets/plugins/PHPExcel-1.8.1/Classes/PHPExcel.php";
-	include "../../assets/plugins/PHPExcel-1.8.1/Classes/PHPExcel/Writer/Excel2007.php";
+	// include "../../config/koneksi.php";
+	// include "../../assets/plugins/PHPExcel-1.8.1/Classes/PHPExcel.php";
+	// include "../../assets/plugins/PHPExcel-1.8.1/Classes/PHPExcel/Writer/Excel2007.php";
 	 
-	$excel	=new PHPExcel;
+	// $excel	=new PHPExcel;
 	 
-	$excel->getProperties()->setCreator("Raja Putra Media");
-	$excel->getProperties()->setLastModifiedBy("Raja Putra Media");
-	$excel->getProperties()->setTitle("Raja Putra Media Report");
-	$excel->removeSheetByIndex(0);
+	// $excel->getProperties()->setCreator("Raja Putra Media");
+	// $excel->getProperties()->setLastModifiedBy("Raja Putra Media");
+	// $excel->getProperties()->setTitle("Raja Putra Media Report");
+	// $excel->removeSheetByIndex(0);
 	 
-	$sheet =$excel->createSheet();
-	$sheet->setTitle('Daftar Unit Kerja');
-	$sheet->setCellValue("A1", "Daftar Unit Kerja");
-	$sheet->setCellValue("A3", "No. Urut");
-	$sheet->setCellValue("B3", "ID");
-	$sheet->setCellValue("C3", "Nama Unit Kerja");
+	// $sheet =$excel->createSheet();
+	// $sheet->setTitle('Daftar Unit Kerja');
+	// $sheet->setCellValue("A1", "Daftar Unit Kerja");
+	// $sheet->setCellValue("A3", "No. Urut");
+	// $sheet->setCellValue("B3", "ID");
+	// $sheet->setCellValue("C3", "Nama Unit Kerja");
 
-	$expUni	=mysqli_query($koneksi, "SELECT * FROM tb_unit ORDER BY id_unit");
-	$i	=4; //Dimulai dengan baris ke dua
-	$no	=1;
-	while($uni	=mysqli_fetch_array($expUni, MYSQLI_ASSOC)){
-	   $sheet->setCellValue( "A" . $i, $no);
-	   $sheet->setCellValue( "B" . $i, $uni['id_unit'] );
-	   $sheet->setCellValue( "C" . $i, $uni['nama'] );
-	   $no++;
-	   $i++;
-	}
+	// $expUni	=mysqli_query($koneksi, "SELECT * FROM tb_unit ORDER BY id_unit");
+	// $i	=4; //Dimulai dengan baris ke dua
+	// $no	=1;
+	// while($uni	=mysqli_fetch_array($expUni, MYSQLI_ASSOC)){
+	//    $sheet->setCellValue( "A" . $i, $no);
+	//    $sheet->setCellValue( "B" . $i, $uni['id_unit'] );
+	//    $sheet->setCellValue( "C" . $i, $uni['nama'] );
+	//    $no++;
+	//    $i++;
+	// }
 	 
-	$writer	=new PHPExcel_Writer_Excel2007($excel);
-	$file	="../../assets/excel/$filename.xlsx";
-	$writer->save("$file");
+	// $writer	=new PHPExcel_Writer_Excel2007($excel);
+	// $file	="../../assets/excel/$filename.xlsx";
+	// $writer->save("$file");
 ?>
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
