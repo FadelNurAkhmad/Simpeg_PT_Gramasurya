@@ -1,10 +1,10 @@
 <?php
-	include "../../config/koneksi.php";
-	if ($_POST['search'] == "search") {
-		$nama	=$_POST['nama'];
-		
-		$tampilPeg	=mysql_query("SELECT * FROM tb_pegawai WHERE status_mut='' AND nama LIKE '%$nama%'");
-	}
+include "../../config/koneksi.php";
+if ($_POST['search'] == "search") {
+	$nama	= $_POST['nama'];
+
+	$tampilPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' AND nama LIKE '%$nama%'");
+}
 ?>
 <!-- begin page-header -->
 <h1 class="page-header">Result <small>Direct Search</small></h1>
@@ -29,28 +29,28 @@
 				</thead>
 				<tbody>
 					<?php
-						$no=0;
-						while($peg	=mysql_fetch_array($tampilPeg)){
+					$no = 0;
+					while ($peg	= mysqli_fetch_array($tampilPeg)) {
 						$no++
 					?>
-					<tr>
-						<td><?=$no?></td>
-						<td><?php echo $peg['nama'];?></td>
-						<td><?php echo $peg['nip']?></td>
-						<td><?php echo $peg['jk']?></td>
-						<td><?php echo $peg['agama']?></td>
-						<td><?php echo $peg['sekolah']?></td>
-						<td><?php echo $peg['status_nikah']?></td>
-						<td><?php echo $peg['pangkat']?></td>
-						<td><?php
-								$unit	=mysql_query("SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
-								$uni	=mysql_fetch_array($unit);
+						<tr>
+							<td><?= $no ?></td>
+							<td><?php echo $peg['nama']; ?></td>
+							<td><?php echo $peg['nip'] ?></td>
+							<td><?php echo $peg['jk'] ?></td>
+							<td><?php echo $peg['agama'] ?></td>
+							<td><?php echo $peg['sekolah'] ?></td>
+							<td><?php echo $peg['status_nikah'] ?></td>
+							<td><?php echo $peg['pangkat'] ?></td>
+							<td><?php
+								$unit	= mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
+								$uni	= mysqli_fetch_array($unit);
 								echo $uni['nama']
-							?>
-						</td>
-					</tr>
+								?>
+							</td>
+						</tr>
 					<?php
-						}
+					}
 					?>
 				</tbody>
 			</table>
