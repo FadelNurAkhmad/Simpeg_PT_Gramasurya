@@ -60,8 +60,8 @@ $pdf->SetFont('helvetica', '', 10);
 		die ("Error. No ID Selected! ");	
 	}
 	
-	$query	=mysql_query("SELECT * FROM tb_cuti WHERE id_cuti='$id_cuti'");
-	$data	=mysql_fetch_array($query);
+	$query	=mysqli_query($koneksi, "SELECT * FROM tb_cuti WHERE id_cuti='$id_cuti'");
+	$data	=mysqli_fetch_array($query, MYSQLI_ASSOC);
 	list($y1,$m1,$d1)	=explode ("-",$data['tgl_mulai']);
 	list($y2,$m2,$d2)	=explode ("-",$data['tgl_selesai']);
 	list($y3,$m3,$d3)	=explode ("-",$data['tgl_suratcuti']);
@@ -180,17 +180,17 @@ $pdf->SetFont('helvetica', '', 10);
 		$m3 ="Desember";
 	}
 	
-	$tampilPeg   =mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
-	$peg    =mysql_fetch_array($tampilPeg);
+	$tampilPeg   =mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
+	$peg    =mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 	
-	$tampilUni   =mysql_query("SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
-	$uni    =mysql_fetch_array($tampilUni);
+	$tampilUni   =mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
+	$uni    =mysqli_fetch_array($tampilUni, MYSQLI_ASSOC);
 	
-	$tampilsek	=mysql_query("SELECT * FROM tb_setup_sekda WHERE id_setup_sekda='1'");
-	$setsek	=mysql_fetch_array($tampilsek);
+	$tampilsek	=mysqli_query($koneksi, "SELECT * FROM tb_setup_sekda WHERE id_setup_sekda='1'");
+	$setsek	=mysqli_fetch_array($tampilsek, MYSQLI_ASSOC);
 	
-	$sekda	=mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$setsek[sekda]'");
-	$sek	=mysql_fetch_array($sekda);
+	$sekda	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$setsek[sekda]'");
+	$sek	=mysqli_fetch_array($sekda, MYSQLI_ASSOC);
 	
 $head ='<table border="0" cellspacing="0" cellpadding="3">
 			<tr>

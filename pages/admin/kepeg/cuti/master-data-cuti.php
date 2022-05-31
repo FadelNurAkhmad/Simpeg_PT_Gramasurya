@@ -35,7 +35,7 @@
 		
 		else{
 		$insert = "INSERT INTO tb_cuti (id_cuti, id_peg, jns_cuti, no_suratcuti, tgl_suratcuti, tgl_mulai, tgl_selesai, lama, lama_terbilang, lama_satuan, point1, ket1, point2, ket2, point3, ket3, tembusan1, tembusan2) VALUES ('$id_cuti', '$id_peg', '$jns_cuti', '$no_suratcuti', '$tgl_suratcuti', '$tgl_mulai', '$tgl_selesai', '$lama', '$lama_terbilang', '$lama_satuan', '$point1', '$ket1', '$point2', '$ket2', '$point3', '$ket3', '$tembusan1', '$tembusan2')";
-		$query = mysql_query ($insert);
+		$query = mysqli_query ($koneksi, $insert);
 		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert data cuti success ...";

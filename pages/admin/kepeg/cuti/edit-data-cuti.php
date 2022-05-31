@@ -7,8 +7,8 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tampilCut	= mysql_query("SELECT * FROM tb_cuti WHERE id_cuti='$id_cuti'");
-	$hasil	= mysql_fetch_array ($tampilCut);
+	$tampilCut	= mysqli_query($koneksi, "SELECT * FROM tb_cuti WHERE id_cuti='$id_cuti'");
+	$hasil	= mysqli_fetch_array ($tampilCut, MYSQLI_ASSOC);
 		$id_peg	=$hasil['id_peg'];
 				
 	if ($_POST['edit'] == "edit") {
@@ -34,7 +34,7 @@
 			header("location:index.php?page=form-edit-data-cuti&id_cuti=$id_cuti");
 		}		
 		else{
-		$update= mysql_query ("UPDATE tb_cuti SET jns_cuti='$jns_cuti', no_suratcuti='$no_suratcuti', tgl_suratcuti='$tgl_suratcuti', tgl_mulai='$tgl_mulai', tgl_selesai='$tgl_selesai', lama='$lama', lama_terbilang='$lama_terbilang', lama_satuan='$lama_satuan', point1='$point1', ket1='$ket1', point2='$point2', ket2='$ket2', point3='$point3', ket3='$ket3', tembusan1='$tembusan1', tembusan2='$tembusan2' WHERE id_cuti='$id_cuti'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_cuti SET jns_cuti='$jns_cuti', no_suratcuti='$no_suratcuti', tgl_suratcuti='$tgl_suratcuti', tgl_mulai='$tgl_mulai', tgl_selesai='$tgl_selesai', lama='$lama', lama_terbilang='$lama_terbilang', lama_satuan='$lama_satuan', point1='$point1', ket1='$ket1', point2='$point2', ket2='$ket2', point3='$point3', ket3='$ket3', tembusan1='$tembusan1', tembusan2='$tembusan2' WHERE id_cuti='$id_cuti'");
 			if($update){
 				$_SESSION['pesan'] = "Good! edit data cuti success ...";
 				header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");
