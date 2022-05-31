@@ -48,7 +48,7 @@
 			$result = mysqli_query($link, 'SELECT * FROM '.$table);
 			$num_fields = mysqli_num_fields($result);
 																
-			$return.= 'DROP TABLE '.$table.';'; //menyisipkan query drop table untuk nanti hapus table yang lama
+			$return = 'DROP TABLE '.$table.';'; //menyisipkan query drop table untuk nanti hapus table yang lama
 			$row2 = mysqli_fetch_row(mysqli_query($link, 'SHOW CREATE TABLE '.$table));
 			$return.= "\n\n".$row2[1].";\n\n";
 					
