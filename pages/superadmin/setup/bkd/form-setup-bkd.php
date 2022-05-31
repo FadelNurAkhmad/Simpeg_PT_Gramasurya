@@ -3,8 +3,8 @@ if (isset($_GET['id_setup_bkd'])) {
 	$id_setup_bkd = $_GET['id_setup_bkd'];
 
 	include "../../config/koneksi.php";
-	$query   = mysql_query("SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='$id_setup_bkd'");
-	$data    = mysql_fetch_array($query);
+	$query   = mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='$id_setup_bkd'");
+	$data    = mysqli_fetch_array($query, MYSQLI_ASSOC);
 } else {
 	die("Error. No ID Selected!");
 }
@@ -57,10 +57,10 @@ if (isset($_GET['id_setup_bkd'])) {
 						<label class="col-md-3 control-label">Kepala</label>
 						<div class="col-md-6">
 							<?php
-							$kepala = mysql_query("SELECT * FROM tb_pegawai WHERE status_mut=''");
+							$kepala = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut=''");
 							echo '<select name="kepala" class="default-select2 form-control">';
 							echo '<option value="' . $data['kepala'] . '">...</option>';
-							while ($row = mysql_fetch_array($kepala)) {
+							while ($row = mysqli_fetch_array($kepala, MYSQLI_ASSOC)) {
 								echo '<option value="' . $row['id_peg'] . '">' . $row['nama'] . '_' . $row['nip'] . '</option>';
 							}
 							echo '</select>';

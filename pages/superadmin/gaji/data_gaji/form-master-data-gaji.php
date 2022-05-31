@@ -17,11 +17,11 @@
 include "../../config/koneksi.php";
 function kdauto($tabel, $inisial)
 {
-    $struktur   = mysql_query("SELECT * FROM $tabel");
-    $field      = mysql_field_name($struktur, 0);
-    $panjang    = mysql_field_len($struktur, 0);
-    $qry  = mysql_query("SELECT max(" . $field . ") FROM " . $tabel);
-    $row  = mysql_fetch_array($qry);
+    $struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
+    $field      = mysqli_field_name($struktur, 0);
+    $panjang    = mysqli_field_len($struktur, 0);
+    $qry  = mysqli_query($koneksi, "SELECT max(" . $field . ") FROM " . $tabel);
+    $row  = mysqli_fetch_array($qry, MYSQLI_ASSOC);
     if ($row[0] == "") {
         $angka = 0;
     } else {
@@ -80,10 +80,10 @@ $id_presensi    = kdauto("tb_presensi", "");
                         <label class="col-md-3 control-label">Pegawai</label>
                         <div class="col-md-6">
                             <?php
-                            $data = mysql_query("SELECT * FROM tb_pegawai ORDER BY nama ASC");
+                            $data = mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY nama ASC");
                             echo '<select name="id_peg" class="default-select2 form-control">';
                             echo '<option value="">...</option>';
-                            while ($row = mysql_fetch_array($data)) {
+                            while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)) {
                                 echo '<option value="' . $row['id_peg'] . '">' . $row['nama'] . '_' . $row['nip'] . '</option>';
                             }
                             echo '</select>';

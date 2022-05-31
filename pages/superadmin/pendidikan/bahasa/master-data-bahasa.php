@@ -22,7 +22,7 @@
 		
 		else{
 		$insert = "INSERT INTO tb_bahasa (id_bhs, id_peg, jns_bhs, bahasa, kemampuan) VALUES ('$id_bhs', '$id_peg', '$jns_bhs', '$bahasa', '$kemampuan')";
-		$query = mysql_query ($insert);		
+		$query = mysqli_query ($koneksi, $insert);		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert data bahasa success ...";
 			header("location:index.php?page=form-master-data-bahasa");

@@ -11,7 +11,7 @@
 	$nama	=$_POST['nama'];
 	
 	include "../../config/koneksi.php";
-	$ceknm	=mysql_num_rows (mysql_query("SELECT nama FROM tb_unit WHERE nama='$_POST[nama]'"));
+	$ceknm	=mysqli_num_rows (mysqli_query($koneksi, "SELECT nama FROM tb_unit WHERE nama='$_POST[nama]'"));
 	
 		if (empty($_POST['nama'])) {
 			$_SESSION['pesan'] = "Oops! Please fill all column ...";
@@ -24,7 +24,7 @@
 		
 		else{
 		$insert = "INSERT INTO tb_unit (id_unit, nama) VALUES ('$id_unit', '$nama')";
-		$query = mysql_query ($insert);
+		$query = mysqli_query ($koneksi, $insert);
 		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert Unit Kerja success ...";

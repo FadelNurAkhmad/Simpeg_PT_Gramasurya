@@ -7,8 +7,8 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tampilBah	= mysql_query("SELECT * FROM tb_bahasa WHERE id_bhs='$id_bhs'");
-	$hasil	= mysql_fetch_array ($tampilBah);
+	$tampilBah	= mysqli_query($koneksi, "SELECT * FROM tb_bahasa WHERE id_bhs='$id_bhs'");
+	$hasil	= mysqli_fetch_array ($tampilBah, MYSQLI_ASSOC);
 		$id_peg	=$hasil['id_peg'];
 				
 	if ($_POST['edit'] == "edit") {
@@ -21,7 +21,7 @@
 			header("location:index.php?page=form-edit-data-bahasa&id_bhs=$id_bhs");
 		}	
 		else{
-		$update= mysql_query ("UPDATE tb_bahasa SET jns_bhs='$jns_bhs', bahasa='$bahasa', kemampuan='$kemampuan' WHERE id_bhs='$id_bhs'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_bahasa SET jns_bhs='$jns_bhs', bahasa='$bahasa', kemampuan='$kemampuan' WHERE id_bhs='$id_bhs'");
 			if($update){
 				$_SESSION['pesan'] = "Good! edit data bahasa success ...";
 				header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");

@@ -28,7 +28,7 @@
 		
 		else{
 		$insert = "INSERT INTO tb_diklat (id_diklat, id_peg, diklat, jml_jam, penyelenggara, tempat, angkatan, tahun, no_sttpp, tgl_sttpp, file) VALUES ('$id_diklat', '$id_peg', '$diklat', '$jml_jam', '$penyelenggara', '$tempat', '$angkatan', '$tahun', '$no_sttpp', '$tgl_sttpp', '$file')";
-		$query = mysql_query ($insert);
+		$query = mysqli_query ($koneksi, $insert);
 		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert data diklat success ...";

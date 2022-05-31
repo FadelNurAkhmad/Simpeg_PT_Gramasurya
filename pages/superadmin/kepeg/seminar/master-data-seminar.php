@@ -27,7 +27,7 @@
 		
 		else{
 		$insert = "INSERT INTO tb_seminar (id_seminar, id_peg, seminar, tempat, penyelenggara, tgl_mulai, tgl_selesai, no_piagam, tgl_piagam, file) VALUES ('$id_seminar', '$id_peg', '$seminar', '$tempat', '$penyelenggara', '$tgl_mulai', '$tgl_selesai', '$no_piagam', '$tgl_piagam', '$file')";
-		$query = mysql_query ($insert);
+		$query = mysqli_query ($koneksi, $insert);
 		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert data seminar success ...";

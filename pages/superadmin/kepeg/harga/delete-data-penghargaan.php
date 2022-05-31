@@ -4,8 +4,8 @@ include "../../config/koneksi.php";
 if (isset($_GET['id_penghargaan'])) {
 	$id_penghargaan = $_GET['id_penghargaan'];
 	
-	$query   =mysql_query("SELECT * FROM tb_penghargaan WHERE id_penghargaan='$id_penghargaan'");
-	$data    =mysql_fetch_array($query);
+	$query   =mysqli_query($koneksi, "SELECT * FROM tb_penghargaan WHERE id_penghargaan='$id_penghargaan'");
+	$data    =mysqli_fetch_array($query, MYSQLI_ASSOC);
 		$id_peg	=$data['id_peg'];
 	}
 	else {
@@ -13,7 +13,7 @@ if (isset($_GET['id_penghargaan'])) {
 	}
 	
 	if (!empty($id_penghargaan) && $id_penghargaan != "") {
-		$delete	=mysql_query("DELETE FROM tb_penghargaan WHERE id_penghargaan='$id_penghargaan'");		
+		$delete	=mysqli_query($koneksi, "DELETE FROM tb_penghargaan WHERE id_penghargaan='$id_penghargaan'");		
 		if($delete){
 			$_SESSION['pesan'] = "Good! delete penghargaan success ...";
 			header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");
@@ -22,6 +22,6 @@ if (isset($_GET['id_penghargaan'])) {
 			echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
 		}
 	}
-	mysql_close($Open);
+	mysqli_close($koneksi);
 ?>
 </div>

@@ -16,11 +16,11 @@
 <?php
 	include "../../config/koneksi.php";
 	function kdauto($tabel, $inisial){
-		$struktur   = mysql_query("SELECT * FROM $tabel");
-		$field      = mysql_field_name($struktur,0);
-		$panjang    = mysql_field_len($struktur,0);
-		$qry  = mysql_query("SELECT max(".$field.") FROM ".$tabel);
-		$row  = mysql_fetch_array($qry);
+		$struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
+		$field      = mysqli_field_name($struktur,0);
+		$panjang    = mysqli_field_len($struktur,0);
+		$qry  = mysqli_query("SELECT max(".$field.") FROM ".$tabel);
+		$row  = mysqli_fetch_array($qry, MYSQLI_ASSOC);
 		if ($row[0]=="") {
 		$angka=0;
 		}
@@ -174,10 +174,10 @@
 						<label class="col-md-3 control-label">Unit Kerja</label>
 						<div class="col-md-6">
 							<?php
-								$unit = mysql_query("SELECT * FROM tb_unit ORDER BY nama");        
+								$unit = mysqli_query($koneksi, "SELECT * FROM tb_unit ORDER BY nama");        
 								echo '<select name="id_unit" class="default-select2 form-control">';    
 								echo '<option value="">...</option>';    
-									while ($rowunit = mysql_fetch_array($unit)) {    
+									while ($rowunit = mysqli_fetch_array($unit, MYSQLI_ASSOC)) {    
 									echo '<option value="'.$rowunit['id_unit'].'">'.$rowunit['nama'].'</option>';    
 									}    
 								echo '</select>';

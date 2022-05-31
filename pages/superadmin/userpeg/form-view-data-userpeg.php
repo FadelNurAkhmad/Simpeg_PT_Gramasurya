@@ -15,7 +15,7 @@
 <!-- end page-header -->
 <?php
 	include "../../config/koneksi.php";
-	$tampilUsr	=mysql_query("SELECT * FROM tb_user WHERE hak_akses='Pegawai'");
+	$tampilUsr	=mysqli_query($koneksi, "SELECT * FROM tb_user WHERE hak_akses='Pegawai'");
 ?>
 <!-- begin row -->
 <div class="row">
@@ -30,7 +30,7 @@
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
-				<h4 class="panel-title">Results <span class="text-info"><?php echo mysql_num_rows($tampilUsr);?></span> rows for "Data User Pegawai"</h4>
+				<h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilUsr);?></span> rows for "Data User Pegawai"</h4>
 			</div>
             <div class="alert alert-success fade in">
 				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
@@ -52,7 +52,7 @@
 					<tbody>
 						<?php
 							$no=0;
-							while($usr		=mysql_fetch_array($tampilUsr)){
+							while($usr		=mysqli_fetch_array($tampilUsr, MYSQLI_ASSOC)){
 							$id	=str_replace(' ', '-', $usr['id_user']);
 							$no++;
 						?>

@@ -6,8 +6,8 @@
         die("Error. No Kode Selected! ");
     }
     include "../../config/koneksi.php";
-    $tampilSem    = mysql_query("SELECT * FROM tb_dokumen WHERE id_dokumen='$id_dokumen'");
-    $hasil    = mysql_fetch_array($tampilSem);
+    $tampilSem    = mysqli_query($koneksi, "SELECT * FROM tb_dokumen WHERE id_dokumen='$id_dokumen'");
+    $hasil    = mysqli_fetch_array($tampilSem, MYSQLI_ASSOC);
     $id_peg    = $hasil['id_peg'];
 
     if ($_POST['edit'] == "edit") {
@@ -18,7 +18,7 @@
             $_SESSION['pesan'] = "Oops! Please fill all column ...";
             header("location:index.php?page=form-edit-data-dokumen&id_dokumen=$id_dokumen");
         } else {
-            $update = mysql_query("UPDATE tb_dokumen SET dokumen='$dokumen', file='$file' WHERE id_dokumen='$id_dokumen'");
+            $update = mysqli_query($koneksi, "UPDATE tb_dokumen SET dokumen='$dokumen', file='$file' WHERE id_dokumen='$id_dokumen'");
             if ($update) {
                 $_SESSION['pesan'] = "Good! edit data seminar success ...";
                 header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");

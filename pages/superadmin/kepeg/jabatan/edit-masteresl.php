@@ -7,13 +7,13 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tampilME	= mysql_query("SELECT * FROM tb_masteresl WHERE id_masteresl='$id_masteresl'");
-	$hasil	= mysql_fetch_array ($tampilME);
+	$tampilME	= mysqli_query($koneksi, "SELECT * FROM tb_masteresl WHERE id_masteresl='$id_masteresl'");
+	$hasil	= mysqli_fetch_array ($tampilME, MYSQLI_ASSOC);
 				
 	if ($_POST['edit'] == "edit") {
 	$nama_masteresl	=$_POST['nama_masteresl'];
 	
-	$cekname	=mysql_num_rows (mysql_query("SELECT nama_masteresl FROM tb_masteresl WHERE nama_masteresl='$_POST[nama_masteresl]'"));
+	$cekname	=mysqli_num_rows (mysqli_query($koneksi, "SELECT nama_masteresl FROM tb_masteresl WHERE nama_masteresl='$_POST[nama_masteresl]'"));
 	
 		if (empty($_POST['nama_masteresl'])) {
 			$_SESSION['pesan'] = "Oops! Please fill all column ...";
@@ -24,7 +24,7 @@
 			header("location:index.php?page=form-edit-masteresl&id_masteresl=$id_masteresl");
 		}
 		else{
-		$update= mysql_query ("UPDATE tb_masteresl SET nama_masteresl='$nama_masteresl' WHERE id_masteresl='$id_masteresl'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_masteresl SET nama_masteresl='$nama_masteresl' WHERE id_masteresl='$id_masteresl'");
 			if($update){
 				$_SESSION['pesan'] = "Good! edit nama eselon success ...";
 				header("location:index.php?page=form-master-data-jabatan");

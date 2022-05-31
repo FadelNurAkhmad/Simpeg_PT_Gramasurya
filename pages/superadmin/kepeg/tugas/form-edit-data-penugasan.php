@@ -3,11 +3,11 @@ if (isset($_GET['id_penugasan'])) {
 	$id_penugasan = $_GET['id_penugasan'];
 
 	include "../../config/koneksi.php";
-	$query   = mysql_query("SELECT * FROM tb_penugasan WHERE id_penugasan='$id_penugasan'");
-	$data    = mysql_fetch_array($query);
+	$query   = mysqli_query($koneksi, "SELECT * FROM tb_penugasan WHERE id_penugasan='$id_penugasan'");
+	$data    = mysqli_fetch_array($query, MYSQLI_ASSOC);
 
-	$tampilPeg   = mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
-	$peg    = mysql_fetch_array($tampilPeg);
+	$tampilPeg   = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
+	$peg    = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 } else {
 	die("Error. No ID Selected!");
 }

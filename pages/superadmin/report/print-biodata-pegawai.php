@@ -68,17 +68,17 @@ $pdf->AddPage();
 $pdf->SetFont('helvetica', '', 9);
 include "../../../config/koneksi.php";
 
-	$kepala	=mysql_query("SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
-	$kep	=mysql_fetch_array($kepala);
+	$kepala	=mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
+	$kep	=mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 	
-	$namakepala	=mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$kep[kepala]'");
-	$nama		=mysql_fetch_array($namakepala);
+	$namakepala	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$kep[kepala]'");
+	$nama		=mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 	
-	$pangkat=mysql_query("SELECT * FROM tb_pangkat WHERE id_peg='$kep[kepala]' AND status_pan='Aktif'");
-	$pank	=mysql_fetch_array($pangkat);
+	$pangkat=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[kepala]' AND status_pan='Aktif'");
+	$pank	=mysqli_fetch_array($pangkat, MYSQLI_ASSOC);
 
-$tampilPeg=mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
-$peg=mysql_fetch_array($tampilPeg);
+$tampilPeg=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
+$peg=mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 
 $header = '<p><font size="12" style="text-transform:uppercase"><b>BADAN KEPEGAWAIAN DAERAH KABUPATEN '.$kep['kab'].'</b></font>
 			<br /><br />
@@ -156,8 +156,8 @@ $tblpri = '<table cellspacing="0" cellpadding="2" border="0">
 	<tr>
 		<td width="30">12.</td>
 		<td width="150">Unit Kerja</td>';
-		$namaskpd=mysql_query("SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
-		$nm=mysql_fetch_array($namaskpd);
+		$namaskpd=mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
+		$nm=mysqli_fetch_array($namaskpd, MYSQLI_ASSOC);
 		$tblpri .='<td>: '.$nm['nama'].'</td>
 	</tr>
 </table>';
@@ -175,8 +175,8 @@ $tblkel ='<table cellspacing="0" cellpadding="2" border="0">
 			</tr>
 			';
 			$no=1;
-			$tampilOrt	=mysql_query("SELECT * FROM tb_ortu WHERE id_peg='$id_peg' ORDER BY status_hub DESC");
-			while($ort=mysql_fetch_array($tampilOrt)) { 
+			$tampilOrt	=mysqli_query($koneksi, "SELECT * FROM tb_ortu WHERE id_peg='$id_peg' ORDER BY status_hub DESC");
+			while($ort=mysqli_fetch_array($tampilOrt, MYSQLI_ASSOC)) { 
 				$tblkel .='<tr>
 					<td width="30">'.$no++.'.</td>
 					<td width="170">'.$ort['nama'].'</td>
@@ -184,8 +184,8 @@ $tblkel ='<table cellspacing="0" cellpadding="2" border="0">
 					<td width="290">'.$ort['status_hub'].'</td>
 				</tr>';
 			}
-			$tampilSi	=mysql_query("SELECT * FROM tb_suamiistri WHERE id_peg='$id_peg'");
-			while($si=mysql_fetch_array($tampilSi)) { 
+			$tampilSi	=mysqli_query($koneksi, "SELECT * FROM tb_suamiistri WHERE id_peg='$id_peg'");
+			while($si=mysqli_fetch_array($tampilSi, MYSQLI_ASSOC)) { 
 				$tblkel .='<tr>
 					<td width="30">'.$no++.'.</td>
 					<td width="170">'.$si['nama'].'</td>
@@ -193,8 +193,8 @@ $tblkel ='<table cellspacing="0" cellpadding="2" border="0">
 					<td width="290">'.$si['status_hub'].'</td>
 				</tr>';
 			} 
-			$tampilAnk	=mysql_query("SELECT * FROM tb_anak WHERE id_peg='$id_peg' ORDER BY tgl_lhr");
-			while($ank=mysql_fetch_array($tampilAnk)) { 
+			$tampilAnk	=mysqli_query($koneksi, "SELECT * FROM tb_anak WHERE id_peg='$id_peg' ORDER BY tgl_lhr");
+			while($ank=mysqli_fetch_array($tampilAnk, MYSQLI_ASSOC)) { 
 				$tblkel .='<tr>
 					<td width="30">'.$no++.'.</td>
 					<td width="170">'.$ank['nama'].'</td>
@@ -221,8 +221,8 @@ $tblpen ='<table cellspacing="0" cellpadding="2" border="0">
 			</tr>
 			';
 			$no=1;
-			$tampilSek	=mysql_query("SELECT * FROM tb_sekolah WHERE id_peg='$id_peg' ORDER BY tgl_ijazah DESC");
-			while($sek=mysql_fetch_array($tampilSek)) { 
+			$tampilSek	=mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE id_peg='$id_peg' ORDER BY tgl_ijazah DESC");
+			while($sek=mysqli_fetch_array($tampilSek, MYSQLI_ASSOC)) { 
 				$tblpen .='<tr>
 					<td width="30">'.$no++.'.</td>
 					<td width="50">'.$sek['tingkat'].'</td>
@@ -249,8 +249,8 @@ $tblbhs ='<table cellspacing="0" cellpadding="2" border="0">
 			</tr>
 			';
 			$no=1;
-			$tampilBhs	=mysql_query("SELECT * FROM tb_bahasa WHERE id_peg='$id_peg'");
-			while($bhs=mysql_fetch_array($tampilBhs)) { 
+			$tampilBhs	=mysqli_query($koneksi, "SELECT * FROM tb_bahasa WHERE id_peg='$id_peg'");
+			while($bhs=mysqli_fetch_array($tampilBhs, MYSQLI_ASSOC)) { 
 				$tblbhs .='<tr>
 					<td width="30">'.$no++.'.</td>
 					<td width="170">'.$bhs['jns_bhs'].'</td>
@@ -274,8 +274,8 @@ $tbljab ='<table cellspacing="0" cellpadding="2" border="0">
 			</tr>
 			';
 			$no=1;
-			$tampilJab	=mysql_query("SELECT * FROM tb_jabatan WHERE id_peg='$id_peg' ORDER BY tmt_jabatan DESC");
-			while($jab=mysql_fetch_array($tampilJab)) { 
+			$tampilJab	=mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$id_peg' ORDER BY tmt_jabatan DESC");
+			while($jab=mysqli_fetch_array($tampilJab, MYSQLI_ASSOC)) { 
 				$tbljab .='<tr>
 					<td width="30">'.$no++.'.</td>
 					<td width="230">'.$jab['jabatan'].'</td>
@@ -300,8 +300,8 @@ $tblpan ='<table cellspacing="0" cellpadding="2" border="0">
 			</tr>
 			';
 			$no=1;
-			$tampilPan	=mysql_query("SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' ORDER BY tmt_pangkat DESC");
-			while($pan=mysql_fetch_array($tampilPan)) { 
+			$tampilPan	=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' ORDER BY tmt_pangkat DESC");
+			while($pan=mysqli_fetch_array($tampilPan, MYSQLI_ASSOC)) { 
 				$tblpan .='<tr>
 					<td width="30">'.$no++.'.</td>
 					<td width="230">'.$pan['pangkat'].'</td>
@@ -325,8 +325,8 @@ $tblhar ='<table cellspacing="0" cellpadding="2" border="0">
 			</tr>
 			';
 			$no=1;
-			$tampilHar	=mysql_query("SELECT * FROM tb_penghargaan WHERE id_peg='$id_peg' ORDER BY tahun DESC");
-			while($har=mysql_fetch_array($tampilHar)) { 
+			$tampilHar	=mysqli_query($koneksi, "SELECT * FROM tb_penghargaan WHERE id_peg='$id_peg' ORDER BY tahun DESC");
+			while($har=mysqli_fetch_array($tampilHar, MYSQLI_ASSOC)) { 
 				$tblhar .='<tr>
 					<td width="30">'.$no++.'.</td>
 					<td width="230">'.$har['penghargaan'].'</td>
@@ -350,8 +350,8 @@ $tblpln ='<table cellspacing="0" cellpadding="2" border="0">
 			</tr>
 			';
 			$no=1;
-			$tampilPln	=mysql_query("SELECT * FROM tb_penugasan WHERE id_peg='$id_peg' ORDER BY tahun DESC");
-			while($pln=mysql_fetch_array($tampilPln)) { 
+			$tampilPln	=mysqli_query($koneksi, "SELECT * FROM tb_penugasan WHERE id_peg='$id_peg' ORDER BY tahun DESC");
+			while($pln=mysqli_fetch_array($tampilPln, MYSQLI_ASSOC)) { 
 				$tblpln .='<tr>
 					<td width="30">'.$no++.'.</td>
 					<td width="170">'.$pln['tujuan'].'</td>
@@ -377,8 +377,8 @@ $tblhkm ='<table cellspacing="0" cellpadding="2" border="0">
 			</tr>
 			';
 			$no=1;
-			$tampilHkm	=mysql_query("SELECT * FROM tb_hukuman WHERE id_peg='$id_peg' ORDER BY tgl_sk DESC");
-			while($hkm=mysql_fetch_array($tampilHkm)) { 
+			$tampilHkm	=mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE id_peg='$id_peg' ORDER BY tgl_sk DESC");
+			while($hkm=mysqli_fetch_array($tampilHkm, MYSQLI_ASSOC)) { 
 				$tblhkm .='<tr>
 					<td width="30">'.$no++.'.</td>
 					<td width="170">'.$hkm['hukuman'].'</td>

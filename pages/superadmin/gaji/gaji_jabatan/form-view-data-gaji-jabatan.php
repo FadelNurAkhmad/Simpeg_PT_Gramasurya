@@ -16,7 +16,7 @@
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";
-$tampilGajiJab    = mysql_query("SELECT * FROM tb_gaji_jabatan ORDER BY id_jabatan DESC");
+$tampilGajiJab    = mysqli_query($koneksi, "SELECT * FROM tb_gaji_jabatan ORDER BY id_jabatan DESC");
 ?>
 <div class="row">
     <!-- begin col-12 -->
@@ -30,7 +30,7 @@ $tampilGajiJab    = mysql_query("SELECT * FROM tb_gaji_jabatan ORDER BY id_jabat
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Results <span class="text-info"><?php echo mysql_num_rows($tampilGajiJab); ?></span> rows for "Data Gaji Jabatan"</h4>
+                <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilGajiJab); ?></span> rows for "Data Gaji Jabatan"</h4>
             </div>
             <div class="alert alert-success fade in">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
@@ -50,7 +50,7 @@ $tampilGajiJab    = mysql_query("SELECT * FROM tb_gaji_jabatan ORDER BY id_jabat
                     <tbody>
                         <?php
                         $no = 0;
-                        while ($gajiJab    = mysql_fetch_array($tampilGajiJab)) {
+                        while ($gajiJab    = mysqli_fetch_array($tampilGajiJab, MYSQLI_ASSOC)) {
                             $no++
                         ?>
                             <tr>

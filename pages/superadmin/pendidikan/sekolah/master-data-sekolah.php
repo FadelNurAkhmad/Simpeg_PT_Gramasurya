@@ -26,7 +26,7 @@
 		
 		else{
 		$insert = "INSERT INTO tb_sekolah (id_sekolah, id_peg, tingkat, nama_sekolah, lokasi, jurusan, no_ijazah, tgl_ijazah, kepala) VALUES ('$id_sekolah', '$id_peg', '$tingkat', '$nama_sekolah', '$lokasi', '$jurusan', '$no_ijazah', '$tgl_ijazah', '$kepala')";
-		$query = mysql_query ($insert);
+		$query = mysqli_query ($koneksi, $insert);
 		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert data sekolah success ...";

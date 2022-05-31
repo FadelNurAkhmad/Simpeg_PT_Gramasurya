@@ -24,7 +24,7 @@
             header("location:index.php?page=form-master-data-presensi");
         } else {
             $insert = "INSERT INTO tb_presensi (id_presensi, id_peg, tanggal, bulan, tahun, hadir, sakit, ijin, tanpa_keterangan) VALUES ('$id_presensi', '$id_peg', '$tanggal', '$bulan', '$tahun', '$hadir', '$sakit', '$ijin', '$tanpa_keterangan')";
-            $query = mysql_query($insert);
+            $query = mysqli_query($koneksi, $insert);
 
             if ($query) {
                 $_SESSION['pesan'] = "Good! Insert data presensi success ...";

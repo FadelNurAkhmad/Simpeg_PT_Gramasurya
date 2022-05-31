@@ -19,10 +19,10 @@
 	$sheet->setCellValue("B3", "ID");
 	$sheet->setCellValue("C3", "Nama Unit Kerja");
 
-	$expUni	=mysql_query("SELECT * FROM tb_unit ORDER BY id_unit");
+	$expUni	=mysqli_query($koneksi, "SELECT * FROM tb_unit ORDER BY id_unit");
 	$i	=4; //Dimulai dengan baris ke dua
 	$no	=1;
-	while($uni	=mysql_fetch_array($expUni)){
+	while($uni	=mysqli_fetch_array($expUni, MYSQLI_ASSOC)){
 	   $sheet->setCellValue( "A" . $i, $no);
 	   $sheet->setCellValue( "B" . $i, $uni['id_unit'] );
 	   $sheet->setCellValue( "C" . $i, $uni['nama'] );
@@ -52,7 +52,7 @@
 <h1 class="page-header">Data <small>Unit Kerja&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
-	$tampilUni	=mysql_query("SELECT * FROM tb_unit ORDER BY id_unit DESC");
+	$tampilUni	=mysqli_query($koneksi, "SELECT * FROM tb_unit ORDER BY id_unit DESC");
 ?>
 <div class="row">
 	<!-- begin col-12 -->
@@ -66,7 +66,7 @@
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
-				<h4 class="panel-title">Results <span class="text-info"><?php echo mysql_num_rows($tampilUni);?></span> rows for "Data Unit Kerja"</h4>
+				<h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilUni);?></span> rows for "Data Unit Kerja"</h4>
 			</div>
             <div class="alert alert-success fade in">
 				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
@@ -83,7 +83,7 @@
 					</thead>
 					<tbody>
 						<?php
-							while($uni		=mysql_fetch_array($tampilUni)){
+							while($uni		=mysqli_fetch_array($tampilUni, MYSQLI_ASSOC)){
 						?>
 						<tr>
 							<td><?php echo $uni['id_unit']?></td>

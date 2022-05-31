@@ -3,8 +3,8 @@
 //     $id_presensi = $_GET['id_presensi'];
 
 //     include "../../config/koneksi.php";
-//     $query   = mysql_query("SELECT * FROM tb_presensi WHERE id_presensi='$id_presensi'");
-//     $data    = mysql_fetch_array($query);
+//     $query   = mysqli_query($koneksi, "SELECT * FROM tb_presensi WHERE id_presensi='$id_presensi'");
+//     $data    = mysqli_fetch_array($query, MYSQLI_ASSOC);
 // } else {
 //     die("Error. No ID Selected!");
 // }

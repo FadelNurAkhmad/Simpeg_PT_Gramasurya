@@ -45,7 +45,7 @@
 		else{
 		$insert = "INSERT INTO tb_spkgb (id_spkgb, id_peg, no_kgb, tgl, pejabat_lama, no_lama, tgl_lama, tgl_berlaku_lama, mk_lama, gaji_lama, gaji_baru, terbilang_gajibaru, mk_baru, gol_baru, tgl_terhitung, tembusan1, tembusan2, tembusan3, tembusan4, tembusan5, tembusan6, tembusan7, tembusan8, tembusan9, tembusan10, tembusan11, tembusan12)
 		VALUES ('$id_spkgb', '$id_peg', '$no_kgb', '$tgl', '$pejabat_lama', '$no_lama', '$tgl_lama', '$tgl_berlaku_lama', '$mk_lama', '$gaji_lama', '$gaji_baru', '$terbilang_gajibaru', '$mk_baru', '$gol_baru', '$tgl_terhitung', '$tembusan1', '$tembusan2', '$tembusan3', '$tembusan4', '$tembusan5', '$tembusan6', '$tembusan7', '$tembusan8', '$tembusan9', '$tembusan10', '$tembusan11', '$tembusan12')";
-		$query = mysql_query ($insert);
+		$query = mysqli_query ($koneksi, $insert);
 		
 		if($query){
 			$_SESSION['pesan'] = "Good! Insert data KGB success ...";

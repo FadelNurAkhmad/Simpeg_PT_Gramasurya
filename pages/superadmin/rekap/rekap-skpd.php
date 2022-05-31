@@ -21,21 +21,21 @@
 				<tbody>
 					<?php
 						$no=0;
-						$rekapskpd	=mysql_query("SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY unit_kerja");
-						while($skpd=mysql_fetch_array($rekapskpd)){
+						$rekapskpd	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY unit_kerja");
+						while($skpd=mysqli_fetch_array($rekapskpd, MYSQLI_ASSOC)){
 						$no++
 					?>
 					<tr>
 						<td><?=$no?></td>
 						<td><?php
-								$namaskpd=mysql_query("SELECT * FROM tb_unit WHERE id_unit='$skpd[unit_kerja]'");
-								$nama=mysql_fetch_array($namaskpd);
+								$namaskpd=mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$skpd[unit_kerja]'");
+								$nama=mysqli_fetch_array($namaskpd, MYSQLI_ASSOC);
 								echo $nama['nama'];
 							?>
 						</td>
 						<td><?php
-								$jml=mysql_query("SELECT * FROM tb_pegawai WHERE status_mut='' AND unit_kerja='$skpd[unit_kerja]'");
-								echo mysql_num_rows($jml);
+								$jml=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' AND unit_kerja='$skpd[unit_kerja]'");
+								echo mysqli_num_rows($jml);
 							?>
 						</td>
 					</tr>
@@ -88,17 +88,17 @@
 						[
 						<?php 
 						$sql   = "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY unit_kerja";
-						$query = mysql_query( $sql )  or die(mysql_error());
-							while( $ret = mysql_fetch_array( $query ) ){
+						$query = mysqli_query($koneksi, $sql )  or die(mysqli_error($koneksi));
+							while( $ret = mysqli_fetch_array( $query, MYSQLI_ASSOC) ){
 									$r	=$ret['unit_kerja'];
 									
-									$nmskpd=mysql_query("SELECT * FROM tb_unit WHERE id_unit='$r'");
-									$nm=mysql_fetch_array($nmskpd);
+									$nmskpd=mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$r'");
+									$nm=mysqli_fetch_array($nmskpd, MYSQLI_ASSOC);
 									$namaskpd= $nm['nama'];
 									
 									$sql_jumlah   = "SELECT * FROM tb_pegawai WHERE status_mut='' AND unit_kerja='$r'";        
-									$query_jumlah = mysql_query( $sql_jumlah ) or die(mysql_error());
-									$data = mysql_num_rows( $query_jumlah );																									
+									$query_jumlah = mysqli_query($koneksi, $sql_jumlah ) or die(mysqli_error($koneksi));
+									$data = mysqli_num_rows( $query_jumlah );																									
 							?>
 								{
 									name: '<?php echo $namaskpd; ?>',

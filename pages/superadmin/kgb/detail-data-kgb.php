@@ -6,20 +6,20 @@
 		die ("Error. No ID Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$query	=mysql_query("SELECT * FROM tb_spkgb WHERE id_spkgb='$id_spkgb'");
-	$data	=mysql_fetch_array($query);
+	$query	=mysqli_query($koneksi, "SELECT * FROM tb_spkgb WHERE id_spkgb='$id_spkgb'");
+	$data	=mysqli_fetch_array($query, MYSQLI_ASSOC);
 	
-	$tampilPeg   =mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
-	$peg    =mysql_fetch_array($tampilPeg);
+	$tampilPeg   =mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
+	$peg    =mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 	
-	$tampilUni   =mysql_query("SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
-	$uni    =mysql_fetch_array($tampilUni);
+	$tampilUni   =mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
+	$uni    =mysqli_fetch_array($tampilUni, MYSQLI_ASSOC);
 	
-	$tampilSek	=mysql_query("SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
-	$set	=mysql_fetch_array($tampilSek);
+	$tampilSek	=mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
+	$set	=mysqli_fetch_array($tampilSek, MYSQLI_ASSOC);
 	
-	$kepala	=mysql_query("SELECT * FROM tb_pegawai WHERE id_peg='$set[kepala]'");
-	$kep	=mysql_fetch_array($kepala);
+	$kepala	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$set[kepala]'");
+	$kep	=mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 ?>
 <!-- begin page-header -->
 <h1 class="page-header">Detail <small>KBG</small></h1>

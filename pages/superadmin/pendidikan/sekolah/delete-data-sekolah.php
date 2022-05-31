@@ -4,8 +4,8 @@ include "../../config/koneksi.php";
 if (isset($_GET['id_sekolah'])) {
 	$id_sekolah = $_GET['id_sekolah'];
 	
-	$query   =mysql_query("SELECT * FROM tb_sekolah WHERE id_sekolah='$id_sekolah'");
-	$data    =mysql_fetch_array($query);
+	$query   =mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE id_sekolah='$id_sekolah'");
+	$data    =mysqli_fetch_array($query, MYSQLI_ASSOC);
 		$id_peg	=$data['id_peg'];
 	}
 	else {
@@ -13,8 +13,8 @@ if (isset($_GET['id_sekolah'])) {
 	}
 	
 	if (!empty($id_sekolah) && $id_sekolah != "") {
-		$delete	=mysql_query("DELETE FROM tb_sekolah WHERE id_sekolah='$id_sekolah'");
-		$updatesek= mysql_query ("UPDATE tb_pegawai SET sekolah='' WHERE id_peg='$id_peg'");
+		$delete	=mysqli_query($koneksi, "DELETE FROM tb_sekolah WHERE id_sekolah='$id_sekolah'");
+		$updatesek= mysqli_query ($koneksi, "UPDATE tb_pegawai SET sekolah='' WHERE id_peg='$id_peg'");
 		
 		if($delete){
 			$_SESSION['pesan'] = "Good! delete sekolah success ...";
@@ -24,6 +24,6 @@ if (isset($_GET['id_sekolah'])) {
 			echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
 		}
 	}
-	mysql_close($Open);
+	mysqli_close($koneksi);
 ?>
 </div>
