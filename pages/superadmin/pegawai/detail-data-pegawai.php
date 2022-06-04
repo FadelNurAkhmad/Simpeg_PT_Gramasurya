@@ -4,10 +4,10 @@ if (isset($_GET['id_peg'])) {
 }
 include "../../config/koneksi.php";
 $query   = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
-$data    = mysqli_fetch_array($query, MYSQLI_ASSOC);
+$data    = mysqli_fetch_array($query);
 
 $queryPan	= mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' AND status_pan='Aktif'");
-$selpan		= mysqli_fetch_array($queryPan, MYSQLI_ASSOC);
+$selpan		= mysqli_fetch_array($queryPan);
 
 $birthday	= new DateTime($data['tgl_lhr']);
 $today		= new DateTime();
@@ -635,7 +635,7 @@ $diff = $today->diff($birthday);
 							<?php
 							$no = 0;
 							$tampilDokumen	= mysqli_query($koneksi, "SELECT * FROM tb_dokumen WHERE id_peg='$id_peg'");
-							while ($dok = mysqli_fetch_array($tampilDokumen, MYSQLI_ASSOC)) {
+							while ($dok = mysqli_fetch_array($tampilDokumen)) {
 								$no++
 							?>
 								<tr>
@@ -675,7 +675,7 @@ $diff = $today->diff($birthday);
 						</div>
 						<div class="col-sm-12">
 							<div class="modal-body">
-								<form action="index.php?page=master-data-dokumen&id_dokumen=<?= $id_dokumen ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+								<form action="index.php?page=masterdok&id_peg=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 									<div class="form-group">
 										<label class="col-md-3 control-label">Nama Dokumen</label>
 										<div class="col-md-6">
@@ -692,6 +692,7 @@ $diff = $today->diff($birthday);
 										<label class="col-md-3 control-label"></label>
 										<div class="col-md-6">
 											<p>* Max size 500 KB</p>
+											<p>* Format PDF</p>
 										</div>
 									</div>
 									<div class="form-group">

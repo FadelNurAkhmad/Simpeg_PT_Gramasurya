@@ -58,6 +58,13 @@ if (isset($_GET['id_dokumen'])) {
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-6">
+                            <p>* Max size 500 KB</p>
+                            <p>* Format PDF</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"></label>
+                        <div class="col-md-6">
                             <button type="submit" name="edit" value="edit" class="btn btn-primary"><i class="fa fa-edit"></i> &nbsp;Edit</button>&nbsp;
                             <a type="button" class="btn btn-default active" href="index.php?page=detail-data-pegawai&id_peg=<?= $data['id_peg'] ?>"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
                         </div>
