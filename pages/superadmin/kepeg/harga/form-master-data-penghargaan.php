@@ -14,7 +14,7 @@
 <h1 class="page-header">Riwayat <small>Penghargaan <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
-include "../../config/koneksi.php";
+
 function kdauto($tabel, $inisial){
 	include "../../config/koneksi.php";
 	
