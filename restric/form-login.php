@@ -30,6 +30,11 @@
 			<div class="login-buttons">
 				<button type="submit" class="btn btn-primary btn-block btn-lg"><i class="fa fa-key"></i> &nbsp;Login</button>
 			</div>
+			<div class="m-t-20 text-white">
+				Lupa Password ? coba
+				<a href="https://api.whatsapp.com/send?phone=6281212345678&text=Selamat Datang!" target="_blank">hubungi</a>
+				admin.
+			</div>
 		</form>
 	</div>
 </div>
