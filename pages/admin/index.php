@@ -467,6 +467,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'delete-data-dokumen':
 					include "../../pages/admin/kepeg/dokumen/delete-data-dokumen.php";
 					break;
+				case 'masterdok':
+					include "../../pages/admin/kepeg/masterdok.php";
+					break;
 
 				case 'form-master-data-diklat':
 					include "../../pages/admin/kepeg/diklat/form-master-data-diklat.php";

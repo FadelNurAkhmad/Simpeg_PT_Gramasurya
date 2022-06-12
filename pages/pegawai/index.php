@@ -13,10 +13,10 @@ if ($_SESSION['hak_akses'] != "Pegawai") {
 }
 include "../../config/koneksi.php";
 $tampilUsr	= mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user='$_SESSION[id_user]'");
-$usr		= mysqli_fetch_array($tampilUsr, MYSQLI_ASSOC);
+$usr		= mysqli_fetch_array($tampilUsr);
 
 $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$usr[id_peg]'");
-$peg		= mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
+$peg		= mysqli_fetch_array($tampilPeg);
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -119,7 +119,7 @@ $peg		= mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 						</a>
 						<ul class="dropdown-menu animated fadeInLeft">
 							<li class="arrow"></li>
-							<li><a href="index.php?page=form-ganti-password&id_user=<?= $_SESSION['id_user'] ?>"><i class="ion-ios-locked"></i> &nbsp;Change Password</a></li>
+							<li><a href="index.php?page=form-ganti-password&id_user=<?= $_SESSION['id_peg'] ?>"><i class="ion-ios-locked"></i> &nbsp;Change Password</a></li>
 							<li class="divider"></li>
 							<li><a href="../../restric/logout.php"><i class="ion-power"></i> &nbsp;Log Out</a></li>
 						</ul>
@@ -158,6 +158,14 @@ $peg		= mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 				<ul class="nav">
 					<li class="nav-header">Navigation <i class="fa fa-paper-plane m-l-5"></i></li>
 					<li><a href="./"><i class="ion-ios-pulse-strong bg-blue"></i><span>Profile Saya</span> <span class="badge bg-blue pull-right">HOME</span></a></li>
+					<!-- <li><a href="index.php?page=form-master-cuti&id_user=<?= $_SESSION['id_user'] ?>"><i class="fa fa-calendar bg-pink"></i><span>Form Pengajuan Cuti</span></a></li> -->
+					<li class="has-sub">
+						<a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-calendar bg-pink"></i><span>Form Pengajuan Cuti</span></a>
+						<ul class="sub-menu">
+							<li><a href="index.php?page=form-master-cuti&id_peg=<?= $peg['id_peg'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Input Pengajuan Cuti</a></li>
+							<li><a href="index.php?page=form-view-cuti&id_peg=<?= $peg['id_peg'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Data Cuti</a></li>
+						</ul>
+					</li>
 					<!-- begin sidebar minify button -->
 					<li><a href="javascript:;" class="sidebar-minify-btn grey" data-click="sidebar-minify"><i class="ion-ios-arrow-left"></i> <span>Collapse</span></a></li>
 					<!-- end sidebar minify button -->
@@ -182,11 +190,28 @@ $peg		= mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 				case 'detail-data-cuti':
 					include "../../pages/pegawai/kepeg/cuti/detail-data-cuti.php";
 					break;
+
 				case 'detail-data-tunjangan':
 					include "../../pages/pegawai/kepeg/tunjangan/detail-data-tunjangan.php";
 					break;
 				case 'detail-data-kawin':
 					include "../../pages/pegawai/kepeg/kawin/detail-data-kawin.php";
+					break;
+
+				case 'form-view-cuti':
+					include "../../pages/pegawai/cuti/form-view-cuti.php";
+					break;
+				case 'form-master-cuti':
+					include "../../pages/pegawai/cuti/form-master-cuti.php";
+					break;
+				case 'master-cuti':
+					include "../../pages/pegawai/cuti/master-cuti.php";
+					break;
+				case 'detail-cuti':
+					include "../../pages/pegawai/cuti/detail-cuti.php";
+					break;
+				case 'delete-cuti':
+					include "../../pages/pegawai/cuti/delete-cuti.php";
 					break;
 
 				case 'form-ganti-password':

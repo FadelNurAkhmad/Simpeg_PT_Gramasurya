@@ -1,50 +1,47 @@
 <?php
-	// $filename	="Daftar Unit Kerja";
-	
-	// include "../../config/koneksi.php";
-	// include "../../assets/plugins/PHPExcel-1.8.1/Classes/PHPExcel.php";
-	// include "../../assets/plugins/PHPExcel-1.8.1/Classes/PHPExcel/Writer/Excel2007.php";
-	 
-	// $excel	=new PHPExcel;
-	 
-	// $excel->getProperties()->setCreator("Raja Putra Media");
-	// $excel->getProperties()->setLastModifiedBy("Raja Putra Media");
-	// $excel->getProperties()->setTitle("Raja Putra Media Report");
-	// $excel->removeSheetByIndex(0);
-	 
-	// $sheet =$excel->createSheet();
-	// $sheet->setTitle('Daftar Unit Kerja');
-	// $sheet->setCellValue("A1", "Daftar Unit Kerja");
-	// $sheet->setCellValue("A3", "No. Urut");
-	// $sheet->setCellValue("B3", "ID");
-	// $sheet->setCellValue("C3", "Nama Unit Kerja");
+$filename	= "Daftar Unit Kerja";
 
-	// $expUni	=mysqli_query($koneksi, "SELECT * FROM tb_unit ORDER BY id_unit");
-	// $i	=4; //Dimulai dengan baris ke dua
-	// $no	=1;
-	// while($uni	=mysqli_fetch_array($expUni, MYSQLI_ASSOC)){
-	//    $sheet->setCellValue( "A" . $i, $no);
-	//    $sheet->setCellValue( "B" . $i, $uni['id_unit'] );
-	//    $sheet->setCellValue( "C" . $i, $uni['nama'] );
-	//    $no++;
-	//    $i++;
-	// }
-	 
-	// $writer	=new PHPExcel_Writer_Excel2007($excel);
-	// $file	="../../assets/excel/$filename.xlsx";
-	// $writer->save("$file");
+include "../../config/koneksi.php";
+require '../../assets/plugins/phpspreadsheet/vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+$spreadsheet = new Spreadsheet();
+
+$sheet = $spreadsheet->getActiveSheet();
+$sheet->setTitle('Daftar Unit Kerja');
+$sheet->setCellValue("A1", "Daftar Unit Kerja");
+$sheet->setCellValue("A3", "No. Urut");
+$sheet->setCellValue("B3", "ID");
+$sheet->setCellValue("C3", "Nama Unit Kerja");
+
+$expUni	= mysqli_query($koneksi, "SELECT * FROM tb_unit ORDER BY id_unit");
+$i	= 4; //Dimulai dengan baris ke dua
+$no	= 1;
+while ($uni	= mysqli_fetch_array($expUni, MYSQLI_ASSOC)) {
+	$sheet->setCellValue("A" . $i, $no);
+	$sheet->setCellValue("B" . $i, $uni['id_unit']);
+	$sheet->setCellValue("C" . $i, $uni['nama']);
+	$no++;
+	$i++;
+}
+
+$writer = new Xlsx($spreadsheet);
+$file	= "../../assets/excel/$filename.xlsx";
+$writer->save("$file");
 ?>
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
 	<li>
 		<?php
-			if (isset($_SESSION['pesan']) && $_SESSION['pesan'] <> '') {
-				echo "<span class='pesan'><div class='btn btn-sm btn-inverse m-b-10'><i class='fa fa-bell text-warning'></i>&nbsp; ".$_SESSION['pesan']." &nbsp; &nbsp; &nbsp;</div></span>";
-			}
-			$_SESSION['pesan'] ="";
+		if (isset($_SESSION['pesan']) && $_SESSION['pesan'] <> '') {
+			echo "<span class='pesan'><div class='btn btn-sm btn-inverse m-b-10'><i class='fa fa-bell text-warning'></i>&nbsp; " . $_SESSION['pesan'] . " &nbsp; &nbsp; &nbsp;</div></span>";
+		}
+		$_SESSION['pesan'] = "";
 		?>
 	</li>
-	<li><a href="<?php echo $file;?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
+	<li><a href="<?php echo $file; ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
 	<li><a href="index.php?page=form-master-data-unit" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Add Unit Kerja</a></li>
 </ol>
 <!-- end breadcrumb -->
@@ -52,11 +49,11 @@
 <h1 class="page-header">Data <small>Unit Kerja&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
-	$tampilUni	=mysqli_query($koneksi, "SELECT * FROM tb_unit ORDER BY id_unit DESC");
+$tampilUni	= mysqli_query($koneksi, "SELECT * FROM tb_unit ORDER BY id_unit DESC");
 ?>
 <div class="row">
 	<!-- begin col-12 -->
-    <div class="col-md-12">
+	<div class="col-md-12">
 		<!-- begin panel -->
 		<div class="panel panel-inverse">
 			<div class="panel-heading">
@@ -66,9 +63,9 @@
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
-				<h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilUni);?></span> rows for "Data Unit Kerja"</h4>
+				<h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilUni); ?></span> rows for "Data Unit Kerja"</h4>
 			</div>
-            <div class="alert alert-success fade in">
+			<div class="alert alert-success fade in">
 				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
 				<i class="fa fa-info fa-2x pull-left"></i> Gunakan button di sebelah kanan setiap baris tabel untuk menuju instruksi edit dan hapus data ...
 			</div>
@@ -83,34 +80,34 @@
 					</thead>
 					<tbody>
 						<?php
-							while($uni		=mysqli_fetch_array($tampilUni, MYSQLI_ASSOC)){
+						while ($uni		= mysqli_fetch_array($tampilUni, MYSQLI_ASSOC)) {
 						?>
-						<tr>
-							<td><?php echo $uni['id_unit']?></td>
-							<td><?php echo $uni['nama']?></td>
-							<td class="text-center">
-								<a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-unit&id_unit=<?=$uni['id_unit']?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
-								<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $uni['id_unit']?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
-							</td>
-						</tr>
-						<!-- #modal-dialog -->
-						<div id="Del<?php echo $uni['id_unit']?>" class="modal fade" role="dialog">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete <u><?php echo $uni['nama']?></u> from Database?</h5>
-									</div>
-									<div class="modal-body" align="center">
-										<a href="index.php?page=delete-unit&id_unit=<?=$uni['id_unit']?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
-									</div>
-									<div class="modal-footer">
-										<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
+							<tr>
+								<td><?php echo $uni['id_unit'] ?></td>
+								<td><?php echo $uni['nama'] ?></td>
+								<td class="text-center">
+									<a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-unit&id_unit=<?= $uni['id_unit'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
+									<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $uni['id_unit'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
+								</td>
+							</tr>
+							<!-- #modal-dialog -->
+							<div id="Del<?php echo $uni['id_unit'] ?>" class="modal fade" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete <u><?php echo $uni['nama'] ?></u> from Database?</h5>
+										</div>
+										<div class="modal-body" align="center">
+											<a href="index.php?page=delete-unit&id_unit=<?= $uni['id_unit'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
+										</div>
+										<div class="modal-footer">
+											<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 						<?php
-							}
+						}
 						?>
 					</tbody>
 				</table>
@@ -118,10 +115,17 @@
 		</div>
 		<!-- end panel -->
 	</div>
-    <!-- end col-10 -->
+	<!-- end col-10 -->
 </div>
 <!-- end row -->
-<script> // 500 = 0,5 s
-	$(document).ready(function(){setTimeout(function(){$(".pesan").fadeIn('slow');}, 500);});
-	setTimeout(function(){$(".pesan").fadeOut('slow');}, 7000);
+<script>
+	// 500 = 0,5 s
+	$(document).ready(function() {
+		setTimeout(function() {
+			$(".pesan").fadeIn('slow');
+		}, 500);
+	});
+	setTimeout(function() {
+		$(".pesan").fadeOut('slow');
+	}, 7000);
 </script>

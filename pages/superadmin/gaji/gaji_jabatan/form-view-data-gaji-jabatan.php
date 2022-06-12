@@ -50,7 +50,7 @@ $tampilGajiJab    = mysqli_query($koneksi, "SELECT * FROM tb_gaji_jabatan ORDER 
                     <tbody>
                         <?php
                         $no = 0;
-                        while ($gajiJab    = mysqli_fetch_array($tampilGajiJab, MYSQLI_ASSOC)) {
+                        while ($gajiJab    = mysqli_fetch_array($tampilGajiJab)) {
                             $no++
                         ?>
                             <tr>

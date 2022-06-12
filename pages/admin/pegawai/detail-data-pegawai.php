@@ -679,7 +679,7 @@ $diff = $today->diff($birthday);
 						</div>
 						<div class="col-sm-12">
 							<div class="modal-body">
-								<form action="index.php?page=master-data-dokumen&id_dokumen=<?= $id_dokumen ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+								<form action="index.php?page=masterdok&id_peg=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 									<div class="form-group">
 										<label class="col-md-3 control-label">Nama Dokumen</label>
 										<div class="col-md-6">
@@ -696,6 +696,7 @@ $diff = $today->diff($birthday);
 										<label class="col-md-3 control-label"></label>
 										<div class="col-md-6">
 											<p>* Max size 500 KB</p>
+											<p>* Format PDF</p>
 										</div>
 									</div>
 									<div class="form-group">
@@ -806,7 +807,8 @@ $diff = $today->diff($birthday);
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#harga" class="btn btn-default"><i class="fa fa-certificate"></i> Penghargaan</a></p>
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#tugas" class="btn btn-default"><i class="fa fa-flag"></i> Penugasan</a></p>
 					<!-- <p class="pull-right"><a type="button" data-toggle="modal" data-target="#seminar" class="btn btn-default"><i class="fa fa-desktop"></i> Seminar</a></p> -->
-					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#cuti" class="btn btn-default"><i class="fa fa-calendar"></i> Cuti</a></p>
+					<!-- <p class="pull-right"><a type="button" data-toggle="modal" data-target="#cuti" class="btn btn-default"><i class="fa fa-calendar"></i> Cuti</a></p> -->
+					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#riwayatcuti" class="btn btn-default"><i class="fa fa-calendar"></i> Riwayat Cuti</a></p>
 					<!-- <p class="pull-right"><a type="button" data-toggle="modal" data-target="#latjab" class="btn btn-default"><i class="fa fa-book"></i> Latihan Jabatan</a></p> -->
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#mutasi" class="btn btn-default"><i class="fa fa-exchange"></i> Mutasi</a></p>
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#tunjangan" class="btn btn-default"><i class="fa fa-money"></i> Tunjangan</a></p>
@@ -1450,6 +1452,80 @@ $diff = $today->diff($birthday);
 													<a href="index.php?page=delete-data-cuti&id_cuti=<?= $cut['id_cuti'] ?>" title="delete" type="button" class="btn btn-danger btn-icon btn-sm" onclick="return confirm('Are you sure you want to delete == Data Cuti == from Database?');"><i class="fa fa-trash-o fa-lg"></i></a>
 												</td>
 												<td class="tools"><a href="index.php?page=detail-data-cuti&id_cuti=<?= $cut['id_cuti']; ?>" title="view detail" type="button" class="btn btn-warning btn-xs">Detail</a></td>
+											</tr>
+										<?php
+										}
+										?>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="riwayatcuti" class="modal fade">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">
+							<i class="fa fa-calendar text-danger"></i>
+							Riwayat Pengajuan Cuti
+						</h4>
+					</div>
+					<div class="col-sm-12">
+						<div class="modal-body">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped">
+									<thead class="thin-border-bottom">
+										<tr>
+											<th>No</th>
+											<th>Jenis Cuti</th>
+											<th>Keperluan</th>
+											<th>Tanggal Pelaksanaan</th>
+											<th>Status</th>
+											<th width="10%">
+												<center><i class="fa fa-code fa-lg"></i></center>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+										$no = 0;
+										$tampilCuti	= mysqli_query($koneksi, "SELECT * FROM tb_data_cuti WHERE id_peg='$id_peg' ORDER BY tanggal_cuti");
+										while ($cuti = mysqli_fetch_array($tampilCuti)) {
+											$no++
+										?>
+											<tr>
+												<td><?= $no ?></td>
+												<td><?php echo $cuti['jenis_cuti']; ?></td>
+												<td><?php echo $cuti['keperluan']; ?></td>
+												<td><?php echo $cuti['tanggal_mulai']; ?> <b>s/d</b> <?php echo $cuti['tanggal_selesai']; ?></td>
+												<td class="text-center">
+													<?php
+													if ($cuti['status'] == 'Process') {
+														echo '<span class="badge badge-primary">PROCESS</span>';
+													} else if ($cuti['status'] == 'Approve') {
+														echo '<span class="badge badge-success">APPROVED</span>';
+													} else if ($cuti['status'] == 'Reject') {
+														echo '<span class="badge badge-danger">REJECTED</span>';
+													}
+													?>
+												</td>
+												<td class="text-center">
+													<?php
+													if ($cuti['status'] == 'Process') {
+														echo '<a href="javascript:;" title="belum di approve" type="button" class="btn btn-default btn-icon btn-sm"><i class="fa fa-print fa-lg"></i></a>';
+													} else if ($cuti['status'] == 'Approve') {
+														echo '<a href="index.php?page=detail-cuti&id_cuti=' . $cuti['id_cuti'] . '" title="cetak" type="button" class="btn btn-success btn-icon btn-sm"><i class="fa fa-print fa-lg"></i></a>';
+													} else if ($cuti['status'] == 'Reject') {
+														echo '<a href="javascript:;" title="belum di approve" type="button" class="btn btn-default btn-icon btn-sm"><i class="fa fa-print fa-lg"></i></a>';
+													}
+													?>
+												</td>
 											</tr>
 										<?php
 										}
