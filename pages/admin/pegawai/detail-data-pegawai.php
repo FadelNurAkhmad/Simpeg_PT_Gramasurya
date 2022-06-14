@@ -148,6 +148,21 @@ $diff = $today->diff($birthday);
 													?>
 												</td>
 											</tr>
+											<tr>
+												<td class="field">Sisa Cuti</td>
+												<td>
+													<?php
+													if ($data['sisa_cuti'] == "") {
+														echo "-";
+													} else {
+														echo "$data[sisa_cuti]";
+													}
+													?>
+													&nbsp; &nbsp;
+													Per Tanggal
+													<?php echo date('j/m/Y'); ?></p>
+												</td>
+											</tr>
 										</tbody>
 									</table>
 								</div>

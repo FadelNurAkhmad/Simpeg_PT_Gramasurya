@@ -158,6 +158,9 @@ $diff = $today->diff($birthday);
 														echo "$data[sisa_cuti]";
 													}
 													?>
+													&nbsp; &nbsp;
+													Per Tanggal
+													<?php echo date('j/m/Y'); ?></p>
 												</td>
 											</tr>
 										</tbody>
