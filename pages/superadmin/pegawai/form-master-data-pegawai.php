@@ -202,7 +202,7 @@ $id_peg	= kdauto("tb_pegawai", "");
 						<label class="col-md-3 control-label"></label>
 						<div class="col-md-6">
 							<button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>&nbsp;
-							<a type="button" class="btn btn-default active" href="index.php?page=form-view-data-pegawai"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+							<a type="button" class="btn btn-default active" href="index.php?page=form-view-lokasi"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
 						</div>
 					</div>
 				</form>

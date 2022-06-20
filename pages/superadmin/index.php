@@ -74,6 +74,8 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="../../assets/plugins/jquery/jquery-2.1.4.min.js"></script>
 	<script src="../../assets/plugins/pace/pace.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKH2F9gZMQyATwBodQsEr-uM0fokVCvZw&callback=initMap"></script>
+
 	<!-- ================== END BASE JS ================== -->
 </head>
 
@@ -239,6 +241,13 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 						</ul>
 					</li>
 					<li class="has-sub">
+						<a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-map-marker bg-warning"></i><span>Lokasi</span></a>
+						<ul class="sub-menu">
+							<li><a href="index.php?page=form-view-lokasi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Lokasi 1</a></li>
+							<li><a href="index.php?page=form-view-tempat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Lokasi 2</a></li>
+						</ul>
+					</li>
+					<li class="has-sub">
 						<a href="javascript:;"><i class="ion-arrow-shrink bg-info"></i><span>Rekapitulasi</span> <span class="badge bg-danger pull-right"><span class="ion-stats-bars"></span></span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=rekap-golongan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Golongan</a></li>
@@ -251,9 +260,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-printer"></i><span>Report</span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=nominatif"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Nominatif</a></li>
-							<!-- <li><a href="index.php?page=daftar-urut-kepangkatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;DUK</a></li> -->
+							<li><a href="index.php?page=daftar-urut-kepangkatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;DUK</a></li>
 							<li><a href="index.php?page=bezetting"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Bezetting</a></li>
-							<li><a href="index.php?page=keadaan-pegawai"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Keadaan Pegawai</a></li>
+							<!-- <li><a href="index.php?page=keadaan-pegawai"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Keadaan Pegawai</a></li> -->
 							<!-- <li><a href="index.php?page=pre-pensiun"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pensiun</a></li> -->
 						</ul>
 					</li>
@@ -864,6 +873,50 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					include "../../pages/superadmin/presensi/attlog/form-view-data-attlog.php";
 					break;
 
+				case 'form-view-lokasi':
+					include "../../pages/superadmin/lokasi/form-view-lokasi.php";
+					break;
+				case 'form-master-lokasi':
+					include "../../pages/superadmin/lokasi/form-master-lokasi.php";
+					break;
+				case 'form-edit-lokasi':
+					include "../../pages/superadmin/lokasi/form-edit-lokasi.php";
+					break;
+				case 'edit-lokasi':
+					include "../../pages/superadmin/lokasi/edit-lokasi.php";
+					break;
+				case 'master-lokasi':
+					include "../../pages/superadmin/lokasi/master-lokasi.php";
+					break;
+				case 'delete-lokasi':
+					include "../../pages/superadmin/lokasi/delete-lokasi.php";
+					break;
+				case 'view-lokasi':
+					include "../../pages/superadmin/lokasi/view-lokasi.php";
+					break;
+				case 'function-lokasi':
+					include "../../pages/superadmin/lokasi/function-lokasi.php";
+					break;
+					
+				case 'form-view-tempat':
+					include "../../pages/superadmin/tempat/form-view-tempat.php";
+					break;
+				case 'form-master-tempat':
+					include "../../pages/superadmin/tempat/form-master-tempat.php";
+					break;
+				case 'master-tempat':
+					include "../../pages/superadmin/tempat/master-tempat.php";
+					break;
+				case 'edit-tempat':
+					include "../../pages/superadmin/tempat/edit-tempat.php";
+					break;
+				case 'delete-tempat':
+					include "../../pages/superadmin/tempat/delete-tempat.php";
+					break;
+				case 'form-edit-tempat':
+					include "../../pages/superadmin/tempat/form-edit-tempat.php";
+					break;
+
 				case 'rekap-golongan':
 					include "../../pages/superadmin/rekap/rekap-golongan.php";
 					break;
@@ -1044,6 +1097,7 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 	<script src="../../assets/plugins/sparkline/jquery.sparkline.js"></script>
 	<script src="../../assets/plugins/jquery-jvectormap/jquery-jvectormap.min.js"></script>
 	<script src="../../assets/plugins/jquery-jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<!-- <script src="../../assets/plugins/jquery-map/jquery-3.6.0.min.js"></script> -->
 	<script src="../../assets/plugins/DataTables/media/js/jquery.dataTables.js"></script>
 	<script src="../../assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js"></script>
 	<script src="../../assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
@@ -1071,6 +1125,7 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 	<script src="../../assets/js/form-plugins.demo.min.js"></script>
 	<script src="../../assets/js/dashboard.min.js"></script>
 	<script src="../../assets/js/apps.min.js"></script>
+
 
 	<!-- ================== END PAGE LEVEL JS ================== -->
 
