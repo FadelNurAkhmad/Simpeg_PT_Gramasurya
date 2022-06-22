@@ -32,7 +32,8 @@
 			</div>
 			<div class="m-t-20 text-white">
 				Lupa Password ? coba
-				<a href="https://api.whatsapp.com/send?phone=6281212345678&text=Selamat Datang!" target="_blank">hubungi</a>
+				<a href="https://maps.app.goo.gl/WSBixqaS2ccMiMXE7" target="_blank">hubungi</a>
+				<!-- <a href="https://api.whatsapp.com/send?phone=6281212345678&text=Selamat Datang!" target="_blank">hubungi</a> -->
 				admin.
 			</div>
 		</form>

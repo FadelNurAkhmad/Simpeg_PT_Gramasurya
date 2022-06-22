@@ -3,10 +3,7 @@
 	if (isset($_GET['pegawai_id'])) {
 	$id_peg = $_GET['pegawai_id'];
 	}
-	else {
-		die ("Error. No ID Selected! ");	
-	}
-	
+
 	if ($_POST['save'] == "save") {
 		$pin			=$_POST['pin'];
 		$nip			=$_POST['nip'];
@@ -22,6 +19,7 @@
 		$alamat			=$_POST['alamat'];
 		$telp			=$_POST['telp'];
 		$email			=$_POST['email'];
+		$sisa_cuti		= $_POST['sisa_cuti'];
 		$foto			=$_FILES['foto']['name'];
 		
 		$password	= password_hash("123", PASSWORD_DEFAULT);
@@ -45,8 +43,11 @@
 		else if($ceknip > 0 || $cekpin > 0) {
 			$_SESSION['pesan'] = "Oops! Duplikat data ...";
 			header("location:index.php?page=form-master-data-pegawai");
+		} 
+		else if ($_POST['sisa_cuti'] > 12) {
+			$_SESSION['pesan'] = "Oops! Kuota Cuti Hanya 12 Per tahun ...";
+			header("location:index.php?page=form-master-data-pegawai");
 		}
-		
 		else {
 			$pegawai = "INSERT INTO pegawai (pegawai_id, pegawai_pin, pegawai_nip, pegawai_nama, pegawai_alias, pegawai_telp, 
 											tempat_lahir, tgl_lahir, tgl_mulai_kerja, gender, tgl_masuk_pertama) 
@@ -55,7 +56,7 @@
 
 			$pegawai_d = mysqli_query($koneksi, "INSERT INTO pegawai_d (pegawai_id, gol_darah, stat_nikah, alamat, agama) VALUES ('$id_peg', '$gol_darah', '$status_nikah', '$alamat', '$agama')");
 
-			$tb_pegawai = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id, email, foto) VALUES ('$id_peg', '$email', '$foto')");
+			$tb_pegawai = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id, email, foto, sisa_cuti) VALUES ('$id_peg', '$email', '$foto', '$sisa_cuti')");
 		
 			$insertusr = mysqli_query($koneksi, "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, id_peg) VALUES ('$nip', '$nama', '$password', 'Pegawai', '$id_peg')");
 		
@@ -88,12 +89,12 @@
 			else {
 				echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
 			}
-			if (strlen($foto)>0) {
+			if (strlen($foto) > 0) {
 				if (is_uploaded_file($_FILES['foto']['tmp_name'])) {
-					move_uploaded_file ($_FILES['foto']['tmp_name'], "../../assets/img/foto/".$foto);
+					move_uploaded_file($_FILES['foto']['tmp_name'], "../../assets/img/foto/" . $foto);
 				}
 			}
 		}
 	}
-?>
+	?>
 </div>

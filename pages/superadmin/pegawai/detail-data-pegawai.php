@@ -234,6 +234,9 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 														echo "$data[sisa_cuti]";
 													}
 													?>
+													&nbsp; &nbsp;
+													Per Tanggal
+													<?php echo date('j/m/Y'); ?></p>
 												</td>
 											</tr>
 										</tbody>

@@ -27,6 +27,7 @@
 	$telp			=$_POST['telp'];
 	$email			=$_POST['email'];
 	// $id_unit		=$_POST['id_unit'];
+	$sisa_cuti		= $_POST['sisa_cuti'];
 	
 	$pensiun = new DateTime($tgl_lhr);
 	$pensiun->modify('+58 year');
@@ -38,15 +39,17 @@
 		if (empty($_POST['pegawai_nip']) || empty($_POST['pegawai_nama']) || empty($_POST['tempat_lahir']) || empty($_POST['tgl_lahir']) || empty($_POST['agama']) || empty($_POST['gender']) || empty($_POST['gol_darah']) || empty($_POST['stat_nikah'])) {
 			$_SESSION['pesan'] = "Oops! Please fill all column ...";
 			header("location:index.php?page=form-edit-data-pegawai&id_peg=$id_peg");
-		}		
-		else if($ceknip > 0) {
+		} else if ($ceknip > 0) {
 			$_SESSION['pesan'] = "Oops! Duplikat data ...";
 			header("location:index.php?page=form-edit-data-pegawai&id_peg=$id_peg");
+		} else if ($_POST['sisa_cuti'] > 12) {
+			$_SESSION['pesan'] = "Oops! Kuota Cuti Hanya 12 Per tahun ...";
+			header("location:index.php?page=form-master-data-pegawai");
 		}
 		else {
 		$update= mysqli_query ($koneksi, "UPDATE pegawai SET pegawai_nip='$nip', pegawai_nama='$nama', tempat_lahir='$tempat_lhr', tgl_lahir='$tgl_lhr', gender='$jk', pegawai_telp='$telp' WHERE pegawai_id='$id_peg'");
 		$update2 = mysqli_query($koneksi, "UPDATE pegawai_d SET agama='$agama', gol_darah='$gol_darah', stat_nikah='$status_nikah', alamat='$alamat' WHERE pegawai_id='$id_peg'");
-		$update3 = mysqli_query($koneksi, "UPDATE tb_pegawai SET email='$email', tgl_pensiun='$tgl_pensiun' WHERE pegawai_id='$id_peg'");
+		$update3 = mysqli_query($koneksi, "UPDATE tb_pegawai SET email='$email', tgl_pensiun='$tgl_pensiun', sisa_cuti='$sisa_cuti' WHERE pegawai_id='$id_peg'");
 		$updateusr= mysqli_query ($koneksi, "UPDATE tb_user SET id_user='$nip', nama_user='$nama' WHERE id_peg='$id_peg'");
 		
 		// kgb //
@@ -55,32 +58,31 @@
 		$endg = new DateTime($tgl_pensiun);
 			for($ig = $beging; $beging <= $endg; $ig->modify('+2 year')){	
 				$ig->format("Y-m-d");
-				$tgl_kgb=$ig->format("Y-m-d");
-				
-				$values="($id_peg, '$tgl_kgb')";
-		$insertkgb	=mysqli_query($koneksi, "INSERT INTO tb_kgb (id_peg, tgl_kgb) VALUES ".$values);
-		}
-		
-		// kpb //
-		$delkpb = mysqli_query($koneksi, "DELETE FROM tb_kpb WHERE id_peg='$id_peg'");
-		$beginp = new DateTime($tgl_naikpangkat);
-		$endp = new DateTime($tgl_pensiun);
-			for($ip = $beginp; $beginp <= $endp; $ip->modify('+4 year')){	
+				$tgl_kgb = $ig->format("Y-m-d");
+
+				$values = "($id_peg, '$tgl_kgb')";
+				$insertkgb	= mysqli_query($koneksi, "INSERT INTO tb_kgb (id_peg, tgl_kgb) VALUES " . $values);
+			}
+
+			// kpb //
+			$delkpb = mysqli_query($koneksi, "DELETE FROM tb_kpb WHERE id_peg='$id_peg'");
+			$beginp = new DateTime($tgl_naikpangkat);
+			$endp = new DateTime($tgl_pensiun);
+			for ($ip = $beginp; $beginp <= $endp; $ip->modify('+4 year')) {
 				$ip->format("Y-m-d");
-				$tgl_kpb=$ip->format("Y-m-d");
-				
-				$valuesp="($id_peg, '$tgl_kpb')";
-		$insertkpb	=mysqli_query($koneksi, "INSERT INTO tb_kpb (id_peg, tgl_kpb) VALUES ".$valuesp);
-		}
-		
-		if($update){
+				$tgl_kpb = $ip->format("Y-m-d");
+
+				$valuesp = "($id_peg, '$tgl_kpb')";
+				$insertkpb	= mysqli_query($koneksi, "INSERT INTO tb_kpb (id_peg, tgl_kpb) VALUES " . $valuesp);
+			}
+
+			if ($update) {
 				$_SESSION['pesan'] = "Good! Edit pegawai $hasil[nip] success ...";
 				header("location:index.php?page=form-view-data-pegawai");
-			}
-			else {
+			} else {
 				echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
 			}
 		}
 	}
-?>
+	?>
 </div>

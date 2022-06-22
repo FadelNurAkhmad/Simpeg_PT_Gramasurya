@@ -17,10 +17,10 @@
 <ol class="breadcrumb pull-right">
 	<li>
 		<?php
-			if (isset($_SESSION['pesan']) && $_SESSION['pesan'] <> '') {
-				echo "<span class='pesan'><div class='btn btn-sm btn-inverse m-b-10'><i class='fa fa-bell text-warning'></i>&nbsp; ".$_SESSION['pesan']." &nbsp; &nbsp; &nbsp;</div></span>";
-			}
-			$_SESSION['pesan'] ="";
+		if (isset($_SESSION['pesan']) && $_SESSION['pesan'] <> '') {
+			echo "<span class='pesan'><div class='btn btn-sm btn-inverse m-b-10'><i class='fa fa-bell text-warning'></i>&nbsp; " . $_SESSION['pesan'] . " &nbsp; &nbsp; &nbsp;</div></span>";
+		}
+		$_SESSION['pesan'] = "";
 		?>
 	</li>
 </ol>
@@ -30,7 +30,7 @@
 <!-- begin row -->
 <div class="row">
 	<!-- begin col-12 -->
-    <div class="col-md-12">
+	<div class="col-md-12">
 		<!-- begin panel -->
 		<div class="panel panel-inverse" data-sortable-id="form-stuff-1">
 			<div class="panel-heading">
@@ -142,7 +142,7 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label">Alamat</label>
 						<div class="col-md-6">
-							<textarea name="alamat" maxlength="255" class="form-control"><?=$data['alamat']?></textarea>
+							<textarea name="alamat" maxlength="255" class="form-control"><?= $data['alamat'] ?></textarea>
 						</div>
 					</div>
 					<div class="form-group">
@@ -154,7 +154,13 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label">Email</label>
 						<div class="col-md-6">
-							<input type="text" name="email" maxlength="64" value="<?=$data['email']?>" class="form-control" />
+							<input type="text" name="email" maxlength="64" value="<?= $data['email'] ?>" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Kuota Cuti</label>
+						<div class="col-md-6">
+							<input type="text" name="sisa_cuti" value="<?= $data['sisa_cuti'] ?>" class="form-control"></input>
 						</div>
 					</div>
 					<div class="form-group">
@@ -172,7 +178,14 @@
 	<!-- end col-6 -->
 </div>
 <!-- end row -->
-<script> // 500 = 0,5 s
-	$(document).ready(function(){setTimeout(function(){$(".pesan").fadeIn('slow');}, 500);});
-	setTimeout(function(){$(".pesan").fadeOut('slow');}, 7000);
+<script>
+	// 500 = 0,5 s
+	$(document).ready(function() {
+		setTimeout(function() {
+			$(".pesan").fadeIn('slow');
+		}, 500);
+	});
+	setTimeout(function() {
+		$(".pesan").fadeOut('slow');
+	}, 7000);
 </script>

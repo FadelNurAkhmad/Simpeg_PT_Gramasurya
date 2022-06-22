@@ -183,7 +183,7 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 						</ul>
 					</li>
 					<li class="has-sub">
-						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-filing bg-info"></i><span>Kepegawaian &nbsp; <span class="label label-warning m-l-5">9</span></span></a>
+						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-filing bg-info"></i><span>Kepegawaian &nbsp; <span class="label label-warning m-l-5">8</span></span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-master-data-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jabatan</a></li>
 							<li><a href="index.php?page=form-master-data-pangkat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pangkat</a></li>
@@ -193,10 +193,17 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 							<li><a href="index.php?page=form-master-data-penghargaan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Penghargaan</a></li>
 							<li><a href="index.php?page=form-master-data-penugasan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Penugasan</a></li>
 							<!-- <li><a href="index.php?page=form-master-data-seminar"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Seminar</a></li> -->
-							<li><a href="index.php?page=form-master-data-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Cuti</a></li>
+							<!-- <li><a href="index.php?page=form-master-data-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Cuti</a></li> -->
 							<!-- <li><a href="index.php?page=form-master-data-lat-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Latihan Jabatan</a></li> -->
 							<li><a href="index.php?page=form-master-data-tunjangan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Tunjangan</a></li>
 							<li><a href="index.php?page=form-master-data-kawin"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Izin Kawin</a></li>
+						</ul>
+					</li>
+					<li class="has-sub">
+						<a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-calendar bg-purple"></i><span>Cuti</span></a>
+						<ul class="sub-menu">
+							<li><a href="index.php?page=form-view-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Cuti</a></li>
+							<li><a href="index.php?page=form-view-jenis-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Jenis Cuti</a></li>
 						</ul>
 					</li>
 					<!-- <li><a href="index.php?page=form-master-data-mutasi"><i class="ion-arrow-swap bg-grey"></i><span>Mutasi</span></a></li> -->
@@ -228,7 +235,7 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 							<!-- <li><a href="index.php?page=daftar-urut-kepangkatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;DUK</a></li> -->
 							<li><a href="index.php?page=bezetting"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Bezetting</a></li>
 							<li><a href="index.php?page=keadaan-pegawai"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Keadaan Pegawai</a></li>
-							<li><a href="index.php?page=pre-pensiun"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pensiun</a></li>
+							<!-- <li><a href="index.php?page=pre-pensiun"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pensiun</a></li> -->
 						</ul>
 					</li>
 					<!-- <li><a href="index.php?page=pre-report-kgb"><i class="fa fa-file-excel-o bg-success"></i><span>Report KGB</span></a></li> -->
@@ -622,6 +629,50 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					break;
 				case 'delete-data-mutasi':
 					include "../../pages/admin/kepeg/mutasi/delete-data-mutasi.php";
+					break;
+
+				case 'form-view-cuti':
+					include "../../pages/admin/cuti/data_cuti/form-view-cuti.php";
+					break;
+				case 'form-master-cuti':
+					include "../../pages/admin/cuti/data_cuti/form-master-cuti.php";
+					break;
+				case 'form-edit-cuti':
+					include "../../pages/admin/cuti/data_cuti/form-edit-cuti.php";
+					break;
+				case 'master-cuti':
+					include "../../pages/admin/cuti/data_cuti/master-cuti.php";
+					break;
+				case 'delete-cuti':
+					include "../../pages/admin/cuti/data_cuti/delete-cuti.php";
+					break;
+				case 'edit-cuti':
+					include "../../pages/admin/cuti/data_cuti/edit-cuti.php";
+					break;
+				case 'status-cuti':
+					include "../../pages/admin/cuti/data_cuti/status-cuti.php";
+					break;
+				case 'detail-cuti':
+					include "../../pages/admin/cuti/data_cuti/detail-cuti.php";
+					break;
+
+				case 'form-view-jenis-cuti':
+					include "../../pages/admin/cuti/jenis_cuti/form-view-jenis-cuti.php";
+					break;
+				case 'form-edit-jenis-cuti':
+					include "../../pages/admin/cuti/jenis_cuti/form-edit-jenis-cuti.php";
+					break;
+				case 'form-master-jenis-cuti':
+					include "../../pages/admin/cuti/jenis_cuti/form-master-jenis-cuti.php";
+					break;
+				case 'master-jenis-cuti':
+					include "../../pages/admin/cuti/jenis_cuti/master-jenis-cuti.php";
+					break;
+				case 'edit-jenis-cuti':
+					include "../../pages/admin/cuti/jenis_cuti/edit-jenis-cuti.php";
+					break;
+				case 'delete-jenis-cuti':
+					include "../../pages/admin/cuti/jenis_cuti/delete-jenis-cuti.php";
 					break;
 
 				case 'form-master-data-skp':

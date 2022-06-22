@@ -11,12 +11,33 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Pengajuan <small>Cuti <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
+<h1 class="page-header">Riwayat <small>Cuti <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
-$id_peg  = $_SESSION['id_peg'];
-$query   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$id_peg'");
-$data    = mysqli_fetch_array($query);
+function kdauto($tabel, $inisial)
+{
+    include "../../config/koneksi.php";
+
+    $struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
+    $fieldInfo = mysqli_fetch_field_direct($struktur, 0);
+    $field      = $fieldInfo->name;
+    $panjang    = $fieldInfo->length;
+    $qry  = mysqli_query($koneksi, "SELECT max(" . $field . ") FROM " . $tabel);
+    $row  = mysqli_fetch_array($qry);
+    if ($row[0] == "") {
+        $angka = 0;
+    } else {
+        $angka = substr($row[0], strlen($inisial));
+    }
+    $angka++;
+    $angka = strval($angka);
+    $tmp  = "";
+    for ($i = 1; $i <= ($panjang - strlen($inisial) - strlen($angka)); $i++) {
+        $tmp = $tmp . "0";
+    }
+    return $inisial . $tmp . $angka;
+}
+$id_cuti    = kdauto("tb_data_cuti", "");
 ?>
 <!-- begin row -->
 <div class="row">
@@ -29,11 +50,26 @@ $data    = mysqli_fetch_array($query);
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
                 <h4 class="panel-title">Form Input Cuti</h4>
             </div>
             <div class="panel-body">
-                <form action="index.php?page=master-cuti&id_peg=<?= $id_peg ?>"" class=" form-horizontal" method="POST" enctype="multipart/form-data">
+                <form action="index.php?page=master-cuti&id_cuti=<?= $id_cuti ?>"" class=" form-horizontal" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Pegawai</label>
+                        <div class="col-md-6">
+                            <?php
+                            $data = mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY nama ASC");
+                            echo '<select name="id_peg" class="default-select2 form-control">';
+                            echo '<option value="">...</option>';
+                            while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)) {
+                                echo '<option value="' . $row['id_peg'] . '">' . $row['nama'] . '_' . $row['nip'] . '</option>';
+                            }
+                            echo '</select>';
+                            ?>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Jenis Cuti</label>
                         <div class="col-md-6">
@@ -41,7 +77,7 @@ $data    = mysqli_fetch_array($query);
                             $dataJ = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY jenis");
                             echo '<select name="jenis_cuti" class="default-select2 form-control">';
                             echo '<option value="">...</option>';
-                            while ($rowj = mysqli_fetch_array($dataJ)) {
+                            while ($rowj = mysqli_fetch_array($dataJ, MYSQLI_ASSOC)) {
                                 echo '<option value="' . $rowj['jenis'] . '">' . $rowj['jenis'] . '</option>';
                             }
                             echo '</select>';
@@ -89,6 +125,19 @@ $data    = mysqli_fetch_array($query);
                             <input type="hidden" id="jumlah_cuti" name="jumlah_cuti" value="1" />
                         </div>
                     </div>
+                    <!-- <div class="form-group">
+                        <label class="col-md-3 control-label">Periode Tahun Cuti</label>
+                        <div class="col-md-6">
+                            <select id="periode" name="periode" class="form-control" required>
+                                <option value="">-- Pilih Periode Tahun Cuti --</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                            </select>
+                        </div>
+                    </div> -->
                     <div class="form-group">
                         <div class="col-md-6">
                             <input type="hidden" id="status" name="status" value="Process">
@@ -98,7 +147,7 @@ $data    = mysqli_fetch_array($query);
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-6">
                             <button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>&nbsp;
-                            <a type="button" class="btn btn-default active" href="./"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+                            <a type="button" class="btn btn-default active" href="index.php?page=form-view-cuti"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
                         </div>
                     </div>
                 </form>
