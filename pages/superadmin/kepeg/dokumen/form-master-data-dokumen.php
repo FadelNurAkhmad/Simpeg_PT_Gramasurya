@@ -60,7 +60,6 @@ $id_dokumen    = kdauto("tb_dokumen", "");
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
                 <h4 class="panel-title">Form master data dokumen</h4>
             </div>
@@ -70,11 +69,11 @@ $id_dokumen    = kdauto("tb_dokumen", "");
                         <label class="col-md-3 control-label">Pegawai</label>
                         <div class="col-md-6">
                             <?php
-                            $data = mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY nama ASC");
+                            $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id ASC");
                             echo '<select name="id_peg" class="default-select2 form-control">';
                             echo '<option value="">...</option>';
                             while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)) {
-                                echo '<option value="' . $row['id_peg'] . '">' . $row['nama'] . '_' . $row['nip'] . '</option>';
+                                echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
                             }
                             echo '</select>';
                             ?>

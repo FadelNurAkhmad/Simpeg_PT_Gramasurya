@@ -1,19 +1,21 @@
 <div class="row">
 <?php
 include "../../config/koneksi.php";
-if (isset($_GET['id_peg'])) {
-	$id_peg = $_GET['id_peg'];
+if (isset($_GET['pegawai_id'])) {
+	$id_peg = $_GET['pegawai_id'];
 	
-	$query   =mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
+	$query   =mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$id_peg'");
 	$data    =mysqli_fetch_array($query, MYSQLI_ASSOC);
-		$nama	=$data['nama'];
+	$nama	= $data['pegawai_nama'];
 	}
 	else {
 		die ("Error. No ID Selected! ");	
 	}
 	
 	if (!empty($id_peg) && $id_peg != "") {
-		$delete	=mysqli_query($koneksi, "DELETE FROM tb_pegawai WHERE id_peg='$id_peg'");
+		$delpeg	=mysqli_query($koneksi, "DELETE FROM pegawai WHERE pegawai_id='$id_peg'");
+		$delpegd	=mysqli_query($koneksi, "DELETE FROM pegawai_d WHERE pegawai_id='$id_peg'");
+		$delete	=mysqli_query($koneksi, "DELETE FROM tb_pegawai WHERE pegawai_id='$id_peg'");
 		$delsi = mysqli_query($koneksi, "DELETE FROM tb_suamiistri WHERE id_peg='$id_peg'");
 		$delanak = mysqli_query($koneksi, "DELETE FROM tb_anak WHERE id_peg='$id_peg'");
 		$delortu = mysqli_query($koneksi, "DELETE FROM tb_ortu WHERE id_peg='$id_peg'");

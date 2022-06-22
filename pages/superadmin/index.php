@@ -15,8 +15,20 @@ include "../../config/koneksi.php";
 $tampilUsr	= mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user='$_SESSION[id_user]'");
 $usr		= mysqli_fetch_array($tampilUsr, MYSQLI_ASSOC);
 
-$tampilPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut=''");
-$jmlpeg		= mysqli_num_rows($tampilPeg);
+$cekPeg = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_pegawai"));
+if($cekPeg == 0) {
+	$query = mysqli_query($koneksi, "SELECT * FROM pegawai");	
+	while($row = mysqli_fetch_array($query)) {
+		$insert = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id) VALUES ('$row[pegawai_id]')");
+	}
+
+}
+
+// $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut=''");
+// $jmlpeg		= mysqli_num_rows($tampilPeg);
+
+
+
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -172,9 +184,10 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-view-setup-bkd"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Perusahaan</a></li>
 							<!-- <li><a href="index.php?page=form-view-setup-sekda"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Sekretariat Daerah</a></li> -->
-							<li><a href="index.php?page=form-view-data-unit"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Unit Kerja</a></li>
+							<!-- <li><a href="index.php?page=form-view-data-unit"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Unit Kerja</a></li> -->
 							<li><a href="index.php?page=form-view-data-user"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Admin</a></li>
 							<li><a href="index.php?page=form-view-data-userpeg"><i class="menu-icon fa fa-caret-right"></i> &nbsp;User Pegawai</a></li>
+							<li><a href="index.php?page=form-view-pengaturan-mesin"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Mesin</a></li>
 						</ul>
 					</li>
 					<li><a href="index.php?page=form-view-data-pegawai"><i class="ion-ios-personadd bg-purple"></i><span>Data Pegawai</span></a></li>
@@ -197,7 +210,7 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-filing bg-grey"></i><span>Kepegawaian &nbsp; <span class="label label-warning m-l-5">8</span></span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-master-data-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jabatan</a></li>
-							<li><a href="index.php?page=form-master-data-pangkat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pangkat</a></li>
+							<!-- <li><a href="index.php?page=form-master-data-pangkat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pangkat</a></li> -->
 							<li><a href="index.php?page=form-master-data-hukuman"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Hukuman</a></li>
 							<li><a href="index.php?page=form-master-data-dokumen"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Dokumen Pegawai</a></li>
 							<!-- <li><a href="index.php?page=form-master-data-diklat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Diklat</a></li> -->
@@ -220,22 +233,25 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					</li>
 					<li><a href="index.php?page=form-master-data-mutasi"><i class="ion-arrow-swap bg-warning"></i><span>Mutasi</span></a></li>
 					<li><a href="index.php?page=form-master-data-skp"><i class="ion-social-buffer bg-pink"></i><span>SKP</span></a></li>
+					<!-- gaji -->
 					<li class="has-sub">
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-social-usd bg-success"></i><span>Gaji Pegawai</span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-view-data-gaji-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Gaji Jabatan</a></li>
 							<li><a href="index.php?page=form-view-data-gaji"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Data Gaji</a></li>
+							<li><a href="index.php?page=form-view-data-gaji-konfigurasi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Gaji</a></li>
+							<li><a href="index.php?page=form-edit-data-gaji-trial"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Trial</a></li>
 						</ul>
 					</li>
+					<!-- end gaji -->
 					<li class="has-sub">
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-compose bg-primary"></i><span>Presensi</span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-view-data-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Presensi</a></li>
-							<li><a href="index.php?page=form-view-data-attlog"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Attlog</a></li>
 							<li><a href="index.php?page=form-view-rekap-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Rekap Presensi</a></li>
-							<li><a href="index.php?page=form-view-pengaturan-mesin"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pengaturan Mesin</a></li>
-							<li><a href="index.php?page=form-view-hari-jam-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Hari/Jam Kerja</a></li>
 							<li><a href="index.php?page=form-view-shift-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Shift</a></li>
+							<li><a href="index.php?page=form-view-hari-jam-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jadwal Kerja Normal</a></li>
+
 						</ul>
 					</li>
 					<li class="has-sub">
@@ -812,6 +828,24 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'detail-data-gaji':
 					include "../../pages/superadmin/gaji/data_gaji/detail-data-gaji.php";
 					break;
+				
+				case 'form-view-data-gaji-konfigurasi':
+					include "../../pages/superadmin/gaji/konfigurasi_gaji/form-view-data-gaji-konfigurasi.php";
+					break;
+				case 'form-edit-data-gaji-konfigurasi':
+					include "../../pages/superadmin/gaji/konfigurasi_gaji/form-edit-data-gaji-konfigurasi.php";
+					break;
+				case 'detail-data-gaji':
+					include "../../pages/superadmin/gaji/data_gaji/detail-data-gaji.php";
+					break;
+				
+			
+				case 'form-edit-data-gaji-trial':
+					include "../../pages/superadmin/gaji/trial/form-edit-data-gaji-trial.php";
+					break;
+				case 'detail-data-gaji':
+					include "../../pages/superadmin/gaji/data_gaji/detail-data-gaji.php";
+					break;
 
 				case 'form-view-data-presensi':
 					include "../../pages/superadmin/presensi/data_presensi/form-view-data-presensi.php";
@@ -842,9 +876,19 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'form-master-shift-kerja':
 					include "../../pages/superadmin/presensi/shift/form-master-shift-kerja.php";
 					break;
+				case 'master-shift-kerja':
+					include "../../pages/superadmin/presensi/shift/master-shift-kerja.php";
+					break;
 				case 'form-edit-shift-kerja':
 					include "../../pages/superadmin/presensi/shift/form-edit-shift-kerja.php";
 					break;
+				case 'edit-shift-kerja':
+					include "../../pages/superadmin/presensi/shift/edit-shift-kerja.php";
+					break;
+				case 'delete-shift-kerja':
+					include "../../pages/superadmin/presensi/shift/delete-shift-kerja.php";
+					break;
+				
 
 				case 'form-view-hari-jam-kerja':
 					include "../../pages/superadmin/presensi/hari_jam_kerja/form-view-hari-jam-kerja.php";
@@ -852,17 +896,23 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'form-master-hari-jam-kerja':
 					include "../../pages/superadmin/presensi/hari_jam_kerja/form-master-hari-jam-kerja.php";
 					break;
+				case 'master-hari-jam-kerja':
+					include "../../pages/superadmin/presensi/hari_jam_kerja/master-hari-jam-kerja.php";
+					break;
 				case 'form-edit-hari-jam-kerja':
 					include "../../pages/superadmin/presensi/hari_jam_kerja/form-edit-hari-jam-kerja.php";
+					break;
+				case 'edit-hari-jam-kerja':
+					include "../../pages/superadmin/presensi/hari_jam_kerja/edit-hari-jam-kerja.php";
+					break;
+				case 'delete-hari-jam-kerja':
+					include "../../pages/superadmin/presensi/hari_jam_kerja/delete-hari-jam-kerja.php";
 					break;
 
 				case 'form-view-rekap-presensi':
 					include "../../pages/superadmin/presensi/rekap/form-view-rekap-presensi.php";
 					break;
 
-				case 'form-view-data-attlog':
-					include "../../pages/superadmin/presensi/attlog/form-view-data-attlog.php";
-					break;
 
 				case 'rekap-golongan':
 					include "../../pages/superadmin/rekap/rekap-golongan.php";
@@ -950,7 +1000,7 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 		</div>
 		<!-- end #footer -->
 		<!-- begin theme-panel -->
-		<div class="theme-panel">
+		<!-- <div class="theme-panel">
 			<a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i class="ion-ios-cog"></i></a>
 			<div class="theme-panel-content">
 				<h5 class="m-t-0">Color Theme</h5>
@@ -1014,7 +1064,7 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- end theme-panel -->
 		<!-- begin scroll to top btn -->
 		<a href="javascript:;" class="btn btn-icon btn-circle btn-primary btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>

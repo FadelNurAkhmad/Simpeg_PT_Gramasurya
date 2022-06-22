@@ -8,4 +8,4 @@
 	// 	die ("Koneksi ke Database Gagal !");
 	// 	}
 
-	$koneksi = mysqli_connect("localhost", "root", "", "db_simpeg7");
+	$koneksi = mysqli_connect("localhost", "root", "", "db_gramasurya");

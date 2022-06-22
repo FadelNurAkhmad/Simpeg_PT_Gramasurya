@@ -57,11 +57,11 @@ if (isset($_GET['id_setup_bkd'])) {
 						<label class="col-md-3 control-label">Kepala</label>
 						<div class="col-md-6">
 							<?php
-							$kepala = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut=''");
+							$kepala = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_status='1'");
 							echo '<select name="kepala" class="default-select2 form-control">';
 							echo '<option value="' . $data['kepala'] . '">...</option>';
 							while ($row = mysqli_fetch_array($kepala, MYSQLI_ASSOC)) {
-								echo '<option value="' . $row['id_peg'] . '">' . $row['nama'] . '_' . $row['nip'] . '</option>';
+								echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
 							}
 							echo '</select>';
 							?>

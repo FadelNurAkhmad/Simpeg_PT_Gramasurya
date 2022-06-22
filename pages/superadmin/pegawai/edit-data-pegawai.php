@@ -1,41 +1,41 @@
 <div class="row">
 <?php
-	if (isset($_GET['id_peg'])) {
-	$id_peg = $_GET['id_peg'];
+	if (isset($_GET['pegawai_id'])) {
+	$id_peg = $_GET['pegawai_id'];
 	}
 	else {
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tampilPro	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
+	$tampilPro	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id = tb_pegawai.pegawai_id WHERE pegawai.pegawai_id='$id_peg'");
 	$hasil	= mysqli_fetch_array ($tampilPro, MYSQLI_ASSOC);
-		$notnip	=$hasil['nip'];
+		$notnip	=$hasil['pegawai_nip'];
 				
 	if ($_POST['edit'] == "edit") {
-	$nip			=$_POST['nip'];
-	$nama			=$_POST['nama'];
-	$tempat_lhr		=$_POST['tempat_lhr'];
-	$tgl_lhr		=$_POST['tgl_lhr'];
+	$nip			=$_POST['pegawai_nip'];
+	$nama			=$_POST['pegawai_nama'];
+	$tempat_lhr		=$_POST['tempat_lahir'];
+	$tgl_lhr		=$_POST['tgl_lahir'];
 	$agama			=$_POST['agama'];
-	$jk				=$_POST['jk'];	
+	$jk				=$_POST['gender'];	
 	$gol_darah		=$_POST['gol_darah'];
-	$status_nikah	=$_POST['status_nikah'];	
-	$status_kepeg	=$_POST['status_kepeg'];	
-	$tgl_naikpangkat=$_POST['tgl_naikpangkat'];	
-	$tgl_naikgaji	=$_POST['tgl_naikgaji'];	
+	$status_nikah	=$_POST['stat_nikah'];	
+	// $status_kepeg	=$_POST['status_kepeg'];	
+	// $tgl_naikpangkat=$_POST['tgl_naikpangkat'];	
+	// $tgl_naikgaji	=$_POST['tgl_naikgaji'];	
 	$alamat			=$_POST['alamat'];
 	$telp			=$_POST['telp'];
 	$email			=$_POST['email'];
-	$id_unit		=$_POST['id_unit'];
+	// $id_unit		=$_POST['id_unit'];
 	
 	$pensiun = new DateTime($tgl_lhr);
 	$pensiun->modify('+58 year');
 	$pensiun->format('Y-m-d');
 	$tgl_pensiun=$pensiun->format('Y-m-d');
 	
-	$ceknip	=mysqli_num_rows (mysqli_query($koneksi, "SELECT nip FROM tb_pegawai WHERE nip='$_POST[nip]' AND nip!='$notnip'"));
+	$ceknip	=mysqli_num_rows (mysqli_query($koneksi, "SELECT pegawai_nip FROM pegawai WHERE pegawai_nip='$_POST[pegawai_nip]' AND pegawai_nip!='$notnip'"));
 	
-		if (empty($_POST['nip']) || empty($_POST['nama']) || empty($_POST['tempat_lhr']) || empty($_POST['tgl_lhr']) || empty($_POST['agama']) || empty($_POST['jk']) || empty($_POST['gol_darah']) || empty($_POST['status_nikah']) || empty($_POST['status_kepeg']) || empty($_POST['tgl_naikpangkat']) || empty($_POST['tgl_naikgaji'])) {
+		if (empty($_POST['pegawai_nip']) || empty($_POST['pegawai_nama']) || empty($_POST['tempat_lahir']) || empty($_POST['tgl_lahir']) || empty($_POST['agama']) || empty($_POST['gender']) || empty($_POST['gol_darah']) || empty($_POST['stat_nikah'])) {
 			$_SESSION['pesan'] = "Oops! Please fill all column ...";
 			header("location:index.php?page=form-edit-data-pegawai&id_peg=$id_peg");
 		}		
@@ -43,9 +43,10 @@
 			$_SESSION['pesan'] = "Oops! Duplikat data ...";
 			header("location:index.php?page=form-edit-data-pegawai&id_peg=$id_peg");
 		}
-		else{
-		$update= mysqli_query ($koneksi, "UPDATE tb_pegawai SET nip='$nip', nama='$nama', tempat_lhr='$tempat_lhr', tgl_lhr='$tgl_lhr', agama='$agama', jk='$jk', gol_darah='$gol_darah', status_nikah='$status_nikah', status_kepeg='$status_kepeg', tgl_naikpangkat='$tgl_naikpangkat', tgl_naikgaji='$tgl_naikgaji', alamat='$alamat', telp='$telp', email='$email', tgl_pensiun='$tgl_pensiun', unit_kerja='$id_unit' WHERE id_peg='$id_peg'");
-		
+		else {
+		$update= mysqli_query ($koneksi, "UPDATE pegawai SET pegawai_nip='$nip', pegawai_nama='$nama', tempat_lahir='$tempat_lhr', tgl_lahir='$tgl_lhr', gender='$jk', pegawai_telp='$telp' WHERE pegawai_id='$id_peg'");
+		$update2 = mysqli_query($koneksi, "UPDATE pegawai_d SET agama='$agama', gol_darah='$gol_darah', stat_nikah='$status_nikah', alamat='$alamat' WHERE pegawai_id='$id_peg'");
+		$update3 = mysqli_query($koneksi, "UPDATE tb_pegawai SET email='$email', tgl_pensiun='$tgl_pensiun' WHERE pegawai_id='$id_peg'");
 		$updateusr= mysqli_query ($koneksi, "UPDATE tb_user SET id_user='$nip', nama_user='$nama' WHERE id_peg='$id_peg'");
 		
 		// kgb //

@@ -6,7 +6,7 @@
 	$query   =mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE id_hukuman='$id_hukuman'");
 	$data    =mysqli_fetch_array($query, MYSQLI_ASSOC);
 		
-	$tampilPeg   =mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
+	$tampilPeg   =mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$data[id_peg]'");
 	$peg    =mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 	}
 	else {
@@ -26,7 +26,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Riwayat <small>Hukuman <i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> Pegawai: <?=$peg['nama']?></small></h1>
+<h1 class="page-header">Riwayat <small>Hukuman <i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> Pegawai: <?=$peg['pegawai_nama']?></small></h1>
 <!-- begin row -->
 <div class="row">
 	<!-- begin col-12 -->

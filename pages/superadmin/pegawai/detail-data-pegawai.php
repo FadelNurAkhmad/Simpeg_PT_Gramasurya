@@ -1,17 +1,25 @@
 <?php
-if (isset($_GET['id_peg'])) {
-	$id_peg = $_GET['id_peg'];
+if (isset($_GET['pegawai_id'])) {
+	$id_peg = $_GET['pegawai_id'];
 }
 include "../../config/koneksi.php";
-$query   = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
-$data    = mysqli_fetch_array($query);
+// mengambil data pegawai dari gabungan tabel pegawai, tb_pegawai, pegawai_d
+$query = "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id = tb_pegawai.pegawai_id INNER JOIN pegawai_d ON pegawai.pegawai_id = pegawai_d.pegawai_id WHERE pegawai.pegawai_id=$id_peg";
+$sql   = mysqli_query($koneksi, $query);
+$data    = mysqli_fetch_array($sql);
+
+$jabatan	= mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$data[pembagian1_id]'");
+$jab	= mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
 
 $queryPan	= mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' AND status_pan='Aktif'");
 $selpan		= mysqli_fetch_array($queryPan);
 
-$birthday	= new DateTime($data['tgl_lhr']);
+$birthday	= new DateTime($data['tgl_lahir']);
 $today		= new DateTime();
 $diff = $today->diff($birthday);
+
+// mengambil data presensi dari mesin
+$tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[pegawai_pin]' ORDER BY scan_date DESC");
 ?>
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
@@ -24,11 +32,11 @@ $diff = $today->diff($birthday);
 		?>
 	</li>
 	<li><a href="index.php?page=form-view-data-pegawai" title="back" class="btn btn-sm btn-white m-b-10"><i class="fa fa-step-backward"></i> &nbsp;Back</a></li>
-	<li><a href="../../pages/superadmin/report/print-biodata-pegawai.php?id_peg=<?= $id_peg ?>" target="_blank" title="print" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-print"></i> &nbsp;Print</a></li>
+	<li><a href="../../pages/superadmin/report/print-biodata-pegawai.php?pegawai_id=<?= $id_peg ?>" target="_blank" title="print" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-print"></i> &nbsp;Print</a></li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Profile <small>Pegawai <i class="fa fa-angle-right"></i> <?= $data['nama'] ?> <i class="fa fa-lock"></i> NIP : <?= $data['nip'] ?></small></h1>
+<h1 class="page-header">Profile <small>Pegawai <i class="fa fa-angle-right"></i> <?= $data['pegawai_nama'] ?> <i class="fa fa-lock"></i> NIP : <?= $data['pegawai_nip'] ?></small></h1>
 <!-- end page-header -->
 <!-- begin row -->
 <div class="row">
@@ -55,10 +63,10 @@ $diff = $today->diff($birthday);
 						<div class="profile-left">
 							<!-- begin profile-image -->
 							<div class="profile-image">
-								<a href="index.php?page=form-ganti-foto&id_peg=<?= $id_peg ?>" title="ganti foto">
+								<a href="index.php?page=form-ganti-foto&pegawai_id=<?= $id_peg ?>" title="ganti foto">
 									<?php
 									if (empty($data['foto']))
-										if ($data['jk'] == "Laki-laki") {
+										if ($data['gender'] == "1") {
 											echo "<img src='../../assets/img/foto/no-foto-male.png' width='160' height='200' /><i class='fa fa-user hide'></i>";
 										} else {
 											echo "<img src='../../assets/img/foto/no-foto-female.png' width='160' height='200' /><i class='fa fa-user hide'></i>";
@@ -70,7 +78,7 @@ $diff = $today->diff($birthday);
 							</div>
 							<!-- end profile-image -->
 							<div class="m-b-10">
-								<a href="javascript:;" class="btn btn-warning btn-block btn-sm"><?= $data['nip'] ?></a>
+								<a href="javascript:;" class="btn btn-warning btn-block btn-sm"><?= $data['pegawai_nip'] ?></a>
 							</div>
 						</div>
 						<!-- end profile-left -->
@@ -87,25 +95,25 @@ $diff = $today->diff($birthday);
 													<h5><span class="label label-inverse pull-right"> # Biodata Pegawai </span></h5>
 												</th>
 												<th>
-													<h4><?= $data['nama'] ?> <small><?= $selpan['pangkat'] ?></small></h4>
+													<h4><?= $data['pegawai_nama'] ?> <small><?= (isset($jab)?"$jab[pembagian1_nama]":"") ?></small></h4>
 												</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr class="highlight">
 												<td class="field">NIP</td>
-												<td><?= $data['nip'] ?></td>
+												<td><?= $data['pegawai_nip'] ?></td>
 											</tr>
 											<tr class="divider">
 												<td colspan="2"></td>
 											</tr>
 											<tr>
 												<td class="field">Jenis Kelamin</td>
-												<td><i class="fa fa-intersex fa-lg m-r-5"></i> <?= $data['jk'] ?></td>
+												<td><i class="fa fa-intersex fa-lg m-r-5"></i> <?= ($data['gender']=='1')?"Laki-laki":"Perempuan"; ?></td>
 											</tr>
 											<tr>
 												<td class="field">Tempat Tanggal Lahir</td>
-												<td><i class="fa fa-map-marker fa-lg m-r-5"></i> <?= $data['tempat_lhr'] ?>, <?= $data['tgl_lhr'] ?></td>
+												<td><i class="fa fa-map-marker fa-lg m-r-5"></i> <?= $data['tempat_lahir'] ?>, <?= $data['tgl_lahir'] ?></td>
 											</tr>
 											<tr>
 												<td class="field">Umur</td>
@@ -113,19 +121,87 @@ $diff = $today->diff($birthday);
 											</tr>
 											<tr>
 												<td class="field">Golongan Darah</td>
-												<td><?= $data['gol_darah'] ?></td>
+												<td><?php 
+													switch($data['gol_darah']) {
+														case 1 :
+															echo "A+";
+															break;
+														case 2 :
+															echo "B+";
+															break;
+														case 3 :
+															echo "O+";
+															break;
+														case 4 :
+															echo "AB+";
+															break;
+														case 5 :
+															echo "A-";
+															break;
+														case 6 :
+															echo "B-";
+															break;
+														case 7 :
+															echo "O-";
+															break;
+														case 8 :
+															echo "AB-";
+															break; 
+													}
+													?>
+												</td>
 											</tr>
 											<tr>
 												<td class="field">Agama</td>
-												<td><?= $data['agama'] ?></td>
+												<td>
+													<?php 
+														switch($data['agama']) {
+															case 1 :
+																echo "Islam";
+																break;
+															case 2 :
+																echo "Katolik";
+																break;
+															case 3 :
+																echo "Protestan";
+																break;
+															case 4 :
+																echo "Hindu";
+																break;
+															case 5 :
+																echo "Budha";
+																break;
+															case 6 :
+																echo "Lainnya";
+																break;
+														} 
+													?>
+												</td>
 											</tr>
 											<tr>
 												<td class="field">Status Pernikahan</td>
-												<td><?= $data['status_nikah'] ?></td>
+												<td>
+													<?php 
+														switch($data['stat_nikah']) {
+															case 1 :
+																echo "Sudah Menikah";
+																break;
+															case 2 :
+																echo "Belum Menikah";
+																break;
+															case 3 :
+																echo "Duda/Janda Meninggal";
+																break;
+															case 4 :
+																echo "Duda/Janda Cerai";
+																break;
+														}
+													?>
+												</td>
 											</tr>
 											<tr>
 												<td class="field">No. Telp</td>
-												<td><i class="fa fa-mobile fa-lg m-r-5"></i> <?= $data['telp'] ?></td>
+												<td><i class="fa fa-mobile fa-lg m-r-5"></i> <?= $data['pegawai_telp'] ?></td>
 											</tr>
 											<tr>
 												<td class="field">Email</td>
@@ -135,7 +211,7 @@ $diff = $today->diff($birthday);
 												<td class="field">Alamat</td>
 												<td><?= $data['alamat'] ?></td>
 											</tr>
-											<tr>
+											<!-- <tr>
 												<td class="field">Status Kepegawaian</td>
 												<td><?= $data['status_kepeg'] ?></td>
 											</tr>
@@ -147,7 +223,7 @@ $diff = $today->diff($birthday);
 													echo $uni['nama'];
 													?>
 												</td>
-											</tr>
+											</tr> -->
 											<tr>
 												<td class="field">Sisa Cuti</td>
 												<td>
@@ -624,6 +700,7 @@ $diff = $today->diff($birthday);
 					</table>
 				</div>
 			</div>
+			<!-- tab dokumen -->
 			<div class="tab-pane fade" id="dokumen">
 				<div class="alert alert-success fade in">
 					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
@@ -687,7 +764,7 @@ $diff = $today->diff($birthday);
 						</div>
 						<div class="col-sm-12">
 							<div class="modal-body">
-								<form action="index.php?page=masterdok&id_peg=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+								<form action="index.php?page=masterdok&pegawai_id=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 									<div class="form-group">
 										<label class="col-md-3 control-label">Nama Dokumen</label>
 										<div class="col-md-6">
@@ -722,6 +799,8 @@ $diff = $today->diff($birthday);
 					</div>
 				</div>
 			</div>
+			<!-- end tab dokumen -->
+			<!-- tab presensi -->
 			<div class="tab-pane fade" id="presensi">
 				<div class="alert alert-success fade in">
 					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
@@ -730,64 +809,109 @@ $diff = $today->diff($birthday);
 				<div class="row ">
 					<div class="col-6 col-md-8">
 						<label class="col-md-1 control-label">Periode</label>
-						<div class="col-md-3">
-							<div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
-								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-								<input type="text" name="periode_awal" placeholder="Dari" class="form-control" />
+						<form action="index.php?page=detail-data-pegawai&pegawai_id=<?= $id_peg ?>" method="POST" enctype="multipart/form-data">
+							<div class="form-group col-md-3">
+								<div class="input-group date" id= "datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+									<input type="text" name="periode_awal" placeholder="Dari" class="form-control" />
+								</div>
 							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="input-group date" id="datepicker-disabled-past2" data-date-format="yyyy-mm-dd">
-								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-								<input type="text" name="periode_akhir" placeholder="Sampai" class="form-control" />
+							<div class="form-group col-md-3">
+								<div class="input-group date" id="datepicker-disabled-past2" data-date-format="yyyy-mm-dd">
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+									<input type="text" name="periode_akhir" placeholder="Sampai" class="form-control" />
+								</div>
 							</div>
-						</div>
-						<div class="col-sm-4 m-b-10">
-							<a type="button" class="btn btn-primary btn-sm m-r-5" data-toggle="modal" data-target="#jab"><i class="fa fa-floppy-o"></i> Submit&nbsp;</a>
-							<a href="#" class="btn btn-sm btn-success" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a>
-						</div>
+							<div class="form-group col-sm-4 m-b-10">
+								<button type="submit" name="cari" value="cari" class="btn btn-primary"><i class="ion-ios-search-strong"></i> &nbsp;Cari</button>&nbsp;
+								<a href="#" class="btn btn-sm btn-success" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a>
+							</div>
+						</form>
+					</div>
+					<div class="col-6 col-md-8">
+						<label class="col-md-1 control-label">Hadir</label>
+							<div class="col-md-2 m-b-10">
+								<input type="text" name="periode_awal" value="" class="form-control" readonly />
+							</div>
 					</div>
 				</div>
 				<div class="table-responsive">
 					<table class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th rowspan="3" width="4%">No</th>
-								<th rowspan="3">Nama</th>
-								<th colspan="3">Tanggal</th>
-								<th colspan="3">Tanggal</th>
-							</tr>
-							<tr>
-								<th colspan="3">23-Mei</th>
-								<th colspan="3">24-Mei</th>
-							</tr>
-							<tr>
-								<th>Datang</th>
-								<th>Pulang</th>
-								<th>Ket</th>
-
-								<th>Datang</th>
-								<th>Pulang</th>
-								<th>Ket</th>
+								<th>No</th>
+								<th>Tanggal</th>
+								<th>Jam</th>
+								<th>NIP</th>
+								<th>Nama</th>
+								<th>PIN</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
-							$no = 0;
-							// while ($peg    = mysql_fetch_array($tampilPeg)) {
-							$no++
+							if(!empty($_POST['periode_awal']) && !empty($_POST['periode_awal'])){ 
+								$tampilCari = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[pegawai_pin]' AND DATE(scan_date) >= '$_POST[periode_awal]' AND DATE(scan_date) <= '$_POST[periode_akhir]'");
+								$no = 0;
+								while($cari = mysqli_fetch_array($tampilCari, MYSQLI_ASSOC)) {
+									$no++;
 							?>
-							<tr>
-								<td><?php echo $no ?></td>
-								<td>Parjo Raharjo</td>
-								<td>06:28:00</td>
-								<td>17:10:00</td>
-								<td>-</td>
+									<tr>
+										<td><?php echo $no ?></td>
+										<?php
+											$myvalue = $cari['scan_date'];
+											$datetime = new DateTime($myvalue);
 
-								<td>08:09:00</td>
-								<td>16:29:00</td>
-								<td>-</td>
-							</tr>
+											$date = $datetime->format('Y-m-d');
+											$time = $datetime->format('H:i:s');
+										?>
+										<td><?= $date ?></td>
+										<td><?= $time ?></td>
+										<?php
+										$tampilPeg = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_pin='$cari[pin]'");
+										$peg = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
+										?>
+										<td><?= $peg['pegawai_nip'] ?></td>
+										<td><?= $peg['pegawai_nama'] ?></td>
+										<td><?= $cari['pin'] ?></td>
+									</tr>
+							<?php
+								}
+							}
+							?>
+
+
+							<?php
+							if(empty($_POST['periode_awal']) && empty($_POST['periode_awal'])){
+								$no = 0;
+								while ($pres    = mysqli_fetch_array($tampilPres, MYSQLI_ASSOC)) {
+									$no++;    
+							?>
+									<tr>
+										<td><?php echo $no ?></td>
+										<?php
+											$myvalue = $pres['scan_date'];
+											$datetime = new DateTime($myvalue);
+
+											$tanggal = $datetime->format('Y-m-d');
+											$jam = $datetime->format('H:i:s');
+										?>
+										<td><?= $tanggal ?></td>
+										<td><?= $jam ?></td>
+										<?php
+										$tampilPeg = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_pin='$pres[pin]'");
+										$peg = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
+										?>
+										<td><?= $peg['pegawai_nip'] ?></td>
+										<td><?= $peg['pegawai_nama'] ?></td>
+										<td><?= $pres['pin'] ?></td>
+										
+										
+									</tr>
+							<?php
+								}    
+							}
+							?>
+						</tbody>
 					</table>
 				</div>
 			</div>
@@ -844,10 +968,10 @@ $diff = $today->diff($birthday);
 									</thead>
 									<tbody>
 										<?php
-										$tampilPens	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
-										$pens	= mysqli_fetch_array($tampilPens, MYSQLI_ASSOC);
-										$lahir	= $pens['tgl_lhr'];
-										$pensiun = $pens['tgl_pensiun'];
+										// $tampilPens	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
+										// $pens	= mysqli_fetch_array($tampilPens, MYSQLI_ASSOC);
+										$lahir	= $data['tgl_lahir'];
+										$pensiiun = $data['tgl_pensiun'];
 										?>
 										<tr>
 											<td><?= $lahir ?></td>
@@ -882,10 +1006,10 @@ $diff = $today->diff($birthday);
 									</thead>
 									<tbody>
 										<?php
-										$tampilNp	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
-										$np	= mysqli_fetch_array($tampilNp, MYSQLI_ASSOC);
-										$naikpangkat	= $np['tgl_naikpangkat'];
-										$naikpensiun	= $np['tgl_pensiun'];
+										// $tampilNp	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
+										// $np	= mysqli_fetch_array($tampilNp, MYSQLI_ASSOC);
+										$naikpangkat	= $data['tgl_naikpangkat'];
+										$naikpensiun	= $data['tgl_pensiun'];
 
 										$begin = new DateTime($naikpangkat);
 										$end = new DateTime($naikpensiun);
@@ -929,10 +1053,10 @@ $diff = $today->diff($birthday);
 									</thead>
 									<tbody>
 										<?php
-										$tampilGj	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
-										$ng	= mysqli_fetch_array($tampilGj, MYSQLI_ASSOC);
-										$naikgaji	= $ng['tgl_naikgaji'];
-										$naikpens	= $ng['tgl_pensiun'];
+										// $tampilGj	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
+										// $ng	= mysqli_fetch_array($tampilGj, MYSQLI_ASSOC);
+										$naikgaji	= $data['tgl_naikgaji'];
+										$naikpens	= $data['tgl_pensiun'];
 
 										$beging = new DateTime($naikgaji);
 										$endg = new DateTime($naikpens);
@@ -975,7 +1099,7 @@ $diff = $today->diff($birthday);
 									<thead class="thin-border-bottom">
 										<tr>
 											<th width="2%">No<br />&nbsp;</th>
-											<th>Jabatan<br />ESL</th>
+											<th>Jabatan<br />&nbsp;</th>
 											<th>No. SK <br />Tgl. SK</th>
 											<th width="25%">TMT / SK<br />&nbsp;</th>
 											<th width="8%">Status<br />&nbsp;</th>
@@ -994,9 +1118,9 @@ $diff = $today->diff($birthday);
 										?>
 											<tr>
 												<td><?= $no ?></td>
-												<td>-&nbsp;<?php echo $jab['jabatan']; ?><br />-&nbsp;<?php echo $jab['eselon']; ?></td>
-												<td>-&nbsp;<?php echo $jab['no_sk']; ?><br />-&nbsp;<?php echo $jab['tgl_sk']; ?></td>
-												<td><?php echo $jab['tmt_jabatan']; ?> s/d <?php echo $jab['sampai_tgl']; ?>
+												<td>-&nbsp;<?php echo $jab['jabatan']; ?></td>
+												<td>-&nbsp;<?php echo $jab['no_sk']; ?><br />-&nbsp;<?php echo ($jab['tgl_sk'] == "0000-00-00")?"-":$jab['tgl_sk']; ?></td>
+												<td><?php echo ($jab['tmt_jabatan'] == "0000-00-00")?"-":$jab['tmt_jabatan']; ?> s/d <?php echo ($jab['sampai_tgl'] == "0000-00-00")?"-":$jab['sampai_tgl']; ?>
 													<br />
 													<?php
 													if ($jab['file'] == "") {
@@ -1018,7 +1142,7 @@ $diff = $today->diff($birthday);
 													<a href="index.php?page=form-edit-data-jabatan&id_jab=<?= $jab['id_jab']; ?>" title="edit" type="button" class="btn btn-info btn-icon btn-sm"><i class="fa fa-edit fa-lg"></i></a>&nbsp;
 													<a href="index.php?page=delete-data-jabatan&id_jab=<?= $jab['id_jab']; ?>" title="delete" type="button" class="btn btn-danger btn-icon btn-sm" onclick="return confirm('Are you sure you want to delete == Data Jabatan == from Database?');"><i class="fa fa-trash-o fa-lg"></i></a>
 												</td>
-												<td class="tools"><a href="index.php?page=set-jabatan-sekarang&id_jab=<?= $jab['id_jab']; ?>&id_peg=<?= $id_peg ?>&jabatan=<?= $jab['jabatan'] ?>" title="setup sebagai jabatan sekarang" type="button" class="btn btn-success btn-xs" onclick="return confirm('Are you sure you want Setup == Jabatan Sekarang == ?');">Set</a></td>
+												<td class="tools"><a href="index.php?page=set-jabatan-sekarang&id_jab=<?= $jab['id_jab']; ?>&pegawai_id=<?= $id_peg ?>&jabatan=<?= $jab['jabatan'] ?>" title="setup sebagai jabatan sekarang" type="button" class="btn btn-success btn-xs" onclick="return confirm('Are you sure you want Setup == Jabatan Sekarang == ?');">Set</a></td>
 											</tr>
 										<?php
 										}

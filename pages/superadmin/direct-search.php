@@ -3,7 +3,7 @@ include "../../config/koneksi.php";
 if ($_POST['search'] == "search") {
 	$nama	= $_POST['nama'];
 
-	$tampilPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' AND nama LIKE '%$nama%'");
+	$tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_status='1' AND pegawai_nama LIKE '%$nama%'");
 }
 ?>
 <!-- begin page-header -->

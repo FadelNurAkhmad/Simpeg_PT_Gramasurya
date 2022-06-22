@@ -7,7 +7,7 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	
-	$password	=md5("123");
+	$password	=password_hash("123", PASSWORD_DEFAULT);
 	
 	include "../../config/koneksi.php";
 	$query	= mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user='$id_user'");

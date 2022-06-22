@@ -1,7 +1,7 @@
 <?php
-$filename	= "Daftar Pegawai";
+// $filename	= "Daftar Pegawai";
 
-include "../../config/koneksi.php";
+// include "../../config/koneksi.php";
 // require '../../assets/plugins/phpspreadsheet/vendor/autoload.php';
 
 // use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -33,14 +33,14 @@ include "../../config/koneksi.php";
 // $sheet->setCellValue("S3", "Unit Kerja");
 // $sheet->setCellValue("T3", "Tgl. Pensiun");
 
-// $expPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY id_peg");
+// $expPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY pegawai_id");
 // $i	= 4; //Dimulai dengan baris ke dua
 // $no	= 1;
 // while ($peg	= mysqli_fetch_array($expPeg)) {
 // 	$expUni	= mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
 // 	$uni	= mysqli_fetch_array($expUni);
 // 	$sheet->setCellValue("A" . $i, $no);
-// 	$sheet->setCellValue("B" . $i, $peg['id_peg']);
+// 	$sheet->setCellValue("B" . $i, $peg['pegawai_id']);
 // 	$sheet->setCellValue("C" . $i, $peg['nip']);
 // 	$sheet->setCellValue("D" . $i, $peg['nama']);
 // 	$sheet->setCellValue("E" . $i, $peg['tempat_lhr']);
@@ -78,17 +78,20 @@ include "../../config/koneksi.php";
 		$_SESSION['pesan'] = "";
 		?>
 	</li>
-	<li><a href="<?php echo $file; ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
-	<li><a href="index.php?page=form-master-data-pegawai" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Add Pegawai</a></li>
+	<!-- <li><a href="<?php //echo $file; ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
+	<li><a href="index.php?page=form-master-data-pegawai" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Add Pegawai</a></li> -->
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Data <small>Pegawai&nbsp;</small></h1>
+<h1 class="page-header">Konfigurasi <small>Gaji Pegawai&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";
-// ambil data gabungan tabel pegawai dan tb_pegawai
-$tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id = tb_pegawai.pegawai_id WHERE pegawai_status='1'");
+$tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id DESC");
+$peg = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
+
+$jabatan	= mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$peg[pembagian1_id]'");
+$jab	= mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
 ?>
 <div class="row">
 	<!-- begin col-12 -->
@@ -105,69 +108,37 @@ $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai
 			</div>
 			<div class="alert alert-success fade in">
 				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
-				<i class="fa fa-info fa-2x pull-left"></i> Gunakan button di sebelah kanan setiap baris tabel untuk menuju instruksi view detail, edit dan hapus data ...
+				<i class="fa fa-info fa-2x pull-left"></i> Gunakan button di sebelah kanan setiap baris tabel untuk menuju instruksi edit data gaji ...
 			</div>
 			<div class="panel-body">
 				<table id="data-table" class="table table-striped table-bordered nowrap" width="100%">
 					<thead>
 						<tr>
 							<th width="4%">No</th>
-							<th>Foto</th>
 							<th>NIP</th>
 							<th>Nama</th>
-							<th>Jenis Kelamin</th>
-							<th>Jadwal Kerja</th>
 							<th>Jabatan</th>
+							<th>Total Gaji</th>
 							<th width="10%">Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
 						$no = 0;
-						while ($peg	= mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC)) {
+						while ($peg) {
 							$no++
 						?>
 							<tr>
 								<td><?php echo $no ?></td>
-								<td><a href="index.php?page=form-ganti-foto&pegawai_id=<?= $peg['pegawai_id']; ?>">
-										<?php
-										if (empty($peg['foto']))
-											if ($peg['gender'] == "1") {
-												echo "<img src='../../assets/img/foto/no-foto-male.png' title='$peg[pegawai_nip]' width='80' height='100'>";
-											} else {
-												echo "<img src='../../assets/img/foto/no-foto-female.png' title='$peg[pegawai_nip]' width='80' height='100'>";
-											}
-										else
-											echo "<img src='../../assets/img/foto/$peg[foto]' title='$peg[pegawai_nip]' width='80' height='100'>";
-										?>
-									</a></td>
 								<td><a href="index.php?page=detail-data-pegawai&pegawai_id=<?= $peg['pegawai_id'] ?>" title="detail"><?php echo $peg['pegawai_nip']; ?></a></td>
 								<td><?php echo $peg['pegawai_nama'] ?></td>
-								<td>
-									<?php 
-									if($peg['gender'] == "1") {
-										echo "Laki-laki";
-									} else {
-										echo "Perempuan";
-									}
-									?>
-								</td>
-								<td><?php echo $peg['tempat_lahir'] ?>, <?php echo $peg['tgl_lahir'] ?></td>
-								<td><?php 
-									$jabatan	= mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$peg[pembagian1_id]'");
-									$jab	= mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
-									if(isset($jab)){
-										echo $jab['pembagian1_nama'];
-									} else {
-										echo "";
-									}
-									?>
-								</td>
+								<td><?php echo (isset($jab)?"$jab[pembagian1_nama]":"") ?></td>
+								<td></td>
 								<td class="text-center">
-									<a type="button" class="btn btn-success btn-icon btn-sm" href="index.php?page=detail-data-pegawai&pegawai_id=<?= $peg['pegawai_id'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
-									<a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-pegawai&pegawai_id=<?= $peg['pegawai_id'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
-									<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $peg['pegawai_id'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
-								</td>
+                                	<a type="button" class="btn btn-success btn-icon btn-sm" href="index.php?page=detail-data-gaji" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
+                                	<a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-gaji-konfigurasi&pegawai_id=<?= $peg['pegawai_id'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
+                                	<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
+                            	</td>
 							</tr>
 							<!-- #modal-dialog -->
 							<div id="Del<?php echo $peg['pegawai_id'] ?>" class="modal fade" role="dialog">

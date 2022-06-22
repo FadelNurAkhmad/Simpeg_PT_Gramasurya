@@ -15,7 +15,7 @@ include "../../config/koneksi.php";
 $tampilUsr	= mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user='$_SESSION[id_user]'");
 $usr		= mysqli_fetch_array($tampilUsr);
 
-$tampilPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$usr[id_peg]'");
+$tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id ='$usr[id_peg]'");
 $peg		= mysqli_fetch_array($tampilPeg);
 ?>
 <!DOCTYPE html>
@@ -162,8 +162,8 @@ $peg		= mysqli_fetch_array($tampilPeg);
 					<li class="has-sub">
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-calendar bg-pink"></i><span>Form Pengajuan Cuti</span></a>
 						<ul class="sub-menu">
-							<li><a href="index.php?page=form-master-cuti&id_peg=<?= $peg['id_peg'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Input Pengajuan Cuti</a></li>
-							<li><a href="index.php?page=form-view-cuti&id_peg=<?= $peg['id_peg'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Data Cuti</a></li>
+							<li><a href="index.php?page=form-master-cuti&pegawai_id=<?= $peg['pegawai_id'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Input Pengajuan Cuti</a></li>
+							<li><a href="index.php?page=form-view-cuti&pegawai_id=<?= $peg['pegawai_id'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Data Cuti</a></li>
 						</ul>
 					</li>
 					<!-- begin sidebar minify button -->
@@ -232,73 +232,7 @@ $peg		= mysqli_fetch_array($tampilPeg);
 			&copy; 2018. <a href="http://www.rajaputramedia.com/">GRAMASURYA</a> Punya Kelompok SPI BOS FARIZ
 		</div>
 		<!-- end #footer -->
-		<!-- begin theme-panel -->
-		<div class="theme-panel">
-			<a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i class="ion-ios-cog"></i></a>
-			<div class="theme-panel-content">
-				<h5 class="m-t-0">Color Theme</h5>
-				<ul class="theme-list clearfix">
-					<li class="active"><a href="javascript:;" class="bg-blue" data-theme="default" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Default">&nbsp;</a></li>
-					<li><a href="javascript:;" class="bg-purple" data-theme="purple" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Purple">&nbsp;</a></li>
-					<li><a href="javascript:;" class="bg-green" data-theme="green" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Green">&nbsp;</a></li>
-					<li><a href="javascript:;" class="bg-orange" data-theme="orange" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Orange">&nbsp;</a></li>
-					<li><a href="javascript:;" class="bg-red" data-theme="red" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Red">&nbsp;</a></li>
-					<li><a href="javascript:;" class="bg-black" data-theme="black" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Black">&nbsp;</a></li>
-				</ul>
-				<div class="divider"></div>
-				<div class="row m-t-10">
-					<div class="col-md-5 control-label double-line">Header Styling</div>
-					<div class="col-md-7">
-						<select name="header-styling" class="form-control input-sm">
-							<option value="1">default</option>
-							<option value="2">inverse</option>
-						</select>
-					</div>
-				</div>
-				<div class="row m-t-10">
-					<div class="col-md-5 control-label">Header</div>
-					<div class="col-md-7">
-						<select name="header-fixed" class="form-control input-sm">
-							<option value="1">fixed</option>
-							<option value="2">default</option>
-						</select>
-					</div>
-				</div>
-				<div class="row m-t-10">
-					<div class="col-md-5 control-label double-line">Sidebar Styling</div>
-					<div class="col-md-7">
-						<select name="sidebar-styling" class="form-control input-sm">
-							<option value="1">default</option>
-							<option value="2">grid</option>
-						</select>
-					</div>
-				</div>
-				<div class="row m-t-10">
-					<div class="col-md-5 control-label">Sidebar</div>
-					<div class="col-md-7">
-						<select name="sidebar-fixed" class="form-control input-sm">
-							<option value="1">fixed</option>
-							<option value="2">default</option>
-						</select>
-					</div>
-				</div>
-				<div class="row m-t-10">
-					<div class="col-md-5 control-label double-line">Sidebar Gradient</div>
-					<div class="col-md-7">
-						<select name="content-gradient" class="form-control input-sm">
-							<option value="1">disabled</option>
-							<option value="2">enabled</option>
-						</select>
-					</div>
-				</div>
-				<div class="row m-t-10">
-					<div class="col-md-12">
-						<hr />
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- end theme-panel -->
+		
 		<!-- begin scroll to top btn -->
 		<a href="javascript:;" class="btn btn-icon btn-circle btn-primary btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
 		<!-- end scroll to top btn -->

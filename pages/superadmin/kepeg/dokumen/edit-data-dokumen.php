@@ -21,7 +21,7 @@
             $update = mysqli_query($koneksi, "UPDATE tb_dokumen SET dokumen='$dokumen', file='$file' WHERE id_dokumen='$id_dokumen'");
             if ($update) {
                 $_SESSION['pesan'] = "Good! edit data seminar success ...";
-                header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");
+                header("location:index.php?page=detail-data-pegawai&pegawai_id=$id_peg");
             } else {
                 echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
             }

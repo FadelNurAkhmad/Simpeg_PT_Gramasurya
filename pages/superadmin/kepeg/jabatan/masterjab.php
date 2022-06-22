@@ -1,7 +1,7 @@
 <div class="row">
 	<?php
 	if ($_POST['save'] == "save") {
-		$nama_masterjab	= $_POST['nama_masterjab'];
+		$pembagian1_nama	= $_POST['pembagian1_nama'];
 
 		function kdauto($tabel, $inisial)
 		{
@@ -26,18 +26,18 @@
 			}
 			return $inisial . $tmp . $angka;
 		}
-		$id_masterjab		= kdauto("tb_masterjab", "");
+		$pembagian1_id		= kdauto("pembagian1", "");
 
-		$cekname	= mysqli_num_rows(mysqli_query($koneksi, "SELECT nama_masterjab FROM tb_masterjab WHERE nama_masterjab='$_POST[nama_masterjab]'"));
+		$cekname	= mysqli_num_rows(mysqli_query($koneksi, "SELECT pembagian1_nama FROM pembagian1 WHERE pembagian1_nama='$_POST[pembagian1_nama]'"));
 
-		if (empty($_POST['nama_masterjab'])) {
+		if (empty($_POST['pembagian1_nama'])) {
 			$_SESSION['pesan'] = "Oops! Please fill all column ...";
 			header("location:index.php?page=form-master-data-jabatan");
 		} else if ($cekname > 0) {
 			$_SESSION['pesan'] = "Oops! Duplikat data ...";
 			header("location:index.php?page=form-master-data-jabatan");
 		} else {
-			$insert = "INSERT INTO tb_masterjab (id_masterjab, nama_masterjab) VALUES ('$id_masterjab', '$nama_masterjab')";
+			$insert = "INSERT INTO pembagian1 (pembagian1_id, pembagian1_nama) VALUES ('$pembagian1_id', '$pembagian1_nama')";
 			$query = mysqli_query($koneksi, $insert);
 
 			if ($query) {

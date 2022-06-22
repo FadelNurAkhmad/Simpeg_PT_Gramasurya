@@ -6,7 +6,7 @@ if (isset($_GET['id_jab'])) {
 	$query   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_jab='$id_jab'");
 	$data    = mysqli_fetch_array($query, MYSQLI_ASSOC);
 
-	$tampilPeg   = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
+	$tampilPeg   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$data[id_peg]'");
 	$peg    = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 } else {
 	die("Error. No ID Selected!");
@@ -25,7 +25,7 @@ if (isset($_GET['id_jab'])) {
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Riwayat <small>Jabatan <i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> Pegawai: <?= $peg['nama'] ?></small></h1>
+<h1 class="page-header">Riwayat <small>Jabatan <i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> Pegawai: <?= $peg['pegawai_nama'] ?></small></h1>
 <!-- begin row -->
 <div class="row">
 	<!-- begin col-12 -->
@@ -37,7 +37,6 @@ if (isset($_GET['id_jab'])) {
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
 				<h4 class="panel-title">Form edit data jabatan</h4>
 			</div>
@@ -47,25 +46,11 @@ if (isset($_GET['id_jab'])) {
 						<label class="col-md-3 control-label">Jabatan</label>
 						<div class="col-md-6">
 							<?php
-							$dataJ = mysqli_query($koneksi, "SELECT * FROM tb_masterjab ORDER BY nama_masterjab");
+							$dataJ = mysqli_query($koneksi, "SELECT * FROM pembagian1 ORDER BY pembagian1_nama");
 							echo '<select name="jabatan" class="default-select2 form-control">';
 							echo '<option value="' . $data['jabatan'] . '">...</option>';
 							while ($rowj = mysqli_fetch_array($dataJ, MYSQLI_ASSOC)) {
-								echo '<option value="' . $rowj['nama_masterjab'] . '">' . $rowj['nama_masterjab'] . '</option>';
-							}
-							echo '</select>';
-							?>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Eselon</label>
-						<div class="col-md-6">
-							<?php
-							$dataE = mysqli_query($koneksi, "SELECT * FROM tb_masteresl ORDER BY nama_masteresl DESC");
-							echo '<select name="eselon" class="default-select2 form-control">';
-							echo '<option value="' . $data['eselon'] . '">...</option>';
-							while ($rowe = mysqli_fetch_array($dataE, MYSQLI_ASSOC)) {
-								echo '<option value="' . $rowe['nama_masteresl'] . '">' . $rowe['nama_masteresl'] . '</option>';
+								echo '<option value="' . $rowj['pembagian1_nama'] . '">' . $rowj['pembagian1_nama'] . '</option>';
 							}
 							echo '</select>';
 							?>
@@ -108,7 +93,7 @@ if (isset($_GET['id_jab'])) {
 						<label class="col-md-3 control-label"></label>
 						<div class="col-md-6">
 							<button type="submit" name="edit" value="edit" class="btn btn-primary"><i class="fa fa-edit"></i> &nbsp;Edit</button>&nbsp;
-							<a type="button" class="btn btn-default active" href="index.php?page=detail-data-pegawai&id_peg=<?= $data['id_peg'] ?>"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+							<a type="button" class="btn btn-default active" href="index.php?page=detail-data-pegawai&pegawai_id=<?= $data['id_peg'] ?>"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
 						</div>
 					</div>
 				</form>

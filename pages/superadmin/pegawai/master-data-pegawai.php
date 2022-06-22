@@ -1,82 +1,90 @@
 <div class="row">
 <?php
-	if (isset($_GET['id_peg'])) {
-	$id_peg = $_GET['id_peg'];
+	if (isset($_GET['pegawai_id'])) {
+	$id_peg = $_GET['pegawai_id'];
 	}
 	else {
 		die ("Error. No ID Selected! ");	
 	}
 	
 	if ($_POST['save'] == "save") {
-	$nip			=$_POST['nip'];
-	$nama			=$_POST['nama'];
-	$tempat_lhr		=$_POST['tempat_lhr'];
-	$tgl_lhr		=$_POST['tgl_lhr'];
-	$agama			=$_POST['agama'];
-	$jk				=$_POST['jk'];	
-	$gol_darah		=$_POST['gol_darah'];
-	$status_nikah	=$_POST['status_nikah'];	
-	$status_kepeg	=$_POST['status_kepeg'];	
-	$tgl_naikpangkat=$_POST['tgl_naikpangkat'];	
-	$tgl_naikgaji	=$_POST['tgl_naikgaji'];	
-	$alamat			=$_POST['alamat'];
-	$telp			=$_POST['telp'];
-	$email			=$_POST['email'];
-	$id_unit		=$_POST['id_unit'];
-	$foto			=$_FILES['foto']['name'];
+		$pin			=$_POST['pin'];
+		$nip			=$_POST['nip'];
+		$nama			=$_POST['nama'];
+		$tempat_lahir	=$_POST['tempat_lahir'];
+		$tgl_lahir		=$_POST['tgl_lahir'];
+		$tgl_mulai_kerja		=$_POST['tgl_mulai_kerja'];
+		$tgl_masuk_pertama		=$_POST['tgl_masuk_pertama'];
+		$agama			=$_POST['agama'];
+		$gender			=$_POST['gender'];	
+		$gol_darah		=$_POST['gol_darah'];
+		$status_nikah	=$_POST['status_nikah'];		
+		$alamat			=$_POST['alamat'];
+		$telp			=$_POST['telp'];
+		$email			=$_POST['email'];
+		$foto			=$_FILES['foto']['name'];
+		
+		$password	= password_hash("123", PASSWORD_DEFAULT);
+		$date_reg	=date("Ymd");
+		
+		// $pensiun = new DateTime($tgl_lhr);
+		// $pensiun->modify('+58 year');
+		// $pensiun->format('Y-m-d');
+		// $tgl_pensiun=$pensiun->format('Y-m-d');
 	
-	$password	=md5("123");
-	$date_reg	=date("Ymd");
+		include "../../config/koneksi.php";
+		$cekpin	=mysqli_num_rows (mysqli_query($koneksi, "SELECT pegawai_pin FROM pegawai WHERE pegawai_pin='$_POST[pin]'"));
+		$ceknip	=mysqli_num_rows (mysqli_query($koneksi, "SELECT pegawai_nip FROM pegawai WHERE pegawai_nip='$_POST[nip]'"));
 	
-	$pensiun = new DateTime($tgl_lhr);
-	$pensiun->modify('+58 year');
-	$pensiun->format('Y-m-d');
-	$tgl_pensiun=$pensiun->format('Y-m-d');
-	
-	include "../../config/koneksi.php";
-	$ceknip	=mysqli_num_rows (mysqli_query($koneksi, "SELECT nip FROM tb_pegawai WHERE nip='$_POST[nip]'"));
-	
-		if (empty($_POST['nip']) || empty($_POST['nama']) || empty($_POST['tempat_lhr']) || empty($_POST['tgl_lhr']) || empty($_POST['agama']) || empty($_POST['jk']) || empty($_POST['gol_darah']) || empty($_POST['status_nikah']) || empty($_POST['status_kepeg']) || empty($_POST['tgl_naikpangkat']) || empty($_POST['tgl_naikgaji'])) {
+		if (empty($_POST['pin']) || empty($_POST['nip']) || empty($_POST['nama']) || empty($_POST['tempat_lahir']) || empty($_POST['tgl_lahir']) || empty($_POST['tgl_mulai_kerja']) 
+			|| empty($_POST['tgl_masuk_pertama']) || empty($_POST['agama']) || empty($_POST['gender']) || empty($_POST['gol_darah'])
+			|| empty($_POST['status_nikah'])) {
 			$_SESSION['pesan'] = "Oops! Please fill all column ...";
 			header("location:index.php?page=form-master-data-pegawai");
 		}
-		else if($ceknip > 0) {
+		else if($ceknip > 0 || $cekpin > 0) {
 			$_SESSION['pesan'] = "Oops! Duplikat data ...";
 			header("location:index.php?page=form-master-data-pegawai");
 		}
 		
-		else{
-		$insert = "INSERT INTO tb_pegawai (id_peg, nip, nama, tempat_lhr, tgl_lhr, agama, jk, gol_darah, status_nikah, status_kepeg, tgl_naikpangkat, tgl_naikgaji, alamat, telp, email, unit_kerja, foto, tgl_pensiun, date_reg) VALUES ('$id_peg', '$nip', '$nama', '$tempat_lhr', '$tgl_lhr', '$agama', '$jk', '$gol_darah', '$status_nikah', '$status_kepeg', '$tgl_naikpangkat', '$tgl_naikgaji', '$alamat', '$telp', '$email', '$id_unit', '$foto', '$tgl_pensiun', '$date_reg')";
-		$query = mysqli_query ($koneksi, $insert);
+		else {
+			$pegawai = "INSERT INTO pegawai (pegawai_id, pegawai_pin, pegawai_nip, pegawai_nama, pegawai_alias, pegawai_telp, 
+											tempat_lahir, tgl_lahir, tgl_mulai_kerja, gender, tgl_masuk_pertama) 
+											VALUES ('$id_peg', '$pin', '$nip', '$nama', '$nama', '$telp', '$tempat_lahir', '$tgl_lahir', '$tgl_mulai_kerja', '$gender', '$tgl_masuk_pertama')";
+			$query = mysqli_query ($koneksi, $pegawai);
+
+			$pegawai_d = mysqli_query($koneksi, "INSERT INTO pegawai_d (pegawai_id, gol_darah, stat_nikah, alamat, agama) VALUES ('$id_peg', '$gol_darah', '$status_nikah', '$alamat', '$agama')");
+
+			$tb_pegawai = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id, email, foto) VALUES ('$id_peg', '$email', '$foto')");
 		
-		$insertusr = mysqli_query($koneksi, "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, id_peg) VALUES ('$nip', '$nama', '$password', 'Pegawai', '$id_peg')");
+			$insertusr = mysqli_query($koneksi, "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, id_peg) VALUES ('$nip', '$nama', '$password', 'Pegawai', '$id_peg')");
 		
-		// kgb //
-		$beging = new DateTime($tgl_naikgaji);
-		$endg = new DateTime($tgl_pensiun);
-			for($ig = $beging; $beging <= $endg; $ig->modify('+2 year')){	
-				$ig->format("Y-m-d");
-				$tgl_kgb=$ig->format("Y-m-d");
+			// kgb //
+			// $beging = new DateTime($tgl_naikgaji);
+			// $endg = new DateTime($tgl_pensiun);
+			// for($ig = $beging; $beging <= $endg; $ig->modify('+2 year')){	
+			// 	$ig->format("Y-m-d");
+			// 	$tgl_kgb=$ig->format("Y-m-d");
 				
-				$values="($id_peg, '$tgl_kgb')";
-		$insertkgb	=mysqli_query($koneksi, "INSERT INTO tb_kgb (id_peg, tgl_kgb) VALUES ".$values);
-		}
+			// 	$values="($id_peg, '$tgl_kgb')";
+			// 	$insertkgb	=mysqli_query($koneksi, "INSERT INTO tb_kgb (id_peg, tgl_kgb) VALUES ".$values);
+			// }
 		
-		// kpb //
-		$beginp = new DateTime($tgl_naikpangkat);
-		$endp = new DateTime($tgl_pensiun);
-			for($ip = $beginp; $beginp <= $endp; $ip->modify('+4 year')){	
-				$ip->format("Y-m-d");
-				$tgl_kpb=$ip->format("Y-m-d");
+			// kpb //
+			// $beginp = new DateTime($tgl_naikpangkat);
+			// $endp = new DateTime($tgl_pensiun);
+			// for($ip = $beginp; $beginp <= $endp; $ip->modify('+4 year')){	
+			// 	$ip->format("Y-m-d");
+			// 	$tgl_kpb=$ip->format("Y-m-d");
 				
-				$valuesp="($id_peg, '$tgl_kpb')";
-		$insertkpb	=mysqli_query($koneksi, "INSERT INTO tb_kpb (id_peg, tgl_kpb) VALUES ".$valuesp);
-		}
+			// 	$valuesp="($id_peg, '$tgl_kpb')";
+			// 	$insertkpb	=mysqli_query($koneksi, "INSERT INTO tb_kpb (id_peg, tgl_kpb) VALUES ".$valuesp);
+			// }
 		
-		if($query){
-			$_SESSION['pesan'] = "Good! Insert master pegawai success ...";
-			header("location:index.php?page=form-view-data-pegawai");
-		}
+			if($query){
+				$_SESSION['pesan'] = "Good! Insert master pegawai success ...";
+				header("location:index.php?page=form-view-data-pegawai");
+			}
 			else {
 				echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
 			}

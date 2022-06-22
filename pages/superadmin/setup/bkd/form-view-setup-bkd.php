@@ -50,9 +50,9 @@ $data	= mysqli_fetch_array($query, MYSQLI_ASSOC);
 						<tr>
 							<td class="field">Kepala</td>
 							<td><?php
-								$kepala	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$data[kepala]'");
+								$kepala	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$data[kepala]'");
 								$kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
-								echo $kep['nama']
+								echo $kep['pegawai_nama']
 								?>
 							</td>
 						</tr>

@@ -51,7 +51,6 @@ $id_jab	= kdauto("tb_jabatan", "");
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
 				<h4 class="panel-title">Form master data jabatan</h4>
 			</div>
@@ -61,11 +60,11 @@ $id_jab	= kdauto("tb_jabatan", "");
 						<label class="col-md-3 control-label">Pegawai</label>
 						<div class="col-md-6">
 							<?php
-							$data = mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY nama ASC");
-							echo '<select name="id_peg" class="default-select2 form-control">';
+							$data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
+							echo '<select name="pegawai_id" class="default-select2 form-control">';
 							echo '<option value="">...</option>';
 							while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)) {
-								echo '<option value="' . $row['id_peg'] . '">' . $row['nama'] . '_' . $row['nip'] . '</option>';
+								echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
 							}
 							echo '</select>';
 							?>
@@ -75,11 +74,11 @@ $id_jab	= kdauto("tb_jabatan", "");
 						<label class="col-md-3 control-label">Jabatan</label>
 						<div class="col-md-4">
 							<?php
-							$dataJ = mysqli_query($koneksi, "SELECT * FROM tb_masterjab ORDER BY nama_masterjab");
+							$dataJ = mysqli_query($koneksi, "SELECT * FROM pembagian1 ORDER BY pembagian1_nama");
 							echo '<select name="jabatan" class="default-select2 form-control">';
 							echo '<option value="">...</option>';
 							while ($rowj = mysqli_fetch_array($dataJ, MYSQLI_ASSOC)) {
-								echo '<option value="' . $rowj['nama_masterjab'] . '">' . $rowj['nama_masterjab'] . '</option>';
+								echo '<option value="' . $rowj['pembagian1_nama'] . '">' . $rowj['pembagian1_nama'] . '</option>';
 							}
 							echo '</select>';
 							?>
@@ -88,23 +87,7 @@ $id_jab	= kdauto("tb_jabatan", "");
 							<a type="button" class="btn btn-warning btn-sm pull-right" data-toggle="modal" data-target="#jab"><i class="fa fa-plus-circle"></i> Add Jabatan&nbsp;</a>
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Eselon</label>
-						<div class="col-md-4">
-							<?php
-							$dataE = mysqli_query($koneksi, "SELECT * FROM tb_masteresl ORDER BY nama_masteresl DESC");
-							echo '<select name="eselon" class="default-select2 form-control">';
-							echo '<option value="">...</option>';
-							while ($rowe = mysqli_fetch_array($dataE, MYSQLI_ASSOC)) {
-								echo '<option value="' . $rowe['nama_masteresl'] . '">' . $rowe['nama_masteresl'] . '</option>';
-							}
-							echo '</select>';
-							?>
-						</div>
-						<div class="col-sm-2">
-							<a type="button" class="btn btn-warning btn-sm pull-right" data-toggle="modal" data-target="#esl"><i class="fa fa-plus-circle"></i> Add Eselon&nbsp; &nbsp;</a>
-						</div>
-					</div>
+					
 					<div class="form-group">
 						<label class="col-md-3 control-label">Nomor dan Tanggal SK</label>
 						<div class="col-md-3">
@@ -112,7 +95,7 @@ $id_jab	= kdauto("tb_jabatan", "");
 						</div>
 						<div class="col-md-3">
 							<div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
-								<input type="text" name="tgl_sk" class="form-control" />
+								<input type="text" value="" name="tgl_sk" class="form-control" />
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 							</div>
 						</div>
@@ -121,13 +104,13 @@ $id_jab	= kdauto("tb_jabatan", "");
 						<label class="col-md-3 control-label">TMT Jabatan</label>
 						<div class="col-md-3">
 							<div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
-								<input type="text" name="tmt_jabatan" placeholder="Dari" class="form-control" />
+								<input type="text" value="" name="tmt_jabatan" placeholder="Dari" class="form-control" />
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="input-group date" id="datepicker-disabled-past4" data-date-format="yyyy-mm-dd">
-								<input type="text" name="sampai_tgl" placeholder="Sampai" class="form-control" />
+								<input type="text" value="" name="sampai_tgl" placeholder="Sampai" class="form-control" />
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 							</div>
 						</div>
@@ -166,7 +149,7 @@ $id_jab	= kdauto("tb_jabatan", "");
 						<div class="form-group">
 							<label class="col-md-2 control-label">Nama Jabatan</label>
 							<div class="col-md-4">
-								<input type="text" name="nama_masterjab" maxlength="32" class="form-control" />
+								<input type="text" name="pembagian1_nama" maxlength="32" class="form-control" />
 							</div>
 							<div class="col-md-4">
 								<p>* Ex: Kepala Dinas</p>
@@ -191,27 +174,27 @@ $id_jab	= kdauto("tb_jabatan", "");
 								<tbody>
 									<?php
 									$no = 0;
-									$tampilJ	= mysqli_query($koneksi, "SELECT * FROM tb_masterjab ORDER BY nama_masterjab ASC");
+									$tampilJ	= mysqli_query($koneksi, "SELECT * FROM pembagian1 ORDER BY pembagian1_nama ASC");
 									while ($jab = mysqli_fetch_array($tampilJ, MYSQLI_ASSOC)) {
 										$no++;
 									?>
 										<tr>
 											<td><?= $no ?></td>
-											<td><?php echo $jab['nama_masterjab']; ?></td>
+											<td><?php echo $jab['pembagian1_nama']; ?></td>
 											<td class="tools" align="center">
-												<a href="index.php?page=form-edit-masterjab&id_masterjab=<?= $jab['id_masterjab']; ?>" title="edit" type="button" class="btn btn-info btn-icon btn-sm"><i class="fa fa-edit fa-lg"></i></a>&nbsp;&nbsp;
-												<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Delmasjab<?php echo $jab['id_masterjab'] ?>" title="delete"><i class="fa-lg fa fa-trash-o"></i></a>
+												<a href="index.php?page=form-edit-masterjab&pembagian1_id=<?= $jab['pembagian1_id']; ?>" title="edit" type="button" class="btn btn-info btn-icon btn-sm"><i class="fa fa-edit fa-lg"></i></a>&nbsp;&nbsp;
+												<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Delmasjab<?php echo $jab['pembagian1_id'] ?>" title="delete"><i class="fa-lg fa fa-trash-o"></i></a>
 											</td>
 										</tr>
 										<!-- #modal-dialog -->
-										<div id="Delmasjab<?php echo $jab['id_masterjab'] ?>" class="modal fade" role="dialog">
+										<div id="Delmasjab<?php echo $jab['pembagian1_id'] ?>" class="modal fade" role="dialog">
 											<div class="modal-dialog">
 												<div class="modal-content">
 													<div class="modal-header">
-														<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete Master Jabatan <?php echo $jab['nama_masterjab'] ?> from Database?</h5>
+														<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete Master Jabatan <?php echo $jab['pembagian1_nama'] ?> from Database?</h5>
 													</div>
 													<div class="modal-body" align="center">
-														<a href="index.php?page=delete-masterjab&id_masterjab=<?= $jab['id_masterjab'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
+														<a href="index.php?page=delete-masterjab&pembagian1_id=<?= $jab['pembagian1_id'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
 													</div>
 													<div class="modal-footer">
 														<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
@@ -233,88 +216,7 @@ $id_jab	= kdauto("tb_jabatan", "");
 		</div>
 	</div>
 </div>
-<div id="esl" class="modal fade">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<div class="table-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Master Data Eselon</h4>
-				</div>
-			</div>
-			<div class="col-sm-12">
-				<div class="modal-body">
-					<form action="index.php?page=masteresl" class="form-horizontal" method="POST" enctype="multipart/form-data">
-						<div class="form-group">
-							<label class="col-md-2 control-label">Nama Eselon</label>
-							<div class="col-md-4">
-								<input type="text" name="nama_masteresl" maxlength="32" class="form-control" />
-							</div>
-							<div class="col-md-4">
-								<p>* Gunakan tanda baca "/". Ex: III/A</p>
-							</div>
-							<div class="col-md-2">
-								<button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>
-							</div>
-						</div>
-					</form>
-					<div class="widget-body">
-						<div class="widget-main">
-							<table class="table table-bordered table-striped">
-								<thead class="thin-border-bottom">
-									<tr>
-										<th width="10%"><i class="fa fa-caret-right"></i> No</th>
-										<th width="70%"><i class="fa fa-caret-right"></i> Nama Eselon</th>
-										<th width="20%">
-											<center><i class="fa fa-code fa-lg"></i></center>
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-									$no = 0;
-									$tampilE	= mysqli_query($koneksi, "SELECT * FROM tb_masteresl ORDER BY nama_masteresl DESC");
-									while ($esl = mysqli_fetch_array($tampilE, MYSQLI_ASSOC)) {
-										$no++;
-									?>
-										<tr>
-											<td><?= $no ?></td>
-											<td><?php echo $esl['nama_masteresl']; ?></td>
-											<td class="tools" align="center">
-												<a href="index.php?page=form-edit-masteresl&id_masteresl=<?= $esl['id_masteresl']; ?>" title="edit" type="button" class="btn btn-info btn-icon btn-sm"><i class="fa fa-edit fa-lg"></i></a>&nbsp;&nbsp;
-												<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Delmasesl<?php echo $esl['id_masteresl'] ?>" title="delete"><i class="fa-lg fa fa-trash-o"></i></a>
-											</td>
-										</tr>
-										<!-- #modal-dialog -->
-										<div id="Delmasesl<?php echo $esl['id_masteresl'] ?>" class="modal fade" role="dialog">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete Master Eselon <?php echo $esl['nama_masteresl'] ?> from Database?</h5>
-													</div>
-													<div class="modal-body" align="center">
-														<a href="index.php?page=delete-masteresl&id_masteresl=<?= $esl['id_masteresl'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
-													</div>
-													<div class="modal-footer">
-														<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									<?php
-									}
-									?>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer no-margin-top">
-			</div>
-		</div>
-	</div>
-</div>
+
 <script>
 	// 500 = 0,5 s
 	$(document).ready(function() {
