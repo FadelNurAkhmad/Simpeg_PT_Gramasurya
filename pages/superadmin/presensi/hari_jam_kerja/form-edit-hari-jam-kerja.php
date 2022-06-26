@@ -22,7 +22,6 @@ if (isset($_GET['jdw_kerja_m_id'])) {
     $data8 = mysqli_fetch_array($query8, MYSQLI_ASSOC);
     $query9 = mysqli_query($koneksi, "SELECT * FROM jdw_kerja_d WHERE jdw_kerja_m_id='$jdw_kerja_m_id' AND jdw_kerja_d_idx=999");
     $data9 = mysqli_fetch_array($query9, MYSQLI_ASSOC);
-
 } else {
     die("Error. No ID Selected!");
 }
@@ -57,194 +56,194 @@ if (isset($_GET['jdw_kerja_m_id'])) {
                 <h4 class="panel-title">Form edit jadwal kerja normal</h4>
             </div>
             <div class="panel-body">
-            <form action="index.php?page=edit-hari-jam-kerja&jdw_kerja_m_id=<?= $jdw_kerja_m_id ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+                <form action="index.php?page=edit-hari-jam-kerja&jdw_kerja_m_id=<?= $jdw_kerja_m_id ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="col-md-3 control-label">Nama Jadwal Kerja*</label>
                         <div class="col-md-3">
-                            <input class="form-control" type="text" name="jdw_kerja_m_name" value="<?= $data['jdw_kerja_m_name'] ?>"/>
+                            <input class="form-control" type="text" name="jdw_kerja_m_name" value="<?= $data['jdw_kerja_m_name'] ?>" />
                         </div>
                         <label class="col-md-1 control-label">Kode*</label>
                         <div class="col-md-2">
-                            <input class="form-control" type="text" name="jdw_kerja_m_kode" value="<?= $data['jdw_kerja_m_kode'] ?>"/>
+                            <input class="form-control" type="text" name="jdw_kerja_m_kode" value="<?= $data['jdw_kerja_m_kode'] ?>" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Keterangan</label>
                         <div class="col-md-3">
-                            <input class="form-control" type="text" name="jdw_kerja_m_keterangan" value="<?= $data['jdw_kerja_m_keterangan'] ?>"/>
+                            <input class="form-control" type="text" name="jdw_kerja_m_keterangan" value="<?= $data['jdw_kerja_m_keterangan'] ?>" />
                         </div>
                     </div>
                     <div class="form-group">
-						<label class="col-md-3 control-label">Mulai Tanggal*</label>
-						<div class="col-md-3">
-							<div class="input-group date" id="datepicker-disabled-past2" data-date-format="yyyy-mm-dd">
-								<input type="text" name="jdw_kerja_m_mulai" class="form-control" value="<?= $data['jdw_kerja_m_mulai'] ?>"/>
-								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-							</div>
-						</div>
-					</div>
+                        <label class="col-md-3 control-label">Mulai Tanggal*</label>
+                        <div class="col-md-3">
+                            <div class="input-group date" id="datepicker-disabled-past2" data-date-format="yyyy-mm-dd">
+                                <input type="text" name="jdw_kerja_m_mulai" class="form-control" value="<?= $data['jdw_kerja_m_mulai'] ?>" />
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Senin</label>
                         <div class="col-md-3">
-                        <?php
+                            <?php
                             $shift = mysqli_query($koneksi, "SELECT * FROM jam_kerja ORDER BY jk_id ASC");
                             echo '<select name="jk_id1" class="default-select2 form-control" id="disabled1">';
                             echo '<option value="">...</option>';
-                            while ($row = mysqli_fetch_array($shift, MYSQLI_ASSOC)) { 
-                        ?>
-								<option value="<?= $row['jk_id'] ?>" <?php echo ($data2['jk_id']==$row['jk_id'])?"selected":""; ?>> <?= $row['jk_name'] ?> </option>    
-                        <?php
+                            while ($row = mysqli_fetch_array($shift, MYSQLI_ASSOC)) {
+                            ?>
+                                <option value="<?= $row['jk_id'] ?>" <?php echo ($data2['jk_id'] == $row['jk_id']) ? "selected" : ""; ?>> <?= $row['jk_name'] ?> </option>
+                            <?php
                             }
-                        ?>	
-							</select>
+                            ?>
+                            </select>
                         </div>
                         <div class="col-md-1 form-check">
-                            <input class="form-check-input" name="libur1" type="checkbox" id="check1" onclick="checkedOn(1)"  value="-1" <?php echo ($data2['jdw_kerja_d_libur']=='-1')?"checked":""; ?>>
+                            <input class="form-check-input" name="libur1" type="checkbox" id="check1" onclick="checkedOn(1)" value="-1" <?php echo ($data2['jdw_kerja_d_libur'] == '-1') ? "checked" : ""; ?>>
                             <label class="form-check-label" for="check">Libur</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Selasa</label>
                         <div class="col-md-3">
-                        <?php
+                            <?php
                             $shift = mysqli_query($koneksi, "SELECT * FROM jam_kerja ORDER BY jk_id ASC");
                             echo '<select name="jk_id2" class="default-select2 form-control" id="disabled2">';
                             echo '<option value="">...</option>';
-                            while ($row = mysqli_fetch_array($shift, MYSQLI_ASSOC)) { 
-                        ?>
-								<option value="<?= $row['jk_id'] ?>" <?php echo ($data3['jk_id']==$row['jk_id'])?"selected":""; ?>> <?= $row['jk_name'] ?> </option>    
-                        <?php
+                            while ($row = mysqli_fetch_array($shift, MYSQLI_ASSOC)) {
+                            ?>
+                                <option value="<?= $row['jk_id'] ?>" <?php echo ($data3['jk_id'] == $row['jk_id']) ? "selected" : ""; ?>> <?= $row['jk_name'] ?> </option>
+                            <?php
                             }
-                        ?>	
-							</select>
+                            ?>
+                            </select>
                         </div>
                         <div class="col-md-1 form-check">
-                            <input class="form-check-input" name="libur2" type="checkbox" id="check2" onclick="checkedOn(2)"  value="-1" <?php echo ($data3['jdw_kerja_d_libur']=='-1')?"checked":""; ?>>
+                            <input class="form-check-input" name="libur2" type="checkbox" id="check2" onclick="checkedOn(2)" value="-1" <?php echo ($data3['jdw_kerja_d_libur'] == '-1') ? "checked" : ""; ?>>
                             <label class="form-check-label" for="check">Libur</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Rabu</label>
                         <div class="col-md-3">
-                        <?php
+                            <?php
                             $shift = mysqli_query($koneksi, "SELECT * FROM jam_kerja ORDER BY jk_id ASC");
                             echo '<select name="jk_id3" class="default-select2 form-control" id="disabled3">';
                             echo '<option value="">...</option>';
-                            while ($row = mysqli_fetch_array($shift, MYSQLI_ASSOC)) { 
-                        ?>
-								<option value="<?= $row['jk_id'] ?>" <?php echo ($data4['jk_id']==$row['jk_id'])?"selected":""; ?>> <?= $row['jk_name'] ?> </option>    
-                        <?php
+                            while ($row = mysqli_fetch_array($shift, MYSQLI_ASSOC)) {
+                            ?>
+                                <option value="<?= $row['jk_id'] ?>" <?php echo ($data4['jk_id'] == $row['jk_id']) ? "selected" : ""; ?>> <?= $row['jk_name'] ?> </option>
+                            <?php
                             }
-                        ?>	
-							</select>
+                            ?>
+                            </select>
                         </div>
                         <div class="col-md-1 form-check">
-                            <input class="form-check-input" name="libur3" type="checkbox" id="check3" onclick="checkedOn(3)"  value="-1" <?php echo ($data4['jdw_kerja_d_libur']=='-1')?"checked":""; ?>>
+                            <input class="form-check-input" name="libur3" type="checkbox" id="check3" onclick="checkedOn(3)" value="-1" <?php echo ($data4['jdw_kerja_d_libur'] == '-1') ? "checked" : ""; ?>>
                             <label class="form-check-label" for="check">Libur</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Kamis</label>
                         <div class="col-md-3">
-                        <?php
+                            <?php
                             $shift = mysqli_query($koneksi, "SELECT * FROM jam_kerja ORDER BY jk_id ASC");
                             echo '<select name="jk_id4" class="default-select2 form-control" id="disabled4">';
                             echo '<option value="">...</option>';
-                            while ($row = mysqli_fetch_array($shift, MYSQLI_ASSOC)) { 
-                        ?>
-								<option value="<?= $row['jk_id'] ?>" <?php echo ($data5['jk_id']==$row['jk_id'])?"selected":""; ?>> <?= $row['jk_name'] ?> </option>    
-                        <?php
+                            while ($row = mysqli_fetch_array($shift, MYSQLI_ASSOC)) {
+                            ?>
+                                <option value="<?= $row['jk_id'] ?>" <?php echo ($data5['jk_id'] == $row['jk_id']) ? "selected" : ""; ?>> <?= $row['jk_name'] ?> </option>
+                            <?php
                             }
-                        ?>	
-							</select>
+                            ?>
+                            </select>
                         </div>
                         <div class="col-md-1 form-check">
-                            <input class="form-check-input" name="libur4" type="checkbox" id="check4" onclick="checkedOn(4)"  value="-1" <?php echo ($data5['jdw_kerja_d_libur']=='-1')?"checked":""; ?>>
+                            <input class="form-check-input" name="libur4" type="checkbox" id="check4" onclick="checkedOn(4)" value="-1" <?php echo ($data5['jdw_kerja_d_libur'] == '-1') ? "checked" : ""; ?>>
                             <label class="form-check-label" for="check">Libur</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Jumat</label>
                         <div class="col-md-3">
-                        <?php
+                            <?php
                             $shift = mysqli_query($koneksi, "SELECT * FROM jam_kerja ORDER BY jk_id ASC");
                             echo '<select name="jk_id5" class="default-select2 form-control" id="disabled5">';
                             echo '<option value="">...</option>';
-                            while ($row = mysqli_fetch_array($shift, MYSQLI_ASSOC)) { 
-                        ?>
-								<option value="<?= $row['jk_id'] ?>" <?php echo ($data6['jk_id']==$row['jk_id'])?"selected":""; ?>> <?= $row['jk_name'] ?> </option>    
-                        <?php
+                            while ($row = mysqli_fetch_array($shift, MYSQLI_ASSOC)) {
+                            ?>
+                                <option value="<?= $row['jk_id'] ?>" <?php echo ($data6['jk_id'] == $row['jk_id']) ? "selected" : ""; ?>> <?= $row['jk_name'] ?> </option>
+                            <?php
                             }
-                        ?>	
-							</select>
+                            ?>
+                            </select>
                         </div>
                         <div class="col-md-1 form-check">
-                            <input class="form-check-input" name="libur5" type="checkbox" id="check5" onclick="checkedOn(5)"  value="-1" <?php echo ($data6['jdw_kerja_d_libur']=='-1')?"checked":""; ?>>
+                            <input class="form-check-input" name="libur5" type="checkbox" id="check5" onclick="checkedOn(5)" value="-1" <?php echo ($data6['jdw_kerja_d_libur'] == '-1') ? "checked" : ""; ?>>
                             <label class="form-check-label" for="check">Libur</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Sabtu</label>
                         <div class="col-md-3">
-                        <?php
+                            <?php
                             $shift = mysqli_query($koneksi, "SELECT * FROM jam_kerja ORDER BY jk_id ASC");
                             echo '<select name="jk_id6" class="default-select2 form-control" id="disabled6">';
                             echo '<option value="">...</option>';
-                            while ($row = mysqli_fetch_array($shift, MYSQLI_ASSOC)) { 
-                        ?>
-								<option value="<?= $row['jk_id'] ?>" <?php echo ($data7['jk_id']==$row['jk_id'])?"selected":""; ?>> <?= $row['jk_name'] ?> </option>    
-                        <?php
+                            while ($row = mysqli_fetch_array($shift, MYSQLI_ASSOC)) {
+                            ?>
+                                <option value="<?= $row['jk_id'] ?>" <?php echo ($data7['jk_id'] == $row['jk_id']) ? "selected" : ""; ?>> <?= $row['jk_name'] ?> </option>
+                            <?php
                             }
-                        ?>	
-							</select>
+                            ?>
+                            </select>
                         </div>
                         <div class="col-md-1 form-check">
-                            <input class="form-check-input" name="libur6" type="checkbox" id="check6" onclick="checkedOn(6)"  value="-1" <?php echo ($data7['jdw_kerja_d_libur']=='-1')?"checked":""; ?>>
+                            <input class="form-check-input" name="libur6" type="checkbox" id="check6" onclick="checkedOn(6)" value="-1" <?php echo ($data7['jdw_kerja_d_libur'] == '-1') ? "checked" : ""; ?>>
                             <label class="form-check-label" for="check">Libur</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Minggu</label>
                         <div class="col-md-3">
-                        <?php
+                            <?php
                             $shift = mysqli_query($koneksi, "SELECT * FROM jam_kerja ORDER BY jk_id ASC");
                             echo '<select name="jk_id7" class="default-select2 form-control" id="disabled7">';
                             echo '<option value="">...</option>';
-                            while ($row = mysqli_fetch_array($shift, MYSQLI_ASSOC)) { 
-                        ?>
-								<option value="<?= $row['jk_id'] ?>" <?php echo ($data8['jk_id']==$row['jk_id'])?"selected":""; ?>> <?= $row['jk_name'] ?> </option>    
-                        <?php
+                            while ($row = mysqli_fetch_array($shift, MYSQLI_ASSOC)) {
+                            ?>
+                                <option value="<?= $row['jk_id'] ?>" <?php echo ($data8['jk_id'] == $row['jk_id']) ? "selected" : ""; ?>> <?= $row['jk_name'] ?> </option>
+                            <?php
                             }
-                        ?>	
-							</select>
+                            ?>
+                            </select>
                         </div>
                         <div class="col-md-1 form-check">
-                            <input class="form-check-input" name="libur7" type="checkbox" id="check7" onclick="checkedOn(7)"  value="-1" <?php echo ($data8['jdw_kerja_d_libur']=='-1')?"checked":""; ?>>
+                            <input class="form-check-input" name="libur7" type="checkbox" id="check7" onclick="checkedOn(7)" value="-1" <?php echo ($data8['jdw_kerja_d_libur'] == '-1') ? "checked" : ""; ?>>
                             <label class="form-check-label" for="check">Libur</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Libur Umum</label>
                         <div class="col-md-3">
-                        <?php
+                            <?php
                             $shift = mysqli_query($koneksi, "SELECT * FROM jam_kerja ORDER BY jk_id ASC");
                             echo '<select name="jk_id8" class="default-select2 form-control" id="disabled8">';
                             echo '<option value="">...</option>';
-                            while ($row = mysqli_fetch_array($shift, MYSQLI_ASSOC)) { 
-                        ?>
-								<option value="<?= $row['jk_id'] ?>" <?php echo ($data9['jk_id']==$row['jk_id'])?"selected":""; ?>> <?= $row['jk_name'] ?> </option>    
-                        <?php
+                            while ($row = mysqli_fetch_array($shift, MYSQLI_ASSOC)) {
+                            ?>
+                                <option value="<?= $row['jk_id'] ?>" <?php echo ($data9['jk_id'] == $row['jk_id']) ? "selected" : ""; ?>> <?= $row['jk_name'] ?> </option>
+                            <?php
                             }
-                        ?>	
-							</select>
+                            ?>
+                            </select>
                         </div>
                         <div class="col-md-1 form-check">
-                            <input class="form-check-input" name="libur8" type="checkbox" id="check8" onclick="checkedOn(8)" value="-1" <?php echo ($data9['jdw_kerja_d_libur']=='-1')?"checked":""; ?>>
+                            <input class="form-check-input" name="libur8" type="checkbox" id="check8" onclick="checkedOn(8)" value="-1" <?php echo ($data9['jdw_kerja_d_libur'] == '-1') ? "checked" : ""; ?>>
                             <label class="form-check-label" for="check">Libur</label>
                         </div>
                     </div>
-                   
-                    
+
+
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-6">
@@ -276,7 +275,7 @@ if (isset($_GET['jdw_kerja_m_id'])) {
         console.log(x);
         var checkBox = document.getElementById("check" + x.toString());
         var disabled = document.getElementById("disabled" + x.toString());
-        if (checkBox.checked == true){
+        if (checkBox.checked == true) {
             disabled.disabled = true;
             console.log(disabled);
         } else {

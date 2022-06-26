@@ -1,10 +1,14 @@
 <?php
-if (isset($_GET['id_presensi'])) {
-    $id_presensi = $_GET['id_presensi'];
+if (isset($_GET['pegawai_id'])) {
+    $pegawai_id = $_GET['pegawai_id'];
 
     include "../../config/koneksi.php";
-    $query   = mysqli_query($koneksi, "SELECT * FROM tb_presensi WHERE id_presensi='$id_presensi'");
+    $query   = mysqli_query($koneksi, "SELECT * FROM jdw_kerja_pegawai WHERE pegawai_id='$pegawai_id'");
     $data    = mysqli_fetch_array($query, MYSQLI_ASSOC);
+   
+
+    $tampilPeg  = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$pegawai_id'");
+    $peg    = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 } else {
     die("Error. No ID Selected!");
 }
@@ -22,7 +26,7 @@ if (isset($_GET['id_presensi'])) {
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Data Presensi <small><i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> Pegawai: <?= $data['id_presensi'] ?></small></h1>
+<h1 class="page-header">Jadwal Kerja <small><i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> Pegawai: <?= $peg['pegawai_nama'] ?></small></h1>
 <!-- begin row -->
 <!-- begin row -->
 <div class="row">
@@ -35,69 +39,34 @@ if (isset($_GET['id_presensi'])) {
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Form edit data presensi</h4>
+                <h4 class="panel-title">Form edit jadwal kerja pegawai</h4>
             </div>
             <div class="panel-body">
-                <form action="index.php?page=edit-data-presensi&id_presensi=<?= $id_presensi ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+                <form action="index.php?page=edit-data-presensi&pegawai_id=<?= $pegawai_id ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Pegawai</label>
+						<label class="col-md-3 control-label">Nama Pegawai</label>
+						<div class="col-md-6">
+							<input type="text" name="pegawai_nama" maxlength="64" value="<?= $peg['pegawai_nama'] ?>" class="form-control" readonly />
+						</div>
+					</div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Jadwal Kerja</label>
                         <div class="col-md-6">
                             <?php
-                            $dataPre = mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY nama ASC");
-                            echo '<select name="id_peg" class="default-select2 form-control">';
-                            echo '<option value="">...</option>';
-                            while ($row = mysqli_fetch_array($dataPre, MYSQLI_ASSOC)) {
-                                echo '<option value="' . $row['id_peg'] . '">' . $row['nama'] . '_' . $row['nip'] . '</option>';
-                            }
-                            echo '</select>';
+                            $jdw = mysqli_query($koneksi, "SELECT * FROM jdw_kerja_m WHERE jdw_kerja_m_type='0' ORDER BY jdw_kerja_m_name ASC");
+                            echo '<select name="jdw_kerja_m_id" class="default-select2 form-control">';
+                            while ( $row = mysqli_fetch_array($jdw, MYSQLI_ASSOC)) {
                             ?>
+                                <option value="<?= $row['jdw_kerja_m_id'] ?>" <?php echo ($data['jdw_kerja_m_id']==$row['jdw_kerja_m_id'])?"selected":"" ?>><?= $row['jdw_kerja_m_name'] ?></option>
+                            
+                            <?php
+                            }
+                            ?>
+                            </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Tanggal</label>
-                        <div class="col-md-6">
-                            <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
-                                <input type="text" name="tanggal" class="form-control" />
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" name="id" value="<?php echo $data['id_presensi']; ?>">
-                        <label class="col-md-3 control-label">Bulan dan Tahun</label>
-                        <div class="col-md-3">
-                            <input class="form-control" type="text" name="bulan" value="<?php echo $data['bulan'] ?>" readonly />
-                        </div>
-                        <div class="col-md-3">
-                            <input class="form-control" type="text" name="tahun" value="<?php echo $data['tahun'] ?>" readonly />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Hadir</label>
-                        <div class="col-md-6">
-                            <input class="form-control" type="text" name="hadir" value="<?php echo $data['hadir'] ?>" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Sakit</label>
-                        <div class="col-md-6">
-                            <input class="form-control" type="text" name="sakit" value="<?php echo $data['sakit'] ?>" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Ijin</label>
-                        <div class="col-md-6">
-                            <input class="form-control" type="text" name="ijin" value="<?php echo $data['ijin'] ?>" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Tanpa Keterangan</label>
-                        <div class="col-md-6">
-                            <input class="form-control" type="text" name="tanpa_keterangan" value="<?php echo $data['tanpa_keterangan'] ?>" />
-                        </div>
-                    </div>
+                   
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-6">

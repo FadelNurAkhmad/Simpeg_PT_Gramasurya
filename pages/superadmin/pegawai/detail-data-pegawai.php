@@ -9,7 +9,7 @@ $sql   = mysqli_query($koneksi, $query);
 $data    = mysqli_fetch_array($sql);
 
 $jabatan	= mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$data[pembagian1_id]'");
-$jab	= mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
+$jab	= mysqli_fetch_array($jabatan);
 
 $queryPan	= mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' AND status_pan='Aktif'");
 $selpan		= mysqli_fetch_array($queryPan);
@@ -49,7 +49,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 			<li class=""><a href="#sekolah" data-toggle="tab"><span class="visible-xs">Pend</span><span class="hidden-xs"><i class="ion-university fa-lg text-inverse"></i> Pendidikan</span></a></li>
 			<li class=""><a href="#bahasa" data-toggle="tab"><span class="visible-xs">Bhs</span><span class="hidden-xs"><i class="fa fa-language fa-lg text-warning"></i> Bahasa</span></a></li>
 			<li class=""><a href="#skp" data-toggle="tab"><span class="visible-xs">SKP</span><span class="hidden-xs"><i class="ion-social-buffer fa-lg text-info"></i> SKP</span></a></li>
-			<li class=""><a href="#kgb" data-toggle="tab"><span class="visible-xs">Gaji</span><span class="hidden-xs"><i class="fa fa-pencil text-inverse"></i> Gaji</span></a></li>
+			<li class=""><a href="#gaji" data-toggle="tab"><span class="visible-xs">Gaji</span><span class="hidden-xs"><i class="fa fa-pencil text-inverse"></i> Gaji</span></a></li>
 			<li class=""><a href="#dokumen" data-toggle="tab"><span class="visible-xs">Dokumen</span><span class="hidden-xs"><i class="fa fa-folder-open text-success"></i> Dokumen</span></a></li>
 			<li class=""><a href="#presensi" data-toggle="tab"><span class="visible-xs">Presensi</span><span class="hidden-xs"><i class="fa fa-calendar-check-o text-danger"></i> Presensi</span></a></li>
 		</ul>
@@ -95,7 +95,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 													<h5><span class="label label-inverse pull-right"> # Biodata Pegawai </span></h5>
 												</th>
 												<th>
-													<h4><?= $data['pegawai_nama'] ?> <small><?= (isset($jab)?"$jab[pembagian1_nama]":"") ?></small></h4>
+													<h4><?= $data['pegawai_nama'] ?> <small><?= (isset($jab) ? "$jab[pembagian1_nama]" : "") ?></small></h4>
 												</th>
 											</tr>
 										</thead>
@@ -109,7 +109,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 											</tr>
 											<tr>
 												<td class="field">Jenis Kelamin</td>
-												<td><i class="fa fa-intersex fa-lg m-r-5"></i> <?= ($data['gender']=='1')?"Laki-laki":"Perempuan"; ?></td>
+												<td><i class="fa fa-intersex fa-lg m-r-5"></i> <?= ($data['gender'] == '1') ? "Laki-laki" : "Perempuan"; ?></td>
 											</tr>
 											<tr>
 												<td class="field">Tempat Tanggal Lahir</td>
@@ -121,32 +121,32 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 											</tr>
 											<tr>
 												<td class="field">Golongan Darah</td>
-												<td><?php 
-													switch($data['gol_darah']) {
-														case 1 :
+												<td><?php
+													switch ($data['gol_darah']) {
+														case 1:
 															echo "A+";
 															break;
-														case 2 :
+														case 2:
 															echo "B+";
 															break;
-														case 3 :
+														case 3:
 															echo "O+";
 															break;
-														case 4 :
+														case 4:
 															echo "AB+";
 															break;
-														case 5 :
+														case 5:
 															echo "A-";
 															break;
-														case 6 :
+														case 6:
 															echo "B-";
 															break;
-														case 7 :
+														case 7:
 															echo "O-";
 															break;
-														case 8 :
+														case 8:
 															echo "AB-";
-															break; 
+															break;
 													}
 													?>
 												</td>
@@ -154,48 +154,48 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 											<tr>
 												<td class="field">Agama</td>
 												<td>
-													<?php 
-														switch($data['agama']) {
-															case 1 :
-																echo "Islam";
-																break;
-															case 2 :
-																echo "Katolik";
-																break;
-															case 3 :
-																echo "Protestan";
-																break;
-															case 4 :
-																echo "Hindu";
-																break;
-															case 5 :
-																echo "Budha";
-																break;
-															case 6 :
-																echo "Lainnya";
-																break;
-														} 
+													<?php
+													switch ($data['agama']) {
+														case 1:
+															echo "Islam";
+															break;
+														case 2:
+															echo "Katolik";
+															break;
+														case 3:
+															echo "Protestan";
+															break;
+														case 4:
+															echo "Hindu";
+															break;
+														case 5:
+															echo "Budha";
+															break;
+														case 6:
+															echo "Lainnya";
+															break;
+													}
 													?>
 												</td>
 											</tr>
 											<tr>
 												<td class="field">Status Pernikahan</td>
 												<td>
-													<?php 
-														switch($data['stat_nikah']) {
-															case 1 :
-																echo "Sudah Menikah";
-																break;
-															case 2 :
-																echo "Belum Menikah";
-																break;
-															case 3 :
-																echo "Duda/Janda Meninggal";
-																break;
-															case 4 :
-																echo "Duda/Janda Cerai";
-																break;
-														}
+													<?php
+													switch ($data['stat_nikah']) {
+														case 1:
+															echo "Sudah Menikah";
+															break;
+														case 2:
+															echo "Belum Menikah";
+															break;
+														case 3:
+															echo "Duda/Janda Meninggal";
+															break;
+														case 4:
+															echo "Duda/Janda Cerai";
+															break;
+													}
 													?>
 												</td>
 											</tr>
@@ -643,7 +643,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 					</table>
 				</div>
 			</div>
-			<div class="tab-pane fade" id="kgb">
+			<div class="tab-pane fade" id="gaji">
 				<div class="alert alert-success fade in">
 					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
 					<i class="fa fa-info fa-2x pull-left"></i> Klik "Detail" untuk menuju halaman preview dan print ...
@@ -653,51 +653,58 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 						<thead>
 							<tr>
 								<th width="4%">No</th>
-								<th>Tanggal</th>
-								<th>Periode Gaji</th>
 								<th>NIP</th>
 								<th>Nama</th>
-								<th>Gaji Bersih</th>
-								<th width="10%">View</th>
+								<th>Periode Gaji</th>
+								<th>Total Gaji</th>
+								<th width="10%">Action</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
 							$no = 0;
-							// while ($peg    = mysql_fetch_array($tampilPeg)) {
-							$no++
+							$tampilGaji   = mysqli_query(
+								$koneksi,
+								"SELECT * FROM tb_gaji_konfigurasi WHERE pegawai_id='$id_peg' ORDER BY id_gaji_konfig"
+							);
+
+							while ($gaji = mysqli_fetch_array($tampilGaji)) {
+								$no++
 							?>
-							<tr>
-								<td><?php echo $no ?></td>
-								<td>11-02-2022</td>
-								<td>Januari/2022</td>
-								<td>1900018237</td>
-								<td>Raharjo</td>
-								<td>Rp. 2.300.000</td>
-								<td class="text-center">
-									<a type="button" class="btn btn-success btn-icon btn-sm" href="index.php?page=detail-data-gaji" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
-									<a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-gaji" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
-									<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
-								</td>
-							</tr>
-							<!-- #modal-dialog -->
-							<div id="Del" class="modal fade" role="dialog">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete from Database?</h5>
-										</div>
-										<div class="modal-body" align="center">
-											<a href="index.php?page=delete-data-pegawai&id_peg=<?= $peg['id_peg'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
-										</div>
-										<div class="modal-footer">
-											<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
+								<tr>
+									<td><?php echo $no ?></td>
+									<td><?php echo $data['pegawai_nip'] ?></td>
+									<td><?php echo $data['pegawai_nama'] ?></td>
+									<td>
+										<?php echo $gaji['bulan'] ?>
+										<b>-</b>
+										<?php echo $gaji['tahun'] ?>
+									</td>
+									<td align="right"><?php echo 'Rp. ' . number_format($gaji['gaji_diterima']); ?></td>
+									<td class="text-center">
+										<a type="button" class="btn btn-success btn-icon btn-sm" href="index.php?page=detail-pegawai-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
+										<a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
+										<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?= $gaji['id_gaji_konfig'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
+									</td>
+								</tr>
+								<!-- #modal-dialog -->
+								<div id="Del<?php echo $gaji['id_gaji_konfig'] ?>" class="modal fade" role="dialog">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete <u><?php echo $gaji['pegawai_nama'] ?></u> from Database?</h5>
+											</div>
+											<div class="modal-body" align="center">
+												<a href="index.php?page=delete-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
+											</div>
+											<div class="modal-footer">
+												<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
 							<?php
-							// }
+							}
 							?>
 						</tbody>
 					</table>
@@ -814,7 +821,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 						<label class="col-md-1 control-label">Periode</label>
 						<form action="index.php?page=detail-data-pegawai&pegawai_id=<?= $id_peg ?>" method="POST" enctype="multipart/form-data">
 							<div class="form-group col-md-3">
-								<div class="input-group date" id= "datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
+								<div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
 									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 									<input type="text" name="periode_awal" placeholder="Dari" class="form-control" />
 								</div>
@@ -833,9 +840,9 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 					</div>
 					<div class="col-6 col-md-8">
 						<label class="col-md-1 control-label">Hadir</label>
-							<div class="col-md-2 m-b-10">
-								<input type="text" name="periode_awal" value="" class="form-control" readonly />
-							</div>
+						<div class="col-md-2 m-b-10">
+							<input type="text" name="periode_awal" value="" class="form-control" readonly />
+						</div>
 					</div>
 				</div>
 				<div class="table-responsive">
@@ -852,20 +859,20 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 						</thead>
 						<tbody>
 							<?php
-							if(!empty($_POST['periode_awal']) && !empty($_POST['periode_awal'])){ 
+							if (!empty($_POST['periode_awal']) && !empty($_POST['periode_awal'])) {
 								$tampilCari = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[pegawai_pin]' AND DATE(scan_date) >= '$_POST[periode_awal]' AND DATE(scan_date) <= '$_POST[periode_akhir]'");
 								$no = 0;
-								while($cari = mysqli_fetch_array($tampilCari, MYSQLI_ASSOC)) {
+								while ($cari = mysqli_fetch_array($tampilCari, MYSQLI_ASSOC)) {
 									$no++;
 							?>
 									<tr>
 										<td><?php echo $no ?></td>
 										<?php
-											$myvalue = $cari['scan_date'];
-											$datetime = new DateTime($myvalue);
+										$myvalue = $cari['scan_date'];
+										$datetime = new DateTime($myvalue);
 
-											$date = $datetime->format('Y-m-d');
-											$time = $datetime->format('H:i:s');
+										$date = $datetime->format('Y-m-d');
+										$time = $datetime->format('H:i:s');
 										?>
 										<td><?= $date ?></td>
 										<td><?= $time ?></td>
@@ -884,19 +891,19 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 
 
 							<?php
-							if(empty($_POST['periode_awal']) && empty($_POST['periode_awal'])){
+							if (empty($_POST['periode_awal']) && empty($_POST['periode_awal'])) {
 								$no = 0;
 								while ($pres    = mysqli_fetch_array($tampilPres, MYSQLI_ASSOC)) {
-									$no++;    
+									$no++;
 							?>
 									<tr>
 										<td><?php echo $no ?></td>
 										<?php
-											$myvalue = $pres['scan_date'];
-											$datetime = new DateTime($myvalue);
+										$myvalue = $pres['scan_date'];
+										$datetime = new DateTime($myvalue);
 
-											$tanggal = $datetime->format('Y-m-d');
-											$jam = $datetime->format('H:i:s');
+										$tanggal = $datetime->format('Y-m-d');
+										$jam = $datetime->format('H:i:s');
 										?>
 										<td><?= $tanggal ?></td>
 										<td><?= $jam ?></td>
@@ -907,11 +914,11 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 										<td><?= $peg['pegawai_nip'] ?></td>
 										<td><?= $peg['pegawai_nama'] ?></td>
 										<td><?= $pres['pin'] ?></td>
-										
-										
+
+
 									</tr>
 							<?php
-								}    
+								}
 							}
 							?>
 						</tbody>
@@ -1122,8 +1129,8 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 											<tr>
 												<td><?= $no ?></td>
 												<td>-&nbsp;<?php echo $jab['jabatan']; ?></td>
-												<td>-&nbsp;<?php echo $jab['no_sk']; ?><br />-&nbsp;<?php echo ($jab['tgl_sk'] == "0000-00-00")?"-":$jab['tgl_sk']; ?></td>
-												<td><?php echo ($jab['tmt_jabatan'] == "0000-00-00")?"-":$jab['tmt_jabatan']; ?> s/d <?php echo ($jab['sampai_tgl'] == "0000-00-00")?"-":$jab['sampai_tgl']; ?>
+												<td>-&nbsp;<?php echo $jab['no_sk']; ?><br />-&nbsp;<?php echo ($jab['tgl_sk'] == "0000-00-00") ? "-" : $jab['tgl_sk']; ?></td>
+												<td><?php echo ($jab['tmt_jabatan'] == "0000-00-00") ? "-" : $jab['tmt_jabatan']; ?> s/d <?php echo ($jab['sampai_tgl'] == "0000-00-00") ? "-" : $jab['sampai_tgl']; ?>
 													<br />
 													<?php
 													if ($jab['file'] == "") {

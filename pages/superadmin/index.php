@@ -16,12 +16,11 @@ $tampilUsr	= mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user='$_SESS
 $usr		= mysqli_fetch_array($tampilUsr, MYSQLI_ASSOC);
 
 $cekPeg = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_pegawai"));
-if($cekPeg == 0) {
-	$query = mysqli_query($koneksi, "SELECT * FROM pegawai");	
-	while($row = mysqli_fetch_array($query)) {
+if ($cekPeg == 0) {
+	$query = mysqli_query($koneksi, "SELECT * FROM pegawai");
+	while ($row = mysqli_fetch_array($query)) {
 		$insert = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id) VALUES ('$row[pegawai_id]')");
 	}
-
 }
 
 // $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut=''");
@@ -242,17 +241,17 @@ if($cekPeg == 0) {
 							<li><a href="index.php?page=form-view-data-gaji-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Gaji Jabatan</a></li>
 							<li><a href="index.php?page=form-view-data-gaji"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Data Gaji</a></li>
 							<li><a href="index.php?page=form-view-data-gaji-konfigurasi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Gaji</a></li>
-							<li><a href="index.php?page=form-edit-data-gaji-trial"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Trial</a></li>
 						</ul>
 					</li>
 					<!-- end gaji -->
 					<li class="has-sub">
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-compose bg-primary"></i><span>Presensi</span></a>
 						<ul class="sub-menu">
-							<li><a href="index.php?page=form-view-data-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Presensi</a></li>
 							<li><a href="index.php?page=form-view-rekap-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Rekap Presensi</a></li>
-							<li><a href="index.php?page=form-view-shift-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Shift</a></li>
-							<li><a href="index.php?page=form-view-hari-jam-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jadwal Kerja Normal</a></li>
+							<li><a href="index.php?page=form-view-data-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jadwal Kerja Pegawai</a></li>
+
+							<li><a href="index.php?page=form-view-shift-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Shift</a></li>
+							<li><a href="index.php?page=form-view-hari-jam-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Jadwal Kerja</a></li>
 
 						</ul>
 					</li>
@@ -837,18 +836,40 @@ if($cekPeg == 0) {
 				case 'detail-data-gaji':
 					include "../../pages/superadmin/gaji/data_gaji/detail-data-gaji.php";
 					break;
-				
+
 				case 'form-view-data-gaji-konfigurasi':
 					include "../../pages/superadmin/gaji/konfigurasi_gaji/form-view-data-gaji-konfigurasi.php";
+					break;
+				case 'form-master-data-gaji-konfigurasi':
+					include "../../pages/superadmin/gaji/konfigurasi_gaji/form-master-data-gaji-konfigurasi.php";
 					break;
 				case 'form-edit-data-gaji-konfigurasi':
 					include "../../pages/superadmin/gaji/konfigurasi_gaji/form-edit-data-gaji-konfigurasi.php";
 					break;
+				case 'edit-data-gaji-konfigurasi':
+					include "../../pages/superadmin/gaji/konfigurasi_gaji/edit-data-gaji-konfigurasi.php";
+					break;
+				case 'master-data-gaji-konfigurasi':
+					include "../../pages/superadmin/gaji/konfigurasi_gaji/master-data-gaji-konfigurasi.php";
+					break;
+				case 'detail-data-gaji-konfigurasi':
+					include "../../pages/superadmin/gaji/konfigurasi_gaji/detail-data-gaji-konfigurasi.php";
+					break;
+				case 'detail-pegawai-data-gaji-konfigurasi':
+					include "../../pages/superadmin/gaji/konfigurasi_gaji/detail-pegawai-data-gaji-konfigurasi.php";
+					break;
+				case 'delete-data-gaji-konfigurasi':
+					include "../../pages/superadmin/gaji/konfigurasi_gaji/delete-data-gaji-konfigurasi.php";
+					break;
+				case 'print-detail-konfigurasi-slip-gaji':
+					include "../../pages/superadmin/gaji/konfigurasi_gaji/print-detail-konfigurasi-slip-gaji.php";
+					break;
+
 				case 'detail-data-gaji':
 					include "../../pages/superadmin/gaji/data_gaji/detail-data-gaji.php";
 					break;
-				
-			
+
+
 				case 'form-edit-data-gaji-trial':
 					include "../../pages/superadmin/gaji/trial/form-edit-data-gaji-trial.php";
 					break;
@@ -861,6 +882,9 @@ if($cekPeg == 0) {
 					break;
 				case 'form-edit-data-presensi':
 					include "../../pages/superadmin/presensi/data_presensi/form-edit-data-presensi.php";
+					break;
+				case 'edit-data-presensi':
+					include "../../pages/superadmin/presensi/data_presensi/edit-data-presensi.php";
 					break;
 				case 'form-master-data-presensi':
 					include "../../pages/superadmin/presensi/data_presensi/form-master-data-presensi.php";
@@ -897,7 +921,7 @@ if($cekPeg == 0) {
 				case 'delete-shift-kerja':
 					include "../../pages/superadmin/presensi/shift/delete-shift-kerja.php";
 					break;
-				
+
 
 				case 'form-view-hari-jam-kerja':
 					include "../../pages/superadmin/presensi/hari_jam_kerja/form-view-hari-jam-kerja.php";
@@ -947,7 +971,7 @@ if($cekPeg == 0) {
 				case 'function-lokasi':
 					include "../../pages/superadmin/lokasi/function-lokasi.php";
 					break;
-					
+
 				case 'form-view-tempat':
 					include "../../pages/superadmin/tempat/form-view-tempat.php";
 					break;

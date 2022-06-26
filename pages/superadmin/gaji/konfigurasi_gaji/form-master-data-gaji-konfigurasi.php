@@ -1,20 +1,3 @@
-<?php
-if (isset($_GET['id_gaji_konfig'])) {
-    $id_gaji_konfig = $_GET['id_gaji_konfig'];
-
-    include "../../config/koneksi.php";
-    $query   = mysqli_query($koneksi, "SELECT * FROM tb_gaji_konfigurasi WHERE id_gaji_konfig='$id_gaji_konfig'");
-    $gaji    = mysqli_fetch_array($query);
-
-    $tampilPeg   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$gaji[pegawai_id]'");
-    $peg    = mysqli_fetch_array($tampilPeg);
-
-    $tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$gaji[pegawai_id]'");
-    $jab    = mysqli_fetch_array($tampilJab);
-} else {
-    die("Error. No ID Selected!");
-}
-?>
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
     <li>
@@ -28,9 +11,34 @@ if (isset($_GET['id_gaji_konfig'])) {
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Form <small>Edit Gaji &nbsp;<i class="fa fa-angle-right"></i>&nbsp; <i class="fa fa-key"></i> Pegawai: <?= $peg['pegawai_nama'] ?> &nbsp;&nbsp;<i class="fa fa-lock"></i> Jabatan : <?= $jab == 0 ? '-' : $jab['jabatan']; ?></small></h1>
+<h1 class="page-header">Data <small>Gaji Konfigurasi <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
+<?php
+function kdauto($tabel, $inisial)
+{
+    include "../../config/koneksi.php";
 
+    $struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
+    $fieldInfo = mysqli_fetch_field_direct($struktur, 0);
+    $field      = $fieldInfo->name;
+    $panjang    = $fieldInfo->length;
+    $qry  = mysqli_query($koneksi, "SELECT max(" . $field . ") FROM " . $tabel);
+    $row  = mysqli_fetch_array($qry);
+    if ($row[0] == "") {
+        $angka = 0;
+    } else {
+        $angka = substr($row[0], strlen($inisial));
+    }
+    $angka++;
+    $angka = strval($angka);
+    $tmp  = "";
+    for ($i = 1; $i <= ($panjang - strlen($inisial) - strlen($angka)); $i++) {
+        $tmp = $tmp . "0";
+    }
+    return $inisial . $tmp . $angka;
+}
+$id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
+?>
 <!-- begin row -->
 <div class="row">
     <!-- begin col-12 -->
@@ -43,10 +51,38 @@ if (isset($_GET['id_gaji_konfig'])) {
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                 </div>
-                <h4 class="panel-title">Form Edit Jumlah Gaji Diterima</h4>
+                <h4 class="panel-title">Form Jumlah Gaji Diterima</h4>
             </div>
             <div class="panel-body">
-                <form action="index.php?page=edit-data-gaji-konfigurasi&id_gaji_konfig=<?= $id_gaji_konfig ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+                <form action="index.php?page=master-data-gaji-konfigurasi&id_gaji_konfig=<?= $id_gaji_konfig ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-3 control-label">Pegawai</label>
+                                <div class="col-md-6">
+                                    <?php
+                                    $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
+                                    echo '<select name="pegawai_id" class="default-select2 form-control">';
+                                    echo '<option value="">...</option>';
+                                    while ($row = mysqli_fetch_array($data)) {
+                                        echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
+                                    }
+                                    echo '</select>';
+                                    ?>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-3 control-label">Tanggal</label>
+                                <div class="col-md-6">
+                                    <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
+                                        <input type="text" name="tanggal_gaji_konfig" id="tanggal_gaji_konfig" class="form-control" />
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -72,24 +108,10 @@ if (isset($_GET['id_gaji_konfig'])) {
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Tanggal</label>
-                                <div class="col-md-6">
-                                    <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
-                                        <input type="text" name="tanggal_gaji_konfig" id="tanggal_gaji_konfig" value="<?= $gaji['tanggal_gaji_konfig'] ?>" class="form-control" />
-                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-row">
-
-                            <div class="form-group col-md-6">
                                 <label class="col-md-3 control-label">Jumlah Gaji Diterima</label>
                                 <div class="col-md-6">
                                     <div class="form-inline">
-                                        Rp. <input type="number" name="gaji_diterima" id="gaji_diterima" value="<?= $gaji['gaji_diterima'] ?>" class="form-control" readonly />
+                                        Rp. <input type="number" name="gaji_diterima" id="gaji_diterima" value="0" class="form-control" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -103,8 +125,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                 <label class="col-md-3 control-label">Gaji Pokok</label>
                                 <div class="col-md-6">
                                     <div class="form-inline">
-                                        Rp.
-                                        <input class="form-control" type="number" name="gaji_pokok" id="gaji_pokok" value="<?= $gaji['gaji_pokok'] ?>" data-parsley-required="true" />
+                                        Rp. <input class="form-control" type="number" name="gaji_pokok" id="gaji_pokok" value="0" data-parsley-required="true" />
                                     </div>
                                 </div>
                             </div>
@@ -118,8 +139,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                 <label class="col-md-3 control-label">Tunjangan Tetap</label>
                                 <div class="col-md-6">
                                     <div class="form-inline">
-                                        Rp.
-                                        <input class="form-control" type="number" name="tunjangan_tetap" id="tunjangan_tetap" value="<?= $gaji['tunjangan_tetap'] ?>" data-parsley-required="true" readonly />
+                                        Rp. <input class="form-control" type="number" name="tunjangan_tetap" id="tunjangan_tetap" value="0" data-parsley-required="true" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +150,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Struktural</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="struktural" id="struktural" value="<?= $gaji['struktural'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="struktural" id="struktural" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -138,7 +158,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Pendidikan</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="pendidikan" id="pendidikan" value="<?= $gaji['pendidikan'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="pendidikan" id="pendidikan" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -146,7 +166,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Keahlian</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="keahlian" id="keahlian" value="<?= $gaji['keahlian'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="keahlian" id="keahlian" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +174,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Penyesuaian</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="penyesuaian" id="penyesuaian" value="<?= $gaji['penyesuaian'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="penyesuaian" id="penyesuaian" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -169,7 +189,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                 <label class="col-md-3 control-label">Tunjangan Variabel</label>
                                 <div class="col-md-6">
                                     <div class="form-inline">
-                                        Rp. <input class="form-control" type="number" name="tunjangan_variabel" id="tunjangan_variabel" value="<?= $gaji['tunjangan_variabel'] ?>" data-parsley-required="true" readonly />
+                                        Rp. <input class="form-control" type="number" name="tunjangan_variabel" id="tunjangan_variabel" value="0" data-parsley-required="true" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +200,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Presensi</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="presensi" id="presensi" value="<?= $gaji['presensi'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="presensi" id="presensi" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -188,7 +208,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Uang Makan</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="uang_makan" id="uang_makan" value="<?= $gaji['uang_makan'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="uang_makan" id="uang_makan" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -196,7 +216,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Kehadiran</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="kehadiran" id="kehadiran" value="<?= $gaji['kehadiran'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="kehadiran" id="kehadiran" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -204,7 +224,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Kedisiplinan</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="kedisiplinan" id="kedisiplinan" value="<?= $gaji['kedisiplinan'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="kedisiplinan" id="kedisiplinan" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -212,7 +232,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Istri/Suami</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="istri_suami" id="istri_suami" value="<?= $gaji['istri_suami'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="istri_suami" id="istri_suami" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -220,7 +240,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Anak</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="anak" id="anak" value="<?= $gaji['anak'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="anak" id="anak" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -245,7 +265,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Presensi</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="presensi_pot" id="presensi_pot" value="<?= $gaji['presensi_pot'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="presensi_pot" id="presensi_pot" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -253,7 +273,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Uang Makan</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="uang_makan_pot" id="uang_makan_pot" value="<?= $gaji['uang_makan_pot'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="uang_makan_pot" id="uang_makan_pot" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -261,7 +281,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Kehadiran</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="kehadiran_pot" id="kehadiran_pot" value="<?= $gaji['kehadiran_pot'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="kehadiran_pot" id="kehadiran_pot" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -269,7 +289,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Kedisiplinan</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="kedisiplinan_pot" id="kedisiplinan_pot" value="<?= $gaji['kedisiplinan_pot'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="kedisiplinan_pot" id="kedisiplinan_pot" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -277,7 +297,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Jumlah</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="jumlah_pot_var" id="jumlah_pot_var" value="<?= $gaji['jumlah_pot_var'] ?>" data-parsley-required="true" readonly />
+                                            Rp. <input class="form-control" type="number" name="jumlah_pot_var" id="jumlah_pot_var" value="0" data-parsley-required="true" readonly />
                                         </div>
                                     </div>
                                 </div>
@@ -302,7 +322,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">BPJS</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="bpjs" id="bpjs" value="<?= $gaji['bpjs'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="bpjs" id="bpjs" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -310,7 +330,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Koperasi</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="koperasi" id="koperasi" value="<?= $gaji['koperasi'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="koperasi" id="koperasi" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -318,7 +338,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Dapen Muh</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="dapen_muh" id="dapen_muh" value="<?= $gaji['dapen_muh'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="dapen_muh" id="dapen_muh" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -326,7 +346,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Lainnya</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="lainya" id="lainya" value="<?= $gaji['lainya'] ?>" data-parsley-required="true" />
+                                            Rp. <input class="form-control" type="number" name="lainya" id="lainya" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -334,7 +354,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                     <label class="col-md-3 control-label">Jumlah</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="jumlah_pot_wajib" id="jumlah_pot_wajib" value="<?= $gaji['jumlah_pot_wajib'] ?>" data-parsley-required="true" readonly />
+                                            Rp. <input class="form-control" type="number" name="jumlah_pot_wajib" id="jumlah_pot_wajib" value="0" data-parsley-required="true" readonly />
                                         </div>
                                     </div>
                                 </div>
@@ -346,7 +366,8 @@ if (isset($_GET['id_gaji_konfig'])) {
                     <div class="form-group col-md-6">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-6">
-                            <button type="submit" name="edit" value="edit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Edit</button>&nbsp;
+                            <button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>&nbsp;
+                            <a type="reset" value="reset" href="index.php?page=form-master-data-gaji-konfigurasi" class="btn btn-danger"><i class="fa fa-repeat"></i>&nbsp;Reset</a>&nbsp;
                             <a type="button" class="btn btn-default active" href="index.php?page=form-view-data-gaji-konfigurasi"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
                         </div>
                     </div>

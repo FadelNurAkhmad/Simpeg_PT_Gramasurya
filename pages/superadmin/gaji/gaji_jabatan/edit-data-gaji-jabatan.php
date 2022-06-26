@@ -7,7 +7,7 @@
     }
     include "../../config/koneksi.php";
     $tampilGajiJab   = mysqli_query($koneksi, "SELECT * FROM tb_gaji_jabatan WHERE id_jabatan='$id_jabatan'");
-    $hasil    = mysqli_fetch_array($tampilGajiJab, MYSQLI_ASSOC);
+    $hasil    = mysqli_fetch_array($tampilGajiJab);
 
     if ($_POST['edit'] == "edit") {
         $nama_jabatan     = $_POST['nama_jabatan'];
@@ -18,7 +18,7 @@
             $_SESSION['pesan'] = "Oops! Please fill all column ...";
             header("location:index.php?page=form-edit-data-gaji-jabatan&id_jabatan=$id_jabatan");
         } else {
-            $update = mysqli_query($koneksi, "UPDATE tb_gaji_jabatan SET nama_jabatan='$nama_jabatan', gapok='$gapok', tunjangan='$tunjangan', WHERE id_jabatan='$id_jabatan'");
+            $update = mysqli_query($koneksi, "UPDATE tb_gaji_jabatan SET nama_jabatan='$nama_jabatan', gapok='$gapok', tunjangan='$tunjangan' WHERE id_jabatan='$id_jabatan'");
             if ($update) {
                 $_SESSION['pesan'] = "Good! edit data gaji jabatan success ...";
                 header("location:index.php?page=form-view-data-gaji-jabatan");
