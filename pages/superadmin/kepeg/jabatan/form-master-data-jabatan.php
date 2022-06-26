@@ -63,7 +63,7 @@ $id_jab	= kdauto("tb_jabatan", "");
 							$data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
 							echo '<select name="pegawai_id" class="default-select2 form-control">';
 							echo '<option value="">...</option>';
-							while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)) {
+							while ($row = mysqli_fetch_array($data)) {
 								echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
 							}
 							echo '</select>';
@@ -77,7 +77,7 @@ $id_jab	= kdauto("tb_jabatan", "");
 							$dataJ = mysqli_query($koneksi, "SELECT * FROM pembagian1 ORDER BY pembagian1_nama");
 							echo '<select name="jabatan" class="default-select2 form-control">';
 							echo '<option value="">...</option>';
-							while ($rowj = mysqli_fetch_array($dataJ, MYSQLI_ASSOC)) {
+							while ($rowj = mysqli_fetch_array($dataJ)) {
 								echo '<option value="' . $rowj['pembagian1_nama'] . '">' . $rowj['pembagian1_nama'] . '</option>';
 							}
 							echo '</select>';
@@ -87,7 +87,7 @@ $id_jab	= kdauto("tb_jabatan", "");
 							<a type="button" class="btn btn-warning btn-sm pull-right" data-toggle="modal" data-target="#jab"><i class="fa fa-plus-circle"></i> Add Jabatan&nbsp;</a>
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<label class="col-md-3 control-label">Nomor dan Tanggal SK</label>
 						<div class="col-md-3">

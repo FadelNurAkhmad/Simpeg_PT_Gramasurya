@@ -102,10 +102,10 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
 <!-- end breadcrumb -->
 <!-- begin page-header -->
 <div class="row ">
-    <div class="col-12 col-md-2">
-        <h1 class="page-header">Rekap Data<small>&nbsp;&nbsp;Presensi&nbsp;</small></h1>
+    <div class="col-12 col-md-4">
+        <h1 class="page-header">Rekap <small>Presensi&nbsp;</small></h1>
     </div>
-    <div class="col-6 col-md-10">
+    <div class="col-6 col-md-8">
         <form action="index.php?page=form-view-rekap-presensi" method="POST" enctype="multipart/form-data">
             <div class="form-group col-md-3">
                 <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">

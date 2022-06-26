@@ -9,7 +9,7 @@ $sql   = mysqli_query($koneksi, $query);
 $data    = mysqli_fetch_array($sql);
 
 $jabatan	= mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$data[pembagian1_id]'");
-$jab	= mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
+$jab	= mysqli_fetch_array($jabatan);
 
 $queryPan	= mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' AND status_pan='Aktif'");
 $selpan		= mysqli_fetch_array($queryPan);
@@ -51,7 +51,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 			<li class=""><a href="#sekolah" data-toggle="tab"><span class="visible-xs">Pend</span><span class="hidden-xs"><i class="ion-university fa-lg text-inverse"></i> Pendidikan</span></a></li>
 			<li class=""><a href="#bahasa" data-toggle="tab"><span class="visible-xs">Bhs</span><span class="hidden-xs"><i class="fa fa-language fa-lg text-warning"></i> Bahasa</span></a></li>
 			<li class=""><a href="#skp" data-toggle="tab"><span class="visible-xs">SKP</span><span class="hidden-xs"><i class="ion-social-buffer fa-lg text-info"></i> SKP</span></a></li>
-			<li class=""><a href="#kgb" data-toggle="tab"><span class="visible-xs">Gaji</span><span class="hidden-xs"><i class="fa fa-pencil text-inverse"></i> Gaji</span></a></li>
+			<li class=""><a href="#gaji" data-toggle="tab"><span class="visible-xs">Gaji</span><span class="hidden-xs"><i class="fa fa-pencil text-inverse"></i> Gaji</span></a></li>
 			<li class=""><a href="#dokumen" data-toggle="tab"><span class="visible-xs">Dokumen</span><span class="hidden-xs"><i class="fa fa-folder-open text-success"></i> Dokumen</span></a></li>
 			<li class=""><a href="#presensi" data-toggle="tab"><span class="visible-xs">Presensi</span><span class="hidden-xs"><i class="fa fa-calendar-check-o text-danger"></i> Presensi</span></a></li>
 		</ul>
@@ -645,7 +645,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 					</table>
 				</div>
 			</div>
-			<div class="tab-pane fade" id="kgb">
+			<div class="tab-pane fade" id="gaji">
 				<div class="alert alert-success fade in">
 					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
 					<i class="fa fa-info fa-2x pull-left"></i> Klik "Detail" untuk menuju halaman preview dan print ...
@@ -655,51 +655,58 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 						<thead>
 							<tr>
 								<th width="4%">No</th>
-								<th>Tanggal</th>
-								<th>Periode Gaji</th>
 								<th>NIP</th>
 								<th>Nama</th>
-								<th>Gaji Bersih</th>
-								<th width="10%">View</th>
+								<th>Periode Gaji</th>
+								<th>Total Gaji</th>
+								<th width="10%">Action</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
 							$no = 0;
-							// while ($peg    = mysql_fetch_array($tampilPeg)) {
-							$no++
+							$tampilGaji   = mysqli_query(
+								$koneksi,
+								"SELECT * FROM tb_gaji_konfigurasi WHERE pegawai_id='$id_peg' ORDER BY id_gaji_konfig"
+							);
+
+							while ($gaji = mysqli_fetch_array($tampilGaji)) {
+								$no++
 							?>
-							<tr>
-								<td><?php echo $no ?></td>
-								<td>11-02-2022</td>
-								<td>Januari/2022</td>
-								<td>1900018237</td>
-								<td>Raharjo</td>
-								<td>Rp. 2.300.000</td>
-								<td class="text-center">
-									<a type="button" class="btn btn-success btn-icon btn-sm" href="index.php?page=detail-data-gaji" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
-									<a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-gaji" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
-									<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
-								</td>
-							</tr>
-							<!-- #modal-dialog -->
-							<div id="Del" class="modal fade" role="dialog">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete from Database?</h5>
-										</div>
-										<div class="modal-body" align="center">
-											<a href="index.php?page=delete-data-pegawai&id_peg=<?= $peg['id_peg'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
-										</div>
-										<div class="modal-footer">
-											<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
+								<tr>
+									<td><?php echo $no ?></td>
+									<td><?php echo $data['pegawai_nip'] ?></td>
+									<td><?php echo $data['pegawai_nama'] ?></td>
+									<td>
+										<?php echo $gaji['bulan'] ?>
+										<b>-</b>
+										<?php echo $gaji['tahun'] ?>
+									</td>
+									<td align="right"><?php echo 'Rp. ' . number_format($gaji['gaji_diterima']); ?></td>
+									<td class="text-center">
+										<a type="button" class="btn btn-success btn-icon btn-sm" href="index.php?page=detail-pegawai-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
+										<a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
+										<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?= $gaji['id_gaji_konfig'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
+									</td>
+								</tr>
+								<!-- #modal-dialog -->
+								<div id="Del<?php echo $gaji['id_gaji_konfig'] ?>" class="modal fade" role="dialog">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete <u><?php echo $gaji['pegawai_nama'] ?></u> from Database?</h5>
+											</div>
+											<div class="modal-body" align="center">
+												<a href="index.php?page=delete-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
+											</div>
+											<div class="modal-footer">
+												<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
 							<?php
-							// }
+							}
 							?>
 						</tbody>
 					</table>
