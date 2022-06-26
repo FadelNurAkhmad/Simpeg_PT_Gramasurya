@@ -891,6 +891,9 @@ if ($cekPeg == 0) {
 				case 'master-data-presensi':
 					include "../../pages/superadmin/presensi/data_presensi/master-data-presensi.php";
 					break;
+				case 'delete-data-presensi':
+					include "../../pages/superadmin/presensi/data_presensi/delete-data-presensi.php";
+					break;
 
 				case 'form-view-pengaturan-mesin':
 					include "../../pages/superadmin/presensi/mesin/form-view-pengaturan-mesin.php";

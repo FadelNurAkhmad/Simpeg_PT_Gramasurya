@@ -5,7 +5,11 @@ if (isset($_GET['pegawai_id'])) {
     include "../../config/koneksi.php";
     $query   = mysqli_query($koneksi, "SELECT * FROM jdw_kerja_pegawai WHERE pegawai_id='$pegawai_id'");
     $data    = mysqli_fetch_array($query, MYSQLI_ASSOC);
-   
+    $cek = mysqli_num_rows($query);
+
+    if ($cek <= 0) {
+        $datapegawai = "";
+    }
 
     $tampilPeg  = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$pegawai_id'");
     $peg    = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
@@ -45,28 +49,31 @@ if (isset($_GET['pegawai_id'])) {
             <div class="panel-body">
                 <form action="index.php?page=edit-data-presensi&pegawai_id=<?= $pegawai_id ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-						<label class="col-md-3 control-label">Nama Pegawai</label>
-						<div class="col-md-6">
-							<input type="text" name="pegawai_nama" maxlength="64" value="<?= $peg['pegawai_nama'] ?>" class="form-control" readonly />
-						</div>
-					</div>
+                        <label class="col-md-3 control-label">Nama Pegawai</label>
+                        <div class="col-md-6">
+                            <input type="text" name="pegawai_nama" maxlength="64" value="<?= $peg['pegawai_nama'] ?>" class="form-control" readonly />
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Jadwal Kerja</label>
                         <div class="col-md-6">
                             <?php
                             $jdw = mysqli_query($koneksi, "SELECT * FROM jdw_kerja_m WHERE jdw_kerja_m_type='0' ORDER BY jdw_kerja_m_name ASC");
                             echo '<select name="jdw_kerja_m_id" class="default-select2 form-control">';
-                            while ( $row = mysqli_fetch_array($jdw, MYSQLI_ASSOC)) {
+                            echo '<option value="">...</option>';
+                            while ($row = mysqli_fetch_array($jdw, MYSQLI_ASSOC)) {
+
                             ?>
-                                <option value="<?= $row['jdw_kerja_m_id'] ?>" <?php echo ($data['jdw_kerja_m_id']==$row['jdw_kerja_m_id'])?"selected":"" ?>><?= $row['jdw_kerja_m_name'] ?></option>
-                            
+
+                                <option value="<?= $row['jdw_kerja_m_id'] ?>" <?php echo ($datapegawai == $row['jdw_kerja_m_id']) ? "selected" : "" ?>><?= $row['jdw_kerja_m_name'] ?></option>
+
                             <?php
                             }
                             ?>
                             </select>
                         </div>
                     </div>
-                   
+
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-6">
