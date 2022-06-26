@@ -90,6 +90,7 @@ include "../../config/koneksi.php";
 $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id DESC");
 $peg = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 
+
 $jabatan	= mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$peg[pembagian1_id]'");
 $jab	= mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
 ?>
@@ -125,7 +126,7 @@ $jab	= mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
 					<tbody>
 						<?php
 						$no = 0;
-						while ($peg) {
+						while ($peg = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC)) {
 							$no++
 						?>
 							<tr>

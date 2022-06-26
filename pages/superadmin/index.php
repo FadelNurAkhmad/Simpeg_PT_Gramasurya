@@ -249,10 +249,11 @@ if($cekPeg == 0) {
 					<li class="has-sub">
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-compose bg-primary"></i><span>Presensi</span></a>
 						<ul class="sub-menu">
-							<li><a href="index.php?page=form-view-data-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Presensi</a></li>
 							<li><a href="index.php?page=form-view-rekap-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Rekap Presensi</a></li>
-							<li><a href="index.php?page=form-view-shift-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Shift</a></li>
-							<li><a href="index.php?page=form-view-hari-jam-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jadwal Kerja Normal</a></li>
+							<li><a href="index.php?page=form-view-data-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jadwal Kerja Pegawai</a></li>
+							
+							<li><a href="index.php?page=form-view-shift-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Shift</a></li>
+							<li><a href="index.php?page=form-view-hari-jam-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Jadwal Kerja</a></li>
 
 						</ul>
 					</li>
@@ -861,6 +862,9 @@ if($cekPeg == 0) {
 					break;
 				case 'form-edit-data-presensi':
 					include "../../pages/superadmin/presensi/data_presensi/form-edit-data-presensi.php";
+					break;
+				case 'edit-data-presensi':
+					include "../../pages/superadmin/presensi/data_presensi/edit-data-presensi.php";
 					break;
 				case 'form-master-data-presensi':
 					include "../../pages/superadmin/presensi/data_presensi/form-master-data-presensi.php";

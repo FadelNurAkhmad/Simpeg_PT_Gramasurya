@@ -1,9 +1,9 @@
 <?php
-if (isset($_GET['id_peg'])) {
-    $id_peg = $_GET['id_peg'];
+if (isset($_GET['pegawai_id'])) {
+    $pegawai_id = $_GET['pegawai_id'];
 
     include "../../config/koneksi.php";
-    $query   = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
+    $query   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$pegawai_id'");
     $peg    = mysqli_fetch_array($query, MYSQLI_ASSOC);
 } else {
     die("Error. No ID Selected!");
@@ -22,7 +22,7 @@ if (isset($_GET['id_peg'])) {
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Data Gaji <small><i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> Pegawai : </small></h1>
+<h1 class="page-header">Data Gaji <small><i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> Pegawai : <?= $peg['pegawai_nama'] ?> </small></h1>
 <!-- begin row -->
 <div class="row">
     <!-- begin col-12 -->
@@ -44,7 +44,7 @@ if (isset($_GET['id_peg'])) {
                             <div class="form-group col-md-6">
                                 <label class="col-md-3 control-label">Nama</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="nama_pegawai" maxlength="64" value="<?= $peg["nama"] ?>" class="form-control" readonly />
+                                    <input type="text" name="nama_pegawai" maxlength="64" value="<?= $peg["pegawai_nama"] ?>" class="form-control" readonly />
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -60,7 +60,7 @@ if (isset($_GET['id_peg'])) {
                             <div class="form-group col-md-6">
                                 <label class="col-md-3 control-label">Jabatan</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="jabatan_pegawai" maxlength="64" value="<?= $peg["jabatan"] ?>" class="form-control" readonly />
+                                    <input type="text" name="jabatan_pegawai" maxlength="64" value="<?= $peg["pembagian1_id"] ?>" class="form-control" readonly />
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
