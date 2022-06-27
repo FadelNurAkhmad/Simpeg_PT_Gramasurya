@@ -10,7 +10,7 @@
 		die ("Error. No Kode Selected! ");	
 	}
 	include "../../config/koneksi.php";
-	$tP=mysqli_query($koneksi, "SElECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
+	$tP=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
 	$jkP=mysqli_fetch_array($tP, MYSQLI_ASSOC);
 	$jk=$jkP['jk'];
 		

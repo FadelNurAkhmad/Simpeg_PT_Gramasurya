@@ -22,6 +22,6 @@ if (isset($_GET['id_cuti'])) {
 			echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
 		}
 	}
-	mysqli_close($Open);
+	mysqli_close($koneksi);
 ?>
 </div>

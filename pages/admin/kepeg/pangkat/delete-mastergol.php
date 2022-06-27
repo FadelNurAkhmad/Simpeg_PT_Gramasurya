@@ -21,6 +21,6 @@ if (isset($_GET['id_mastergol'])) {
 			echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
 		}
 	}
-	mysqli_close($Open);
+	mysqli_close($koneksi);
 ?>
 </div>

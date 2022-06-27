@@ -1,9 +1,9 @@
 <?php
-	if (isset($_GET['id_peg'])) {
-	$id_peg = $_GET['id_peg'];
+	if (isset($_GET['pegawai_id'])) {
+	$id_peg = $_GET['pegawai_id'];
 	
 	include "../../config/koneksi.php";
-	$query   =mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
+	$query   =mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id = tb_pegawai.pegawai_id WHERE pegawai.pegawai_id='$id_peg'");
 	$data    =mysqli_fetch_array($query, MYSQLI_ASSOC);
 	}
 	else {
@@ -23,7 +23,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Ganti <small>Foto <i class="fa fa-angle-right"></i> NIP_<?=$data['nip']?></small></h1>
+<h1 class="page-header">Ganti <small>Foto <i class="fa fa-angle-right"></i> NIP_<?=$data['pegawai_nip']?></small></h1>
 <!-- end page-header -->
 <div class="row">
 	<!-- begin col-12 -->
@@ -35,12 +35,11 @@
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
 				<h4 class="panel-title">Form ganti foto pegawai</h4>
 			</div>
 			<div class="panel-body">
-				<form action="index.php?page=ganti-foto&id_peg=<?=$id_peg?>" class="form-horizontal" method="POST" enctype="multipart/form-data" >
+				<form action="index.php?page=ganti-foto&pegawai_id=<?=$id_peg?>" class="form-horizontal" method="POST" enctype="multipart/form-data" >
 					<div class="form-group">
 						<label class="col-md-3 control-label">Foto</label>
 						<div class="col-md-6">
@@ -51,7 +50,7 @@
 						<label class="col-md-3 control-label"></label>
 						<div class="col-md-6">
 							<button type="submit" name="edit" value="edit" class="btn btn-primary"><i class="fa fa-edit"></i> &nbsp;Change</button>&nbsp;
-							<a type="button" class="btn btn-default active" href="index.php?page=detail-data-pegawai&id_peg=<?=$id_peg?>"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+							<a type="button" class="btn btn-default active" href="index.php?page=detail-data-pegawai&pegawai_id=<?=$id_peg?>"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
 						</div>
 					</div>
 				</form>

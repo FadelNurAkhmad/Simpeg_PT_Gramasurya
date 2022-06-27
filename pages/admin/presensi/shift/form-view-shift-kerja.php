@@ -16,7 +16,7 @@
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";
-$tampilDataPre    = mysqli_query($koneksi, "SELECT * FROM tb_presensi ORDER BY id_presensi DESC");
+$tampilDataShift    = mysqli_query($koneksi, "SELECT * FROM jam_kerja ORDER BY jk_id ASC");
 ?>
 <div class="row">
     <!-- begin col-12 -->
@@ -28,9 +28,8 @@ $tampilDataPre    = mysqli_query($koneksi, "SELECT * FROM tb_presensi ORDER BY i
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilDataPre); ?></span> rows for "Shift Kerja"</h4>
+                <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilDataShift); ?></span> rows for "Shift Kerja"</h4>
             </div>
             <div class="alert alert-success fade in">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
@@ -42,40 +41,46 @@ $tampilDataPre    = mysqli_query($koneksi, "SELECT * FROM tb_presensi ORDER BY i
                         <tr>
                             <th width="4%">No</th>
                             <th>Nama Shift</th>
+                            <th>Kode</th>
+                            <th>Masuk</th>
+                            <th>Istirahat Keluar</th>
+                            <th>Istirahat Kembali</th>
+                            <th>Pulang</th>
+                            <th>Durasi</th>
+                            <th>Dihitung</th>
                             <th width="10%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $no = 0;
-                        while ($dataPre    = mysqli_fetch_array($tampilDataPre, MYSQLI_ASSOC)) {
+                        while ($dataShift    = mysqli_fetch_array($tampilDataShift, MYSQLI_ASSOC)) {
                             $no++;
                         ?>
                             <tr>
                                 <td><?php echo $no ?></td>
-                                <td>Pagi</td>
+                                <td><?= $dataShift['jk_name'] ?></td>
+                                <td><?= $dataShift['jk_kode'] ?></td>
+                                <td><?= $dataShift['jk_bcin'] ?></td>
+                                <td><?= $dataShift['jk_ist1'] ?></td>
+                                <td><?= $dataShift['jk_ist2'] ?></td>
+                                <td><?= $dataShift['jk_ecout'] ?></td>
+                                <td><?= ($dataShift['jk_durasi'] == 1)?"Efektif":"Aktual" ?></td>
+                                <td><?= $dataShift['jk_countas'] ?></td>
                                 <td class="text-center">
-                                    <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-shift-kerja" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
-                                    <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $dataPre['id_presensi'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><?php echo $no ?></td>
-                                <td>Malam</td>
-                                <td class="text-center">
-                                    <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-shift-kerja" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
-                                    <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $dataPre['id_presensi'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
+                                    <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-shift-kerja&jk_id=<?= $dataShift['jk_id'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
+                                    <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $dataShift['jk_id'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
                                 </td>
                             </tr>
                             <!-- #modal-dialog -->
-                            <div id="Del<?php echo $dataPre['id_presensi'] ?>" class="modal fade" role="dialog">
+                            <div id="Del<?php echo $dataShift['jk_id'] ?>" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete <u><?php echo $dataPre['nama_jabatan'] ?></u> from Database?</h5>
+                                            <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete <u><?php echo $dataShift['jk_name'] ?></u> from Database?</h5>
                                         </div>
                                         <div class="modal-body" align="center">
-                                            <a href="index.php?page=delete-data-presensi&id_presensi=<?= $dataPre['id_presensi'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
+                                            <a href="index.php?page=delete-shift-kerja&jk_id=<?= $dataShift['jk_id'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
                                         </div>
                                         <div class="modal-footer">
                                             <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>

@@ -13,7 +13,7 @@ if ($_SESSION['hak_akses'] != "Superadmin") {
 }
 include "../../config/koneksi.php";
 $tampilUsr	= mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user='$_SESSION[id_user]'");
-$usr		= mysqli_fetch_array($tampilUsr, MYSQLI_ASSOC);
+$usr		= mysqli_fetch_array($tampilUsr);
 
 $cekPeg = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_pegawai"));
 if ($cekPeg == 0) {
@@ -208,7 +208,7 @@ if ($cekPeg == 0) {
 						</ul>
 					</li>
 					<li class="has-sub">
-						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-filing bg-grey"></i><span>Kepegawaian &nbsp; <span class="label label-warning m-l-5">8</span></span></a>
+						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-filing bg-grey"></i><span>Kepegawaian &nbsp; <span class="label label-warning m-l-5">7</span></span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-master-data-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jabatan</a></li>
 							<!-- <li><a href="index.php?page=form-master-data-pangkat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pangkat</a></li> -->
@@ -252,7 +252,6 @@ if ($cekPeg == 0) {
 							<li><a href="index.php?page=form-view-data-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jadwal Kerja Pegawai</a></li>
 							<li><a href="index.php?page=form-view-shift-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Shift</a></li>
 							<li><a href="index.php?page=form-view-hari-jam-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Jadwal Kerja</a></li>
-
 						</ul>
 					</li>
 					<li class="has-sub">
@@ -1110,7 +1109,7 @@ if ($cekPeg == 0) {
 		</div>
 		<!-- end #footer -->
 		<!-- begin theme-panel -->
-		<!-- <div class="theme-panel">
+		<div class="theme-panel">
 			<a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i class="ion-ios-cog"></i></a>
 			<div class="theme-panel-content">
 				<h5 class="m-t-0">Color Theme</h5>
@@ -1174,7 +1173,7 @@ if ($cekPeg == 0) {
 					</div>
 				</div>
 			</div>
-		</div> -->
+		</div>
 		<!-- end theme-panel -->
 		<!-- begin scroll to top btn -->
 		<a href="javascript:;" class="btn btn-icon btn-circle btn-primary btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>

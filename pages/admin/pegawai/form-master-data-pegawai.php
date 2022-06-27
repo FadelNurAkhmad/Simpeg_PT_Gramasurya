@@ -49,12 +49,21 @@ $id_peg	= kdauto("tb_pegawai", "");
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
 				<h4 class="panel-title">Form master data pegawai</h4>
 			</div>
 			<div class="panel-body">
-				<form action="index.php?page=master-data-pegawai&id_peg=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+				<form action="index.php?page=master-data-pegawai&pegawai_id=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+					<div class="form-group">
+						<label class="col-md-3 control-label">PIN</label>
+						<div class="col-md-6">
+							<?php
+							$sql = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id DESC LIMIT 1");
+							$pin = mysqli_fetch_array($sql);
+							?>
+							<input type="text" value="<?= $pin['pegawai_pin'] + 1 ?>" name="pin" maxlength="24" class="form-control" />
+						</div>
+					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label">NIP</label>
 						<div class="col-md-6">
@@ -64,11 +73,11 @@ $id_peg	= kdauto("tb_pegawai", "");
 					<div class="form-group">
 						<label class="col-md-3 control-label">Tempat, Tanggal Lahir</label>
 						<div class="col-md-3">
-							<input type="text" name="tempat_lhr" maxlength="64" class="form-control" />
+							<input type="text" name="tempat_lahir" maxlength="64" class="form-control" />
 						</div>
 						<div class="col-md-3">
 							<div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
-								<input type="text" name="tgl_lhr" class="form-control" />
+								<input type="text" name="tgl_lahir" class="form-control" />
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 							</div>
 						</div>
@@ -80,26 +89,44 @@ $id_peg	= kdauto("tb_pegawai", "");
 						</div>
 					</div>
 					<div class="form-group">
+						<label class="col-md-3 control-label">Tanggal Mulai Kerja</label>
+						<div class="col-md-3">
+							<div class="input-group date" id="datepicker-disabled-past2" data-date-format="yyyy-mm-dd">
+								<input type="text" name="tgl_mulai_kerja" class="form-control" />
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Tanggal Masuk Kerja</label>
+						<div class="col-md-3">
+							<div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
+								<input type="text" name="tgl_masuk_pertama" class="form-control" />
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
 						<label class="col-md-3 control-label">Agama</label>
 						<div class="col-md-6">
 							<select name="agama" class="default-select2 form-control">
 								<option value="">...</option>
-								<option value="Islam">Islam</option>
-								<option value="Protestan">Protestan</option>
-								<option value="Katolik">Katolik</option>
-								<option value="Hindu">Hindu</option>
-								<option value="Budha">Budha</option>
-								<option value="Kong Hu Cu">Kong Hu Cu</option>
+								<option value="1">Islam</option>
+								<option value="2">Katolik</option>
+								<option value="3">Protestan</option>
+								<option value="4">Hindu</option>
+								<option value="5">Budha</option>
+								<option value="6">Lainnya</option>
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label">Jenis Kelamin</label>
 						<div class="col-md-6">
-							<select name="jk" class="default-select2 form-control">
+							<select name="gender" class="default-select2 form-control">
 								<option value="">...</option>
-								<option value="Laki-laki">Laki-laki</option>
-								<option value="Perempuan">Perempuan</option>
+								<option value="1">Laki-laki</option>
+								<option value="2">Perempuan</option>
 							</select>
 						</div>
 					</div>
@@ -108,10 +135,14 @@ $id_peg	= kdauto("tb_pegawai", "");
 						<div class="col-md-6">
 							<select name="gol_darah" class="default-select2 form-control">
 								<option value="">...</option>
-								<option value="A">A</option>
-								<option value="AB">AB</option>
-								<option value="B">B</option>
-								<option value="O">O</option>
+								<option value="1">A+</option>
+								<option value="2">B+</option>
+								<option value="3">O+</option>
+								<option value="4">AB+</option>
+								<option value="5">A-</option>
+								<option value="6">B-</option>
+								<option value="7">O-</option>
+								<option value="8">AB-</option>
 							</select>
 						</div>
 					</div>
@@ -120,38 +151,11 @@ $id_peg	= kdauto("tb_pegawai", "");
 						<div class="col-md-6">
 							<select name="status_nikah" class="default-select2 form-control">
 								<option value="">...</option>
-								<option value="Nikah">Nikah</option>
-								<option value="Belum Nikah">Belum Nikah</option>
-								<option value="Cerai">Cerai</option>
+								<option value="1">Sudah Menikah</option>
+								<option value="2">Belum Menikah</option>
+								<option value="3">Duda/Janda Meninggal</option>
+								<option value="4">Duda/Janda Cerai</option>
 							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Status Kepegawaian</label>
-						<div class="col-md-6">
-							<select name="status_kepeg" class="default-select2 form-control">
-								<option value="">...</option>
-								<option value="PNS">PNS</option>
-								<option value="PTT">PTT</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Tanggal Kenaikan Pangkat</label>
-						<div class="col-md-6">
-							<div class="input-group date" id="datepicker-disabled-past2" data-date-format="yyyy-mm-dd">
-								<input type="text" name="tgl_naikpangkat" class="form-control" />
-								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Tanggal Kenaikan Gaji</label>
-						<div class="col-md-6">
-							<div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
-								<input type="text" name="tgl_naikgaji" class="form-control" />
-								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-							</div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -173,26 +177,6 @@ $id_peg	= kdauto("tb_pegawai", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Unit Kerja</label>
-						<div class="col-md-6">
-							<?php
-							$unit = mysqli_query($koneksi, "SELECT * FROM tb_unit ORDER BY nama");
-							echo '<select name="id_unit" class="default-select2 form-control">';
-							echo '<option value="">...</option>';
-							while ($rowunit = mysqli_fetch_array($unit, MYSQLI_ASSOC)) {
-								echo '<option value="' . $rowunit['id_unit'] . '">' . $rowunit['nama'] . '</option>';
-							}
-							echo '</select>';
-							?>
-						</div>
-					</div>
-					<!-- <div class="form-group">
-						<label class="col-md-3 control-label">Kuota Cuti</label>
-						<div class="col-md-6">
-							<input type="text" name="sisa_cuti" class="form-control" placeholder="Per Tahun"></input>
-						</div>
-					</div> -->
-					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right">Foto</label>
 						<div class="col-sm-6">
 							<input type="file" name="foto" maxlength="255" class="form-control" />
@@ -202,7 +186,7 @@ $id_peg	= kdauto("tb_pegawai", "");
 						<label class="col-md-3 control-label"></label>
 						<div class="col-md-6">
 							<button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>&nbsp;
-							<a type="button" class="btn btn-default active" href="index.php?page=form-view-data-pegawai"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+							<a type="button" class="btn btn-default active" href="index.php?page=form-view-data-pegawaigit"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
 						</div>
 					</div>
 				</form>

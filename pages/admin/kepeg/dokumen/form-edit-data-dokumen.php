@@ -4,10 +4,10 @@ if (isset($_GET['id_dokumen'])) {
 
     include "../../config/koneksi.php";
     $query   = mysqli_query($koneksi, "SELECT * FROM tb_dokumen WHERE id_dokumen='$id_dokumen'");
-    $data    = mysqli_fetch_array($query, MYSQLI_ASSOC);
+    $data    = mysqli_fetch_array($query);
 
-    $tampilPeg   = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
-    $peg    = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
+    $tampilPeg   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$data[id_peg]'");
+    $peg    = mysqli_fetch_array($tampilPeg);
 } else {
     die("Error. No ID Selected!");
 }
@@ -25,7 +25,7 @@ if (isset($_GET['id_dokumen'])) {
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Riwayat <small>Dokumen <i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> Pegawai: <?= $peg['nama'] ?></small></h1>
+<h1 class="page-header">Riwayat <small>Dokumen <i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> Pegawai: <?= $peg['pegawai_nama'] ?></small></h1>
 <!-- begin row -->
 <div class="row">
     <!-- begin col-12 -->
@@ -58,8 +58,15 @@ if (isset($_GET['id_dokumen'])) {
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-6">
+                            <p>* Max size 500 KB</p>
+                            <p>* Format PDF</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"></label>
+                        <div class="col-md-6">
                             <button type="submit" name="edit" value="edit" class="btn btn-primary"><i class="fa fa-edit"></i> &nbsp;Edit</button>&nbsp;
-                            <a type="button" class="btn btn-default active" href="index.php?page=detail-data-pegawai&id_peg=<?= $data['id_peg'] ?>"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+                            <a type="button" class="btn btn-default active" href="index.php?page=detail-data-pegawai&pegawai_id=<?= $data['id_peg'] ?>"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
                         </div>
                     </div>
                 </form>
