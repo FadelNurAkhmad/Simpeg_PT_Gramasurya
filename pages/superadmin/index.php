@@ -15,6 +15,12 @@ include "../../config/koneksi.php";
 $tampilUsr	= mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user='$_SESSION[id_user]'");
 $usr		= mysqli_fetch_array($tampilUsr, MYSQLI_ASSOC);
 
+// $query = mysqli_query($koneksi, "SELECT * FROM pegawai");
+// while ($row = mysqli_fetch_array($query)) {
+// 	$insert = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id) VALUES ('$row[pegawai_id]')");
+// 	$insertusr = mysqli_query($koneksi, "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, id_peg) VALUES ('$nip', '$nama', '$password', 'Pegawai', '$id_peg')");
+// }
+
 $cekPeg = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_pegawai"));
 if ($cekPeg == 0) {
 	$query = mysqli_query($koneksi, "SELECT * FROM pegawai");
