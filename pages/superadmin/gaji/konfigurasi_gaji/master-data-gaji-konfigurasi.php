@@ -7,7 +7,7 @@
     }
 
     if ($_POST['save'] == "save") {
-        $pegawai_id         = $_POST['pegawai_id'];
+        $id_peg         = $_POST['id_peg'];
         $bulan              = $_POST['bulan'];
         $tahun              = $_POST['tahun'];
         $tanggal_gaji_konfig = $_POST['tanggal_gaji_konfig'];
@@ -38,13 +38,13 @@
 
         include "../../config/koneksi.php";
 
-        if (empty($_POST['pegawai_id']) || empty($_POST['bulan']) || empty($_POST['tahun']) || empty($_POST['tanggal_gaji_konfig'])) {
+        if (empty($_POST['id_peg']) || empty($_POST['bulan']) || empty($_POST['tahun']) || empty($_POST['tanggal_gaji_konfig'])) {
             $_SESSION['pesan'] = "Oops! Please fill all column ...";
             header("location:index.php?page=form-master-data-gaji-konfigurasi");
         } else {
             $insert = "INSERT INTO tb_gaji_konfigurasi (
                         id_gaji_konfig, 
-                        pegawai_id, 
+                        id_peg, 
                         bulan, 
                         tahun,
                         tanggal_gaji_konfig,
@@ -72,7 +72,7 @@
                         dapen_muh,
                         lainya,
                         jumlah_pot_wajib)
-                    VALUES ('$id_gaji_konfig','$pegawai_id', 
+                    VALUES ('$id_gaji_konfig','$id_peg', 
                             '$bulan', '$tahun', '$tanggal_gaji_konfig',
                             '$gaji_diterima', '$gaji_pokok',
                             '$tunjangan_tetap', '$struktural',

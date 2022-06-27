@@ -191,6 +191,10 @@ $peg		= mysqli_fetch_array($tampilPeg);
 					include "../../pages/pegawai/kepeg/cuti/detail-data-cuti.php";
 					break;
 
+				case 'detail-pegawai-data-gaji-konfigurasi':
+					include "../../pages/pegawai/gaji/detail-pegawai-data-gaji-konfigurasi.php";
+					break;
+
 				case 'detail-data-tunjangan':
 					include "../../pages/pegawai/kepeg/tunjangan/detail-data-tunjangan.php";
 					break;
@@ -232,7 +236,7 @@ $peg		= mysqli_fetch_array($tampilPeg);
 			&copy; 2018. <a href="http://www.rajaputramedia.com/">GRAMASURYA</a> Punya Kelompok SPI BOS FARIZ
 		</div>
 		<!-- end #footer -->
-		
+
 		<!-- begin scroll to top btn -->
 		<a href="javascript:;" class="btn btn-icon btn-circle btn-primary btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
 		<!-- end scroll to top btn -->
