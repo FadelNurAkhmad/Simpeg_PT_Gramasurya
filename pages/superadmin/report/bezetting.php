@@ -85,14 +85,14 @@ $writer->save("$file");
 		?>
 	</li>
 	<li><a href="<?php echo $file; ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
-	
+
 </ol>
 <?php
 if (isset($_GET['pegawai_id'])) {
 	$id_peg = $_GET['pegawai_id'];
 }
 include "../../config/koneksi.php";
-$kepala	= mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_peru='1'");
+$kepala	= mysqli_query($koneksi, "SELECT * FROM tb_setup_peru WHERE id_setup_peru='1'");
 $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 ?>
 <!-- begin breadcrumb -->

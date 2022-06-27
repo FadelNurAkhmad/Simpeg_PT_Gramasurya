@@ -683,7 +683,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 							$no = 0;
 							$tampilGaji   = mysqli_query(
 								$koneksi,
-								"SELECT * FROM tb_gaji_konfigurasi WHERE pegawai_id='$id_peg' ORDER BY id_gaji_konfig"
+								"SELECT * FROM tb_gaji_konfigurasi WHERE id_peg='$id_peg' ORDER BY id_gaji_konfig"
 							);
 
 							while ($gaji = mysqli_fetch_array($tampilGaji)) {
