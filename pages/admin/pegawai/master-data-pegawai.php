@@ -22,7 +22,7 @@
 		$telp			= $_POST['telp'];
 		$email			= $_POST['email'];
 		$id_unit		= $_POST['id_unit'];
-		$sisa_cuti		= $_POST['sisa_cuti'];
+		// $sisa_cuti		= $_POST['sisa_cuti'];
 		$foto			= $_FILES['foto']['name'];
 
 		$password	= md5("123");
@@ -36,7 +36,7 @@
 		include "../../config/koneksi.php";
 		$ceknip	= mysqli_num_rows(mysqli_query($koneksi, "SELECT nip FROM tb_pegawai WHERE nip='$_POST[nip]'"));
 
-		if (empty($_POST['nip']) || empty($_POST['nama']) || empty($_POST['tempat_lhr']) || empty($_POST['tgl_lhr']) || empty($_POST['agama']) || empty($_POST['jk']) || empty($_POST['gol_darah']) || empty($_POST['status_nikah']) || empty($_POST['status_kepeg']) || empty($_POST['tgl_naikpangkat']) || empty($_POST['tgl_naikgaji']) || empty($_POST['sisa_cuti'])) {
+		if (empty($_POST['nip']) || empty($_POST['nama']) || empty($_POST['tempat_lhr']) || empty($_POST['tgl_lhr']) || empty($_POST['agama']) || empty($_POST['jk']) || empty($_POST['gol_darah']) || empty($_POST['status_nikah']) || empty($_POST['status_kepeg']) || empty($_POST['tgl_naikpangkat']) || empty($_POST['tgl_naikgaji'])) {
 			$_SESSION['pesan'] = "Oops! Please fill all column ...";
 			header("location:index.php?page=form-master-data-pegawai");
 		} else if ($ceknip > 0) {
@@ -46,7 +46,7 @@
 			$_SESSION['pesan'] = "Oops! Kuota Cuti Hanya 12 Per tahun ...";
 			header("location:index.php?page=form-master-data-pegawai");
 		} else {
-			$insert = "INSERT INTO tb_pegawai (id_peg, nip, nama, tempat_lhr, tgl_lhr, agama, jk, gol_darah, status_nikah, status_kepeg, tgl_naikpangkat, tgl_naikgaji, alamat, telp, email, unit_kerja, sisa_cuti, foto, tgl_pensiun, date_reg) VALUES ('$id_peg', '$nip', '$nama', '$tempat_lhr', '$tgl_lhr', '$agama', '$jk', '$gol_darah', '$status_nikah', '$status_kepeg', '$tgl_naikpangkat', '$tgl_naikgaji', '$alamat', '$telp', '$email', '$id_unit', '$sisa_cuti', '$foto', '$tgl_pensiun', '$date_reg')";
+			$insert = "INSERT INTO tb_pegawai (id_peg, nip, nama, tempat_lhr, tgl_lhr, agama, jk, gol_darah, status_nikah, status_kepeg, tgl_naikpangkat, tgl_naikgaji, alamat, telp, email, unit_kerja, foto, tgl_pensiun, date_reg) VALUES ('$id_peg', '$nip', '$nama', '$tempat_lhr', '$tgl_lhr', '$agama', '$jk', '$gol_darah', '$status_nikah', '$status_kepeg', '$tgl_naikpangkat', '$tgl_naikgaji', '$alamat', '$telp', '$email', '$id_unit', '$foto', '$tgl_pensiun', '$date_reg')";
 			$query = mysqli_query($koneksi, $insert);
 
 			$insertusr = mysqli_query($koneksi, "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, id_peg) VALUES ('$nip', '$nama', '$password', 'Pegawai', '$id_peg')");

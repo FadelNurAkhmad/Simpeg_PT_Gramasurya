@@ -10,7 +10,7 @@
         $jumlah_cuti = $data['jumlah_cuti'];
         $status      = "Approve";
 
-        $cekSisaCuti = mysqli_query($koneksi, "SELECT sisa_cuti FROM tb_pegawai WHERE id_peg='$id_peg'");
+        $cekSisaCuti = mysqli_query($koneksi, "SELECT jatah_c_sisa FROM tb_jatah_cuti WHERE id_peg='$id_peg'");
 
         while ($cek = mysqli_fetch_array($cekSisaCuti)) {
             $sisa = $cek;
@@ -20,13 +20,13 @@
             $_SESSION['pesan'] = "Oops! Data tidak ditemukan. ...";
             header("location:index.php?page=form-view-cuti");
         } else {
-            if ($sisa['sisa_cuti'] <= 0) {
+            if ($sisa['jatah_c_sisa'] <= 0) {
                 $_SESSION['pesan'] = "Oops! Sisa cuti telah habis. ...";
                 header("location:index.php?page=form-view-cuti");
             } else {
                 $cuti   = mysqli_query($koneksi, "UPDATE tb_data_cuti SET status='$status' WHERE id_peg='$id_peg' AND id_cuti='$id_cuti'");
                 if ($cuti) {
-                    $approve = mysqli_query($koneksi, "UPDATE tb_pegawai SET sisa_cuti=(sisa_cuti-'$jumlah_cuti') WHERE id_peg='$id_peg'");
+                    $approve = mysqli_query($koneksi, "UPDATE tb_jatah_cuti SET jatah_c_sisa=(jatah_c_sisa-'$jumlah_cuti'), jatah_c_ambil=(jatah_c_ambil+'$jumlah_cuti')  WHERE id_peg='$id_peg'");
                     $_SESSION['pesan'] = "Good!  Data berhasil di Approve. ...";
                     header("location:index.php?page=form-view-cuti");
                 } else {

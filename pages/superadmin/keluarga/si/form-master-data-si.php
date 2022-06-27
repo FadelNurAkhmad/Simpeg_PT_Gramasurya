@@ -2,10 +2,10 @@
 <ol class="breadcrumb pull-right">
 	<li>
 		<?php
-			if (isset($_SESSION['pesan']) && $_SESSION['pesan'] <> '') {
-				echo "<span class='pesan'><div class='btn btn-sm btn-inverse m-b-10'><i class='fa fa-bell text-warning'></i>&nbsp; ".$_SESSION['pesan']." &nbsp; &nbsp; &nbsp;</div></span>";
-			}
-			$_SESSION['pesan'] ="";
+		if (isset($_SESSION['pesan']) && $_SESSION['pesan'] <> '') {
+			echo "<span class='pesan'><div class='btn btn-sm btn-inverse m-b-10'><i class='fa fa-bell text-warning'></i>&nbsp; " . $_SESSION['pesan'] . " &nbsp; &nbsp; &nbsp;</div></span>";
+		}
+		$_SESSION['pesan'] = "";
 		?>
 	</li>
 </ol>
@@ -14,36 +14,36 @@
 <h1 class="page-header">Riwayat <small>Suami Istri <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
-	
-	function kdauto($tabel, $inisial){
-		include "../../config/koneksi.php";
-		
-		$struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
-		$fieldInfo = mysqli_fetch_field_direct($struktur, 0);
-		$field      = $fieldInfo->name;
-		$panjang    = $fieldInfo->length;
-		$qry  = mysqli_query($koneksi, "SELECT max(".$field.") FROM ".$tabel);
-		$row  = mysqli_fetch_array($qry);
-		if ($row[0]=="") {
-		$angka=0;
-		}
-		else {
-		$angka= substr($row[0], strlen($inisial));
-		}
-		$angka++;
-		$angka =strval($angka);
-		$tmp  ="";
-		for($i=1; $i<=($panjang-strlen($inisial)-strlen($angka)); $i++) {
-		$tmp=$tmp."0";
-		}
-		return $inisial.$tmp.$angka;
-		}
-	$id_si	=kdauto("tb_suamiistri","");
+
+function kdauto($tabel, $inisial)
+{
+	include "../../config/koneksi.php";
+
+	$struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
+	$fieldInfo = mysqli_fetch_field_direct($struktur, 0);
+	$field      = $fieldInfo->name;
+	$panjang    = $fieldInfo->length;
+	$qry  = mysqli_query($koneksi, "SELECT max(" . $field . ") FROM " . $tabel);
+	$row  = mysqli_fetch_array($qry);
+	if ($row[0] == "") {
+		$angka = 0;
+	} else {
+		$angka = substr($row[0], strlen($inisial));
+	}
+	$angka++;
+	$angka = strval($angka);
+	$tmp  = "";
+	for ($i = 1; $i <= ($panjang - strlen($inisial) - strlen($angka)); $i++) {
+		$tmp = $tmp . "0";
+	}
+	return $inisial . $tmp . $angka;
+}
+$id_si	= kdauto("tb_suamiistri", "");
 ?>
 <!-- begin row -->
 <div class="row">
 	<!-- begin col-12 -->
-    <div class="col-md-12">
+	<div class="col-md-12">
 		<!-- begin panel -->
 		<div class="panel panel-inverse" data-sortable-id="form-stuff-1">
 			<div class="panel-heading">
@@ -56,18 +56,18 @@
 				<h4 class="panel-title">Form master data suami / istri</h4>
 			</div>
 			<div class="panel-body">
-				<form action="index.php?page=master-data-si&id_si=<?=$id_si?>" class="form-horizontal" method="POST" enctype="multipart/form-data" >
+				<form action="index.php?page=master-data-si&id_si=<?= $id_si ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label class="col-md-3 control-label">Pegawai</label>
 						<div class="col-md-6">
 							<?php
-								$data = mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY nama ASC");        
-								echo '<select name="id_peg" class="default-select2 form-control">';    
-								echo '<option value="">...</option>';    
-									while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)) {    
-									echo '<option value="'.$row['id_peg'].'">'.$row['nama'].'_'.$row['nip'].'</option>';    
-									}    
-								echo '</select>';
+							$data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
+							echo '<select name="id_peg" class="default-select2 form-control">';
+							echo '<option value="">...</option>';
+							while ($row = mysqli_fetch_array($data)) {
+								echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
+							}
+							echo '</select>';
 							?>
 						</div>
 					</div>
@@ -99,10 +99,12 @@
 						<label class="col-md-3 control-label">Pendidikan</label>
 						<div class="col-md-6">
 							<select name="pendidikan" class="default-select2 form-control">
-								<option value="">...</option>    
+								<option value="">...</option>
 								<option value="SD">SD</option>
 								<option value="SLTP">SLTP</option>
 								<option value="SLTA">SLTA</option>
+								<option value="D1">D1</option>
+								<option value="D2">D2</option>
 								<option value="D3">D3</option>
 								<option value="S1">S1</option>
 								<option value="S2">S2</option>
@@ -120,7 +122,7 @@
 						<label class="col-md-3 control-label">Status Hubungan</label>
 						<div class="col-md-6">
 							<select name="status_hub" class="default-select2 form-control">
-								<option value="">...</option>    
+								<option value="">...</option>
 								<option value="Suami">Suami</option>
 								<option value="Istri">Istri</option>
 							</select>
@@ -141,7 +143,14 @@
 	<!-- end col-6 -->
 </div>
 <!-- end row -->
-<script> // 500 = 0,5 s
-	$(document).ready(function(){setTimeout(function(){$(".pesan").fadeIn('slow');}, 500);});
-	setTimeout(function(){$(".pesan").fadeOut('slow');}, 7000);
+<script>
+	// 500 = 0,5 s
+	$(document).ready(function() {
+		setTimeout(function() {
+			$(".pesan").fadeIn('slow');
+		}, 500);
+	});
+	setTimeout(function() {
+		$(".pesan").fadeOut('slow');
+	}, 7000);
 </script>

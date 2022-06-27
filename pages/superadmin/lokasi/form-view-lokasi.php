@@ -19,9 +19,9 @@ include "../../config/koneksi.php";
 // $tampilCuti    = mysqli_query($koneksi, "SELECT * FROM tb_data_cuti ORDER BY id_cuti DESC");
 $tampilLokasi    = mysqli_query(
     $koneksi,
-    "SELECT tb_lokasi.id_lokasi, tb_lokasi.id_peg, tb_lokasi.nama_lokasi, tb_lokasi.lat, tb_lokasi.lng, tb_lokasi.alamat, tb_pegawai.nip, tb_pegawai.nama
+    "SELECT tb_lokasi.id_lokasi, tb_lokasi.id_peg, tb_lokasi.nama_lokasi, tb_lokasi.lat, tb_lokasi.lng, tb_lokasi.alamat, pegawai.pegawai_nip, pegawai.pegawai_nama
     FROM tb_lokasi
-    INNER JOIN tb_pegawai ON tb_lokasi.id_peg=tb_pegawai.id_peg ORDER BY id_lokasi DESC"
+    INNER JOIN pegawai ON tb_lokasi.id_peg=pegawai.pegawai_id ORDER BY id_lokasi DESC"
 );
 
 ?>
@@ -64,8 +64,8 @@ $tampilLokasi    = mysqli_query(
                         ?>
                             <tr>
                                 <td><?php echo $no ?></td>
-                                <td><?php echo $lok['nip'] ?></td>
-                                <td><?php echo $lok['nama'] ?></td>
+                                <td><?php echo $lok == 0 ? '-' : $lok['pegawai_nip']; ?></td>
+                                <td><?php echo $lok['pegawai_nama'] ?></td>
                                 <td><?php echo $lok['nama_lokasi'] ?></td>
                                 <td><?php echo $lok['lat'] ?></td>
                                 <td><?php echo $lok['lng'] ?></td>
@@ -81,26 +81,10 @@ $tampilLokasi    = mysqli_query(
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Anda yakin akan menghapus data lokasi <u><?php echo $lok['nama'] ?></u> dari Database ?</h5>
+                                            <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Anda yakin akan menghapus data lokasi <u><?php echo $lok['pegawai_nama'] ?></u> dari Database ?</h5>
                                         </div>
                                         <div class="modal-body" align="center">
                                             <a href="index.php?page=delete-lokasi&id_lokasi=<?= $lok['id_lokasi'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- #modal-dialog-approve -->
-                            <div id="Approve<?php echo $lok['id_lokasi'] ?>" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title"><span class="label label-inverse"> # Approval</span> &nbsp; Anda yakin approve cuti <u><?php echo $lok['nama'] ?></u> ?</h5>
-                                        </div>
-                                        <div class="modal-body" align="center">
-                                            <a href="#" class="btn btn-success">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
                                         </div>
                                         <div class="modal-footer">
                                             <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
@@ -123,13 +107,13 @@ $tampilLokasi    = mysqli_query(
                                                 <div class="form-group col-sm-12">
                                                     <label class="col-md-3 control-label">NIP</label>
                                                     <div class="col-md-9">
-                                                        : <?php echo $lok['nip'] ?>
+                                                        : <?php echo $lok == 0 ? '-' : $lok['pegawai_nip']; ?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm-12">
                                                     <label class="col-md-3 control-label">Nama</label>
                                                     <div class="col-md-9">
-                                                        : <?php echo $lok['nama'] ?>
+                                                        : <?php echo $lok['pegawai_nama'] ?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm-12">

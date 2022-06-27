@@ -186,12 +186,12 @@ $id_peg	= kdauto("tb_pegawai", "");
 							?>
 						</div>
 					</div>
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<label class="col-md-3 control-label">Kuota Cuti</label>
 						<div class="col-md-6">
 							<input type="text" name="sisa_cuti" class="form-control" placeholder="Per Tahun"></input>
 						</div>
-					</div>
+					</div> -->
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right">Foto</label>
 						<div class="col-sm-6">

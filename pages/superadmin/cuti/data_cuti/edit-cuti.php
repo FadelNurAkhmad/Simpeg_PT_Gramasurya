@@ -7,7 +7,7 @@
     }
     include "../../config/koneksi.php";
     $tampilCut    = mysqli_query($koneksi, "SELECT * FROM tb_data_cuti WHERE id_cuti='$id_cuti'");
-    $hasil    = mysqli_fetch_array($tampilCut, MYSQLI_ASSOC);
+    $hasil    = mysqli_fetch_array($tampilCut);
     $id_peg    = $hasil['id_peg'];
 
     if ($_POST['edit'] == "edit") {

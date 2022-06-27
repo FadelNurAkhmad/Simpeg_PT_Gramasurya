@@ -52,22 +52,34 @@ if (isset($_GET['id_gaji_konfig'])) {
                             <div class="form-group col-md-6">
                                 <label class="col-md-3 control-label">Periode</label>
                                 <div class="col-md-3">
-                                    <select class="form-control" name="bulan" id="bulan">
-                                        <?php
-                                        $arr = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
-                                        foreach ($arr as $key) {
-                                            echo "<option value='$key'>$key";
-                                        }
-                                        ?>
+                                    <select name="bulan" id="bulan" class="default-select2 form-control">
+                                        <option value="Januari" <?php echo ($gaji['bulan'] == 'Januari') ? "selected" : ""; ?>>Januari
+                                        <option value="Februari" <?php echo ($gaji['bulan'] == 'Februari') ? "selected" : ""; ?>>Februari
+                                        <option value="Maret" <?php echo ($gaji['bulan'] == 'Maret') ? "selected" : ""; ?>>Maret
+                                        <option value="April" <?php echo ($gaji['bulan'] == 'April') ? "selected" : ""; ?>>April
+                                        <option value="Mei" <?php echo ($gaji['bulan'] == 'Mei') ? "selected" : ""; ?>>Mei
+                                        <option value="Juni" <?php echo ($gaji['bulan'] == 'Juni') ? "selected" : ""; ?>>Juni
+                                        <option value="Juli" <?php echo ($gaji['bulan'] == 'Juli') ? "selected" : ""; ?>>Juli
+                                        <option value="Agustus" <?php echo ($gaji['bulan'] == 'Agustus') ? "selected" : ""; ?>>Agustus
+                                        <option value="September" <?php echo ($gaji['bulan'] == 'September') ? "selected" : ""; ?>>September
+                                        <option value="Oktober" <?php echo ($gaji['bulan'] == 'Oktober') ? "selected" : ""; ?>>Oktober
+                                        <option value="November" <?php echo ($gaji['bulan'] == 'November') ? "selected" : ""; ?>>November
+                                        <option value="Desember" <?php echo ($gaji['bulan'] == 'Desember') ? "selected" : ""; ?>>Desember
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <select name="tahun" id="tahun" class="form-control">
-                                        <?php
-                                        for ($i = 2020; $i < 2027; $i++) {
-                                            echo '<option value="' . $i . '">' . $i . '</option>';
-                                        }
-                                        ?>
+                                    <select name="tahun" id="tahun" class="default-select2 form-control">
+                                        <option value="2020" <?php echo ($gaji['tahun'] == '2020') ? "selected" : ""; ?>>2020
+                                        <option value="2021" <?php echo ($gaji['tahun'] == '2021') ? "selected" : ""; ?>>2021
+                                        <option value="2022" <?php echo ($gaji['tahun'] == '2022') ? "selected" : ""; ?>>2022
+                                        <option value="2023" <?php echo ($gaji['tahun'] == '2023') ? "selected" : ""; ?>>2023
+                                        <option value="2024" <?php echo ($gaji['tahun'] == '2024') ? "selected" : ""; ?>>2024
+                                        <option value="2025" <?php echo ($gaji['tahun'] == '2025') ? "selected" : ""; ?>>2025
+                                        <option value="2026" <?php echo ($gaji['tahun'] == '2026') ? "selected" : ""; ?>>2026
+                                        <option value="2027" <?php echo ($gaji['tahun'] == '2027') ? "selected" : ""; ?>>2027
+                                        <option value="2028" <?php echo ($gaji['tahun'] == '2028') ? "selected" : ""; ?>>2028
+                                        <option value="2029" <?php echo ($gaji['tahun'] == '2029') ? "selected" : ""; ?>>2029
+                                        <option value="2030" <?php echo ($gaji['tahun'] == '2030') ? "selected" : ""; ?>>2030
                                     </select>
                                 </div>
                             </div>

@@ -203,6 +203,7 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-calendar bg-purple"></i><span>Cuti</span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-view-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Cuti</a></li>
+							<li><a href="index.php?page=form-view-jatah-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jatah Cuti Pegawai</a></li>
 							<li><a href="index.php?page=form-view-jenis-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Jenis Cuti</a></li>
 						</ul>
 					</li>

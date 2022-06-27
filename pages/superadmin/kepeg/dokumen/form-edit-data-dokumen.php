@@ -4,10 +4,10 @@ if (isset($_GET['id_dokumen'])) {
 
     include "../../config/koneksi.php";
     $query   = mysqli_query($koneksi, "SELECT * FROM tb_dokumen WHERE id_dokumen='$id_dokumen'");
-    $data    = mysqli_fetch_array($query, MYSQLI_ASSOC);
+    $data    = mysqli_fetch_array($query);
 
     $tampilPeg   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$data[id_peg]'");
-    $peg    = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
+    $peg    = mysqli_fetch_array($tampilPeg);
 } else {
     die("Error. No ID Selected!");
 }

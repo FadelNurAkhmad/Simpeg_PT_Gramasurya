@@ -9,6 +9,9 @@ $data    = mysqli_fetch_array($query, MYSQLI_ASSOC);
 $queryPan	= mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' AND status_pan='Aktif'");
 $selpan		= mysqli_fetch_array($queryPan, MYSQLI_ASSOC);
 
+$queryCuti	= mysqli_query($koneksi, "SELECT * FROM tb_jatah_cuti WHERE id_peg='$id_peg'");
+$jatCuti	= mysqli_fetch_array($queryCuti);
+
 $birthday	= new DateTime($data['tgl_lhr']);
 $today		= new DateTime();
 $diff = $today->diff($birthday);
@@ -149,13 +152,25 @@ $diff = $today->diff($birthday);
 												</td>
 											</tr>
 											<tr>
+												<td class="field">Jatah Cuti</td>
+												<td>
+													<?php
+													if ($jatCuti == 0) {
+														echo "-";
+													} else {
+														echo "$jatCuti[jatah_c_jml]";
+													}
+													?>
+												</td>
+											</tr>
+											<tr>
 												<td class="field">Sisa Cuti</td>
 												<td>
 													<?php
-													if ($data['sisa_cuti'] == "") {
+													if ($jatCuti == 0) {
 														echo "-";
 													} else {
-														echo "$data[sisa_cuti]";
+														echo "$jatCuti[jatah_c_sisa]";
 													}
 													?>
 													&nbsp; &nbsp;

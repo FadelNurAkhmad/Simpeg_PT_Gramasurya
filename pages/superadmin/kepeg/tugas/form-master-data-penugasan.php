@@ -14,29 +14,29 @@
 <h1 class="page-header">Riwayat <small>Penugasan <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
-function kdauto($tabel, $inisial){
+function kdauto($tabel, $inisial)
+{
 	include "../../config/koneksi.php";
-	
+
 	$struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
 	$fieldInfo = mysqli_fetch_field_direct($struktur, 0);
 	$field      = $fieldInfo->name;
 	$panjang    = $fieldInfo->length;
-	$qry  = mysqli_query($koneksi, "SELECT max(".$field.") FROM ".$tabel);
+	$qry  = mysqli_query($koneksi, "SELECT max(" . $field . ") FROM " . $tabel);
 	$row  = mysqli_fetch_array($qry);
-	if ($row[0]=="") {
-	$angka=0;
-	}
-	else {
-	$angka= substr($row[0], strlen($inisial));
+	if ($row[0] == "") {
+		$angka = 0;
+	} else {
+		$angka = substr($row[0], strlen($inisial));
 	}
 	$angka++;
-	$angka =strval($angka);
-	$tmp  ="";
-	for($i=1; $i<=($panjang-strlen($inisial)-strlen($angka)); $i++) {
-	$tmp=$tmp."0";
+	$angka = strval($angka);
+	$tmp  = "";
+	for ($i = 1; $i <= ($panjang - strlen($inisial) - strlen($angka)); $i++) {
+		$tmp = $tmp . "0";
 	}
-	return $inisial.$tmp.$angka;
-	}
+	return $inisial . $tmp . $angka;
+}
 $id_penugasan	= kdauto("tb_penugasan", "");
 ?>
 <!-- begin row -->
@@ -60,11 +60,11 @@ $id_penugasan	= kdauto("tb_penugasan", "");
 						<label class="col-md-3 control-label">Pegawai</label>
 						<div class="col-md-6">
 							<?php
-							$data = mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY nama ASC");
+							$data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id ASC");
 							echo '<select name="id_peg" class="default-select2 form-control">';
 							echo '<option value="">...</option>';
-							while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)) {
-								echo '<option value="' . $row['id_peg'] . '">' . $row['nama'] . '_' . $row['nip'] . '</option>';
+							while ($row = mysqli_fetch_array($data)) {
+								echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
 							}
 							echo '</select>';
 							?>

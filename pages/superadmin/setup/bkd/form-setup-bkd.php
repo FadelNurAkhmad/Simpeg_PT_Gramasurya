@@ -60,7 +60,7 @@ if (isset($_GET['id_setup_bkd'])) {
 							$kepala = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_status='1'");
 							echo '<select name="kepala" class="default-select2 form-control">';
 							echo '<option value="' . $data['kepala'] . '">...</option>';
-							while ($row = mysqli_fetch_array($kepala, MYSQLI_ASSOC)) {
+							while ($row = mysqli_fetch_array($kepala)) {
 								echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
 							}
 							echo '</select>';

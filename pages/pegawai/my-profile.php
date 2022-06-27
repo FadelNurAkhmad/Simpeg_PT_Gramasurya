@@ -89,7 +89,7 @@ $diff = $today->diff($birthday);
 													<h5><span class="label label-inverse pull-right"> # Biodata Pegawai </span></h5>
 												</th>
 												<th>
-													<h4><?= $data['pegawai_nama'] ?> <small><?= (isset($jab)?"$jab[pembagian1_nama]":"") ?></small></h4>
+													<h4><?= $data['pegawai_nama'] ?> <small><?= (isset($jab) ? "$jab[pembagian1_nama]" : "") ?></small></h4>
 												</th>
 											</tr>
 										</thead>
@@ -103,7 +103,7 @@ $diff = $today->diff($birthday);
 											</tr>
 											<tr>
 												<td class="field">Jenis Kelamin</td>
-												<td><i class="fa fa-intersex fa-lg m-r-5"></i> <?= ($data['gender']=='1')?"Laki-laki":"Perempuan"; ?></td>
+												<td><i class="fa fa-intersex fa-lg m-r-5"></i> <?= ($data['gender'] == '1') ? "Laki-laki" : "Perempuan"; ?></td>
 											</tr>
 											<tr>
 												<td class="field">Tempat Tanggal Lahir</td>
@@ -115,32 +115,32 @@ $diff = $today->diff($birthday);
 											</tr>
 											<tr>
 												<td class="field">Golongan Darah</td>
-												<td><?php 
-													switch($data['gol_darah']) {
-														case 1 :
+												<td><?php
+													switch ($data['gol_darah']) {
+														case 1:
 															echo "A+";
 															break;
-														case 2 :
+														case 2:
 															echo "B+";
 															break;
-														case 3 :
+														case 3:
 															echo "O+";
 															break;
-														case 4 :
+														case 4:
 															echo "AB+";
 															break;
-														case 5 :
+														case 5:
 															echo "A-";
 															break;
-														case 6 :
+														case 6:
 															echo "B-";
 															break;
-														case 7 :
+														case 7:
 															echo "O-";
 															break;
-														case 8 :
+														case 8:
 															echo "AB-";
-															break; 
+															break;
 													}
 													?>
 												</td>
@@ -148,48 +148,48 @@ $diff = $today->diff($birthday);
 											<tr>
 												<td class="field">Agama</td>
 												<td>
-													<?php 
-														switch($data['agama']) {
-															case 1 :
-																echo "Islam";
-																break;
-															case 2 :
-																echo "Katolik";
-																break;
-															case 3 :
-																echo "Protestan";
-																break;
-															case 4 :
-																echo "Hindu";
-																break;
-															case 5 :
-																echo "Budha";
-																break;
-															case 6 :
-																echo "Lainnya";
-																break;
-														} 
+													<?php
+													switch ($data['agama']) {
+														case 1:
+															echo "Islam";
+															break;
+														case 2:
+															echo "Katolik";
+															break;
+														case 3:
+															echo "Protestan";
+															break;
+														case 4:
+															echo "Hindu";
+															break;
+														case 5:
+															echo "Budha";
+															break;
+														case 6:
+															echo "Lainnya";
+															break;
+													}
 													?>
 												</td>
 											</tr>
 											<tr>
 												<td class="field">Status Pernikahan</td>
 												<td>
-													<?php 
-														switch($data['stat_nikah']) {
-															case 1 :
-																echo "Sudah Menikah";
-																break;
-															case 2 :
-																echo "Belum Menikah";
-																break;
-															case 3 :
-																echo "Duda/Janda Meninggal";
-																break;
-															case 4 :
-																echo "Duda/Janda Cerai";
-																break;
-														}
+													<?php
+													switch ($data['stat_nikah']) {
+														case 1:
+															echo "Sudah Menikah";
+															break;
+														case 2:
+															echo "Belum Menikah";
+															break;
+														case 3:
+															echo "Duda/Janda Meninggal";
+															break;
+														case 4:
+															echo "Duda/Janda Cerai";
+															break;
+													}
 													?>
 												</td>
 											</tr>
@@ -219,17 +219,33 @@ $diff = $today->diff($birthday);
 												</td>
 											</tr> -->
 											<tr>
-												<td class="field">Sisa Cuti</td>
+												<td class="field">Jatah Cuti</td>
 												<td>
 													<?php
-													if ($data['sisa_cuti'] == "") {
+													if ($jatCuti['jatah_c_jml'] == "") {
 														echo "-";
 													} else {
-														echo "$data[sisa_cuti]";
+														echo "$jatCuti[jatah_c_jml]";
 													}
 													?>
 												</td>
 											</tr>
+											<tr>
+												<td class="field">Sisa Cuti</td>
+												<td>
+													<?php
+													if ($jatCuti['jatah_c_sisa'] == "") {
+														echo "-";
+													} else {
+														echo "$jatCuti[jatah_c_sisa]";
+													}
+													?>
+													&nbsp; &nbsp;
+													Per Tanggal
+													<?php echo date('j/m/Y'); ?></p>
+												</td>
+											</tr>
+										</tbody>
 										</tbody>
 									</table>
 								</div>
@@ -576,7 +592,7 @@ $diff = $today->diff($birthday);
 						<label class="col-md-1 control-label">Periode</label>
 						<form action="" method="POST" enctype="multipart/form-data">
 							<div class="form-group col-md-3">
-								<div class="input-group date" id= "datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
+								<div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
 									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 									<input type="text" name="periode_awal" placeholder="Dari" class="form-control" />
 								</div>
@@ -595,9 +611,9 @@ $diff = $today->diff($birthday);
 					</div>
 					<div class="col-6 col-md-8">
 						<label class="col-md-1 control-label">Hadir</label>
-							<div class="col-md-2 m-b-10">
-								<input type="text" name="periode_awal" value="" class="form-control" readonly />
-							</div>
+						<div class="col-md-2 m-b-10">
+							<input type="text" name="periode_awal" value="" class="form-control" readonly />
+						</div>
 					</div>
 				</div>
 				<div class="table-responsive">
@@ -614,20 +630,20 @@ $diff = $today->diff($birthday);
 						</thead>
 						<tbody>
 							<?php
-							if(!empty($_POST['periode_awal']) && !empty($_POST['periode_awal'])){ 
+							if (!empty($_POST['periode_awal']) && !empty($_POST['periode_awal'])) {
 								$tampilCari = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[pegawai_pin]' AND DATE(scan_date) >= '$_POST[periode_awal]' AND DATE(scan_date) <= '$_POST[periode_akhir]'");
 								$no = 0;
-								while($cari = mysqli_fetch_array($tampilCari, MYSQLI_ASSOC)) {
+								while ($cari = mysqli_fetch_array($tampilCari, MYSQLI_ASSOC)) {
 									$no++;
 							?>
 									<tr>
 										<td><?php echo $no ?></td>
 										<?php
-											$myvalue = $cari['scan_date'];
-											$datetime = new DateTime($myvalue);
+										$myvalue = $cari['scan_date'];
+										$datetime = new DateTime($myvalue);
 
-											$date = $datetime->format('Y-m-d');
-											$time = $datetime->format('H:i:s');
+										$date = $datetime->format('Y-m-d');
+										$time = $datetime->format('H:i:s');
 										?>
 										<td><?= $date ?></td>
 										<td><?= $time ?></td>
@@ -646,19 +662,19 @@ $diff = $today->diff($birthday);
 
 
 							<?php
-							if(empty($_POST['periode_awal']) && empty($_POST['periode_awal'])){
+							if (empty($_POST['periode_awal']) && empty($_POST['periode_awal'])) {
 								$no = 0;
 								while ($pres    = mysqli_fetch_array($tampilPres, MYSQLI_ASSOC)) {
-									$no++;    
+									$no++;
 							?>
 									<tr>
 										<td><?php echo $no ?></td>
 										<?php
-											$myvalue = $pres['scan_date'];
-											$datetime = new DateTime($myvalue);
+										$myvalue = $pres['scan_date'];
+										$datetime = new DateTime($myvalue);
 
-											$tanggal = $datetime->format('Y-m-d');
-											$jam = $datetime->format('H:i:s');
+										$tanggal = $datetime->format('Y-m-d');
+										$jam = $datetime->format('H:i:s');
 										?>
 										<td><?= $tanggal ?></td>
 										<td><?= $jam ?></td>
@@ -669,11 +685,11 @@ $diff = $today->diff($birthday);
 										<td><?= $peg['pegawai_nip'] ?></td>
 										<td><?= $peg['pegawai_nama'] ?></td>
 										<td><?= $pres['pin'] ?></td>
-										
-										
+
+
 									</tr>
 							<?php
-								}    
+								}
 							}
 							?>
 						</tbody>

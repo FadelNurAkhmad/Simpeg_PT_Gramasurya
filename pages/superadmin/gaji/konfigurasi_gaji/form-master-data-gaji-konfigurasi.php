@@ -100,7 +100,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                 <div class="col-md-3">
                                     <select name="tahun" id="tahun" class="form-control">
                                         <?php
-                                        for ($i = 2020; $i < 2027; $i++) {
+                                        for ($i = 2020; $i < 2031; $i++) {
                                             echo '<option value="' . $i . '">' . $i . '</option>';
                                         }
                                         ?>
