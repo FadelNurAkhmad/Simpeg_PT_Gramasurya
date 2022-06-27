@@ -1,9 +1,9 @@
 <?php
-	if (isset($_GET['id_masterjab'])) {
-	$id_masterjab = $_GET['id_masterjab'];
+	if (isset($_GET['pembagian1_id'])) {
+	$pembagian1_id = $_GET['pembagian1_id'];
 	
 	include "../../config/koneksi.php";
-	$query   =mysqli_query($koneksi, "SELECT * FROM tb_masterjab WHERE id_masterjab='$id_masterjab'");
+	$query   =mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$pembagian1_id'");
 	$data    =mysqli_fetch_array($query, MYSQLI_ASSOC);
 	}
 	else {
@@ -23,7 +23,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Master <small>Nama Jabatan <i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> id_<?=$id_masterjab?></small></h1>
+<h1 class="page-header">Master <small>Nama Jabatan <i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> id_<?=$pembagian1_id?></small></h1>
 <!-- begin row -->
 <div class="row">
 	<!-- begin col-12 -->
@@ -35,16 +35,15 @@
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
 				<h4 class="panel-title">Form edit master nama jabatan</h4>
 			</div>
 			<div class="panel-body">
-				<form action="index.php?page=edit-masterjab&id_masterjab=<?=$id_masterjab?>" class="form-horizontal" method="POST" enctype="multipart/form-data" >
+				<form action="index.php?page=edit-masterjab&pembagian1_id=<?=$pembagian1_id?>" class="form-horizontal" method="POST" enctype="multipart/form-data" >
 					<div class="form-group">
 						<label class="col-md-3 control-label">Nama Jabatan</label>
 						<div class="col-md-6">
-							<input type="text" name="nama_masterjab" maxlength="64" value="<?=$data['nama_masterjab']?>" class="form-control" />
+							<input type="text" name="pembagian1_nama" maxlength="64" value="<?=$data['pembagian1_nama']?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">

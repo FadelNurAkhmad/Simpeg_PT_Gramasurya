@@ -20,22 +20,22 @@
 				</thead>
 				<tbody>
 					<?php
-						$no=0;
-						$rekapjab	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY jabatan ORDER BY jabatan DESC");
-						while($jab=mysqli_fetch_array($rekapjab, MYSQLI_ASSOC)){
+					$no = 0;
+					$rekapjab	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY jabatan ORDER BY jabatan DESC");
+					while ($jab = mysqli_fetch_array($rekapjab, MYSQLI_ASSOC)) {
 						$no++
 					?>
-					<tr>
-						<td><?=$no?></td>
-						<td><?=$jab['jabatan']?></td>
-						<td><?php
-								$jml=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' AND jabatan='$jab[jabatan]'");
+						<tr>
+							<td><?= $no ?></td>
+							<td><?= $jab['jabatan'] ?></td>
+							<td><?php
+								$jml = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' AND jabatan='$jab[jabatan]'");
 								echo mysqli_num_rows($jml);
-							?>
-						</td>
-					</tr>
+								?>
+							</td>
+						</tr>
 					<?php
-						}
+					}
 					?>
 				</tbody>
 			</table>
@@ -46,7 +46,7 @@
 			<div class="panel-heading">
 				<h3 class="panel-title">
 					<a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-					    <i class="fa fa-plus-circle pull-right"></i> 
+						<i class="fa fa-plus-circle pull-right"></i>
 						<i class="ion-stats-bars fa-lg text-warning"></i> &nbsp;Statistik Jabatan
 					</a>
 				</h3>
@@ -60,46 +60,45 @@
 	</div>
 </div>
 <script src="../../assets/js/highcharts.js" type="text/javascript"></script>
-	<script type="text/javascript">
-		var chart1; // globally available
-			$(document).ready(function() {
-				chart1 = new Highcharts.Chart({
-					chart: {
-						renderTo: 'container',
-						type: 'column'
-					},   
-					title: {
-						text: 'Statistik Jabatan'
+<script type="text/javascript">
+	var chart1; // globally available
+	$(document).ready(function() {
+		chart1 = new Highcharts.Chart({
+			chart: {
+				renderTo: 'container',
+				type: 'column'
+			},
+			title: {
+				text: 'Statistik Jabatan'
+			},
+			xAxis: {
+				categories: ['Jabatan']
+			},
+			yAxis: {
+				title: {
+					text: 'Jumlah'
+				}
+			},
+			series: [
+				<?php
+				$sql   = "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY jabatan ORDER BY jabatan DESC";
+				$query = mysqli_query($koneksi, $sql)  or die(mysqli_error($koneksi));
+				while ($ret = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+					$jab	= $ret['jabatan'];
+
+					$sql_jumlah   = "SELECT * FROM tb_pegawai WHERE status_mut='' AND jabatan='$jab'";
+					$query_jumlah = mysqli_query($koneksi, $sql_jumlah) or die(mysqli_error($koneksi));
+					$data = mysqli_num_rows($query_jumlah);
+				?>,
+					{
+						name: '<?php echo $jab; ?>',
+						data: [<?php echo $data; ?>]
 					},
-					xAxis: {
-						categories: ['Jabatan']
-					},
-						yAxis: {
-						title: {
-							text: 'Jumlah'
-						}
-					},
-					series:             
-						[
-						<?php 
-						$sql   = "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY jabatan ORDER BY jabatan DESC";
-						$query = mysqli_query($koneksi, $sql )  or die(mysqli_error($koneksi));
-							while( $ret = mysqli_fetch_array( $query, MYSQLI_ASSOC) ){
-									$jab	=$ret['jabatan'];
-									
-									$sql_jumlah   = "SELECT * FROM tb_pegawai WHERE status_mut='' AND jabatan='$jab'";        
-									$query_jumlah = mysqli_query($koneksi, $sql_jumlah ) or die(mysqli_error($koneksi));
-									$data = mysqli_num_rows( $query_jumlah );																									
-							?>
-								{
-									name: '<?php echo $jab; ?>',
-									data: [<?php echo $data; ?>]
-								},
-							<?php 
-							
-							}
-							?>
-						]
-				});
-			});	
-	</script>
+				<?php
+
+				}
+				?>
+			]
+		});
+	});
+</script>

@@ -6,19 +6,25 @@ if (isset($_GET['id_kawin'])) {
 }
 include "../../config/koneksi.php";
 $query	= mysqli_query($koneksi, "SELECT * FROM tb_kawin WHERE id_kawin='$id_kawin'");
-$data	= mysqli_fetch_array($query, MYSQLI_ASSOC);
+$data	= mysqli_fetch_array($query);
 
-$tampilPeg   = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
-$peg    = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
+$tampilPeg = mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id = tb_pegawai.pegawai_id INNER JOIN pegawai_d ON pegawai.pegawai_id = pegawai_d.pegawai_id WHERE pegawai.pegawai_id='$data[id_peg]'");
+$peg    = mysqli_fetch_array($tampilPeg);
 
-$tampilUni   = mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
-$uni    = mysqli_fetch_array($tampilUni, MYSQLI_ASSOC);
+$tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$data[id_peg]'");
+$jab    = mysqli_fetch_array($tampilJab);
 
-$tampilSek	= mysqli_query($koneksi, "SELECT * FROM tb_setup_sekda WHERE id_setup_sekda='1'");
-$setsek	= mysqli_fetch_array($tampilSek, MYSQLI_ASSOC);
+// $tampilUni   = mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
+// $uni    = mysqli_fetch_array($tampilUni);
 
-$sekda	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$setsek[sekda]'");
-$sek	= mysqli_fetch_array($sekda, MYSQLI_ASSOC);
+$tampilPeru	= mysqli_query($koneksi, "SELECT * FROM tb_setup_peru WHERE id_setup_peru='1'");
+$peru	= mysqli_fetch_array($tampilPeru);
+
+$pimpinan	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$peru[pimpinan]'");
+$pim	= mysqli_fetch_array($pimpinan);
+
+$tampilJab2   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peru[pimpinan]'");
+$jab2    = mysqli_fetch_array($tampilJab2);
 ?>
 <!-- begin page-header -->
 <h1 class="page-header">Detail <small>Surat Izin Kawin</small></h1>
@@ -26,8 +32,8 @@ $sek	= mysqli_fetch_array($sekda, MYSQLI_ASSOC);
 <div class="invoice">
 	<div class="invoice-company">
 		<span class="pull-right hidden-print">
-			<a href="index.php?page=detail-data-pegawai&id_peg=<?= $peg['id_peg'] ?>" title="back" class="btn btn-sm btn-white m-b-10"><i class="fa fa-step-backward"></i> &nbsp;Back</a>
-			<a href="../../pages/admin/kepeg/kawin/print-detail-kawin.php?id_kawin=<?= $id_kawin ?>" target="_blank" title="print" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print"></i> &nbsp;Print</a>
+			<a href="index.php?page=detail-data-pegawai&pegawai_id=<?= $data['id_peg'] ?>" title="back" class="btn btn-sm btn-white m-b-10"><i class="fa fa-step-backward"></i> &nbsp;Back</a>
+			<a href="../../pages/superadmin/kepeg/kawin/print-detail-kawin.php?id_kawin=<?= $id_kawin ?>" target="_blank" title="print" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print"></i> &nbsp;Print</a>
 		</span>
 		Detail Surat Izin Kawin Pegawai
 	</div>
@@ -65,37 +71,37 @@ $sek	= mysqli_fetch_array($sekda, MYSQLI_ASSOC);
 						<td width="6%">1.</td>
 						<td width="44%" colspan="3">Nama</td>
 						<td width="2%">:</td>
-						<td width="48%"><span style="color:red"><?= $peg['nama'] ?></span></td>
+						<td width="48%"><span style="color:red"><?= $peg['pegawai_nama'] ?></span></td>
 					</tr>
 					<tr>
 						<td>2.</td>
 						<td colspan="3">NIP</td>
 						<td>:</td>
-						<td><span style="color:red"><?= $peg['nip'] ?></span></td>
+						<td><span style="color:red"><?= $peg == 0 ? '-' : $peg['pegawai_nip']; ?></span></td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td>3.</td>
 						<td colspan="3">Pangkat / Golongan Ruang</td>
 						<td>:</td>
 						<td><span style="color:red"><?= $peg['pangkat'] ?> ( <?= $peg['urut_pangkat'] ?> )</span></td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td>4.</td>
 						<td colspan="3">Jabatan</td>
 						<td>:</td>
-						<td><span style="color:red"><?= $peg['jabatan'] ?></span></td>
+						<td><span style="color:red"><?= $jab == 0 ? '-' : $jab['jabatan']; ?></span></td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td>5.</td>
 						<td colspan="3">Pada Instansi/Dinas</td>
 						<td>:</td>
 						<td><span style="color:red"><?= $uni['nama'] ?></span></td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td>6.</td>
 						<td colspan="3">Tempat & Tanggal Lahir</td>
 						<td>:</td>
-						<td><span style="color:red"><?= $peg['tempat_lhr'] ?>, <?= $peg['tgl_lhr'] ?></span></td>
+						<td><span style="color:red"><?= $peg['tempat_lahir'] ?>, <?= $peg['tgl_lahir'] ?></span></td>
 					</tr>
 					<tr>
 						<td>7.</td>
@@ -107,7 +113,32 @@ $sek	= mysqli_fetch_array($sekda, MYSQLI_ASSOC);
 						<td>8.</td>
 						<td colspan="3">Agama</td>
 						<td>:</td>
-						<td><span style="color:red"><?= $peg['agama'] ?></span></td>
+						<td>
+							<span style="color:red">
+								<?php
+								switch ($peg['agama']) {
+									case 1:
+										echo "Islam";
+										break;
+									case 2:
+										echo "Katolik";
+										break;
+									case 3:
+										echo "Protestan";
+										break;
+									case 4:
+										echo "Hindu";
+										break;
+									case 5:
+										echo "Budha";
+										break;
+									case 6:
+										echo "Lainnya";
+										break;
+								}
+								?>
+							</span>
+						</td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
@@ -307,7 +338,6 @@ $sek	= mysqli_fetch_array($sekda, MYSQLI_ASSOC);
 					<tr>
 						<td width="70%">&nbsp;</td>
 						<td width="15%">Ditetapkan di</td>
-						<!-- <td width="15%" style="text-transform:uppercase">: <?= $setsek['kab'] ?></td> -->
 						<td width="15%" style="text-transform:uppercase">: Yogyakarta</td>
 					</tr>
 					<tr>
@@ -322,7 +352,6 @@ $sek	= mysqli_fetch_array($sekda, MYSQLI_ASSOC);
 					</tr>
 					<tr align="center">
 						<td>&nbsp;</td>
-						<!-- <td colspan="2" style="text-transform:uppercase">An. BUPATI <?= $setsek['kab'] ?></td> -->
 						<td colspan="2" style="text-transform:uppercase">An. PIMPINAN PERUSAHAAN</td>
 					</tr>
 					<tr align="center">
@@ -335,15 +364,15 @@ $sek	= mysqli_fetch_array($sekda, MYSQLI_ASSOC);
 					</tr>
 					<tr align="center">
 						<td>&nbsp;</td>
-						<td colspan="2"><span style="color:red"><?= $sek['nama'] ?></span></td>
+						<td colspan="2"><span style="color:red"><?= $pim['pegawai_nama'] ?></span></td>
 					</tr>
 					<tr align="center">
 						<td>&nbsp;</td>
-						<td colspan="2"><span style="color:red"><?= $sek['pangkat'] ?></span></td>
+						<td colspan="2"><span style="color:red"><?= $jab2 == 0 ? '-' : $jab2['jabatan']; ?></span></td>
 					</tr>
 					<tr align="center">
 						<td>&nbsp;</td>
-						<td colspan="2">NIP : <span style="color:red"><?= $sek['nip'] ?></span></td>
+						<td colspan="2">NIP : <span style="color:red"><?= $pim['pegawai_nip'] ?></span></td>
 					</tr>
 				</table>
 			</div>

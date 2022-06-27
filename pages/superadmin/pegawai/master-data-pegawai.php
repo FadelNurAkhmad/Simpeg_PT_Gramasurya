@@ -19,7 +19,7 @@
 		$alamat			= $_POST['alamat'];
 		$telp			= $_POST['telp'];
 		$email			= $_POST['email'];
-		$sisa_cuti		= $_POST['sisa_cuti'];
+		// $sisa_cuti		= $_POST['sisa_cuti'];
 		$foto			= $_FILES['foto']['name'];
 
 		$password	= password_hash("123", PASSWORD_DEFAULT);
