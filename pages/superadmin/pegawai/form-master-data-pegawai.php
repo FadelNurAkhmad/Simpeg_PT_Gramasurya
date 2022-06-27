@@ -53,15 +53,15 @@ $id_peg	= kdauto("tb_pegawai", "");
 				<h4 class="panel-title">Form master data pegawai</h4>
 			</div>
 			<div class="panel-body">
-				<form action="index.php?page=master-data-pegawai&pegawai_id=<?=$id_peg?>" class="form-horizontal" method="POST" enctype="multipart/form-data" >
+				<form action="index.php?page=master-data-pegawai&pegawai_id=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label class="col-md-3 control-label">PIN</label>
 						<div class="col-md-6">
 							<?php
-								$sql = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id DESC LIMIT 1");
-								$pin = mysqli_fetch_array($sql);
+							$sql = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id DESC LIMIT 1");
+							$pin = mysqli_fetch_array($sql);
 							?>
-							<input type="text" value="<?= $pin['pegawai_pin']+1 ?>" name="pin" maxlength="24" class="form-control" />
+							<input type="text" value="<?= $pin['pegawai_pin'] + 1 ?>" name="pin" maxlength="24" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -110,7 +110,7 @@ $id_peg	= kdauto("tb_pegawai", "");
 						<label class="col-md-3 control-label">Agama</label>
 						<div class="col-md-6">
 							<select name="agama" class="default-select2 form-control">
-								<option value="">...</option>    
+								<option value="">...</option>
 								<option value="1">Islam</option>
 								<option value="2">Katolik</option>
 								<option value="3">Protestan</option>
@@ -124,7 +124,7 @@ $id_peg	= kdauto("tb_pegawai", "");
 						<label class="col-md-3 control-label">Jenis Kelamin</label>
 						<div class="col-md-6">
 							<select name="gender" class="default-select2 form-control">
-								<option value="">...</option>    
+								<option value="">...</option>
 								<option value="1">Laki-laki</option>
 								<option value="2">Perempuan</option>
 							</select>
@@ -134,7 +134,7 @@ $id_peg	= kdauto("tb_pegawai", "");
 						<label class="col-md-3 control-label">Golongan Darah</label>
 						<div class="col-md-6">
 							<select name="gol_darah" class="default-select2 form-control">
-								<option value="">...</option>    
+								<option value="">...</option>
 								<option value="1">A+</option>
 								<option value="2">B+</option>
 								<option value="3">O+</option>
@@ -150,7 +150,7 @@ $id_peg	= kdauto("tb_pegawai", "");
 						<label class="col-md-3 control-label">Status Pernikahan</label>
 						<div class="col-md-6">
 							<select name="status_nikah" class="default-select2 form-control">
-								<option value="">...</option>    
+								<option value="">...</option>
 								<option value="1">Sudah Menikah</option>
 								<option value="2">Belum Menikah</option>
 								<option value="3">Duda/Janda Meninggal</option>
@@ -174,12 +174,6 @@ $id_peg	= kdauto("tb_pegawai", "");
 						<label class="col-md-3 control-label">Email</label>
 						<div class="col-md-6">
 							<input type="text" name="email" maxlength="64" class="form-control" />
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Kuota Cuti</label>
-						<div class="col-md-6">
-							<input type="text" name="sisa_cuti" class="form-control" placeholder="Per Tahun"></input>
 						</div>
 					</div>
 					<div class="form-group">

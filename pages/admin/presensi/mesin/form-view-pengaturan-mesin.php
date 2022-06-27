@@ -8,7 +8,7 @@
         $_SESSION['pesan'] = "";
         ?>
     </li>
-    <li><a href="index.php?page=form-master-pengaturan-mesin" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Tambah Pengaturan Mesin</a></li>
+    <!-- <li><a href="index.php?page=form-master-pengaturan-mesin" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Tambah Mesin</a></li> -->
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
@@ -16,7 +16,7 @@
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";
-$tampilDataPre    = mysqli_query($koneksi, "SELECT * FROM tb_presensi ORDER BY id_presensi DESC");
+$tampilDataPre    = mysqli_query($koneksi, "SELECT * FROM device ORDER BY sn DESC");
 ?>
 <div class="row">
     <!-- begin col-12 -->
@@ -28,7 +28,6 @@ $tampilDataPre    = mysqli_query($koneksi, "SELECT * FROM tb_presensi ORDER BY i
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
                 <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilDataPre); ?></span> rows for "Pengaturan Mesin"</h4>
             </div>
@@ -41,10 +40,14 @@ $tampilDataPre    = mysqli_query($koneksi, "SELECT * FROM tb_presensi ORDER BY i
                     <thead>
                         <tr>
                             <th width="4%">No</th>
-                            <th>Lokasi Mesin</th>
-                            <th>Nama Mesin</th>
-                            <th>IP:Port</th>
-                            <th width="10%">Action</th>
+                            <th>Nomor Seri</th>
+                            <th>Type</th>
+                            <th>Nama</th>
+                            <th>No. Mesin</th>
+                            <th>Jenis Koneksi</th>
+                            <th>IP Address/URL</th>
+                            <th>Port</th>
+                            <!-- <th width="10%">Action</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -55,30 +58,54 @@ $tampilDataPre    = mysqli_query($koneksi, "SELECT * FROM tb_presensi ORDER BY i
                         ?>
                             <tr>
                                 <td><?php echo $no ?></td>
-                                <td>Gedung A</td>
-                                <td>FP Gedung A1</td>
-                                <td>8.8.8.8:8089</td>
-                                <td class="text-center">
-                                    <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-pengaturan-mesin" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
-                                    <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $dataPre['id_presensi'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
+                                <td><?= $dataPre['sn'] ?></td>
+                                <td>
+                                    <?php
+                                        $query = mysqli_query($koneksi, "SELECT * FROM dev_type WHERE id_type='$dataPre[id_type]' ");
+                                        $type = mysqli_fetch_array($query, MYSQLI_ASSOC);
+                                        echo $type['type'];
+                                    ?>
                                 </td>
+                                <td><?= $dataPre['device_name'] ?></td>
+                                <td><?= $dataPre['dev_id'] ?></td>
+                                <td>
+                                    <?php 
+                                        switch($dataPre['comm_type']) {
+                                            case 0 :
+                                                echo "Ethernet";
+                                                break;
+                                            case 1 :
+                                                echo "USB";
+                                                break;
+                                            case 2 :
+                                                echo "Serial";
+                                                break;
+                                        }
+                                    ?>
+                                </td>
+                                <td><?= $dataPre['ip_address'] ?></td>
+                                <td><?= $dataPre['ethernet_port'] ?></td>
+                                <!-- <td class="text-center">
+                                    <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-pengaturan-mesin" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
+                                    <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $dataPre['sn'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
+                                </td> -->
                             </tr>
                             <!-- #modal-dialog -->
-                            <div id="Del<?php echo $dataPre['id_presensi'] ?>" class="modal fade" role="dialog">
+                            <!-- <div id="Del<?php echo $dataPre['sn'] ?>" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete <u><?php echo $dataPre['nama_jabatan'] ?></u> from Database?</h5>
+                                            <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete <u><?php echo $dataPre['sn'] ?></u> from Database?</h5>
                                         </div>
                                         <div class="modal-body" align="center">
-                                            <a href="index.php?page=delete-data-presensi&id_presensi=<?= $dataPre['id_presensi'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
+                                            <a href="index.php?page=delete-data-presensi&id_presensi=<?= $dataPre['sn'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
                                         </div>
                                         <div class="modal-footer">
                                             <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         <?php
                         }
                         ?>

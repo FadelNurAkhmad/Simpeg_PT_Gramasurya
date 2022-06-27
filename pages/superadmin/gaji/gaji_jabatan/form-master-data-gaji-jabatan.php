@@ -8,35 +8,36 @@
         $_SESSION['pesan'] = "";
         ?>
     </li>
+
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
 <h1 class="page-header">Data <small>Gaji Jabatan <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
-function kdauto($tabel, $inisial){
+function kdauto($tabel, $inisial)
+{
     include "../../config/koneksi.php";
-    
+
     $struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
     $fieldInfo = mysqli_fetch_field_direct($struktur, 0);
     $field      = $fieldInfo->name;
     $panjang    = $fieldInfo->length;
-    $qry  = mysqli_query($koneksi, "SELECT max(".$field.") FROM ".$tabel);
+    $qry  = mysqli_query($koneksi, "SELECT max(" . $field . ") FROM " . $tabel);
     $row  = mysqli_fetch_array($qry);
-    if ($row[0]=="") {
-    $angka=0;
-    }
-    else {
-    $angka= substr($row[0], strlen($inisial));
+    if ($row[0] == "") {
+        $angka = 0;
+    } else {
+        $angka = substr($row[0], strlen($inisial));
     }
     $angka++;
-    $angka =strval($angka);
-    $tmp  ="";
-    for($i=1; $i<=($panjang-strlen($inisial)-strlen($angka)); $i++) {
-    $tmp=$tmp."0";
+    $angka = strval($angka);
+    $tmp  = "";
+    for ($i = 1; $i <= ($panjang - strlen($inisial) - strlen($angka)); $i++) {
+        $tmp = $tmp . "0";
     }
-    return $inisial.$tmp.$angka;
-    }
+    return $inisial . $tmp . $angka;
+}
 $id_jabatan    = kdauto("tb_gaji_jabatan", "");
 ?>
 <!-- begin row -->
@@ -63,7 +64,7 @@ $id_jabatan    = kdauto("tb_gaji_jabatan", "");
                             $dataJ = mysqli_query($koneksi, "SELECT * FROM tb_masterjab ORDER BY nama_masterjab");
                             echo '<select name="nama_jabatan" class="default-select2 form-control">';
                             echo '<option value="">...</option>';
-                            while ($rowj = mysqli_fetch_array($dataJ, MYSQLI_ASSOC)) {
+                            while ($rowj = mysqli_fetch_array($dataJ)) {
                                 echo '<option value="' . $rowj['nama_masterjab'] . '">' . $rowj['nama_masterjab'] . '</option>';
                             }
                             echo '</select>';

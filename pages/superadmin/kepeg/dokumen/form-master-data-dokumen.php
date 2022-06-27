@@ -11,15 +11,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Riwayat <small>Dokumen <i class="fa fa-angle-right"></i> Insert&nbsp;
-        <?php
-        if (isset($_SESSION['pesan']) && $_SESSION['pesan'] <> '') {
-            echo "<span class='pesan'>&nbsp; <i class='fa fa-bell text-warning'></i>&nbsp; " . $_SESSION['pesan'] . "</span>";
-        }
-        $_SESSION['pesan'] = "";
-        ?>
-    </small>
-</h1>
+<h1 class="page-header">Riwayat <small>Dokumen <i class="fa fa-angle-right"></i> Insert&nbsp;</h1>
 <!-- end page-header -->
 <?php
 
@@ -72,7 +64,7 @@ $id_dokumen    = kdauto("tb_dokumen", "");
                             $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id ASC");
                             echo '<select name="id_peg" class="default-select2 form-control">';
                             echo '<option value="">...</option>';
-                            while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)) {
+                            while ($row = mysqli_fetch_array($data)) {
                                 echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
                             }
                             echo '</select>';

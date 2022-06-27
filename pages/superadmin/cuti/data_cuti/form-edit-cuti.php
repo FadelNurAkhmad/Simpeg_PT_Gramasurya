@@ -6,7 +6,7 @@ if (isset($_GET['id_cuti'])) {
     $query   = mysqli_query($koneksi, "SELECT * FROM tb_data_cuti WHERE id_cuti='$id_cuti'");
     $data    = mysqli_fetch_array($query);
 
-    $tampilPeg   = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$data[id_peg]'");
+    $tampilPeg   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$data[id_peg]'");
     $peg    = mysqli_fetch_array($tampilPeg);
 } else {
     die("Error. No ID Selected!");
@@ -25,7 +25,7 @@ if (isset($_GET['id_cuti'])) {
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Form <small>Edit Cuti <i class="fa fa-angle-right"></i> <i class="fa fa-key"></i> Pegawai: <?= $peg['nama'] ?> &nbsp;&nbsp;<i class="fa fa-lock"></i> NIP : <?= $peg['nip'] ?></small></h1>
+<h1 class="page-header">Form <small>Edit Cuti <i class="fa fa-angle-right"></i> <i class="fa fa-key"></i> Pegawai: <?= $peg['pegawai_nama'] ?> &nbsp;&nbsp;<i class="fa fa-lock"></i> NIP : <?= $peg == 0 ? '-' : $peg['pegawai_nip']; ?></small></h1>
 <!-- begin row -->
 <div class="row">
     <!-- begin col-12 -->

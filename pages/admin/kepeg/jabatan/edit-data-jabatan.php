@@ -13,22 +13,21 @@
 				
 	if ($_POST['edit'] == "edit") {
 	$jabatan		=$_POST['jabatan'];
-	$eselon			=$_POST['eselon'];
 	$no_sk			=$_POST['no_sk'];
 	$tgl_sk			=$_POST['tgl_sk'];
 	$tmt_jabatan	=$_POST['tmt_jabatan'];
 	$sampai_tgl		=$_POST['sampai_tgl'];
 	$file			=$_FILES['file']['name'];
 	
-		if (empty($_POST['jabatan']) || empty($_POST['eselon']) || empty($_POST['tmt_jabatan'])) {
-			$_SESSION['pesan'] = "Oops! Please fill all column ...";
+		if (empty($_POST['jabatan'])) {
+			$_SESSION['pesan'] = "Oops! Please fill jabatan column ...";
 			header("location:index.php?page=form-edit-data-jabatan&id_jab=$id_jab");
 		}
 		else{
-		$update= mysqli_query ($koneksi, "UPDATE tb_jabatan SET jabatan='$jabatan', eselon='$eselon', no_sk='$no_sk', tgl_sk='$tgl_sk', tmt_jabatan='$tmt_jabatan', sampai_tgl='$sampai_tgl', file='$file' WHERE id_jab='$id_jab'");
+		$update= mysqli_query ($koneksi, "UPDATE tb_jabatan SET jabatan='$jabatan', no_sk='$no_sk', tgl_sk='$tgl_sk', tmt_jabatan='$tmt_jabatan', sampai_tgl='$sampai_tgl', file='$file' WHERE id_jab='$id_jab'");
 			if($update){
 				$_SESSION['pesan'] = "Good! edit data jabatan success ...";
-				header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");
+				header("location:index.php?page=detail-data-pegawai&pegawai_id=$id_peg");
 			}
 			else {
 				echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";

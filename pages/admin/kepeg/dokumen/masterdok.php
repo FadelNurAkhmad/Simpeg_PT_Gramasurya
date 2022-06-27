@@ -1,8 +1,8 @@
 <div class="row">
     <?php
     ob_start();
-    if (isset($_GET['id_peg'])) {
-        $id_peg = $_GET['id_peg'];
+    if (isset($_GET['pegawai_id'])) {
+        $id_peg = $_GET['pegawai_id'];
     } else {
         die("Error. No ID Selected! ");
     }
@@ -41,11 +41,11 @@
 
         if (empty($_POST['dokumen'])) {
             $_SESSION['pesan'] = "Oops! Please fill all column ...";
-            header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");
+            header("location:index.php?page=detail-data-pegawai&pegawai_id=$id_peg");
         } else {
             if (!in_array($ext, $ekstensi)) {
                 $_SESSION['pesan'] = "Oops! File extensions not available. Only PDF ...";
-                header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");
+                header("location:index.php?page=detail-data-pegawai&pegawai_id=$id_peg");
             } else {
                 if ($ukuran > 500000 === false) {
 
@@ -54,7 +54,7 @@
 
                     if ($query) {
                         $_SESSION['pesan'] = "Good! Insert data dokumen success ...";
-                        header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");
+                        header("location:index.php?page=detail-data-pegawai&pegawai_id=$id_peg");
                     } else {
                         echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
                     }
@@ -65,7 +65,7 @@
                     }
                 } else {
                     $_SESSION['pesan'] = "Oops! Ukuran File Terlalu Besar ...";
-                    header("location:index.php?page=detail-data-pegawai&id_peg=$id_peg");
+                    header("location:index.php?page=detail-data-pegawai&pegawai_id=$id_peg");
                 }
             }
         }

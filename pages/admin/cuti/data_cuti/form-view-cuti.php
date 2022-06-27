@@ -19,9 +19,9 @@ include "../../config/koneksi.php";
 // $tampilCuti    = mysqli_query($koneksi, "SELECT * FROM tb_data_cuti ORDER BY id_cuti DESC");
 $tampilCuti    = mysqli_query(
     $koneksi,
-    "SELECT tb_data_cuti.id_cuti, tb_data_cuti.id_peg, tb_data_cuti.tanggal_cuti, tb_data_cuti.tanggal_mulai, tb_data_cuti.tanggal_selesai, tb_data_cuti.lama_cuti, tb_data_cuti.jumlah_cuti, tb_data_cuti.jenis_cuti, tb_data_cuti.keperluan, tb_data_cuti.status, tb_pegawai.nip, tb_pegawai.nama
+    "SELECT tb_data_cuti.id_cuti, tb_data_cuti.id_peg, tb_data_cuti.tanggal_cuti, tb_data_cuti.tanggal_mulai, tb_data_cuti.tanggal_selesai, tb_data_cuti.lama_cuti, tb_data_cuti.jumlah_cuti, tb_data_cuti.jenis_cuti, tb_data_cuti.keperluan, tb_data_cuti.status, pegawai.pegawai_nip, pegawai.pegawai_nama
     FROM tb_data_cuti
-    INNER JOIN tb_pegawai ON tb_data_cuti.id_peg=tb_pegawai.id_peg ORDER BY id_cuti DESC"
+    INNER JOIN pegawai ON tb_data_cuti.id_peg=pegawai.pegawai_id ORDER BY id_cuti DESC"
 );
 
 ?>
@@ -65,8 +65,8 @@ $tampilCuti    = mysqli_query(
                         ?>
                             <tr>
                                 <td><?php echo $no ?></td>
-                                <td><?php echo $cuti['nip'] ?></td>
-                                <td><?php echo $cuti['nama'] ?></td>
+                                <td><?php echo $cuti == 0 ? '-' : $cuti['pegawai_nip']; ?></td>
+                                <td><?php echo $cuti['pegawai_nama'] ?></td>
                                 <td><?php echo $cuti['tanggal_cuti'] ?></td>
                                 <td>
                                     <?php echo $cuti['tanggal_mulai'] ?>
@@ -88,7 +88,7 @@ $tampilCuti    = mysqli_query(
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Anda yakin akan menghapus data <u><?php echo $cuti['nama'] ?></u> dari Database ?</h5>
+                                            <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Anda yakin akan menghapus data <u><?php echo $cuti['pegawai_nama'] ?></u> dari Database ?</h5>
                                         </div>
                                         <div class="modal-body" align="center">
                                             <a href="index.php?page=delete-cuti&id_cuti=<?= $cuti['id_cuti'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
@@ -104,7 +104,7 @@ $tampilCuti    = mysqli_query(
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title"><span class="label label-inverse"> # Approval</span> &nbsp; Anda yakin approve cuti <u><?php echo $cuti['nama'] ?></u> ?</h5>
+                                            <h5 class="modal-title"><span class="label label-inverse"> # Approval</span> &nbsp; Anda yakin approve cuti <u><?php echo $cuti['pegawai_nama'] ?></u> ?</h5>
                                         </div>
                                         <div class="modal-body" align="center">
                                             <a href="index.php?page=status-cuti&true=true&id_cuti=<?= $cuti['id_cuti'] ?>" class="btn btn-success">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
@@ -120,7 +120,7 @@ $tampilCuti    = mysqli_query(
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title"><span class="label label-inverse"> # Reject</span> &nbsp; Anda yakin reject cuti <u><?php echo $cuti['nama'] ?></u> ?</h5>
+                                            <h5 class="modal-title"><span class="label label-inverse"> # Reject</span> &nbsp; Anda yakin reject cuti <u><?php echo $cuti['pegawai_nama'] ?></u> ?</h5>
                                         </div>
                                         <div class="modal-body" align="center">
                                             <a href="index.php?page=status-cuti&false=false&id_cuti=<?= $cuti['id_cuti'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
@@ -146,13 +146,13 @@ $tampilCuti    = mysqli_query(
                                                 <div class="form-group col-sm-12">
                                                     <label class="col-md-3 control-label">NIP</label>
                                                     <div class="col-md-9">
-                                                        : <?php echo $cuti['nip'] ?>
+                                                        : <?php echo $cuti == 0 ? '-' : $cuti['pegawai_nip']; ?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm-12">
                                                     <label class="col-md-3 control-label">Nama</label>
                                                     <div class="col-md-9">
-                                                        : <?php echo $cuti['nama'] ?>
+                                                        : <?php echo $cuti['pegawai_nama'] ?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm-12">

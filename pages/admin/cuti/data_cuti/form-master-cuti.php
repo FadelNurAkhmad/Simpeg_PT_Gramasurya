@@ -11,7 +11,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Riwayat <small>Cuti <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
+<h1 class="page-header">Input <small>Cuti <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 function kdauto($tabel, $inisial)
@@ -60,11 +60,11 @@ $id_cuti    = kdauto("tb_data_cuti", "");
                         <label class="col-md-3 control-label">Pegawai</label>
                         <div class="col-md-6">
                             <?php
-                            $data = mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY nama ASC");
+                            $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
                             echo '<select name="id_peg" class="default-select2 form-control">';
                             echo '<option value="">...</option>';
-                            while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)) {
-                                echo '<option value="' . $row['id_peg'] . '">' . $row['nama'] . '_' . $row['nip'] . '</option>';
+                            while ($row = mysqli_fetch_array($data)) {
+                                echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
                             }
                             echo '</select>';
                             ?>

@@ -93,6 +93,8 @@ $writer->save("$file");
 include "../../config/koneksi.php";
 // ambil data gabungan tabel pegawai dan tb_pegawai
 $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id = tb_pegawai.pegawai_id WHERE pegawai_status='1'");
+
+
 ?>
 <div class="row">
 	<!-- begin col-12 -->
@@ -120,7 +122,7 @@ $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai
 							<th>NIP</th>
 							<th>Nama</th>
 							<th>Jenis Kelamin</th>
-							<th>Jadwal Kerja</th>
+							<th>TTL</th>
 							<th>Jabatan</th>
 							<th width="10%">Action</th>
 						</tr>
@@ -128,7 +130,7 @@ $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai
 					<tbody>
 						<?php
 						$no = 0;
-						while ($peg	= mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC)) {
+						while ($peg	= mysqli_fetch_array($tampilPeg)) {
 							$no++
 						?>
 							<tr>
@@ -148,8 +150,8 @@ $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai
 								<td><a href="index.php?page=detail-data-pegawai&pegawai_id=<?= $peg['pegawai_id'] ?>" title="detail"><?php echo $peg['pegawai_nip']; ?></a></td>
 								<td><?php echo $peg['pegawai_nama'] ?></td>
 								<td>
-									<?php 
-									if($peg['gender'] == "1") {
+									<?php
+									if ($peg['gender'] == "1") {
 										echo "Laki-laki";
 									} else {
 										echo "Perempuan";
@@ -157,11 +159,12 @@ $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai
 									?>
 								</td>
 								<td><?php echo $peg['tempat_lahir'] ?>, <?php echo $peg['tgl_lahir'] ?></td>
-								<td><?php 
-									$jabatan	= mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$peg[pembagian1_id]'");
-									$jab	= mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
-									if(isset($jab)){
-										echo $jab['pembagian1_nama'];
+								<td><?php
+									$tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]'");
+									$jab    = mysqli_fetch_array($tampilJab);
+
+									if (isset($jab)) {
+										echo $jab['jabatan'];
 									} else {
 										echo "";
 									}

@@ -13,10 +13,11 @@ if ($_SESSION['hak_akses'] != "Admin") {
 }
 include "../../config/koneksi.php";
 $tampilUsr	= mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user='$_SESSION[id_user]'");
-$usr		= mysqli_fetch_array($tampilUsr, MYSQLI_ASSOC);
+$usr		= mysqli_fetch_array($tampilUsr);
 
 $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut=''");
 $jmlpeg		= mysqli_num_rows($tampilPeg);
+
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -183,10 +184,10 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 						</ul>
 					</li>
 					<li class="has-sub">
-						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-filing bg-info"></i><span>Kepegawaian &nbsp; <span class="label label-warning m-l-5">8</span></span></a>
+						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-filing bg-info"></i><span>Kepegawaian &nbsp; <span class="label label-warning m-l-5">7</span></span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-master-data-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jabatan</a></li>
-							<li><a href="index.php?page=form-master-data-pangkat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pangkat</a></li>
+							<!-- <li><a href="index.php?page=form-master-data-pangkat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pangkat</a></li> -->
 							<li><a href="index.php?page=form-master-data-hukuman"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Hukuman</a></li>
 							<li><a href="index.php?page=form-master-data-dokumen"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Dokumen Pegawai</a></li>
 							<!-- <li><a href="index.php?page=form-master-data-diklat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Diklat</a></li> -->
@@ -203,6 +204,7 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-calendar bg-purple"></i><span>Cuti</span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-view-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Cuti</a></li>
+							<li><a href="index.php?page=form-view-jatah-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jatah Cuti Pegawai</a></li>
 							<li><a href="index.php?page=form-view-jenis-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Jenis Cuti</a></li>
 						</ul>
 					</li>
@@ -211,12 +213,10 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					<li class="has-sub">
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-compose bg-primary"></i><span>Presensi</span></a>
 						<ul class="sub-menu">
-							<li><a href="index.php?page=form-view-data-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Presensi</a></li>
-							<li><a href="index.php?page=form-view-data-attlog"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Attlog</a></li>
 							<li><a href="index.php?page=form-view-rekap-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Rekap Presensi</a></li>
-							<li><a href="index.php?page=form-view-pengaturan-mesin"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pengaturan Mesin</a></li>
-							<li><a href="index.php?page=form-view-hari-jam-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Hari/Jam Kerja</a></li>
-							<li><a href="index.php?page=form-view-shift-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Shift</a></li>
+							<li><a href="index.php?page=form-view-data-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jadwal Kerja Pegawai</a></li>
+							<li><a href="index.php?page=form-view-shift-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Shift</a></li>
+							<li><a href="index.php?page=form-view-hari-jam-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Jadwal Kerja</a></li>
 						</ul>
 					</li>
 					<li class="has-sub">
@@ -675,6 +675,25 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					include "../../pages/admin/cuti/jenis_cuti/delete-jenis-cuti.php";
 					break;
 
+				case 'form-view-jatah-cuti':
+					include "../../pages/admin/cuti/jatah_cuti/form-view-jatah-cuti.php";
+					break;
+				case 'form-master-jatah-cuti':
+					include "../../pages/admin/cuti/jatah_cuti/form-master-jatah-cuti.php";
+					break;
+				case 'form-edit-jatah-cuti':
+					include "../../pages/admin/cuti/jatah_cuti/form-edit-jatah-cuti.php";
+					break;
+				case 'master-jatah-cuti':
+					include "../../pages/admin/cuti/jatah_cuti/master-jatah-cuti.php";
+					break;
+				case 'edit-jatah-cuti':
+					include "../../pages/admin/cuti/jatah_cuti/edit-jatah-cuti.php";
+					break;
+				case 'delete-jatah-cuti':
+					include "../../pages/admin/cuti/jatah_cuti/delete-jatah-cuti.php";
+					break;
+
 				case 'form-master-data-skp':
 					include "../../pages/admin/skp/form-master-data-skp.php";
 					break;
@@ -700,11 +719,17 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'form-edit-data-presensi':
 					include "../../pages/admin/presensi/data_presensi/form-edit-data-presensi.php";
 					break;
+				case 'edit-data-presensi':
+					include "../../pages/admin/presensi/data_presensi/edit-data-presensi.php";
+					break;
 				case 'form-master-data-presensi':
 					include "../../pages/admin/presensi/data_presensi/form-master-data-presensi.php";
 					break;
 				case 'master-data-presensi':
 					include "../../pages/admin/presensi/data_presensi/master-data-presensi.php";
+					break;
+				case 'delete-data-presensi':
+					include "../../pages/admin/presensi/data_presensi/delete-data-presensi.php";
 					break;
 
 				case 'form-view-pengaturan-mesin':
@@ -723,8 +748,17 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'form-master-shift-kerja':
 					include "../../pages/admin/presensi/shift/form-master-shift-kerja.php";
 					break;
+				case 'master-shift-kerja':
+					include "../../pages/admin/presensi/shift/master-shift-kerja.php";
+					break;
 				case 'form-edit-shift-kerja':
 					include "../../pages/admin/presensi/shift/form-edit-shift-kerja.php";
+					break;
+				case 'edit-shift-kerja':
+					include "../../pages/admin/presensi/shift/edit-shift-kerja.php";
+					break;
+				case 'delete-shift-kerja':
+					include "../../pages/admin/presensi/shift/delete-shift-kerja.php";
 					break;
 
 				case 'form-view-hari-jam-kerja':
@@ -733,8 +767,17 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'form-master-hari-jam-kerja':
 					include "../../pages/admin/presensi/hari_jam_kerja/form-master-hari-jam-kerja.php";
 					break;
+				case 'master-hari-jam-kerja':
+					include "../../pages/admin/presensi/hari_jam_kerja/master-hari-jam-kerja.php";
+					break;
 				case 'form-edit-hari-jam-kerja':
 					include "../../pages/admin/presensi/hari_jam_kerja/form-edit-hari-jam-kerja.php";
+					break;
+				case 'edit-hari-jam-kerja':
+					include "../../pages/admin/presensi/hari_jam_kerja/edit-hari-jam-kerja.php";
+					break;
+				case 'delete-hari-jam-kerja':
+					include "../../pages/admin/presensi/hari_jam_kerja/delete-hari-jam-kerja.php";
 					break;
 
 				case 'form-view-rekap-presensi':

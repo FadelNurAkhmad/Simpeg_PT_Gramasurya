@@ -1,17 +1,15 @@
 <?php
-	if (isset($_GET['pegawai_id'])) {
-		$id_peg = $_GET['pegawai_id'];
-		
-		include "../../config/koneksi.php";
-		// mengambil data pegawai dari gabungan tabel pegawai, tb_pegawai, pegawai_d
-		$query = "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id = tb_pegawai.pegawai_id INNER JOIN pegawai_d ON pegawai.pegawai_id = pegawai_d.pegawai_id WHERE pegawai.pegawai_id=$id_peg";
-		$sql   = mysqli_query($koneksi, $query);
-		$data    = mysqli_fetch_array($sql);
+if (isset($_GET['pegawai_id'])) {
+	$id_peg = $_GET['pegawai_id'];
 
-	}
-	else {
-		die ("Error. No ID Selected!");	
-	}
+	include "../../config/koneksi.php";
+	// mengambil data pegawai dari gabungan tabel pegawai, tb_pegawai, pegawai_d
+	$query = "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id = tb_pegawai.pegawai_id INNER JOIN pegawai_d ON pegawai.pegawai_id = pegawai_d.pegawai_id WHERE pegawai.pegawai_id=$id_peg";
+	$sql   = mysqli_query($koneksi, $query);
+	$data    = mysqli_fetch_array($sql);
+} else {
+	die("Error. No ID Selected!");
+}
 ?>
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
@@ -26,7 +24,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Data <small>Pegawai <i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> NIP_<?=$data['pegawai_nip']?></small></h1>
+<h1 class="page-header">Data <small>Pegawai <i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> NIP_<?= $data['pegawai_nip'] ?></small></h1>
 <!-- begin row -->
 <div class="row">
 	<!-- begin col-12 -->
@@ -42,7 +40,7 @@
 				<h4 class="panel-title">Form edit data pegawai</h4>
 			</div>
 			<div class="panel-body">
-				<form action="index.php?page=edit-data-pegawai&pegawai_id=<?=$id_peg?>" class="form-horizontal" method="POST" enctype="multipart/form-data" >
+				<form action="index.php?page=edit-data-pegawai&pegawai_id=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label class="col-md-3 control-label">PIN</label>
 						<div class="col-md-6">
@@ -52,17 +50,17 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label">NIP</label>
 						<div class="col-md-6">
-							<input type="text" name="pegawai_nip" maxlength="24" value="<?=$data['pegawai_nip']?>" class="form-control" />
+							<input type="text" name="pegawai_nip" maxlength="24" value="<?= $data['pegawai_nip'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label">Tempat, Tanggal Lahir</label>
 						<div class="col-md-3">
-							<input type="text" name="tempat_lahir" maxlength="64" value="<?=$data['tempat_lahir']?>" class="form-control" />
+							<input type="text" name="tempat_lahir" maxlength="64" value="<?= $data['tempat_lahir'] ?>" class="form-control" />
 						</div>
 						<div class="col-md-3">
 							<div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
-								<input type="text" name="tgl_lahir" value="<?=$data['tgl_lahir']?>" class="form-control" />
+								<input type="text" name="tgl_lahir" value="<?= $data['tgl_lahir'] ?>" class="form-control" />
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 							</div>
 						</div>
@@ -70,7 +68,7 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label">Nama Pegawai</label>
 						<div class="col-md-6">
-							<input type="text" name="pegawai_nama" maxlength="64" value="<?=$data['pegawai_nama']?>" class="form-control" />
+							<input type="text" name="pegawai_nama" maxlength="64" value="<?= $data['pegawai_nama'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -95,12 +93,12 @@
 						<label class="col-md-3 control-label">Agama</label>
 						<div class="col-md-6">
 							<select name="agama" class="default-select2 form-control">
-								<option value="1" <?php echo ($data['agama']=='1')?"selected":""; ?>>Islam    
-								<option value="2" <?php echo ($data['agama']=='2')?"selected":""; ?>>Katolik   
-								<option value="3" <?php echo ($data['agama']=='3')?"selected":""; ?>>Protestan    
-								<option value="4" <?php echo ($data['agama']=='4')?"selected":""; ?>>Hindu    
-								<option value="5" <?php echo ($data['agama']=='5')?"selected":""; ?>>Budha    
-								<option value="6" <?php echo ($data['agama']=='6')?"selected":""; ?>>Lainnya
+								<option value="1" <?php echo ($data['agama'] == '1') ? "selected" : ""; ?>>Islam
+								<option value="2" <?php echo ($data['agama'] == '2') ? "selected" : ""; ?>>Katolik
+								<option value="3" <?php echo ($data['agama'] == '3') ? "selected" : ""; ?>>Protestan
+								<option value="4" <?php echo ($data['agama'] == '4') ? "selected" : ""; ?>>Hindu
+								<option value="5" <?php echo ($data['agama'] == '5') ? "selected" : ""; ?>>Budha
+								<option value="6" <?php echo ($data['agama'] == '6') ? "selected" : ""; ?>>Lainnya
 							</select>
 						</div>
 					</div>
@@ -108,8 +106,8 @@
 						<label class="col-md-3 control-label">Jenis Kelamin</label>
 						<div class="col-md-6">
 							<select name="gender" class="default-select2 form-control">
-								<option value="1" <?php echo ($data['gender']=='1')?"selected":""; ?>>Laki-laki
-								<option value="2" <?php echo ($data['gender']=='2')?"selected":""; ?>>Perempuan
+								<option value="1" <?php echo ($data['gender'] == '1') ? "selected" : ""; ?>>Laki-laki
+								<option value="2" <?php echo ($data['gender'] == '2') ? "selected" : ""; ?>>Perempuan
 							</select>
 						</div>
 					</div>
@@ -117,14 +115,14 @@
 						<label class="col-md-3 control-label">Golongan Darah</label>
 						<div class="col-md-6">
 							<select name="gol_darah" class="default-select2 form-control">
-								<option value="1" <?php echo ($data['gol_darah']=='1')?"selected":""; ?>>A+
-								<option value="2" <?php echo ($data['gol_darah']=='2')?"selected":""; ?>>B+
-								<option value="3" <?php echo ($data['gol_darah']=='3')?"selected":""; ?>>O+
-								<option value="4" <?php echo ($data['gol_darah']=='4')?"selected":""; ?>>AB+
-								<option value="5" <?php echo ($data['gol_darah']=='5')?"selected":""; ?>>A-
-								<option value="6" <?php echo ($data['gol_darah']=='6')?"selected":""; ?>>B-
-								<option value="7" <?php echo ($data['gol_darah']=='7')?"selected":""; ?>>O-
-								<option value="8" <?php echo ($data['gol_darah']=='8')?"selected":""; ?>>AB-	 
+								<option value="1" <?php echo ($data['gol_darah'] == '1') ? "selected" : ""; ?>>A+
+								<option value="2" <?php echo ($data['gol_darah'] == '2') ? "selected" : ""; ?>>B+
+								<option value="3" <?php echo ($data['gol_darah'] == '3') ? "selected" : ""; ?>>O+
+								<option value="4" <?php echo ($data['gol_darah'] == '4') ? "selected" : ""; ?>>AB+
+								<option value="5" <?php echo ($data['gol_darah'] == '5') ? "selected" : ""; ?>>A-
+								<option value="6" <?php echo ($data['gol_darah'] == '6') ? "selected" : ""; ?>>B-
+								<option value="7" <?php echo ($data['gol_darah'] == '7') ? "selected" : ""; ?>>O-
+								<option value="8" <?php echo ($data['gol_darah'] == '8') ? "selected" : ""; ?>>AB-
 							</select>
 						</div>
 					</div>
@@ -132,10 +130,10 @@
 						<label class="col-md-3 control-label">Status Pernikahan</label>
 						<div class="col-md-6">
 							<select name="stat_nikah" class="default-select2 form-control">
-								<option value="1" <?php echo ($data['stat_nikah']=='1')?"selected":""; ?>>Sudah Menikah     
-								<option value="2" <?php echo ($data['stat_nikah']=='2')?"selected":""; ?>>Belum Menikah     
-								<option value="3" <?php echo ($data['stat_nikah']=='3')?"selected":""; ?>>Duda/Janda Meninggal
-								<option value="4" <?php echo ($data['stat_nikah']=='4')?"selected":""; ?>>Duda/Janda Cerai
+								<option value="1" <?php echo ($data['stat_nikah'] == '1') ? "selected" : ""; ?>>Sudah Menikah
+								<option value="2" <?php echo ($data['stat_nikah'] == '2') ? "selected" : ""; ?>>Belum Menikah
+								<option value="3" <?php echo ($data['stat_nikah'] == '3') ? "selected" : ""; ?>>Duda/Janda Meninggal
+								<option value="4" <?php echo ($data['stat_nikah'] == '4') ? "selected" : ""; ?>>Duda/Janda Cerai
 							</select>
 						</div>
 					</div>
@@ -148,19 +146,13 @@
 					<div class="form-group">
 						<label class="col-md-3 control-label">No. Telp</label>
 						<div class="col-md-6">
-							<input type="text" name="telp" maxlength="12" value="<?=$data['pegawai_telp']?>" class="form-control" />
+							<input type="text" name="telp" maxlength="12" value="<?= $data['pegawai_telp'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label">Email</label>
 						<div class="col-md-6">
 							<input type="text" name="email" maxlength="64" value="<?= $data['email'] ?>" class="form-control" />
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Kuota Cuti</label>
-						<div class="col-md-6">
-							<input type="text" name="sisa_cuti" value="<?= $data['sisa_cuti'] ?>" class="form-control"></input>
 						</div>
 					</div>
 					<div class="form-group">

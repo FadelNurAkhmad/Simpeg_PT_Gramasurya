@@ -2,70 +2,70 @@
 $filename	= "Daftar Pegawai";
 
 include "../../config/koneksi.php";
-require '../../assets/plugins/phpspreadsheet/vendor/autoload.php';
+// require '../../assets/plugins/phpspreadsheet/vendor/autoload.php';
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+// use PhpOffice\PhpSpreadsheet\Spreadsheet;
+// use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-$spreadsheet = new Spreadsheet();
+// $spreadsheet = new Spreadsheet();
 
-$sheet = $spreadsheet->getActiveSheet();
-$sheet->setTitle('Daftar Pegawai');
-$sheet->setCellValue("A1", "DAFTAR PEGAWAI");
-$sheet->setCellValue("A3", "No. Urut");
-$sheet->setCellValue("B3", "ID");
-$sheet->setCellValue("C3", "NIP");
-$sheet->setCellValue("D3", "Nama");
-$sheet->setCellValue("E3", "Tempat Lahir");
-$sheet->setCellValue("F3", "Tgl. Lahir");
-$sheet->setCellValue("G3", "Agama");
-$sheet->setCellValue("H3", "Jenis Kelamin");
-$sheet->setCellValue("I3", "Gol Darah");
-$sheet->setCellValue("J3", "Status Nikah");
-$sheet->setCellValue("K3", "Status");
-$sheet->setCellValue("L3", "Alamat");
-$sheet->setCellValue("M3", "Telp");
-$sheet->setCellValue("N3", "Email");
-$sheet->setCellValue("O3", "Gol/Ruang");
-$sheet->setCellValue("P3", "Pangkat");
-$sheet->setCellValue("Q3", "Jabatan");
-$sheet->setCellValue("R3", "Pendidikan");
-$sheet->setCellValue("S3", "Unit Kerja");
-$sheet->setCellValue("T3", "Tgl. Pensiun");
+// $sheet = $spreadsheet->getActiveSheet();
+// $sheet->setTitle('Daftar Pegawai');
+// $sheet->setCellValue("A1", "DAFTAR PEGAWAI");
+// $sheet->setCellValue("A3", "No. Urut");
+// $sheet->setCellValue("B3", "ID");
+// $sheet->setCellValue("C3", "NIP");
+// $sheet->setCellValue("D3", "Nama");
+// $sheet->setCellValue("E3", "Tempat Lahir");
+// $sheet->setCellValue("F3", "Tgl. Lahir");
+// $sheet->setCellValue("G3", "Agama");
+// $sheet->setCellValue("H3", "Jenis Kelamin");
+// $sheet->setCellValue("I3", "Gol Darah");
+// $sheet->setCellValue("J3", "Status Nikah");
+// $sheet->setCellValue("K3", "Status");
+// $sheet->setCellValue("L3", "Alamat");
+// $sheet->setCellValue("M3", "Telp");
+// $sheet->setCellValue("N3", "Email");
+// $sheet->setCellValue("O3", "Gol/Ruang");
+// $sheet->setCellValue("P3", "Pangkat");
+// $sheet->setCellValue("Q3", "Jabatan");
+// $sheet->setCellValue("R3", "Pendidikan");
+// $sheet->setCellValue("S3", "Unit Kerja");
+// $sheet->setCellValue("T3", "Tgl. Pensiun");
 
-$expPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY id_peg");
-$i	= 4; //Dimulai dengan baris ke dua
-$no	= 1;
-while ($peg	= mysqli_fetch_array($expPeg)) {
-	$expUni	= mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
-	$uni	= mysqli_fetch_array($expUni);
-	$sheet->setCellValue("A" . $i, $no);
-	$sheet->setCellValue("B" . $i, $peg['id_peg']);
-	$sheet->setCellValue("C" . $i, $peg['nip']);
-	$sheet->setCellValue("D" . $i, $peg['nama']);
-	$sheet->setCellValue("E" . $i, $peg['tempat_lhr']);
-	$sheet->setCellValue("F" . $i, $peg['tgl_lhr']);
-	$sheet->setCellValue("G" . $i, $peg['agama']);
-	$sheet->setCellValue("H" . $i, $peg['jk']);
-	$sheet->setCellValue("I" . $i, $peg['gol_darah']);
-	$sheet->setCellValue("J" . $i, $peg['status_nikah']);
-	$sheet->setCellValue("K" . $i, $peg['status_kepeg']);
-	$sheet->setCellValue("L" . $i, $peg['alamat']);
-	$sheet->setCellValue("M" . $i, $peg['telp']);
-	$sheet->setCellValue("N" . $i, $peg['email']);
-	$sheet->setCellValue("O" . $i, $peg['urut_pangkat']);
-	$sheet->setCellValue("P" . $i, $peg['pangkat']);
-	$sheet->setCellValue("Q" . $i, $peg['jabatan']);
-	$sheet->setCellValue("R" . $i, $peg['sekolah']);
-	$sheet->setCellValue("S" . $i, $uni['nama']);
-	$sheet->setCellValue("T" . $i, $peg['tgl_pensiun']);
-	$no++;
-	$i++;
-}
+// $expPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY id_peg");
+// $i	= 4; //Dimulai dengan baris ke dua
+// $no	= 1;
+// while ($peg	= mysqli_fetch_array($expPeg)) {
+// 	$expUni	= mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
+// 	$uni	= mysqli_fetch_array($expUni);
+// 	$sheet->setCellValue("A" . $i, $no);
+// 	$sheet->setCellValue("B" . $i, $peg['id_peg']);
+// 	$sheet->setCellValue("C" . $i, $peg['nip']);
+// 	$sheet->setCellValue("D" . $i, $peg['nama']);
+// 	$sheet->setCellValue("E" . $i, $peg['tempat_lhr']);
+// 	$sheet->setCellValue("F" . $i, $peg['tgl_lhr']);
+// 	$sheet->setCellValue("G" . $i, $peg['agama']);
+// 	$sheet->setCellValue("H" . $i, $peg['jk']);
+// 	$sheet->setCellValue("I" . $i, $peg['gol_darah']);
+// 	$sheet->setCellValue("J" . $i, $peg['status_nikah']);
+// 	$sheet->setCellValue("K" . $i, $peg['status_kepeg']);
+// 	$sheet->setCellValue("L" . $i, $peg['alamat']);
+// 	$sheet->setCellValue("M" . $i, $peg['telp']);
+// 	$sheet->setCellValue("N" . $i, $peg['email']);
+// 	$sheet->setCellValue("O" . $i, $peg['urut_pangkat']);
+// 	$sheet->setCellValue("P" . $i, $peg['pangkat']);
+// 	$sheet->setCellValue("Q" . $i, $peg['jabatan']);
+// 	$sheet->setCellValue("R" . $i, $peg['sekolah']);
+// 	$sheet->setCellValue("S" . $i, $uni['nama']);
+// 	$sheet->setCellValue("T" . $i, $peg['tgl_pensiun']);
+// 	$no++;
+// 	$i++;
+// }
 
-$writer = new Xlsx($spreadsheet);
-$file	= "../../assets/excel/$filename.xlsx";
-$writer->save("$file");
+// $writer = new Xlsx($spreadsheet);
+// $file	= "../../assets/excel/$filename.xlsx";
+// $writer->save("$file");
 
 ?>
 <!-- begin breadcrumb -->
@@ -87,7 +87,10 @@ $writer->save("$file");
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";
-$tampilPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY id_peg DESC");
+// ambil data gabungan tabel pegawai dan tb_pegawai
+$tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id = tb_pegawai.pegawai_id WHERE pegawai_status='1'");
+
+
 ?>
 <div class="row">
 	<!-- begin col-12 -->
@@ -99,7 +102,6 @@ $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY id_peg DE
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
 				<h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilPeg); ?></span> rows for "Data Pegawai"</h4>
 			</div>
@@ -115,55 +117,70 @@ $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai ORDER BY id_peg DE
 							<th>Foto</th>
 							<th>NIP</th>
 							<th>Nama</th>
-							<th>JK / TTL</th>
-							<th>Unit Kerja</th>
+							<th>Jenis Kelamin</th>
+							<th>TTL</th>
+							<th>Jabatan</th>
 							<th width="10%">Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
 						$no = 0;
-						while ($peg	= mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC)) {
+						while ($peg	= mysqli_fetch_array($tampilPeg)) {
 							$no++
 						?>
 							<tr>
 								<td><?php echo $no ?></td>
-								<td><a href="index.php?page=form-ganti-foto&id_peg=<?= $peg['id_peg']; ?>">
+								<td><a href="index.php?page=form-ganti-foto&pegawai_id=<?= $peg['pegawai_id']; ?>">
 										<?php
 										if (empty($peg['foto']))
-											if ($peg['jk'] == "Laki-laki") {
-												echo "<img src='../../assets/img/foto/no-foto-male.png' title='$peg[nip]' width='80' height='100'>";
+											if ($peg['gender'] == "1") {
+												echo "<img src='../../assets/img/foto/no-foto-male.png' title='$peg[pegawai_nip]' width='80' height='100'>";
 											} else {
-												echo "<img src='../../assets/img/foto/no-foto-female.png' title='$peg[nip]' width='80' height='100'>";
+												echo "<img src='../../assets/img/foto/no-foto-female.png' title='$peg[pegawai_nip]' width='80' height='100'>";
 											}
 										else
-											echo "<img src='../../assets/img/foto/$peg[foto]' title='$peg[nip]' width='80' height='100'>";
+											echo "<img src='../../assets/img/foto/$peg[foto]' title='$peg[pegawai_nip]' width='80' height='100'>";
 										?>
 									</a></td>
-								<td><a href="index.php?page=detail-data-pegawai&id_peg=<?= $peg['id_peg'] ?>" title="detail"><?php echo $peg['nip']; ?></a></td>
-								<td><?php echo $peg['nama'] ?></td>
-								<td><?php echo $peg['jk'] ?><br /><?php echo $peg['tempat_lhr'] ?>, <?php echo $peg['tgl_lhr'] ?></td>
+								<td><a href="index.php?page=detail-data-pegawai&pegawai_id=<?= $peg['pegawai_id'] ?>" title="detail"><?php echo $peg['pegawai_nip']; ?></a></td>
+								<td><?php echo $peg['pegawai_nama'] ?></td>
+								<td>
+									<?php
+									if ($peg['gender'] == "1") {
+										echo "Laki-laki";
+									} else {
+										echo "Perempuan";
+									}
+									?>
+								</td>
+								<td><?php echo $peg['tempat_lahir'] ?>, <?php echo $peg['tgl_lahir'] ?></td>
 								<td><?php
-									$unit	= mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
-									$uni	= mysqli_fetch_array($unit, MYSQLI_ASSOC);
-									echo $uni['nama']
+									$tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]'");
+									$jab    = mysqli_fetch_array($tampilJab);
+
+									if (isset($jab)) {
+										echo $jab['jabatan'];
+									} else {
+										echo "";
+									}
 									?>
 								</td>
 								<td class="text-center">
-									<a type="button" class="btn btn-success btn-icon btn-sm" href="index.php?page=detail-data-pegawai&id_peg=<?= $peg['id_peg'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
-									<a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-pegawai&id_peg=<?= $peg['id_peg'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
-									<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $peg['id_peg'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
+									<a type="button" class="btn btn-success btn-icon btn-sm" href="index.php?page=detail-data-pegawai&pegawai_id=<?= $peg['pegawai_id'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
+									<a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-pegawai&pegawai_id=<?= $peg['pegawai_id'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
+									<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $peg['pegawai_id'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
 								</td>
 							</tr>
 							<!-- #modal-dialog -->
-							<div id="Del<?php echo $peg['id_peg'] ?>" class="modal fade" role="dialog">
+							<div id="Del<?php echo $peg['pegawai_id'] ?>" class="modal fade" role="dialog">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete <u><?php echo $peg['nama'] ?></u> from Database?</h5>
+											<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete <u><?php echo $peg['pegawai_nama'] ?></u> from Database?</h5>
 										</div>
 										<div class="modal-body" align="center">
-											<a href="index.php?page=delete-data-pegawai&id_peg=<?= $peg['id_peg'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
+											<a href="index.php?page=delete-data-pegawai&pegawai_id=<?= $peg['pegawai_id'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
 										</div>
 										<div class="modal-footer">
 											<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
