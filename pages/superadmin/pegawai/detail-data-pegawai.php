@@ -35,7 +35,9 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 		?>
 	</li>
 	<li><a href="index.php?page=form-view-data-pegawai" title="back" class="btn btn-sm btn-white m-b-10"><i class="fa fa-step-backward"></i> &nbsp;Back</a></li>
+	<li><a class="btn btn-info btn-sm m-b-10" href="index.php?page=form-edit-data-pegawai&pegawai_id=<?= $id_peg ?>" title="edit"><i class="fa fa-pencil fa-lg"></i> &nbsp;Edit</a></li>
 	<li><a href="../../pages/superadmin/report/print-biodata-pegawai.php?pegawai_id=<?= $id_peg ?>" target="_blank" title="print" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-print"></i> &nbsp;Print</a></li>
+
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
@@ -946,8 +948,6 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 										<td><?= $peg['pegawai_nip'] ?></td>
 										<td><?= $peg['pegawai_nama'] ?></td>
 										<td><?= $pres['pin'] ?></td>
-
-
 									</tr>
 							<?php
 								}

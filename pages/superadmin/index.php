@@ -250,7 +250,6 @@ if ($cekPeg == 0) {
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-view-rekap-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Rekap Presensi</a></li>
 							<li><a href="index.php?page=form-view-data-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jadwal Kerja Pegawai</a></li>
-
 							<li><a href="index.php?page=form-view-shift-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Shift</a></li>
 							<li><a href="index.php?page=form-view-hari-jam-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Jadwal Kerja</a></li>
 
@@ -922,6 +921,9 @@ if ($cekPeg == 0) {
 					break;
 				case 'master-data-presensi':
 					include "../../pages/superadmin/presensi/data_presensi/master-data-presensi.php";
+					break;
+				case 'delete-data-presensi':
+					include "../../pages/superadmin/presensi/data_presensi/delete-data-presensi.php";
 					break;
 
 				case 'form-view-pengaturan-mesin':

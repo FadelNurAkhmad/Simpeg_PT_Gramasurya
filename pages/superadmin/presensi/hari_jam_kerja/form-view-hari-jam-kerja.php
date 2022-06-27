@@ -71,17 +71,17 @@ $tampilJdwM = mysqli_query($koneksi, "SELECT * FROM jdw_kerja_m WHERE jdw_kerja_
                                 <td><?php echo $jdwM['jdw_kerja_m_name'] ?></td>
                                 <td><?php echo $jdwM['jdw_kerja_m_kode'] ?></td>
                                 <?php
-                                    $tampilJdwD    = mysqli_query($koneksi, "SELECT * FROM jdw_kerja_d WHERE jdw_kerja_m_id=$jdwM[jdw_kerja_m_id]");
-                                    while ($jdwD    = mysqli_fetch_array($tampilJdwD, MYSQLI_ASSOC)) {
+                                $tampilJdwD    = mysqli_query($koneksi, "SELECT * FROM jdw_kerja_d WHERE jdw_kerja_m_id=$jdwM[jdw_kerja_m_id]");
+                                while ($jdwD    = mysqli_fetch_array($tampilJdwD, MYSQLI_ASSOC)) {
 
-                                        $tampilShift = mysqli_query($koneksi, "SELECT * FROM jam_kerja WHERE jk_id=$jdwD[jk_id]");
-                                        $shift = mysqli_fetch_array($tampilShift, MYSQLI_ASSOC);
+                                    $tampilShift = mysqli_query($koneksi, "SELECT * FROM jam_kerja WHERE jk_id=$jdwD[jk_id]");
+                                    $shift = mysqli_fetch_array($tampilShift, MYSQLI_ASSOC);
                                 ?>
-                                        <td><?php echo ($jdwD['jdw_kerja_d_libur'] == '0')?$shift['jk_name']:"Libur" ?></td>
+                                    <td><?php echo ($jdwD['jdw_kerja_d_libur'] == '0') ? $shift['jk_name'] : "Libur" ?></td>
                                 <?php
-                                    }
+                                }
                                 ?>
-                             
+
                                 <td class="text-center">
                                     <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-hari-jam-kerja&jdw_kerja_m_id=<?= $jdwM['jdw_kerja_m_id'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
                                     <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $jdwM['jdw_kerja_m_id'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
@@ -104,7 +104,7 @@ $tampilJdwM = mysqli_query($koneksi, "SELECT * FROM jdw_kerja_m WHERE jdw_kerja_
                                 </div>
                             </div>
                         <?php
-                                    
+
                         }
                         ?>
                     </tbody>

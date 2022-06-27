@@ -12,8 +12,10 @@
     } else {
         die("Error. No ID Selected! ");
     }
-
-    if (!empty($jdw_kerja_m_id) && $jdw_kerja_m_id != "") {
+    if ($cekjdw > 0) {
+        $_SESSION['pesan'] = "Oops! Jadwal kerja sedang dipakai di jadwal pegawai ...";
+        header("location:index.php?page=form-view-hari-jam-kerja");
+    } else if (!empty($jdw_kerja_m_id) && $jdw_kerja_m_id != "") {
         $delete    = mysqli_query($koneksi, "DELETE FROM jdw_kerja_m WHERE jdw_kerja_m_id='$jdw_kerja_m_id'");
         $deld    = mysqli_query($koneksi, "DELETE FROM jdw_kerja_d WHERE jdw_kerja_m_id='$jdw_kerja_m_id'");
 

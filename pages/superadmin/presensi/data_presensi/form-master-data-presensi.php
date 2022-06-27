@@ -38,13 +38,13 @@
                             echo '<select name="pegawai_id" class="default-select2 form-control">';
                             echo '<option value="">...</option>';
                             while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)) {
+                                // hanya menampilkan nama pegawai yang belum terdaftar jadwal kerja
                                 $query = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM jdw_kerja_pegawai WHERE pegawai_id=$row[pegawai_id]"));
-                                if($query > 0) {
+                                if ($query > 0) {
                                     continue;
                                 } else {
                                     echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
                                 }
-                                
                             }
                             echo '</select>';
                             ?>

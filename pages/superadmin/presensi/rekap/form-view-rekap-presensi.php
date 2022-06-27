@@ -69,7 +69,22 @@ include "../../config/koneksi.php";
 ?>
 <?php
 include "../../config/koneksi.php";
-$tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log ORDER BY scan_date DESC LIMIT 1000");
+function timeScan($attribute)
+{
+    $datetime = new DateTime($attribute);
+    $jam = $datetime->format('H:i:s');
+    return $jam;
+}
+
+// mengambil data presensi mesin untuk scanlog
+$tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log ORDER BY scan_date DESC LIMIT 100");
+
+// mengambil data pegawai untuk rekapharian
+$tampilPeg2    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id ASC");
+
+// mengambil data pegawai untuk rekapperiode
+$tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id ASC");
+
 
 ?>
 <!-- begin breadcrumb -->
@@ -122,16 +137,14 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log ORDER BY scan_dat
             <li class=""><a href="#rekapperiode" data-toggle="tab"><span class="visible-xs">Rekap Periode</span><span class="hidden-xs"><i class="fa fa-calendar-check-o text-danger"></i> Rekap Periode</span></a></li>
         </ul>
         <div class="tab-content">
-
-            <!-- tab presensi -->
+            <!-- tab scanlog -->
             <div class="tab-pane fade active in" id="scanlog">
                 <div class="alert alert-success fade in">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
                     <i class="fa fa-info fa-2x pull-left"></i> Folder ini dapat digunakan untuk melihat rekap presensi ...
                 </div>
-
                 <div class="table-responsive">
-                    <table id="data-table" class="table table-striped table-bordered nowrap" width="100%">
+                    <table id="" class="table table-bordered table-striped display">
                         <thead>
                             <tr>
                                 <th>Tanggal Scan</th>
@@ -146,7 +159,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log ORDER BY scan_dat
                         </thead>
                         <tbody>
                             <?php
-                            if (!empty($_POST['periode_awal']) && !empty($_POST['periode_awal'])) {
+                            if (!empty($_POST['periode_awal']) && !empty($_POST['periode_akhir'])) {
                                 $tampilCari = mysqli_query($koneksi, "SELECT * FROM att_log WHERE DATE(scan_date) >= '$_POST[periode_awal]' AND DATE(scan_date) <= '$_POST[periode_akhir]'");
                                 $no = 0;
                                 while ($cari = mysqli_fetch_array($tampilCari, MYSQLI_ASSOC)) {
@@ -163,11 +176,11 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log ORDER BY scan_dat
                                         ?>
                                         <td><?= $date ?></td>
                                         <td><?= $time ?></td>
-                                        <td><?= $cari['pin'] ?></td>
                                         <?php
                                         $tampilPeg = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_pin='$cari[pin]'");
                                         $peg = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
                                         ?>
+                                        <td><?= $cari['pin'] ?></td>
                                         <td><?= $peg['pegawai_nip'] ?></td>
                                         <td><?= $peg['pegawai_nama'] ?></td>
                                         <td><?php
@@ -181,15 +194,15 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log ORDER BY scan_dat
                                             ?>
                                         </td>
                                         <td><?= $cari['sn'] ?></td>
-
                                     </tr>
                             <?php
                                 }
                             }
                             ?>
 
+
                             <?php
-                            if (empty($_POST['periode_awal']) && empty($_POST['periode_awal'])) {
+                            if (empty($_POST['periode_awal']) && empty($_POST['periode_akhir'])) {
                                 $no = 0;
                                 while ($pres    = mysqli_fetch_array($tampilPres, MYSQLI_ASSOC)) {
                                     $no++;
@@ -205,11 +218,11 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log ORDER BY scan_dat
                                         ?>
                                         <td><?= $tanggal ?></td>
                                         <td><?= $jam ?></td>
-                                        <td><?= $pres['pin'] ?></td>
                                         <?php
                                         $tampilPeg = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_pin='$pres[pin]'");
                                         $peg = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
                                         ?>
+                                        <td><?= $pres['pin'] ?></td>
                                         <td><?= $peg['pegawai_nip'] ?></td>
                                         <td><?= $peg['pegawai_nama'] ?></td>
                                         <td><?php
@@ -223,14 +236,193 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log ORDER BY scan_dat
                                             ?>
                                         </td>
                                         <td><?= $pres['sn'] ?></td>
-
-
-
                                     </tr>
                             <?php
                                 }
                             }
                             ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- end tab scanlog -->
+
+            <!-- tab rekap harian -->
+            <div class="tab-pane fade" id="rekapharian">
+
+
+                <div class="alert alert-success fade in">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+                    <i class="fa fa-info fa-2x pull-left"></i> Folder ini dapat digunakan untuk melihat rekap presensi ...
+                </div>
+
+                <div class="table-responsive">
+                    <table id="" class="table table-bordered nowrap display" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Jadwal Kerja</th>
+                                <th>Shift</th>
+                                <th>PIN</th>
+                                <th>NIP</th>
+                                <th>Nama</th>
+                                <th>Jabatan</th>
+                                <th>Jam Masuk</th>
+                                <th>Scan Masuk</th>
+                                <th>Terlambat</th>
+                                <th>Scan Istirahat 1</th>
+                                <th>Scan Istirahat 2</th>
+                                <th>Jam Pulang</th>
+                                <th>Scan Pulang</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (!empty($_POST['periode_awal']) && !empty($_POST['periode_akhir'])) {
+
+                                while ($peg    = mysqli_fetch_array($tampilPeg2, MYSQLI_ASSOC)) {
+                                    $tampilCari = mysqli_query($koneksi, "SELECT * FROM shift_result WHERE tgl_shift >= '$_POST[periode_awal]' AND tgl_shift <= '$_POST[periode_akhir]' AND pegawai_id = '$peg[pegawai_id]'");
+
+                                    while ($cari = mysqli_fetch_array($tampilCari, MYSQLI_ASSOC)) {
+
+                                        $jdwM    = mysqli_query($koneksi, "SELECT * FROM jdw_kerja_m WHERE jdw_kerja_m_id='$cari[jdw_kerja_m_id]'");
+                                        $jdw    = mysqli_fetch_array($jdwM, MYSQLI_ASSOC);
+
+                                        $tampilJk    = mysqli_query($koneksi, "SELECT * FROM jam_kerja WHERE jk_id='$cari[jk_id]'");
+                                        $jk    = mysqli_fetch_array($tampilJk, MYSQLI_ASSOC);
+
+                                        $jabatan    = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$peg[pembagian1_id]'");
+                                        $jab    = mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
+
+
+                            ?>
+                                        <tr <?= (isset($jk)) ? "class=''" : "class='danger'" ?>>
+                                            <td><?= $cari['tgl_shift'] ?></td>
+                                            <td><?= (isset($jdw)) ? $jdw['jdw_kerja_m_name'] : "" ?></td>
+                                            <td><?= (isset($jk)) ? $jk['jk_name'] : "Libur" ?></td>
+                                            <td><?= $peg['pegawai_pin'] ?></td>
+                                            <td><?= $peg['pegawai_nip'] ?></td>
+                                            <td><?= $peg['pegawai_nama'] ?></td>
+                                            <td><?= (isset($jab)) ? $jab['pembagian1_nama'] : "" ?></td>
+                                            <td><?= (isset($jk)) ? $jk['jk_bcin'] : "00:00:00" ?></td>
+                                            <td><?= timeScan($cari['scan_in']) ?></td>
+                                            <td><?= $cari['late_minute'] ?> menit</td>
+                                            <td><?= timeScan($cari['break_in']) ?></td>
+                                            <td><?= timeScan($cari['break_out']) ?></td>
+                                            <td><?= (isset($jk)) ? $jk['jk_ecout'] : "00:00:00" ?></td>
+                                            <td><?= timeScan($cari['scan_out']) ?></td>
+                                        </tr>
+
+                            <?php
+                                    }
+                                }
+                            }
+                            ?>
+
+                            <?php
+                            if (empty($_POST['periode_awal']) && empty($_POST['periode_akhir'])) {
+                                while ($peg    = mysqli_fetch_array($tampilPeg2, MYSQLI_ASSOC)) {
+
+                                    $tampilPres2 = mysqli_query($koneksi, "SELECT * FROM shift_result WHERE pegawai_id = '$peg[pegawai_id]' ORDER BY tgl_shift DESC LIMIT 100");
+                                    while ($pres2 = mysqli_fetch_array($tampilPres2, MYSQLI_ASSOC)) {
+
+                                        $jdwM    = mysqli_query($koneksi, "SELECT * FROM jdw_kerja_m WHERE jdw_kerja_m_id='$pres2[jdw_kerja_m_id]'");
+                                        $jdw    = mysqli_fetch_array($jdwM, MYSQLI_ASSOC);
+
+                                        $tampilJk    = mysqli_query($koneksi, "SELECT * FROM jam_kerja WHERE jk_id='$pres2[jk_id]'");
+                                        $jk    = mysqli_fetch_array($tampilJk, MYSQLI_ASSOC);
+
+                                        $jabatan    = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$peg[pembagian1_id]'");
+                                        $jab    = mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
+
+
+
+                            ?>
+                                        <tr <?= (isset($jk)) ? "class=''" : "class='danger'" ?>>
+                                            <td><?= $pres2['tgl_shift'] ?></td>
+                                            <td><?= (isset($jdw)) ? $jdw['jdw_kerja_m_name'] : "" ?></td>
+                                            <td><?= (isset($jk)) ? $jk['jk_name'] : "Libur" ?></td>
+                                            <td><?= $peg['pegawai_pin'] ?></td>
+                                            <td><?= $peg['pegawai_nip'] ?></td>
+                                            <td><?= $peg['pegawai_nama'] ?></td>
+                                            <td><?= (isset($jab)) ? $jab['pembagian1_nama'] : "" ?></td>
+                                            <td><?= (isset($jk)) ? $jk['jk_bcin'] : "00:00:00" ?></td>
+                                            <td><?= timeScan($pres2['scan_in']) ?></td>
+                                            <td><?= $pres2['late_minute'] ?> menit</td>
+                                            <td><?= timeScan($pres2['break_in']) ?></td>
+                                            <td><?= timeScan($pres2['break_out']) ?></td>
+                                            <td><?= (isset($jk)) ? $jk['jk_ecout'] : "00:00:00" ?></td>
+                                            <td><?= timeScan($pres2['scan_out']) ?></td>
+                                        </tr>
+
+                            <?php
+                                    }
+                                }
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- tab rekap periode -->
+            <div class="tab-pane fade" id="rekapperiode">
+                <div class="alert alert-success fade in">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+                    <i class="fa fa-info fa-2x pull-left"></i> Folder ini dapat digunakan untuk melihat rekap presensi ...
+                </div>
+
+                <div class="table-responsive">
+                    <table id="" class="table table-striped table-bordered nowrap display" width="100%">
+                        <thead>
+                            <tr>
+                                <th>PIN</th>
+                                <th>NIP</th>
+                                <th>Nama</th>
+                                <th>Jabatan</th>
+                                <th>Periode</th>
+                                <th>Hadir</th>
+                                <th>Izin</th>
+                                <th>Terlambat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (!empty($_POST['periode_awal']) && !empty($_POST['periode_akhir'])) {
+
+                                $begin = new DateTime($_POST['periode_awal']);
+                                $end = new DateTime($_POST['periode_akhir']);
+                                $end->modify("+1 day");
+                                $interval = $begin->diff($end);
+
+                                if (($interval->m) > '0') {
+                                    while ($peg3    = mysqli_fetch_array($tampilPeg3, MYSQLI_ASSOC)) {
+                                        $tampilCari = mysqli_query($koneksi, "SELECT SUM(jk_count_as) AS hadir, SUM(late) AS terlambat FROM shift_result WHERE tgl_shift >= '$_POST[periode_awal]' AND tgl_shift <= '$_POST[periode_akhir]' AND pegawai_id = '$peg3[pegawai_id]'");
+                                        $cari = mysqli_fetch_array($tampilCari, MYSQLI_ASSOC);
+
+                                        $jabatan    = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$peg3[pembagian1_id]'");
+                                        $jab    = mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
+
+
+                            ?>
+                                        <tr>
+                                            <td><?= $peg3['pegawai_pin'] ?></td>
+                                            <td><?= $peg3['pegawai_nip'] ?></td>
+                                            <td><?= $peg3['pegawai_nama'] ?></td>
+                                            <td><?= (isset($jab)) ? $jab['pembagian1_nama'] : "" ?></td>
+                                            <td><?= $begin->format("F") ?> / <?= $begin->format("Y") ?></td>
+                                            <td><?= $cari["hadir"] ?></td>
+                                            <td></td>
+                                            <td><?= $cari["terlambat"] ?></td>
+                                        </tr>
+
+                            <?php
+
+                                    }
+                                }
+                            }
+                            ?>
+
                         </tbody>
                     </table>
                 </div>
@@ -250,4 +442,8 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log ORDER BY scan_dat
     setTimeout(function() {
         $(".pesan").fadeOut('slow');
     }, 7000);
+
+    $(document).ready(function() {
+        $('table.display').DataTable();
+    });
 </script>
