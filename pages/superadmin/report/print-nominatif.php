@@ -66,10 +66,10 @@ $pdf->SetFont('helvetica', '', 8);
 
 include "../../../config/koneksi.php";
 
-$kepala	= mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
+$kepala	= mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_peru='1'");
 $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 
-$namakepala	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$kep[kepala]'");
+$namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai  WHERE pegawai_id='$kep[kepala]'");
 $nama		= mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 
 $pangkat = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[kepala]' AND status_pan='Aktif'");
@@ -80,7 +80,7 @@ $header = '<p align="center"><font size="12"><b>DAFTAR NOMINATIF PEGAWAI NEGERI 
 $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = 10, $header, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
 $subhead = '<table cellpadding="1" border="0">
 			<tr>
-				<td><font size="8" style="text-transform:uppercase">PEMERINTAH KABUPATEN ' . $kep['kab'] . '</font></td>
+				<td><font size="8" style="text-transform:uppercase"> ' . $kep['nama_peru'] . '</font></td>
 			</tr>
 		</table>';
 $pdf->writeHTML($subhead, true, false, false, false, '');
@@ -117,31 +117,44 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				<th>11</th>
 			</tr>';
 $no = 1;
-$idPeg = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' AND status_kepeg='PNS' ORDER BY urut_pangkat DESC");
+$idPeg = mysqli_query($koneksi, "SELECT * FROM pegawai JOIN tb_pegawai ON pegawai.pegawai_id=tb_pegawai.pegawai_id 
+								JOIN pembagian1 ON tb_pegawai.pegawai_id=pembagian1.pembagian1_id 
+								JOIN tb_jabatan ON pembagian1.pembagian1_id=tb_jabatan.id_jab 
+								JOIN tb_pangkat ON tb_jabatan.id_jab=tb_pangkat.id_pangkat 
+								JOIN pegawai_d ON tb_pangkat.id_pangkat=pegawai_d.pegawai_id ORDER BY urut_pangkat ASC;");
 while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 	$html .= '<tr>
+	
+								
 					<td align="center">' . $no++ . '</td>
-					<td colspan="2">' . $peg['nama'] . '<br /><br />' . $peg['tempat_lhr'] . ', ' . $peg['tgl_lhr'] . '<br />' . $peg['nip'] . '<br />' . $peg['agama'] . '</td>
-					<td>' . $peg['jk'] . '</td>';
-	$idPan = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE (id_peg='$peg[id_peg]' AND status_pan='Aktif')");
+					<td colspan="2">' . $peg['pegawai_nama'] . '<br /><br />' . $peg['tempat_lahir'] . ', ' . $peg['tgl_lahir'] . '<br />' . $peg['pegawai_nip'] . '<br />' . $peg['agama'] . '</td>
+					<td>' . $peg['gender'] . '</td>';
+	$idPan = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE (id_pangkat='$peg[pegawai_id]' AND status_pan='Aktif')");
 	$hpan = mysqli_fetch_array($idPan, MYSQLI_ASSOC);
-	$html .= '<td align="center">' . $hpan['pangkat'] . '<br />' . $hpan['gol'] . '</td>
-					<td>' . $hpan['tmt_pangkat'] . '</td>';
-	$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE (id_peg='$peg[id_peg]' AND status_jab='Aktif')");
+	$pan1 = isset($hpan['pangkat']) ? $hpan['pangkat'] : '';
+	$gol = isset($hpan['gol']) ? $hpan['gol'] : '';
+	$tmt = isset($hpan['tmt_pangkat']) ? $hpan['tmt_pangkat'] : '';
+	$html .= '<td align="center">' . $pan1 . '<br />' . $gol . '</td>
+					<td>' . $tmt . '</td>';
+	$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE (id_jab='$peg[pegawai_id]' AND status_jab='Aktif')");
 	$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
 	$html .= '<td>' . $hjab['jabatan'] . '</td>
 					<td>' . $hjab['tmt_jabatan'] . '</td>
-					<td align="center">' . $hjab['eselon'] . '</td>';
-	$idLatjab = mysqli_query($koneksi, "SELECT * FROM tb_lat_jabatan WHERE id_peg='$peg[id_peg]'");
+					<td align="center">' . '</td>';
+	$idLatjab = mysqli_query($koneksi, "SELECT * FROM tb_lat_jabatan WHERE id_lat_jabatan='$peg[pegawai_id]'");
 	$hljab = mysqli_fetch_array($idLatjab, MYSQLI_ASSOC);
 	// $html .='<td>'.$hljab['nama_pelatih'].'</td>
 	// <td align="center">'.$hljab['tahun_lat'].'</td>
 	// <td align="center">'.$hljab['jml_jam'].'</td>';
-	$idSek = mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE (id_peg='$peg[id_peg]' AND status='Akhir')");
+	$idSek = mysqli_query($koneksi, "SELECT * FROM  tb_sekolah  WHERE status='Akhir'");
 	$hsek = mysqli_fetch_array($idSek, MYSQLI_ASSOC);
-	$html .= '<td>' . $hsek['tingkat'] . '<br />' . $hsek['nama_sekolah'] . '<br />' . $hsek['jurusan'] . '<br />' . $hsek['tgl_ijazah'] . '</td>
-					<td>' . $peg['alamat'] . '<br /><br />' . $peg['telp'] . '</td>
-					<td align="center">' . $peg['status_kepeg'] . '</td>
+	$hsek1 = isset($hsek['pend_name']) ? $hsek['pend_name'] : '';
+	$hsek2 = isset($hsek['nama_sekolah']) ? $hsek['nama_sekolah'] : '';
+	$hsek3 = isset($hsek['jurusan']) ? $hsek['jurusan'] : '';
+	$hsek4 = isset($hsek['tgl_ijazah']) ? $hsek['tgl_ijazah'] : '';
+	$html .= '<td>' . $hsek1 . '<br />' . $hsek2 . '<br />' . $hsek3 . '<br />' . $hsek4 . '</td>
+					<td>' . $peg['alamat'] . '<br /><br />' . $peg['pegawai_telp'] . '</td>
+					<td align="center">'  . '</td>
 				</tr>';
 }
 $html .= '</table><br /><br />';
@@ -149,7 +162,7 @@ $html .= '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td width="550"></td>
 				<td width="40"></td>
-				<td width="380">' . $kep['kab'] . ', ' . date("j F Y") . '</td>
+				<td width="380">' . $kep['nama_peru'] . ', ' . date("j F Y") . '</td>
 			</tr>
 			<tr>
 				<td></td>
@@ -164,7 +177,7 @@ $html .= '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td></td>
 				<td></td>
-				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">KABUPATEN ' . $kep['kab'] . '</font></td>
+				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">KABUPATEN ' . $kep['nama_peru'] . '</font></td>
 			</tr>
 			<tr>
 				<td height="60"></td>
@@ -174,17 +187,17 @@ $html .= '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td></td>
 				<td></td>
-				<td align="center"><font size="9"><b>' . $nama['nama'] . '</b></font></td>
+				<td align="center"><font size="9"><b>' . $nama['pegawai_nama'] . '</b></font></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
-				<td align="center"><font size="9">' . $pan['pangkat'] . '</font></td>
+				<td align="center"><font size="9">' . $pan1. '</font></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
-				<td align="center"><font size="9"><b>NIP. ' . $nama['nip'] . '</b></font></td>
+				<td align="center"><font size="9"><b>NIP. ' . $nama['pegawai_nip'] . '</b></font></td>
 			</tr>
 		</table>';
 $pdf->writeHTML($html, true, false, false, false, '');
