@@ -69,10 +69,10 @@ include "../../../config/koneksi.php";
 $kepala	= mysqli_query($koneksi, "SELECT * FROM tb_setup_peru WHERE id_setup_peru='1'");
 $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 
-$namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$kep[kepala]'");
+$namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$kep[pimpinan]'");
 $nama		= mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 
-$pangkat = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[kepala]' AND status_pan='Aktif'");
+$pangkat = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[pimpinan]' AND status_pan='Aktif'");
 $pan	= mysqli_fetch_array($pangkat, MYSQLI_ASSOC);
 $pan1 = isset($pan['pangkat']) ? $pan['pangkat'] : '';
 
