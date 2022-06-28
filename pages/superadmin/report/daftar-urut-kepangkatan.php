@@ -16,54 +16,43 @@ $sheet->setCellValue("A1", "REPORT DUK");
 $sheet->setCellValue("A3", "No");
 $sheet->setCellValue("B3", "Nama / TTL");
 $sheet->setCellValue("C3", "NIP");
-$sheet->setCellValue("D3", "Pangkat GOL/Ruang");
+$sheet->setCellValue("D3", "Jabatan");
 $sheet->setCellValue("E3", "TMT");
-$sheet->setCellValue("F3", "Jabatan");
-$sheet->setCellValue("G3", "TMT");
-$sheet->setCellValue("H3", "MK GOL Tahun/Bulan");
-$sheet->setCellValue("I3", "Pendidikan AKhir / Asal");
-$sheet->setCellValue("J3", "Tahun Lulus");
-$sheet->setCellValue("K3", "ket.");
-// $sheet->setCellValue("H3", "Alamat & Telp");
-// $sheet->setCellValue("M3", "Ket");
+$sheet->setCellValue("F3", "Pendidikan Akhir / Asal");
+$sheet->setCellValue("G3", "Tahun Lulus");
+$sheet->setCellValue("H3", "ket.");;
 
 
-$expPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai JOIN tb_pegawai  ON pegawai.pegawai_id= tb_pegawai.pegawai_id 
-									JOIN tb_pangkat ON tb_pegawai.pegawai_id=tb_pangkat.id_peg
-									JOIN pembagian1 ON tb_pangkat.id_peg=pembagian1.pembagian1_id
-									JOIN tb_sekolah ON pembagian1.pembagian1_id=tb_sekolah.id_peg
-									JOIN tb_jabatan ON tb_sekolah.id_peg=tb_jabatan.id_peg WHERE  tb_sekolah.status='Akhir' ");
+$expPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id= tb_pegawai.pegawai_id INNER JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id ");
 $i	= 4; //Dimulai dengan baris ke dua
 $no	= 1;
 
 while ($peg	= mysqli_fetch_array($expPeg)) {
-	$tgl_sk	= new DateTime($peg['tgl_sk']);
-	$today	= new DateTime();
-	$selisih	= $today->diff($tgl_sk);
+	if ($peg['pegawai_status'] == '1') {
+		$pgw = 'Aktif';
+	}
+	$expeg2 = mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE id_peg='$peg[pegawai_id]' AND status='Akhir'");
+	$peg2 = mysqli_fetch_array($expeg2, MYSQLI_ASSOC);
+	$pegg = isset($peg2['tingkat']) ? $peg2['tingkat'] : '';
+	$pegg1 = isset($peg2['nama_sekolah']) ? $peg2['nama_sekolah'] : '';
+	$peg1 = isset($peg2['tgl_ijazah']) ? $peg2['tgl_ijazah'] : '';
 
-	$expUni	= mysqli_query($koneksi, "SELECT * FROM pegawai JOIN tb_pegawai  ON pegawai.pegawai_id= tb_pegawai.pegawai_id 
-									JOIN tb_pangkat ON tb_pegawai.pegawai_id=tb_pangkat.id_peg 
-									JOIN pembagian1 ON tb_pangkat.id_peg=pembagian1.pembagian1_id
-									JOIN tb_sekolah ON pembagian1.pembagian1_id=tb_sekolah.id_peg 
-									JOIN tb_jabatan ON tb_sekolah.id_peg=tb_jabatan.id_peg WHERE tb_sekolah.status='Akhir'");
+	$expeg3 = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]'");
+	$peg3 = mysqli_fetch_array($expeg3, MYSQLI_ASSOC);
+	$pegi = isset($peg3['jabatan']) ? $peg3['jabatan'] : '';
+	$pegii = isset($peg3['tmt_jabatan']) ? $peg3['tmt_jabatan'] : '';
+
+	$expUni	= mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
 	$uni	= mysqli_fetch_array($expUni);
 
 	$sheet->setCellValue("A" . $i, $no);
 	$sheet->setCellValue("B" . $i, $peg['pegawai_nama'] . '/' . $peg['tempat_lahir'] . '/' . $peg['tgl_lahir']);
 	$sheet->setCellValue("C" . $i, $peg['pegawai_nip']);
-	$sheet->setCellValue("D" . $i, $peg['pangkat'] . '/' . $peg['gol']);
-	$sheet->setCellValue("E" . $i, $peg['tmt_pangkat']);
-	$sheet->setCellValue("F" . $i, $peg['pembagian1_nama']);
-	$sheet->setCellValue("G" . $i, $peg['tmt_jabatan']);
-	$sheet->setCellValue("H" . $i, $peg['jabatan']);
-	$sheet->setCellValue("I" . $i, $selisih->y);
-	$sheet->setCellValue("J" . $i, $selisih->m);
-	$sheet->setCellValue("K" . $i, $peg['nama_sekolah'].'/'.$peg['tingkat']);
-	$sheet->setCellValue("L" . $i, $peg['tgl_ijazah']);
-	// $sheet->setCellValue("J" . $i, $peg['eselon']);
-	// $sheet->setCellValue("G" . $i, $peg1['tingkat'] . '/' . $peg1['jurusan'] . '/' . $peg1['tgl_ijazah']);
-	// $sheet->setCellValue("H" . $i, $peg1['alamat'] . '/' . $peg['pegawai_telp']);
-	// $sheet->setCellValue("M" . $i, $peg['status_kepeg']);
+	$sheet->setCellValue("D" . $i, $pegi);
+	$sheet->setCellValue("E" . $i, $pegii);
+	$sheet->setCellValue("F" . $i, $pegg . '/' . $pegg1);
+	$sheet->setCellValue("G" . $i, $peg1);
+	$sheet->setCellValue("H" . $i, $pgw);
 
 
 	$no++;
@@ -90,7 +79,7 @@ $writer->save("$file");
 </ol>
 <?php
 include "../../config/koneksi.php";
-$kepala	= mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_peru='1'");
+$kepala	= mysqli_query($koneksi, "SELECT * FROM tb_setup_peru WHERE id_setup_peru='1'");
 $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 ?>
 <!-- begin breadcrumb -->
@@ -113,22 +102,15 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 						<th rowspan="2">No</th>
 						<th colspan="2">NAMA</th>
 						<th rowspan="2">NIP</th>
-						<th colspan="2">PKT TERAKHIR</th>
 						<th colspan="2">JABATAN</th>
-						<!-- <th rowspan="2">ESL</th> -->
-						<th colspan="2">MK GOL</th>
 						<th colspan="2">PEND AKHIR</th>
 						<th rowspan="2">KET</th>
 					</tr>
 					<tr>
 						<th colspan="2">TTL</th>
-						<th>GOL/RUANG</th>
-						<th>TMT</th>
 						<th>NAMA</th>
 						<th>TMT</th>
-						<th>THN</th>
-						<th>BLN</th>
-						<th>ASAL / TK</th>
+						<th>ASAL / TINGKAT</th>
 						<th>T.LLS</th>
 					</tr>
 					<tr>
@@ -140,11 +122,7 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 						<th>6</th>
 						<th>7</th>
 						<th>8</th>
-						<th>9</th>
-						<th>10</th>
-						<th>11</th>
-						<th>12</th>
-						<!-- <th>13</th> -->
+						
 					</tr>
 				</thead>
 				<tbody>
@@ -159,37 +137,28 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 						<td><?php echo $peg['tempat_lahir']; ?> <?php echo $peg['tgl_lahir']; ?></td>
 						</td>
 						<td><?php echo $peg['pegawai_nip']; ?></td>
+						
 						<td><?php
-							$idPan = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE (id_peg='$peg[pegawai_id]' AND status_pan='Aktif')");
-							$hpan = mysqli_fetch_array($idPan, MYSQLI_ASSOC);
-							$hpan1 = isset($hpan['pangkat']) ? $hpan['pangkat'] : '';
-							$hpan2 = isset($hpan['gol']) ? $hpan['gol'] : '';
-							$hpan3 = isset($hpan['tmt_pangkat']) ? $hpan['tmt_pangkat'] : '';
-							$hpan4 = isset($hpan['tgl_sk']) ? $hpan['tgl_sk'] : '';
-							?>
-							<?php echo $hpan1; ?><br /><?php echo $hpan2; ?></td>
-						<td><?php echo $hpan3; ?></td>
-						<td><?php
-							$idJab = mysqli_query($koneksi, "SELECT * FROM pembagian1 JOIN tb_jabatan ON pembagian1.pembagian1_id=tb_jabatan.id_jab WHERE status_jab='Aktif'");
+							$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE (id_jab='$peg[pegawai_id]' AND status_jab='Aktif')");
 							$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
-							$hjab1 = isset($hjab['pembagian1_nama']) ? $hjab['pembagian1_nama'] : '';
+							$hjab1 = isset($hjab['jabatan']) ? $hjab['jabatan'] : '';
 							$hjab2 = isset($hjab['tmt_jabatan']) ? $hjab['tmt_jabatan'] : '';
 
 							?>
 							<?php echo $hjab1 ?></td>
 						<td><?php echo $hjab2; ?></td>
 						<!-- <td><?php echo $hjab['eselon']; ?></td> -->
-						<td><?php
+						<!-- <td><?php
 							$tgl_sk	= new DateTime($hpan4);
 							$today	= new DateTime();
 							$selisih	= $today->diff($tgl_sk);
 
 							echo $selisih->y;
 							?>
-						</td>
-						<td><?php echo $selisih->m; ?></td>
+						</td> -->
+						<!-- <td><?php echo $selisih->m; ?></td> -->
 						<td><?php
-							$idSek = mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE (id_sekolah='$peg[pegawai_id]' AND status='Akhir')");
+							$idSek = mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE id_peg='$peg[pegawai_id]' AND status='Akhir'");
 							$hsek = mysqli_fetch_array($idSek, MYSQLI_ASSOC);
 							$hsek1 = isset($hsek['nama_sekolah']) ? $hsek['nama_sekolah'] : '';
 							$hsek2 = isset($hsek['tingkat']) ? $hsek['tingkat'] : '';
@@ -199,7 +168,11 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 							<?php echo $hsek1; ?><br><?php echo $hsek2; ?>
 						</td>
 						<td><?php echo $hsek3; ?></td>
-						<!-- <td><?php echo $peg['status_kepeg']; ?></td> -->
+						<td><?php
+							if ($peg['pegawai_status'] == '1') {
+								$pgw = 'Aktif';
+							}
+							echo $pgw; ?></td>
 						</tr>
 					<?php
 					}

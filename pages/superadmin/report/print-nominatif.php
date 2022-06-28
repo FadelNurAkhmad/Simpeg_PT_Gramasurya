@@ -66,13 +66,13 @@ $pdf->SetFont('helvetica', '', 8);
 
 include "../../../config/koneksi.php";
 
-$kepala	= mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_peru='1'");
+$kepala	= mysqli_query($koneksi, "SELECT * FROM tb_setup_peru WHERE id_setup_peru='1'");
 $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 
-$namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai  WHERE pegawai_id='$kep[kepala]'");
+$namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai  WHERE pegawai_id='$kep[pimpinan]'");
 $nama		= mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 
-$pangkat = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[kepala]' AND status_pan='Aktif'");
+$pangkat = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[pimpinan]' AND status_pan='Aktif'");
 $pan	= mysqli_fetch_array($pangkat, MYSQLI_ASSOC);
 
 $header = '<p align="center"><font size="12"><b>DAFTAR NOMINATIF PEGAWAI NEGERI SIPIL</b></font><br />
@@ -89,7 +89,6 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				<th rowspan="2" width="30">NO</th>
 				<th colspan="2" width="140">NAMA, TTL</th>
 				<th rowspan="2" width="70">JNS KELAMIN</th>
-				<th colspan="2" width="120">PKT TERAKHIR</th>
 				<th colspan="2" width="140">JABATAN</th>
 				<th rowspan="2" width="40">ESL</th>
 				<th rowspan="2" width="110">PEND, JURUSAN, T.LULUS</th>
@@ -97,9 +96,7 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				<th rowspan="2" width="40">KET</th>
 			</tr>
 			<tr align="center">
-				<th colspan="2" width="140">NIP, AGAMA</th>
-				<th width="60">GOL/RUANG</th>
-				<th width="60">TMT</th>
+				<th colspan="2" width="140">NIP, AGAMA</th>	
 				<th width="80">NAMA</th>
 				<th width="60">TMT</th>
 			</tr>
@@ -113,48 +110,67 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				<th>7</th>
 				<th>8</th>
 				<th>9</th>
-				<th>10</th>
-				<th>11</th>
 			</tr>';
 $no = 1;
-$idPeg = mysqli_query($koneksi, "SELECT * FROM pegawai JOIN tb_pegawai ON pegawai.pegawai_id=tb_pegawai.pegawai_id 
-								JOIN pembagian1 ON tb_pegawai.pegawai_id=pembagian1.pembagian1_id 
-								JOIN tb_jabatan ON pembagian1.pembagian1_id=tb_jabatan.id_jab 
-								JOIN tb_pangkat ON tb_jabatan.id_jab=tb_pangkat.id_pangkat 
-								JOIN pegawai_d ON tb_pangkat.id_pangkat=pegawai_d.pegawai_id ORDER BY urut_pangkat ASC;");
+$idPeg = mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id= tb_pegawai.pegawai_id INNER JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id");
+
 while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
+	if ($peg['agama'] == '1') {
+		$agama = 'Islam';
+	}
+
+	if ($peg['gender'] == '1') {
+		$gender = 'Laki-laki';
+	}
+	if ($peg['pegawai_status'] == '1') {
+		$status = 'Aktif';
+	}
+
 	$html .= '<tr>
-	
-								
+							
 					<td align="center">' . $no++ . '</td>
-					<td colspan="2">' . $peg['pegawai_nama'] . '<br /><br />' . $peg['tempat_lahir'] . ', ' . $peg['tgl_lahir'] . '<br />' . $peg['pegawai_nip'] . '<br />' . $peg['agama'] . '</td>
-					<td>' . $peg['gender'] . '</td>';
-	$idPan = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE (id_pangkat='$peg[pegawai_id]' AND status_pan='Aktif')");
-	$hpan = mysqli_fetch_array($idPan, MYSQLI_ASSOC);
-	$pan1 = isset($hpan['pangkat']) ? $hpan['pangkat'] : '';
-	$gol = isset($hpan['gol']) ? $hpan['gol'] : '';
-	$tmt = isset($hpan['tmt_pangkat']) ? $hpan['tmt_pangkat'] : '';
-	$html .= '<td align="center">' . $pan1 . '<br />' . $gol . '</td>
-					<td>' . $tmt . '</td>';
-	$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE (id_jab='$peg[pegawai_id]' AND status_jab='Aktif')");
+					<td colspan="2">' . $peg['pegawai_nama'] . '<br /><br />' . $peg['tempat_lahir'] . ', ' . $peg['tgl_lahir'] . '<br />' . $peg['pegawai_nip'] . '<br />' . $agama . '</td>
+					<td>' . $gender . '</td>';
+
+	// $idPan = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$peg[pegawai_id]' AND status_pan='Aktif'");
+	// $hpan = mysqli_fetch_array($idPan, MYSQLI_ASSOC);
+	// $pan1 = isset($hpan['pangkat']) ? $hpan['pangkat'] : '';
+	// $gol = isset($hpan['gol']) ? $hpan['gol'] : '';
+	// $tmt = isset($hpan['tmt_pangkat']) ? $hpan['tmt_pangkat'] : '';
+	// $html .= '<td align="center">' . $pan1 . '<br />' . $gol . '</td>
+	// 				<td>' . $tmt . '</td>';
+
+	$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]'");
+	// if(mysqli_num_rows($idJab) > 0) {
+
+	// } else {
+		
+	// }
 	$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
-	$html .= '<td>' . $hjab['jabatan'] . '</td>
-					<td>' . $hjab['tmt_jabatan'] . '</td>
+	$xx = isset($hjab['jabatan']) ? $hjab['jabatan'] : '';
+	$xxx = isset($hjab['tmt_jabatan']) ? $hjab['tmt_jabatan'] : '';
+	$html .= '<td>' . $xx . '</td>
+					<td>' . $xxx . '</td>
 					<td align="center">' . '</td>';
-	$idLatjab = mysqli_query($koneksi, "SELECT * FROM tb_lat_jabatan WHERE id_lat_jabatan='$peg[pegawai_id]'");
-	$hljab = mysqli_fetch_array($idLatjab, MYSQLI_ASSOC);
-	// $html .='<td>'.$hljab['nama_pelatih'].'</td>
-	// <td align="center">'.$hljab['tahun_lat'].'</td>
-	// <td align="center">'.$hljab['jml_jam'].'</td>';
-	$idSek = mysqli_query($koneksi, "SELECT * FROM  tb_sekolah  WHERE status='Akhir'");
+
+	// $idLatjab = mysqli_query($koneksi, "SELECT * FROM tb_lat_jabatan WHERE id_lat_jabatan='$peg[pegawai_id]'");
+	// $hljab = mysqli_fetch_array($idLatjab, MYSQLI_ASSOC);
+	// $hljab1 = isset($hljab['nama_pelatih']) ? $hljab['nama_pelatih'] : '';
+	// $hljab2 = isset($hljab['tahun_lat']) ? $hljab['tahun_lat'] : '';
+	// $hljab3 = isset($hljab['jml_jam']) ? $hljab['jml_jam'] : '';
+	// $html .='<td>'.$hljab1.'</td>
+	// <td align="center">'.$hljab2.'</td>
+	// <td align="center">'.$hljab3.'</td>';
+
+	$idSek = mysqli_query($koneksi, "SELECT * FROM  tb_sekolah  WHERE id_peg='$peg[pegawai_id]' AND status='Akhir' ");
 	$hsek = mysqli_fetch_array($idSek, MYSQLI_ASSOC);
-	$hsek1 = isset($hsek['pend_name']) ? $hsek['pend_name'] : '';
+	$hsek1 = isset($hsek['tingkat']) ? $hsek['tingkat'] : '';
 	$hsek2 = isset($hsek['nama_sekolah']) ? $hsek['nama_sekolah'] : '';
 	$hsek3 = isset($hsek['jurusan']) ? $hsek['jurusan'] : '';
 	$hsek4 = isset($hsek['tgl_ijazah']) ? $hsek['tgl_ijazah'] : '';
 	$html .= '<td>' . $hsek1 . '<br />' . $hsek2 . '<br />' . $hsek3 . '<br />' . $hsek4 . '</td>
 					<td>' . $peg['alamat'] . '<br /><br />' . $peg['pegawai_telp'] . '</td>
-					<td align="center">'  . '</td>
+					<td align="center">'  . $status . '</td>
 				</tr>';
 }
 $html .= '</table><br /><br />';
@@ -172,12 +188,12 @@ $html .= '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td></td>
 				<td></td>
-				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">BADAN KEPEGAWAIAN DAERAH</font></td>
+				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">DIREKTUR UTAMA</font></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
-				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">KABUPATEN ' . $kep['nama_peru'] . '</font></td>
+				<td><font size="9" style="text-transform:uppercase;font-weight:bold;"> ' . $kep['nama_peru'] . '</font></td>
 			</tr>
 			<tr>
 				<td height="60"></td>
@@ -192,7 +208,7 @@ $html .= '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td></td>
 				<td></td>
-				<td align="center"><font size="9">' . $pan1. '</font></td>
+				<td align="center"><font size="9"></font></td>
 			</tr>
 			<tr>
 				<td></td>

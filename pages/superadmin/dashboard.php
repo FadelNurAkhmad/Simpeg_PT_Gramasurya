@@ -16,14 +16,14 @@
 <?php
 include "../../config/koneksi.php";
 
-$jmlpeg	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_status='1' ORDER BY pegawai_id DESC");
-$jpeg	= mysqli_num_rows($jmlpeg);
+$jmlpeg    = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_status='1' ORDER BY pegawai_id DESC");
+$jpeg    = mysqli_num_rows($jmlpeg);
 
-$jmlhar	= mysqli_query($koneksi, "SELECT * FROM tb_penghargaan");
-$jhar	= mysqli_num_rows($jmlhar);
+$jmlhar    = mysqli_query($koneksi, "SELECT * FROM tb_penghargaan");
+$jhar    = mysqli_num_rows($jmlhar);
 
-$jmltug	= mysqli_query($koneksi, "SELECT * FROM tb_penugasan");
-$jtug	= mysqli_num_rows($jmltug);
+$jmltug    = mysqli_query($koneksi, "SELECT * FROM tb_penugasan");
+$jtug    = mysqli_num_rows($jmltug);
 
 ?>
 <!-- begin row -->
