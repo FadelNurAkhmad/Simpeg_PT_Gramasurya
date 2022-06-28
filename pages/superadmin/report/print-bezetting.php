@@ -101,22 +101,15 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				
 			</tr>';
 $no = 1;
-<<<<<<< HEAD
 $idPeg = mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id= tb_pegawai.pegawai_id INNER JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id");
 while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 	if ($peg['pegawai_status'] == '1') {
 		$status = 'Aktif';
 	}
-=======
-$idPeg = mysqli_query($koneksi, "SELECT * FROM pegawai JOIN tb_pegawai ON pegawai.pegawai_id=tb_pegawai.pegawai_id 
-						JOIN pembagian1 ON tb_pegawai.pegawai_id=pembagian1.pembagian1_id ORDER BY urut_pangkat ASC");
-while ($peg = mysqli_fetch_array($idPeg)) {
->>>>>>> 31c80161eccec78e675d7a6fd054f9c2c9fc5b0b
 	$html .= '<tr>
 					<td align="center">' . $no++ . '</td>
 					<td>' . $peg['pegawai_nama'] . '<br />' . $peg['tempat_lahir'] . ',' . $peg['tgl_lahir'] . '</td>
 					<td>' . $peg['pegawai_nip'] . '</td>';
-<<<<<<< HEAD
 
 	$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_jab=$peg[pegawai_id] ");
 	$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
@@ -125,19 +118,6 @@ while ($peg = mysqli_fetch_array($idPeg)) {
 
 	$idSek = mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE id_peg='$peg[pegawai_id]' AND status='Akhir' ");
 	$hsek = mysqli_fetch_array($idSek, MYSQLI_ASSOC);
-=======
-	$idPan = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE (id_peg='$peg[pegawai_id]' AND status_pan='Aktif')");
-	$hpan = mysqli_fetch_array($idPan);
-	$hpan1 = isset($hpan['pangkat']) ? $hpan['pangkat'] : '';
-	$hpan2 = isset($hpan['gol']) ? $hpan['gol'] : '';
-	$html .= '<td align="center">' . $hpan1 . '<br />' . $hpan2 . '</td>';
-	$idJab = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id=$peg[pembagian1_id] ");
-	$hjab = mysqli_fetch_array($idJab);
-	$hjab1 = isset($hjab['pembagian1_nama']) ? $hjab['pembagian1_nama'] : '';
-	$html .= '<td>' . $hjab1 . '</td>';
-	$idSek = mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE (id_sekolah='$peg[pegawai_id]' AND status='Akhir')");
-	$hsek = mysqli_fetch_array($idSek);
->>>>>>> 31c80161eccec78e675d7a6fd054f9c2c9fc5b0b
 	$hsek1 = isset($hsek['tingkat']) ? $hsek['tingkat'] : '';
 	$html .= '<td align="center">' . $hsek1 . '</td>';
 

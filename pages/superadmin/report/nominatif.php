@@ -89,7 +89,7 @@ $writer->save("$file");
 
 <?php
 include "../../config/koneksi.php";
-$kepala	= mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_peru='1'");
+$kepala	= mysqli_query($koneksi, "SELECT * FROM tb_setup_peru WHERE id_setup_peru='1'");
 $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 ?>
 <!-- begin breadcrumb -->
