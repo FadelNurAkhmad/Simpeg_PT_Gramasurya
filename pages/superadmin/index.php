@@ -15,24 +15,19 @@ include "../../config/koneksi.php";
 $tampilUsr    = mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_user='$_SESSION[id_user]'");
 $usr        = mysqli_fetch_array($tampilUsr);
 
-// $query = mysqli_query($koneksi, "SELECT * FROM pegawai");
-// while ($row = mysqli_fetch_array($query)) {
-// 	$insert = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id) VALUES ('$row[pegawai_id]')");
-// 	$insertusr = mysqli_query($koneksi, "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, id_peg) VALUES ('$nip', '$nama', '$password', 'Pegawai', '$id_peg')");
-// }
-
-$cekPeg = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_pegawai"));
-if ($cekPeg == 0) {
-    $query = mysqli_query($koneksi, "SELECT * FROM pegawai");
-    while ($row = mysqli_fetch_array($query)) {
+$query = mysqli_query($koneksi, "SELECT * FROM pegawai");
+while ($row = mysqli_fetch_array($query)) {
+    $cekPeg = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE pegawai_id=$row[pegawai_id]"));
+    $cekUsr = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_peg=$row[pegawai_id]"));
+    if ($cekPeg <= 0) {
         $insert = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id) VALUES ('$row[pegawai_id]')");
     }
+
+    if ($cekUsr <= 0) {
+        $password    = password_hash("123", PASSWORD_DEFAULT);
+        $insertusr = mysqli_query($koneksi, "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, id_peg) VALUES ('$row[pegawai_pin]', '$row[pegawai_nama]', '$password', 'Pegawai', '$row[pegawai_id]')");
+    }
 }
-
-// $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut=''");
-// $jmlpeg		= mysqli_num_rows($tampilPeg);
-
-
 
 ?>
 <!DOCTYPE html>
