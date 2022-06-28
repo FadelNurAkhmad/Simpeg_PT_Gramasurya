@@ -91,6 +91,7 @@ while ($peg	= mysqli_fetch_array($expPeg)) {
 
 	$uni1 = isset($uni1['nama']) ? $uni['nama'] : '';
 	$peg1 = isset($peg['sekolah']) ? $peg['sekolah'] : '';
+	
 	$sheet->setCellValue("A" . $i, $no);
 	$sheet->setCellValue("B" . $i, $peg['pegawai_id']);
 	$sheet->setCellValue("C" . $i, $peg['pegawai_nip']);

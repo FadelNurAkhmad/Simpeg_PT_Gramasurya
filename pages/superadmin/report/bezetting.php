@@ -54,7 +54,7 @@ while ($peg	= mysqli_fetch_array($expPeg)) {
 	$sheet->setCellValue("E" . $i, $pegg);
 	$sheet->setCellValue("F" . $i, $selisih->y);
 	$sheet->setCellValue("G" . $i, $pgw);
-	
+
 
 
 	$no++;
@@ -77,7 +77,7 @@ $writer->save("$file");
 		?>
 	</li>
 	<li><a href="<?php echo $file; ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
-	
+
 </ol>
 <?php
 if (isset($_GET['pegawai_id'])) {
@@ -107,7 +107,6 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 						<th>No</th>
 						<th>NAMA<br />TEMPAT TANGGAL LAHIR</th>
 						<th>NIP</th>
-						<th>PANGKAT<br />GOL/RUANG</th>
 						<th>JABATAN</th>
 						<th>PENDIDIKAN<br />TERAKHIR</th>
 						<th>UMUR (THN)</th>
@@ -121,7 +120,7 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 						<th>5</th>
 						<th>6</th>
 						<th>7</th>
-						<th>8</th>
+
 					</tr>
 				</thead>
 				<tbody>
@@ -134,19 +133,14 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 						<td><?= $no; ?></td>
 						<td><?php echo $peg['pegawai_nama']; ?><br /><?php echo $peg['tempat_lahir']; ?> <?php echo $peg['tgl_lahir']; ?></td>
 						<td><?php echo $peg['pegawai_nip']; ?></td>
-						<td><?php
-							$idPan = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$peg[pegawai_id]' AND status_pan='Aktif'");
-							$hpan = mysqli_fetch_array($idPan, MYSQLI_ASSOC);
-							$hpan1 = isset($hpan['pangkat']) ? $hpan['pangkat'] : '';
-							$hpan2 = isset($hpan['gol']) ? $hpan['gol'] : '';
-							?>
-							<?php echo $hpan1; ?><br /><?php echo $hpan2; ?></td>
+						
 						<td><?php
 							$idJab = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$peg[pembagian1_id]'");
 							$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
 							$hjab1 = isset($hjab['pembagian1_nama']) ? $hjab['pembagian1_nama'] : '';
 							?>
 							<?php echo $hjab1; ?></td>
+
 						<td><?php
 							$idSek = mysqli_query($koneksi, " SELECT * FROM tb_sekolah WHERE id_peg='$peg[pegawai_id]' AND status='Akhir'");
 							$hsek = mysqli_fetch_array($idSek, MYSQLI_ASSOC);
@@ -154,6 +148,7 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 							?>
 							<?php echo $hsek1; ?>
 						</td>
+
 						<td><?php
 							$lhr	= new DateTime($peg['tgl_lahir']);
 							$today	= new DateTime();
@@ -161,12 +156,12 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 							echo $selisih->y;
 							?>
 						</td>
-						
+
 						<td><?php
-									if ($peg['pegawai_status'] == '1') {
-										$pgw = 'Aktif';
-									}
-						echo $pgw; ?></td>
+							if ($peg['pegawai_status'] == '1') {
+								$pgw = 'Aktif';
+							}
+							echo $pgw; ?></td>
 						</tr>
 					<?php
 					}
