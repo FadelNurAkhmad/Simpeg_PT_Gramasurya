@@ -868,7 +868,7 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 		<!-- end #content -->
 		<!-- begin #footer -->
 		<div id="footer" class="footer">
-			&copy; 2018. <a href="http://www.rajaputramedia.com/">SIMPEG</a> Version 7.0 - All Rights Reserved
+			&copy; 2022. <a href="https://gramasurya.com/">GRAMASURYA</a> - All Rights Reserved
 		</div>
 		<!-- end #footer -->
 		<!-- begin theme-panel -->

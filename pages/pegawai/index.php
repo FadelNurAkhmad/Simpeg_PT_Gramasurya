@@ -233,7 +233,7 @@ $peg		= mysqli_fetch_array($tampilPeg);
 		<!-- end #content -->
 		<!-- begin #footer -->
 		<div id="footer" class="footer">
-			&copy; 2018. <a href="http://www.rajaputramedia.com/">GRAMASURYA</a> Punya Kelompok SPI BOS FARIZ
+			&copy; 2022. <a href="https://gramasurya.com/">GRAMASURYA</a> - All Rights Reserved
 		</div>
 		<!-- end #footer -->
 
