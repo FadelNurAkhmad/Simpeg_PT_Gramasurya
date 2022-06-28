@@ -84,10 +84,10 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				<th width="30">No</th>
 				<th width="150">NAMA<br />TEMPAT TANGGAL LAHIR</th>
 				<th width="130">NIP</th>
-				<th width="100">PANGKAT<br />GOL/RUANG</th>
+				
 				<th width="100">JABATAN</th>
-				<th width="70">PEND<br />TERAKHIR</th>
-				<th width="40">UMUR (THN)</th>
+				<th width="100">PEND<br />TERAKHIR</th>
+				<th width="70">UMUR (THN)</th>
 				<th width="40">KET</th>
 			</tr>
 			<tr align="center">
@@ -98,34 +98,34 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				<th width="100">5</th>
 				<th width="70">6</th>
 				<th width="40">7</th>
-				<th width="40">8</th>
+				
 			</tr>';
 $no = 1;
-$idPeg = mysqli_query($koneksi, "SELECT * FROM pegawai JOIN tb_pegawai ON pegawai.pegawai_id=tb_pegawai.pegawai_id 
-						JOIN pembagian1 ON tb_pegawai.pegawai_id=pembagian1.pembagian1_id ORDER BY urut_pangkat ASC");
+$idPeg = mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id= tb_pegawai.pegawai_id INNER JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id");
 while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
+	if ($peg['pegawai_status'] == '1') {
+		$status = 'Aktif';
+	}
 	$html .= '<tr>
 					<td align="center">' . $no++ . '</td>
 					<td>' . $peg['pegawai_nama'] . '<br />' . $peg['tempat_lahir'] . ',' . $peg['tgl_lahir'] . '</td>
 					<td>' . $peg['pegawai_nip'] . '</td>';
-	$idPan = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE (id_peg='$peg[pegawai_id]' AND status_pan='Aktif')");
-	$hpan = mysqli_fetch_array($idPan, MYSQLI_ASSOC);
-	$hpan1 = isset($hpan['pangkat']) ? $hpan['pangkat'] : '';
-	$hpan2 = isset($hpan['gol']) ? $hpan['gol'] : '';
-	$html .= '<td align="center">' . $hpan1 . '<br />' . $hpan2 . '</td>';
-	$idJab = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id=$peg[pembagian1_id] ");
+
+	$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_jab=$peg[pegawai_id] ");
 	$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
-	$hjab1 = isset($hjab['pembagian1_nama']) ? $hjab['pembagian1_nama'] : '';
+	$hjab1 = isset($hjab['jabatan']) ? $hjab['jabatan'] : '';
 	$html .= '<td>' . $hjab1 . '</td>';
-	$idSek = mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE (id_sekolah='$peg[pegawai_id]' AND status='Akhir')");
+
+	$idSek = mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE id_peg='$peg[pegawai_id]' AND status='Akhir' ");
 	$hsek = mysqli_fetch_array($idSek, MYSQLI_ASSOC);
 	$hsek1 = isset($hsek['tingkat']) ? $hsek['tingkat'] : '';
 	$html .= '<td align="center">' . $hsek1 . '</td>';
+
 	$lhr	= new DateTime($peg['tgl_lahir']);
 	$today	= new DateTime();
 	$selisih	= $today->diff($lhr);
 	$html .= '<td align="center">' . $selisih->y . '</td>
-					<td align="center">' . $peg['pegawai_status'] . '</td>
+					<td align="center">' . $status . '</td>
 				</tr>';
 }
 $html .= '</table><br /><br />';
@@ -143,12 +143,12 @@ $html .= '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td></td>
 				<td></td>
-				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">BADAN KEPEGAWAIAN DAERAH</font></td>
+				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">DIREKTUR UTAMA</font></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
-				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">KABUPATEN ' . $kep['nama_peru'] . '</font></td>
+				<td><font size="9" style="text-transform:uppercase;font-weight:bold;"> ' . $kep['nama_peru'] . '</font></td>
 			</tr>
 			<tr>
 				<td height="60"></td>
