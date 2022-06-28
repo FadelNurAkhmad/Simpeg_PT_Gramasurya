@@ -7,10 +7,10 @@ if (isset($_GET['id_gaji_konfig'])) {
     $query   = mysqli_query($koneksi, "SELECT * FROM tb_gaji_konfigurasi WHERE id_gaji_konfig='$id_gaji_konfig'");
     $gaji    = mysqli_fetch_array($query);
 
-    $tampilPeg   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$gaji[pegawai_id]'");
+    $tampilPeg   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$gaji[id_peg]'");
     $peg    = mysqli_fetch_array($tampilPeg);
 
-    $tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$gaji[pegawai_id]'");
+    $tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$gaji[id_peg]'");
     $jab    = mysqli_fetch_array($tampilJab);
 } else {
     die("Error. No ID Selected!");
@@ -23,7 +23,7 @@ if (isset($_GET['id_gaji_konfig'])) {
 <div class="invoice">
     <div class="invoice-company">
         <span class="pull-right hidden-print">
-            <a href="index.php?page=detail-data-pegawai&pegawai_id=<?= $peg['pegawai_id'] ?>" title="back" class="btn btn-sm btn-white m-b-10"><i class="fa fa-step-backward"></i> &nbsp;Back</a>
+            <a href="index.php?page=detail-data-pegawai&pegawai_id=<?= $gaji['id_peg'] ?>" title="back" class="btn btn-sm btn-white m-b-10"><i class="fa fa-step-backward"></i> &nbsp;Back</a>
             <a href="../../pages/superadmin/gaji/konfigurasi_gaji/print-detail-konfigurasi-slip-gaji.php" target="_blank" title="print" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print"></i> &nbsp;Print</a>
         </span>
         PT Gramasurya

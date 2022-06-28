@@ -6,10 +6,10 @@ if (isset($_GET['id_gaji_konfig'])) {
     $query   = mysqli_query($koneksi, "SELECT * FROM tb_gaji_konfigurasi WHERE id_gaji_konfig='$id_gaji_konfig'");
     $gaji    = mysqli_fetch_array($query);
 
-    $tampilPeg   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$gaji[pegawai_id]'");
+    $tampilPeg   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$gaji[id_peg]'");
     $peg    = mysqli_fetch_array($tampilPeg);
 
-    $tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$gaji[pegawai_id]'");
+    $tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$gaji[id_peg]'");
     $jab    = mysqli_fetch_array($tampilJab);
 } else {
     die("Error. No ID Selected!");

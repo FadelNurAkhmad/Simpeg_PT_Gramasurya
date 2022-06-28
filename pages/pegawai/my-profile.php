@@ -6,14 +6,17 @@ $query = "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id = tb
 $sql   = mysqli_query($koneksi, $query);
 $data    = mysqli_fetch_array($sql);
 
-$jabatan	= mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$data[pembagian1_id]'");
-$jab	= mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
+$jabatan	= mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$data[pegawai_id]'");
+$jab	= mysqli_fetch_array($jabatan);
 
 // mengambil data presensi dari mesin
 $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[pegawai_pin]' ORDER BY scan_date DESC");
 
 $queryPan	= mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' AND status_pan='Aktif'");
 $selpan		= mysqli_fetch_array($queryPan);
+
+$queryCuti	= mysqli_query($koneksi, "SELECT * FROM tb_jatah_cuti WHERE id_peg='$id_peg'");
+$jatCuti		= mysqli_fetch_array($queryCuti);
 
 $birthday	= new DateTime($data['tgl_lahir']);
 $today		= new DateTime();
@@ -46,6 +49,7 @@ $diff = $today->diff($birthday);
 			<li class=""><a href="#sekolah" data-toggle="tab"><span class="visible-xs">Pend</span><span class="hidden-xs"><i class="ion-university fa-lg text-inverse"></i> Pendidikan</span></a></li>
 			<li class=""><a href="#bahasa" data-toggle="tab"><span class="visible-xs">Bhs</span><span class="hidden-xs"><i class="fa fa-language fa-lg text-warning"></i> Bahasa</span></a></li>
 			<li class=""><a href="#skp" data-toggle="tab"><span class="visible-xs">SKP</span><span class="hidden-xs"><i class="ion-social-buffer fa-lg text-info"></i> SKP</span></a></li>
+			<li class=""><a href="#gaji" data-toggle="tab"><span class="visible-xs">Gaji</span><span class="hidden-xs"><i class="fa fa-pencil text-inverse"></i> Gaji</span></a></li>
 			<li class=""><a href="#dokumen" data-toggle="tab"><span class="visible-xs">Dokumen</span><span class="hidden-xs"><i class="fa fa-folder-open text-success"></i> Dokumen</span></a></li>
 			<li class=""><a href="#presensi" data-toggle="tab"><span class="visible-xs">Presensi</span><span class="hidden-xs"><i class="fa fa-calendar-check-o text-danger"></i> Presensi</span></a></li>
 		</ul>
@@ -89,7 +93,7 @@ $diff = $today->diff($birthday);
 													<h5><span class="label label-inverse pull-right"> # Biodata Pegawai </span></h5>
 												</th>
 												<th>
-													<h4><?= $data['pegawai_nama'] ?> <small><?= (isset($jab) ? "$jab[pembagian1_nama]" : "") ?></small></h4>
+													<h4><?= $data['pegawai_nama'] ?> <small><?= $jab == 0 ? '-' : $jab['jabatan']; ?></small></h4>
 												</th>
 											</tr>
 										</thead>
@@ -222,7 +226,7 @@ $diff = $today->diff($birthday);
 												<td class="field">Jatah Cuti</td>
 												<td>
 													<?php
-													if ($jatCuti['jatah_c_jml'] == "") {
+													if ($jatCuti == 0) {
 														echo "-";
 													} else {
 														echo "$jatCuti[jatah_c_jml]";
@@ -234,7 +238,7 @@ $diff = $today->diff($birthday);
 												<td class="field">Sisa Cuti</td>
 												<td>
 													<?php
-													if ($jatCuti['jatah_c_sisa'] == "") {
+													if ($jatCuti == 0) {
 														echo "-";
 													} else {
 														echo "$jatCuti[jatah_c_sisa]";
@@ -490,7 +494,7 @@ $diff = $today->diff($birthday);
 					</table>
 				</div>
 			</div>
-			<div class="tab-pane fade" id="kgb">
+			<!-- <div class="tab-pane fade" id="kgb">
 				<div class="table-responsive">
 					<table class="table table-bordered table-striped">
 						<thead>
@@ -520,6 +524,71 @@ $diff = $today->diff($birthday);
 									<td><?php echo $kgb['gol_baru']; ?></td>
 									<td class="tools"><a href="index.php?page=detail-data-kgb&id_spkgb=<?= $kgb['id_spkgb']; ?>" title="view detail" type="button" class="btn btn-warning btn-xs">Detail</a></td>
 								</tr>
+							<?php
+							}
+							?>
+						</tbody>
+					</table>
+				</div>
+			</div> -->
+			<div class="tab-pane fade" id="gaji">
+				<div class="alert alert-success fade in">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+					<i class="fa fa-info fa-2x pull-left"></i> Klik "Detail" untuk menuju halaman preview dan print ...
+				</div>
+				<div class="panel-body">
+					<table id="data-table" class="table table-striped table-bordered nowrap" width="100%">
+						<thead>
+							<tr>
+								<th width="4%">No</th>
+								<th>NIP</th>
+								<th>Nama</th>
+								<th>Periode Gaji</th>
+								<th>Total Gaji</th>
+								<th width="10%">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							$no = 0;
+							$tampilGaji   = mysqli_query(
+								$koneksi,
+								"SELECT * FROM tb_gaji_konfigurasi WHERE id_peg='$id_peg' ORDER BY id_gaji_konfig"
+							);
+
+							while ($gaji = mysqli_fetch_array($tampilGaji)) {
+								$no++
+							?>
+								<tr>
+									<td><?php echo $no ?></td>
+									<td><?php echo $data['pegawai_nip'] ?></td>
+									<td><?php echo $data['pegawai_nama'] ?></td>
+									<td>
+										<?php echo $gaji['bulan'] ?>
+										<b>-</b>
+										<?php echo $gaji['tahun'] ?>
+									</td>
+									<td align="right"><?php echo 'Rp. ' . number_format($gaji['gaji_diterima']); ?></td>
+									<td class="text-center">
+										<a type="button" class="btn btn-success btn-icon btn-sm" href="index.php?page=detail-pegawai-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
+									</td>
+								</tr>
+								<!-- #modal-dialog -->
+								<div id="Del<?php echo $gaji['id_gaji_konfig'] ?>" class="modal fade" role="dialog">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Apakah Anda yakin ingin delete Data Gaji dari Database?</h5>
+											</div>
+											<div class="modal-body" align="center">
+												<a href="index.php?page=delete-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
+											</div>
+											<div class="modal-footer">
+												<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
+											</div>
+										</div>
+									</div>
+								</div>
 							<?php
 							}
 							?>
@@ -710,11 +779,11 @@ $diff = $today->diff($birthday);
 			</div>
 			<div id="collapseOne" class="panel-collapse collapse in">
 				<div class="panel-body">
-					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#pensiun" class="btn btn-default"><i class="fa fa-calendar"></i> Pensiun</a></p>
+					<!-- <p class="pull-right"><a type="button" data-toggle="modal" data-target="#pensiun" class="btn btn-default"><i class="fa fa-calendar"></i> Pensiun</a></p> -->
 					<!-- <p class="pull-right"><a type="button" data-toggle="modal" data-target="#naikpangkat" class="btn btn-default"><i class="fa fa-calendar"></i> Naik Pangkat</a></p> -->
 					<!-- <p class="pull-right"><a type="button" data-toggle="modal" data-target="#naikgaji" class="btn btn-default"><i class="fa fa-calendar"></i> Naik Gaji</a></p> -->
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#jabatan" class="btn btn-default"><i class="fa fa-star"></i> Jabatan</a></p>
-					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#pangkat" class="btn btn-default"><i class="fa fa-star"></i> Kepangkatan</a></p>
+					<!-- <p class="pull-right"><a type="button" data-toggle="modal" data-target="#pangkat" class="btn btn-default"><i class="fa fa-star"></i> Kepangkatan</a></p> -->
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#hukuman" class="btn btn-default"><i class="fa fa-gavel"></i> Hukuman</a></p>
 					<!-- <p class="pull-right"><a type="button" data-toggle="modal" data-target="#diklat" class="btn btn-default"><i class="fa fa-graduation-cap"></i> Diklat</a></p> -->
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#harga" class="btn btn-default"><i class="fa fa-certificate"></i> Penghargaan</a></p>
@@ -730,7 +799,7 @@ $diff = $today->diff($birthday);
 			</div>
 		</div>
 		<!-- modal -->
-		<div id="pensiun" class="modal fade">
+		<!-- <div id="pensiun" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -767,7 +836,7 @@ $diff = $today->diff($birthday);
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- <div id="naikpangkat" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -925,7 +994,7 @@ $diff = $today->diff($birthday);
 				</div>
 			</div>
 		</div>
-		<div id="pangkat" class="modal fade">
+		<!-- <div id="pangkat" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -994,7 +1063,7 @@ $diff = $today->diff($birthday);
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div id="hukuman" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">

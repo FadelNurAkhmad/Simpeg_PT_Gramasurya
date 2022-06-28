@@ -19,7 +19,7 @@ include "../../config/koneksi.php";
 
 $tampilGaji   = mysqli_query(
 	$koneksi,
-	"SELECT * FROM tb_gaji_konfigurasi INNER JOIN pegawai on tb_gaji_konfigurasi.pegawai_id=pegawai.pegawai_id ORDER BY id_gaji_konfig DESC"
+	"SELECT * FROM tb_gaji_konfigurasi INNER JOIN pegawai on tb_gaji_konfigurasi.id_peg=pegawai.pegawai_id ORDER BY id_gaji_konfig DESC"
 );
 
 

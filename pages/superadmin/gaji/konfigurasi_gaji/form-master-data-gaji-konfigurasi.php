@@ -62,7 +62,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                 <div class="col-md-6">
                                     <?php
                                     $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
-                                    echo '<select name="pegawai_id" class="default-select2 form-control">';
+                                    echo '<select name="id_peg" class="default-select2 form-control">';
                                     echo '<option value="">...</option>';
                                     while ($row = mysqli_fetch_array($data)) {
                                         echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';

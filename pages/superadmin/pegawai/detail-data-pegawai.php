@@ -8,7 +8,7 @@ $query = "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id = tb
 $sql   = mysqli_query($koneksi, $query);
 $data    = mysqli_fetch_array($sql);
 
-$jabatan	= mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$data[pegawai_id]'");
+$jabatan	= mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$data[pembagian1_id]'");
 $jab	= mysqli_fetch_array($jabatan);
 
 $queryPan	= mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' AND status_pan='Aktif'");
@@ -100,7 +100,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 													<h5><span class="label label-inverse pull-right"> # Biodata Pegawai </span></h5>
 												</th>
 												<th>
-													<h4><?= $data['pegawai_nama'] ?> <small><?= $jab == 0 ? '-' : $jab['jabatan']; ?></small></h4>
+													<h4><?= $data['pegawai_nama'] ?> <small><?= (isset($jab['pembagian1_id']) ? $jab['pembagian1_nama'] : "") ?></small></h4>
 												</th>
 											</tr>
 										</thead>
@@ -683,7 +683,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 							$no = 0;
 							$tampilGaji   = mysqli_query(
 								$koneksi,
-								"SELECT * FROM tb_gaji_konfigurasi WHERE pegawai_id='$id_peg' ORDER BY id_gaji_konfig"
+								"SELECT * FROM tb_gaji_konfigurasi WHERE id_peg='$id_peg' ORDER BY id_gaji_konfig"
 							);
 
 							while ($gaji = mysqli_fetch_array($tampilGaji)) {
