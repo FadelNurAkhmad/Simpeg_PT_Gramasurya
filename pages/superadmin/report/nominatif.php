@@ -23,7 +23,7 @@ $sheet->setCellValue("H3", "Alamat & Telp");
 $sheet->setCellValue("I3", "Ket");
 
 
-$expPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id= tb_pegawai.pegawai_id INNER JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id");
+$expPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id JOIN tb_pegawai ON pegawai_d.pegawai_id=tb_pegawai.pegawai_id ORDER BY urut_pangkat DESC");
 // $expeg1 = mysqli_query($koneksi, "SELECT * FROM pegawai_d WHERE pegawai_id='[pegawai_id]'");
 
 $i	= 4; //Dimulai dengan baris ke dua
@@ -184,9 +184,9 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 						
 
 							<td><?php
-								$idJab = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE (pembagian1_id='$peg[pembagian1_id]' )");
+								$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]' ");
 								$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
-								$hjab1 = isset($hjab['pembagian1_nama']) ? $hjab['pembagian1_nama'] : '';
+								$hjab1 = isset($hjab['jabatan']) ? $hjab['jabatan'] : '';
 								?>
 
 								<?php echo $hjab1; ?></td>
@@ -201,7 +201,7 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 								<!-- <td><?php echo $hjab['eselon']; ?></td> -->
 							</td>
 							<td><?php
-						$expeg3 = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]'");
+						$expeg3 = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg=$peg[pegawai_id]");
 						$peg3 = mysqli_fetch_array($expeg3, MYSQLI_ASSOC);
 
 								$idSek = mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE id_peg='$peg[pegawai_id]' AND status='Akhir'");

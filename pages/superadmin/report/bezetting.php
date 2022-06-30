@@ -22,7 +22,7 @@ $sheet->setCellValue("F3", "UMUR");
 $sheet->setCellValue("G3", "Ket.");
 
 
-$expPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id= tb_pegawai.pegawai_id INNER JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id");
+$expPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id JOIN tb_pegawai ON pegawai_d.pegawai_id=tb_pegawai.pegawai_id ORDER BY urut_pangkat DESC");
 $i	= 4; //Dimulai dengan baris ke dua
 $no	= 1;
 
@@ -35,9 +35,10 @@ while ($peg	= mysqli_fetch_array($expPeg)) {
 	$peg2 = mysqli_fetch_array($expeg2, MYSQLI_ASSOC);
 	$pegg = isset($peg2['tingkat']) ? $peg2['tingkat'] : '';
 
-	$expeg3 = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]'");
-	$peg3 = mysqli_fetch_array($expeg3, MYSQLI_ASSOC);
-	$pegi = isset($peg3['jabatan']) ? $peg3['jabatan'] : '';
+	$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]' ");
+	$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
+	$hjab1 = isset($hjab['jabatan']) ? $hjab['jabatan'] : '';
+	
 
 	$lhr	= new DateTime($peg['tgl_lahir']);
 	$today	= new DateTime();
@@ -50,7 +51,7 @@ while ($peg	= mysqli_fetch_array($expPeg)) {
 	$sheet->setCellValue("A" . $i, $no);
 	$sheet->setCellValue("B" . $i, $peg['pegawai_nama'] . '/' . $peg['tempat_lahir'] . '/' . $peg['tgl_lahir']);
 	$sheet->setCellValue("C" . $i, $peg['pegawai_nip']);
-	$sheet->setCellValue("D" . $i, $pegi);
+	$sheet->setCellValue("D" . $i, $hjab1);
 	$sheet->setCellValue("E" . $i, $pegg);
 	$sheet->setCellValue("F" . $i, $selisih->y);
 	$sheet->setCellValue("G" . $i, $pgw);
@@ -133,11 +134,11 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 						<td><?= $no; ?></td>
 						<td><?php echo $peg['pegawai_nama']; ?><br /><?php echo $peg['tempat_lahir']; ?> <?php echo $peg['tgl_lahir']; ?></td>
 						<td><?php echo $peg['pegawai_nip']; ?></td>
-						
+
 						<td><?php
-							$idJab = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$peg[pembagian1_id]'");
+							$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]'");
 							$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
-							$hjab1 = isset($hjab['pembagian1_nama']) ? $hjab['pembagian1_nama'] : '';
+							$hjab1 = isset($hjab['jabatan']) ? $hjab['jabatan'] : '';
 							?>
 							<?php echo $hjab1; ?></td>
 
