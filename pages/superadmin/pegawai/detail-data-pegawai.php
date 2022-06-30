@@ -872,12 +872,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 							</div>
 						</form>
 					</div>
-					<div class="col-6 col-md-8">
-						<label class="col-md-1 control-label">Hadir</label>
-						<div class="col-md-2 m-b-10">
-							<input type="text" name="periode_awal" value="" class="form-control" readonly />
-						</div>
-					</div>
+
 				</div>
 				<div class="table-responsive">
 					<table class="table table-bordered table-striped">
