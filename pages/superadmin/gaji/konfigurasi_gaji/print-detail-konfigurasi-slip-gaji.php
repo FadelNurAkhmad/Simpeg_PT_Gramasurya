@@ -225,6 +225,12 @@ $html = '<table border="0" cellspacing="0" cellpadding="3">
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
+				<td width="23%">Kedisiplinan</td>
+				<td width="5%">:</td>
+				<td width="30%">Rp. ' . $data['kedisiplinan'] . '</td>
+			</tr>
+			<tr>
+				<td width="12%">&nbsp;</td>
 				<td width="23%">Keluarga Istri/Suami</td>
 				<td width="5%">:</td>
 				<td width="30%">Rp. ' . $data['istri_suami'] . '</td>
@@ -249,31 +255,31 @@ $html = '<table border="0" cellspacing="0" cellpadding="3">
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
-				<td width="23%">Presensi</td>
+				<td width="44%">Presensi</td>
 				<td width="5%">:</td>
 				<td width="30%">Rp. ' . $data['presensi_pot'] . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
-				<td width="23%">Uang Makan</td>
+				<td width="44%">Uang Makan</td>
 				<td width="5%">:</td>
 				<td width="30%">Rp. ' . $data['uang_makan_pot'] . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
-				<td width="23%">Kehadiran</td>
+				<td width="44%">Kehadiran</td>
 				<td width="5%">:</td>
 				<td width="30%">Rp. ' . $data['kehadiran_pot'] . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
-				<td width="23%">Kedisiplinan</td>
+				<td width="44%">Kedisiplinan</td>
 				<td width="5%">:</td>
 				<td width="30%">Rp. ' . $data['kedisiplinan_pot'] . '</td>
 			</tr>
 			<tr>
-				<td width="25%">&nbsp;</td>
-				<td width="50%">Jumlah Potongan Variabel</td>
+				<td width="27%">&nbsp;</td>
+				<td width="48%">Jumlah Potongan Variabel</td>
 				<td width="5%">:</td>
 				<td width="20%">Rp. ' . $data['jumlah_pot_var'] . '</td>
 			</tr>
@@ -285,31 +291,31 @@ $html = '<table border="0" cellspacing="0" cellpadding="3">
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
-				<td width="23%">BPJS</td>
+				<td width="44%">BPJS</td>
 				<td width="5%">:</td>
 				<td width="30%">Rp. ' . $data['bpjs'] . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
-				<td width="23%">Koperasi</td>
+				<td width="44%">Koperasi</td>
 				<td width="5%">:</td>
 				<td width="30%">Rp. ' . $data['koperasi'] . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
-				<td width="23%">Dapen Muh</td>
+				<td width="44%">Dapen Muh</td>
 				<td width="5%">:</td>
 				<td width="30%">Rp. ' . $data['dapen_muh'] . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
-				<td width="23%">Lainya</td>
+				<td width="44%">Lainya</td>
 				<td width="5%">:</td>
 				<td width="30%">Rp. ' . $data['lainya'] . '</td>
 			</tr>
 			<tr>
-				<td width="25%">&nbsp;</td>
-				<td width="50%">Jumlah Potongan Variabel</td>
+				<td width="27%">&nbsp;</td>
+				<td width="48%">Jumlah Potongan Wajib</td>
 				<td width="5%">:</td>
 				<td width="20%">Rp. ' . $data['jumlah_pot_wajib'] . '</td>
 			</tr>
@@ -321,7 +327,7 @@ $html = '<table border="0" cellspacing="0" cellpadding="3">
 			</tr>
 		</table>
 		<table border="0" cellspacing="0" cellpadding="3">
-		</table><br /><br /><br /><br />';
+		</table><br /><br /><br />';
 $pdf->writeHTML($html, true, false, false, false, '');
 
 $sign = '<table cellpadding="1" border="0" align="center">
