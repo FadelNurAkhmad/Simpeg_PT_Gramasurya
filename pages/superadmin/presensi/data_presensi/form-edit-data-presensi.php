@@ -65,7 +65,7 @@ if (isset($_GET['pegawai_id'])) {
 
                             ?>
 
-                                <option value="<?= $row['jdw_kerja_m_id'] ?>" <?php echo ($datapegawai == $row['jdw_kerja_m_id']) ? "selected" : "" ?>><?= $row['jdw_kerja_m_name'] ?></option>
+                                <option value="<?= $row['jdw_kerja_m_id'] ?>" <?php echo ($data == $row['jdw_kerja_m_id']) ? "selected" : "" ?>><?= $row['jdw_kerja_m_name'] ?></option>
 
                             <?php
                             }
