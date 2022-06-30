@@ -44,13 +44,13 @@ if (isset($_GET['id_setup_peru'])) {
 					<div class="form-group">
 						<label class="col-md-3 control-label">Nama Perusahaan</label>
 						<div class="col-md-6">
-							<input type="text" name="nama_peru" value="<?= $data['nama_peru'] ?>" maxlength="255" class="form-control" />
+							<input type="text" name="nama_peru" value="<?= (isset($data['nama_peru'])) ? $data['nama_peru'] : "" ?>" maxlength="255" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label">Alamat</label>
 						<div class="col-md-6">
-							<textarea type="text" name="alamat" class="form-control"><?= $data['alamat'] ?></textarea>
+							<textarea type="text" name="alamat" class="form-control"><?= (isset($data['alamat'])) ? $data['alamat'] : "" ?></textarea>
 						</div>
 					</div>
 					<div class="form-group">
@@ -59,7 +59,7 @@ if (isset($_GET['id_setup_peru'])) {
 							<?php
 							$pimpinan = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_status='1'");
 							echo '<select name="pimpinan" class="default-select2 form-control">';
-							echo '<option value="' . $data['pimpinan'] . '">...</option>';
+							echo '<option value="' . (isset($data['pimpinan'])) ? $data['pimpinan'] : "" . '">...</option>';
 							while ($row = mysqli_fetch_array($pimpinan)) {
 								echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
 							}
