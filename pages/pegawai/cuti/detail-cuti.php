@@ -33,7 +33,7 @@ $jab2    = mysqli_fetch_array($tampilJab2);
     <div class="invoice-company">
         <span class="pull-right hidden-print">
             <a href="index.php?page=detail-data-pegawai&id_peg=<?= $data['id_peg'] ?>" title="back" class="btn btn-sm btn-white m-b-10"><i class="fa fa-step-backward"></i> &nbsp;Back</a>
-            <a href="../../pages/superadmin/rekap/print-cuti.php?id_cuti=<?= $id_cuti ?>" target="_blank" title="print" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print"></i> &nbsp;Print</a>
+            <a href="../../pages/pegawai/cuti/print-cuti.php?id_cuti=<?= $id_cuti ?>" target="_blank" title="print" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print"></i> &nbsp;Print</a>
         </span>
         Detail Cuti Pegawai
     </div>

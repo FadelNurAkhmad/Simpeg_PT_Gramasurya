@@ -1,24 +1,27 @@
 <?php
 ob_start();
-include'../../../assets/plugins/tcpdf/tcpdf.php';
+include '../../../assets/plugins/tcpdf/tcpdf.php';
 
-class MYPDF extends TCPDF {
-	public function Header() {
-        // Logo
-        //$image_file ='../../../assets/images/avatars/print.png';
+class MYPDF extends TCPDF
+{
+	public function Header()
+	{
+		// Logo
+		//$image_file ='../../../assets/images/avatars/print.png';
 		//$this->Image($image_file, 10, 10, 25, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
-        // Header
-        //$html = '<p><b>REPORT STOCK</b></p>';
+		// Header
+		//$html = '<p><b>REPORT STOCK</b></p>';
 		//$this->writeHTMLCell($w = 0, $h = 0, $x = 40, $y = 10, $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
-    }
-    public function Footer() {
-        // Position at 15 mm from bottom
-        $this->SetY(-15);
-        // Set font
-        $this->SetFont('helvetica', 'I', 8);
-        // Page number
-        $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages().'    '.'*** '.date ("d-m-Y").' ***', 0, false, 'C', 0, '', 0, false, 'T', 'M');
-    }
+	}
+	public function Footer()
+	{
+		// Position at 15 mm from bottom
+		$this->SetY(-15);
+		// Set font
+		$this->SetFont('helvetica', 'I', 8);
+		// Page number
+		$this->Cell(0, 10, 'Page ' . $this->getAliasNumPage() . '/' . $this->getAliasNbPages() . '    ' . '*** ' . date("d-m-Y") . ' ***', 0, false, 'C', 0, '', 0, false, 'T', 'M');
+	}
 }
 
 $pdf = new MYPDF('P', 'mm', 'A4', true, 'UTF-8', false);
@@ -34,8 +37,8 @@ $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 
 // set header and footer fonts
-$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -52,75 +55,75 @@ $pdf->SetAutoPageBreak(TRUE, 20);
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 // set some language-dependent strings (optional)
-if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-    require_once(dirname(__FILE__).'/lang/eng.php');
-    $pdf->setLanguageArray($l);
+if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
+	require_once(dirname(__FILE__) . '/lang/eng.php');
+	$pdf->setLanguageArray($l);
 }
 
 // add a page
 $pdf->AddPage();
 $pdf->SetFont('helvetica', '', 10);
 
-	include "../../../config/koneksi.php";
-	
-	$kepala	=mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
-	$kep	=mysqli_fetch_array($kepala, MYSQLI_ASSOC);
-	
-	$namakepala	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$kep[kepala]'");
-	$nama		=mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
-	
-	$pangkat=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[kepala]' AND status_pan='Aktif'");
-	$pan	=mysqli_fetch_array($pangkat, MYSQLI_ASSOC);
-	
-$head ='<table border="0" cellspacing="0" cellpadding="3">
+include "../../../config/koneksi.php";
+
+$kepala	= mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
+$kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
+
+$namakepala	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$kep[kepala]'");
+$nama		= mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
+
+$pangkat = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[kepala]' AND status_pan='Aktif'");
+$pan	= mysqli_fetch_array($pangkat, MYSQLI_ASSOC);
+
+$head = '<table border="0" cellspacing="0" cellpadding="3">
 			<tr>
 				<td width="100" rowspan="3"><img src="../../../assets/img/logo-grama.png" width="78" height="78"/></td>
-				<td width="385" align="center"><font size="11" style="text-transform:uppercase;">PEMERINTAH KABUPATEN '.$kep['kab'].'</font></td>
+				<td width="385" align="center"><font size="11" style="text-transform:uppercase;">PEMERINTAH KABUPATEN ' . $kep['kab'] . '</font></td>
 				<td width="100" rowspan="3"></td>
 			</tr>
 			<tr>
 				<td align="center"><font size="10" style="text-transform:uppercase;font-weight:bold;">BADAN KEPEGAWAIAN DAERAH</font></td>	
 			</tr>
 			<tr>
-				<td align="center"><font size="10">'.$kep['alamat'].'</font></td>	
+				<td align="center"><font size="10">' . $kep['alamat'] . '</font></td>	
 			</tr>
 		</table>
 		<table border="2" cellspacing="0" cellpadding="3">
-		</table>';	
+		</table>';
 $pdf->writeHTML($head, true, false, false, false, '');
 
-$subhead ='<table border="0" cellspacing="0" cellpadding="3">
+$subhead = '<table border="0" cellspacing="0" cellpadding="3">
 			<tr>
 				<td width="585" align="center"><font size="10"><b>Rekapitulasi Pegawai Berdasarkan Pendidikan</b></font></td>	
 			</tr>
-		</table><br /><br />';	
+		</table><br /><br />';
 $pdf->writeHTML($subhead, true, false, false, false, '');
 
-$html ='<table border="1" cellspacing="0" cellpadding="3">
+$html = '<table border="1" cellspacing="0" cellpadding="3">
 			<tr align="center">
 				<td width="40" height="28"><b>NO</b></td>
 				<td width="380"><b>TINGKAT PENDIDIKAN</b></td>	
 				<td width="165"><b>JUMLAH PEGAWAI</b></td>	
 			</tr>';
-			$no=0;
-			$rekapsek	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY sekolah ORDER BY sekolah DESC");
-			while($sek=mysqli_fetch_array($rekapsek, MYSQLI_ASSOC)){
-			$no++;
-			$html .='<tr>
-				<td align="center">'.$no.'</td>
-				<td>'.$sek['sekolah'].'</td>';
-				$jml=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' AND sekolah='$sek[sekolah]'");
-				$html .='<td>'.mysqli_num_rows($jml).'</td>
+$no = 0;
+$rekapsek	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY sekolah ORDER BY sekolah DESC");
+while ($sek = mysqli_fetch_array($rekapsek, MYSQLI_ASSOC)) {
+	$no++;
+	$html .= '<tr>
+				<td align="center">' . $no . '</td>
+				<td>' . $sek['sekolah'] . '</td>';
+	$jml = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' AND sekolah='$sek[sekolah]'");
+	$html .= '<td>' . mysqli_num_rows($jml) . '</td>
 			</tr>';
-			}			
-$html .='</table><br /><br />';
+}
+$html .= '</table><br /><br />';
 $pdf->writeHTML($html, true, false, false, false, '');
 
 $sign = '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td width="200"></td>
 				<td width="100"></td>
-				<td width="285">'.$kep['kab'].', '.date("j F Y").'</td>
+				<td width="285">' . $kep['kab'] . ', ' . date("j F Y") . '</td>
 			</tr>
 			<tr>
 				<td></td>
@@ -135,7 +138,7 @@ $sign = '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td></td>
 				<td></td>
-				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">KABUPATEN '.$kep['kab'].'</font></td>
+				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">KABUPATEN ' . $kep['kab'] . '</font></td>
 			</tr>
 			<tr>
 				<td height="60"></td>
@@ -145,20 +148,20 @@ $sign = '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td></td>
 				<td></td>
-				<td align="center"><font size="9"><b>'.$nama['nama'].'</b></font></td>
+				<td align="center"><font size="9"><b>' . $nama['nama'] . '</b></font></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
-				<td align="center"><font size="9">'.$pan['pangkat'].'</font></td>
+				<td align="center"><font size="9">' . $pan['pangkat'] . '</font></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
-				<td align="center"><font size="9"><b>NIP. '.$nama['nip'].'</b></font></td>
+				<td align="center"><font size="9"><b>NIP. ' . $nama['nip'] . '</b></font></td>
 			</tr>
 		</table>';
 $pdf->writeHTML($sign, true, false, false, false, '');
 
 //Close and output PDF document
-$pdf->Output('Rekap_Pendidikan_'.date("Ymd").'.pdf', 'I');
+$pdf->Output('Rekap_Pendidikan_' . date("Ymd") . '.pdf', 'I');

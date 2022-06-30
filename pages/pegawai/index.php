@@ -217,6 +217,9 @@ $peg		= mysqli_fetch_array($tampilPeg);
 				case 'delete-cuti':
 					include "../../pages/pegawai/cuti/delete-cuti.php";
 					break;
+				case 'print-cuti':
+					include "../../pages/pegawai/cuti/print-cuti.php";
+					break;
 
 				case 'form-ganti-password':
 					include "../../pages/pegawai/form-ganti-password.php";

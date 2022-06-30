@@ -683,6 +683,7 @@ while ($row = mysqli_fetch_array($query)) {
                     include "../../pages/superadmin/kepeg/cuti/detail-data-cuti.php";
                     break;
 
+
                 case 'form-master-data-lat-jabatan':
                     include "../../pages/superadmin/kepeg/latjab/form-master-data-lat-jabatan.php";
                     break;
@@ -760,6 +761,9 @@ while ($row = mysqli_fetch_array($query)) {
                     break;
                 case 'detail-cuti':
                     include "../../pages/superadmin/cuti/data_cuti/detail-cuti.php";
+                    break;
+                case 'print-cuti':
+                    include "../../pages/superadmin/cuti/data_cuti/print-cuti.php";
                     break;
 
                 case 'form-view-jenis-cuti':
