@@ -222,10 +222,10 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					<li class="has-sub">
 						<a href="javascript:;"><i class="ion-arrow-shrink bg-info"></i><span>Rekapitulasi</span> <span class="badge bg-danger pull-right"><span class="ion-stats-bars"></span></span></a>
 						<ul class="sub-menu">
-							<li><a href="index.php?page=rekap-golongan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Golongan</a></li>
+							<!-- <li><a href="index.php?page=rekap-golongan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Golongan</a></li> -->
 							<li><a href="index.php?page=rekap-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jabatan</a></li>
 							<li><a href="index.php?page=rekap-pendidikan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pendidikan</a></li>
-							<li><a href="index.php?page=rekap-skpd"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Unit Kerja</a></li>
+							<!-- <li><a href="index.php?page=rekap-skpd"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Unit Kerja</a></li> -->
 						</ul>
 					</li>
 					<li class="has-sub">

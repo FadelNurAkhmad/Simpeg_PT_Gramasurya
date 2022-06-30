@@ -101,11 +101,12 @@ $id_si	= kdauto("tb_suamiistri", "");
 							<select name="pendidikan" class="default-select2 form-control">
 								<option value="">...</option>
 								<option value="SD">SD</option>
-								<option value="SLTP">SLTP</option>
-								<option value="SLTA">SLTA</option>
-								<option value="D1">D1</option>
-								<option value="D2">D2</option>
-								<option value="D3">D3</option>
+								<option value="SMP">SMP</option>
+								<option value="SMA">SMA</option>
+								<option value="DI">DI</option>
+								<option value="DII">DII</option>
+								<option value="DIII">DIII</option>
+								<option value="DIV">DIV</option>
 								<option value="S1">S1</option>
 								<option value="S2">S2</option>
 								<option value="S3">S3</option>

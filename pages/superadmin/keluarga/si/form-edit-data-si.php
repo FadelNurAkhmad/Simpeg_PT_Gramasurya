@@ -72,11 +72,12 @@ if (isset($_GET['id_si'])) {
 						<div class="col-md-6">
 							<select name="pendidikan" class="default-select2 form-control">
 								<option value="SD" <?php echo ($data['pendidikan'] == 'SD') ? "selected" : ""; ?>>SD
-								<option value="SLTP" <?php echo ($data['pendidikan'] == 'SLTP') ? "selected" : ""; ?>>SLTP
-								<option value="SLTA" <?php echo ($data['pendidikan'] == 'SLTA') ? "selected" : ""; ?>>SLTA
-								<option value="D1" <?php echo ($data['pendidikan'] == 'D1') ? "selected" : ""; ?>>D1
-								<option value="D2" <?php echo ($data['pendidikan'] == 'D2') ? "selected" : ""; ?>>D2
-								<option value="D3" <?php echo ($data['pendidikan'] == 'D3') ? "selected" : ""; ?>>D3
+								<option value="SMP" <?php echo ($data['pendidikan'] == 'SMP') ? "selected" : ""; ?>>SMP
+								<option value="SMA" <?php echo ($data['pendidikan'] == 'SMA') ? "selected" : ""; ?>>SMA
+								<option value="DI" <?php echo ($data['pendidikan'] == 'DI') ? "selected" : ""; ?>>DI
+								<option value="DII" <?php echo ($data['pendidikan'] == 'DII') ? "selected" : ""; ?>>DII
+								<option value="DIII" <?php echo ($data['pendidikan'] == 'DIII') ? "selected" : ""; ?>>DIII
+								<option value="DIV" <?php echo ($data['pendidikan'] == 'DIV') ? "selected" : ""; ?>>DIV
 								<option value="S1" <?php echo ($data['pendidikan'] == 'S1') ? "selected" : ""; ?>>S1
 								<option value="S2" <?php echo ($data['pendidikan'] == 'S2') ? "selected" : ""; ?>>S2
 								<option value="S3" <?php echo ($data['pendidikan'] == 'S3') ? "selected" : ""; ?>>S3
