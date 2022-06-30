@@ -139,7 +139,7 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 						<td><?php echo $peg['pegawai_nip']; ?></td>
 						
 						<td><?php
-							$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE (id_jab='$peg[pegawai_id]' AND status_jab='Aktif')");
+							$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]' ");
 							$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
 							$hjab1 = isset($hjab['jabatan']) ? $hjab['jabatan'] : '';
 							$hjab2 = isset($hjab['tmt_jabatan']) ? $hjab['tmt_jabatan'] : '';

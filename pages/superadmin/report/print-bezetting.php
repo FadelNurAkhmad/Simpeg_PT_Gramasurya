@@ -111,7 +111,7 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 					<td>' . $peg['pegawai_nama'] . '<br />' . $peg['tempat_lahir'] . ',' . $peg['tgl_lahir'] . '</td>
 					<td>' . $peg['pegawai_nip'] . '</td>';
 
-	$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_jab=$peg[pegawai_id] ");
+	$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg=$peg[pegawai_id] ");
 	$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
 	$hjab1 = isset($hjab['jabatan']) ? $hjab['jabatan'] : '';
 	$html .= '<td>' . $hjab1 . '</td>';
