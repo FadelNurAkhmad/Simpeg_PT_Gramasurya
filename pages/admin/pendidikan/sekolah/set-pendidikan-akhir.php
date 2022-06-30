@@ -23,7 +23,7 @@
 	$update1 = mysqli_query($koneksi, "UPDATE tb_sekolah SET status='' WHERE id_peg='$id_peg'");
 	// $update2 = mysqli_query($koneksi, "UPDATE tb_sekolah SET status='Akhir', gol='$gol', pangkat='$pangkat', eselon='$eselon' WHERE id_sekolah='$id_sekolah'");
 	$update2 = mysqli_query($koneksi, "UPDATE tb_sekolah SET status='Akhir' WHERE id_sekolah='$id_sekolah'");
-	$update3 = mysqli_query($koneksi, "UPDATE tb_pegawai SET sekolah='$tingkat' WHERE id_peg='$id_peg'");
+	$update3 = mysqli_query($koneksi, "UPDATE tb_pegawai SET sekolah='$tingkat' WHERE pegawai_id='$id_peg'");
 	if ($update1) {
 		$_SESSION['pesan'] = "Good! setup pendidikan akhir success ...";
 		header("location:index.php?page=detail-data-pegawai&pegawai_id=$id_peg");

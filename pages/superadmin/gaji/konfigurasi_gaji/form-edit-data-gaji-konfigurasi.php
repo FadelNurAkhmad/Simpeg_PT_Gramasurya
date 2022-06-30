@@ -108,20 +108,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                         </div>
                     </div>
 
-                    <br>
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Gaji Pokok</label>
-                                <div class="col-md-6">
-                                    <div class="form-inline">
-                                        Rp.
-                                        <input class="form-control" type="number" name="gaji_pokok" id="gaji_pokok" value="<?= $gaji['gaji_pokok'] ?>" data-parsley-required="true" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <hr>
 
                     <br>
                     <div id="tunj_tetap">
@@ -173,6 +160,8 @@ if (isset($_GET['id_gaji_konfig'])) {
                             </div>
                         </div>
                     </div>
+
+                    <hr>
 
                     <br>
                     <div id="tunj_variabel">
@@ -240,6 +229,8 @@ if (isset($_GET['id_gaji_konfig'])) {
                         </div>
                     </div>
 
+                    <hr>
+
                     <div class="form-group">
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -297,6 +288,8 @@ if (isset($_GET['id_gaji_konfig'])) {
                         </div>
                     </div>
 
+                    <hr>
+
                     <div class="form-group">
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -348,6 +341,22 @@ if (isset($_GET['id_gaji_konfig'])) {
                                         <div class="form-inline">
                                             Rp. <input class="form-control" type="number" name="jumlah_pot_wajib" id="jumlah_pot_wajib" value="<?= $gaji['jumlah_pot_wajib'] ?>" data-parsley-required="true" readonly />
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-3 control-label">Gaji Pokok</label>
+                                <div class="col-md-6">
+                                    <div class="form-inline">
+                                        Rp.
+                                        <input class="form-control" type="number" name="gaji_pokok" id="gaji_pokok" value="<?= $gaji['gaji_pokok'] ?>" data-parsley-required="true" />
                                     </div>
                                 </div>
                             </div>

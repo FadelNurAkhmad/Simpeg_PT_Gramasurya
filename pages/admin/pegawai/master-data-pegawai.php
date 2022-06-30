@@ -44,10 +44,12 @@
 		} else if ($ceknip > 0 || $cekpin > 0) {
 			$_SESSION['pesan'] = "Oops! Duplikat data ...";
 			header("location:index.php?page=form-master-data-pegawai");
-		} else if ($_POST['sisa_cuti'] > 12) {
-			$_SESSION['pesan'] = "Oops! Kuota Cuti Hanya 12 Per tahun ...";
-			header("location:index.php?page=form-master-data-pegawai");
-		} else {
+		}
+		// else if ($_POST['sisa_cuti'] > 12) {
+		// 	$_SESSION['pesan'] = "Oops! Kuota Cuti Hanya 12 Per tahun ...";
+		// 	header("location:index.php?page=form-master-data-pegawai");
+		// } 
+		else {
 			$pegawai = "INSERT INTO pegawai (pegawai_id, pegawai_pin, pegawai_nip, pegawai_nama, pegawai_alias, pegawai_telp, 
 											tempat_lahir, tgl_lahir, tgl_mulai_kerja, gender, tgl_masuk_pertama) 
 											VALUES ('$id_peg', '$pin', '$nip', '$nama', '$nama', '$telp', '$tempat_lahir', '$tgl_lahir', '$tgl_mulai_kerja', '$gender', '$tgl_masuk_pertama')";
@@ -55,31 +57,9 @@
 
 			$pegawai_d = mysqli_query($koneksi, "INSERT INTO pegawai_d (pegawai_id, gol_darah, stat_nikah, alamat, agama) VALUES ('$id_peg', '$gol_darah', '$status_nikah', '$alamat', '$agama')");
 
-			$tb_pegawai = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id, email, foto) VALUES ('$id_peg', '$email', '$foto')");
+			$tb_pegawai = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id, email, foto, sisa_cuti) VALUES ('$id_peg', '$email', '$foto', '$sisa_cuti')");
 
 			$insertusr = mysqli_query($koneksi, "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, id_peg) VALUES ('$nip', '$nama', '$password', 'Pegawai', '$id_peg')");
-
-			// kgb //
-			// $beging = new DateTime($tgl_naikgaji);
-			// $endg = new DateTime($tgl_pensiun);
-			// for($ig = $beging; $beging <= $endg; $ig->modify('+2 year')){	
-			// 	$ig->format("Y-m-d");
-			// 	$tgl_kgb=$ig->format("Y-m-d");
-
-			// 	$values="($id_peg, '$tgl_kgb')";
-			// 	$insertkgb	=mysqli_query($koneksi, "INSERT INTO tb_kgb (id_peg, tgl_kgb) VALUES ".$values);
-			// }
-
-			// kpb //
-			// $beginp = new DateTime($tgl_naikpangkat);
-			// $endp = new DateTime($tgl_pensiun);
-			// for($ip = $beginp; $beginp <= $endp; $ip->modify('+4 year')){	
-			// 	$ip->format("Y-m-d");
-			// 	$tgl_kpb=$ip->format("Y-m-d");
-
-			// 	$valuesp="($id_peg, '$tgl_kpb')";
-			// 	$insertkpb	=mysqli_query($koneksi, "INSERT INTO tb_kpb (id_peg, tgl_kpb) VALUES ".$valuesp);
-			// }
 
 			if ($query) {
 				$_SESSION['pesan'] = "Good! Insert master pegawai success ...";

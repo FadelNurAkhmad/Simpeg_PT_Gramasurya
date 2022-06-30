@@ -99,7 +99,7 @@
 									$sql_jumlah   = "SELECT * FROM tb_pegawai WHERE status_mut='' AND unit_kerja='$r'";        
 									$query_jumlah = mysqli_query($koneksi, $sql_jumlah ) or die(mysqli_error($koneksi));
 									$data = mysqli_num_rows( $query_jumlah );																									
-							?>
+							?>,
 								{
 									name: '<?php echo $namaskpd; ?>',
 									data: [<?php echo $data; ?>]

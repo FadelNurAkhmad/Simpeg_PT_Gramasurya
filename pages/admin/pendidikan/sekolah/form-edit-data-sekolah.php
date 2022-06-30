@@ -46,7 +46,18 @@ if (isset($_GET['id_sekolah'])) {
 					<div class="form-group">
 						<label class="col-md-3 control-label">Tingkat</label>
 						<div class="col-md-6">
-							<input type="text" name="tingkat" maxlength="16" value="<?= $data['tingkat'] ?>" class="form-control" />
+							<select name="tingkat" class="default-select2 form-control">
+								<option value="SD" <?php echo ($data['tingkat'] == 'SD') ? "selected" : ""; ?>>SD
+								<option value="SMP" <?php echo ($data['tingkat'] == 'SMP') ? "selected" : ""; ?>>SMP
+								<option value="SMA" <?php echo ($data['tingkat'] == 'SMA') ? "selected" : ""; ?>>SMA
+								<option value="DI" <?php echo ($data['tingkat'] == 'DI') ? "selected" : ""; ?>>DI
+								<option value="DII" <?php echo ($data['tingkat'] == 'DII') ? "selected" : ""; ?>>DII
+								<option value="DIII" <?php echo ($data['tingkat'] == 'DIII') ? "selected" : ""; ?>>DIII
+								<option value="DIV" <?php echo ($data['tingkat'] == 'DIV') ? "selected" : ""; ?>>DIV
+								<option value="S1" <?php echo ($data['tingkat'] == 'S1') ? "selected" : ""; ?>>S1
+								<option value="S2" <?php echo ($data['tingkat'] == 'S2') ? "selected" : ""; ?>>S2
+								<option value="S3" <?php echo ($data['tingkat'] == 'S3') ? "selected" : ""; ?>>S3
+							</select>
 						</div>
 					</div>
 					<div class="form-group">
