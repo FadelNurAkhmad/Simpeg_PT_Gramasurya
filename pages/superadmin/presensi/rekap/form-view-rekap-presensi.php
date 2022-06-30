@@ -338,7 +338,7 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
 
 
                             ?>
-                                        <tr <?= (isset($jk)) ? "class=''" : "class='danger'" ?>>
+                                        <tr <?= ($pres2['libur_rutin'] == "0") ? "class=''" : "class='danger'" ?>>
                                             <td><?= $pres2['tgl_shift'] ?></td>
                                             <td><?= (isset($jdw)) ? $jdw['jdw_kerja_m_name'] : "" ?></td>
                                             <td><?= (isset($jk)) ? $jk['jk_name'] : "Libur" ?></td>
