@@ -73,7 +73,19 @@ $id_sekolah	= kdauto("tb_sekolah", "");
 					<div class="form-group">
 						<label class="col-md-3 control-label">Tingkat</label>
 						<div class="col-md-6">
-							<input type="text" name="tingkat" maxlength="16" class="form-control" onkeyup="this.value = this.value.toUpperCase()" />
+							<select name="tingkat" class="default-select2 form-control">
+								<option value="">...</option>
+								<option value="SD">SD</option>
+								<option value="SMP">SMP</option>
+								<option value="SMA">SMA</option>
+								<option value="DI">DI</option>
+								<option value="DII">DII</option>
+								<option value="DIII">DIII</option>
+								<option value="DIV">DIV</option>
+								<option value="S1">S1</option>
+								<option value="S2">S2</option>
+								<option value="S3">S3</option>
+							</select>
 						</div>
 					</div>
 					<div class="form-group">

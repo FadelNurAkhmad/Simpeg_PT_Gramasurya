@@ -44,10 +44,12 @@
 		} else if ($ceknip > 0 || $cekpin > 0) {
 			$_SESSION['pesan'] = "Oops! Duplikat data ...";
 			header("location:index.php?page=form-master-data-pegawai");
-		} else if ($_POST['sisa_cuti'] > 12) {
-			$_SESSION['pesan'] = "Oops! Kuota Cuti Hanya 12 Per tahun ...";
-			header("location:index.php?page=form-master-data-pegawai");
-		} else {
+		}
+		// else if ($_POST['sisa_cuti'] > 12) {
+		// 	$_SESSION['pesan'] = "Oops! Kuota Cuti Hanya 12 Per tahun ...";
+		// 	header("location:index.php?page=form-master-data-pegawai");
+		// } 
+		else {
 			$pegawai = "INSERT INTO pegawai (pegawai_id, pegawai_pin, pegawai_nip, pegawai_nama, pegawai_alias, pegawai_telp, 
 											tempat_lahir, tgl_lahir, tgl_mulai_kerja, gender, tgl_masuk_pertama) 
 											VALUES ('$id_peg', '$pin', '$nip', '$nama', '$nama', '$telp', '$tempat_lahir', '$tgl_lahir', '$tgl_mulai_kerja', '$gender', '$tgl_masuk_pertama')";

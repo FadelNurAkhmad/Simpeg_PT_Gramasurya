@@ -62,7 +62,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                 <div class="col-md-6">
                                     <?php
                                     $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
-                                    echo '<select name="id_peg" class="default-select2 form-control">';
+                                    echo '<select name="id_peg" class="default-select2 form-control" required>';
                                     echo '<option value="">...</option>';
                                     while ($row = mysqli_fetch_array($data)) {
                                         echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
@@ -75,7 +75,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                 <label class="col-md-3 control-label">Tanggal</label>
                                 <div class="col-md-6">
                                     <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
-                                        <input type="text" name="tanggal_gaji_konfig" id="tanggal_gaji_konfig" class="form-control" />
+                                        <input type="text" name="tanggal_gaji_konfig" id="tanggal_gaji_konfig" class="form-control" required />
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                     </div>
                                 </div>
@@ -88,7 +88,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                             <div class="form-group col-md-6">
                                 <label class="col-md-3 control-label">Periode</label>
                                 <div class="col-md-3">
-                                    <select class="form-control" name="bulan" id="bulan">
+                                    <select class="form-control" name="bulan" id="bulan" required>
                                         <?php
                                         $arr = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
                                         foreach ($arr as $key) {
@@ -98,7 +98,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <select name="tahun" id="tahun" class="form-control">
+                                    <select name="tahun" id="tahun" class="form-control" required>
                                         <?php
                                         for ($i = 2020; $i < 2031; $i++) {
                                             echo '<option value="' . $i . '">' . $i . '</option>';
@@ -118,19 +118,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                         </div>
                     </div>
 
-                    <br>
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Gaji Pokok</label>
-                                <div class="col-md-6">
-                                    <div class="form-inline">
-                                        Rp. <input class="form-control" type="number" name="gaji_pokok" id="gaji_pokok" value="0" data-parsley-required="true" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <hr>
 
                     <br>
                     <div id="tunj_tetap">
@@ -181,6 +169,8 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                             </div>
                         </div>
                     </div>
+
+                    <hr>
 
                     <br>
                     <div id="tunj_variabel">
@@ -248,6 +238,8 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                         </div>
                     </div>
 
+                    <hr>
+
                     <div class="form-group">
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -305,6 +297,8 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                         </div>
                     </div>
 
+                    <hr>
+
                     <div class="form-group">
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -356,6 +350,21 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                         <div class="form-inline">
                                             Rp. <input class="form-control" type="number" name="jumlah_pot_wajib" id="jumlah_pot_wajib" value="0" data-parsley-required="true" readonly />
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-3 control-label">Gaji Pokok</label>
+                                <div class="col-md-6">
+                                    <div class="form-inline">
+                                        Rp. <input class="form-control" type="number" name="gaji_pokok" id="gaji_pokok" value="0" data-parsley-required="true" />
                                     </div>
                                 </div>
                             </div>
