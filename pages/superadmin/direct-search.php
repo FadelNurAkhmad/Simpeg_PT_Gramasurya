@@ -19,12 +19,7 @@ if ($_POST['search'] == "search") {
 						<th width="4%">No</th>
 						<th>Nama</th>
 						<th>NIP</th>
-						<th>JK</th>
-						<th>Agama</th>
-						<th>Pendidikan</th>
-						<th>Status Nikah</th>
-						<th>Pangkat</th>
-						<th>Unit Kerja</th>
+						<th>Jabatan</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -35,17 +30,17 @@ if ($_POST['search'] == "search") {
 					?>
 						<tr>
 							<td><?= $no ?></td>
-							<td><?php echo $peg['nama']; ?></td>
-							<td><?php echo $peg['nip'] ?></td>
-							<td><?php echo $peg['jk'] ?></td>
-							<td><?php echo $peg['agama'] ?></td>
-							<td><?php echo $peg['sekolah'] ?></td>
-							<td><?php echo $peg['status_nikah'] ?></td>
-							<td><?php echo $peg['pangkat'] ?></td>
+							<td><a href="index.php?page=detail-data-pegawai&pegawai_id=<?= $peg['pegawai_id'] ?>" title="detail"><?php echo $peg['pegawai_nama']; ?></a></td>
+							<td><?php echo $peg['pegawai_nip'] ?></td>
 							<td><?php
-								$unit	= mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
-								$uni	= mysqli_fetch_array($unit, MYSQLI_ASSOC);
-								echo $uni['nama']
+								$tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]'");
+								$jab    = mysqli_fetch_array($tampilJab);
+
+								if (isset($jab)) {
+									echo $jab['jabatan'];
+								} else {
+									echo "";
+								}
 								?>
 							</td>
 						</tr>

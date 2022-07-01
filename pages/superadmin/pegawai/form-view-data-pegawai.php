@@ -71,7 +71,7 @@ while ($peg	= mysqli_fetch_array($expPeg)) {
 		$goldar = 'AB-';
 	}
 
-	if ($peg['stat_nikah'] == '1'){
+	if ($peg['stat_nikah'] == '1') {
 		$stat = 'Sudah Menikah';
 	} else if ($peg['stat_nikah'] == '2') {
 		$stat = 'Belum Menikah';
@@ -79,7 +79,7 @@ while ($peg	= mysqli_fetch_array($expPeg)) {
 		$stat = 'Janda / Duda';
 	}
 
-	if ($peg['pegawai_status'] == '1'){
+	if ($peg['pegawai_status'] == '1') {
 		$pgw = 'Aktif';
 	}
 
@@ -91,7 +91,7 @@ while ($peg	= mysqli_fetch_array($expPeg)) {
 
 	$uni1 = isset($uni1['nama']) ? $uni['nama'] : '';
 	$peg1 = isset($peg['sekolah']) ? $peg['sekolah'] : '';
-	
+
 	$sheet->setCellValue("A" . $i, $no);
 	$sheet->setCellValue("B" . $i, $peg['pegawai_id']);
 	$sheet->setCellValue("C" . $i, $peg['pegawai_nip']);
