@@ -18,14 +18,17 @@ $usr        = mysqli_fetch_array($tampilUsr);
 $query = mysqli_query($koneksi, "SELECT * FROM pegawai");
 while ($row = mysqli_fetch_array($query)) {
     $cekPeg = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE pegawai_id=$row[pegawai_id]"));
-    $cekUsr = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_peg=$row[pegawai_id]"));
+
     if ($cekPeg <= 0) {
         $insert = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id) VALUES ('$row[pegawai_id]')");
     }
 
-    if ($cekUsr <= 0) {
-        $password    = password_hash("123", PASSWORD_DEFAULT);
-        $insertusr = mysqli_query($koneksi, "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, id_peg) VALUES ('$row[pegawai_pin]', '$row[pegawai_nama]', '$password', 'Pegawai', '$row[pegawai_id]')");
+    if ($row['pegawai_status'] == 1) {
+        $cekUsr = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_peg=$row[pegawai_id]"));
+        if ($cekUsr <= 0) {
+            $password    = password_hash("123", PASSWORD_DEFAULT);
+            $insertusr = mysqli_query($koneksi, "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, id_peg) VALUES ('$row[pegawai_pin]', '$row[pegawai_nama]', '$password', 'Pegawai', '$row[pegawai_id]')");
+        }
     }
 }
 
@@ -250,7 +253,7 @@ while ($row = mysqli_fetch_array($query)) {
                         <a href="javascript:;"><b class="caret pull-right"></b><i class="ion-compose bg-primary"></i><span>Presensi</span></a>
                         <ul class="sub-menu">
                             <li><a href="index.php?page=form-view-rekap-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Rekap Presensi</a></li>
-                            <li><a href="index.php?page=form-view-data-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jadwal Kerja Pegawai</a></li>
+                            <li><a href="index.php?page=form-view-data-jadwal-kerja-pegawai"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jadwal Kerja Pegawai</a></li>
                             <li><a href="index.php?page=form-view-shift-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Shift</a></li>
                             <li><a href="index.php?page=form-view-hari-jam-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Jadwal Kerja</a></li>
                         </ul>
@@ -911,23 +914,23 @@ while ($row = mysqli_fetch_array($query)) {
                     include "../../pages/superadmin/gaji/data_gaji/detail-data-gaji.php";
                     break;
 
-                case 'form-view-data-presensi':
-                    include "../../pages/superadmin/presensi/data_presensi/form-view-data-presensi.php";
+                case 'form-view-data-jadwal-kerja-pegawai':
+                    include "../../pages/superadmin/presensi/jadwal_kerja_pegawai/form-view-data-jadwal-kerja-pegawai.php";
                     break;
-                case 'form-edit-data-presensi':
-                    include "../../pages/superadmin/presensi/data_presensi/form-edit-data-presensi.php";
+                case 'form-edit-data-jadwal-kerja-pegawai':
+                    include "../../pages/superadmin/presensi/jadwal_kerja_pegawai/form-edit-data-jadwal-kerja-pegawai.php";
                     break;
-                case 'edit-data-presensi':
-                    include "../../pages/superadmin/presensi/data_presensi/edit-data-presensi.php";
+                case 'edit-data-jadwal-kerja-pegawai':
+                    include "../../pages/superadmin/presensi/jadwal_kerja_pegawai/edit-data-jadwal-kerja-pegawai.php";
                     break;
-                case 'form-master-data-presensi':
-                    include "../../pages/superadmin/presensi/data_presensi/form-master-data-presensi.php";
+                case 'form-master-data-jadwal-kerja-pegawai':
+                    include "../../pages/superadmin/presensi/jadwal_kerja_pegawai/form-master-data-jadwal-kerja-pegawai.php";
                     break;
-                case 'master-data-presensi':
-                    include "../../pages/superadmin/presensi/data_presensi/master-data-presensi.php";
+                case 'master-data-jadwal-kerja-pegawai':
+                    include "../../pages/superadmin/presensi/jadwal_kerja_pegawai/master-data-jadwal-kerja-pegawai.php";
                     break;
-                case 'delete-data-presensi':
-                    include "../../pages/superadmin/presensi/data_presensi/delete-data-presensi.php";
+                case 'delete-data-jadwal-kerja-pegawai':
+                    include "../../pages/superadmin/presensi/jadwal_kerja_pegawai/delete-data-jadwal-kerja-pegawai.php";
                     break;
 
                 case 'form-view-pengaturan-mesin':

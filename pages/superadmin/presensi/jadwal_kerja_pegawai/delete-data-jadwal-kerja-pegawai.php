@@ -15,7 +15,7 @@
 
         if ($delete) {
             $_SESSION['pesan'] = "Good! Delete jadwal kerja pegawai success ...";
-            header("location:index.php?page=form-view-data-presensi");
+            header("location:index.php?page=form-view-data-jadwal-kerja-pegawai");
         } else {
             echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
         }

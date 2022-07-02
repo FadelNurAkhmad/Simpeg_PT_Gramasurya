@@ -3,7 +3,7 @@ include "../../config/koneksi.php";
 if ($_POST['search'] == "search") {
 	$nama	= $_POST['nama'];
 
-	$tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_status='1' AND pegawai_nama LIKE '%$nama%'");
+	$tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_nama LIKE '%$nama%'");
 }
 ?>
 <!-- begin page-header -->
@@ -20,6 +20,7 @@ if ($_POST['search'] == "search") {
 						<th>Nama</th>
 						<th>NIP</th>
 						<th>Jabatan</th>
+						<th>Status Pegawai</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -40,6 +41,20 @@ if ($_POST['search'] == "search") {
 									echo $jab['jabatan'];
 								} else {
 									echo "";
+								}
+								?>
+							</td>
+							<td><?php
+								switch ($peg['pegawai_status']) {
+									case 0:
+										echo "Non Aktif";
+										break;
+									case 1:
+										echo "Aktif";
+										break;
+									case 2:
+										echo "Berhenti";
+										break;
 								}
 								?>
 							</td>

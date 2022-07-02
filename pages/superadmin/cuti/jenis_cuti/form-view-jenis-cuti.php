@@ -12,7 +12,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Data <small>Jenis Cuti&nbsp;</small></h1>
+<h1 class="page-header">Cuti <small><i class="fa fa-angle-right"></i> List Jenis Cuti&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 $tampilJenis    = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY id_jenis DESC");

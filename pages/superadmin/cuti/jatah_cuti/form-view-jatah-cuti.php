@@ -12,7 +12,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">List Jatah <small>Cuti Pertahun&nbsp;</small></h1>
+<h1 class="page-header">Cuti <small><i class="fa fa-angle-right"></i> Jatah Cuti Pegawai&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";

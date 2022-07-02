@@ -13,14 +13,14 @@
 
         if (empty($_POST['pegawai_id']) || empty($_POST['jdw_kerja_m_id'])) {
             $_SESSION['pesan'] = "Oops! Please fill all column ...";
-            header("location:index.php?page=form-master-data-presensi");
+            header("location:index.php?page=form-master-data-jadwal-kerja-pegawai");
         } else {
             $insert = "INSERT INTO jdw_kerja_pegawai (pegawai_id, jdw_kerja_m_id, jdw_kerja_m_mulai) VALUES ('$pegawai_id', '$jdw_kerja_m_id', '$jdw_kerja_m_mulai')";
             $query = mysqli_query($koneksi, $insert);
 
             if ($query) {
                 $_SESSION['pesan'] = "Good! Insert data jadwal kerja pegawai success ...";
-                header("location:index.php?page=form-view-data-presensi");
+                header("location:index.php?page=form-view-data-jadwal-kerja-pegawai");
             } else {
                 echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
             }

@@ -17,7 +17,7 @@ $data	= mysqli_fetch_array($query);
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Setup <small>Perusahaan &nbsp;</small></h1>
+<h1 class="page-header">Master Setup <small><i class="fa fa-angle-right"></i> Perusahaan &nbsp;</small></h1>
 <!-- end page-header -->
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">

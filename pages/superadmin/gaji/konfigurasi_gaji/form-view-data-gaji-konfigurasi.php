@@ -12,7 +12,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Konfigurasi <small>Gaji Pegawai&nbsp;</small></h1>
+<h1 class="page-header">Gaji Pegawai <small><i class="fa fa-angle-right"></i> Konfigurasi Gaji&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";
