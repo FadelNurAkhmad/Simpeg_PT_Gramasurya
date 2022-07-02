@@ -11,7 +11,9 @@
 	$notnip	= $hasil['pegawai_nip'];
 
 	if ($_POST['edit'] == "edit") {
+		$pin			= $_POST['pegawai_pin'];
 		$nip			= $_POST['pegawai_nip'];
+		$pegawai_status = $_POST['pegawai_status'];
 		$nama			= $_POST['pegawai_nama'];
 		$tempat_lhr		= $_POST['tempat_lahir'];
 		$tgl_lhr		= $_POST['tgl_lahir'];
@@ -33,49 +35,38 @@
 		$pensiun->format('Y-m-d');
 		$tgl_pensiun = $pensiun->format('Y-m-d');
 
+		$cekpin	= mysqli_num_rows(mysqli_query($koneksi, "SELECT pegawai_pin FROM pegawai WHERE pegawai_pin='$_POST[pin]'"));
 		$ceknip	= mysqli_num_rows(mysqli_query($koneksi, "SELECT pegawai_nip FROM pegawai WHERE pegawai_nip='$_POST[pegawai_nip]' AND pegawai_nip!='$notnip'"));
 
 		if (empty($_POST['pegawai_nip']) || empty($_POST['pegawai_nama']) || empty($_POST['tempat_lahir']) || empty($_POST['tgl_lahir']) || empty($_POST['agama']) || empty($_POST['gender']) || empty($_POST['gol_darah']) || empty($_POST['stat_nikah'])) {
 			$_SESSION['pesan'] = "Oops! Please fill all column ...";
 			header("location:index.php?page=form-edit-data-pegawai&id_peg=$id_peg");
-		} else if ($ceknip > 0) {
-			$_SESSION['pesan'] = "Oops! Duplikat data ...";
+		} else if ($ceknip > 0 || $cekpin > 0) {
+			$_SESSION['pesan'] = "Oops! NIP atau PIN telah terpakai ...";
 			header("location:index.php?page=form-edit-data-pegawai&id_peg=$id_peg");
 		} else {
-			$update = mysqli_query($koneksi, "UPDATE pegawai SET pegawai_nip='$nip', pegawai_nama='$nama', tempat_lahir='$tempat_lhr', tgl_lahir='$tgl_lhr', gender='$jk', pegawai_telp='$telp' WHERE pegawai_id='$id_peg'");
-			$update2 = mysqli_query($koneksi, "UPDATE pegawai_d SET agama='$agama', gol_darah='$gol_darah', stat_nikah='$status_nikah', alamat='$alamat' WHERE pegawai_id='$id_peg'");
-			$update3 = mysqli_query($koneksi, "UPDATE tb_pegawai SET email='$email', tgl_pensiun='$tgl_pensiun', sisa_cuti='$sisa_cuti' WHERE pegawai_id='$id_peg'");
-			$updateusr = mysqli_query($koneksi, "UPDATE tb_user SET id_user='$nip', nama_user='$nama' WHERE id_peg='$id_peg'");
+			$updtPegawai = mysqli_query($koneksi, "UPDATE pegawai SET pegawai_pin='$pin', pegawai_nip='$nip', pegawai_nama='$nama', pegawai_status='$pegawai_status', tempat_lahir='$tempat_lhr', tgl_lahir='$tgl_lhr', gender='$jk', pegawai_telp='$telp' WHERE pegawai_id='$id_peg'");
+			$updtPegawai_d = mysqli_query($koneksi, "UPDATE pegawai_d SET agama='$agama', gol_darah='$gol_darah', stat_nikah='$status_nikah', alamat='$alamat' WHERE pegawai_id='$id_peg'");
+			$updtTb_pegawai = mysqli_query($koneksi, "UPDATE tb_pegawai SET email='$email', tgl_pensiun='$tgl_pensiun', sisa_cuti='$sisa_cuti' WHERE pegawai_id='$id_peg'");
 
-			// // kgb //
-			// $delkgb	=mysqli_query($koneksi, "DELETE FROM tb_kgb WHERE id_peg='$id_peg'");
-			// $beging = new DateTime($tgl_naikgaji);
-			// $endg = new DateTime($tgl_pensiun);
-			// 	for($ig = $beging; $beging <= $endg; $ig->modify('+2 year')){	
-			// 		$ig->format("Y-m-d");
-			// 		$tgl_kgb = $ig->format("Y-m-d");
+			if ($pegawai_status == 1) {
+				$updtUser = mysqli_query($koneksi, "UPDATE tb_user SET id_user='$nip', nama_user='$nama' WHERE id_peg='$id_peg'");
 
-			// 		$values = "($id_peg, '$tgl_kgb')";
-			// 		$insertkgb	= mysqli_query($koneksi, "INSERT INTO tb_kgb (id_peg, tgl_kgb) VALUES " . $values);
-			// 	}
-
-			// 	// kpb //
-			// 	$delkpb = mysqli_query($koneksi, "DELETE FROM tb_kpb WHERE id_peg='$id_peg'");
-			// 	$beginp = new DateTime($tgl_naikpangkat);
-			// 	$endp = new DateTime($tgl_pensiun);
-			// 	for ($ip = $beginp; $beginp <= $endp; $ip->modify('+4 year')) {
-			// 		$ip->format("Y-m-d");
-			// 		$tgl_kpb = $ip->format("Y-m-d");
-
-			// 		$valuesp = "($id_peg, '$tgl_kpb')";
-			// 		$insertkpb	= mysqli_query($koneksi, "INSERT INTO tb_kpb (id_peg, tgl_kpb) VALUES " . $valuesp);
-			// 	}
-
-			if ($update) {
-				$_SESSION['pesan'] = "Good! Edit pegawai $hasil[nip] success ...";
-				header("location:index.php?page=form-view-data-pegawai");
+				if ($updtPegawai && $updtPegawai_d && $updtTb_pegawai && $updtUser) {
+					$_SESSION['pesan'] = "Good! Edit pegawai $hasil[nip] success ...";
+					header("location:index.php?page=form-view-data-pegawai");
+				} else {
+					echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
+				}
 			} else {
-				echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
+				$delusr = mysqli_query($koneksi, "DELETE FROM tb_user WHERE id_peg='$id_peg'");
+
+				if ($updtPegawai && $updtPegawai_d && $updtTb_pegawai && $delusr) {
+					$_SESSION['pesan'] = "Good! Edit pegawai $hasil[nip] success ...";
+					header("location:index.php?page=form-view-data-pegawai");
+				} else {
+					echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
+				}
 			}
 		}
 	}

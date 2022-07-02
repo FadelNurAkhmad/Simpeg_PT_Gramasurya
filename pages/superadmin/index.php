@@ -18,14 +18,17 @@ $usr        = mysqli_fetch_array($tampilUsr);
 $query = mysqli_query($koneksi, "SELECT * FROM pegawai");
 while ($row = mysqli_fetch_array($query)) {
     $cekPeg = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE pegawai_id=$row[pegawai_id]"));
-    $cekUsr = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_peg=$row[pegawai_id]"));
+
     if ($cekPeg <= 0) {
         $insert = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id) VALUES ('$row[pegawai_id]')");
     }
 
-    if ($cekUsr <= 0) {
-        $password    = password_hash("123", PASSWORD_DEFAULT);
-        $insertusr = mysqli_query($koneksi, "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, id_peg) VALUES ('$row[pegawai_pin]', '$row[pegawai_nama]', '$password', 'Pegawai', '$row[pegawai_id]')");
+    if ($row['pegawai_status'] == 1) {
+        $cekUsr = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_peg=$row[pegawai_id]"));
+        if ($cekUsr <= 0) {
+            $password    = password_hash("123", PASSWORD_DEFAULT);
+            $insertusr = mysqli_query($koneksi, "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, id_peg) VALUES ('$row[pegawai_pin]', '$row[pegawai_nama]', '$password', 'Pegawai', '$row[pegawai_id]')");
+        }
     }
 }
 
@@ -251,7 +254,7 @@ while ($row = mysqli_fetch_array($query)) {
                         <a href="javascript:;"><b class="caret pull-right"></b><i class="ion-compose bg-primary"></i><span>Presensi</span></a>
                         <ul class="sub-menu">
                             <li><a href="index.php?page=form-view-rekap-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Rekap Presensi</a></li>
-                            <li><a href="index.php?page=form-view-data-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jadwal Kerja Pegawai</a></li>
+                            <li><a href="index.php?page=form-view-data-jadwal-kerja-pegawai"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jadwal Kerja Pegawai</a></li>
                             <li><a href="index.php?page=form-view-shift-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Shift</a></li>
                             <li><a href="index.php?page=form-view-hari-jam-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Jadwal Kerja</a></li>
                         </ul>
@@ -940,23 +943,23 @@ while ($row = mysqli_fetch_array($query)) {
                     include "../../pages/superadmin/gaji/data_gaji/detail-data-gaji.php";
                     break;
 
-                case 'form-view-data-presensi':
-                    include "../../pages/superadmin/presensi/data_presensi/form-view-data-presensi.php";
+                case 'form-view-data-jadwal-kerja-pegawai':
+                    include "../../pages/superadmin/presensi/jadwal_kerja_pegawai/form-view-data-jadwal-kerja-pegawai.php";
                     break;
-                case 'form-edit-data-presensi':
-                    include "../../pages/superadmin/presensi/data_presensi/form-edit-data-presensi.php";
+                case 'form-edit-data-jadwal-kerja-pegawai':
+                    include "../../pages/superadmin/presensi/jadwal_kerja_pegawai/form-edit-data-jadwal-kerja-pegawai.php";
                     break;
-                case 'edit-data-presensi':
-                    include "../../pages/superadmin/presensi/data_presensi/edit-data-presensi.php";
+                case 'edit-data-jadwal-kerja-pegawai':
+                    include "../../pages/superadmin/presensi/jadwal_kerja_pegawai/edit-data-jadwal-kerja-pegawai.php";
                     break;
-                case 'form-master-data-presensi':
-                    include "../../pages/superadmin/presensi/data_presensi/form-master-data-presensi.php";
+                case 'form-master-data-jadwal-kerja-pegawai':
+                    include "../../pages/superadmin/presensi/jadwal_kerja_pegawai/form-master-data-jadwal-kerja-pegawai.php";
                     break;
-                case 'master-data-presensi':
-                    include "../../pages/superadmin/presensi/data_presensi/master-data-presensi.php";
+                case 'master-data-jadwal-kerja-pegawai':
+                    include "../../pages/superadmin/presensi/jadwal_kerja_pegawai/master-data-jadwal-kerja-pegawai.php";
                     break;
-                case 'delete-data-presensi':
-                    include "../../pages/superadmin/presensi/data_presensi/delete-data-presensi.php";
+                case 'delete-data-jadwal-kerja-pegawai':
+                    include "../../pages/superadmin/presensi/jadwal_kerja_pegawai/delete-data-jadwal-kerja-pegawai.php";
                     break;
 
                 case 'form-view-pengaturan-mesin':
@@ -1142,73 +1145,7 @@ while ($row = mysqli_fetch_array($query)) {
             &copy; 2022. <a href="https://gramasurya.com/">GRAMASURYA</a> - All Rights Reserved
         </div>
         <!-- end #footer -->
-        <!-- begin theme-panel -->
-        <div class="theme-panel">
-            <a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i class="ion-ios-cog"></i></a>
-            <div class="theme-panel-content">
-                <h5 class="m-t-0">Color Theme</h5>
-                <ul class="theme-list clearfix">
-                    <li class="active"><a href="javascript:;" class="bg-blue" data-theme="default" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Default">&nbsp;</a></li>
-                    <li><a href="javascript:;" class="bg-purple" data-theme="purple" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Purple">&nbsp;</a></li>
-                    <li><a href="javascript:;" class="bg-green" data-theme="green" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Green">&nbsp;</a></li>
-                    <li><a href="javascript:;" class="bg-orange" data-theme="orange" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Orange">&nbsp;</a></li>
-                    <li><a href="javascript:;" class="bg-red" data-theme="red" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Red">&nbsp;</a></li>
-                    <li><a href="javascript:;" class="bg-black" data-theme="black" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Black">&nbsp;</a></li>
-                </ul>
-                <div class="divider"></div>
-                <div class="row m-t-10">
-                    <div class="col-md-5 control-label double-line">Header Styling</div>
-                    <div class="col-md-7">
-                        <select name="header-styling" class="form-control input-sm">
-                            <option value="1">default</option>
-                            <option value="2">inverse</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row m-t-10">
-                    <div class="col-md-5 control-label">Header</div>
-                    <div class="col-md-7">
-                        <select name="header-fixed" class="form-control input-sm">
-                            <option value="1">fixed</option>
-                            <option value="2">default</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row m-t-10">
-                    <div class="col-md-5 control-label double-line">Sidebar Styling</div>
-                    <div class="col-md-7">
-                        <select name="sidebar-styling" class="form-control input-sm">
-                            <option value="1">default</option>
-                            <option value="2">grid</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row m-t-10">
-                    <div class="col-md-5 control-label">Sidebar</div>
-                    <div class="col-md-7">
-                        <select name="sidebar-fixed" class="form-control input-sm">
-                            <option value="1">fixed</option>
-                            <option value="2">default</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row m-t-10">
-                    <div class="col-md-5 control-label double-line">Sidebar Gradient</div>
-                    <div class="col-md-7">
-                        <select name="content-gradient" class="form-control input-sm">
-                            <option value="1">disabled</option>
-                            <option value="2">enabled</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row m-t-10">
-                    <div class="col-md-12">
-                        <hr />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end theme-panel -->
+
         <!-- begin scroll to top btn -->
         <a href="javascript:;" class="btn btn-icon btn-circle btn-primary btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
         <!-- end scroll to top btn -->

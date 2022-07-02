@@ -8,11 +8,11 @@
         $_SESSION['pesan'] = "";
         ?>
     </li>
-    <li><a href="index.php?page=form-master-data-presensi" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Tambah Jadwal Kerja Pegawai</a></li>
+    <li><a href="index.php?page=form-master-data-jadwal-kerja-pegawai" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Tambah Jadwal Kerja Pegawai</a></li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">List<small> Data Presensi&nbsp;</small></h1>
+<h1 class="page-header">Presensi <small><i class="fa fa-angle-right"></i> Jadwal Kerja Pegawai&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";
@@ -60,23 +60,23 @@ $tampilPeg = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id A
 
                             $check = mysqli_num_rows($tampilDataPre);
 
-                            if($check > 0) {
+                            if ($check > 0) {
                                 $tampilJdw = mysqli_query($koneksi, "SELECT * FROM jdw_kerja_m WHERE jdw_kerja_m_id='$dataPre[jdw_kerja_m_id]'");
                                 $jdw = mysqli_fetch_array($tampilJdw, MYSQLI_ASSOC);
                             } else {
                                 unset($jdw);
                             }
-                            
+
                         ?>
                             <tr>
                                 <td><?php echo $no ?></td>
                                 <td><?php echo $peg['pegawai_nip'] ?></td>
                                 <td><?php echo $peg['pegawai_nama'] ?></td>
-                                <td><?php echo (isset($jdw['jdw_kerja_m_id']))?"$jdw[jdw_kerja_m_name]":"" ?></td>
-                                <td><?php echo (isset($dataPre['jdw_kerja_m_mulai']))?"$dataPre[jdw_kerja_m_mulai]":"" ?></td>
-        
+                                <td><?php echo (isset($jdw['jdw_kerja_m_id'])) ? "$jdw[jdw_kerja_m_name]" : "" ?></td>
+                                <td><?php echo (isset($dataPre['jdw_kerja_m_mulai'])) ? "$dataPre[jdw_kerja_m_mulai]" : "" ?></td>
+
                                 <td class="text-center">
-                                    <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-presensi&pegawai_id=<?= $peg['pegawai_id'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
+                                    <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-jadwal-kerja-pegawai&pegawai_id=<?= $peg['pegawai_id'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
                                     <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $peg['pegawai_id'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
                                 </td>
                             </tr>
@@ -88,7 +88,7 @@ $tampilPeg = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id A
                                             <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete <u><?php echo $peg['pegawai_nama'] ?></u> from Database?</h5>
                                         </div>
                                         <div class="modal-body" align="center">
-                                            <a href="index.php?page=delete-data-presensi&pegawai_id=<?= $peg['pegawai_id'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
+                                            <a href="index.php?page=delete-data-jadwal-kerja-pegawai&pegawai_id=<?= $peg['pegawai_id'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
                                         </div>
                                         <div class="modal-footer">
                                             <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
@@ -96,7 +96,7 @@ $tampilPeg = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id A
                                     </div>
                                 </div>
                             </div>
-                            
+
                         <?php
                         }
                         ?>

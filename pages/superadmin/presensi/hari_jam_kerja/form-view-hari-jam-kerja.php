@@ -12,7 +12,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Jadwal Kerja<small> Normal&nbsp;</small></h1>
+<h1 class="page-header">Presensi <small><i class="fa fa-angle-right"></i> Konfigurasi Jadwal Kerja&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";
