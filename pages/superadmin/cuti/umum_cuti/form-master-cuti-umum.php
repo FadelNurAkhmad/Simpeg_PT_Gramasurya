@@ -1,17 +1,3 @@
-<?php
-if (isset($_GET['id_cuti'])) {
-    $id_cuti = $_GET['id_cuti'];
-
-    include "../../config/koneksi.php";
-    $query   = mysqli_query($koneksi, "SELECT * FROM tb_data_cuti WHERE id_cuti='$id_cuti'");
-    $data    = mysqli_fetch_array($query);
-
-    $tampilPeg   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$data[id_peg]'");
-    $peg    = mysqli_fetch_array($tampilPeg);
-} else {
-    die("Error. No ID Selected!");
-}
-?>
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
     <li>
@@ -25,7 +11,34 @@ if (isset($_GET['id_cuti'])) {
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Form <small>Edit Cuti <i class="fa fa-angle-right"></i> <i class="fa fa-key"></i> Pegawai: <?= $peg['pegawai_nama'] ?> &nbsp;&nbsp;<i class="fa fa-lock"></i> NIP : <?= $peg == 0 ? '-' : $peg['pegawai_nip']; ?></small></h1>
+<h1 class="page-header">Input <small>Cuti <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
+<!-- end page-header -->
+<?php
+function kdauto($tabel, $inisial)
+{
+    include "../../config/koneksi.php";
+
+    $struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
+    $fieldInfo = mysqli_fetch_field_direct($struktur, 0);
+    $field      = $fieldInfo->name;
+    $panjang    = $fieldInfo->length;
+    $qry  = mysqli_query($koneksi, "SELECT max(" . $field . ") FROM " . $tabel);
+    $row  = mysqli_fetch_array($qry);
+    if ($row[0] == "") {
+        $angka = 0;
+    } else {
+        $angka = substr($row[0], strlen($inisial));
+    }
+    $angka++;
+    $angka = strval($angka);
+    $tmp  = "";
+    for ($i = 1; $i <= ($panjang - strlen($inisial) - strlen($angka)); $i++) {
+        $tmp = $tmp . "0";
+    }
+    return $inisial . $tmp . $angka;
+}
+$id_cuti_umum    = kdauto("tb_cuti_umum", "");
+?>
 <!-- begin row -->
 <div class="row">
     <!-- begin col-12 -->
@@ -39,10 +52,24 @@ if (isset($_GET['id_cuti'])) {
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Form edit cuti</h4>
+                <h4 class="panel-title">Form Input Cuti Umum</h4>
             </div>
             <div class="panel-body">
-                <form action="index.php?page=edit-cuti&id_cuti=<?= $id_cuti ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+                <form action="index.php?page=master-cuti-umum&id_cuti_umum=<?= $id_cuti_umum ?>"" class=" form-horizontal" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Pegawai</label>
+                        <div class="col-md-6">
+                            <?php
+                            $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
+                            echo '<select name="id_peg" class="default-select2 form-control">';
+                            echo '<option value="">...</option>';
+                            while ($row = mysqli_fetch_array($data)) {
+                                echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
+                            }
+                            echo '</select>';
+                            ?>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Jenis Cuti</label>
                         <div class="col-md-6">
@@ -50,7 +77,7 @@ if (isset($_GET['id_cuti'])) {
                             $dataJ = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY jenis");
                             echo '<select name="jenis_cuti" class="default-select2 form-control">';
                             echo '<option value="">...</option>';
-                            while ($rowj = mysqli_fetch_array($dataJ)) {
+                            while ($rowj = mysqli_fetch_array($dataJ, MYSQLI_ASSOC)) {
                                 echo '<option value="' . $rowj['jenis'] . '">' . $rowj['jenis'] . '</option>';
                             }
                             echo '</select>';
@@ -60,14 +87,14 @@ if (isset($_GET['id_cuti'])) {
                     <div class="form-group">
                         <label class="col-md-3 control-label">Keperluan</label>
                         <div class="col-md-6">
-                            <textarea type="text" name="keperluan" maxlength="255" class="form-control"><?= $data['keperluan'] ?></textarea>
+                            <textarea type="text" name="keperluan" maxlength="255" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Tanggal Pengajuan</label>
+                        <label class="col-md-3 control-label">Tanggal Pengajuan Cuti</label>
                         <div class="col-md-6">
                             <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
-                                <input type="text" name="tanggal_cuti" value="<?= $data['tanggal_cuti'] ?>" class="form-control" />
+                                <input type="text" name="tanggal_cuti" placeholder="Mulai" class="form-control" />
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
@@ -76,13 +103,13 @@ if (isset($_GET['id_cuti'])) {
                         <label class="col-md-3 control-label">Tanggal Pelaksanaan</label>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
-                                <input type="text" name="tanggal_mulai" value="<?= $data['tanggal_mulai'] ?>" placeholder="Dari" class="form-control" />
+                                <input type="text" name="tanggal_mulai" placeholder="Dari" class="form-control" />
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past4" data-date-format="yyyy-mm-dd">
-                                <input type="text" name="tanggal_selesai" value="<?= $data['tanggal_selesai'] ?>" placeholder="Sampai" class="form-control" />
+                                <input type="text" name="tanggal_selesai" placeholder="Sampai" class="form-control" />
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
@@ -90,24 +117,37 @@ if (isset($_GET['id_cuti'])) {
                     <div class="form-group">
                         <label class="col-md-3 control-label">Lama Cuti</label>
                         <div class="col-md-6">
-                            <input type="text" name="lama_cuti" value="<?= $data['lama_cuti'] ?>" class="form-control" />
+                            <input type="text" name="lama_cuti" class="form-control" placeholder="Dalam Hari"></input>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-6">
-                            <input type="hidden" id="jumlah_cuti" name="jumlah_cuti" value="<?= $data['jumlah_cuti'] ?>" />
+                            <input type="hidden" id="jumlah_cuti" name="jumlah_cuti" value="1" />
                         </div>
                     </div>
+                    <!-- <div class="form-group">
+                        <label class="col-md-3 control-label">Periode Tahun Cuti</label>
+                        <div class="col-md-6">
+                            <select id="periode" name="periode" class="form-control" required>
+                                <option value="">-- Pilih Periode Tahun Cuti --</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                            </select>
+                        </div>
+                    </div> -->
                     <div class="form-group">
                         <div class="col-md-6">
-                            <input type="hidden" id="status" name="status" value="<?= $data['status']; ?>">
+                            <input type="hidden" id="status" name="status" value="Process">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-6">
-                            <button type="submit" name="edit" value="edit" class="btn btn-primary"><i class="fa fa-edit"></i> &nbsp;Edit</button>&nbsp;
-                            <a type="button" class="btn btn-default active" href="index.php?page=form-view-cuti"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+                            <button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>&nbsp;
+                            <a type="button" class="btn btn-default active" href="index.php?page=form-view-cuti-umum"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
                         </div>
                     </div>
                 </form>

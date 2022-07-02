@@ -123,7 +123,7 @@ while ($row = mysqli_fetch_array($query)) {
                     <li>
                         <form action="index.php?page=direct-search" method="POST" enctype="multipart/form-data" class="navbar-form full-width">
                             <div class="form-group">
-                                <input type="text" name="nama" class="form-control" placeholder="Masukan Nama Pegawai" required />
+                                <input type="text" name="pegawai_nama" class="form-control" placeholder="Masukan Nama Pegawai" required />
                                 <button type="submit" name="search" value="search" class="btn btn-search"><i class="ion-ios-search-strong"></i></button>
                             </div>
                         </form>
@@ -229,9 +229,10 @@ while ($row = mysqli_fetch_array($query)) {
                     <li class="has-sub">
                         <a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-calendar bg-purple"></i><span>Cuti</span></a>
                         <ul class="sub-menu">
-                            <li><a href="index.php?page=form-view-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Cuti</a></li>
-                            <li><a href="index.php?page=form-view-jatah-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jatah Cuti Pegawai</a></li>
-                            <li><a href="index.php?page=form-view-jenis-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Jenis Cuti</a></li>
+                            <li><a href="index.php?page=form-view-cuti-umum"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Cuti Umum</a></li>
+                            <li><a href="index.php?page=form-view-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Cuti Tahunan</a></li>
+                            <li><a href="index.php?page=form-view-jatah-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jatah Cuti Tahunan</a></li>
+                            <li><a href="index.php?page=form-view-jenis-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Jenis Cuti Umum</a></li>
                         </ul>
                     </li>
                     <li><a href="index.php?page=form-master-data-mutasi"><i class="ion-arrow-swap bg-warning"></i><span>Mutasi</span></a></li>
@@ -739,31 +740,59 @@ while ($row = mysqli_fetch_array($query)) {
                     break;
 
                 case 'form-view-cuti':
-                    include "../../pages/superadmin/cuti/data_cuti/form-view-cuti.php";
+                    include "../../pages/superadmin/cuti/tahunan_cuti/form-view-cuti.php";
                     break;
                 case 'form-master-cuti':
-                    include "../../pages/superadmin/cuti/data_cuti/form-master-cuti.php";
+                    include "../../pages/superadmin/cuti/tahunan_cuti/form-master-cuti.php";
                     break;
                 case 'form-edit-cuti':
-                    include "../../pages/superadmin/cuti/data_cuti/form-edit-cuti.php";
+                    include "../../pages/superadmin/cuti/tahunan_cuti/form-edit-cuti.php";
                     break;
                 case 'master-cuti':
-                    include "../../pages/superadmin/cuti/data_cuti/master-cuti.php";
+                    include "../../pages/superadmin/cuti/tahunan_cuti/master-cuti.php";
                     break;
                 case 'delete-cuti':
-                    include "../../pages/superadmin/cuti/data_cuti/delete-cuti.php";
+                    include "../../pages/superadmin/cuti/tahunan_cuti/delete-cuti.php";
                     break;
                 case 'edit-cuti':
-                    include "../../pages/superadmin/cuti/data_cuti/edit-cuti.php";
+                    include "../../pages/superadmin/cuti/tahunan_cuti/edit-cuti.php";
                     break;
                 case 'status-cuti':
-                    include "../../pages/superadmin/cuti/data_cuti/status-cuti.php";
+                    include "../../pages/superadmin/cuti/tahunan_cuti/status-cuti.php";
                     break;
                 case 'detail-cuti':
-                    include "../../pages/superadmin/cuti/data_cuti/detail-cuti.php";
+                    include "../../pages/superadmin/cuti/tahunan_cuti/detail-cuti.php";
                     break;
                 case 'print-cuti':
-                    include "../../pages/superadmin/cuti/data_cuti/print-cuti.php";
+                    include "../../pages/superadmin/cuti/tahunan_cuti/print-cuti.php";
+                    break;
+
+                case 'form-view-cuti-umum':
+                    include "../../pages/superadmin/cuti/umum_cuti/form-view-cuti-umum.php";
+                    break;
+                case 'form-master-cuti-umum':
+                    include "../../pages/superadmin/cuti/umum_cuti/form-master-cuti-umum.php";
+                    break;
+                case 'form-edit-cuti-umum':
+                    include "../../pages/superadmin/cuti/umum_cuti/form-edit-cuti-umum.php";
+                    break;
+                case 'master-cuti-umum':
+                    include "../../pages/superadmin/cuti/umum_cuti/master-cuti-umum.php";
+                    break;
+                case 'delete-cuti-umum':
+                    include "../../pages/superadmin/cuti/umum_cuti/delete-cuti-umum.php";
+                    break;
+                case 'edit-cuti-umum':
+                    include "../../pages/superadmin/cuti/umum_cuti/edit-cuti-umum.php";
+                    break;
+                case 'status-cuti-umum':
+                    include "../../pages/superadmin/cuti/umum_cuti/status-cuti-umum.php";
+                    break;
+                case 'detail-cuti-umum':
+                    include "../../pages/superadmin/cuti/umum_cuti/detail-cuti-umum.php";
+                    break;
+                case 'print-cuti-umum':
+                    include "../../pages/superadmin/cuti/umum_cuti/print-cuti-umum.php";
                     break;
 
                 case 'form-view-jenis-cuti':

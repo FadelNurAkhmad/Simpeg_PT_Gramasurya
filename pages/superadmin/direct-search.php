@@ -1,7 +1,7 @@
 <?php
 include "../../config/koneksi.php";
 if ($_POST['search'] == "search") {
-	$nama	= $_POST['nama'];
+	$nama	= $_POST['pegawai_nama'];
 
 	$tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_status='1' AND pegawai_nama LIKE '%$nama%'");
 }
@@ -35,8 +35,8 @@ if ($_POST['search'] == "search") {
 					?>
 						<tr>
 							<td><?= $no ?></td>
-							<td><?php echo $peg['nama']; ?></td>
-							<td><?php echo $peg['nip'] ?></td>
+							<td><?php echo $peg['pegawai_nama']; ?></td>
+							<td><?php echo $peg['pegawai_nip'] ?></td>
 							<td><?php echo $peg['jk'] ?></td>
 							<td><?php echo $peg['agama'] ?></td>
 							<td><?php echo $peg['sekolah'] ?></td>
