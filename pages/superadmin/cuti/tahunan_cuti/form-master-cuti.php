@@ -52,7 +52,7 @@ $id_cuti    = kdauto("tb_data_cuti", "");
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Form Input Cuti</h4>
+                <h4 class="panel-title">Form Input Cuti Tahunan</h4>
             </div>
             <div class="panel-body">
                 <form action="index.php?page=master-cuti&id_cuti=<?= $id_cuti ?>"" class=" form-horizontal" method="POST" enctype="multipart/form-data">
@@ -71,17 +71,9 @@ $id_cuti    = kdauto("tb_data_cuti", "");
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Jenis Cuti</label>
+                        <label class="col-md-3 control-label">Janis Cuti</label>
                         <div class="col-md-6">
-                            <?php
-                            $dataJ = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY jenis");
-                            echo '<select name="jenis_cuti" class="default-select2 form-control">';
-                            echo '<option value="">...</option>';
-                            while ($rowj = mysqli_fetch_array($dataJ, MYSQLI_ASSOC)) {
-                                echo '<option value="' . $rowj['jenis'] . '">' . $rowj['jenis'] . '</option>';
-                            }
-                            echo '</select>';
-                            ?>
+                            <input type="text" name="jenis_cuti" class="form-control" placeholder="Tahunan" value="Tahunan" readonly></input>
                         </div>
                     </div>
                     <div class="form-group">

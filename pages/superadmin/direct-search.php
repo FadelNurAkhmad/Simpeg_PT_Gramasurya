@@ -1,7 +1,7 @@
 <?php
 include "../../config/koneksi.php";
 if ($_POST['search'] == "search") {
-	$nama	= $_POST['nama'];
+	$nama	= $_POST['pegawai_nama'];
 
 	$tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_nama LIKE '%$nama%'");
 }

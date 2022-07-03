@@ -8,11 +8,11 @@
         $_SESSION['pesan'] = "";
         ?>
     </li>
-    <li><a href="index.php?page=form-master-cuti" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Input Data Cuti</a></li>
+    <li><a href="index.php?page=form-master-cuti" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Input Cuti Tahuan</a></li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Cuti <small><i class="fa fa-angle-right"></i> Data Cuti&nbsp;</small></h1>
+<h1 class="page-header">Cuti <small> <i class="fa fa-angle-right"></i> Cuti Tahunan&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";
@@ -37,7 +37,7 @@ $tampilCuti    = mysqli_query(
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilCuti); ?></span> rows for "Data Cuti"</h4>
+                <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilCuti); ?></span> rows for "Data Cuti Tahunan"</h4>
             </div>
             <div class="alert alert-success fade in">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
@@ -54,6 +54,7 @@ $tampilCuti    = mysqli_query(
                             <th>Tanggal Pelaksanaan</th>
                             <th>Lama Cuti</th>
                             <th>Jenis Cuti</th>
+                            <th>Status Cuti</th>
                             <th class="text-center" width="10%">Action</th>
                         </tr>
                     </thead>
@@ -75,6 +76,16 @@ $tampilCuti    = mysqli_query(
                                 </td>
                                 <td><?php echo $cuti['lama_cuti'] ?> Hari</td>
                                 <td><?php echo $cuti['jenis_cuti'] ?></td>
+                                <td><?php
+                                    if ($cuti['status'] == 'Process') {
+                                        echo '<span class="badge badge-primary">PROCESS</span>';
+                                    } else if ($cuti['status'] == 'Approve') {
+                                        echo '<span class="badge badge-success">APPROVED</span>';
+                                    } else if ($cuti['status'] == 'Reject') {
+                                        echo '<span class="badge badge-danger">REJECTED</span>';
+                                    }
+                                    ?>
+                                </td>
                                 <td class="text-center">
                                     <a type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#Approve<?php echo $cuti['id_cuti'] ?>" title="Approve"><i class="fa fa-check"> </i> Approve</a>
                                     <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#Reject<?php echo $cuti['id_cuti'] ?>" title="Reject"><i class="fa fa-close"> </i> Reject</a>
@@ -104,9 +115,11 @@ $tampilCuti    = mysqli_query(
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title"><span class="label label-inverse"> # Approval</span> &nbsp; Anda yakin approve cuti <u><?php echo $cuti['pegawai_nama'] ?></u> ?</h5>
+                                            <h5 class="modal-title"><span class="label label-inverse"> # Approval</span> &nbsp; Anda yakin approve cuti <?php echo $cuti['jenis_cuti'] ?> <u><?php echo $cuti['pegawai_nama'] ?></u> ?</h5>
                                         </div>
                                         <div class="modal-body" align="center">
+                                            <p>Mohon periksa kembali data pengajuan cuti terlampir. Pastikan semua informasi telah <span class="label label-primary">SESUAI</span> !</p>
+                                            <br>
                                             <a href="index.php?page=status-cuti&true=true&id_cuti=<?= $cuti['id_cuti'] ?>" class="btn btn-success">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
                                         </div>
                                         <div class="modal-footer">
@@ -138,7 +151,7 @@ $tampilCuti    = mysqli_query(
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                             <h4 class="modal-title">
                                                 <i class="ion-ios-gear text-danger"></i>
-                                                Detail Pengajuan Cuti ID_<?php echo $cuti['id_cuti'] ?>
+                                                Detail Pengajuan Cuti Tahunan ID_<?php echo $cuti['id_cuti'] ?>
                                             </h4>
                                         </div>
                                         <div class="col-sm-12">
