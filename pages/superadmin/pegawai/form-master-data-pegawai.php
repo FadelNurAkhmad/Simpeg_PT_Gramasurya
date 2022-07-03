@@ -61,24 +61,33 @@ $id_peg	= kdauto("tb_pegawai", "");
 							$sql = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id DESC LIMIT 1");
 							$pin = mysqli_fetch_array($sql);
 							?>
-							<input type="text" value="<?= $pin['pegawai_pin'] + 1 ?>" name="pin" maxlength="24" class="form-control" />
+							<input type="text" value="<?= $pin['pegawai_pin'] + 1 ?>" name="pegawai_pin" maxlength="24" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label">NIP*</label>
 						<div class="col-md-6">
-							<input type="text" name="nip" maxlength="24" class="form-control" />
+							<input type="text" name="pegawai_nip" maxlength="24" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label">Status Pegawai*</label>
 						<div class="col-md-6">
-							<select name="pegawai_status" class="default-select2 form-control">
+							<select name="pegawai_status" class="default-select2 form-control" id="option" onchange="selectOption()">
 								<option value="">...</option>
 								<option value="0">Non Aktif</option>
 								<option value="1">Aktif</option>
 								<option value="2">Berhenti</option>
 							</select>
+						</div>
+					</div>
+					<div class="form-group" id="resign" style="display:none">
+						<label class="col-md-3 control-label">Tanggal Berhenti</label>
+						<div class="col-md-3">
+							<div class="input-group date" id="datepicker-disabled-past4" data-date-format="yyyy-mm-dd">
+								<input type="text" name="tgl_resign" class="form-control" />
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -96,7 +105,7 @@ $id_peg	= kdauto("tb_pegawai", "");
 					<div class="form-group">
 						<label class="col-md-3 control-label">Nama Pegawai*</label>
 						<div class="col-md-6">
-							<input type="text" name="nama" maxlength="64" class="form-control" />
+							<input type="text" name="pegawai_nama" maxlength="64" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -160,7 +169,7 @@ $id_peg	= kdauto("tb_pegawai", "");
 					<div class="form-group">
 						<label class="col-md-3 control-label">Status Pernikahan*</label>
 						<div class="col-md-6">
-							<select name="status_nikah" class="default-select2 form-control">
+							<select name="stat_nikah" class="default-select2 form-control">
 								<option value="">...</option>
 								<option value="1">Sudah Menikah</option>
 								<option value="2">Belum Menikah</option>
@@ -178,7 +187,7 @@ $id_peg	= kdauto("tb_pegawai", "");
 					<div class="form-group">
 						<label class="col-md-3 control-label">No. Telp</label>
 						<div class="col-md-6">
-							<input type="text" name="telp" maxlength="12" class="form-control" />
+							<input type="text" name="pegawai_telp" maxlength="12" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -197,7 +206,7 @@ $id_peg	= kdauto("tb_pegawai", "");
 						<label class="col-md-3 control-label"></label>
 						<div class="col-md-6">
 							<button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>&nbsp;
-							<a type="button" class="btn btn-default active" href="index.php?page=form-view-data-pegawaigit"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+							<a type="button" class="btn btn-default active" href="index.php?page=form-view-data-pegawai"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
 						</div>
 					</div>
 				</form>
@@ -218,4 +227,18 @@ $id_peg	= kdauto("tb_pegawai", "");
 	setTimeout(function() {
 		$(".pesan").fadeOut('slow');
 	}, 7000);
+
+	function selectOption() {
+		var select = document.getElementById("option");
+		var resign = document.getElementById("resign");
+
+		if (select.value == "2") {
+			resign.style.display = "block";
+
+		} else {
+			resign.style.display = "none";
+		}
+	}
+
+	selectOption();
 </script>

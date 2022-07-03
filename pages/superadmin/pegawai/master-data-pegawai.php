@@ -5,22 +5,22 @@
 	}
 
 	if ($_POST['save'] == "save") {
-		$pin			= $_POST['pin'];
-		$nip			= $_POST['nip'];
+		$pin			= $_POST['pegawai_pin'];
+		$nip			= $_POST['pegawai_nip'];
 		$pegawai_status = $_POST['pegawai_status'];
-		$nama			= $_POST['nama'];
+		$tgl_resign		= $_POST['tgl_resign'];
 		$tempat_lahir	= $_POST['tempat_lahir'];
 		$tgl_lahir		= $_POST['tgl_lahir'];
+		$nama			= $_POST['pegawai_nama'];
 		$tgl_mulai_kerja		= $_POST['tgl_mulai_kerja'];
 		$tgl_masuk_pertama		= $_POST['tgl_masuk_pertama'];
 		$agama			= $_POST['agama'];
 		$gender			= $_POST['gender'];
 		$gol_darah		= $_POST['gol_darah'];
-		$status_nikah	= $_POST['status_nikah'];
+		$status_nikah	= $_POST['stat_nikah'];
 		$alamat			= $_POST['alamat'];
-		$telp			= $_POST['telp'];
+		$telp			= $_POST['pegawai_telp'];
 		$email			= $_POST['email'];
-		// $sisa_cuti		= $_POST['sisa_cuti'];
 		$foto			= $_FILES['foto']['name'];
 
 		$password	= password_hash("123", PASSWORD_DEFAULT);
@@ -35,35 +35,24 @@
 		$cekpin	= mysqli_num_rows(mysqli_query($koneksi, "SELECT pegawai_pin FROM pegawai WHERE pegawai_pin='$_POST[pin]'"));
 		$ceknip	= mysqli_num_rows(mysqli_query($koneksi, "SELECT pegawai_nip FROM pegawai WHERE pegawai_nip='$_POST[nip]'"));
 
-		if (
-			empty($_POST['pin']) || empty($_POST['nip']) || empty($_POST['nama']) || empty($_POST['tempat_lahir']) || empty($_POST['tgl_lahir']) || empty($_POST['tgl_mulai_kerja'])
-			|| empty($_POST['tgl_masuk_pertama']) || empty($_POST['agama']) || empty($_POST['gender']) || empty($_POST['gol_darah'])
-			|| empty($_POST['status_nikah'] || empty($_POST['pegawai_status']))
-		) {
+		if (empty($_POST['pegawai_pin']) || empty($_POST['pegawai_nip']) || empty($_POST['pegawai_nama']) || empty($_POST['tempat_lahir']) || empty($_POST['tgl_lahir']) || empty($_POST['tgl_mulai_kerja']) || empty($_POST['tgl_masuk_pertama']) || empty($_POST['agama']) || empty($_POST['gender']) || empty($_POST['gol_darah']) || empty($_POST['stat_nikah'])) {
 			$_SESSION['pesan'] = "Oops! Please fill all column ...";
 			header("location:index.php?page=form-master-data-pegawai");
 		} else if ($ceknip > 0 || $cekpin > 0) {
 			$_SESSION['pesan'] = "Oops! Duplikat data ...";
 			header("location:index.php?page=form-master-data-pegawai");
-		}
-		// else if ($_POST['sisa_cuti'] > 12) {
-		// 	$_SESSION['pesan'] = "Oops! Kuota Cuti Hanya 12 Per tahun ...";
-		// 	header("location:index.php?page=form-master-data-pegawai");
-		// } 
-		else {
+		} else {
 
-
-			$query = "INSERT INTO pegawai (pegawai_id, pegawai_pin, pegawai_nip, pegawai_nama, pegawai_alias, pegawai_telp, 
-											pegawai_status, tempat_lahir, tgl_lahir, tgl_mulai_kerja, gender, tgl_masuk_pertama) 
-											VALUES ('$id_peg', '$pin', '$nip', '$nama', '$nama', '$telp', '$pegawai_status', '$tempat_lahir', '$tgl_lahir', '$tgl_mulai_kerja', '$gender', '$tgl_masuk_pertama')";
-			$pegawai = mysqli_query($koneksi, $query);
 			$pegawai_d = mysqli_query($koneksi, "INSERT INTO pegawai_d (pegawai_id, gol_darah, stat_nikah, alamat, agama) VALUES ('$id_peg', '$gol_darah', '$status_nikah', '$alamat', '$agama')");
 			$tb_pegawai = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id, email, foto, sisa_cuti) VALUES ('$id_peg', '$email', '$foto', '$sisa_cuti')");
 
 			if ($pegawai_status == 1) {
-				$insertusr = mysqli_query($koneksi, "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, id_peg) VALUES ('$nip', '$nama', '$password', 'Pegawai', '$id_peg')");
+				$query = "INSERT INTO pegawai (pegawai_id, pegawai_pin, pegawai_nip, pegawai_nama, pegawai_alias, pegawai_telp, pegawai_status, tempat_lahir, tgl_lahir, tgl_mulai_kerja, gender, tgl_masuk_pertama) 
+													VALUES ('$id_peg', '$pin', '$nip', '$nama', '$nama', '$telp', '$pegawai_status', '$tempat_lahir', '$tgl_lahir', '$tgl_mulai_kerja', '$gender', '$tgl_masuk_pertama')";
+				$pegawai = mysqli_query($koneksi, $query);
+				$tb_user = mysqli_query($koneksi, "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, id_peg) VALUES ('$nip', '$nama', '$password', 'Pegawai', '$id_peg')");
 
-				if ($pegawai && $pegawai_d && $tb_pegawai && $insertusr) {
+				if ($pegawai && $pegawai_d && $tb_pegawai && $tb_user) {
 					$_SESSION['pesan'] = "Good! Menambahkan data pegawai berhasil ...";
 					header("location:index.php?page=form-view-data-pegawai");
 				} else {
@@ -75,6 +64,11 @@
 					}
 				}
 			} else {
+				if ($pegawai_status == 2) {
+					$query = "INSERT INTO pegawai (pegawai_id, pegawai_pin, pegawai_nip, pegawai_nama, pegawai_alias, pegawai_telp, pegawai_status, tempat_lahir, tgl_lahir, tgl_mulai_kerja, gender, tgl_masuk_pertama, tgl_resign) 
+													VALUES ('$id_peg', '$pin', '$nip', '$nama', '$nama', '$telp', '$pegawai_status', '$tempat_lahir', '$tgl_lahir', '$tgl_mulai_kerja', '$gender', '$tgl_masuk_pertama', '$tgl_resign')";
+					$pegawai = mysqli_query($koneksi, $query);
+				}
 				if ($pegawai && $pegawai_d && $tb_pegawai) {
 					$_SESSION['pesan'] = "Good! Menambahkan data pegawai berhasil ...";
 					header("location:index.php?page=form-view-data-pegawai");

@@ -157,9 +157,9 @@ $tampilResign	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pega
 	<!-- begin col-12 -->
 	<div class="col-md-12">
 		<ul class="nav nav-tabs">
-			<li class="active"><a href="#aktif" data-toggle="tab"><span class="visible-xs">Aktif</span><span class="hidden-xs"><i class="fa fa-calendar-check-o text-danger"></i> Aktif</span></a></li>
-			<li class=""><a href="#nonaktif" data-toggle="tab"><span class="visible-xs">Non Aktif</span><span class="hidden-xs"><i class="fa fa-calendar-check-o text-danger"></i> Non Aktif</span></a></li>
-			<li class=""><a href="#berhenti" data-toggle="tab"><span class="visible-xs">Berhenti</span><span class="hidden-xs"><i class="fa fa-calendar-check-o text-danger"></i> Berhenti</span></a></li>
+			<li class="active"><a href="#aktif" data-toggle="tab"><span class="visible-xs">Aktif</span><span class="hidden-xs"><i class="ion-ios-person fa-lg text-success"></i> Aktif</span></a></li>
+			<li class=""><a href="#nonaktif" data-toggle="tab"><span class="visible-xs">Non Aktif</span><span class="hidden-xs"><i class="ion-ios-person fa-lg text-warning"></i> Non Aktif</span></a></li>
+			<li class=""><a href="#berhenti" data-toggle="tab"><span class="visible-xs">Berhenti</span><span class="hidden-xs"><i class="ion-ios-person fa-lg text-danger"></i> Berhenti</span></a></li>
 		</ul>
 		<!-- begin tab-content -->
 		<div class="tab-content">
@@ -201,7 +201,7 @@ $tampilResign	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pega
 										}
 										?>
 									</td>
-									<td><?php echo (is_null($peg['tempat_lahir'])) ? $peg['tempat_lahir'] . "," : "" ?> <?php echo $peg['tgl_lahir'] ?></td>
+									<td><?php echo (empty($peg['tempat_lahir'])) ? "" : $peg['tempat_lahir'] . "," ?> <?php echo $peg['tgl_lahir'] ?></td>
 									<td><?php
 										$tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]'");
 										$jab    = mysqli_fetch_array($tampilJab);
@@ -281,7 +281,7 @@ $tampilResign	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pega
 										}
 										?>
 									</td>
-									<td><?php echo (is_null($non['tempat_lahir'])) ? $non['tempat_lahir'] . "," : "" ?> <?php echo $non['tgl_lahir'] ?></td>
+									<td><?php echo (empty($non['tempat_lahir'])) ? "" : $non['tempat_lahir'] . "," ?> <?php echo $non['tgl_lahir'] ?></td>
 									<td><?php
 										$tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$non[pegawai_id]'");
 										$jab    = mysqli_fetch_array($tampilJab);
@@ -339,6 +339,7 @@ $tampilResign	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pega
 								<th>Jenis Kelamin</th>
 								<th>TTL</th>
 								<th>Jabatan</th>
+								<th>Tanggal Berhenti</th>
 								<th width="10%">Action</th>
 							</tr>
 						</thead>
@@ -361,7 +362,7 @@ $tampilResign	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pega
 										}
 										?>
 									</td>
-									<td><?php echo (is_null($resign['tempat_lahir'])) ? $resign['tempat_lahir'] . "," : "" ?> <?php echo $resign['tgl_lahir'] ?></td>
+									<td><?php echo (empty($resign['tempat_lahir'])) ? "" : $resign['tempat_lahir'] . "," ?> <?php echo $resign['tgl_lahir'] ?></td>
 									<td><?php
 										$tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$resign[pegawai_id]'");
 										$jab    = mysqli_fetch_array($tampilJab);
@@ -373,6 +374,7 @@ $tampilResign	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pega
 										}
 										?>
 									</td>
+									<td><?php echo $resign['tgl_resign'] ?></td>
 									<td class="text-center">
 										<a type="button" class="btn btn-success btn-icon btn-sm" href="index.php?page=detail-data-pegawai&pegawai_id=<?= $resign['pegawai_id'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
 										<a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-pegawai&pegawai_id=<?= $resign['pegawai_id'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
