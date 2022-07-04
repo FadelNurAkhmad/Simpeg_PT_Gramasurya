@@ -39,7 +39,7 @@ if (isset($_GET['jdw_kerja_m_id'])) {
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Jadwal Kerja Normal <small><i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i></small></h1>
+<h1 class="page-header">Presensi <small><i class="fa fa-angle-right"></i> Konfigurasi Jadwal Kerja<i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i></small></h1>
 <!-- begin row -->
 <!-- begin row -->
 <div class="row">

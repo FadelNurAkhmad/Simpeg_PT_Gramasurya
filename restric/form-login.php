@@ -22,18 +22,12 @@
 			<div class="form-group m-b-20 has-feedback">
 				<input type="password" name="password" maxlength="255" class="form-control input-lg no-border" placeholder="Password" required /><span class="fa fa-lock form-control-feedback"></span>
 			</div>
-			<div class="checkbox m-b-20">
-				<label>
-					<h5><input type="checkbox" /><span class="label">Remember Me</span></h5>
-				</label>
-			</div>
 			<div class="login-buttons">
 				<button type="submit" class="btn btn-primary btn-block btn-lg"><i class="fa fa-key"></i> &nbsp;Login</button>
 			</div>
 			<div class="m-t-20 text-white">
 				Lupa Password ? coba
-				<a href="https://maps.app.goo.gl/WSBixqaS2ccMiMXE7" target="_blank">hubungi</a>
-				<!-- <a href="https://api.whatsapp.com/send?phone=6281212345678&text=Selamat Datang!" target="_blank">hubungi</a> -->
+				<a href="https://api.whatsapp.com/send?phone=6281212345678&text=Selamat Datang!" target="_blank">hubungi</a>
 				admin.
 			</div>
 		</form>

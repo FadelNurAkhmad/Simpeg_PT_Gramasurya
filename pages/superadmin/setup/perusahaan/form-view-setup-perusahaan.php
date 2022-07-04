@@ -13,11 +13,11 @@ $data	= mysqli_fetch_array($query);
 		$_SESSION['pesan'] = "";
 		?>
 	</li>
-	<li><a href="index.php?page=form-setup-perusahaan&id_setup_peru=<?= $data['id_setup_peru'] ?>" title="setup" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-gear"></i> &nbsp;Setup</a></li>
+	<li><a href="index.php?page=form-setup-perusahaan&id_setup_peru=<?= (isset($data['id_setup_peru'])) ? $data['id_setup_peru'] : "1" ?>" title="setup" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-gear"></i> &nbsp;Setup</a></li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Setup <small>Perusahaan &nbsp;</small></h1>
+<h1 class="page-header">Master Setup <small><i class="fa fa-angle-right"></i> Perusahaan &nbsp;</small></h1>
 <!-- end page-header -->
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
@@ -38,21 +38,22 @@ $data	= mysqli_fetch_array($query);
 					<tbody>
 						<tr class="highlight">
 							<td class="field">Nama Perusahaan</td>
-							<td><?= $data['nama_peru'] ?></td>
+							<td><?= (isset($data['nama_peru'])) ? $data['nama_peru'] : "" ?></td>
 						</tr>
 						<tr class="divider">
 							<td colspan="2"></td>
 						</tr>
 						<tr>
 							<td class="field">Alamat</td>
-							<td><i class="fa fa-map-marker fa-lg m-r-5"></i> <?= $data['alamat'] ?></td>
+							<td><i class="fa fa-map-marker fa-lg m-r-5"></i> <?= (isset($data['alamat'])) ? $data['alamat'] : "" ?></td>
 						</tr>
 						<tr>
 							<td class="field">Pimpinan</td>
 							<td><?php
-								$pimpinan	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$data[pimpinan]'");
+								$idPimpinan = (isset($data['pimpinan'])) ? $data['pimpinan'] : "";
+								$pimpinan	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$idPimpinan'");
 								$kep	= mysqli_fetch_array($pimpinan);
-								echo $kep['pegawai_nama']
+								echo (isset($kep['pegawai_nama'])) ? $kep['pegawai_nama'] : "";
 								?>
 							</td>
 						</tr>

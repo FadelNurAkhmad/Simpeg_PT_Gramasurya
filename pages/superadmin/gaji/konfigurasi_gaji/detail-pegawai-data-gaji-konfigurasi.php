@@ -24,7 +24,7 @@ if (isset($_GET['id_gaji_konfig'])) {
     <div class="invoice-company">
         <span class="pull-right hidden-print">
             <a href="index.php?page=detail-data-pegawai&pegawai_id=<?= $gaji['id_peg'] ?>" title="back" class="btn btn-sm btn-white m-b-10"><i class="fa fa-step-backward"></i> &nbsp;Back</a>
-            <a href="../../pages/superadmin/gaji/konfigurasi_gaji/print-detail-konfigurasi-slip-gaji.php" target="_blank" title="print" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print"></i> &nbsp;Print</a>
+            <a href="../../pages/superadmin/gaji/konfigurasi_gaji/print-detail-konfigurasi-slip-gaji.php?id_gaji_konfig=<?= $id_gaji_konfig ?>" target="_blank" title="print" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print"></i> &nbsp;Print</a>
         </span>
         PT Gramasurya
     </div>

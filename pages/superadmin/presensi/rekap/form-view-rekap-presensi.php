@@ -103,7 +103,7 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
 <!-- begin page-header -->
 <div class="row ">
     <div class="col-12 col-md-4">
-        <h1 class="page-header">Rekap <small>Presensi&nbsp;</small></h1>
+        <h1 class="page-header">Presensi <small><i class="fa fa-angle-right"></i> Rekap Presensi&nbsp;</small></h1>
     </div>
     <div class="col-6 col-md-8">
         <form action="index.php?page=form-view-rekap-presensi" method="POST" enctype="multipart/form-data">
@@ -130,12 +130,14 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
 
 <!-- begin row -->
 <div class="row">
+    <!-- begin col-12 -->
     <div class="col-md-12">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#scanlog" data-toggle="tab"><span class="visible-xs">Data Scanlog</span><span class="hidden-xs"><i class="fa fa-calendar-check-o text-danger"></i> Data Scanlog</span></a></li>
             <li class=""><a href="#rekapharian" data-toggle="tab"><span class="visible-xs">Rekap Harian</span><span class="hidden-xs"><i class="fa fa-calendar-check-o text-danger"></i> Rekap Harian</span></a></li>
             <li class=""><a href="#rekapperiode" data-toggle="tab"><span class="visible-xs">Rekap Periode</span><span class="hidden-xs"><i class="fa fa-calendar-check-o text-danger"></i> Rekap Periode</span></a></li>
         </ul>
+        <!-- begin tab-content -->
         <div class="tab-content">
             <!-- tab scanlog -->
             <div class="tab-pane fade active in" id="scanlog">
@@ -199,8 +201,6 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
                                 }
                             }
                             ?>
-
-
                             <?php
                             if (empty($_POST['periode_awal']) && empty($_POST['periode_akhir'])) {
                                 $no = 0;
@@ -246,11 +246,8 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
                 </div>
             </div>
             <!-- end tab scanlog -->
-
             <!-- tab rekap harian -->
             <div class="tab-pane fade" id="rekapharian">
-
-
                 <div class="alert alert-success fade in">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
                     <i class="fa fa-info fa-2x pull-left"></i> Folder ini dapat digunakan untuk melihat rekap presensi ...
@@ -279,7 +276,6 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
                         <tbody>
                             <?php
                             if (!empty($_POST['periode_awal']) && !empty($_POST['periode_akhir'])) {
-
                                 while ($peg    = mysqli_fetch_array($tampilPeg2, MYSQLI_ASSOC)) {
                                     $tampilCari = mysqli_query($koneksi, "SELECT * FROM shift_result WHERE tgl_shift >= '$_POST[periode_awal]' AND tgl_shift <= '$_POST[periode_akhir]' AND pegawai_id = '$peg[pegawai_id]'");
 
@@ -293,8 +289,6 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
 
                                         $jabatan    = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$peg[pembagian1_id]'");
                                         $jab    = mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
-
-
                             ?>
                                         <tr <?= (isset($jk)) ? "class=''" : "class='danger'" ?>>
                                             <td><?= $cari['tgl_shift'] ?></td>
@@ -312,17 +306,14 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
                                             <td><?= (isset($jk)) ? $jk['jk_ecout'] : "00:00:00" ?></td>
                                             <td><?= timeScan($cari['scan_out']) ?></td>
                                         </tr>
-
                             <?php
                                     }
                                 }
                             }
                             ?>
-
                             <?php
                             if (empty($_POST['periode_awal']) && empty($_POST['periode_akhir'])) {
                                 while ($peg    = mysqli_fetch_array($tampilPeg2, MYSQLI_ASSOC)) {
-
                                     $tampilPres2 = mysqli_query($koneksi, "SELECT * FROM shift_result WHERE pegawai_id = '$peg[pegawai_id]' ORDER BY tgl_shift DESC LIMIT 100");
                                     while ($pres2 = mysqli_fetch_array($tampilPres2, MYSQLI_ASSOC)) {
 
@@ -334,9 +325,6 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
 
                                         $jabatan    = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$peg[pembagian1_id]'");
                                         $jab    = mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
-
-
-
                             ?>
                                         <tr <?= ($pres2['libur_rutin'] == "0") ? "class=''" : "class='danger'" ?>>
                                             <td><?= $pres2['tgl_shift'] ?></td>
@@ -354,7 +342,6 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
                                             <td><?= (isset($jk)) ? $jk['jk_ecout'] : "00:00:00" ?></td>
                                             <td><?= timeScan($pres2['scan_out']) ?></td>
                                         </tr>
-
                             <?php
                                     }
                                 }
@@ -364,7 +351,7 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
                     </table>
                 </div>
             </div>
-
+            <!-- end tab rekap harian -->
             <!-- tab rekap periode -->
             <div class="tab-pane fade" id="rekapperiode">
                 <div class="alert alert-success fade in">
@@ -402,8 +389,6 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
 
                                         $jabatan    = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$peg3[pembagian1_id]'");
                                         $jab    = mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
-
-
                             ?>
                                         <tr>
                                             <td><?= $peg3['pegawai_pin'] ?></td>
@@ -415,23 +400,23 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
                                             <td></td>
                                             <td><?= $cari["terlambat"] ?></td>
                                         </tr>
-
                             <?php
-
                                     }
                                 }
                             }
                             ?>
-
                         </tbody>
                     </table>
                 </div>
             </div>
-
-
+            <!-- end tab periode -->
         </div>
+        <!-- end tab-content -->
     </div>
+    <!-- end col-12 -->
 </div>
+<!-- end row -->
+
 <script>
     // 500 = 0,5 s
     $(document).ready(function() {

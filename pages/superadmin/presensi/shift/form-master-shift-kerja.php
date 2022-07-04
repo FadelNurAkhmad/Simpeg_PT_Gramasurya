@@ -11,33 +11,33 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Shift <small>Kerja <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
+<h1 class="page-header">Presensi <small><i class="fa fa-angle-right"></i> Konfigurasi Shift <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
-	function kdauto($tabel, $inisial){
-		include "../../config/koneksi.php";
-		
-		$struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
-		$fieldInfo = mysqli_fetch_field_direct($struktur, 0);
-		$field      = $fieldInfo->name;
-		$panjang    = $fieldInfo->length;
-		$qry  = mysqli_query($koneksi, "SELECT max(".$field.") FROM ".$tabel);
-		$row  = mysqli_fetch_array($qry);
-		if ($row[0]=="") {
-		$angka=0;
-		}
-		else {
-		$angka= substr($row[0], strlen($inisial));
-		}
-		$angka++;
-		$angka =strval($angka);
-		$tmp  ="";
-		for($i=1; $i<=($panjang-strlen($inisial)-strlen($angka)); $i++) {
-		$tmp=$tmp."0";
-		}
-		return $inisial.$tmp.$angka;
-		}
-	$jk_id	=kdauto("jam_kerja","");
+function kdauto($tabel, $inisial)
+{
+    include "../../config/koneksi.php";
+
+    $struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
+    $fieldInfo = mysqli_fetch_field_direct($struktur, 0);
+    $field      = $fieldInfo->name;
+    $panjang    = $fieldInfo->length;
+    $qry  = mysqli_query($koneksi, "SELECT max(" . $field . ") FROM " . $tabel);
+    $row  = mysqli_fetch_array($qry);
+    if ($row[0] == "") {
+        $angka = 0;
+    } else {
+        $angka = substr($row[0], strlen($inisial));
+    }
+    $angka++;
+    $angka = strval($angka);
+    $tmp  = "";
+    for ($i = 1; $i <= ($panjang - strlen($inisial) - strlen($angka)); $i++) {
+        $tmp = $tmp . "0";
+    }
+    return $inisial . $tmp . $angka;
+}
+$jk_id    = kdauto("jam_kerja", "");
 ?>
 <!-- begin row -->
 <div class="row">
@@ -55,21 +55,21 @@
             </div>
             <div class="panel-body">
                 <form action="index.php?page=master-shift-kerja&jk_id=<?= $jk_id ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
-                    
+
                     <div class="form-group">
                         <label class="col-md-3 control-label">Nama Shift</label>
                         <div class="col-md-3">
-                            <input class="form-control" type="text" name="jk_name"/>
+                            <input class="form-control" type="text" name="jk_name" />
                         </div>
                         <label class="col-md-1 control-label">Kode</label>
                         <div class="col-md-3">
-                            <input class="form-control" type="text" name="jk_kode"/>
+                            <input class="form-control" type="text" name="jk_kode" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Keterangan</label>
                         <div class="col-md-3">
-                            <input class="form-control" type="text" name="jk_ket"/>
+                            <input class="form-control" type="text" name="jk_ket" />
                         </div>
                         <label class="col-md-1 control-label"></label>
                         <div class="col-md-1 form-check form-check-inline">
@@ -80,7 +80,7 @@
                         </div>
                         <label class="col-md-1 control-label"></label>
                         <div class="col-md-1 form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="jk_durasi" id="flexRadioDefault2" value="2" >
+                            <input class="form-check-input" type="radio" name="jk_durasi" id="flexRadioDefault2" value="2">
                             <label class="form-check-label" for="flexRadioDefault2">
                                 Durasi aktual
                             </label>
@@ -88,7 +88,7 @@
                     </div>
 
                     <hr>
-    
+
                     <div class="form-group">
                         <label class="col-md-2 control-label">Dihitung</label>
                         <div class="col-md-3">
@@ -107,17 +107,17 @@
                             <label class="col-md-8 control-label">Masuk</label>
                             <input class="form-control" type="time" name="masuk" id="masuk" value="00:00" data-parsley-required="true" />
                         </div>
-                        
+
                         <div class="col-md-2" id="show" style="display:none">
                             <label class="col-md-10 control-label">Istirahat Keluar</label>
-                            <input class="form-control" type="time" name="ist_1" id="ist_1" value="00:00" data-parsley-required="true"/>
+                            <input class="form-control" type="time" name="ist_1" id="ist_1" value="00:00" data-parsley-required="true" />
                         </div>
-                        
+
                         <div class="col-md-2" id="show2" style="display:none">
                             <label class="col-md-10 control-label">Istirahat Kembali</label>
-                            <input class="form-control" type="time" name="ist_2" id="ist_2" value="00:00" data-parsley-required="true"/>
+                            <input class="form-control" type="time" name="ist_2" id="ist_2" value="00:00" data-parsley-required="true" />
                         </div>
-                     
+
                         <div class="col-md-2">
                             <label class="col-md-8 control-label">Pulang</label>
                             <input class="form-control" type="time" name="pulang" id="pulang" value="00:00" data-parsley-required="true" />
@@ -138,9 +138,9 @@
                                 <input class="form-control" type="number" name="sebelum_pulang" value="0" /> menit
                             </div>
                         </div>
-                        
+
                     </div>
-  
+
                     <div class="form-group">
                         <label class="col-md-3 control-label">Durasi setelah jam masuk</label>
                         <div class="col-md-3">
@@ -170,7 +170,7 @@
                             </div>
                         </div>
                     </div>
-  
+
                     <div class="form-group">
                         <!-- <label class="col-md-3 control-label">Durasi minimal dihitung 1/2 hari kerja</label>
                         <div class="col-md-3">
@@ -216,7 +216,7 @@
         var checkBox = document.getElementById("check");
         var show = document.getElementById("show");
         var show2 = document.getElementById("show2");
-        if (checkBox.checked == true){
+        if (checkBox.checked == true) {
             show.style.display = "block";
             show2.style.display = "block";
         } else {

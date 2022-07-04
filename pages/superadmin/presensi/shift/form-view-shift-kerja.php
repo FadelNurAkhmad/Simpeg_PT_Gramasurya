@@ -12,7 +12,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Shift<small> Kerja&nbsp;</small></h1>
+<h1 class="page-header">Presensi <small><i class="fa fa-angle-right"></i> Konfigurasi Shift&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";
@@ -65,7 +65,7 @@ $tampilDataShift    = mysqli_query($koneksi, "SELECT * FROM jam_kerja ORDER BY j
                                 <td><?= $dataShift['jk_ist1'] ?></td>
                                 <td><?= $dataShift['jk_ist2'] ?></td>
                                 <td><?= $dataShift['jk_ecout'] ?></td>
-                                <td><?= ($dataShift['jk_durasi'] == 1)?"Efektif":"Aktual" ?></td>
+                                <td><?= ($dataShift['jk_durasi'] == 1) ? "Efektif" : "Aktual" ?></td>
                                 <td><?= $dataShift['jk_countas'] ?></td>
                                 <td class="text-center">
                                     <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-shift-kerja&jk_id=<?= $dataShift['jk_id'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
