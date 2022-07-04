@@ -240,5 +240,3 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 		$(".pesan").fadeOut('slow');
 	}, 7000);
 </script>
-
-About
