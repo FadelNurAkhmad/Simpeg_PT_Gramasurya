@@ -233,9 +233,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-printer"></i><span>Report</span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=nominatif"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Nominatif</a></li>
-							<!-- <li><a href="index.php?page=daftar-urut-kepangkatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;DUK</a></li> -->
+							<li><a href="index.php?page=daftar-urut-kepangkatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;DUK</a></li>
 							<li><a href="index.php?page=bezetting"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Bezetting</a></li>
-							<li><a href="index.php?page=keadaan-pegawai"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Keadaan Pegawai</a></li>
+							<!-- <li><a href="index.php?page=keadaan-pegawai"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Keadaan Pegawai</a></li> -->
 							<!-- <li><a href="index.php?page=pre-pensiun"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pensiun</a></li> -->
 						</ul>
 					</li>

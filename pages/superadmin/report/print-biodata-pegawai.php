@@ -1,8 +1,8 @@
 <?php
 ob_start();
 include'../../../assets/plugins/tcpdf/tcpdf.php';
-if (isset($_GET['id_peg'])) {
-	$id_peg = $_GET['id_peg'];
+if (isset($_GET['pegawai_id'])) {
+	$id_peg = $_GET['pegawai_id'];
 	}
 	else {
 		die ("Error. No ID Selected! ");	
@@ -68,19 +68,64 @@ $pdf->AddPage();
 $pdf->SetFont('helvetica', '', 9);
 include "../../../config/koneksi.php";
 
-	$kepala	=mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
+	$kepala	=mysqli_query($koneksi, "SELECT * FROM tb_setup_peru WHERE id_setup_peru='1'");
 	$kep	=mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 	
-	$namakepala	=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$kep[kepala]'");
+	$namakepala	=mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$kep[pimpinan]'");
 	$nama		=mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 	
-	$pangkat=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[kepala]' AND status_pan='Aktif'");
+	$pangkat=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[pimpinan]' AND status_pan='Aktif'");
 	$pank	=mysqli_fetch_array($pangkat, MYSQLI_ASSOC);
 
-$tampilPeg=mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$id_peg'");
+$tampilPeg=mysqli_query($koneksi, "SELECT * FROM pegawai JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id ");
 $peg=mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 
-$header = '<p><font size="12" style="text-transform:uppercase"><b>BADAN KEPEGAWAIAN DAERAH KABUPATEN '.$kep['kab'].'</b></font>
+//agama
+if ($peg['agama'] == '1') {
+	$agama = 'Islam';
+}
+//gender
+if ($peg['gender'] == '1') {
+	$gender = 'Laki-Laki';
+} else if ($peg['gender'] == '2') {
+	$gender = 'Perempuan';
+}
+
+//goldar
+if ($peg['gol_darah'] == '1') {
+	$goldar = 'A+';
+} else if ($peg['gol_darah'] == '2') {
+	$goldar = 'B+';
+} else if ($peg['gol_darah'] == '3') {
+	$goldar = 'O+';
+} else if ($peg['gol_darah'] == '4') {
+	$goldar = 'A-';
+} else if ($peg['gol_darah'] == '5') {
+	$goldar = 'AB+';
+} else if ($peg['gol_darah'] == '6') {
+	$goldar = 'B-';
+} else if ($peg['gol_darah'] == '7') {
+	$goldar = 'O-';
+} else if ($peg['gol_darah'] == '8') {
+	$goldar = 'AB-';
+}
+//nikah
+if ($peg['stat_nikah'] == '1') {
+	$stat = 'Sudah Menikah';
+} else if ($peg['stat_nikah'] == '2') {
+	$stat = 'Belum Menikah';
+} else if ($peg['stat_nikah'] == '3') {
+	$stat = 'Janda / Duda';
+}
+//stats
+if ($peg['pegawai_status'] == '1') {
+	$pgw = 'Aktif';
+}
+else if ($peg['pegawai_status'] == '0') {
+	$pgw = 'Non-Aktif';
+}
+
+$header = '<p><font size="12" style="text-transform:uppercase"><b> '.$kep['nama_peru'].'</b></font>
 			<br /><br />
 			<font size="10" align="center"><u><b>BIODATA PEGAWAI</b></u><font></p>';
 $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = 10, $header, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
@@ -92,51 +137,52 @@ $tblpri = '<table cellspacing="0" cellpadding="2" border="0">
     <tr>
 		<td width="30">1.</td>
 		<td width="150">NIP</td>
-		<td width="360">: '.$peg['nip'].'</td>';
+		<td width="360">: '.$peg['pegawai_nip'].'</td>';
 		if (empty($peg['foto']))
-						if ($peg['jk'] == "Laki-laki"){
+						if ($peg['gender'] == "Laki-laki"){
 							$tblpri .='<td rowspan="12" align="center" width="120"><img src="../../../assets/img/foto/no-foto-male.png" width="100" height="130"><br />Pas Foto</td>';
 						}
-						else{
-							$tblpri .='<td rowspan="12" align="center" width="120"><img src="../../../assets/img/foto/no-foto-female.png" width="100" height="130"><br />Pas Foto</td>';
-						}
-						else
-							$tblpri .='<td rowspan="12" align="center" width="120"><img src="../../../assets/img/foto/'.$peg['foto'].'" width="100" height="130"><br />Pas Foto</td>';
+						// else{
+						// 	$tblpri .='<td rowspan="12" align="center" width="120"><img src="../../../assets/img/foto/no-foto-female.png" width="100" height="130"><br />Pas Foto</td>';
+						//}
+						// else
+						// 	$tblpri .='<td rowspan="12" align="center" width="120"><img src="../../../assets/img/foto/'.$peg['foto'].'" width="100" height="130"><br />Pas Foto</td>';
 	$tblpri .='</tr>
+	
 	<tr>
 		<td width="30">2.</td>
 		<td width="150">Nama</td>
-		<td width="360">: '.$peg['nama'].'</td>
+		<td width="360">: '.$peg['pegawai_nama'].'</td>
 	</tr>
 	<tr>
 		<td width="30">3.</td>
 		<td width="150">Tempat, Tanggal Lahir</td>
-		<td width="360">: '.$peg['tempat_lhr'].', '.$peg['tgl_lhr'].'</td>
+		<td width="360">: '.$peg['tempat_lahir'].', '.$peg['tgl_lahir'].'</td>
 	</tr>
 	<tr>
 		<td width="30">4.</td>
 		<td width="150">Agama</td>
-		<td width="360">: '.$peg['agama'].'</td>
+		<td width="360">: '.$agama.'</td>
 	</tr>
 	<tr>
 		<td width="30">5.</td>
 		<td width="150">Jenis Kelamin</td>
-		<td width="360">: '.$peg['jk'].'</td>
+		<td width="360">: '.$gender.'</td>
 	</tr>
 	<tr>
 		<td width="30">6.</td>
 		<td width="150">Golongan Darah</td>
-		<td width="360">: '.$peg['gol_darah'].'</td>
+		<td width="360">: '.$goldar.'</td>
 	</tr>
 	<tr>
 		<td width="30">7.</td>
 		<td width="150">Status Pernikahan</td>
-		<td width="360">: '.$peg['status_nikah'].'</td>
+		<td width="360">: '.$stat.'</td>
 	</tr>
 	<tr>
 		<td width="30">8.</td>
 		<td width="150">Status Kepegawaian</td>
-		<td width="360">: '.$peg['status_kepeg'].'</td>
+		<td width="360">: '.$pgw.'</td>
 	</tr>
 	<tr>
 		<td width="30">9.</td>
@@ -146,17 +192,13 @@ $tblpri = '<table cellspacing="0" cellpadding="2" border="0">
 	<tr>
 		<td width="30">10.</td>
 		<td width="150">No. Telepon</td>
-		<td width="360">: '.$peg['telp'].'</td>
+		<td width="360">: '.$peg['pegawai_telp'].'</td>
 	</tr>
-	<tr>
-		<td width="30">11.</td>
-		<td width="150">Email</td>
-		<td width="360">: '.$peg['email'].'</td>
-	</tr>
+	
 	<tr>
 		<td width="30">12.</td>
 		<td width="150">Unit Kerja</td>';
-		$namaskpd=mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
+		$namaskpd=mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[pegawai_id]'");
 		$nm=mysqli_fetch_array($namaskpd, MYSQLI_ASSOC);
 		$tblpri .='<td>: '.$nm['nama'].'</td>
 	</tr>
@@ -293,23 +335,22 @@ $pdf->writeHTML($dpan, true, false, false, false, '');
 $tblpan ='<table cellspacing="0" cellpadding="2" border="0">
 			<tr>
 				<th width="30"><b>No.</b></th>
-				<th width="230"><b>Pangkat</b></th>
-				<th width="110"><b>Golongan</b></th>
-				<th width="110"><b>TMT</b></th>
+				
+				
 				<th width="180"><b>Status</b></th>
 			</tr>
 			';
-			$no=1;
-			$tampilPan	=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' ORDER BY tmt_pangkat DESC");
-			while($pan=mysqli_fetch_array($tampilPan, MYSQLI_ASSOC)) { 
-				$tblpan .='<tr>
-					<td width="30">'.$no++.'.</td>
-					<td width="230">'.$pan['pangkat'].'</td>
-					<td width="110">'.$pan['gol'].'</td>
-					<td width="110">'.$pan['tmt_pangkat'].'</td>
-					<td width="180">'.$pan['status_pan'].'</td>
-				</tr>';
-			} 
+			// $no=1;
+			// $tampilPan	=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' ORDER BY tmt_pangkat DESC");
+			// while($pan=mysqli_fetch_array($tampilPan, MYSQLI_ASSOC)) { 
+			// 	$tblpan .='<tr>
+			// 		<td width="30">'.$no++.'.</td>
+			// 		<td width="230">'.$pan['pangkat'].'</td>
+			// 		<td width="110">'.$pan['gol'].'</td>
+			// 		<td width="110">'.$pan['tmt_pangkat'].'</td>
+			// 		<td width="180">'.$pan['status_pan'].'</td>
+			// 	</tr>';
+			// } 
 $tblpan .= '</table>';
 $pdf->writeHTML($tblpan, true, false, false, false, '');
 
@@ -395,7 +436,7 @@ $signa = '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td width="300"></td>
 				<td width="60"></td>
-				<td width="300">'.$kep['kab'].', '.date("j F Y").'</td>
+				<td width="300">'.$kep['nama_peru'].', '.date("j F Y").'</td>
 			</tr>
 			<tr>
 				<td></td>
@@ -410,7 +451,7 @@ $signa = '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td></td>
 				<td></td>
-				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">KABUPATEN '.$kep['kab'].'</font></td>
+				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">KABUPATEN '.$kep['nama_peru'].'</font></td>
 			</tr>
 			<tr>
 				<td height="60"></td>
@@ -420,21 +461,17 @@ $signa = '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td></td>
 				<td></td>
-				<td align="center"><font size="9"><b>'.$nama['nama'].'</b></font></td>
+				<td align="center"><font size="9"><b>'.$nama['pegawai_nama'].'</b></font></td>
 			</tr>
+			
 			<tr>
 				<td></td>
 				<td></td>
-				<td align="center"><font size="9">'.$pank['pangkat'].'</font></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td align="center"><font size="9"><b>NIP. '.$nama['nip'].'</b></font></td>
+				<td align="center"><font size="9"><b>NIP. '.$nama['pegawai_nip'].'</b></font></td>
 			</tr>
 		</table>';
 $pdf->writeHTML($signa, true, false, false, false, '');
 
 //Close and output PDF document
-$pdf->Output('Biodata_Pegawai_'.$peg['nip'].'.pdf', 'I');
+$pdf->Output('Biodata_Pegawai_'.$peg['pegawai_nip'].'.pdf', 'I');
 ?>

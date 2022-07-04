@@ -1085,6 +1085,9 @@ while ($row = mysqli_fetch_array($query)) {
                 case 'nominatif':
                     include "../../pages/superadmin/report/nominatif.php";
                     break;
+                case 'export-bezetting':
+                    include "../../pages/superadmin/report/export-bezetting.php";
+                    break;
                 case 'pre-pensiun':
                     include "../../pages/superadmin/report/pre-pensiun.php";
                     break;
