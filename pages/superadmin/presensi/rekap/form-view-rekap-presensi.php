@@ -1,7 +1,9 @@
 <?php
 $filename    = "Daftar Pegawai";
-
 include "../../config/koneksi.php";
+require '../../assets/plugins/phpspreadsheet/vendor/autoload.php';
+require 'presensi/rekap/export-scanlog.php';
+
 // require '../../assets/plugins/phpspreadsheet/vendor/autoload.php';
 
 // use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -68,7 +70,7 @@ include "../../config/koneksi.php";
 // $writer->save("$file");
 ?>
 <?php
-include "../../config/koneksi.php";
+
 function timeScan($attribute)
 {
     $datetime = new DateTime($attribute);
@@ -141,7 +143,13 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
         <div class="tab-content">
             <!-- tab scanlog -->
             <div class="tab-pane fade active in" id="scanlog">
+                <?php
+
+                ?>
+                <li style="text-align:right ;"><a href="<?php echo $file; ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
+
                 <div class="alert alert-success fade in">
+
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
                     <i class="fa fa-info fa-2x pull-left"></i> Folder ini dapat digunakan untuk melihat rekap presensi ...
                 </div>
