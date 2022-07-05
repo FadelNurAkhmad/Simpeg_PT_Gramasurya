@@ -75,7 +75,7 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
                 <?php
 
                 ?>
-                <li style="text-align:right ;"><a href="index.php?page=export-scanlog" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
+                <li style="text-align:right ;"><a href="index.php?page=export-scanlog&periodeawal=<?= (isset($_POST['periode_awal'])) ? $_POST['periode_awal'] : null ?>&periodeakhir=<?= (isset($_POST['periode_akhir'])) ? $_POST['periode_akhir'] : null ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
 
                 <div class="alert alert-success fade in">
 

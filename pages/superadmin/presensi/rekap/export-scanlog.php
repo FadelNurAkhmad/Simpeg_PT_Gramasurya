@@ -1,9 +1,17 @@
 
 <?php
+
+if (isset($_GET['periodeawal']) && isset($_GET['periodeakhir'])) {
+    $periode_awal = $_GET['periodeawal'];
+    $periode_akhir = $_GET['periodeakhir'];
+}
+
 $filename    = "Rekap Presensi scanlog";
 
 include "../../config/koneksi.php";
 require '../../assets/plugins/phpspreadsheet/vendor/autoload.php';
+
+
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -26,8 +34,8 @@ $sheet->setCellValue("I3", "SN");
 $i = 4;
 $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log ORDER BY scan_date DESC LIMIT 100");
 
-if (!empty($_POST['periode_awal']) && !empty($_POST['periode_akhir'])) {
-    $tampilCari = mysqli_query($koneksi, "SELECT * FROM att_log WHERE DATE(scan_date) >= '$_POST[periode_awal]' AND DATE(scan_date) <= '$_POST[periode_akhir]'");
+if (!empty($periode_awal) && !empty($periode_akhir)) {
+    $tampilCari = mysqli_query($koneksi, "SELECT * FROM att_log WHERE DATE(scan_date) >= '$periode_awal' AND DATE(scan_date) <= '$periode_akhir'");
 
     $no = 0;
     while ($cari = mysqli_fetch_array($tampilCari, MYSQLI_ASSOC)) {
@@ -58,7 +66,7 @@ if (!empty($_POST['periode_awal']) && !empty($_POST['periode_akhir'])) {
     }
 }
 
-if (empty($_POST['periode_awal']) && empty($_POST['periode_akhir'])) {
+if (empty($periode_awal) && empty($periode_akhir)) {
     $no = 0;
     while ($pres    = mysqli_fetch_array($tampilPres, MYSQLI_ASSOC)) {
         $no++;
