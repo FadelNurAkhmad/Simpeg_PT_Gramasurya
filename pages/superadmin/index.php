@@ -248,14 +248,15 @@ while ($row = mysqli_fetch_array($query)) {
                     </li>
                     <!-- <li><a href="index.php?page=form-master-data-skp"><i class="ion-social-buffer bg-pink"></i><span>SKP</span></a></li> -->
                     <!-- gaji -->
-                    <li class="has-sub">
+                    <li><a href="index.php?page=form-view-data-gaji-konfigurasi"><i class="ion-social-usd bg-success"></i><span>Gaji Pegawai</span></a></li>
+                    <!-- <li class="has-sub">
                         <a href="javascript:;"><b class="caret pull-right"></b><i class="ion-social-usd bg-success"></i><span>Gaji Pegawai</span></a>
                         <ul class="sub-menu">
-                            <!-- <li><a href="index.php?page=form-view-data-gaji-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Gaji Jabatan</a></li> -->
-                            <!-- <li><a href="index.php?page=form-view-data-gaji"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Data Gaji</a></li> -->
+                            <li><a href="index.php?page=form-view-data-gaji-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Gaji Jabatan</a></li>
+                            <li><a href="index.php?page=form-view-data-gaji"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Data Gaji</a></li>
                             <li><a href="index.php?page=form-view-data-gaji-konfigurasi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Gaji</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                     <!-- end gaji -->
                     <li class="has-sub">
                         <a href="javascript:;"><b class="caret pull-right"></b><i class="ion-compose bg-primary"></i><span>Presensi</span></a>

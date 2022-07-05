@@ -512,9 +512,7 @@ $diff = $today->diff($birthday);
 								<th>Tanggal Buat</th>
 								<th>Divisi</th>
 								<th>Periode Penilaian</th>
-								<th width="10%">
-									<center>View</center>
-								</th>
+								<th class="text-center" width="10%">View</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -602,9 +600,7 @@ $diff = $today->diff($birthday);
 								<th>Nama</th>
 								<th>Periode Gaji</th>
 								<th>Total Gaji</th>
-								<th width="10%">
-									<center>View</center>
-								</th>
+								<th class="text-center" width="10%">View</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -651,7 +647,7 @@ $diff = $today->diff($birthday);
 								<th width="10%">No #</th>
 								<th>Nama Dokumen</th>
 								<th>File</th>
-								<th>Download Dokumen</th>
+								<th class="text-center">Download Dokumen</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -672,17 +668,7 @@ $diff = $today->diff($birthday);
 										}
 										?>
 									</td>
-									<!-- <td><?php
-												if (isset($_POST['view'])) {
-													header("content-type: application/pdf");
-													readfile("../../assets/file/$dok[file]");
-												}
-												?>
-										<form action="" method="post">
-											<button name="view" title="View Dokumen" type="button" class="btn btn-warning btn-xs">View Dokumen</button>
-										</form>
-									</td> -->
-									<td class="tools">
+									<td class="text-center">
 										<a href="../../assets/file/<?= $dok['file']; ?>" title="Download" type="button" class="btn btn-warning btn-xs">Download</a>
 									</td>
 								</tr>

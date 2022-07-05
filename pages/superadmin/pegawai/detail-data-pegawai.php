@@ -679,7 +679,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 								<th class="text-center">
 									<center><i class="fa fa-code fa-lg"></i></center>
 								</th>
-								<th width="6%">View</th>
+								<th class="text-center" width="6%">View</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -746,8 +746,10 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 								<th>Nama</th>
 								<th>Periode Gaji</th>
 								<th>Total Gaji</th>
-								<th width="10%">Action</th>
-								<th width="6%">View</th>
+								<th class="text-center">
+									<center><i class="fa fa-code fa-lg"></i></center>
+								</th>
+								<th class="text-center" width="6%">View</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -776,7 +778,9 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 										<a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
 										<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?= $gaji['id_gaji_konfig'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
 									</td>
-									<td class="tools"><a href="index.php?page=detail-pegawai-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" title="view detail" type="button" class="btn btn-warning btn-xs">Detail</a></td>
+									<td class="text-center">
+										<a href="index.php?page=detail-pegawai-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" title="view detail" type="button" class="btn btn-warning btn-xs">Detail</a>
+									</td>
 								</tr>
 								<!-- #modal-dialog -->
 								<div id="Del<?php echo $gaji['id_gaji_konfig'] ?>" class="modal fade" role="dialog">
@@ -839,7 +843,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 										}
 										?>
 									</td>
-									<td class="tools">
+									<td class="text-center">
 										<a href="index.php?page=form-edit-data-dokumen&id_dokumen=<?= $dok['id_dokumen']; ?>" title="edit" type="button" class="btn btn-info btn-icon btn-sm"><i class="fa fa-edit fa-lg"></i></a>&nbsp;
 										<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?= $dok['id_dokumen'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
 									</td>
