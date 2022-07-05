@@ -1011,8 +1011,12 @@ while ($row = mysqli_fetch_array($query)) {
                     include "../../pages/superadmin/presensi/hari_jam_kerja/delete-hari-jam-kerja.php";
                     break;
 
+
                 case 'form-view-rekap-presensi':
                     include "../../pages/superadmin/presensi/rekap/form-view-rekap-presensi.php";
+                    break;
+                case 'export-scanlog':
+                    include "../../pages/superadmin/presensi/rekap/export-scanlog.php";
                     break;
 
 
