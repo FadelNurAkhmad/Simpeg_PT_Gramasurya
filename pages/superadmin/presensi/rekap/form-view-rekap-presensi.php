@@ -1,7 +1,10 @@
 <?php
 $filename    = "Daftar Pegawai";
-
 include "../../config/koneksi.php";
+require '../../assets/plugins/phpspreadsheet/vendor/autoload.php';
+require 'presensi/rekap/export-scanlog.php';
+
+
 // require '../../assets/plugins/phpspreadsheet/vendor/autoload.php';
 
 // use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -68,7 +71,7 @@ include "../../config/koneksi.php";
 // $writer->save("$file");
 ?>
 <?php
-include "../../config/koneksi.php";
+
 function timeScan($attribute)
 {
     $datetime = new DateTime($attribute);
@@ -121,7 +124,7 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
             </div>
             <div class="form-group col-sm-4 m-b-10">
                 <button type="submit" name="cari" value="cari" class="btn btn-primary"><i class="ion-ios-search-strong"></i> &nbsp;Cari</button>&nbsp;
-                <a href="#" class="btn btn-sm btn-success" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a>
+                <!-- <a href="#" class="btn btn-sm btn-success" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a> -->
             </div>
         </form>
     </div>
@@ -141,7 +144,13 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
         <div class="tab-content">
             <!-- tab scanlog -->
             <div class="tab-pane fade active in" id="scanlog">
+                <?php
+
+                ?>
+                <li style="text-align:right ;"><a href="<?php echo $file; ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
+
                 <div class="alert alert-success fade in">
+
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
                     <i class="fa fa-info fa-2x pull-left"></i> Folder ini dapat digunakan untuk melihat rekap presensi ...
                 </div>
@@ -248,6 +257,7 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
             <!-- end tab scanlog -->
             <!-- tab rekap harian -->
             <div class="tab-pane fade" id="rekapharian">
+                <li style="text-align:right ;"><a href="<?php echo $file1; ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
                 <div class="alert alert-success fade in">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
                     <i class="fa fa-info fa-2x pull-left"></i> Folder ini dapat digunakan untuk melihat rekap presensi ...
@@ -354,6 +364,7 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
             <!-- end tab rekap harian -->
             <!-- tab rekap periode -->
             <div class="tab-pane fade" id="rekapperiode">
+                <li style="text-align:right ;"><a href="<?php echo $file2; ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
                 <div class="alert alert-success fade in">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
                     <i class="fa fa-info fa-2x pull-left"></i> Folder ini dapat digunakan untuk melihat rekap presensi ...
