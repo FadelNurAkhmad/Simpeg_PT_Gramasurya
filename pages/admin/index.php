@@ -210,7 +210,14 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 						</ul>
 					</li>
 					<!-- <li><a href="index.php?page=form-master-data-mutasi"><i class="ion-arrow-swap bg-grey"></i><span>Mutasi</span></a></li> -->
-					<li><a href="index.php?page=form-master-data-skp"><i class="ion-social-buffer bg-warning"></i><span>SKP</span></a></li>
+					<!-- <li><a href="index.php?page=form-master-data-skp"><i class="ion-social-buffer bg-warning"></i><span>SKP</span></a></li> -->
+					<li class="has-sub">
+						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-social-buffer bg-warning"></i><span>KPI</span></a>
+						<ul class="sub-menu">
+							<li><a href="index.php?page=form-view-kpi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data KPI</a></li>
+							<li><a href="index.php?page=form-view-divisi-kpi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Divisi Perusahaan</a></li>
+						</ul>
+					</li>
 					<li class="has-sub">
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-compose bg-primary"></i><span>Presensi</span></a>
 						<ul class="sub-menu">
@@ -743,6 +750,53 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					break;
 				case 'detail-data-skp':
 					include "../../pages/admin/skp/detail-data-skp.php";
+					break;
+
+				case 'form-view-kpi':
+					include "../../pages/admin/kpi/data_kpi/form-view-kpi.php";
+					break;
+				case 'form-master-kpi':
+					include "../../pages/admin/kpi/data_kpi/form-master-kpi.php";
+					break;
+				case 'form-edit-kpi':
+					include "../../pages/admin/kpi/data_kpi/form-edit-kpi.php";
+					break;
+				case 'edit-kpi':
+					include "../../pages/admin/kpi/data_kpi/edit-kpi.php";
+					break;
+				case 'master-kpi':
+					include "../../pages/admin/kpi/data_kpi/master-kpi.php";
+					break;
+				case 'delete-kpi':
+					include "../../pages/admin/kpi/data_kpi/delete-kpi.php";
+					break;
+				case 'detail-kpi':
+					include "../../pages/admin/kpi/data_kpi/detail-kpi.php";
+					break;
+				case 'detail-pegawai-kpi':
+					include "../../pages/admin/kpi/data_kpi/detail-pegawai-kpi.php";
+					break;
+				case 'masterkpi':
+					include "../../pages/admin/kpi/data_kpi/masterkpi.php";
+					break;
+
+				case 'form-view-divisi-kpi':
+					include "../../pages/admin/kpi/divisi/form-view-divisi-kpi.php";
+					break;
+				case 'form-master-divisi-kpi':
+					include "../../pages/admin/kpi/divisi/form-master-divisi-kpi.php";
+					break;
+				case 'form-edit-divisi-kpi':
+					include "../../pages/admin/kpi/divisi/form-edit-divisi-kpi.php";
+					break;
+				case 'master-divisi-kpi':
+					include "../../pages/admin/kpi/divisi/master-divisi-kpi.php";
+					break;
+				case 'edit-divisi-kpi':
+					include "../../pages/admin/kpi/divisi/edit-divisi-kpi.php";
+					break;
+				case 'delete-divisi-kpi':
+					include "../../pages/admin/kpi/divisi/delete-divisi-kpi.php";
 					break;
 
 				case 'form-view-data-presensi':

@@ -239,12 +239,19 @@ while ($row = mysqli_fetch_array($query)) {
                         </ul>
                     </li>
                     <li><a href="index.php?page=form-master-data-mutasi"><i class="ion-arrow-swap bg-warning"></i><span>Mutasi</span></a></li>
-                    <li><a href="index.php?page=form-master-data-skp"><i class="ion-social-buffer bg-pink"></i><span>SKP</span></a></li>
+                    <li class="has-sub">
+                        <a href="javascript:;"><b class="caret pull-right"></b><i class="ion-social-buffer bg-pink"></i><span>KPI</span></a>
+                        <ul class="sub-menu">
+                            <li><a href="index.php?page=form-view-kpi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data KPI</a></li>
+                            <li><a href="index.php?page=form-view-divisi-kpi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Divisi Perusahaan</a></li>
+                        </ul>
+                    </li>
+                    <!-- <li><a href="index.php?page=form-master-data-skp"><i class="ion-social-buffer bg-pink"></i><span>SKP</span></a></li> -->
                     <!-- gaji -->
                     <li class="has-sub">
                         <a href="javascript:;"><b class="caret pull-right"></b><i class="ion-social-usd bg-success"></i><span>Gaji Pegawai</span></a>
                         <ul class="sub-menu">
-                            <li><a href="index.php?page=form-view-data-gaji-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Gaji Jabatan</a></li>
+                            <!-- <li><a href="index.php?page=form-view-data-gaji-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Gaji Jabatan</a></li> -->
                             <!-- <li><a href="index.php?page=form-view-data-gaji"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Data Gaji</a></li> -->
                             <li><a href="index.php?page=form-view-data-gaji-konfigurasi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Gaji</a></li>
                         </ul>
@@ -869,6 +876,53 @@ while ($row = mysqli_fetch_array($query)) {
                     break;
                 case 'detail-data-skp':
                     include "../../pages/superadmin/skp/detail-data-skp.php";
+                    break;
+
+                case 'form-view-kpi':
+                    include "../../pages/superadmin/kpi/data_kpi/form-view-kpi.php";
+                    break;
+                case 'form-master-kpi':
+                    include "../../pages/superadmin/kpi/data_kpi/form-master-kpi.php";
+                    break;
+                case 'form-edit-kpi':
+                    include "../../pages/superadmin/kpi/data_kpi/form-edit-kpi.php";
+                    break;
+                case 'edit-kpi':
+                    include "../../pages/superadmin/kpi/data_kpi/edit-kpi.php";
+                    break;
+                case 'master-kpi':
+                    include "../../pages/superadmin/kpi/data_kpi/master-kpi.php";
+                    break;
+                case 'delete-kpi':
+                    include "../../pages/superadmin/kpi/data_kpi/delete-kpi.php";
+                    break;
+                case 'detail-kpi':
+                    include "../../pages/superadmin/kpi/data_kpi/detail-kpi.php";
+                    break;
+                case 'detail-pegawai-kpi':
+                    include "../../pages/superadmin/kpi/data_kpi/detail-pegawai-kpi.php";
+                    break;
+                case 'masterkpi':
+                    include "../../pages/superadmin/kpi/data_kpi/masterkpi.php";
+                    break;
+
+                case 'form-view-divisi-kpi':
+                    include "../../pages/superadmin/kpi/divisi/form-view-divisi-kpi.php";
+                    break;
+                case 'form-master-divisi-kpi':
+                    include "../../pages/superadmin/kpi/divisi/form-master-divisi-kpi.php";
+                    break;
+                case 'form-edit-divisi-kpi':
+                    include "../../pages/superadmin/kpi/divisi/form-edit-divisi-kpi.php";
+                    break;
+                case 'master-divisi-kpi':
+                    include "../../pages/superadmin/kpi/divisi/master-divisi-kpi.php";
+                    break;
+                case 'edit-divisi-kpi':
+                    include "../../pages/superadmin/kpi/divisi/edit-divisi-kpi.php";
+                    break;
+                case 'delete-divisi-kpi':
+                    include "../../pages/superadmin/kpi/divisi/delete-divisi-kpi.php";
                     break;
 
                 case 'form-view-data-gaji-jabatan':

@@ -48,7 +48,8 @@ $diff = $today->diff($birthday);
 			<li class=""><a href="#ortu" data-toggle="tab"><span class="visible-xs">Ortu</span><span class="hidden-xs"><i class="ion-ios-paper fa-lg text-danger"></i> Orang Tua</span></a></li>
 			<li class=""><a href="#sekolah" data-toggle="tab"><span class="visible-xs">Pend</span><span class="hidden-xs"><i class="ion-university fa-lg text-inverse"></i> Pendidikan</span></a></li>
 			<li class=""><a href="#bahasa" data-toggle="tab"><span class="visible-xs">Bhs</span><span class="hidden-xs"><i class="fa fa-language fa-lg text-warning"></i> Bahasa</span></a></li>
-			<li class=""><a href="#skp" data-toggle="tab"><span class="visible-xs">SKP</span><span class="hidden-xs"><i class="ion-social-buffer fa-lg text-info"></i> SKP</span></a></li>
+			<!-- <li class=""><a href="#skp" data-toggle="tab"><span class="visible-xs">SKP</span><span class="hidden-xs"><i class="ion-social-buffer fa-lg text-info"></i> SKP</span></a></li> -->
+			<li class=""><a href="#kpi" data-toggle="tab"><span class="visible-xs">KPI</span><span class="hidden-xs"><i class="ion-social-buffer fa-lg text-info"></i> KPI</span></a></li>
 			<li class=""><a href="#gaji" data-toggle="tab"><span class="visible-xs">Gaji</span><span class="hidden-xs"><i class="fa fa-pencil text-inverse"></i> Gaji</span></a></li>
 			<li class=""><a href="#dokumen" data-toggle="tab"><span class="visible-xs">Dokumen</span><span class="hidden-xs"><i class="fa fa-folder-open text-success"></i> Dokumen</span></a></li>
 			<li class=""><a href="#presensi" data-toggle="tab"><span class="visible-xs">Presensi</span><span class="hidden-xs"><i class="fa fa-calendar-check-o text-danger"></i> Presensi</span></a></li>
@@ -434,7 +435,7 @@ $diff = $today->diff($birthday);
 					</table>
 				</div>
 			</div>
-			<div class="tab-pane fade" id="skp">
+			<!-- <div class="tab-pane fade" id="skp">
 				<div class="table-responsive">
 					<table class="table table-bordered table-striped">
 						<thead>
@@ -493,6 +494,60 @@ $diff = $today->diff($birthday);
 						</tbody>
 					</table>
 				</div>
+			</div> -->
+
+			<!-- tab KPI -->
+			<div class="tab-pane fade" id="kpi">
+				<div class="alert alert-success fade in">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+					<i class="fa fa-info fa-2x pull-left"></i> Klik "Detail" untuk melihat hasil KPI ...
+				</div>
+				<div class="table-responsive">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th width="4%">No</th>
+								<th>NIP</th>
+								<th>Nama</th>
+								<th>Tanggal Buat</th>
+								<th>Divisi</th>
+								<th>Periode Penilaian</th>
+								<th width="10%">
+									<center>View</center>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							$no = 0;
+							$tampilKPI    = mysqli_query(
+								$koneksi,
+								"SELECT DISTINCT id_kategori, id_peg, tanggal_kpi, divisi, bulan, tahun FROM tb_kpi WHERE id_peg='$id_peg' ORDER BY id_data_kpi DESC"
+							);
+							while ($kpi    = mysqli_fetch_array($tampilKPI)) {
+								$no++
+							?>
+								<tr>
+									<td><?php echo $no ?></td>
+									<td><?php echo $data == 0 ? '-' : $data['pegawai_nip']; ?></td>
+									<td><?php echo $data == 0 ? '-' : $data['pegawai_nama']; ?></td>
+									<td><?php echo $kpi['tanggal_kpi'] ?></td>
+									<td><?php echo $kpi['divisi'] ?></td>
+									<td>
+										<?php echo $kpi['bulan'] ?>
+										<b>-</b>
+										<?php echo $kpi['tahun'] ?>
+									</td>
+									<td class="text-center">
+										<a href="index.php?page=detail-pegawai-kpi&id_kategori=<?= $kpi['id_kategori'] ?>" title="view detail" type="button" class="btn btn-warning btn-xs">Detail</a>
+									</td>
+								</tr>
+							<?php
+							}
+							?>
+						</tbody>
+					</table>
+				</div>
 			</div>
 			<!-- <div class="tab-pane fade" id="kgb">
 				<div class="table-responsive">
@@ -531,6 +586,8 @@ $diff = $today->diff($birthday);
 					</table>
 				</div>
 			</div> -->
+
+			<!-- tab gaji -->
 			<div class="tab-pane fade" id="gaji">
 				<div class="alert alert-success fade in">
 					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
@@ -545,7 +602,9 @@ $diff = $today->diff($birthday);
 								<th>Nama</th>
 								<th>Periode Gaji</th>
 								<th>Total Gaji</th>
-								<th width="10%">Action</th>
+								<th width="10%">
+									<center>View</center>
+								</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -570,25 +629,9 @@ $diff = $today->diff($birthday);
 									</td>
 									<td align="right"><?php echo 'Rp. ' . number_format($gaji['gaji_diterima']); ?></td>
 									<td class="text-center">
-										<a type="button" class="btn btn-success btn-icon btn-sm" href="index.php?page=detail-pegawai-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
+										<a href="index.php?page=detail-pegawai-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" title="view detail" type="button" class="btn btn-warning btn-xs">Detail</a>
 									</td>
 								</tr>
-								<!-- #modal-dialog -->
-								<div id="Del<?php echo $gaji['id_gaji_konfig'] ?>" class="modal fade" role="dialog">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Apakah Anda yakin ingin delete Data Gaji dari Database?</h5>
-											</div>
-											<div class="modal-body" align="center">
-												<a href="index.php?page=delete-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
-											</div>
-											<div class="modal-footer">
-												<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
-											</div>
-										</div>
-									</div>
-								</div>
 							<?php
 							}
 							?>

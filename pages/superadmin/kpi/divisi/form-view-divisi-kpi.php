@@ -8,14 +8,14 @@
         $_SESSION['pesan'] = "";
         ?>
     </li>
-    <li><a href="index.php?page=form-master-jenis-cuti" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Tambah Jenis Cuti</a></li>
+    <li><a href="index.php?page=form-master-divisi-kpi" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Tambah Divisi</a></li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Cuti <small> <i class="fa fa-angle-right"></i> Jenis Cuti Umum&nbsp;</small></h1>
+<h1 class="page-header">KPI <small> <i class="fa fa-angle-right"></i> Divisi Perusahaan&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
-$tampilJenis    = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY id_jenis DESC");
+$tampilDivisi    = mysqli_query($koneksi, "SELECT * FROM tb_divisi_kpi ORDER BY id_divisi_kpi DESC");
 ?>
 <div class="row">
     <!-- begin col-12 -->
@@ -29,7 +29,7 @@ $tampilJenis    = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY i
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilJenis); ?></span> rows for "Data Jenis Cuti Umum"</h4>
+                <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilDivisi); ?></span> rows for "Data Divisi Perusahaan"</h4>
             </div>
             <div class="alert alert-success fade in">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
@@ -40,31 +40,31 @@ $tampilJenis    = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY i
                     <thead>
                         <tr>
                             <th><i class="fa fa-lock bigger-110 hidden-480"></i> ID</th>
-                            <th>Variabel Jenis Cuti</th>
+                            <th>Variabel Divisi Perusahaan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        while ($jenis = mysqli_fetch_array($tampilJenis)) {
+                        while ($divisi = mysqli_fetch_array($tampilDivisi)) {
                         ?>
                             <tr>
-                                <td><?php echo $jenis['id_jenis'] ?></td>
-                                <td><?php echo $jenis['jenis'] ?></td>
+                                <td><?php echo $divisi['id_divisi_kpi'] ?></td>
+                                <td><?php echo $divisi['divisi'] ?></td>
                                 <td class="text-center">
-                                    <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-jenis-cuti&id_jenis=<?= $jenis['id_jenis'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
-                                    <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $jenis['id_jenis'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
+                                    <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-divisi-kpi&id_divisi_kpi=<?= $divisi['id_divisi_kpi'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
+                                    <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $divisi['id_divisi_kpi'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
                                 </td>
                             </tr>
                             <!-- #modal-dialog -->
-                            <div id="Del<?php echo $jenis['id_jenis'] ?>" class="modal fade" role="dialog">
+                            <div id="Del<?php echo $divisi['id_divisi_kpi'] ?>" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Apakah kamu ingin delete <u><?php echo $jenis['jenis'] ?></u> dari Database?</h5>
+                                            <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Apakah kamu ingin delete <u><?php echo $divisi['divisi'] ?></u> dari Database?</h5>
                                         </div>
                                         <div class="modal-body" align="center">
-                                            <a href="index.php?page=delete-jenis-cuti&id_jenis=<?= $jenis['id_jenis'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
+                                            <a href="index.php?page=delete-divisi-kpi&id_divisi_kpi=<?= $divisi['id_divisi_kpi'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
                                         </div>
                                         <div class="modal-footer">
                                             <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>

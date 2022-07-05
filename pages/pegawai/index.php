@@ -186,6 +186,9 @@ $peg		= mysqli_fetch_array($tampilPeg);
 				case 'detail-data-skp':
 					include "../../pages/pegawai/skp/detail-data-skp.php";
 					break;
+				case 'detail-pegawai-kpi':
+					include "../../pages/pegawai/kpi/detail-pegawai-kpi.php";
+					break;
 				case 'detail-data-kgb':
 					include "../../pages/pegawai/kgb/detail-data-kgb.php";
 					break;

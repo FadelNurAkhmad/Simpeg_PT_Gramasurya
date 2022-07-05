@@ -11,10 +11,9 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Riwayat <small>Dokumen <i class="fa fa-angle-right"></i> Insert&nbsp;</h1>
+<h1 class="page-header">KPI <small>Divisi Perusahaan <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
-
 function kdauto($tabel, $inisial)
 {
     include "../../config/koneksi.php";
@@ -38,10 +37,8 @@ function kdauto($tabel, $inisial)
     }
     return $inisial . $tmp . $angka;
 }
-
-$id_dokumen    = kdauto("tb_dokumen", "");
+$id_divisi_kpi    = kdauto("tb_divisi_kpi", "");
 ?>
-<!-- begin row -->
 <div class="row">
     <!-- begin col-12 -->
     <div class="col-md-12">
@@ -54,48 +51,21 @@ $id_dokumen    = kdauto("tb_dokumen", "");
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Form master data dokumen</h4>
+                <h4 class="panel-title">Form input divisi perusahaan</h4>
             </div>
             <div class="panel-body">
-                <form action="index.php?page=master-data-dokumen&id_dokumen=<?= $id_dokumen ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+                <form action="index.php?page=master-divisi-kpi&id_divisi_kpi=<?= $id_divisi_kpi ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Pegawai</label>
+                        <label class="col-md-3 control-label">Nama Divisi</label>
                         <div class="col-md-6">
-                            <?php
-                            $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id ASC");
-                            echo '<select name="id_peg" class="default-select2 form-control">';
-                            echo '<option value="">...</option>';
-                            while ($row = mysqli_fetch_array($data)) {
-                                echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
-                            }
-                            echo '</select>';
-                            ?>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Nama Dokumen</label>
-                        <div class="col-md-6">
-                            <input type="text" name="dokumen" maxlength="128" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">File</label>
-                        <div class="col-md-6">
-                            <input type="file" name="file" maxlength="255" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"></label>
-                        <div class="col-md-6">
-                            <p>* Max size 500 KB</p>
-                            <p>* Format PDF</p>
+                            <input type="text" name="divisi" maxlength="255" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-6">
                             <button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>&nbsp;
-                            <a type="button" class="btn btn-default active" href="./"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+                            <a type="button" class="btn btn-default active" href="index.php?page=form-view-divisi-kpi"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
                         </div>
                     </div>
                 </form>
