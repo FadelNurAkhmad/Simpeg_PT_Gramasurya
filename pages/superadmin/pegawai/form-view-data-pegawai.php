@@ -81,6 +81,10 @@ while ($peg	= mysqli_fetch_array($expPeg)) {
 
 	if ($peg['pegawai_status'] == '1') {
 		$pgw = 'Aktif';
+	} else if ($peg['pegawai_status'] == '0') {
+		$pgw = 'Non-Aktif';
+	} else if ($peg['pegawai_status'] == '2') {
+		$pgw = 'Berhenti';
 	}
 
 	$expUni	= mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[unit_kerja]'");
