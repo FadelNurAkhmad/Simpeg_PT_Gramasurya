@@ -1065,8 +1065,12 @@ while ($row = mysqli_fetch_array($query)) {
                     include "../../pages/superadmin/presensi/hari_jam_kerja/delete-hari-jam-kerja.php";
                     break;
 
+
                 case 'form-view-rekap-presensi':
                     include "../../pages/superadmin/presensi/rekap/form-view-rekap-presensi.php";
+                    break;
+                case 'export-scanlog':
+                    include "../../pages/superadmin/presensi/rekap/export-scanlog.php";
                     break;
 
 
@@ -1138,6 +1142,9 @@ while ($row = mysqli_fetch_array($query)) {
                     break;
                 case 'nominatif':
                     include "../../pages/superadmin/report/nominatif.php";
+                    break;
+                case 'export-bezetting':
+                    include "../../pages/superadmin/report/export-bezetting.php";
                     break;
                 case 'pre-pensiun':
                     include "../../pages/superadmin/report/pre-pensiun.php";
