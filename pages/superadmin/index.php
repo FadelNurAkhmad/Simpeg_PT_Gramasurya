@@ -893,6 +893,9 @@ while ($row = mysqli_fetch_array($query)) {
                 case 'master-kpi':
                     include "../../pages/superadmin/kpi/data_kpi/master-kpi.php";
                     break;
+                case 'delete-edit-kpi':
+                    include "../../pages/superadmin/kpi/data_kpi/delete-edit-kpi.php";
+                    break;
                 case 'delete-kpi':
                     include "../../pages/superadmin/kpi/data_kpi/delete-kpi.php";
                     break;
