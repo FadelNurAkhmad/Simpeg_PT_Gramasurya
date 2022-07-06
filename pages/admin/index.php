@@ -392,6 +392,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'set-jabatan-sekarang':
 					include "../../pages/admin/kepeg/jabatan/set-jabatan-sekarang.php";
 					break;
+				case 'unset-jabatan-sekarang':
+					include "../../pages/admin/kepeg/jabatan/unset-jabatan-sekarang.php";
+					break;
 
 				case 'masterjab':
 					include "../../pages/admin/kepeg/jabatan/masterjab.php";

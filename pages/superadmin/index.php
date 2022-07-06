@@ -518,6 +518,9 @@ while ($row = mysqli_fetch_array($query)) {
                 case 'set-jabatan-sekarang':
                     include "../../pages/superadmin/kepeg/jabatan/set-jabatan-sekarang.php";
                     break;
+                case 'unset-jabatan-sekarang':
+                    include "../../pages/superadmin/kepeg/jabatan/unset-jabatan-sekarang.php";
+                    break;
 
                 case 'masterjab':
                     include "../../pages/superadmin/kepeg/jabatan/masterjab.php";

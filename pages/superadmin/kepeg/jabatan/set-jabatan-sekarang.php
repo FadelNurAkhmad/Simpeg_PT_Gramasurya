@@ -15,9 +15,8 @@
 	$cekJab = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_nama='$jabatan'");
 	$jabId = mysqli_fetch_array($cekJab, MYSQLI_ASSOC);
 
-	$update1 = mysqli_query($koneksi, "UPDATE tb_jabatan SET status_jab='' WHERE id_peg='$id_peg'");
-	$update2 = mysqli_query($koneksi, "UPDATE tb_jabatan SET status_jab='Aktif', jk_jab='$jk' WHERE id_jab='$id_jab'");
-	$update3 = mysqli_query($koneksi, "UPDATE pegawai SET pembagian1_id='$jabId[pembagian1_id]' WHERE pegawai_id='$id_peg'");
+	$update1 = mysqli_query($koneksi, "UPDATE tb_jabatan SET status_jab='Aktif', jk_jab='$jk' WHERE id_jab='$id_jab'");
+	$update2 = mysqli_query($koneksi, "UPDATE pegawai SET pembagian1_id='$jabId[pembagian1_id]' WHERE pegawai_id='$id_peg'");
 	if ($update1) {
 		$_SESSION['pesan'] = "Good! setup jabatan sekarang success ...";
 		header("location:index.php?page=detail-data-pegawai&pegawai_id=$id_peg");

@@ -8,7 +8,7 @@ $query = "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id = tb
 $sql   = mysqli_query($koneksi, $query);
 $data    = mysqli_fetch_array($sql);
 
-$jabatan	= mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$data[pegawai_id]'");
+$jabatan	= mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id ='$data[pembagian1_id]'");
 $jab	= mysqli_fetch_array($jabatan);
 
 $queryPan	= mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' AND status_pan='Aktif'");
@@ -100,7 +100,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 													<h5><span class="label label-inverse pull-right"> # Biodata Pegawai </span></h5>
 												</th>
 												<th>
-													<h4><?= $data['pegawai_nama'] ?> <small><?= $jab == 0 ? '-' : $jab['jabatan']; ?></small></h4>
+													<h4><?= $data['pegawai_nama'] ?> <small><?= (isset($jab['pembagian1_id']) ? $jab['pembagian1_nama'] : "-") ?></small></h4>
 												</th>
 											</tr>
 										</thead>
@@ -1157,7 +1157,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 											<th width="10%">
 												<center><i class="fa fa-code fa-lg"></i></center><br />
 											</th>
-											<th width="5%">Set<br />&nbsp;</th>
+											<th width="15%">Set<br />&nbsp;</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -1193,7 +1193,14 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 													<a href="index.php?page=form-edit-data-jabatan&id_jab=<?= $jab['id_jab']; ?>" title="edit" type="button" class="btn btn-info btn-icon btn-sm"><i class="fa fa-edit fa-lg"></i></a>&nbsp;
 													<a href="index.php?page=delete-data-jabatan&id_jab=<?= $jab['id_jab']; ?>" title="delete" type="button" class="btn btn-danger btn-icon btn-sm" onclick="return confirm('Apakah kamu ingin delete == Data Jabatan == Dari Database?');"><i class="fa fa-trash-o fa-lg"></i></a>
 												</td>
-												<td class="tools"><a href="index.php?page=set-jabatan-sekarang&id_jab=<?= $jab['id_jab']; ?>&pegawai_id=<?= $id_peg ?>&jabatan=<?= $jab['jabatan'] ?>" title="setup sebagai jabatan sekarang" type="button" class="btn btn-success btn-xs" onclick="return confirm('Are you sure you want Setup == Jabatan Sekarang == ?');">Set</a></td>
+												<td class="tools">
+													<a href="index.php?page=set-jabatan-sekarang&id_jab=<?= $jab['id_jab']; ?>&pegawai_id=<?= $id_peg ?>&jabatan=<?= $jab['jabatan'] ?>" title="setup sebagai jabatan sekarang" type="button" class="btn btn-success btn-xs" onclick="return confirm('Are you sure you want Setup == Jabatan Sekarang == ?');">Set</a>
+													<?php
+													if ($jab['status_jab'] == "Aktif") {
+														echo "<a href='index.php?page=unset-jabatan-sekarang&id_jab= $jab[id_jab] &pegawai_id= $id_peg &jabatan= $jab[jabatan]' title='unset jabatan sekarang' type='button' class='btn btn-danger btn-xs' onclick='return confirm(Are you sure you want Unset == Jabatan Sekarang == ?);'>Unset</a>";
+													}
+													?>
+												</td>
 											</tr>
 										<?php
 										}

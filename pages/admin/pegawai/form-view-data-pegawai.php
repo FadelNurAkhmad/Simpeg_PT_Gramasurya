@@ -156,11 +156,13 @@ $tampilPeg	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai
 								</td>
 								<td><?php echo $peg['tempat_lahir'] ?>, <?php echo $peg['tgl_lahir'] ?></td>
 								<td><?php
-									$tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]'");
+									// $tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]' AND status_jab='Aktif'");
+									$tampilJab = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id = '$peg[pembagian1_id]'");
 									$jab    = mysqli_fetch_array($tampilJab);
 
 									if (isset($jab)) {
-										echo $jab['jabatan'];
+										// echo $jab['jabatan'];
+										echo $jab['pembagian1_nama'];
 									} else {
 										echo "";
 									}
