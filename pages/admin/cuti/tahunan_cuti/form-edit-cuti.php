@@ -3,7 +3,7 @@ if (isset($_GET['id_cuti'])) {
     $id_cuti = $_GET['id_cuti'];
 
     include "../../config/koneksi.php";
-    $query   = mysqli_query($koneksi, "SELECT * FROM tb_data_cuti WHERE id_cuti='$id_cuti'");
+    $query   = mysqli_query($koneksi, "SELECT * FROM tb_cuti_tahunan WHERE id_cuti='$id_cuti'");
     $data    = mysqli_fetch_array($query);
 
     $tampilPeg   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$data[id_peg]'");

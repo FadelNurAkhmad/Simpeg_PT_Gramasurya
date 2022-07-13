@@ -163,9 +163,9 @@ $peg		= mysqli_fetch_array($tampilPeg);
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-calendar bg-pink"></i><span>Form Pengajuan Cuti</span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-master-cuti&pegawai_id=<?= $peg['pegawai_id'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pengajuan Cuti Tahunan</a></li>
-							<li><a href="index.php?page=form-master-cuti-umum&pegawai_id=<?= $peg['pegawai_id'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pengajuan Cuti Umum</a></li>
+							<li><a href="index.php?page=form-master-cuti-umum&pegawai_id=<?= $peg['pegawai_id'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pengajuan Izin</a></li>
 							<li><a href="index.php?page=form-view-cuti&pegawai_id=<?= $peg['pegawai_id'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Data Cuti Tahunan</a></li>
-							<li><a href="index.php?page=form-view-cuti-umum&pegawai_id=<?= $peg['pegawai_id'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Data Cuti Umum</a></li>
+							<li><a href="index.php?page=form-view-cuti-umum&pegawai_id=<?= $peg['pegawai_id'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Data Izin</a></li>
 						</ul>
 					</li>
 					<!-- begin sidebar minify button -->

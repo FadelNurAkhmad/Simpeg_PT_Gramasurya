@@ -11,7 +11,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Form Pengajuan Cuti <small><i class="fa fa-angle-right"></i> List Data Cuti Umum&nbsp;</small></h1>
+<h1 class="page-header">Form Pengajuan Cuti <small><i class="fa fa-angle-right"></i> List Data Izin&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";
@@ -33,11 +33,11 @@ $tampilCutiUmum    = mysqli_query($koneksi, "SELECT * FROM tb_cuti_umum WHERE id
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                 </div>
-                <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilCutiUmum); ?></span> rows for "Data Cuti Umum"</h4>
+                <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilCutiUmum); ?></span> rows for "Data Izin"</h4>
             </div>
             <div class="alert alert-success fade in">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
-                <i class="fa fa-info fa-2x pull-left"></i> Gunakan button di sebelah kanan setiap baris tabel untuk menuju instruksi view detail, edit dan hapus data ...
+                <i class="fa fa-info fa-2x pull-left"></i> Gunakan button di sebelah kanan setiap baris tabel untuk menuju instruksi view detail dan hapus data ...
             </div>
             <div class="panel-body">
                 <table id="data-table" class="table table-striped table-bordered nowrap" width="100%">
@@ -141,11 +141,14 @@ $tampilCutiUmum    = mysqli_query($koneksi, "SELECT * FROM tb_cuti_umum WHERE id
                                                     <div class="col-md-9">
                                                         :
                                                         <?php
-                                                        if ($cuti['status'] == 'Process') {
+                                                        $status = mysqli_query($koneksi, "SELECT status FROM tb_approval_cuti_umum WHERE id_approval_umum='$cuti[id_cuti_umum]'");
+                                                        $stat    = mysqli_fetch_array($status);
+
+                                                        if ($stat['status'] == 'Process') {
                                                             echo '<span class="badge badge-primary">PROCESS</span>';
-                                                        } else if ($cuti['status'] == 'Approve') {
+                                                        } else if ($stat['status'] == 'Approve') {
                                                             echo '<span class="badge badge-success">APPROVED</span>';
-                                                        } else if ($cuti['status'] == 'Reject') {
+                                                        } else if ($stat['status'] == 'Reject') {
                                                             echo '<span class="badge badge-danger">REJECTED</span>';
                                                         }
                                                         ?>

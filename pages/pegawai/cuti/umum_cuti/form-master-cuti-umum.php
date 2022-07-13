@@ -11,7 +11,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Form Pengajuan Cuti <small><i class="fa fa-angle-right"></i> Pengajuan Cuti Umum&nbsp;</small></h1>
+<h1 class="page-header">Form Pengajuan Cuti <small><i class="fa fa-angle-right"></i> Pengajuan Izin&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 $id_peg  = $_SESSION['id_peg'];
@@ -30,12 +30,12 @@ $data    = mysqli_fetch_array($query);
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                 </div>
-                <h4 class="panel-title">Form Pengajuan Cuti Umum</h4>
+                <h4 class="panel-title">Form Pengajuan Izin</h4>
             </div>
             <div class="panel-body">
                 <form action="index.php?page=master-cuti-umum&id_peg=<?= $id_peg ?>"" class=" form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Jenis Cuti</label>
+                        <label class="col-md-3 control-label">Jenis Izin</label>
                         <div class="col-md-6">
                             <?php
                             $dataJ = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY jenis");
@@ -55,7 +55,7 @@ $data    = mysqli_fetch_array($query);
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Tanggal Pengajuan Cuti</label>
+                        <label class="col-md-3 control-label">Tanggal Pengajuan Izin</label>
                         <div class="col-md-6">
                             <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
                                 <input type="text" name="tanggal_cuti" placeholder="Mulai" class="form-control" />
@@ -79,7 +79,7 @@ $data    = mysqli_fetch_array($query);
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Lama Cuti</label>
+                        <label class="col-md-3 control-label">Lama Izin</label>
                         <div class="col-md-6">
                             <input type="text" name="lama_cuti" class="form-control" placeholder="Dalam Hari"></input>
                         </div>

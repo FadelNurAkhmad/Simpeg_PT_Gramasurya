@@ -28,12 +28,14 @@
             $_SESSION['pesan'] = "Oops! Duplikat data ...";
             header("location:index.php?page=form-master-cuti-umum");
         } else {
-            $insert = "INSERT INTO tb_cuti_umum (id_cuti_umum, id_peg, tanggal_cuti, tanggal_mulai, tanggal_selesai, lama_cuti, jumlah_cuti, jenis_cuti, keperluan, status) 
-            VALUES ('$id_cuti_umum', '$id_peg', '$tanggal_cuti', '$tanggal_mulai', '$tanggal_selesai', '$lama_cuti', '$jumlah_cuti', '$jenis_cuti', '$keperluan', '$status')";
-            $query = mysqli_query($koneksi, $insert) or die(mysqli_error($koneksi));
+            $insert = mysqli_query($koneksi, "INSERT INTO tb_cuti_umum (id_cuti_umum, id_peg, tanggal_cuti, tanggal_mulai, tanggal_selesai, lama_cuti, jumlah_cuti, jenis_cuti, keperluan, status) 
+            VALUES ('$id_cuti_umum', '$id_peg', '$tanggal_cuti', '$tanggal_mulai', '$tanggal_selesai', '$lama_cuti', '$jumlah_cuti', '$jenis_cuti', '$keperluan', '$status')");
 
-            if ($query) {
-                $_SESSION['pesan'] = "Good! Insert data cuti success ...";
+            $approval = mysqli_query($koneksi, "INSERT INTO tb_approval_cuti_umum (id_approval_umum, id_peg, tanggal_cuti, tanggal_mulai, tanggal_selesai, lama_cuti, jumlah_cuti, jenis_cuti, keperluan, status) 
+            VALUES ('$id_cuti_umum', '$id_peg', '$tanggal_cuti', '$tanggal_mulai', '$tanggal_selesai', '$lama_cuti', '$jumlah_cuti', '$jenis_cuti', '$keperluan', '$status')");
+
+            if ($insert && $approval) {
+                $_SESSION['pesan'] = "Good! Insert data izin success ...";
                 header("location:index.php?page=form-view-cuti-umum");
             } else {
                 echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";

@@ -8,11 +8,11 @@
         $_SESSION['pesan'] = "";
         ?>
     </li>
-    <li><a href="index.php?page=form-master-cuti-umum" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Input Cuti Umum</a></li>
+    <li><a href="index.php?page=form-master-cuti-umum" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Input Izin</a></li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Cuti <small> <i class="fa fa-angle-right"></i> Cuti Umum&nbsp;</small></h1>
+<h1 class="page-header">Cuti / Izin<small> <i class="fa fa-angle-right"></i> Izin&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";
@@ -37,7 +37,7 @@ $tampilCutiUmum    = mysqli_query(
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilCutiUmum); ?></span> rows for "Data Cuti Umum"</h4>
+                <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilCutiUmum); ?></span> rows for "Data Izin"</h4>
             </div>
             <div class="alert alert-success fade in">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
@@ -52,8 +52,8 @@ $tampilCutiUmum    = mysqli_query(
                             <th>Nama</th>
                             <th>Tanggal Pengajuan</th>
                             <th>Tanggal Pelaksanaan</th>
-                            <th>Lama Cuti</th>
-                            <th>Jenis Cuti</th>
+                            <th>Lama Izin</th>
+                            <th>Jenis Izin</th>
                             <th>Status</th>
                             <th class="text-center" width="10%">Action</th>
                         </tr>
@@ -77,18 +77,21 @@ $tampilCutiUmum    = mysqli_query(
                                 <td><?php echo $cuti['lama_cuti'] ?> Hari</td>
                                 <td><?php echo $cuti['jenis_cuti'] ?></td>
                                 <td><?php
-                                    if ($cuti['status'] == 'Process') {
+                                    $status = mysqli_query($koneksi, "SELECT status FROM tb_approval_cuti_umum WHERE id_approval_umum='$cuti[id_cuti_umum]'");
+                                    $stat    = mysqli_fetch_array($status);
+
+                                    if ($stat['status'] == 'Process') {
                                         echo '<span class="badge badge-primary">PROCESS</span>';
-                                    } else if ($cuti['status'] == 'Approve') {
+                                    } else if ($stat['status'] == 'Approve') {
                                         echo '<span class="badge badge-success">APPROVED</span>';
-                                    } else if ($cuti['status'] == 'Reject') {
+                                    } else if ($stat['status'] == 'Reject') {
                                         echo '<span class="badge badge-danger">REJECTED</span>';
                                     }
                                     ?>
                                 </td>
                                 <td class="text-center">
-                                    <a type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#Approve<?php echo $cuti['id_cuti_umum'] ?>" title="Approve"><i class="fa fa-check"> </i> Approve</a>
-                                    <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#Reject<?php echo $cuti['id_cuti_umum'] ?>" title="Reject"><i class="fa fa-close"> </i> Reject</a>
+                                    <!-- <a type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#Approve<?php echo $cuti['id_cuti_umum'] ?>" title="Approve"><i class="fa fa-check"> </i> Approve</a> -->
+                                    <!-- <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#Reject<?php echo $cuti['id_cuti_umum'] ?>" title="Reject"><i class="fa fa-close"> </i> Reject</a> -->
                                     <a type="button" class="btn btn-success btn-icon btn-sm" data-toggle="modal" data-target="#Detail<?php echo $cuti['id_cuti_umum'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
                                     <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-cuti-umum&id_cuti_umum=<?= $cuti['id_cuti_umum'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
                                     <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $cuti['id_cuti_umum'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
@@ -169,7 +172,7 @@ $tampilCutiUmum    = mysqli_query(
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm-12">
-                                                    <label class="col-md-3 control-label">Jenis Cuti</label>
+                                                    <label class="col-md-3 control-label">Jenis Izin</label>
                                                     <div class="col-md-9">
                                                         : <?php echo $cuti['jenis_cuti'] ?>
                                                     </div>
@@ -196,7 +199,7 @@ $tampilCutiUmum    = mysqli_query(
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm-12">
-                                                    <label class="col-md-3 control-label">Lama Cuti</label>
+                                                    <label class="col-md-3 control-label">Lama Izin</label>
                                                     <div class="col-md-9">
                                                         : <?php echo $cuti['lama_cuti'] ?> Hari
                                                     </div>
@@ -206,11 +209,14 @@ $tampilCutiUmum    = mysqli_query(
                                                     <div class="col-md-9">
                                                         :
                                                         <?php
-                                                        if ($cuti['status'] == 'Process') {
+                                                        $status = mysqli_query($koneksi, "SELECT status FROM tb_approval_cuti_umum WHERE id_approval_umum='$cuti[id_cuti_umum]'");
+                                                        $stat    = mysqli_fetch_array($status);
+
+                                                        if ($stat['status'] == 'Process') {
                                                             echo '<span class="badge badge-primary">PROCESS</span>';
-                                                        } else if ($cuti['status'] == 'Approve') {
+                                                        } else if ($stat['status'] == 'Approve') {
                                                             echo '<span class="badge badge-success">APPROVED</span>';
-                                                        } else if ($cuti['status'] == 'Reject') {
+                                                        } else if ($stat['status'] == 'Reject') {
                                                             echo '<span class="badge badge-danger">REJECTED</span>';
                                                         }
                                                         ?>

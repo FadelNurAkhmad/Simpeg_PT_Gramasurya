@@ -230,12 +230,19 @@ while ($row = mysqli_fetch_array($query)) {
                         </ul>
                     </li>
                     <li class="has-sub">
-                        <a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-calendar bg-purple"></i><span>Cuti</span></a>
+                        <a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-calendar bg-purple"></i><span>Cuti / Izin</span></a>
                         <ul class="sub-menu">
-                            <li><a href="index.php?page=form-view-cuti-umum"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Cuti Umum</a></li>
                             <li><a href="index.php?page=form-view-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Cuti Tahunan</a></li>
                             <li><a href="index.php?page=form-view-jatah-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jatah Cuti Tahunan</a></li>
-                            <li><a href="index.php?page=form-view-jenis-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Jenis Cuti Umum</a></li>
+                            <li><a href="index.php?page=form-view-cuti-umum"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Izin</a></li>
+                            <li><a href="index.php?page=form-view-jenis-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Jenis Izin</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="javascript:;"><i class="fa fa-calendar bg-success"></i><span>Approval Cuti/Izin</span> <span class="badge bg-warning pull-right"><span class="fa fa-check"></span></span></a>
+                        <ul class="sub-menu">
+                            <li><a href="index.php?page=form-view-approval-tahap1"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Approval Tahap 1</a></li>
+                            <li><a href="index.php?page=form-view-approval-tahap2"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Approval Tahap 2</a></li>
                         </ul>
                     </li>
                     <li><a href="index.php?page=form-master-data-mutasi"><i class="ion-arrow-swap bg-warning"></i><span>Mutasi</span></a></li>
@@ -771,9 +778,6 @@ while ($row = mysqli_fetch_array($query)) {
                 case 'edit-cuti':
                     include "../../pages/superadmin/cuti/tahunan_cuti/edit-cuti.php";
                     break;
-                case 'status-cuti':
-                    include "../../pages/superadmin/cuti/tahunan_cuti/status-cuti.php";
-                    break;
                 case 'detail-cuti':
                     include "../../pages/superadmin/cuti/tahunan_cuti/detail-cuti.php";
                     break;
@@ -798,9 +802,6 @@ while ($row = mysqli_fetch_array($query)) {
                     break;
                 case 'edit-cuti-umum':
                     include "../../pages/superadmin/cuti/umum_cuti/edit-cuti-umum.php";
-                    break;
-                case 'status-cuti-umum':
-                    include "../../pages/superadmin/cuti/umum_cuti/status-cuti-umum.php";
                     break;
                 case 'detail-cuti-umum':
                     include "../../pages/superadmin/cuti/umum_cuti/detail-cuti-umum.php";
@@ -845,6 +846,38 @@ while ($row = mysqli_fetch_array($query)) {
                     break;
                 case 'delete-jatah-cuti':
                     include "../../pages/superadmin/cuti/jatah_cuti/delete-jatah-cuti.php";
+                    break;
+
+                case 'form-view-approval-tahap1':
+                    include "../../pages/superadmin/cuti/approval_tahap_1/form-view-approval-tahap1.php";
+                    break;
+                case 'status-cuti-umum':
+                    include "../../pages/superadmin/cuti/approval_tahap_1/status-cuti-umum.php";
+                    break;
+                case 'status-cuti-tahunan':
+                    include "../../pages/superadmin/cuti/approval_tahap_1/status-cuti-tahunan.php";
+                    break;
+                case 'delete-approval-tahunan':
+                    include "../../pages/superadmin/cuti/approval_tahap_1/delete-approval-tahunan.php";
+                    break;
+                case 'delete-approval-izin':
+                    include "../../pages/superadmin/cuti/approval_tahap_1/delete-approval-izin.php";
+                    break;
+
+                case 'form-view-approval-tahap2':
+                    include "../../pages/superadmin/cuti/approval_tahap_2/form-view-approval-tahap2.php";
+                    break;
+                case 'status-cuti-tahunan-2':
+                    include "../../pages/superadmin/cuti/approval_tahap_2/status-cuti-tahunan-2.php";
+                    break;
+                case 'status-cuti-umum-2':
+                    include "../../pages/superadmin/cuti/approval_tahap_2/status-cuti-umum-2.php";
+                    break;
+                case 'delete-approval-izin-2':
+                    include "../../pages/superadmin/cuti/approval_tahap_2/delete-approval-izin-2.php";
+                    break;
+                case 'delete-approval-tahunan-2':
+                    include "../../pages/superadmin/cuti/approval_tahap_2/delete-approval-tahunan-2.php";
                     break;
 
                 case 'form-master-data-mutasi':

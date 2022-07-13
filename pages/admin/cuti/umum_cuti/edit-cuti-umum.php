@@ -26,7 +26,7 @@
         } else {
             $update = mysqli_query($koneksi, "UPDATE tb_cuti_umum SET tanggal_cuti='$tanggal_cuti', tanggal_mulai='$tanggal_mulai', lama_cuti='$lama_cuti', jumlah_cuti='$jumlah_cuti', jenis_cuti='$jenis_cuti', keperluan='$keperluan', status='$status' WHERE id_cuti_umum='$id_cuti_umum'");
             if ($update) {
-                $_SESSION['pesan'] = "Good! edit cuti success ...";
+                $_SESSION['pesan'] = "Good! edit izin success ...";
                 header("location:index.php?page=form-view-cuti-umum");
             } else {
                 echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";

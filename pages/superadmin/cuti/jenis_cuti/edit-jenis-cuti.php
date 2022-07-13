@@ -24,7 +24,7 @@
 		} else {
 			$update = mysqli_query($koneksi, "UPDATE tb_jenis_cuti SET jenis='$jenis' WHERE id_jenis='$id_jenis'");
 			if ($update) {
-				$_SESSION['pesan'] = "Good! Edit Unit Kerja success ...";
+				$_SESSION['pesan'] = "Good! Edit Jenis Izin success ...";
 				header("location:index.php?page=form-view-jenis-cuti");
 			} else {
 				echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
