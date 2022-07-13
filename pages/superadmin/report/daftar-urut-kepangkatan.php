@@ -31,7 +31,7 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Report <small>DUK</small></h1>
+<h1 class="page-header">Report <small> <i class="fa fa-angle-right"></i> DUK</small></h1>
 <!-- end page-header -->
 <div class="profile-container">
 	<!-- begin profile-section -->
@@ -65,7 +65,7 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 						<th>6</th>
 						<th>7</th>
 						<th>8</th>
-						
+
 					</tr>
 				</thead>
 				<tbody>
@@ -80,7 +80,7 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 						<td><?php echo $peg['tempat_lahir']; ?> <?php echo $peg['tgl_lahir']; ?></td>
 						</td>
 						<td><?php echo $peg['pegawai_nip']; ?></td>
-						
+
 						<td><?php
 							$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]' ");
 							$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
@@ -92,12 +92,12 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 						<td><?php echo $hjab2; ?></td>
 						<!-- <td><?php echo $hjab['eselon']; ?></td> -->
 						<!-- <td><?php
-							$tgl_sk	= new DateTime($hpan4);
-							$today	= new DateTime();
-							$selisih	= $today->diff($tgl_sk);
+									$tgl_sk	= new DateTime($hpan4);
+									$today	= new DateTime();
+									$selisih	= $today->diff($tgl_sk);
 
-							echo $selisih->y;
-							?>
+									echo $selisih->y;
+									?>
 						</td> -->
 						<!-- <td><?php echo $selisih->m; ?></td> -->
 						<td><?php

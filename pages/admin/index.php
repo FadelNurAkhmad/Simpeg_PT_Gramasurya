@@ -934,6 +934,15 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'nominatif':
 					include "../../pages/admin/report/nominatif.php";
 					break;
+				case 'export-nominatif':
+					include "../../pages/admin/report/export-nominatif.php";
+					break;
+				case 'export-bezetting':
+					include "../../pages/admin/report/export-bezetting.php";
+					break;
+				case 'export-duk':
+					include "../../pages/admin/report/export-duk.php";
+					break;
 				case 'pre-pensiun':
 					include "../../pages/admin/report/pre-pensiun.php";
 					break;
@@ -980,6 +989,17 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'direct-search':
 					include "../../pages/admin/direct-search.php";
 					break;
+
+				case 'export-harian':
+					include "../../pages/admin/presensi/rekap/export-harian.php";
+					break;
+				case 'export-scanlog':
+					include "../../pages/admin/presensi/rekap/export-scanlog.php";
+					break;
+				case 'export-periode':
+					include "../../pages/admin/presensi/rekap/export-periode.php";
+					break;
+
 
 				default:
 					include '../../pages/admin/dashboard.php';

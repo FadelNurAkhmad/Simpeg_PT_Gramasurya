@@ -41,7 +41,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Profile <small>Pegawai <i class="fa fa-angle-right"></i> <?= $data['pegawai_nama'] ?> <i class="fa fa-lock"></i> NIP :<?= $data == 0 ? '-' : $data['pegawai_nip']; ?></small></h1>
+<h1 class="page-header">Profile <small>Data Pegawai <i class="fa fa-angle-right"></i> <?= $data['pegawai_nama'] ?> <i class="fa fa-lock"></i> NIP :<?= $data == 0 ? '-' : $data['pegawai_nip']; ?></small></h1>
 <!-- end page-header -->
 <!-- begin row -->
 <div class="row">
@@ -579,7 +579,6 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 					</table>
 				</div>
 			</div>
-
 			<div class="tab-pane fade" id="kpi">
 				<div class="alert alert-success fade in">
 					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>

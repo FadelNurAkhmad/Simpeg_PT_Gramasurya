@@ -86,27 +86,27 @@ $subhead = '<table cellpadding="1" border="0">
 $pdf->writeHTML($subhead, true, false, false, false, '');
 $html = '<table border="1" cellspacing="0" cellpadding="3">
 			<tr align="center">
-				<th rowspan="2" width="30">NO</th>
-				<th colspan="2" width="140">NAMA, TTL</th>
-				<th rowspan="2" width="70">JNS KELAMIN</th>
-				<th colspan="2" width="140">JABATAN</th>
-				<th rowspan="2" width="40">ESL</th>
-				<th rowspan="2" width="110">PEND, JURUSAN, T.LULUS</th>
-				<th rowspan="2" width="140">ALAMAT & NO. TELP</th>
-				<th rowspan="2" width="40">KET</th>
+				<th rowspan="2" width="40" height="50">NO</th>
+				<th colspan="2" width="200" height="30">NAMA, TTL</th>
+				<th rowspan="2" width="100">JENIS KELAMIN</th>
+				<th colspan="2" width="200">JABATAN</th>
+				<th rowspan="2" width="30">ESL</th>
+				<th rowspan="2" width="170">PEND, JURUSAN, T.LULUS</th>
+				<th rowspan="2" width="170">ALAMAT & NO. TELP</th>
+				<th rowspan="2" width="50">KET</th>
 			</tr>
 			<tr align="center">
-				<th colspan="2" width="140">NIP, AGAMA</th>	
-				<th width="80">NAMA</th>
-				<th width="60">TMT</th>
+				<th colspan="2" width="200">NIP, AGAMA</th>	
+				<th width="100">NAMA</th>
+				<th width="100">TMT</th>
 			</tr>
-			<tr align="center">
-				<th>1</th>
+			<tr align="center" >
+				<th height="20">1</th>
 				<th colspan="2">2</th>
 				<th>3</th>
 				<th>4</th>
 				<th>5</th>
-				<th>6</th>
+				<th></th>
 				<th>7</th>
 				<th>8</th>
 				<th>9</th>
@@ -147,10 +147,10 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 
 	// }
 	$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
-	$xx = isset($hjab['jabatan']) ? $hjab['jabatan'] : '';
-	$xxx = isset($hjab['tmt_jabatan']) ? $hjab['tmt_jabatan'] : '';
-	$html .= '<td>' . $xx . '</td>
-					<td>' . $xxx . '</td>
+	$jb = isset($hjab['jabatan']) ? $hjab['jabatan'] : '';
+	$jbt = isset($hjab['tmt_jabatan']) ? $hjab['tmt_jabatan'] : '';
+	$html .= '<td>' . $jb . '</td>
+					<td>' . $jbt . '</td>
 					<td align="center">' . '</td>';
 
 	// $idLatjab = mysqli_query($koneksi, "SELECT * FROM tb_lat_jabatan WHERE id_lat_jabatan='$peg[pegawai_id]'");

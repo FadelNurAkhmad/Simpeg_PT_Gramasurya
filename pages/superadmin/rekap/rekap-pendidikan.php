@@ -4,7 +4,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Rekapitulasi <small>Pegawai Berdasarkan Pendidikan</small></h1>
+<h1 class="page-header">Rekapitulasi <small> <i class="fa fa-angle-right"></i> Pendidikan</small></h1>
 <!-- end page-header -->
 <!-- begin row -->
 <div class="row">

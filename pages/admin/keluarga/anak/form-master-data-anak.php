@@ -11,7 +11,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Riwayat <small>Anak <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
+<h1 class="page-header">Riwayat Keluarga<small>Anak <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 

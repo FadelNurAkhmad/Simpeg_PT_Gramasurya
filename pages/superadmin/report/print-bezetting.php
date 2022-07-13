@@ -82,7 +82,7 @@ $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = 10, $header, $border = 0, $ln 
 $html = '<table border="1" cellspacing="0" cellpadding="3">
 			<tr align="center">
 				<th width="30">No</th>
-				<th width="150">NAMA<br />TEMPAT TANGGAL LAHIR</th>
+				<th width="200">NAMA<br />TEMPAT TANGGAL LAHIR</th>
 				<th width="130">NIP</th>
 				
 				<th width="100">JABATAN</th>
@@ -92,7 +92,7 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 			</tr>
 			<tr align="center">
 				<th width="30">1</th>
-				<th width="150">2</th>
+				<th width="200">2</th>
 				<th width="130">3</th>
 				<th width="100">4</th>
 				<th width="100">5</th>
@@ -107,7 +107,7 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 		$status = 'Aktif';
 	}
 	$html .= '<tr>
-					<td align="center">' . $no++ . '</td>
+					<td align="center" width="30">' . $no++ . '</td>
 					<td>' . $peg['pegawai_nama'] . '<br />' . $peg['tempat_lahir'] . ',' . $peg['tgl_lahir'] . '</td>
 					<td>' . $peg['pegawai_nip'] . '</td>';
 
