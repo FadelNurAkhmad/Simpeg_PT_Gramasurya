@@ -1079,6 +1079,12 @@ while ($row = mysqli_fetch_array($query)) {
                 case 'export-scanlog':
                     include "../../pages/superadmin/presensi/rekap/export-scanlog.php";
                     break;
+                case 'export-harian':
+                    include "../../pages/superadmin/presensi/rekap/export-harian.php";
+                    break;
+                case 'export-periode':
+                    include "../../pages/superadmin/presensi/rekap/export-periode.php";
+                    break;
 
 
                 case 'form-view-lokasi':

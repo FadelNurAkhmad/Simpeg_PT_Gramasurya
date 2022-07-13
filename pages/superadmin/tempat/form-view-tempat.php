@@ -12,7 +12,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">List Data <small>Lokasi&nbsp;</small></h1>
+<h1 class="page-header">Lokasi <small>Lokasi tipe 2&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";

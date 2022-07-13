@@ -8,7 +8,7 @@ $query = "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id = tb
 $sql   = mysqli_query($koneksi, $query);
 $data    = mysqli_fetch_array($sql);
 
-$jabatan	= mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id ='$data[pembagian1_id]'");
+$jabatan	= mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$data[pembagian1_id]'");
 $jab	= mysqli_fetch_array($jabatan);
 
 $queryPan	= mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' AND status_pan='Aktif'");
@@ -41,7 +41,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Profile <small>Pegawai <i class="fa fa-angle-right"></i> <?= $data['pegawai_nama'] ?> <i class="fa fa-lock"></i> NIP : <?= $data == 0 ? '-' : $data['pegawai_nip']; ?></small></h1>
+<h1 class="page-header">Profile <small>Data Pegawai <i class="fa fa-angle-right"></i> <?= $data['pegawai_nama'] ?> <i class="fa fa-lock"></i> NIP :<?= $data == 0 ? '-' : $data['pegawai_nip']; ?></small></h1>
 <!-- end page-header -->
 <!-- begin row -->
 <div class="row">
@@ -55,6 +55,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 			<li class=""><a href="#bahasa" data-toggle="tab"><span class="visible-xs">Bhs</span><span class="hidden-xs"><i class="fa fa-language fa-lg text-warning"></i> Bahasa</span></a></li>
 			<!-- <li class=""><a href="#skp" data-toggle="tab"><span class="visible-xs">SKP</span><span class="hidden-xs"><i class="ion-social-buffer fa-lg text-info"></i> SKP</span></a></li> -->
 			<li class=""><a href="#kpi" data-toggle="tab"><span class="visible-xs">KPI</span><span class="hidden-xs"><i class="ion-social-buffer fa-lg text-info"></i> KPI</span></a></li>
+			<li class=""><a href="#gaji" data-toggle="tab"><span class="visible-xs">Gaji</span><span class="hidden-xs"><i class="fa fa-pencil text-inverse"></i> Gaji</span></a></li>
 			<li class=""><a href="#dokumen" data-toggle="tab"><span class="visible-xs">Dokumen</span><span class="hidden-xs"><i class="fa fa-folder-open text-success"></i> Dokumen</span></a></li>
 			<li class=""><a href="#presensi" data-toggle="tab"><span class="visible-xs">Presensi</span><span class="hidden-xs"><i class="fa fa-calendar-check-o text-danger"></i> Presensi</span></a></li>
 		</ul>
@@ -118,7 +119,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 											</tr>
 											<tr>
 												<td class="field">Tempat Tanggal Lahir</td>
-												<td><i class="fa fa-map-marker fa-lg m-r-5"></i> <?= $data['tempat_lahir'] ?>, <?= $data['tgl_lahir'] ?></td>
+												<td><i class="fa fa-map-marker fa-lg m-r-5"></i> <?= (empty($data['tempat_lahir'])) ? "" : $data['tempat_lahir'] . "," ?> <?= $data['tgl_lahir'] ?></td>
 											</tr>
 											<tr>
 												<td class="field">Umur</td>
@@ -230,7 +231,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 												</td>
 											</tr> -->
 											<tr>
-												<td class="field">Jatah Cuti</td>
+												<td class="field">Jatah Cuti Tahunan</td>
 												<td>
 													<?php
 													if ($jatCuti == 0) {
@@ -242,7 +243,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 												</td>
 											</tr>
 											<tr>
-												<td class="field">Sisa Cuti</td>
+												<td class="field">Sisa Cuti Tahunan</td>
 												<td>
 													<?php
 													if ($jatCuti == 0) {
@@ -660,8 +661,6 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 					</table>
 				</div>
 			</div> -->
-
-			<!-- tab KPI -->
 			<div class="tab-pane fade" id="kpi">
 				<div class="alert alert-success fade in">
 					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
@@ -708,9 +707,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 										<a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-kpi&id_kategori=<?= $kpi['id_kategori'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
 										<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $kpi['id_kategori'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
 									</td>
-									<td class="text-center">
-										<a href="index.php?page=detail-pegawai-kpi&id_kategori=<?= $kpi['id_kategori'] ?>" title="view detail" type="button" class="btn btn-warning btn-xs">Detail</a>
-									</td>
+									<td class="tools"><a href="index.php?page=detail-pegawai-kpi&id_kategori=<?= $kpi['id_kategori'] ?>" title="view detail" type="button" class="btn btn-warning btn-xs">Detail</a></td>
 								</tr>
 								<!-- #modal-dialog-delete -->
 								<div id="Del<?php echo $kpi['id_kategori'] ?>" class="modal fade" role="dialog">
@@ -721,6 +718,79 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 											</div>
 											<div class="modal-body" align="center">
 												<a href="index.php?page=delete-kpi&id_kategori=<?= $kpi['id_kategori'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
+											</div>
+											<div class="modal-footer">
+												<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							<?php
+							}
+							?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="gaji">
+				<div class="alert alert-success fade in">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+					<i class="fa fa-info fa-2x pull-left"></i> Klik "Detail" untuk menuju halaman preview dan print ...
+				</div>
+				<div class="panel-body">
+					<table id="data-table" class="table table-striped table-bordered nowrap" width="100%">
+						<thead>
+							<tr>
+								<th width="4%">No</th>
+								<th>NIP</th>
+								<th>Nama</th>
+								<th>Periode Gaji</th>
+								<th>Total Gaji</th>
+								<th class="text-center">
+									<center><i class="fa fa-code fa-lg"></i></center>
+								</th>
+								<th class="text-center" width="6%">View</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							$no = 0;
+							$tampilGaji   = mysqli_query(
+								$koneksi,
+								"SELECT * FROM tb_gaji_konfigurasi WHERE id_peg='$id_peg' ORDER BY id_gaji_konfig"
+							);
+
+							while ($gaji = mysqli_fetch_array($tampilGaji)) {
+								$no++
+							?>
+								<tr>
+									<td><?php echo $no ?></td>
+									<td><?php echo $data['pegawai_nip'] ?></td>
+									<td><?php echo $data['pegawai_nama'] ?></td>
+									<td>
+										<?php echo $gaji['bulan'] ?>
+										<b>-</b>
+										<?php echo $gaji['tahun'] ?>
+									</td>
+									<td align="right"><?php echo 'Rp. ' . number_format($gaji['gaji_diterima']); ?></td>
+									<td class="text-center">
+										<!-- <a type="button" class="btn btn-success btn-icon btn-sm" href="index.php?page=detail-pegawai-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a> -->
+										<a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
+										<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?= $gaji['id_gaji_konfig'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
+									</td>
+									<td class="text-center">
+										<a href="index.php?page=detail-pegawai-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" title="view detail" type="button" class="btn btn-warning btn-xs">Detail</a>
+									</td>
+								</tr>
+								<!-- #modal-dialog -->
+								<div id="Del<?php echo $gaji['id_gaji_konfig'] ?>" class="modal fade" role="dialog">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Apakah Anda yakin ingin delete Data Gaji dari Database?</h5>
+											</div>
+											<div class="modal-body" align="center">
+												<a href="index.php?page=delete-data-gaji-konfigurasi&id_gaji_konfig=<?= $gaji['id_gaji_konfig'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
 											</div>
 											<div class="modal-footer">
 												<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
@@ -851,7 +921,6 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 				</div>
 			</div>
 			<!-- end tab dokumen -->
-
 			<!-- tab presensi -->
 			<div class="tab-pane fade" id="presensi">
 				<div class="alert alert-success fade in">
@@ -880,12 +949,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 							</div>
 						</form>
 					</div>
-					<div class="col-6 col-md-8">
-						<label class="col-md-1 control-label">Hadir</label>
-						<div class="col-md-2 m-b-10">
-							<input type="text" name="periode_awal" value="" class="form-control" readonly />
-						</div>
-					</div>
+
 				</div>
 				<div class="table-responsive">
 					<table class="table table-bordered table-striped">
@@ -1201,6 +1265,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 													}
 													?>
 												</td>
+
 											</tr>
 										<?php
 										}

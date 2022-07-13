@@ -35,7 +35,7 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Report <small>Bezetting</small></h1>
+<h1 class="page-header">Report <small> <i class="fa fa-angle-right"></i> Bezetting</small></h1>
 <!-- end page-header -->
 <div class="profile-container">
 	<!-- begin profile-section -->
