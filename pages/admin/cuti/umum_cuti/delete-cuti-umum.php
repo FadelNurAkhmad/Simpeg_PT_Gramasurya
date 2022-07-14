@@ -13,7 +13,7 @@
     if (!empty($id_cuti_umum) && $id_cuti_umum != "") {
         $delete    = mysqli_query($koneksi, "DELETE FROM tb_cuti_umum WHERE id_cuti_umum='$id_cuti_umum'");
         if ($delete) {
-            $_SESSION['pesan'] = "Good! delete cuti success ...";
+            $_SESSION['pesan'] = "Good! delete izin success ...";
             header("location:index.php?page=form-view-cuti-umum");
         } else {
             echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";

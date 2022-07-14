@@ -196,7 +196,7 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
             <!-- end tab scanlog -->
             <!-- tab rekap harian -->
             <div class="tab-pane fade" id="rekapharian">
-                <li style="text-align:right ;"><a href="<?php echo $file1; ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
+                <li style="text-align:right ;"><a href="index.php?page=export-harian&periodeawal=<?= (isset($_POST['periode_awal'])) ? $_POST['periode_awal'] : null ?>&periodeakhir=<?= (isset($_POST['periode_akhir'])) ? $_POST['periode_akhir'] : null ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
                 <div class="alert alert-success fade in">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
                     <i class="fa fa-info fa-2x pull-left"></i> Folder ini dapat digunakan untuk melihat rekap presensi ...
@@ -372,7 +372,7 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
             <!-- end tab rekap harian -->
             <!-- tab rekap periode -->
             <div class="tab-pane fade" id="rekapperiode">
-                <li style="text-align:right ;"><a href="<?php echo $file2; ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
+                <li style="text-align:right ;"><a href="index.php?page=export-periode&periodeawal=<?= (isset($_POST['periode_awal'])) ? $_POST['periode_awal'] : null ?>&periodeakhir=<?= (isset($_POST['periode_akhir'])) ? $_POST['periode_akhir'] : null ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
                 <div class="alert alert-success fade in">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
                     <i class="fa fa-info fa-2x pull-left"></i> Folder ini dapat digunakan untuk melihat rekap presensi ...

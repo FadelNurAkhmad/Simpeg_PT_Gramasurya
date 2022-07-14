@@ -2,47 +2,47 @@
 <ol class="breadcrumb pull-right">
 	<li>
 		<?php
-			if (isset($_SESSION['pesan']) && $_SESSION['pesan'] <> '') {
-				echo "<span class='pesan'><div class='btn btn-sm btn-inverse m-b-10'><i class='fa fa-bell text-warning'></i>&nbsp; ".$_SESSION['pesan']." &nbsp; &nbsp; &nbsp;</div></span>";
-			}
-			$_SESSION['pesan'] ="";
+		if (isset($_SESSION['pesan']) && $_SESSION['pesan'] <> '') {
+			echo "<span class='pesan'><div class='btn btn-sm btn-inverse m-b-10'><i class='fa fa-bell text-warning'></i>&nbsp; " . $_SESSION['pesan'] . " &nbsp; &nbsp; &nbsp;</div></span>";
+		}
+		$_SESSION['pesan'] = "";
 		?>
 	</li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Riwayat <small>Pangkat <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
+<h1 class="page-header">Kepegawaian <small><i class="fa fa-angle-right"></i> Pangkat <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
-	function kdauto($tabel, $inisial){
-		include "../../config/koneksi.php";
-		
-		$struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
-		$fieldInfo = mysqli_fetch_field_direct($struktur, 0);
-		$field      = $fieldInfo->name;
-		$panjang    = $fieldInfo->length;
-		$qry  = mysqli_query($koneksi, "SELECT max(".$field.") FROM ".$tabel);
-		$row  = mysqli_fetch_array($qry);
-		if ($row[0]=="") {
-		$angka=0;
-		}
-		else {
-		$angka= substr($row[0], strlen($inisial));
-		}
-		$angka++;
-		$angka =strval($angka);
-		$tmp  ="";
-		for($i=1; $i<=($panjang-strlen($inisial)-strlen($angka)); $i++) {
-		$tmp=$tmp."0";
-		}
-		return $inisial.$tmp.$angka;
-		}
-	$id_pangkat	=kdauto("tb_pangkat","");
+function kdauto($tabel, $inisial)
+{
+	include "../../config/koneksi.php";
+
+	$struktur   = mysqli_query($koneksi, "SELECT * FROM $tabel");
+	$fieldInfo = mysqli_fetch_field_direct($struktur, 0);
+	$field      = $fieldInfo->name;
+	$panjang    = $fieldInfo->length;
+	$qry  = mysqli_query($koneksi, "SELECT max(" . $field . ") FROM " . $tabel);
+	$row  = mysqli_fetch_array($qry);
+	if ($row[0] == "") {
+		$angka = 0;
+	} else {
+		$angka = substr($row[0], strlen($inisial));
+	}
+	$angka++;
+	$angka = strval($angka);
+	$tmp  = "";
+	for ($i = 1; $i <= ($panjang - strlen($inisial) - strlen($angka)); $i++) {
+		$tmp = $tmp . "0";
+	}
+	return $inisial . $tmp . $angka;
+}
+$id_pangkat	= kdauto("tb_pangkat", "");
 ?>
 <!-- begin row -->
 <div class="row">
 	<!-- begin col-12 -->
-    <div class="col-md-12">
+	<div class="col-md-12">
 		<!-- begin panel -->
 		<div class="panel panel-inverse" data-sortable-id="form-stuff-1">
 			<div class="panel-heading">
@@ -55,18 +55,18 @@
 				<h4 class="panel-title">Form master data pangkat</h4>
 			</div>
 			<div class="panel-body">
-				<form action="index.php?page=master-data-pangkat&id_pangkat=<?=$id_pangkat?>" class="form-horizontal" method="POST" enctype="multipart/form-data" >
+				<form action="index.php?page=master-data-pangkat&id_pangkat=<?= $id_pangkat ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label class="col-md-3 control-label">Pegawai</label>
 						<div class="col-md-6">
 							<?php
-								$data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");        
-								echo '<select name="id_peg" class="default-select2 form-control">';    
-								echo '<option value="">...</option>';    
-									while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)) {    
-									echo '<option value="'.$row['pegawai_id'].'">'.$row['pegawai_nama'].'_'.$row['pegawai_nip'].'</option>';    
-									}    
-								echo '</select>';
+							$data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
+							echo '<select name="id_peg" class="default-select2 form-control">';
+							echo '<option value="">...</option>';
+							while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)) {
+								echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
+							}
+							echo '</select>';
 							?>
 						</div>
 					</div>
@@ -80,16 +80,16 @@
 						<label class="col-md-3 control-label">Golongan</label>
 						<div class="col-md-4">
 							<?php
-								$dataG = mysqli_query($koneksi, "SELECT * FROM tb_mastergol ORDER BY nama_mastergol DESC");      
-								echo '<select name="gol" class="default-select2 form-control">';    
-								echo '<option value="">...</option>';    
-									while ($rowg = mysqli_fetch_array($dataG, MYSQLI_ASSOC)) {    
-									echo '<option value="'.$rowg['nama_mastergol'].'">'.$rowg['nama_mastergol'].'</option>';    
-									}    
-								echo '</select>';
+							$dataG = mysqli_query($koneksi, "SELECT * FROM tb_mastergol ORDER BY nama_mastergol DESC");
+							echo '<select name="gol" class="default-select2 form-control">';
+							echo '<option value="">...</option>';
+							while ($rowg = mysqli_fetch_array($dataG, MYSQLI_ASSOC)) {
+								echo '<option value="' . $rowg['nama_mastergol'] . '">' . $rowg['nama_mastergol'] . '</option>';
+							}
+							echo '</select>';
 							?>
 						</div>
-						<div class="col-sm-2">					
+						<div class="col-sm-2">
 							<a type="button" class="btn btn-warning btn-sm pull-right" data-toggle="modal" data-target="#gol"><i class="fa fa-plus-circle"></i> Add Golongan</a>
 						</div>
 					</div>
@@ -173,39 +173,41 @@
 						</div>
 					</form>
 					<div class="widget-body">
-						<div class="widget-main">							
+						<div class="widget-main">
 							<table class="table table-bordered table-striped">
 								<thead class="thin-border-bottom">
 									<tr>
 										<th width="10%"><i class="fa fa-caret-right"></i> No</th>
 										<th width="70%"><i class="fa fa-caret-right"></i> Nama Golongan</th>
-										<th width="20%"><center><i class="fa fa-code fa-lg"></i></center></th>
+										<th width="20%">
+											<center><i class="fa fa-code fa-lg"></i></center>
+										</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php
-										$no=0;
-										$tampilG	=mysqli_query($koneksi, "SELECT * FROM tb_mastergol ORDER BY nama_mastergol DESC");
-										while($gol=mysqli_fetch_array($tampilG, MYSQLI_ASSOC)){
+									$no = 0;
+									$tampilG	= mysqli_query($koneksi, "SELECT * FROM tb_mastergol ORDER BY nama_mastergol DESC");
+									while ($gol = mysqli_fetch_array($tampilG, MYSQLI_ASSOC)) {
 										$no++;
-									?>	
+									?>
 										<tr>
-											<td><?=$no?></td>
-											<td><?php echo $gol['nama_mastergol'];?></td>
+											<td><?= $no ?></td>
+											<td><?php echo $gol['nama_mastergol']; ?></td>
 											<td class="tools" align="center">
-												<a href="index.php?page=form-edit-mastergol&id_mastergol=<?=$gol['id_mastergol'];?>" title="edit" type="button" class="btn btn-info btn-icon btn-sm"><i class="fa fa-edit fa-lg"></i></a>&nbsp;&nbsp;
-												<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Delmasgol<?php echo $gol['id_mastergol']?>" title="delete"><i class="fa-lg fa fa-trash-o"></i></a>
+												<a href="index.php?page=form-edit-mastergol&id_mastergol=<?= $gol['id_mastergol']; ?>" title="edit" type="button" class="btn btn-info btn-icon btn-sm"><i class="fa fa-edit fa-lg"></i></a>&nbsp;&nbsp;
+												<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Delmasgol<?php echo $gol['id_mastergol'] ?>" title="delete"><i class="fa-lg fa fa-trash-o"></i></a>
 											</td>
 										</tr>
 										<!-- #modal-dialog -->
-										<div id="Delmasgol<?php echo $gol['id_mastergol']?>" class="modal fade" role="dialog">
+										<div id="Delmasgol<?php echo $gol['id_mastergol'] ?>" class="modal fade" role="dialog">
 											<div class="modal-dialog">
 												<div class="modal-content">
 													<div class="modal-header">
-														<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete Master Golongan <?php echo $gol['nama_mastergol']?> from Database?</h5>
+														<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete Master Golongan <?php echo $gol['nama_mastergol'] ?> from Database?</h5>
 													</div>
 													<div class="modal-body" align="center">
-														<a href="index.php?page=delete-mastergol&id_mastergol=<?=$gol['id_mastergol']?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
+														<a href="index.php?page=delete-mastergol&id_mastergol=<?= $gol['id_mastergol'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
 													</div>
 													<div class="modal-footer">
 														<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
@@ -214,7 +216,7 @@
 											</div>
 										</div>
 									<?php
-										}
+									}
 									?>
 								</tbody>
 							</table>
@@ -227,7 +229,14 @@
 		</div>
 	</div>
 </div>
-<script> // 500 = 0,5 s
-	$(document).ready(function(){setTimeout(function(){$(".pesan").fadeIn('slow');}, 500);});
-	setTimeout(function(){$(".pesan").fadeOut('slow');}, 7000);
+<script>
+	// 500 = 0,5 s
+	$(document).ready(function() {
+		setTimeout(function() {
+			$(".pesan").fadeIn('slow');
+		}, 500);
+	});
+	setTimeout(function() {
+		$(".pesan").fadeOut('slow');
+	}, 7000);
 </script>

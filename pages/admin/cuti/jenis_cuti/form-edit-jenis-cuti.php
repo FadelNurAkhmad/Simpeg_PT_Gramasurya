@@ -22,7 +22,7 @@ if (isset($_GET['id_jenis'])) {
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Data <small>Jenis Cuti <i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> id_<?= $id_jenis ?></small></h1>
+<h1 class="page-header">Cuti / Izin <small><i class="fa fa-angle-right"></i> List Jenis Izin <i class="fa fa-angle-right"></i> Edit Jenis Izin <i class="fa fa-key"></i> id_<?= $id_jenis ?></small></h1>
 <!-- begin row -->
 <div class="row">
 	<!-- begin col-12 -->
@@ -36,12 +36,12 @@ if (isset($_GET['id_jenis'])) {
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
-				<h4 class="panel-title">Form edit data Jenis Cuti</h4>
+				<h4 class="panel-title">Form edit data Jenis Izin</h4>
 			</div>
 			<div class="panel-body">
 				<form action="index.php?page=edit-jenis-cuti&id_jenis=<?= $id_jenis ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nama Jenis Cuti</label>
+						<label class="col-md-3 control-label">Nama Jenis Izin</label>
 						<div class="col-md-6">
 							<input type="text" name="jenis" maxlength="255" value="<?= $data['jenis'] ?>" class="form-control" />
 						</div>

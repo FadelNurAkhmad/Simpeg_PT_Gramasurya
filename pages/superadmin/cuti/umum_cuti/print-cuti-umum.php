@@ -55,13 +55,13 @@ $pdf->SetFont('helvetica', '', 10);
 
 include "../../../../config/koneksi.php";
 
-if (isset($_GET['id_cuti_umum'])) {
-	$id_cuti_umum = $_GET['id_cuti_umum'];
+if (isset($_GET['id_approval_umum'])) {
+	$id_approval_umum = $_GET['id_approval_umum'];
 } else {
 	die("Error. No ID Selected! ");
 }
 
-$query    = mysqli_query($koneksi, "SELECT * FROM tb_cuti_umum WHERE id_cuti_umum='$id_cuti_umum'");
+$query    = mysqli_query($koneksi, "SELECT * FROM tb_approval_cuti_umum WHERE id_approval_umum='$id_approval_umum'");
 $data    = mysqli_fetch_array($query);
 list($y1, $m1, $d1)    = explode("-", $data['tanggal_mulai']);
 list($y2, $m2, $d2)    = explode("-", $data['tanggal_selesai']);

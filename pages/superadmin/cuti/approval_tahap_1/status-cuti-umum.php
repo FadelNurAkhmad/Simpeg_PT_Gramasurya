@@ -15,13 +15,18 @@
 
         if (mysqli_num_rows($query) == 0) {
             $_SESSION['pesan'] = "Oops! Data tidak ditemukan. ...";
-            header("location:index.php?page=form-view-cuti-umum");
+            header("location:index.php?page=form-view-approval-tahap1");
         } else {
             $cuti   = mysqli_query($koneksi, "UPDATE tb_cuti_umum SET status='$status' WHERE id_peg='$id_peg' AND id_cuti_umum='$id_cuti_umum'");
+<<<<<<< HEAD:pages/superadmin/cuti/umum_cuti/status-cuti-umum.php
             $shift_result = mysqli_query($koneksi, "UPDATE shift_result SET izin_jenis_id = '$tb_jenis_cuti[id_jenis]' WHERE pegawai_id = $id_peg AND tgl_shift >= '$data[tanggal_mulai]' AND tgl_shift <= '$data[tanggal_selesai]'");
+=======
+            $approval = mysqli_query($koneksi, "UPDATE tb_approval_cuti_umum SET approval='Aktif' WHERE id_approval_umum='$id_cuti_umum'");
+
+>>>>>>> af5746b5157b558dcde4a080cfaae82261275d2b:pages/superadmin/cuti/approval_tahap_1/status-cuti-umum.php
             if ($cuti) {
                 $_SESSION['pesan'] = "Good!  Data berhasil di Approve. ...";
-                header("location:index.php?page=form-view-cuti-umum");
+                header("location:index.php?page=form-view-approval-tahap1");
             } else {
                 echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
             }
@@ -34,9 +39,9 @@
     <?php
     include "../../config/koneksi.php";
     if (isset($_GET['false']) == 'false') {
-        $id_cuti1 = $_GET['id_cuti_umum'];
+        $id_cuti_umum1 = $_GET['id_cuti_umum'];
 
-        $query1       = mysqli_query($koneksi, "SELECT * FROM tb_cuti_umum WHERE id_cuti_umum='$id_cuti1'");
+        $query1       = mysqli_query($koneksi, "SELECT * FROM tb_cuti_umum WHERE id_cuti_umum='$id_cuti_umum1'");
         $data1        = mysqli_fetch_array($query1);
         $id_peg1      = $data1['id_peg'];
         $jumlah_cuti1 = $data1['jumlah_cuti'];
@@ -44,12 +49,14 @@
 
         if (mysqli_num_rows($query1) == 0) {
             $_SESSION['pesan'] = "Oops! Data tidak ditemukan. ...";
-            header("location:index.php?page=form-view-cuti-umum");
+            header("location:index.php?page=form-view-approval-tahap1");
         } else {
-            $cuti1   = mysqli_query($koneksi, "UPDATE tb_cuti_umum SET status='$status1' WHERE id_peg='$id_peg1' AND id_cuti_umum='$id_cuti1'");
+            $cuti1   = mysqli_query($koneksi, "UPDATE tb_cuti_umum SET status='$status1' WHERE id_peg='$id_peg1' AND id_cuti_umum='$id_cuti_umum1'");
+            $approval1 = mysqli_query($koneksi, "UPDATE tb_approval_cuti_umum SET approval='' WHERE id_approval_umum='$id_cuti_umum1'");
+
             if ($cuti1) {
                 $_SESSION['pesan'] = "Good!  Data berhasil di Reject. ...";
-                header("location:index.php?page=form-view-cuti-umum");
+                header("location:index.php?page=form-view-approval-tahap1");
             } else {
                 echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
             }

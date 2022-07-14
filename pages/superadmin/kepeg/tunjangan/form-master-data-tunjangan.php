@@ -11,7 +11,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Riwayat <small>Surat Perintah Tunjangan <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
+<h1 class="page-header">Kepegawaian <small> <i class="fa fa-angle-right"></i> Surat Perintah Tunjangan <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 function kdauto($tabel, $inisial)

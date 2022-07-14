@@ -31,7 +31,7 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Report <small>Nominatif</small></h1>
+<h1 class="page-header">Report <small> <i class="fa fa-angle-right"></i> Nominatif</small></h1>
 <!-- end page-header -->
 <div class="profile-container">
 	<!-- begin profile-section -->
@@ -69,7 +69,7 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 						<th>6</th>
 						<th>7</th>
 						<th>8</th>
-						
+
 					</tr>
 				</thead>
 				<tbody>
@@ -114,7 +114,7 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 									echo "Perempuan";
 								}
 								?></td>
-						
+
 
 							<td><?php
 								$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]' ");
@@ -134,8 +134,8 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 								<!-- <td><?php echo $hjab['eselon']; ?></td> -->
 							</td>
 							<td><?php
-						$expeg3 = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg=$peg[pegawai_id]");
-						$peg3 = mysqli_fetch_array($expeg3, MYSQLI_ASSOC);
+								$expeg3 = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg=$peg[pegawai_id]");
+								$peg3 = mysqli_fetch_array($expeg3, MYSQLI_ASSOC);
 
 								$idSek = mysqli_query($koneksi, "SELECT * FROM tb_sekolah WHERE id_peg='$peg[pegawai_id]' AND status='Akhir'");
 								$hsek = mysqli_fetch_array($idSek, MYSQLI_ASSOC);

@@ -8,11 +8,11 @@
         $_SESSION['pesan'] = "";
         ?>
     </li>
-    <li><a href="index.php?page=form-master-jenis-cuti" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Tambah Jenis Cuti</a></li>
+    <li><a href="index.php?page=form-master-jenis-cuti" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Tambah Jenis Izin</a></li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Cuti <small> <i class="fa fa-angle-right"></i> Jenis Cuti Umum&nbsp;</small></h1>
+<h1 class="page-header">Cuti / Izin<small> <i class="fa fa-angle-right"></i> List Jenis Izin&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 $tampilJenis    = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY id_jenis DESC");
@@ -29,7 +29,7 @@ $tampilJenis    = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY i
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilJenis); ?></span> rows for "Data Jenis Cuti Umum"</h4>
+                <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilJenis); ?></span> rows for "Data Jenis Izin"</h4>
             </div>
             <div class="alert alert-success fade in">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
@@ -40,7 +40,7 @@ $tampilJenis    = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY i
                     <thead>
                         <tr>
                             <th><i class="fa fa-lock bigger-110 hidden-480"></i> ID</th>
-                            <th>Variabel Jenis Cuti</th>
+                            <th>Variabel Jenis Izin</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -61,7 +61,7 @@ $tampilJenis    = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY i
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete <u><?php echo $jenis['jenis'] ?></u> from Database?</h5>
+                                            <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Apakah kamu ingin delete <u><?php echo $jenis['jenis'] ?></u> dari Database?</h5>
                                         </div>
                                         <div class="modal-body" align="center">
                                             <a href="index.php?page=delete-jenis-cuti&id_jenis=<?= $jenis['id_jenis'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>

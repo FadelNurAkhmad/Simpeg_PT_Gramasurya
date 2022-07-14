@@ -12,7 +12,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Pengaturan<small> Mesin&nbsp;</small></h1>
+<h1 class="page-header">Presensi <small><i class="fa fa-angle-right"></i> Pengaturan Mesin&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";
@@ -61,26 +61,26 @@ $tampilDataPre    = mysqli_query($koneksi, "SELECT * FROM device ORDER BY sn DES
                                 <td><?= $dataPre['sn'] ?></td>
                                 <td>
                                     <?php
-                                        $query = mysqli_query($koneksi, "SELECT * FROM dev_type WHERE id_type='$dataPre[id_type]' ");
-                                        $type = mysqli_fetch_array($query, MYSQLI_ASSOC);
-                                        echo $type['type'];
+                                    $query = mysqli_query($koneksi, "SELECT * FROM dev_type WHERE id_type='$dataPre[id_type]' ");
+                                    $type = mysqli_fetch_array($query, MYSQLI_ASSOC);
+                                    echo $type['type'];
                                     ?>
                                 </td>
                                 <td><?= $dataPre['device_name'] ?></td>
                                 <td><?= $dataPre['dev_id'] ?></td>
                                 <td>
-                                    <?php 
-                                        switch($dataPre['comm_type']) {
-                                            case 0 :
-                                                echo "Ethernet";
-                                                break;
-                                            case 1 :
-                                                echo "USB";
-                                                break;
-                                            case 2 :
-                                                echo "Serial";
-                                                break;
-                                        }
+                                    <?php
+                                    switch ($dataPre['comm_type']) {
+                                        case 0:
+                                            echo "Ethernet";
+                                            break;
+                                        case 1:
+                                            echo "USB";
+                                            break;
+                                        case 2:
+                                            echo "Serial";
+                                            break;
+                                    }
                                     ?>
                                 </td>
                                 <td><?= $dataPre['ip_address'] ?></td>

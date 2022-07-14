@@ -6,7 +6,7 @@
         die("Error. No Kode Selected! ");
     }
     include "../../config/koneksi.php";
-    $tampilCut    = mysqli_query($koneksi, "SELECT * FROM tb_data_cuti WHERE id_cuti='$id_cuti'");
+    $tampilCut    = mysqli_query($koneksi, "SELECT * FROM tb_cuti_tahunan WHERE id_cuti='$id_cuti'");
     $hasil    = mysqli_fetch_array($tampilCut);
     $id_peg    = $hasil['id_peg'];
 
@@ -24,7 +24,7 @@
             $_SESSION['pesan'] = "Oops! Please fill all column ...";
             header("location:index.php?page=form-edit-cuti&id_cuti=$id_cuti");
         } else {
-            $update = mysqli_query($koneksi, "UPDATE tb_data_cuti SET tanggal_cuti='$tanggal_cuti', tanggal_mulai='$tanggal_mulai', lama_cuti='$lama_cuti', jumlah_cuti='$jumlah_cuti', jenis_cuti='$jenis_cuti', keperluan='$keperluan', status='$status' WHERE id_cuti='$id_cuti'");
+            $update = mysqli_query($koneksi, "UPDATE tb_cuti_tahunan SET tanggal_cuti='$tanggal_cuti', tanggal_mulai='$tanggal_mulai', lama_cuti='$lama_cuti', jumlah_cuti='$jumlah_cuti', jenis_cuti='$jenis_cuti', keperluan='$keperluan', status='$status' WHERE id_cuti='$id_cuti'");
             if ($update) {
                 $_SESSION['pesan'] = "Good! edit cuti success ...";
                 header("location:index.php?page=form-view-cuti");

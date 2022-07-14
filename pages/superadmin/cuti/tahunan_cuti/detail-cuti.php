@@ -1,11 +1,11 @@
 <?php
-if (isset($_GET['id_cuti'])) {
-    $id_cuti = $_GET['id_cuti'];
+if (isset($_GET['id_approval_cuti'])) {
+    $id_approval_cuti = $_GET['id_approval_cuti'];
 } else {
     die("Error. No ID Selected! ");
 }
 include "../../config/koneksi.php";
-$query    = mysqli_query($koneksi, "SELECT * FROM tb_data_cuti WHERE id_cuti='$id_cuti'");
+$query    = mysqli_query($koneksi, "SELECT * FROM tb_approval_cuti_tahunan WHERE id_approval_cuti='$id_approval_cuti'");
 $data    = mysqli_fetch_array($query);
 
 $tampilPeg   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$data[id_peg]'");
@@ -33,7 +33,7 @@ $jab2    = mysqli_fetch_array($tampilJab2);
     <div class="invoice-company">
         <span class="pull-right hidden-print">
             <a href="index.php?page=detail-data-pegawai&pegawai_id=<?= $data['id_peg'] ?>" title="back" class="btn btn-sm btn-white m-b-10"><i class="fa fa-step-backward"></i> &nbsp;Back</a>
-            <a href="../../pages/superadmin/cuti/tahunan_cuti/print-cuti.php?id_cuti=<?= $id_cuti ?>" target="_blank" title="print" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print"></i> &nbsp;Print</a>
+            <a href="../../pages/superadmin/cuti/tahunan_cuti/print-cuti.php?id_approval_cuti=<?= $id_approval_cuti ?>" target="_blank" title="print" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print"></i> &nbsp;Print</a>
         </span>
         Detail Cuti Pegawai
     </div>

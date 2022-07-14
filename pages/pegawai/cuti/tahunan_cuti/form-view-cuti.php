@@ -19,7 +19,7 @@ $id_peg     = $_SESSION['id_peg'];
 $query   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$id_peg'");
 $data    = mysqli_fetch_array($query);
 
-$tampilCuti    = mysqli_query($koneksi, "SELECT * FROM tb_data_cuti WHERE id_peg='$id_peg' ORDER BY tanggal_cuti");
+$tampilCuti    = mysqli_query($koneksi, "SELECT * FROM tb_cuti_tahunan WHERE id_peg='$id_peg' ORDER BY tanggal_cuti");
 
 ?>
 <div class="row">
@@ -141,11 +141,14 @@ $tampilCuti    = mysqli_query($koneksi, "SELECT * FROM tb_data_cuti WHERE id_peg
                                                     <div class="col-md-9">
                                                         :
                                                         <?php
-                                                        if ($cuti['status'] == 'Process') {
+                                                        $status = mysqli_query($koneksi, "SELECT status FROM tb_approval_cuti_tahunan WHERE id_approval_cuti='$cuti[id_cuti]'");
+                                                        $stat    = mysqli_fetch_array($status);
+
+                                                        if ($stat['status'] == 'Process') {
                                                             echo '<span class="badge badge-primary">PROCESS</span>';
-                                                        } else if ($cuti['status'] == 'Approve') {
+                                                        } else if ($stat['status'] == 'Approve') {
                                                             echo '<span class="badge badge-success">APPROVED</span>';
-                                                        } else if ($cuti['status'] == 'Reject') {
+                                                        } else if ($stat['status'] == 'Reject') {
                                                             echo '<span class="badge badge-danger">REJECTED</span>';
                                                         }
                                                         ?>

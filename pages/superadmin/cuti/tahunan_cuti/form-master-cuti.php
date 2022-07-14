@@ -37,7 +37,7 @@ function kdauto($tabel, $inisial)
     }
     return $inisial . $tmp . $angka;
 }
-$id_cuti    = kdauto("tb_data_cuti", "");
+$id_cuti    = kdauto("tb_cuti_tahunan", "");
 ?>
 <!-- begin row -->
 <div class="row">

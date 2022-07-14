@@ -81,43 +81,43 @@ $header = '<p align="center"><font size="12"><b>DAFTAR URUT KEPANGKATAN PEGAWAI 
 $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = 10, $header, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
 $html = '<table border="1" cellspacing="0" cellpadding="3">
 			<tr align="center">
-				<th rowspan="2" width="30">NO</th>
-				<th colspan="2" width="120">NAMA</th>
+				<th rowspan="2" width="40">NO</th>
+				<th colspan="2" width="180">NAMA</th>
 				<th rowspan="2" width="120">NIP</th>
 				
-				<th colspan="2" width="120">JABATAN</th>
+				<th colspan="2" width="180">JABATAN</th>
 				
 				
-				<th colspan="3" width="140">LATIHAN JABATAN</th>
-				<th colspan="3" width="160">PEND AKHIR</th>
-				<th rowspan="2" width="40">KET</th>
+				<th colspan="3" width="180">LATIHAN JABATAN</th>
+				<th colspan="3" width="210">PEND AKHIR</th>
+				<th rowspan="2" width="50">KET</th>
 			</tr>
 			<tr align="center">
-				<th colspan="2" width="120">TTL</th>
+				<th colspan="2" width="180">TTL</th>
 				
-				<th width="60">NAMA</th>
-				<th width="60">TMT</th>
+				<th width="90">NAMA</th>
+				<th width="90">TMT</th>
 			
-				<th width="60">NAMA</th>
+				<th width="90">NAMA</th>
 				<th width="40">THN</th>
-				<th width="40">JML JAM</th>
-				<th width="60">ASAL</th>
+				<th width="50">JML JAM</th>
+				<th width="90">ASAL</th>
 				<th width="60">T.LLS</th>
-				<th width="40">TINGKAT</th>
+				<th width="60">TINGKAT</th>
 			</tr>
 			<tr align="center">
-				<th width="30">1</th>
-				<th colspan="2" width="120">2</th>
+				<th width="40">1</th>
+				<th colspan="2" width="180">2</th>
 				<th width="120">3</th>
-				<th width="60">4</th>
-				<th width="60">5</th>
-				<th width="60">6</th>
+				<th width="90">4</th>
+				<th width="90">5</th>
+				<th width="90">6</th>
 				<th width="40">7</th>
-				<th width="40">8</th>
-				<th width="60">9</th>
+				<th width="50">8</th>
+				<th width="90">9</th>
 				<th width="60">10</th>
-				<th width="40">11</th>
-				<th width="40">12</th>
+				<th width="60">11</th>
+				<th width="50">12</th>
 				
 				
 			</tr>';

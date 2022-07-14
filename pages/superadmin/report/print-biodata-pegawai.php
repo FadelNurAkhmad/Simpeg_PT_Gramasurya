@@ -200,7 +200,8 @@ $tblpri = '<table cellspacing="0" cellpadding="2" border="0">
 		<td width="150">Unit Kerja</td>';
 		$namaskpd=mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$peg[pegawai_id]'");
 		$nm=mysqli_fetch_array($namaskpd, MYSQLI_ASSOC);
-		$tblpri .='<td>: '.$nm['nama'].'</td>
+		$nm1= isset($nm['nama']) ? $nm['nama'] : "";
+		$tblpri .='<td>: '.$nm1.'</td>
 	</tr>
 </table>';
 $pdf->writeHTML($tblpri, true, false, false, false, '');
@@ -474,4 +475,3 @@ $pdf->writeHTML($signa, true, false, false, false, '');
 
 //Close and output PDF document
 $pdf->Output('Biodata_Pegawai_'.$peg['pegawai_nip'].'.pdf', 'I');
-?>

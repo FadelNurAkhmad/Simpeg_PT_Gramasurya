@@ -11,7 +11,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Input <small>Cuti <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
+<h1 class="page-header">Cuti / Izin <small> <i class="fa fa-angle-right"></i> Izin <i class="fa fa-angle-right"></i> Input Izin&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 function kdauto($tabel, $inisial)
@@ -52,7 +52,7 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Form Input Cuti Umum</h4>
+                <h4 class="panel-title">Form Input Izin</h4>
             </div>
             <div class="panel-body">
                 <form action="index.php?page=master-cuti-umum&id_cuti_umum=<?= $id_cuti_umum ?>"" class=" form-horizontal" method="POST" enctype="multipart/form-data">
@@ -71,7 +71,7 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Jenis Cuti</label>
+                        <label class="col-md-3 control-label">Jenis Izin</label>
                         <div class="col-md-6">
                             <?php
                             $dataJ = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY jenis");
@@ -91,7 +91,7 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Tanggal Pengajuan Cuti</label>
+                        <label class="col-md-3 control-label">Tanggal Pengajuan Izin</label>
                         <div class="col-md-6">
                             <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
                                 <input type="text" name="tanggal_cuti" placeholder="Mulai" class="form-control" />
@@ -115,7 +115,7 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Lama Cuti</label>
+                        <label class="col-md-3 control-label">Lama Izin</label>
                         <div class="col-md-6">
                             <input type="text" name="lama_cuti" class="form-control" placeholder="Dalam Hari"></input>
                         </div>
