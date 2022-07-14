@@ -10,11 +10,15 @@
         $jumlah_cuti = $data['jumlah_cuti'];
         $status      = "Approve";
 
+        $queryJenisCuti = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti WHERE jenis = '$data[jenis_cuti]'");
+        $tb_jenis_cuti = mysqli_fetch_array($queryJenisCuti, MYSQLI_ASSOC);
+
         if (mysqli_num_rows($query) == 0) {
             $_SESSION['pesan'] = "Oops! Data tidak ditemukan. ...";
             header("location:index.php?page=form-view-cuti-umum");
         } else {
             $cuti   = mysqli_query($koneksi, "UPDATE tb_cuti_umum SET status='$status' WHERE id_peg='$id_peg' AND id_cuti_umum='$id_cuti_umum'");
+            $shift_result = mysqli_query($koneksi, "UPDATE shift_result SET izin_jenis_id = '$tb_jenis_cuti[id_jenis]' WHERE pegawai_id = $id_peg AND tgl_shift >= '$data[tanggal_mulai]' AND tgl_shift <= '$data[tanggal_selesai]'");
             if ($cuti) {
                 $_SESSION['pesan'] = "Good!  Data berhasil di Approve. ...";
                 header("location:index.php?page=form-view-cuti-umum");
