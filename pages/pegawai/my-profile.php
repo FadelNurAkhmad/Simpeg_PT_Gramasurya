@@ -12,9 +12,6 @@ $jab	= mysqli_fetch_array($jabatan);
 // mengambil data presensi dari mesin
 $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[pegawai_pin]' ORDER BY scan_date DESC");
 
-$queryPan	= mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' AND status_pan='Aktif'");
-$selpan		= mysqli_fetch_array($queryPan);
-
 $queryCuti	= mysqli_query($koneksi, "SELECT * FROM tb_jatah_cuti WHERE id_peg='$id_peg'");
 $jatCuti		= mysqli_fetch_array($queryCuti);
 
@@ -210,19 +207,6 @@ $diff = $today->diff($birthday);
 												<td class="field">Alamat</td>
 												<td><?= $data['alamat'] ?></td>
 											</tr>
-											<!-- <tr>
-												<td class="field">Status Kepegawaian</td>
-												<td><?= $data['status_kepeg'] ?></td>
-											</tr>
-											<tr>
-												<td class="field">Unit Kerja</td>
-												<td><?php
-													$seluni	= mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$data[unit_kerja]'");
-													$uni = mysqli_fetch_array($seluni, MYSQLI_ASSOC);
-													echo $uni['nama'];
-													?>
-												</td>
-											</tr> -->
 											<tr>
 												<td class="field">Jatah Cuti Tahunan</td>
 												<td>
@@ -495,7 +479,7 @@ $diff = $today->diff($birthday);
 					<i class="fa fa-info fa-2x pull-left"></i> Klik "Detail" untuk menuju halaman preview dan print ...
 				</div>
 				<div class="panel-body">
-					<table id="data-table" class="table table-striped table-bordered nowrap" width="100%">
+					<table class="table table-striped table-bordered nowrap display" width="100%">
 						<thead>
 							<tr>
 								<th width="4%">No</th>
@@ -613,7 +597,7 @@ $diff = $today->diff($birthday);
 
 				</div>
 				<div class="table-responsive">
-					<table class="table table-bordered table-striped">
+					<table class="table table-bordered table-striped display">
 						<thead>
 							<tr>
 								<th>No</th>
@@ -1136,55 +1120,6 @@ $diff = $today->diff($birthday);
 				</div>
 			</div>
 		</div>
-		<div id="tunjangan" class="modal fade">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Riwayat Tunjangan</h4>
-					</div>
-					<div class="col-sm-12">
-						<div class="modal-body">
-							<div class="table-responsive">
-								<table class="table table-bordered table-striped">
-									<thead class="thin-border-bottom">
-										<tr>
-											<th>No</th>
-											<th>Jenis Tunjangan</th>
-											<th>Nomor</th>
-											<th>Tanggal</th>
-											<th>Terhitung Mulai</th>
-											<th width="6%">View</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php
-										$no = 0;
-										$tampilTun	= mysqli_query($koneksi, "SELECT * FROM tb_tunjangan WHERE id_peg='$id_peg' ORDER BY tgl_tunjangan DESC");
-										while ($tun = mysqli_fetch_array($tampilTun, MYSQLI_ASSOC)) {
-											$no++
-										?>
-											<tr>
-												<td><?= $no ?></td>
-												<td><?php echo $tun['jns_tunjangan']; ?></td>
-												<td><?php echo $tun['no_tunjangan']; ?></td>
-												<td><?php echo $tun['tgl_tunjangan']; ?></td>
-												<td><?php echo $tun['tgl_terhitung']; ?></td>
-												<td class="tools"><a href="index.php?page=detail-data-tunjangan&id_tunjangan=<?= $tun['id_tunjangan']; ?>" title="view detail" type="button" class="btn btn-warning btn-xs">Detail</a></td>
-											</tr>
-										<?php
-										}
-										?>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-					</div>
-				</div>
-			</div>
-		</div>
 		<div id="kawin" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -1246,4 +1181,8 @@ $diff = $today->diff($birthday);
 	setTimeout(function() {
 		$(".pesan").fadeOut('slow');
 	}, 7000);
+
+	$(document).ready(function() {
+		$('table.display').DataTable();
+	});
 </script>
