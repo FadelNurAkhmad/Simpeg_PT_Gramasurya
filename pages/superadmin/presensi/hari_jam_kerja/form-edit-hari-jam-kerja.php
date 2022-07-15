@@ -58,11 +58,11 @@ if (isset($_GET['jdw_kerja_m_id'])) {
             <div class="panel-body">
                 <form action="index.php?page=edit-hari-jam-kerja&jdw_kerja_m_id=<?= $jdw_kerja_m_id ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Nama Jadwal Kerja*</label>
+                        <label class="col-md-3 control-label">Nama Jadwal Kerja<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-3">
                             <input class="form-control" type="text" name="jdw_kerja_m_name" value="<?= $data['jdw_kerja_m_name'] ?>" />
                         </div>
-                        <label class="col-md-1 control-label">Kode*</label>
+                        <label class="col-md-1 control-label">Kode<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-2">
                             <input class="form-control" type="text" name="jdw_kerja_m_kode" value="<?= $data['jdw_kerja_m_kode'] ?>" />
                         </div>
@@ -74,7 +74,7 @@ if (isset($_GET['jdw_kerja_m_id'])) {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Mulai Tanggal*</label>
+                        <label class="col-md-3 control-label">Mulai Tanggal<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past2" data-date-format="yyyy-mm-dd">
                                 <input type="text" name="jdw_kerja_m_mulai" class="form-control" value="<?= $data['jdw_kerja_m_mulai'] ?>" />

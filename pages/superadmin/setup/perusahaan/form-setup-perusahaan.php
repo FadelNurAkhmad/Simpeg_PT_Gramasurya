@@ -42,19 +42,19 @@ if (isset($_GET['id_setup_peru'])) {
 			<div class="panel-body">
 				<form action="index.php?page=setup-perusahaan&id_setup_peru=<?= $id_setup_peru ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nama Perusahaan</label>
+						<label class="col-md-3 control-label">Nama Perusahaan<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="nama_peru" value="<?= (isset($data['nama_peru'])) ? $data['nama_peru'] : "" ?>" maxlength="255" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Alamat</label>
+						<label class="col-md-3 control-label">Alamat<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<textarea type="text" name="alamat" class="form-control"><?= (isset($data['alamat'])) ? $data['alamat'] : "" ?></textarea>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pimpinan</label>
+						<label class="col-md-3 control-label">Pimpinan<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<?php
 							$pimpinan = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_status='1'");

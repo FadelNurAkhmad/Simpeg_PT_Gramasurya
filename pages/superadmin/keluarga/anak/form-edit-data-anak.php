@@ -37,26 +37,25 @@ if (isset($_GET['id_anak'])) {
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
 				<h4 class="panel-title">Form edit data anak</h4>
 			</div>
 			<div class="panel-body">
 				<form action="index.php?page=edit-data-anak&id_anak=<?= $id_anak ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">NIK</label>
+						<label class="col-md-3 control-label">NIK<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="nik" maxlength="16" value="<?= $data['nik'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nama</label>
+						<label class="col-md-3 control-label">Nama<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="nama" maxlength="64" value="<?= $data['nama'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tempat, Tanggal Lahir</label>
+						<label class="col-md-3 control-label">Tempat, Tanggal Lahir<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-3">
 							<input type="text" name="tmp_lhr" maxlength="64" value="<?= $data['tmp_lhr'] ?>" class="form-control" />
 						</div>
@@ -68,7 +67,7 @@ if (isset($_GET['id_anak'])) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Jenis Kelamin</label>
+						<label class="col-md-3 control-label">Jenis Kelamin<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<select name="jk" class="default-select2 form-control">
 								<option value="Laki-laki" <?php echo ($data['jk'] == 'Laki-laki') ? "selected" : ""; ?>>Laki-laki
@@ -100,7 +99,7 @@ if (isset($_GET['id_anak'])) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Status Hubungan</label>
+						<label class="col-md-3 control-label">Status Hubungan<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<select name="status_hub" class="default-select2 form-control">
 								<option value="Anak Kandung" <?php echo ($data['status_hub'] == 'Anak Kandung') ? "selected" : ""; ?>>Anak Kandung

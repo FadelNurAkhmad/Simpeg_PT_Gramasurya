@@ -72,9 +72,9 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 $namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$kep[pimpinan]'");
 $nama		= mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 
-$pangkat = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[pimpinan]' AND status_pan='Aktif'");
-$pan	= mysqli_fetch_array($pangkat, MYSQLI_ASSOC);
-$pan1 = isset($pan['pangkat']) ? $pan['pangkat'] : '';
+// $pangkat = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[pimpinan]' AND status_pan='Aktif'");
+// $pan	= mysqli_fetch_array($pangkat, MYSQLI_ASSOC);
+// $pan1 = isset($pan['pangkat']) ? $pan['pangkat'] : '';
 
 $header = '<p align="center"><font size="12"><b>DAFTAR URUT KEPANGKATAN PEGAWAI NEGERI SIPIL</b></font><br />
 			<font size="9" style="text-transform:uppercase"> ' . $kep['nama_peru'] . ' TAHUN ' . date('Y') . '<font></p>';
@@ -149,19 +149,19 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 	$hjabb = mysqli_fetch_array($idjab, MYSQLI_ASSOC);
 	$hjab1 = isset($hjabb['jabatan']) ? $hjabb['jabatan'] : '';
 	$hjab2 = isset($hjabb['tmt_jabatan']) ? $hjabb['tmt_jabatan'] : '';
-	
-	$html .= '<td>' . $hjab1 . '</td>
-					<td>' . $hjab2. '</td>';
-	
 
-	$idLatjab = mysqli_query($koneksi, "SELECT * FROM tb_lat_jabatan WHERE id_lat_jabatan='$peg[pegawai_id]'");
-	$hljab = mysqli_fetch_array($idLatjab, MYSQLI_ASSOC);
-	$hljab1 = isset($hljab['nama_pelatih']) ? $hljab['nama_pelatih'] : '';
-	$hljab2 = isset($hljab['tahun_lat']) ? $hljab['tahun_lat'] : '';
-	$hljab3 = isset($hljab['jml_jam']) ? $hljab['jml_jam'] : '';
-	$html .= '<td>' . $hljab1 . '</td>
-					<td align="center">' . $hljab2. '</td>
-					<td align="center">' . $hljab3 . '</td>';
+	$html .= '<td>' . $hjab1 . '</td>
+					<td>' . $hjab2 . '</td>';
+
+
+	// $idLatjab = mysqli_query($koneksi, "SELECT * FROM tb_lat_jabatan WHERE id_lat_jabatan='$peg[pegawai_id]'");
+	// $hljab = mysqli_fetch_array($idLatjab, MYSQLI_ASSOC);
+	// $hljab1 = isset($hljab['nama_pelatih']) ? $hljab['nama_pelatih'] : '';
+	// $hljab2 = isset($hljab['tahun_lat']) ? $hljab['tahun_lat'] : '';
+	// $hljab3 = isset($hljab['jml_jam']) ? $hljab['jml_jam'] : '';
+	// $html .= '<td>' . $hljab1 . '</td>
+	// 				<td align="center">' . $hljab2. '</td>
+	// 				<td align="center">' . $hljab3 . '</td>';
 
 	$idSek = mysqli_query($koneksi, "SELECT * FROM  tb_sekolah WHERE id_peg='$peg[pegawai_id]' AND status='Akhir'");
 	$hsek = mysqli_fetch_array($idSek, MYSQLI_ASSOC);
@@ -170,7 +170,7 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 	$hsek3 = isset($hsek['tingkat']) ? $hsek['tingkat'] : '';
 	$html .= '<td>' . $hsek1 . '</td>
 					<td>' . $hsek2 . '</td>
-					<td align="center">' . $hsek3. '</td>
+					<td align="center">' . $hsek3 . '</td>
 					<td align="center">' . $status . '</td>
 				</tr>';
 }

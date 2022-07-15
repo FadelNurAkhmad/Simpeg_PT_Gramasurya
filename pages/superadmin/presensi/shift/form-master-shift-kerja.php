@@ -57,11 +57,11 @@ $jk_id    = kdauto("jam_kerja", "");
                 <form action="index.php?page=master-shift-kerja&jk_id=<?= $jk_id ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Nama Shift</label>
+                        <label class="col-md-3 control-label">Nama Shift<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-3">
                             <input class="form-control" type="text" name="jk_name" />
                         </div>
-                        <label class="col-md-1 control-label">Kode</label>
+                        <label class="col-md-1 control-label">Kode<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-3">
                             <input class="form-control" type="text" name="jk_kode" />
                         </div>
@@ -104,7 +104,7 @@ $jk_id    = kdauto("jam_kerja", "");
                     <div class="form-group">
                         <div class="col-md-2"></div>
                         <div class="col-md-2">
-                            <label class="col-md-8 control-label">Masuk</label>
+                            <label class="col-md-8 control-label">Masuk<span aria-required="true" class="text-warning"> * </span></label>
                             <input class="form-control" type="time" name="masuk" id="masuk" value="00:00" data-parsley-required="true" />
                         </div>
 
@@ -119,7 +119,7 @@ $jk_id    = kdauto("jam_kerja", "");
                         </div>
 
                         <div class="col-md-2">
-                            <label class="col-md-8 control-label">Pulang</label>
+                            <label class="col-md-8 control-label">Pulang<span aria-required="true" class="text-warning"> * </span></label>
                             <input class="form-control" type="time" name="pulang" id="pulang" value="00:00" data-parsley-required="true" />
                         </div>
                     </div>

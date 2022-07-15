@@ -57,7 +57,7 @@ $id_jab	= kdauto("tb_jabatan", "");
 			<div class="panel-body">
 				<form action="index.php?page=master-data-jabatan&id_jab=<?= $id_jab ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pegawai*</label>
+						<label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<?php
 							$data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
@@ -71,7 +71,7 @@ $id_jab	= kdauto("tb_jabatan", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Jabatan*</label>
+						<label class="col-md-3 control-label">Jabatan<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-4">
 							<?php
 							$dataJ = mysqli_query($koneksi, "SELECT * FROM pembagian1 ORDER BY pembagian1_nama");

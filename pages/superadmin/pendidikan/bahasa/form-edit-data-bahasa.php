@@ -37,26 +37,25 @@ if (isset($_GET['id_bhs'])) {
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
 				<h4 class="panel-title">Form edit data bahasa</h4>
 			</div>
 			<div class="panel-body">
 				<form action="index.php?page=edit-data-bahasa&id_bhs=<?= $id_bhs ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Jenis Bahasa</label>
+						<label class="col-md-3 control-label">Jenis Bahasa<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="jns_bhs" maxlength="32" value="<?= $data['jns_bhs'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Bahasa</label>
+						<label class="col-md-3 control-label">Bahasa<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="bahasa" maxlength="32" value="<?= $data['bahasa'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Kemampuan Bicara</label>
+						<label class="col-md-3 control-label">Kemampuan Bicara<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<select name="kemampuan" class="default-select2 form-control">
 								<option value="Aktif" <?php echo ($data['kemampuan'] == 'Aktif') ? "selected" : ""; ?>>Aktif
