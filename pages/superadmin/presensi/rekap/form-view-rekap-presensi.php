@@ -304,7 +304,7 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
                                         $jab    = mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
 
                                         // mengecek dan mengupdate data izin
-                                        $cek = mysqli_query($koneksi, "SELECT * FROM tb_cuti_umum WHERE id_peg = '$peg[pegawai_id]'");
+                                        $cek = mysqli_query($koneksi, "SELECT * FROM tb_approval_cuti_umum WHERE id_peg = '$peg[pegawai_id]'");
                                         while ($row = mysqli_fetch_array($cek, MYSQLI_ASSOC)) {
                                             // mengambil id jenis izin
                                             $queryJenisCuti = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti WHERE jenis = '$row[jenis_cuti]'");
