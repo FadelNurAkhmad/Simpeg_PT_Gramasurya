@@ -74,7 +74,7 @@ $id_si	= kdauto("tb_suamiistri", "");
 					<div class="form-group">
 						<label class="col-md-3 control-label">NIK</label>
 						<div class="col-md-6">
-							<input type="text" name="nik" maxlength="16" class="form-control" />
+							<input type="number" name="nik" maxlength="16" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">

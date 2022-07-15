@@ -11,7 +11,7 @@
 
 	if ($_POST['edit'] == "edit") {
 		$nama_user	= $_POST['nama_user'];
-		$password	= md5($_POST['password']);
+		$password	= password_hash($_POST['password'], PASSWORD_DEFAULT);
 		$hak_akses	= $_POST['hak_akses'];
 		$avatar		= $_FILES['avatar']['name'];
 

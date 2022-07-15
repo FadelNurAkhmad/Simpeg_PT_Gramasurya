@@ -87,7 +87,7 @@ $id_dokumen    = kdauto("tb_dokumen", "");
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-6">
-                            <p>* Max size 500 KB</p>
+                            <p>* Max size 5 MB</p>
                             <p>* Format PDF</p>
                         </div>
                     </div>

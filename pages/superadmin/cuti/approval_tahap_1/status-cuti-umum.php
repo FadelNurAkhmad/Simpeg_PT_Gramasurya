@@ -18,12 +18,8 @@
             header("location:index.php?page=form-view-approval-tahap1");
         } else {
             $cuti   = mysqli_query($koneksi, "UPDATE tb_cuti_umum SET status='$status' WHERE id_peg='$id_peg' AND id_cuti_umum='$id_cuti_umum'");
-<<<<<<< HEAD:pages/superadmin/cuti/umum_cuti/status-cuti-umum.php
-            $shift_result = mysqli_query($koneksi, "UPDATE shift_result SET izin_jenis_id = '$tb_jenis_cuti[id_jenis]' WHERE pegawai_id = $id_peg AND tgl_shift >= '$data[tanggal_mulai]' AND tgl_shift <= '$data[tanggal_selesai]'");
-=======
             $approval = mysqli_query($koneksi, "UPDATE tb_approval_cuti_umum SET approval='Aktif' WHERE id_approval_umum='$id_cuti_umum'");
 
->>>>>>> af5746b5157b558dcde4a080cfaae82261275d2b:pages/superadmin/cuti/approval_tahap_1/status-cuti-umum.php
             if ($cuti) {
                 $_SESSION['pesan'] = "Good!  Data berhasil di Approve. ...";
                 header("location:index.php?page=form-view-approval-tahap1");

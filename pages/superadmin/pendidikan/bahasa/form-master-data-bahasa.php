@@ -57,7 +57,7 @@ $id_bhs	= kdauto("tb_bahasa", "");
 			<div class="panel-body">
 				<form action="index.php?page=master-data-bahasa&id_bhs=<?= $id_bhs ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pegawai</label>
+						<label class="col-md-3 control-label">Pegawai*</label>
 						<div class="col-md-6">
 							<?php
 							$data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
@@ -71,19 +71,24 @@ $id_bhs	= kdauto("tb_bahasa", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Jenis Bahasa</label>
+						<label class="col-md-3 control-label">Jenis Bahasa*</label>
 						<div class="col-md-6">
-							<input type="text" name="jns_bhs" maxlength="32" class="form-control" />
+							<select name="jns_bhs" class="default-select2 form-control">
+								<option value="">...</option>
+								<option value="Asing">Asing</option>
+								<option value="Lokal">Lokal</option>
+								<option value="Daerah">Daerah</option>
+							</select>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Bahasa</label>
+						<label class="col-md-3 control-label">Bahasa*</label>
 						<div class="col-md-6">
 							<input type="text" name="bahasa" maxlength="32" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Kemampuan Bicara</label>
+						<label class="col-md-3 control-label">Kemampuan Bicara*</label>
 						<div class="col-md-6">
 							<select name="kemampuan" class="default-select2 form-control">
 								<option value="">...</option>

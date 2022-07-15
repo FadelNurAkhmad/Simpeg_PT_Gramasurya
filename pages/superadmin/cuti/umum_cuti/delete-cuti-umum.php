@@ -14,6 +14,11 @@
         // mengupdate izin pada tabel shift_result menjadi 0 jika data izin dihapus
         $shift_result = mysqli_query($koneksi, "UPDATE shift_result SET izin_jenis_id = '0' WHERE pegawai_id = $data[id_peg] AND tgl_shift >= '$data[tanggal_mulai]' AND tgl_shift <= '$data[tanggal_selesai]'");
         $delete    = mysqli_query($koneksi, "DELETE FROM tb_cuti_umum WHERE id_cuti_umum='$id_cuti_umum'");
+        $delete1   = mysqli_query($koneksi, "DELETE FROM tb_approval_cuti_umum WHERE id_approval_umum='$id_cuti_umum'");
+
+        // mengupdate izin pada tabel shift_result menjadi 0 jika data izin dihapus
+        $shift_result = mysqli_query($koneksi, "UPDATE shift_result SET izin_jenis_id = '0' WHERE pegawai_id = $data[id_peg] AND tgl_shift >= '$data[tanggal_mulai]' AND tgl_shift <= '$data[tanggal_selesai]'");
+
         if ($delete) {
             $_SESSION['pesan'] = "Good! delete izin success ...";
             header("location:index.php?page=form-view-cuti-umum");
