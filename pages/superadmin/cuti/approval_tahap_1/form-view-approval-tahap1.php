@@ -97,7 +97,7 @@ $tampilCutiUmum    = mysqli_query(
                                         <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#Reject<?php echo $cuti['id_cuti'] ?>" title="Reject"><i class="fa fa-close"> </i> Reject</a>
                                         <a type="button" class="btn btn-success btn-icon btn-sm" data-toggle="modal" data-target="#Detail<?php echo $cuti['id_cuti'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
                                         <!-- <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-cuti&id_cuti=<?= $cuti['id_cuti'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a> -->
-                                        <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $cuti['id_cuti'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
+                                        <!-- <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $cuti['id_cuti'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a> -->
                                     </td>
                                 </tr>
                                 <!-- #modal-dialog-delete -->
@@ -295,7 +295,7 @@ $tampilCutiUmum    = mysqli_query(
                                         <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#Reject<?php echo $izin['id_cuti_umum'] ?>" title="Reject"><i class="fa fa-close"> </i> Reject</a>
                                         <a type="button" class="btn btn-success btn-icon btn-sm" data-toggle="modal" data-target="#Detail<?php echo $izin['id_cuti_umum'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
                                         <!-- <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-cuti-umum&id_cuti_umum=<?= $izin['id_cuti_umum'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a> -->
-                                        <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del1<?php echo $izin['id_cuti_umum'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
+                                        <!-- <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del1<?php echo $izin['id_cuti_umum'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a> -->
                                     </td>
                                 </tr>
                                 <!-- #modal-dialog-delete -->
