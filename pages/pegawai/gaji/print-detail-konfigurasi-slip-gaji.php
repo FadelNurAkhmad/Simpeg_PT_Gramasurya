@@ -1,6 +1,6 @@
 <?php
 ob_start();
-include '../../../../assets/plugins/tcpdf/tcpdf.php';
+include '../../../assets/plugins/tcpdf/tcpdf.php';
 
 class MYPDF extends TCPDF
 {
@@ -53,7 +53,7 @@ if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
 $pdf->AddPage();
 $pdf->SetFont('helvetica', '', 10);
 
-include "../../../../config/koneksi.php";
+include "../../../config/koneksi.php";
 
 if (isset($_GET['id_gaji_konfig'])) {
 	$id_gaji_konfig = $_GET['id_gaji_konfig'];

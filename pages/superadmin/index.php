@@ -1286,6 +1286,7 @@ while ($row = mysqli_fetch_array($query)) {
     <script src="../../assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js"></script>
     <script src="../../assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
     <script src="../../assets/js/table-manage-responsive.demo.min.js"></script>
+    <script src="../../assets/plugins/number-format/easy-number-separator.js"></script>
 
     <script src="../../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script src="../../assets/plugins/ionRangeSlider/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>

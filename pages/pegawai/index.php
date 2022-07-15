@@ -199,6 +199,9 @@ $peg		= mysqli_fetch_array($tampilPeg);
 				case 'detail-pegawai-data-gaji-konfigurasi':
 					include "../../pages/pegawai/gaji/detail-pegawai-data-gaji-konfigurasi.php";
 					break;
+				case 'print-detail-konfigurasi-slip-gaji':
+					include "../../pages/pegawai/gaji/print-detail-konfigurasi-slip-gaji.php";
+					break;
 
 				case 'detail-data-tunjangan':
 					include "../../pages/pegawai/kepeg/tunjangan/detail-data-tunjangan.php";

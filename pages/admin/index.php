@@ -834,6 +834,34 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					include "../../pages/admin/kpi/divisi/delete-divisi-kpi.php";
 					break;
 
+				case 'form-view-data-gaji-konfigurasi':
+					include "../../pages/admin/gaji/konfigurasi_gaji/form-view-data-gaji-konfigurasi.php";
+					break;
+				case 'form-master-data-gaji-konfigurasi':
+					include "../../pages/admin/gaji/konfigurasi_gaji/form-master-data-gaji-konfigurasi.php";
+					break;
+				case 'form-edit-data-gaji-konfigurasi':
+					include "../../pages/admin/gaji/konfigurasi_gaji/form-edit-data-gaji-konfigurasi.php";
+					break;
+				case 'edit-data-gaji-konfigurasi':
+					include "../../pages/admin/gaji/konfigurasi_gaji/edit-data-gaji-konfigurasi.php";
+					break;
+				case 'master-data-gaji-konfigurasi':
+					include "../../pages/admin/gaji/konfigurasi_gaji/master-data-gaji-konfigurasi.php";
+					break;
+				case 'detail-data-gaji-konfigurasi':
+					include "../../pages/admin/gaji/konfigurasi_gaji/detail-data-gaji-konfigurasi.php";
+					break;
+				case 'detail-pegawai-data-gaji-konfigurasi':
+					include "../../pages/admin/gaji/konfigurasi_gaji/detail-pegawai-data-gaji-konfigurasi.php";
+					break;
+				case 'delete-data-gaji-konfigurasi':
+					include "../../pages/admin/gaji/konfigurasi_gaji/delete-data-gaji-konfigurasi.php";
+					break;
+				case 'print-detail-konfigurasi-slip-gaji':
+					include "../../pages/admin/gaji/konfigurasi_gaji/print-detail-konfigurasi-slip-gaji.php";
+					break;
+
 				case 'form-view-data-presensi':
 					include "../../pages/admin/presensi/data_presensi/form-view-data-presensi.php";
 					break;
