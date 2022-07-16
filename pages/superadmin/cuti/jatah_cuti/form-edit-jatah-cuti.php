@@ -37,7 +37,6 @@ if (isset($_GET['id_jatah'])) {
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
                 <h4 class="panel-title">Form edit cuti</h4>
             </div>
@@ -45,7 +44,7 @@ if (isset($_GET['id_jatah'])) {
                 <form action="index.php?page=edit-jatah-cuti&id_jatah=<?= $id_jatah ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Periode Jatah Cuti</label>
+                        <label class="col-md-3 control-label">Periode Jatah Cuti<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
                                 <input type="text" name="jatah_c_mulai" value="<?= $data['jatah_c_mulai'] ?>" placeholder="Mulai" class="form-control" />
@@ -60,7 +59,7 @@ if (isset($_GET['id_jatah'])) {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Jatah Cuti</label>
+                        <label class="col-md-3 control-label">Jatah Cuti<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-4">
                             <input type="text" name="jatah_c_jml" maxlength="11" value="<?= $data['jatah_c_jml'] ?>" class="form-control" /></input>
                         </div>
@@ -75,7 +74,7 @@ if (isset($_GET['id_jatah'])) {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Sisa Cuti</label>
+                        <label class="col-md-3 control-label">Sisa Cuti<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-4">
                             <input type="text" name="jatah_c_sisa" value="<?= $data['jatah_c_sisa'] ?>" class="form-control"></input>
                         </div>

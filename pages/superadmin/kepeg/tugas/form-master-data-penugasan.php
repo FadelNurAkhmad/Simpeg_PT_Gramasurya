@@ -50,14 +50,13 @@ $id_penugasan	= kdauto("tb_penugasan", "");
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
 				<h4 class="panel-title">Form master data penugasan</h4>
 			</div>
 			<div class="panel-body">
 				<form action="index.php?page=master-data-penugasan&id_penugasan=<?= $id_penugasan ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pegawai</label>
+						<label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<?php
 							$data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id ASC");
@@ -71,25 +70,25 @@ $id_penugasan	= kdauto("tb_penugasan", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Lokasi Tujuan</label>
+						<label class="col-md-3 control-label">Lokasi Tujuan<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="tujuan" maxlength="32" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tahun</label>
+						<label class="col-md-3 control-label">Tahun<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="tahun" maxlength="4" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Lama Penugasan (Hari)</label>
+						<label class="col-md-3 control-label">Lama Penugasan (Hari)<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="lama" maxlength="3" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Alasan Penugasan</label>
+						<label class="col-md-3 control-label">Alasan Penugasan<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="alasan" maxlength="128" class="form-control" />
 						</div>

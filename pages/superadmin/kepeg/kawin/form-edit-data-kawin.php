@@ -37,14 +37,13 @@ if (isset($_GET['id_kawin'])) {
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
 				<h4 class="panel-title">Form edit data izin kawin</h4>
 			</div>
 			<div class="panel-body">
 				<form action="index.php?page=edit-data-kawin&id_kawin=<?= $id_kawin ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nomor dan Tanggal Izin Kawin</label>
+						<label class="col-md-3 control-label">Nomor dan Tanggal Izin Kawin<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-3">
 							<input type="text" name="no_kawin" maxlength="32" value="<?= $data['no_kawin'] ?>" class="form-control" />
 						</div>
@@ -104,13 +103,13 @@ if (isset($_GET['id_kawin'])) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nama</label>
+						<label class="col-md-3 control-label">Nama<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="nama" maxlength="255" value="<?= $data['nama'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tempat dan Tanggal Lahir</label>
+						<label class="col-md-3 control-label">Tempat dan Tanggal Lahir<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-3">
 							<input type="text" name="tmp_lahir" maxlength="255" value="<?= $data['tmp_lahir'] ?>" class="form-control" />
 						</div>
@@ -221,7 +220,7 @@ if (isset($_GET['id_kawin'])) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tanggal Ditetapkan</label>
+						<label class="col-md-3 control-label">Tanggal Ditetapkan<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<div class="input-group date" id="datepicker-disabled-past4" data-date-format="yyyy-mm-dd">
 								<input type="text" name="tgl_ditetapkan" value="<?= $data['tgl_ditetapkan'] ?>" class="form-control" />

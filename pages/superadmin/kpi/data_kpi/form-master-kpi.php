@@ -58,7 +58,7 @@ $id_data_kpi   = kdauto("tb_kpi", "");
                     <div class="form-group">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Pegawai</label>
+                                <label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-warning"> * </span></label>
                                 <div class="col-md-6">
                                     <?php
                                     $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
@@ -72,7 +72,7 @@ $id_data_kpi   = kdauto("tb_kpi", "");
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Tanggal Buat</label>
+                                <label class="col-md-3 control-label">Tanggal Buat<span aria-required="true" class="text-warning"> * </span></label>
                                 <div class="col-md-6">
                                     <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
                                         <input type="text" name="tanggal_kpi" id="tanggal_kpi" class="form-control" />
@@ -86,7 +86,7 @@ $id_data_kpi   = kdauto("tb_kpi", "");
                     <div class="form-group">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Divisi</label>
+                                <label class="col-md-3 control-label">Divisi<span aria-required="true" class="text-warning"> * </span></label>
                                 <div class="col-md-6">
                                     <?php
                                     $data = mysqli_query($koneksi, "SELECT * FROM tb_divisi_kpi ORDER BY divisi ASC");
@@ -100,7 +100,7 @@ $id_data_kpi   = kdauto("tb_kpi", "");
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Periode</label>
+                                <label class="col-md-3 control-label">Periode<span aria-required="true" class="text-warning"> * </span></label>
                                 <div class="col-md-3">
                                     <select class="form-control" name="bulan" id="bulan">
                                         <?php
