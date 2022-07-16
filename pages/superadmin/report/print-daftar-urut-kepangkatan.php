@@ -72,14 +72,6 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 $namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$kep[pimpinan]'");
 $nama		= mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 
-<<<<<<< HEAD
-
-=======
-// $pangkat = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[pimpinan]' AND status_pan='Aktif'");
-// $pan	= mysqli_fetch_array($pangkat, MYSQLI_ASSOC);
-// $pan1 = isset($pan['pangkat']) ? $pan['pangkat'] : '';
->>>>>>> 8b3064f6fe0c5bfb7826219afe755ecaf9528bd7
-
 $header = '<p align="center"><font size="12"><b>DAFTAR URUT KEPANGKATAN PEGAWAI NEGERI SIPIL</b></font><br />
 			<font size="9" style="text-transform:uppercase"> ' . $kep['nama_peru'] . ' TAHUN ' . date('Y') . '<font></p>';
 $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = 10, $header, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
@@ -87,41 +79,37 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 			<tr align="center">
 				<th rowspan="2" width="40">NO</th>
 				<th colspan="2" width="180">NAMA</th>
-				<th rowspan="2" width="120">NIP</th>
+				<th rowspan="2" width="150">NIP</th>
 				
-				<th colspan="2" width="180">JABATAN</th>
+				<th colspan="2" width="250">JABATAN</th>
 				
 				
-				<th colspan="3" width="180">LATIHAN JABATAN</th>
-				<th colspan="3" width="210">PEND AKHIR</th>
-				<th rowspan="2" width="50">KET</th>
+			
+				<th colspan="3" width="270">PEND AKHIR</th>
+				<th rowspan="2" width="90">KET</th>
 			</tr>
 			<tr align="center">
 				<th colspan="2" width="180">TTL</th>
 				
-				<th width="90">NAMA</th>
-				<th width="90">TMT</th>
+				<th width="125">NAMA</th>
+				<th width="125">TMT</th>
 			
-				<th width="90">NAMA</th>
-				<th width="40">THN</th>
-				<th width="50">JML JAM</th>
+				
 				<th width="90">ASAL</th>
-				<th width="60">T.LLS</th>
-				<th width="60">TINGKAT</th>
+				<th width="90">T.LLS</th>
+				<th width="90">TINGKAT</th>
 			</tr>
 			<tr align="center">
 				<th width="40">1</th>
 				<th colspan="2" width="180">2</th>
-				<th width="120">3</th>
-				<th width="90">4</th>
-				<th width="90">5</th>
+				<th width="150">3</th>
+				<th width="125">4</th>
+				<th width="125">5</th>
 				<th width="90">6</th>
-				<th width="40">7</th>
-				<th width="50">8</th>
+				<th width="90">7</th>
+				<th width="90">8</th>
 				<th width="90">9</th>
-				<th width="60">10</th>
-				<th width="60">11</th>
-				<th width="50">12</th>
+				
 				
 				
 			</tr>';

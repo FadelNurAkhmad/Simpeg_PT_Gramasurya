@@ -72,8 +72,6 @@ $kep	= mysqli_fetch_array($kepala);
 $namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$kep[pimpinan]'");
 $nama		= mysqli_fetch_array($namakepala);
 
-
-
 $header = '<p align="center"><font size="12"><b>DAFTAR BEZETTING</b></font><br />
 			<font size="9" style="text-transform:uppercase">' . $kep['nama_peru'] . ' PERIODE BULAN ' . date('m') . ' TAHUN ' . date('Y') . '<font></p>';
 $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = 10, $header, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
@@ -158,11 +156,7 @@ $html .= '<table cellpadding="1" border="0" align="center">
 				<td></td>
 				<td align="center"><font size="9"><b>' . $nama['pegawai_nama'] . '</b></font></td>
 			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td align="center"><font size="9">' . $pan1 . '</font></td>
-			</tr>
+			
 			<tr>
 				<td></td>
 				<td></td>

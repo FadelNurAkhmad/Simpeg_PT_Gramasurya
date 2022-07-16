@@ -72,11 +72,6 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 $namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai  WHERE pegawai_id='$kep[pimpinan]'");
 $nama		= mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 8b3064f6fe0c5bfb7826219afe755ecaf9528bd7
-
 $header = '<p align="center"><font size="12"><b>DAFTAR NOMINATIF PEGAWAI NEGERI SIPIL</b></font><br />
 			<font size="10" style="text-transform:uppercase">PER ' . date("j F Y") . '<font></p>';
 $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = 10, $header, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
@@ -149,14 +144,7 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 					<td>' . $jbt . '</td>
 					<td align="center">' . '</td>';
 
-	// $idLatjab = mysqli_query($koneksi, "SELECT * FROM tb_lat_jabatan WHERE id_lat_jabatan='$peg[pegawai_id]'");
-	// $hljab = mysqli_fetch_array($idLatjab, MYSQLI_ASSOC);
-	// $hljab1 = isset($hljab['nama_pelatih']) ? $hljab['nama_pelatih'] : '';
-	// $hljab2 = isset($hljab['tahun_lat']) ? $hljab['tahun_lat'] : '';
-	// $hljab3 = isset($hljab['jml_jam']) ? $hljab['jml_jam'] : '';
-	// $html .='<td>'.$hljab1.'</td>
-	// <td align="center">'.$hljab2.'</td>
-	// <td align="center">'.$hljab3.'</td>';
+
 
 	$idSek = mysqli_query($koneksi, "SELECT * FROM  tb_sekolah  WHERE id_peg='$peg[pegawai_id]' AND status='Akhir' ");
 	$hsek = mysqli_fetch_array($idSek, MYSQLI_ASSOC);
