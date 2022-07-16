@@ -74,8 +74,7 @@ include "../../../config/koneksi.php";
 	$namakepala	=mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$kep[pimpinan]'");
 	$nama		=mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 	
-	$pangkat=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[pimpinan]' AND status_pan='Aktif'");
-	$pank	=mysqli_fetch_array($pangkat, MYSQLI_ASSOC);
+	
 
 $tampilPeg=mysqli_query($koneksi, "SELECT * FROM pegawai JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id ");
 $peg=mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
@@ -341,17 +340,7 @@ $tblpan ='<table cellspacing="0" cellpadding="2" border="0">
 				<th width="180"><b>Status</b></th>
 			</tr>
 			';
-			// $no=1;
-			// $tampilPan	=mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' ORDER BY tmt_pangkat DESC");
-			// while($pan=mysqli_fetch_array($tampilPan, MYSQLI_ASSOC)) { 
-			// 	$tblpan .='<tr>
-			// 		<td width="30">'.$no++.'.</td>
-			// 		<td width="230">'.$pan['pangkat'].'</td>
-			// 		<td width="110">'.$pan['gol'].'</td>
-			// 		<td width="110">'.$pan['tmt_pangkat'].'</td>
-			// 		<td width="180">'.$pan['status_pan'].'</td>
-			// 	</tr>';
-			// } 
+			
 $tblpan .= '</table>';
 $pdf->writeHTML($tblpan, true, false, false, false, '');
 

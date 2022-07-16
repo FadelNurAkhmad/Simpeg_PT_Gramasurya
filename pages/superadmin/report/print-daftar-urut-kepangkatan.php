@@ -72,9 +72,7 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 $namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$kep[pimpinan]'");
 $nama		= mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 
-$pangkat = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[pimpinan]' AND status_pan='Aktif'");
-$pan	= mysqli_fetch_array($pangkat, MYSQLI_ASSOC);
-$pan1 = isset($pan['pangkat']) ? $pan['pangkat'] : '';
+
 
 $header = '<p align="center"><font size="12"><b>DAFTAR URUT KEPANGKATAN PEGAWAI NEGERI SIPIL</b></font><br />
 			<font size="9" style="text-transform:uppercase"> ' . $kep['nama_peru'] . ' TAHUN ' . date('Y') . '<font></p>';
@@ -133,17 +131,7 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 					<td colspan="2">' . $peg['pegawai_nama'] . '<br />' . $peg['tempat_lahir'] . ',' . $peg['tgl_lahir'] . '</td>
 					<td>' . $peg['pegawai_nip'] . '</td>';
 
-	// $idPan = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE (id_peg='$peg[pegawai_id]' AND status_pan='Aktif')");
-	// $hpan = mysqli_fetch_array($idPan, MYSQLI_ASSOC);
-	// $hpan1 = isset($hpan['pangkat']) ? $hpan['pangkat'] : '';
-	// $hpan2 = isset($hpan['gol']) ? $hpan['gol'] : '';
-	// $hpan3 = isset($hpan['tmt_pangkat']) ? $hpan['tmt_pangkat'] : '';
-	// $hpan4 = isset($hpan['tgl_sk']) ? $hpan['tgl_sk'] : '';
-	// $html .= '<td align="center">' . $hpan1 . '<br />' . $hpan2 . '</td>
-	// 				<td>' . $hpan3 . '</td>';
-
-	// $idJab = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE (pembagian1_id='$peg[pembagian1_id]') ");
-	// $hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
+	
 
 	$idjab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]'");
 	$hjabb = mysqli_fetch_array($idjab, MYSQLI_ASSOC);

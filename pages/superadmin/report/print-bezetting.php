@@ -72,9 +72,6 @@ $kep	= mysqli_fetch_array($kepala);
 $namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$kep[pimpinan]'");
 $nama		= mysqli_fetch_array($namakepala);
 
-$pangkat = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[pimpinan]' AND status_pan='Aktif'");
-$pan	= mysqli_fetch_array($pangkat);
-$pan1 = isset($pan['pangkat']) ? $pan['pangkat'] : '';
 
 $header = '<p align="center"><font size="12"><b>DAFTAR BEZETTING</b></font><br />
 			<font size="9" style="text-transform:uppercase">' . $kep['nama_peru'] . ' PERIODE BULAN ' . date('m') . ' TAHUN ' . date('Y') . '<font></p>';
