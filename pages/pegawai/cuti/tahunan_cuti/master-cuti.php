@@ -40,9 +40,9 @@
             }
             return $inisial . $tmp . $angka;
         }
-        $id_cuti       = kdauto("tb_data_cuti", "");
+        $id_cuti       = kdauto("tb_cuti_tahunan", "");
 
-        $cek = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_data_cuti WHERE tanggal_cuti='$_POST[tanggal_cuti]' AND id_peg='$_POST[id_peg]'"));
+        $cek = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_cuti_tahunan WHERE tanggal_cuti='$_POST[tanggal_cuti]' AND id_peg='$_POST[id_peg]'"));
 
         if (empty($_POST['tanggal_cuti']) || empty($_POST['tanggal_mulai']) || empty($_POST['tanggal_selesai']) || empty($_POST['lama_cuti']) || empty($_POST['jumlah_cuti']) || empty($_POST['jenis_cuti']) || empty($_POST['keperluan']) || empty($_POST['status'])) {
             $_SESSION['pesan'] = "Oops! Please fill all column ...";
@@ -51,11 +51,13 @@
             $_SESSION['pesan'] = "Oops! Duplikat data ...";
             header("location:index.php?page=form-master-cuti");
         } else {
-            $insert = "INSERT INTO tb_data_cuti (id_cuti, id_peg, tanggal_cuti, tanggal_mulai, tanggal_selesai, lama_cuti, jumlah_cuti, jenis_cuti, keperluan, status) 
-            VALUES ('$id_cuti', '$id_peg', '$tanggal_cuti', '$tanggal_mulai', '$tanggal_selesai', '$lama_cuti', '$jumlah_cuti', '$jenis_cuti', '$keperluan', '$status')";
-            $query = mysqli_query($koneksi, $insert) or die(mysqli_error($koneksi));
+            $insert = mysqli_query($koneksi, "INSERT INTO tb_cuti_tahunan (id_cuti, id_peg, tanggal_cuti, tanggal_mulai, tanggal_selesai, lama_cuti, jumlah_cuti, jenis_cuti, keperluan, status) 
+            VALUES ('$id_cuti', '$id_peg', '$tanggal_cuti', '$tanggal_mulai', '$tanggal_selesai', '$lama_cuti', '$jumlah_cuti', '$jenis_cuti', '$keperluan', '$status')");
 
-            if ($query) {
+            $approval = mysqli_query($koneksi, "INSERT INTO tb_approval_cuti_tahunan (id_approval_cuti, id_peg, tanggal_cuti, tanggal_mulai, tanggal_selesai, lama_cuti, jumlah_cuti, jenis_cuti, keperluan, status) 
+            VALUES ('$id_cuti', '$id_peg', '$tanggal_cuti', '$tanggal_mulai', '$tanggal_selesai', '$lama_cuti', '$jumlah_cuti', '$jenis_cuti', '$keperluan', '$status')");
+
+            if ($query && $approval) {
                 $_SESSION['pesan'] = "Good! Insert data cuti success ...";
                 header("location:index.php?page=form-master-cuti");
             } else {

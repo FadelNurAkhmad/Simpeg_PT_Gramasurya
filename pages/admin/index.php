@@ -200,7 +200,7 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 							<li><a href="index.php?page=form-master-data-kawin"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Izin Kawin</a></li>
 						</ul>
 					</li>
-					<li class="has-sub">
+					<!-- <li class="has-sub">
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-calendar bg-purple"></i><span>Cuti</span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-view-cuti-umum"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Cuti Umum</a></li>
@@ -208,7 +208,7 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 							<li><a href="index.php?page=form-view-jatah-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jatah Cuti Tahunan</a></li>
 							<li><a href="index.php?page=form-view-jenis-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Jenis Cuti Umum</a></li>
 						</ul>
-					</li>
+					</li> -->
 					<!-- <li><a href="index.php?page=form-master-data-mutasi"><i class="ion-arrow-swap bg-grey"></i><span>Mutasi</span></a></li> -->
 					<!-- <li><a href="index.php?page=form-master-data-skp"><i class="ion-social-buffer bg-warning"></i><span>SKP</span></a></li> -->
 					<li class="has-sub">
@@ -736,6 +736,38 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					include "../../pages/admin/cuti/jatah_cuti/delete-jatah-cuti.php";
 					break;
 
+				case 'form-view-approval-tahap1':
+					include "../../pages/admin/cuti/approval_tahap_1/form-view-approval-tahap1.php";
+					break;
+				case 'status-cuti-umum':
+					include "../../pages/admin/cuti/approval_tahap_1/status-cuti-umum.php";
+					break;
+				case 'status-cuti-tahunan':
+					include "../../pages/admin/cuti/approval_tahap_1/status-cuti-tahunan.php";
+					break;
+				case 'delete-approval-tahunan':
+					include "../../pages/admin/cuti/approval_tahap_1/delete-approval-tahunan.php";
+					break;
+				case 'delete-approval-izin':
+					include "../../pages/admin/cuti/approval_tahap_1/delete-approval-izin.php";
+					break;
+
+				case 'form-view-approval-tahap2':
+					include "../../pages/admin/cuti/approval_tahap_2/form-view-approval-tahap2.php";
+					break;
+				case 'status-cuti-tahunan-2':
+					include "../../pages/admin/cuti/approval_tahap_2/status-cuti-tahunan-2.php";
+					break;
+				case 'status-cuti-umum-2':
+					include "../../pages/admin/cuti/approval_tahap_2/status-cuti-umum-2.php";
+					break;
+				case 'delete-approval-izin-2':
+					include "../../pages/admin/cuti/approval_tahap_2/delete-approval-izin-2.php";
+					break;
+				case 'delete-approval-tahunan-2':
+					include "../../pages/admin/cuti/approval_tahap_2/delete-approval-tahunan-2.php";
+					break;
+
 				case 'form-master-data-skp':
 					include "../../pages/admin/skp/form-master-data-skp.php";
 					break;
@@ -800,6 +832,34 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					break;
 				case 'delete-divisi-kpi':
 					include "../../pages/admin/kpi/divisi/delete-divisi-kpi.php";
+					break;
+
+				case 'form-view-data-gaji-konfigurasi':
+					include "../../pages/admin/gaji/konfigurasi_gaji/form-view-data-gaji-konfigurasi.php";
+					break;
+				case 'form-master-data-gaji-konfigurasi':
+					include "../../pages/admin/gaji/konfigurasi_gaji/form-master-data-gaji-konfigurasi.php";
+					break;
+				case 'form-edit-data-gaji-konfigurasi':
+					include "../../pages/admin/gaji/konfigurasi_gaji/form-edit-data-gaji-konfigurasi.php";
+					break;
+				case 'edit-data-gaji-konfigurasi':
+					include "../../pages/admin/gaji/konfigurasi_gaji/edit-data-gaji-konfigurasi.php";
+					break;
+				case 'master-data-gaji-konfigurasi':
+					include "../../pages/admin/gaji/konfigurasi_gaji/master-data-gaji-konfigurasi.php";
+					break;
+				case 'detail-data-gaji-konfigurasi':
+					include "../../pages/admin/gaji/konfigurasi_gaji/detail-data-gaji-konfigurasi.php";
+					break;
+				case 'detail-pegawai-data-gaji-konfigurasi':
+					include "../../pages/admin/gaji/konfigurasi_gaji/detail-pegawai-data-gaji-konfigurasi.php";
+					break;
+				case 'delete-data-gaji-konfigurasi':
+					include "../../pages/admin/gaji/konfigurasi_gaji/delete-data-gaji-konfigurasi.php";
+					break;
+				case 'print-detail-konfigurasi-slip-gaji':
+					include "../../pages/admin/gaji/konfigurasi_gaji/print-detail-konfigurasi-slip-gaji.php";
 					break;
 
 				case 'form-view-data-presensi':

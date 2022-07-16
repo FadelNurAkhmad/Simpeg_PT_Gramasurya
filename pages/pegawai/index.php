@@ -163,9 +163,9 @@ $peg		= mysqli_fetch_array($tampilPeg);
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-calendar bg-pink"></i><span>Form Pengajuan Cuti</span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-master-cuti&pegawai_id=<?= $peg['pegawai_id'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pengajuan Cuti Tahunan</a></li>
-							<li><a href="index.php?page=form-master-cuti-umum&pegawai_id=<?= $peg['pegawai_id'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pengajuan Cuti Umum</a></li>
+							<li><a href="index.php?page=form-master-cuti-umum&pegawai_id=<?= $peg['pegawai_id'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pengajuan Izin</a></li>
 							<li><a href="index.php?page=form-view-cuti&pegawai_id=<?= $peg['pegawai_id'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Data Cuti Tahunan</a></li>
-							<li><a href="index.php?page=form-view-cuti-umum&pegawai_id=<?= $peg['pegawai_id'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Data Cuti Umum</a></li>
+							<li><a href="index.php?page=form-view-cuti-umum&pegawai_id=<?= $peg['pegawai_id'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Data Izin</a></li>
 						</ul>
 					</li>
 					<!-- begin sidebar minify button -->
@@ -199,6 +199,9 @@ $peg		= mysqli_fetch_array($tampilPeg);
 				case 'detail-pegawai-data-gaji-konfigurasi':
 					include "../../pages/pegawai/gaji/detail-pegawai-data-gaji-konfigurasi.php";
 					break;
+				case 'print-detail-konfigurasi-slip-gaji':
+					include "../../pages/pegawai/gaji/print-detail-konfigurasi-slip-gaji.php";
+					break;
 
 				case 'detail-data-tunjangan':
 					include "../../pages/pegawai/kepeg/tunjangan/detail-data-tunjangan.php";
@@ -212,6 +215,12 @@ $peg		= mysqli_fetch_array($tampilPeg);
 					break;
 				case 'form-master-cuti':
 					include "../../pages/pegawai/cuti/tahunan_cuti/form-master-cuti.php";
+					break;
+				case 'form-edit-cuti':
+					include "../../pages/pegawai/cuti/tahunan_cuti/form-edit-cuti.php";
+					break;
+				case 'edit-cuti':
+					include "../../pages/pegawai/cuti/tahunan_cuti/edit-cuti.php";
 					break;
 				case 'master-cuti':
 					include "../../pages/pegawai/cuti/tahunan_cuti/master-cuti.php";

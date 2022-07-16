@@ -72,6 +72,10 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 $namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai  WHERE pegawai_id='$kep[pimpinan]'");
 $nama		= mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8b3064f6fe0c5bfb7826219afe755ecaf9528bd7
 
 $header = '<p align="center"><font size="12"><b>DAFTAR NOMINATIF PEGAWAI NEGERI SIPIL</b></font><br />
 			<font size="10" style="text-transform:uppercase">PER ' . date("j F Y") . '<font></p>';
@@ -136,7 +140,7 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 	// if(mysqli_num_rows($idJab) > 0) {
 
 	// } else {
-		
+
 	// }
 	$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
 	$jb = isset($hjab['jabatan']) ? $hjab['jabatan'] : '';

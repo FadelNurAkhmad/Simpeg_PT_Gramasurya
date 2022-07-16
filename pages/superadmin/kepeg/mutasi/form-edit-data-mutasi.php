@@ -37,14 +37,13 @@ if (isset($_GET['id_mutasi'])) {
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
 				<h4 class="panel-title">Form edit data mutasi</h4>
 			</div>
 			<div class="panel-body">
 				<form action="index.php?page=edit-data-mutasi&id_mutasi=<?= $id_mutasi ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">No. SK & Tgl Mutasi</label>
+						<label class="col-md-3 control-label">No. SK & Tgl Mutasi<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-4">
 							<input type="text" name="no_mutasi" maxlength="32" value="<?= $data['no_mutasi'] ?>" class="form-control" />
 						</div>
@@ -56,7 +55,7 @@ if (isset($_GET['id_mutasi'])) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Jenis Mutasi</label>
+						<label class="col-md-3 control-label">Jenis Mutasi<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="jns_mutasi" class="default-select2 form-control">
 								<option value="Masuk" <?php echo ($data['jns_mutasi'] == 'Masuk') ? "selected" : ""; ?>>Masuk

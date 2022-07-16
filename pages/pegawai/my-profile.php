@@ -12,9 +12,6 @@ $jab	= mysqli_fetch_array($jabatan);
 // mengambil data presensi dari mesin
 $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[pegawai_pin]' ORDER BY scan_date DESC");
 
-$queryPan	= mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' AND status_pan='Aktif'");
-$selpan		= mysqli_fetch_array($queryPan);
-
 $queryCuti	= mysqli_query($koneksi, "SELECT * FROM tb_jatah_cuti WHERE id_peg='$id_peg'");
 $jatCuti		= mysqli_fetch_array($queryCuti);
 
@@ -210,19 +207,6 @@ $diff = $today->diff($birthday);
 												<td class="field">Alamat</td>
 												<td><?= $data['alamat'] ?></td>
 											</tr>
-											<!-- <tr>
-												<td class="field">Status Kepegawaian</td>
-												<td><?= $data['status_kepeg'] ?></td>
-											</tr>
-											<tr>
-												<td class="field">Unit Kerja</td>
-												<td><?php
-													$seluni	= mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$data[unit_kerja]'");
-													$uni = mysqli_fetch_array($seluni, MYSQLI_ASSOC);
-													echo $uni['nama'];
-													?>
-												</td>
-											</tr> -->
 											<tr>
 												<td class="field">Jatah Cuti Tahunan</td>
 												<td>
@@ -435,66 +419,6 @@ $diff = $today->diff($birthday);
 					</table>
 				</div>
 			</div>
-			<!-- <div class="tab-pane fade" id="skp">
-				<div class="table-responsive">
-					<table class="table table-bordered table-striped">
-						<thead>
-							<tr>
-								<th rowspan="2">No<br />&nbsp;</th>
-								<th colspan="2">Periode Penilaian</th>
-								<th colspan="2">Penilai</th>
-								<th rowspan="2">N Total<br />&nbsp;</th>
-								<th rowspan="2">Rata<sup>2</sup><br />&nbsp;</th>
-								<th rowspan="2">Mutu<br />&nbsp;</th>
-								<th width="6%" rowspan="2">View<br />&nbsp;</th>
-							</tr>
-							<tr>
-								<th scope="col">Awal</th>
-								<th scope="col">Akhir</th>
-								<th scope="col">Pejabat</th>
-								<th scope="col">Atasan Pejabat</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							$no = 0;
-							$tampilSkp	= mysqli_query($koneksi, "SELECT * FROM tb_skp WHERE id_peg='$id_peg' ORDER BY periode_akhir");
-							while ($skp = mysqli_fetch_array($tampilSkp, MYSQLI_ASSOC)) {
-								$id_skp	= $skp['id_skp'];
-								$no++
-							?>
-								<tr>
-									<td><?= $no ?></td>
-									<td><?php echo $skp['periode_awal']; ?></td>
-									<td><?php echo $skp['periode_akhir']; ?></td>
-									<td><?php echo $skp['penilai']; ?></td>
-									<td><?php echo $skp['atasan_penilai']; ?></td>
-									<td><?php
-										$nilai	= mysqli_query($koneksi, "SELECT * FROM tb_skp WHERE id_skp='$id_skp'");
-										while ($nskp = mysqli_fetch_array($nilai, MYSQLI_ASSOC)) {
-											$orientasi		= $nskp['nilai_orientasi'];
-											$integritas		= $nskp['nilai_integritas'];
-											$komitmen		= $nskp['nilai_komitmen'];
-											$disiplin		= $nskp['nilai_disiplin'];
-											$kerjasama		= $nskp['nilai_kerjasama'];
-											$kepemimpinan	= $nskp['nilai_kepemimpinan'];
-										}
-										$jml_nilai	= $orientasi + $integritas + $komitmen + $disiplin + $kerjasama + $kepemimpinan;
-										$rata		= $jml_nilai / 6;
-										echo $jml_nilai;
-										?>
-									</td>
-									<td><?= number_format($rata, 2, ".", ",") ?></td>
-									<td><?php echo $skp['hasil_penilaian']; ?></td>
-									<td class="tools"><a href="index.php?page=detail-data-skp&id_skp=<?= $skp['id_skp']; ?>" title="view detail" type="button" class="btn btn-warning btn-xs">Detail</a></td>
-								</tr>
-							<?php
-							}
-							?>
-						</tbody>
-					</table>
-				</div>
-			</div> -->
 
 			<!-- tab KPI -->
 			<div class="tab-pane fade" id="kpi">
@@ -547,43 +471,6 @@ $diff = $today->diff($birthday);
 					</table>
 				</div>
 			</div>
-			<!-- <div class="tab-pane fade" id="kgb">
-				<div class="table-responsive">
-					<table class="table table-bordered table-striped">
-						<thead>
-							<tr>
-								<th>No #</th>
-								<th>Nomor KGB</th>
-								<th>Tanggal</th>
-								<th>Gaji Lama</th>
-								<th>Gaji Baru</th>
-								<th>Gol Baru</th>
-								<th>View</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							$no = 0;
-							$tampilKgb	= mysqli_query($koneksi, "SELECT * FROM tb_spkgb WHERE id_peg='$id_peg' ORDER BY tgl DESC");
-							while ($kgb = mysqli_fetch_array($tampilKgb, MYSQLI_ASSOC)) {
-								$no++
-							?>
-								<tr>
-									<td><?= $no ?></td>
-									<td><?php echo $kgb['no_kgb']; ?></td>
-									<td><?php echo $kgb['tgl']; ?></td>
-									<td><?= number_format($kgb['gaji_lama'], 0, ",", "."); ?></td>
-									<td><?= number_format($kgb['gaji_baru'], 0, ",", "."); ?></td>
-									<td><?php echo $kgb['gol_baru']; ?></td>
-									<td class="tools"><a href="index.php?page=detail-data-kgb&id_spkgb=<?= $kgb['id_spkgb']; ?>" title="view detail" type="button" class="btn btn-warning btn-xs">Detail</a></td>
-								</tr>
-							<?php
-							}
-							?>
-						</tbody>
-					</table>
-				</div>
-			</div> -->
 
 			<!-- tab gaji -->
 			<div class="tab-pane fade" id="gaji">
@@ -592,7 +479,7 @@ $diff = $today->diff($birthday);
 					<i class="fa fa-info fa-2x pull-left"></i> Klik "Detail" untuk menuju halaman preview dan print ...
 				</div>
 				<div class="panel-body">
-					<table id="data-table" class="table table-striped table-bordered nowrap" width="100%">
+					<table class="table table-striped table-bordered nowrap display" width="100%">
 						<thead>
 							<tr>
 								<th width="4%">No</th>
@@ -710,7 +597,7 @@ $diff = $today->diff($birthday);
 
 				</div>
 				<div class="table-responsive">
-					<table class="table table-bordered table-striped">
+					<table class="table table-bordered table-striped display">
 						<thead>
 							<tr>
 								<th>No</th>
@@ -815,7 +702,7 @@ $diff = $today->diff($birthday);
 					<!-- <p class="pull-right"><a type="button" data-toggle="modal" data-target="#seminar" class="btn btn-default"><i class="fa fa-desktop"></i> Seminar</a></p> -->
 					<!-- <p class="pull-right"><a type="button" data-toggle="modal" data-target="#cuti" class="btn btn-default"><i class="fa fa-calendar"></i> Cuti</a></p> -->
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#riwayatcutitahunan" class="btn btn-default"><i class="fa fa-calendar"></i> Riwayat Cuti Tahunan</a></p>
-					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#riwayatcutiumum" class="btn btn-default"><i class="fa fa-calendar"></i> Riwayat Cuti Umum</a></p>
+					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#riwayatizin" class="btn btn-default"><i class="fa fa-calendar"></i> Riwayat Izin</a></p>
 					<!-- <p class="pull-right"><a type="button" data-toggle="modal" data-target="#latjab" class="btn btn-default"><i class="fa fa-book"></i> Latihan Jabatan</a></p> -->
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#mutasi" class="btn btn-default"><i class="fa fa-exchange"></i> Mutasi</a></p>
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#tunjangan" class="btn btn-default"><i class="fa fa-money"></i> Tunjangan</a></p>
@@ -823,139 +710,7 @@ $diff = $today->diff($birthday);
 				</div>
 			</div>
 		</div>
-		<!-- modal -->
-		<!-- <div id="pensiun" class="modal fade">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Schedule Pensiun</h4>
-					</div>
-					<div class="col-sm-10 col-sm-offset-1">
-						<div class="modal-body">
-							<div class="table-responsive">
-								<table class="table table-bordered table-striped">
-									<thead class="thin-border-bottom">
-										<tr>
-											<th width="40%"><i class="fa fa-caret-right"></i> Tanggal Kelahiran</th>
-											<th width="60%"><i class="fa fa-caret-right"></i> Tanggal Jatuh Tempo Pensiun</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php
-										$tampilPens	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$id_peg'");
-										$pens	= mysqli_fetch_array($tampilPens, MYSQLI_ASSOC);
-										$lahir	= $pens['tgl_lahir'];
-										$pensiun = $pens['tgl_pensiun'];
-										?>
-										<tr>
-											<td><?= $lahir ?></td>
-											<td><?= $pensiun ?></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-					</div>
-				</div>
-			</div>
-		</div> -->
-		<!-- <div id="naikpangkat" class="modal fade">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Schedule Periode Kenaikan Pangkat</h4>
-					</div>
-					<div class="col-sm-10 col-sm-offset-1">
-						<div class="modal-body">
-							<div class="table-responsive">
-								<table class="table table-bordered table-striped">
-									<thead class="thin-border-bottom">
-										<tr>
-											<th width="40%"><i class="fa fa-caret-right"></i> Periode</th>
-											<th width="60%"><i class="fa fa-caret-right"></i> Tanggal Kenaikan Pangkat</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php
-										$tampilNp	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$id_peg'");
-										$np	= mysqli_fetch_array($tampilNp, MYSQLI_ASSOC);
-										$naikpangkat	= $np['tgl_naikpangkat'];
-										$naikpensiun	= $np['tgl_pensiun'];
 
-										$begin = new DateTime($naikpangkat);
-										$end = new DateTime($naikpensiun);
-										$no = 0;
-										for ($i = $begin; $begin <= $end; $i->modify('+4 year')) {
-											$no++;
-										?>
-											<tr>
-												<td>Periode <?= $no ?></td>
-												<td><?php echo $i->format("Y-m-d"); ?></td>
-											</tr>
-										<?php
-										}
-										?>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-					</div>
-				</div>
-			</div>
-		</div> -->
-		<!-- <div id="naikgaji" class="modal fade">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Schedule Periode Kenaikan Gaji</h4>
-					</div>
-					<div class="col-sm-10 col-sm-offset-1">
-						<div class="modal-body">
-							<div class="table-responsive">
-								<table class="table table-bordered table-striped">
-									<thead class="thin-border-bottom">
-										<tr>
-											<th width="40%"><i class="fa fa-caret-right"></i> Periode</th>
-											<th width="60%"><i class="fa fa-caret-right"></i> Tanggal Kenaikan Gaji</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php
-										$tampilGj	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$id_peg'");
-										$ng	= mysqli_fetch_array($tampilGj, MYSQLI_ASSOC);
-										$naikgaji	= $ng['tgl_naikgaji'];
-										$naikpens	= $ng['tgl_pensiun'];
-
-										$beging = new DateTime($naikgaji);
-										$endg = new DateTime($naikpens);
-										$nog = 0;
-										for ($ig = $beging; $beging <= $endg; $ig->modify('+2 year')) {
-											$nog++;
-										?>
-											<tr>
-												<td>Periode <?= $nog ?></td>
-												<td><?php echo $ig->format("Y-m-d"); ?></td>
-											</tr>
-										<?php
-										}
-										?>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-					</div>
-				</div>
-			</div>
-		</div> -->
 		<div id="jabatan" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -965,12 +720,16 @@ $diff = $today->diff($birthday);
 					</div>
 					<div class="col-sm-12">
 						<div class="modal-body">
+							<div class="alert alert-success fade in">
+								<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+								<i class="fa fa-info fa-2x pull-left"></i> Klik "Set" untuk menentukan jabatan sekarang ...
+							</div>
 							<div class="table-responsive">
 								<table class="table table-bordered table-striped">
 									<thead class="thin-border-bottom">
 										<tr>
 											<th width="2%">No<br />&nbsp;</th>
-											<th>Jabatan<br />ESL</th>
+											<th>Jabatan<br />&nbsp;</th>
 											<th>No. SK <br />Tgl. SK</th>
 											<th width="25%">TMT / SK<br />&nbsp;</th>
 											<th width="8%">Status<br />&nbsp;</th>
@@ -985,9 +744,9 @@ $diff = $today->diff($birthday);
 										?>
 											<tr>
 												<td><?= $no ?></td>
-												<td>-&nbsp;<?php echo $jab['jabatan']; ?><br />-&nbsp;<?php echo $jab['eselon']; ?></td>
-												<td>-&nbsp;<?php echo $jab['no_sk']; ?><br />-&nbsp;<?php echo $jab['tgl_sk']; ?></td>
-												<td><?php echo $jab['tmt_jabatan']; ?> s/d <?php echo $jab['sampai_tgl']; ?>
+												<td>-&nbsp;<?php echo $jab['jabatan']; ?></td>
+												<td>-&nbsp;<?php echo $jab['no_sk']; ?><br />-&nbsp;<?php echo ($jab['tgl_sk'] == "0000-00-00") ? "-" : $jab['tgl_sk']; ?></td>
+												<td><?php echo ($jab['tmt_jabatan'] == "0000-00-00") ? "-" : $jab['tmt_jabatan']; ?> s/d <?php echo ($jab['sampai_tgl'] == "0000-00-00") ? "-" : $jab['sampai_tgl']; ?>
 													<br />
 													<?php
 													if ($jab['file'] == "") {
@@ -1005,6 +764,7 @@ $diff = $today->diff($birthday);
 													}
 													?>
 												</td>
+
 											</tr>
 										<?php
 										}
@@ -1019,76 +779,7 @@ $diff = $today->diff($birthday);
 				</div>
 			</div>
 		</div>
-		<!-- <div id="pangkat" class="modal fade">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Riwayat Pangkat</h4>
-					</div>
-					<div class="col-sm-12">
-						<div class="modal-body">
-							<div class="table-responsive">
-								<table class="table table-bordered table-striped">
-									<thead class="thin-border-bottom">
-										<tr>
-											<th rowspan="2" width="1%">No<br />&nbsp;</th>
-											<th rowspan="2">Pangkat<br />Gol</th>
-											<th rowspan="2">Jenis<br />&nbsp;</th>
-											<th rowspan="2">TMT<br />&nbsp;</th>
-											<th colspan="2">Surat Keputusan</th>
-											<th rowspan="2">SK<br />&nbsp;</th>
-											<th rowspan="2">Status<br />&nbsp;</th>
-										</tr>
-										<tr>
-											<th>Pejabat</th>
-											<th>Nomor / TGL</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php
-										$no = 0;
-										$tampilPan	= mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' ORDER BY tgl_sk");
-										while ($pangkat = mysqli_fetch_array($tampilPan, MYSQLI_ASSOC)) {
-											$no++
-										?>
-											<tr>
-												<td><?= $no ?></td>
-												<td><?php echo $pangkat['pangkat']; ?><br /><?php echo $pangkat['gol']; ?></td>
-												<td><?php echo $pangkat['jns_pangkat']; ?></td>
-												<td><?php echo $pangkat['tmt_pangkat']; ?></td>
-												<td><?php echo $pangkat['pejabat_sk']; ?></td>
-												<td><?php echo $pangkat['no_sk']; ?><br /><?php echo $pangkat['tgl_sk']; ?></td>
-												<td><?php
-													if ($pangkat['file'] == "") {
-														echo "-";
-													} else {
-														echo "<a href='../../assets/file/$pangkat[file]' target='_blank' title='download'><i class='fa fa-file'></i></a>";
-													}
-													?>
-												</td>
-												<td><?php
-													if ($pangkat['status_pan'] == "") {
-														echo "-";
-													} else {
-														echo "$pangkat[status_pan]";
-													}
-													?>
-												</td>
-											</tr>
-										<?php
-										}
-										?>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-					</div>
-				</div>
-			</div>
-		</div> -->
+
 		<div id="hukuman" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -1146,66 +837,7 @@ $diff = $today->diff($birthday);
 				</div>
 			</div>
 		</div>
-		<div id="diklat" class="modal fade">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Riwayat Diklat</h4>
-					</div>
-					<div class="col-sm-12">
-						<div class="modal-body">
-							<div class="table-responsive">
-								<table class="table table-bordered table-striped">
-									<thead class="thin-border-bottom">
-										<tr>
-											<th>No<br />&nbsp;</th>
-											<th>Nama Diklat<br />&nbsp;</th>
-											<th>Jumlah Jam<br />&nbsp;</th>
-											<th>Penyelenggara<br />&nbsp;</th>
-											<th>Tempat<br />&nbsp;</th>
-											<th>Angkatan<br />Tahun</th>
-											<th>No STTPP<br />Tgl STTPP</th>
-											<th>Sertifikat<br />&nbsp;</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php
-										$no = 0;
-										$tampilDik	= mysqli_query($koneksi, "SELECT * FROM tb_diklat WHERE id_peg='$id_peg' ORDER BY tahun");
-										while ($dik = mysqli_fetch_array($tampilDik, MYSQLI_ASSOC)) {
-											$no++
-										?>
-											<tr>
-												<td><?= $no ?></td>
-												<td><?php echo $dik['diklat']; ?></td>
-												<td><?php echo $dik['jml_jam']; ?></td>
-												<td><?php echo $dik['penyelenggara']; ?></td>
-												<td><?php echo $dik['tempat']; ?></td>
-												<td><?php echo $dik['angkatan']; ?><br /><?php echo $dik['tahun']; ?></td>
-												<td><?php echo $dik['no_sttpp']; ?><br /><?php echo $dik['tgl_sttpp']; ?></td>
-												<td><?php
-													if ($dik['file'] == "") {
-														echo "-";
-													} else {
-														echo "<a href='../../assets/file/$dik[file]' target='_blank' title='download'><i class='fa fa-file'></i></a>";
-													}
-													?>
-												</td>
-											</tr>
-										<?php
-										}
-										?>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-					</div>
-				</div>
-			</div>
-		</div>
+
 		<div id="harga" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -1298,116 +930,7 @@ $diff = $today->diff($birthday);
 				</div>
 			</div>
 		</div>
-		<div id="seminar" class="modal fade">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Riwayat Seminar</h4>
-					</div>
-					<div class="col-sm-12">
-						<div class="modal-body">
-							<div class="table-responsive">
-								<table class="table table-bordered table-striped">
-									<thead class="thin-border-bottom">
-										<tr>
-											<th>No<br />&nbsp;</th>
-											<th>Seminar<br />&nbsp;</th>
-											<th>Tempat<br />&nbsp;</th>
-											<th>Penyelenggara<br />&nbsp;</th>
-											<th>Tanggal Pelaksanaan<br />&nbsp;</th>
-											<th>No. Piagam<br />Tgl</th>
-											<th>Sertifikat<br />&nbsp;</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php
-										$no = 0;
-										$tampilSem	= mysqli_query($koneksi, "SELECT * FROM tb_seminar WHERE id_peg='$id_peg' ORDER BY tgl_selesai");
-										while ($sem = mysqli_fetch_array($tampilSem, MYSQLI_ASSOC)) {
-											$no++
-										?>
-											<tr>
-												<td><?= $no ?></td>
-												<td><?php echo $sem['seminar']; ?></td>
-												<td><?php echo $sem['tempat']; ?></td>
-												<td><?php echo $sem['penyelenggara']; ?></td>
-												<td><?php echo $sem['tgl_mulai']; ?> s/d <?php echo $sem['tgl_selesai']; ?></td>
-												<td><?php echo $sem['no_piagam']; ?><br /><?php echo $sem['tgl_piagam']; ?></td>
-												<td><?php
-													if ($sem['file'] == "") {
-														echo "-";
-													} else {
-														echo "<a href='../../assets/file/$sem[file]' target='_blank' title='download'><i class='fa fa-file'></i></a>";
-													}
-													?>
-												</td>
-											</tr>
-										<?php
-										}
-										?>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="cuti" class="modal fade">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">
-							<i class="fa fa-calendar text-danger"></i>
-							Riwayat Pengajuan Cuti
-						</h4>
-					</div>
-					<div class="col-sm-12">
-						<div class="modal-body">
-							<div class="table-responsive">
-								<table class="table table-bordered table-striped">
-									<thead class="thin-border-bottom">
-										<tr>
-											<th>No#</th>
-											<th>Jenis Cuti</th>
-											<th>No. Surat Cuti</th>
-											<th>Tgl Surat Cuti</th>
-											<th>Tanggal Pelaksanaan</th>
-											<th width="6%">View</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php
-										$no = 0;
-										$tampilCut	= mysqli_query($koneksi, "SELECT * FROM tb_cuti WHERE id_peg='$id_peg' ORDER BY tgl_suratcuti");
-										while ($cut = mysqli_fetch_array($tampilCut, MYSQLI_ASSOC)) {
-											$no++
-										?>
-											<tr>
-												<td><?= $no ?></td>
-												<td><?php echo $cut['jns_cuti']; ?></td>
-												<td><?php echo $cut['no_suratcuti']; ?></td>
-												<td><?php echo $cut['tgl_suratcuti']; ?></td>
-												<td><?php echo $cut['tgl_mulai']; ?> <b>s/d</b> <?php echo $cut['tgl_selesai']; ?></td>
-												<td class="tools"><a href="index.php?page=detail-data-cuti&id_cuti=<?= $cut['id_cuti']; ?>" title="view detail" type="button" class="btn btn-warning btn-xs">Detail</a></td>
-											</tr>
-										<?php
-										}
-										?>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-					</div>
-				</div>
-			</div>
-		</div>
+
 		<div id="riwayatcutitahunan" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -1437,7 +960,7 @@ $diff = $today->diff($birthday);
 									<tbody>
 										<?php
 										$no = 0;
-										$tampilCuti	= mysqli_query($koneksi, "SELECT * FROM tb_data_cuti WHERE id_peg='$id_peg' ORDER BY tanggal_cuti");
+										$tampilCuti	= mysqli_query($koneksi, "SELECT * FROM tb_approval_cuti_tahunan WHERE id_peg='$id_peg' ORDER BY tanggal_cuti");
 										while ($cuti = mysqli_fetch_array($tampilCuti)) {
 											$no++
 										?>
@@ -1462,7 +985,7 @@ $diff = $today->diff($birthday);
 													if ($cuti['status'] == 'Process') {
 														echo '<a href="javascript:;" title="belum di approve" type="button" class="btn btn-default btn-icon btn-sm"><i class="fa fa-print fa-lg"></i></a>';
 													} else if ($cuti['status'] == 'Approve') {
-														echo '<a href="index.php?page=detail-cuti&id_cuti=' . $cuti['id_cuti'] . '" title="cetak" type="button" class="btn btn-success btn-icon btn-sm"><i class="fa fa-print fa-lg"></i></a>';
+														echo '<a href="index.php?page=detail-cuti&id_approval_cuti=' . $cuti['id_approval_cuti'] . '" title="cetak" type="button" class="btn btn-success btn-icon btn-sm"><i class="fa fa-print fa-lg"></i></a>';
 													} else if ($cuti['status'] == 'Reject') {
 														echo '<a href="javascript:;" title="belum di approve" type="button" class="btn btn-default btn-icon btn-sm"><i class="fa fa-print fa-lg"></i></a>';
 													}
@@ -1482,14 +1005,14 @@ $diff = $today->diff($birthday);
 				</div>
 			</div>
 		</div>
-		<div id="riwayatcutiumum" class="modal fade">
+		<div id="riwayatizin" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">
 							<i class="fa fa-calendar text-danger"></i>
-							Riwayat Pengajuan Cuti Umum
+							Riwayat Pengajuan Izin
 						</h4>
 					</div>
 					<div class="col-sm-12">
@@ -1511,7 +1034,7 @@ $diff = $today->diff($birthday);
 									<tbody>
 										<?php
 										$no = 0;
-										$tampilCuti	= mysqli_query($koneksi, "SELECT * FROM tb_cuti_umum WHERE id_peg='$id_peg' ORDER BY tanggal_cuti");
+										$tampilCuti	= mysqli_query($koneksi, "SELECT * FROM tb_approval_cuti_umum WHERE id_peg='$id_peg' ORDER BY tanggal_cuti");
 										while ($cuti = mysqli_fetch_array($tampilCuti)) {
 											$no++
 										?>
@@ -1536,7 +1059,7 @@ $diff = $today->diff($birthday);
 													if ($cuti['status'] == 'Process') {
 														echo '<a href="javascript:;" title="belum di approve" type="button" class="btn btn-default btn-icon btn-sm"><i class="fa fa-print fa-lg"></i></a>';
 													} else if ($cuti['status'] == 'Approve') {
-														echo '<a href="index.php?page=detail-cuti-umum&id_cuti_umum=' . $cuti['id_cuti_umum'] . '" title="cetak" type="button" class="btn btn-success btn-icon btn-sm"><i class="fa fa-print fa-lg"></i></a>';
+														echo '<a href="index.php?page=detail-cuti-umum&id_approval_umum=' . $cuti['id_approval_umum'] . '" title="cetak" type="button" class="btn btn-success btn-icon btn-sm"><i class="fa fa-print fa-lg"></i></a>';
 													} else if ($cuti['status'] == 'Reject') {
 														echo '<a href="javascript:;" title="belum di approve" type="button" class="btn btn-default btn-icon btn-sm"><i class="fa fa-print fa-lg"></i></a>';
 													}
@@ -1556,56 +1079,7 @@ $diff = $today->diff($birthday);
 				</div>
 			</div>
 		</div>
-		<div id="latjab" class="modal fade">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Riwayat Pelatihan Jabatan</h4>
-					</div>
-					<div class="col-sm-12">
-						<div class="modal-body">
-							<div class="table-responsive">
-								<table class="table table-bordered table-striped">
-									<thead class="thin-border-bottom">
-										<tr>
-											<th>Nama Pelatih</th>
-											<th>Tahun</th>
-											<th>Jumlah Jam</th>
-											<th>Sertifikat</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php
-										$tampilLatjab	= mysqli_query($koneksi, "SELECT * FROM tb_lat_jabatan WHERE id_peg='$id_peg' ORDER BY tahun_lat");
-										while ($latjab = mysqli_fetch_array($tampilLatjab, MYSQLI_ASSOC)) {
-										?>
-											<tr>
-												<td><?php echo $latjab['nama_pelatih']; ?></td>
-												<td><?php echo $latjab['tahun_lat']; ?></td>
-												<td><?php echo $latjab['jml_jam']; ?></td>
-												<td><?php
-													if ($latjab['file'] == "") {
-														echo "-";
-													} else {
-														echo "<a href='../../assets/file/$latjab[file]' target='_blank' title='download'><i class='fa fa-file'></i></a>";
-													}
-													?>
-												</td>
-											</tr>
-										<?php
-										}
-										?>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-					</div>
-				</div>
-			</div>
-		</div>
+
 		<div id="mutasi" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -1651,6 +1125,7 @@ $diff = $today->diff($birthday);
 				</div>
 			</div>
 		</div>
+
 		<div id="tunjangan" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -1700,6 +1175,7 @@ $diff = $today->diff($birthday);
 				</div>
 			</div>
 		</div>
+
 		<div id="kawin" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -1761,4 +1237,8 @@ $diff = $today->diff($birthday);
 	setTimeout(function() {
 		$(".pesan").fadeOut('slow');
 	}, 7000);
+
+	$(document).ready(function() {
+		$('table.display').DataTable();
+	});
 </script>

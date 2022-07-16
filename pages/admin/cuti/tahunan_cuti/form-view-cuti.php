@@ -16,13 +16,16 @@
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";
-// $tampilCuti    = mysqli_query($koneksi, "SELECT * FROM tb_data_cuti ORDER BY id_cuti DESC");
+// $tampilCuti    = mysqli_query($koneksi, "SELECT * FROM tb_cuti_tahunan ORDER BY id_cuti DESC");
 $tampilCuti    = mysqli_query(
     $koneksi,
-    "SELECT tb_data_cuti.id_cuti, tb_data_cuti.id_peg, tb_data_cuti.tanggal_cuti, tb_data_cuti.tanggal_mulai, tb_data_cuti.tanggal_selesai, tb_data_cuti.lama_cuti, tb_data_cuti.jumlah_cuti, tb_data_cuti.jenis_cuti, tb_data_cuti.keperluan, tb_data_cuti.status, pegawai.pegawai_nip, pegawai.pegawai_nama
-    FROM tb_data_cuti
-    INNER JOIN pegawai ON tb_data_cuti.id_peg=pegawai.pegawai_id ORDER BY id_cuti DESC"
+    "SELECT tb_cuti_tahunan.id_cuti, tb_cuti_tahunan.id_peg, tb_cuti_tahunan.tanggal_cuti, tb_cuti_tahunan.tanggal_mulai, tb_cuti_tahunan.tanggal_selesai, tb_cuti_tahunan.lama_cuti, tb_cuti_tahunan.jumlah_cuti, tb_cuti_tahunan.jenis_cuti, tb_cuti_tahunan.keperluan, tb_cuti_tahunan.status, pegawai.pegawai_nip, pegawai.pegawai_nama
+    FROM tb_cuti_tahunan
+    INNER JOIN pegawai ON tb_cuti_tahunan.id_peg=pegawai.pegawai_id ORDER BY id_cuti DESC"
 );
+
+// ambil data status dari tb_approval_cuti_tahunan (Cuti Tahunan)
+
 
 ?>
 <div class="row">
@@ -77,18 +80,21 @@ $tampilCuti    = mysqli_query(
                                 <td><?php echo $cuti['lama_cuti'] ?> Hari</td>
                                 <td><?php echo $cuti['jenis_cuti'] ?></td>
                                 <td><?php
-                                    if ($cuti['status'] == 'Process') {
+                                    $status = mysqli_query($koneksi, "SELECT status FROM tb_approval_cuti_tahunan WHERE id_approval_cuti='$cuti[id_cuti]'");
+                                    $stat    = mysqli_fetch_array($status);
+
+                                    if ($stat['status'] == 'Process') {
                                         echo '<span class="badge badge-primary">PROCESS</span>';
-                                    } else if ($cuti['status'] == 'Approve') {
+                                    } else if ($stat['status'] == 'Approve') {
                                         echo '<span class="badge badge-success">APPROVED</span>';
-                                    } else if ($cuti['status'] == 'Reject') {
+                                    } else if ($stat['status'] == 'Reject') {
                                         echo '<span class="badge badge-danger">REJECTED</span>';
                                     }
                                     ?>
                                 </td>
                                 <td class="text-center">
-                                    <a type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#Approve<?php echo $cuti['id_cuti'] ?>" title="Approve"><i class="fa fa-check"> </i> Approve</a>
-                                    <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#Reject<?php echo $cuti['id_cuti'] ?>" title="Reject"><i class="fa fa-close"> </i> Reject</a>
+                                    <!-- <a type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#Approve<?php echo $cuti['id_cuti'] ?>" title="Approve"><i class="fa fa-check"> </i> Approve</a> -->
+                                    <!-- <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#Reject<?php echo $cuti['id_cuti'] ?>" title="Reject"><i class="fa fa-close"> </i> Reject</a> -->
                                     <a type="button" class="btn btn-success btn-icon btn-sm" data-toggle="modal" data-target="#Detail<?php echo $cuti['id_cuti'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
                                     <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-cuti&id_cuti=<?= $cuti['id_cuti'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
                                     <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $cuti['id_cuti'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
@@ -206,11 +212,14 @@ $tampilCuti    = mysqli_query(
                                                     <div class="col-md-9">
                                                         :
                                                         <?php
-                                                        if ($cuti['status'] == 'Process') {
+                                                        $status = mysqli_query($koneksi, "SELECT status FROM tb_approval_cuti_tahunan WHERE id_approval_cuti='$cuti[id_cuti]'");
+                                                        $stat    = mysqli_fetch_array($status);
+
+                                                        if ($stat['status'] == 'Process') {
                                                             echo '<span class="badge badge-primary">PROCESS</span>';
-                                                        } else if ($cuti['status'] == 'Approve') {
+                                                        } else if ($stat['status'] == 'Approve') {
                                                             echo '<span class="badge badge-success">APPROVED</span>';
-                                                        } else if ($cuti['status'] == 'Reject') {
+                                                        } else if ($stat['status'] == 'Reject') {
                                                             echo '<span class="badge badge-danger">REJECTED</span>';
                                                         }
                                                         ?>

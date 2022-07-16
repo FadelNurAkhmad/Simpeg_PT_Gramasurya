@@ -11,7 +11,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Riwayat Pendidikan <small>Sekolah <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
+<h1 class="page-header">Riwayat Pendidikan <small><i class="fa fa-angle-right"></i> Sekolah <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 function kdauto($tabel, $inisial)
@@ -50,14 +50,13 @@ $id_sekolah	= kdauto("tb_sekolah", "");
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
 				<h4 class="panel-title">Form master data pendidikan</h4>
 			</div>
 			<div class="panel-body">
 				<form action="index.php?page=master-data-sekolah&id_sekolah=<?= $id_sekolah ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pegawai</label>
+						<label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<?php
 							$data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
@@ -71,7 +70,7 @@ $id_sekolah	= kdauto("tb_sekolah", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tingkat</label>
+						<label class="col-md-3 control-label">Tingkat<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="tingkat" class="default-select2 form-control">
 								<option value="">...</option>
@@ -89,13 +88,13 @@ $id_sekolah	= kdauto("tb_sekolah", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nama Sekolah / Universitas</label>
+						<label class="col-md-3 control-label">Nama Sekolah / Universitas<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="nama_sekolah" maxlength="64" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Lokasi</label>
+						<label class="col-md-3 control-label">Lokasi<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="lokasi" maxlength="32" class="form-control" />
 						</div>
@@ -107,7 +106,7 @@ $id_sekolah	= kdauto("tb_sekolah", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nomor dan Tanggal Ijazah</label>
+						<label class="col-md-3 control-label">Nomor dan Tanggal Ijazah<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-3">
 							<input type="text" name="no_ijazah" maxlength="32" class="form-control" />
 						</div>
@@ -119,7 +118,7 @@ $id_sekolah	= kdauto("tb_sekolah", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nama KepSek / Rektor</label>
+						<label class="col-md-3 control-label">Nama KepSek / Rektor<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="kepala" maxlength="64" class="form-control" />
 						</div>

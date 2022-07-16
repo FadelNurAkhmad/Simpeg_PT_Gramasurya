@@ -132,7 +132,7 @@ $jtug    = mysqli_num_rows($jmltug);
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title"><i class="ion-ios-calendar fa-lg text-warning"></i> &nbsp;Pengajuan Cuti</h4>
+                <h4 class="panel-title"><i class="ion-ios-calendar fa-lg text-warning"></i> &nbsp;Pengajuan Cuti Tahunan</h4>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -149,9 +149,9 @@ $jtug    = mysqli_num_rows($jmltug);
                             <?php
                             $tampilCuti    = mysqli_query(
                                 $koneksi,
-                                "SELECT tb_data_cuti.id_cuti, tb_data_cuti.id_peg, tb_data_cuti.tanggal_cuti, tb_data_cuti.tanggal_mulai, tb_data_cuti.tanggal_selesai, tb_data_cuti.lama_cuti, tb_data_cuti.jumlah_cuti, tb_data_cuti.jenis_cuti, tb_data_cuti.keperluan, tb_data_cuti.status, pegawai.pegawai_nip, pegawai.pegawai_nama
-    							FROM tb_data_cuti
-    							INNER JOIN pegawai ON tb_data_cuti.id_peg=pegawai.pegawai_id ORDER BY id_cuti DESC LIMIT 7"
+                                "SELECT tb_cuti_tahunan.id_cuti, tb_cuti_tahunan.id_peg, tb_cuti_tahunan.tanggal_cuti, tb_cuti_tahunan.tanggal_mulai, tb_cuti_tahunan.tanggal_selesai, tb_cuti_tahunan.lama_cuti, tb_cuti_tahunan.jumlah_cuti, tb_cuti_tahunan.jenis_cuti, tb_cuti_tahunan.keperluan, tb_cuti_tahunan.status, pegawai.pegawai_nip, pegawai.pegawai_nama
+    							FROM tb_cuti_tahunan
+    							INNER JOIN pegawai ON tb_cuti_tahunan.id_peg=pegawai.pegawai_id ORDER BY id_cuti DESC LIMIT 6"
                             );
                             while ($cuti    = mysqli_fetch_array($tampilCuti)) {
                             ?>
@@ -165,6 +165,61 @@ $jtug    = mysqli_num_rows($jmltug);
                                         } else if ($cuti['status'] == 'Approve') {
                                             echo '<span class="badge badge-success">APPROVED</span>';
                                         } else if ($cuti['status'] == 'Reject') {
+                                            echo '<span class="badge badge-danger">REJECTED</span>';
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-inverse" data-sortable-id="index-1">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title"><i class="ion-ios-calendar fa-lg text-warning"></i> &nbsp;Pengajuan Izin</h4>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="thin-border-bottom">
+                            <tr>
+                                <th width="25%"><i class="ace-icon fa fa-lock blue"></i> NIP</th>
+                                <th width="40%"><i class="ace-icon fa fa-caret-right blue"></i> Nama</th>
+                                <th width="20%"><i class="ace-icon fa fa-caret-right blue"></i> Tgl Pengajuan</th>
+                                <th width="15%" class="hidden-480"><i class="ace-icon fa fa-caret-right blue"></i> Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $tampilCutiUmum    = mysqli_query(
+                                $koneksi,
+                                "SELECT tb_cuti_umum.id_cuti_umum, tb_cuti_umum.id_peg, tb_cuti_umum.tanggal_cuti, tb_cuti_umum.tanggal_mulai, tb_cuti_umum.tanggal_selesai, tb_cuti_umum.lama_cuti, tb_cuti_umum.jumlah_cuti, tb_cuti_umum.jenis_cuti, tb_cuti_umum.keperluan, tb_cuti_umum.status, pegawai.pegawai_nip, pegawai.pegawai_nama
+								FROM tb_cuti_umum
+								INNER JOIN pegawai ON tb_cuti_umum.id_peg=pegawai.pegawai_id ORDER BY id_cuti_umum DESC LIMIT 6"
+                            );
+                            while ($izin    = mysqli_fetch_array($tampilCutiUmum)) {
+                            ?>
+                                <tr>
+                                    <td><?php echo $izin == 0 ? '-' : $izin['pegawai_nip']; ?></td>
+                                    <td><?php echo $izin['pegawai_nama'] ?></td>
+                                    <td><?php echo $izin['tanggal_cuti'] ?></td>
+                                    <td><?php
+                                        if ($izin['status'] == 'Process') {
+                                            echo '<span class="badge badge-primary">PROCESS</span>';
+                                        } else if ($izin['status'] == 'Approve') {
+                                            echo '<span class="badge badge-success">APPROVED</span>';
+                                        } else if ($izin['status'] == 'Reject') {
                                             echo '<span class="badge badge-danger">REJECTED</span>';
                                         }
                                         ?>

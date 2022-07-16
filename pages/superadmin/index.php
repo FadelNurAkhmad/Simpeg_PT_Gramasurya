@@ -188,8 +188,6 @@ while ($row = mysqli_fetch_array($query)) {
                         <a href="javascript:;"><b class="caret pull-right"></b><i class="ion-ios-gear bg-pink"></i><span>Master Setup</span></a>
                         <ul class="sub-menu">
                             <li><a href="index.php?page=form-view-setup-perusahaan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Perusahaan</a></li>
-                            <!-- <li><a href="index.php?page=form-view-setup-sekda"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Sekretariat Daerah</a></li> -->
-                            <!-- <li><a href="index.php?page=form-view-data-unit"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Unit Kerja</a></li> -->
                             <li><a href="index.php?page=form-view-data-user"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Admin</a></li>
                             <li><a href="index.php?page=form-view-data-userpeg"><i class="menu-icon fa fa-caret-right"></i> &nbsp;User Pegawai</a></li>
                             <li><a href="index.php?page=form-view-pengaturan-mesin"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Mesin</a></li>
@@ -215,27 +213,28 @@ while ($row = mysqli_fetch_array($query)) {
                         <a href="javascript:;"><b class="caret pull-right"></b><i class="ion-filing bg-grey"></i><span>Kepegawaian &nbsp; <span class="label label-warning m-l-5">7</span></span></a>
                         <ul class="sub-menu">
                             <li><a href="index.php?page=form-master-data-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jabatan</a></li>
-                            <!-- <li><a href="index.php?page=form-master-data-pangkat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pangkat</a></li> -->
                             <li><a href="index.php?page=form-master-data-hukuman"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Hukuman</a></li>
                             <li><a href="index.php?page=form-master-data-dokumen"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Dokumen Pegawai</a></li>
-                            <!-- <li><a href="index.php?page=form-master-data-diklat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Diklat</a></li> -->
                             <li><a href="index.php?page=form-master-data-penghargaan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Penghargaan</a></li>
                             <li><a href="index.php?page=form-master-data-penugasan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Penugasan</a></li>
-                            <!-- <li><a href="index.php?page=form-master-data-seminar"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Seminar</a></li> -->
-                            <!-- <li><a href="index.php?page=form-master-data-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Cuti</a></li> -->
-                            <!-- <li><a href="index.php?page=form-master-data-lat-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Latihan Jabatan</a></li> -->
-                            <!-- <li><a href="index.php?page=form-master-data-gaji-pegawai"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Gaji Pegawai</a></li> -->
                             <li><a href="index.php?page=form-master-data-tunjangan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Tunjangan</a></li>
                             <li><a href="index.php?page=form-master-data-kawin"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Izin Kawin</a></li>
                         </ul>
                     </li>
                     <li class="has-sub">
-                        <a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-calendar bg-purple"></i><span>Cuti</span></a>
+                        <a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-calendar bg-purple"></i><span>Cuti / Izin</span></a>
                         <ul class="sub-menu">
-                            <li><a href="index.php?page=form-view-cuti-umum"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Cuti Umum</a></li>
                             <li><a href="index.php?page=form-view-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Cuti Tahunan</a></li>
                             <li><a href="index.php?page=form-view-jatah-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jatah Cuti Tahunan</a></li>
-                            <li><a href="index.php?page=form-view-jenis-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Jenis Cuti Umum</a></li>
+                            <li><a href="index.php?page=form-view-cuti-umum"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Izin</a></li>
+                            <li><a href="index.php?page=form-view-jenis-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Jenis Izin</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="javascript:;"><i class="fa fa-calendar bg-success"></i><span>Approval Cuti/Izin</span> <span class="badge bg-warning pull-right"><span class="fa fa-check"></span></span></a>
+                        <ul class="sub-menu">
+                            <li><a href="index.php?page=form-view-approval-tahap1"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Approval Tahap 1</a></li>
+                            <li><a href="index.php?page=form-view-approval-tahap2"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Approval Tahap 2</a></li>
                         </ul>
                     </li>
                     <li><a href="index.php?page=form-master-data-mutasi"><i class="ion-arrow-swap bg-warning"></i><span>Mutasi</span></a></li>
@@ -246,17 +245,8 @@ while ($row = mysqli_fetch_array($query)) {
                             <li><a href="index.php?page=form-view-divisi-kpi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Divisi Perusahaan</a></li>
                         </ul>
                     </li>
-                    <!-- <li><a href="index.php?page=form-master-data-skp"><i class="ion-social-buffer bg-pink"></i><span>SKP</span></a></li> -->
                     <!-- gaji -->
                     <li><a href="index.php?page=form-view-data-gaji-konfigurasi"><i class="ion-social-usd bg-success"></i><span>Gaji Pegawai</span></a></li>
-                    <!-- <li class="has-sub">
-                        <a href="javascript:;"><b class="caret pull-right"></b><i class="ion-social-usd bg-success"></i><span>Gaji Pegawai</span></a>
-                        <ul class="sub-menu">
-                            <li><a href="index.php?page=form-view-data-gaji-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Data Gaji Jabatan</a></li>
-                            <li><a href="index.php?page=form-view-data-gaji"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Data Gaji</a></li>
-                            <li><a href="index.php?page=form-view-data-gaji-konfigurasi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Gaji</a></li>
-                        </ul>
-                    </li> -->
                     <!-- end gaji -->
                     <li class="has-sub">
                         <a href="javascript:;"><b class="caret pull-right"></b><i class="ion-compose bg-primary"></i><span>Presensi</span></a>
@@ -277,10 +267,9 @@ while ($row = mysqli_fetch_array($query)) {
                     <li class="has-sub">
                         <a href="javascript:;"><i class="ion-arrow-shrink bg-info"></i><span>Rekapitulasi</span> <span class="badge bg-danger pull-right"><span class="ion-stats-bars"></span></span></a>
                         <ul class="sub-menu">
-                            <!-- <li><a href="index.php?page=rekap-golongan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Golongan</a></li> -->
                             <li><a href="index.php?page=rekap-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jabatan</a></li>
                             <li><a href="index.php?page=rekap-pendidikan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pendidikan</a></li>
-                            <!-- <li><a href="index.php?page=rekap-skpd"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Unit Kerja</a></li> -->
+
                         </ul>
                     </li>
                     <li class="has-sub">
@@ -289,11 +278,8 @@ while ($row = mysqli_fetch_array($query)) {
                             <li><a href="index.php?page=nominatif"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Nominatif</a></li>
                             <li><a href="index.php?page=daftar-urut-kepangkatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;DUK</a></li>
                             <li><a href="index.php?page=bezetting"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Bezetting</a></li>
-                            <!-- <li><a href="index.php?page=keadaan-pegawai"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Keadaan Pegawai</a></li> -->
-                            <!-- <li><a href="index.php?page=pre-pensiun"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pensiun</a></li> -->
                         </ul>
                     </li>
-                    <!-- <li><a href="index.php?page=pre-report-kgb"><i class="fa fa-file-excel-o bg-success"></i><span>Report KGB</span></a></li> -->
                     <li><a href="index.php?page=backup-data"><i class="ion-ios-cloud bg-blue"></i><span>Backup Database</span></a></li>
                     <!-- begin sidebar minify button -->
                     <li><a href="javascript:;" class="sidebar-minify-btn grey" data-click="sidebar-minify"><i class="ion-ios-arrow-left"></i> <span>Collapse</span></a></li>
@@ -321,25 +307,6 @@ while ($row = mysqli_fetch_array($query)) {
                     include "../../pages/superadmin/setup/perusahaan/setup-perusahaan.php";
                     break;
 
-                case 'form-view-setup-bkd':
-                    include "../../pages/superadmin/setup/bkd/form-view-setup-bkd.php";
-                    break;
-                case 'form-setup-bkd':
-                    include "../../pages/superadmin/setup/bkd/form-setup-bkd.php";
-                    break;
-                case 'setup-bkd':
-                    include "../../pages/superadmin/setup/bkd/setup-bkd.php";
-                    break;
-
-                case 'form-view-setup-sekda':
-                    include "../../pages/superadmin/setup/sekda/form-view-setup-sekda.php";
-                    break;
-                case 'form-setup-sekda':
-                    include "../../pages/superadmin/setup/sekda/form-setup-sekda.php";
-                    break;
-                case 'setup-sekda':
-                    include "../../pages/superadmin/setup/sekda/setup-sekda.php";
-                    break;
 
                 case 'form-view-data-unit':
                     include "../../pages/superadmin/unit/form-view-data-unit.php";
@@ -535,51 +502,6 @@ while ($row = mysqli_fetch_array($query)) {
                     include "../../pages/superadmin/kepeg/jabatan/delete-masterjab.php";
                     break;
 
-                case 'masteresl':
-                    include "../../pages/superadmin/kepeg/jabatan/masteresl.php";
-                    break;
-                case 'form-edit-masteresl':
-                    include "../../pages/superadmin/kepeg/jabatan/form-edit-masteresl.php";
-                    break;
-                case 'edit-masteresl':
-                    include "../../pages/superadmin/kepeg/jabatan/edit-masteresl.php";
-                    break;
-                case 'delete-masteresl':
-                    include "../../pages/superadmin/kepeg/jabatan/delete-masteresl.php";
-                    break;
-
-                case 'form-master-data-pangkat':
-                    include "../../pages/superadmin/kepeg/pangkat/form-master-data-pangkat.php";
-                    break;
-                case 'master-data-pangkat':
-                    include "../../pages/superadmin/kepeg/pangkat/master-data-pangkat.php";
-                    break;
-                case 'form-edit-data-pangkat':
-                    include "../../pages/superadmin/kepeg/pangkat/form-edit-data-pangkat.php";
-                    break;
-                case 'edit-data-pangkat':
-                    include "../../pages/superadmin/kepeg/pangkat/edit-data-pangkat.php";
-                    break;
-                case 'delete-data-pangkat':
-                    include "../../pages/superadmin/kepeg/pangkat/delete-data-pangkat.php";
-                    break;
-                case 'set-pangkat-sekarang':
-                    include "../../pages/superadmin/kepeg/pangkat/set-pangkat-sekarang.php";
-                    break;
-
-                case 'mastergol':
-                    include "../../pages/superadmin/kepeg/pangkat/mastergol.php";
-                    break;
-                case 'form-edit-mastergol':
-                    include "../../pages/superadmin/kepeg/pangkat/form-edit-mastergol.php";
-                    break;
-                case 'edit-mastergol':
-                    include "../../pages/superadmin/kepeg/pangkat/edit-mastergol.php";
-                    break;
-                case 'delete-mastergol':
-                    include "../../pages/superadmin/kepeg/pangkat/delete-mastergol.php";
-                    break;
-
                 case 'form-master-data-hukuman':
                     include "../../pages/superadmin/kepeg/hukum/form-master-data-hukuman.php";
                     break;
@@ -615,21 +537,6 @@ while ($row = mysqli_fetch_array($query)) {
                     include "../../pages/superadmin/kepeg/dokumen/masterdok.php";
                     break;
 
-                case 'form-master-data-diklat':
-                    include "../../pages/superadmin/kepeg/diklat/form-master-data-diklat.php";
-                    break;
-                case 'master-data-diklat':
-                    include "../../pages/superadmin/kepeg/diklat/master-data-diklat.php";
-                    break;
-                case 'form-edit-data-diklat':
-                    include "../../pages/superadmin/kepeg/diklat/form-edit-data-diklat.php";
-                    break;
-                case 'edit-data-diklat':
-                    include "../../pages/superadmin/kepeg/diklat/edit-data-diklat.php";
-                    break;
-                case 'delete-data-diklat':
-                    include "../../pages/superadmin/kepeg/diklat/delete-data-diklat.php";
-                    break;
 
                 case 'form-master-data-penghargaan':
                     include "../../pages/superadmin/kepeg/harga/form-master-data-penghargaan.php";
@@ -661,58 +568,6 @@ while ($row = mysqli_fetch_array($query)) {
                     break;
                 case 'delete-data-penugasan':
                     include "../../pages/superadmin/kepeg/tugas/delete-data-penugasan.php";
-                    break;
-
-                case 'form-master-data-seminar':
-                    include "../../pages/superadmin/kepeg/seminar/form-master-data-seminar.php";
-                    break;
-                case 'master-data-seminar':
-                    include "../../pages/superadmin/kepeg/seminar/master-data-seminar.php";
-                    break;
-                case 'form-edit-data-seminar':
-                    include "../../pages/superadmin/kepeg/seminar/form-edit-data-seminar.php";
-                    break;
-                case 'edit-data-seminar':
-                    include "../../pages/superadmin/kepeg/seminar/edit-data-seminar.php";
-                    break;
-                case 'delete-data-seminar':
-                    include "../../pages/superadmin/kepeg/seminar/delete-data-seminar.php";
-                    break;
-
-                case 'form-master-data-cuti':
-                    include "../../pages/superadmin/kepeg/cuti/form-master-data-cuti.php";
-                    break;
-                case 'master-data-cuti':
-                    include "../../pages/superadmin/kepeg/cuti/master-data-cuti.php";
-                    break;
-                case 'form-edit-data-cuti':
-                    include "../../pages/superadmin/kepeg/cuti/form-edit-data-cuti.php";
-                    break;
-                case 'edit-data-cuti':
-                    include "../../pages/superadmin/kepeg/cuti/edit-data-cuti.php";
-                    break;
-                case 'delete-data-cuti':
-                    include "../../pages/superadmin/kepeg/cuti/delete-data-cuti.php";
-                    break;
-                case 'detail-data-cuti':
-                    include "../../pages/superadmin/kepeg/cuti/detail-data-cuti.php";
-                    break;
-
-
-                case 'form-master-data-lat-jabatan':
-                    include "../../pages/superadmin/kepeg/latjab/form-master-data-lat-jabatan.php";
-                    break;
-                case 'master-data-lat-jabatan':
-                    include "../../pages/superadmin/kepeg/latjab/master-data-lat-jabatan.php";
-                    break;
-                case 'form-edit-data-lat-jabatan':
-                    include "../../pages/superadmin/kepeg/latjab/form-edit-data-lat-jabatan.php";
-                    break;
-                case 'edit-data-lat-jabatan':
-                    include "../../pages/superadmin/kepeg/latjab/edit-data-lat-jabatan.php";
-                    break;
-                case 'delete-data-lat-jabatan':
-                    include "../../pages/superadmin/kepeg/latjab/delete-data-lat-jabatan.php";
                     break;
 
                 case 'form-master-data-tunjangan':
@@ -771,9 +626,6 @@ while ($row = mysqli_fetch_array($query)) {
                 case 'edit-cuti':
                     include "../../pages/superadmin/cuti/tahunan_cuti/edit-cuti.php";
                     break;
-                case 'status-cuti':
-                    include "../../pages/superadmin/cuti/tahunan_cuti/status-cuti.php";
-                    break;
                 case 'detail-cuti':
                     include "../../pages/superadmin/cuti/tahunan_cuti/detail-cuti.php";
                     break;
@@ -798,9 +650,6 @@ while ($row = mysqli_fetch_array($query)) {
                     break;
                 case 'edit-cuti-umum':
                     include "../../pages/superadmin/cuti/umum_cuti/edit-cuti-umum.php";
-                    break;
-                case 'status-cuti-umum':
-                    include "../../pages/superadmin/cuti/umum_cuti/status-cuti-umum.php";
                     break;
                 case 'detail-cuti-umum':
                     include "../../pages/superadmin/cuti/umum_cuti/detail-cuti-umum.php";
@@ -847,6 +696,38 @@ while ($row = mysqli_fetch_array($query)) {
                     include "../../pages/superadmin/cuti/jatah_cuti/delete-jatah-cuti.php";
                     break;
 
+                case 'form-view-approval-tahap1':
+                    include "../../pages/superadmin/cuti/approval_tahap_1/form-view-approval-tahap1.php";
+                    break;
+                case 'status-cuti-umum':
+                    include "../../pages/superadmin/cuti/approval_tahap_1/status-cuti-umum.php";
+                    break;
+                case 'status-cuti-tahunan':
+                    include "../../pages/superadmin/cuti/approval_tahap_1/status-cuti-tahunan.php";
+                    break;
+                case 'delete-approval-tahunan':
+                    include "../../pages/superadmin/cuti/approval_tahap_1/delete-approval-tahunan.php";
+                    break;
+                case 'delete-approval-izin':
+                    include "../../pages/superadmin/cuti/approval_tahap_1/delete-approval-izin.php";
+                    break;
+
+                case 'form-view-approval-tahap2':
+                    include "../../pages/superadmin/cuti/approval_tahap_2/form-view-approval-tahap2.php";
+                    break;
+                case 'status-cuti-tahunan-2':
+                    include "../../pages/superadmin/cuti/approval_tahap_2/status-cuti-tahunan-2.php";
+                    break;
+                case 'status-cuti-umum-2':
+                    include "../../pages/superadmin/cuti/approval_tahap_2/status-cuti-umum-2.php";
+                    break;
+                case 'delete-approval-izin-2':
+                    include "../../pages/superadmin/cuti/approval_tahap_2/delete-approval-izin-2.php";
+                    break;
+                case 'delete-approval-tahunan-2':
+                    include "../../pages/superadmin/cuti/approval_tahap_2/delete-approval-tahunan-2.php";
+                    break;
+
                 case 'form-master-data-mutasi':
                     include "../../pages/superadmin/kepeg/mutasi/form-master-data-mutasi.php";
                     break;
@@ -863,24 +744,6 @@ while ($row = mysqli_fetch_array($query)) {
                     include "../../pages/superadmin/kepeg/mutasi/delete-data-mutasi.php";
                     break;
 
-                case 'form-master-data-skp':
-                    include "../../pages/superadmin/skp/form-master-data-skp.php";
-                    break;
-                case 'master-data-skp':
-                    include "../../pages/superadmin/skp/master-data-skp.php";
-                    break;
-                case 'form-edit-data-skp':
-                    include "../../pages/superadmin/skp/form-edit-data-skp.php";
-                    break;
-                case 'edit-data-skp':
-                    include "../../pages/superadmin/skp/edit-data-skp.php";
-                    break;
-                case 'delete-data-skp':
-                    include "../../pages/superadmin/skp/delete-data-skp.php";
-                    break;
-                case 'detail-data-skp':
-                    include "../../pages/superadmin/skp/detail-data-skp.php";
-                    break;
 
                 case 'form-view-kpi':
                     include "../../pages/superadmin/kpi/data_kpi/form-view-kpi.php";
@@ -990,18 +853,6 @@ while ($row = mysqli_fetch_array($query)) {
                     break;
                 case 'print-detail-konfigurasi-slip-gaji':
                     include "../../pages/superadmin/gaji/konfigurasi_gaji/print-detail-konfigurasi-slip-gaji.php";
-                    break;
-
-                case 'detail-data-gaji':
-                    include "../../pages/superadmin/gaji/data_gaji/detail-data-gaji.php";
-                    break;
-
-
-                case 'form-edit-data-gaji-trial':
-                    include "../../pages/superadmin/gaji/trial/form-edit-data-gaji-trial.php";
-                    break;
-                case 'detail-data-gaji':
-                    include "../../pages/superadmin/gaji/data_gaji/detail-data-gaji.php";
                     break;
 
                 case 'form-view-data-jadwal-kerja-pegawai':
@@ -1253,6 +1104,7 @@ while ($row = mysqli_fetch_array($query)) {
     <script src="../../assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js"></script>
     <script src="../../assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
     <script src="../../assets/js/table-manage-responsive.demo.min.js"></script>
+    <script src="../../assets/plugins/number-format/easy-number-separator.js"></script>
 
     <script src="../../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script src="../../assets/plugins/ionRangeSlider/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>

@@ -11,7 +11,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Riwayat Keluarga <small>Orang Tua <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
+<h1 class="page-header">Riwayat Keluarga <small><i class="fa fa-angle-right"></i> Orang Tua <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 function kdauto($tabel, $inisial)
@@ -50,14 +50,13 @@ $id_ortu	= kdauto("tb_ortu", "");
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
 				<h4 class="panel-title">Form master data orang tua</h4>
 			</div>
 			<div class="panel-body">
 				<form action="index.php?page=master-data-ortu&id_ortu=<?= $id_ortu ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pegawai</label>
+						<label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<?php
 							$data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
@@ -71,19 +70,19 @@ $id_ortu	= kdauto("tb_ortu", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">NIK</label>
+						<label class="col-md-3 control-label">NIK<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="nik" maxlength="16" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nama</label>
+						<label class="col-md-3 control-label">Nama<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="nama" maxlength="64" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tempat, Tanggal Lahir</label>
+						<label class="col-md-3 control-label">Tempat, Tanggal Lahir<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-3">
 							<input type="text" name="tmp_lhr" maxlength="64" class="form-control" />
 						</div>
@@ -95,7 +94,7 @@ $id_ortu	= kdauto("tb_ortu", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pendidikan</label>
+						<label class="col-md-3 control-label">Pendidikan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="pendidikan" class="default-select2 form-control">
 								<option value="">...</option>
@@ -113,13 +112,13 @@ $id_ortu	= kdauto("tb_ortu", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pekerjaan</label>
+						<label class="col-md-3 control-label">Pekerjaan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="pekerjaan" maxlength="32" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Status Hubungan</label>
+						<label class="col-md-3 control-label">Status Hubungan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="status_hub" class="default-select2 form-control">
 								<option value="">...</option>

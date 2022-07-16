@@ -23,7 +23,7 @@
             $query = mysqli_query($koneksi, $insert);
 
             if ($query) {
-                $_SESSION['pesan'] = "Good! Insert Jenis Cuti success ...";
+                $_SESSION['pesan'] = "Good! Insert Jenis Izin success ...";
                 header("location:index.php?page=form-view-jenis-cuti");
             } else {
                 echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";

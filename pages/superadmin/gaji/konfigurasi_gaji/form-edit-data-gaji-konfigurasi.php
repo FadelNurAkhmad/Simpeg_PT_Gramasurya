@@ -50,7 +50,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                     <div class="form-group">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Periode</label>
+                                <label class="col-md-3 control-label">Periode<span aria-required="true" class="text-danger"> * </span></label>
                                 <div class="col-md-3">
                                     <select name="bulan" id="bulan" class="default-select2 form-control">
                                         <option value="Januari" <?php echo ($gaji['bulan'] == 'Januari') ? "selected" : ""; ?>>Januari
@@ -84,7 +84,7 @@ if (isset($_GET['id_gaji_konfig'])) {
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Tanggal</label>
+                                <label class="col-md-3 control-label">Tanggal<span aria-required="true" class="text-danger"> * </span></label>
                                 <div class="col-md-6">
                                     <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
                                         <input type="text" name="tanggal_gaji_konfig" id="tanggal_gaji_konfig" value="<?= $gaji['tanggal_gaji_konfig'] ?>" class="form-control" />

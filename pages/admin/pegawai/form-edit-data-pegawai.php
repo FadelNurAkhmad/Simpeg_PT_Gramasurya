@@ -42,19 +42,19 @@ if (isset($_GET['pegawai_id'])) {
 			<div class="panel-body">
 				<form action="index.php?page=edit-data-pegawai&pegawai_id=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">PIN</label>
+						<label class="col-md-3 control-label">PIN<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" value="<?= $data['pegawai_pin'] ?>" name="pegawai_pin" maxlength="24" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">NIP</label>
+						<label class="col-md-3 control-label">NIP<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="pegawai_nip" maxlength="24" value="<?= $data['pegawai_nip'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tempat, Tanggal Lahir</label>
+						<label class="col-md-3 control-label">Tempat, Tanggal Lahir<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-3">
 							<input type="text" name="tempat_lahir" maxlength="64" value="<?= $data['tempat_lahir'] ?>" class="form-control" />
 						</div>
@@ -66,13 +66,13 @@ if (isset($_GET['pegawai_id'])) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nama Pegawai</label>
+						<label class="col-md-3 control-label">Nama Pegawai<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="pegawai_nama" maxlength="64" value="<?= $data['pegawai_nama'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tanggal Mulai Kerja</label>
+						<label class="col-md-3 control-label">Tanggal Mulai Kerja<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-3">
 							<div class="input-group date" id="datepicker-disabled-past2" data-date-format="yyyy-mm-dd">
 								<input type="text" value=<?= $data['tgl_mulai_kerja'] ?> name="tgl_mulai_kerja" class="form-control" />
@@ -81,7 +81,7 @@ if (isset($_GET['pegawai_id'])) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tanggal Masuk Kerja</label>
+						<label class="col-md-3 control-label">Tanggal Masuk Kerja<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-3">
 							<div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
 								<input type="text" value=<?= $data['tgl_masuk_pertama'] ?> name="tgl_masuk_pertama" class="form-control" />
@@ -90,7 +90,7 @@ if (isset($_GET['pegawai_id'])) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Agama</label>
+						<label class="col-md-3 control-label">Agama<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="agama" class="default-select2 form-control">
 								<option value="1" <?php echo ($data['agama'] == '1') ? "selected" : ""; ?>>Islam
@@ -103,7 +103,7 @@ if (isset($_GET['pegawai_id'])) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Jenis Kelamin</label>
+						<label class="col-md-3 control-label">Jenis Kelamin<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="gender" class="default-select2 form-control">
 								<option value="1" <?php echo ($data['gender'] == '1') ? "selected" : ""; ?>>Laki-laki
@@ -112,7 +112,7 @@ if (isset($_GET['pegawai_id'])) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Golongan Darah</label>
+						<label class="col-md-3 control-label">Golongan Darah<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="gol_darah" class="default-select2 form-control">
 								<option value="1" <?php echo ($data['gol_darah'] == '1') ? "selected" : ""; ?>>A+
@@ -127,7 +127,7 @@ if (isset($_GET['pegawai_id'])) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Status Pernikahan</label>
+						<label class="col-md-3 control-label">Status Pernikahan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="stat_nikah" class="default-select2 form-control">
 								<option value="1" <?php echo ($data['stat_nikah'] == '1') ? "selected" : ""; ?>>Sudah Menikah

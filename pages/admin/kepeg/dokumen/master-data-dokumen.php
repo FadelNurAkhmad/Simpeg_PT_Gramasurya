@@ -24,7 +24,7 @@
                 $_SESSION['pesan'] = "Oops! File extensions not available. Only PDF ...";
                 header("location:index.php?page=form-master-data-dokumen");
             } else {
-                if ($ukuran > 500000 === false) {
+                if ($ukuran > 5000000 === false) {
                     $insert = "INSERT INTO tb_dokumen (id_dokumen, id_peg, dokumen, file) VALUES ('$id_dokumen', '$id_peg', '$dokumen', '$file')";
                     $query = mysqli_query($koneksi, $insert);
 

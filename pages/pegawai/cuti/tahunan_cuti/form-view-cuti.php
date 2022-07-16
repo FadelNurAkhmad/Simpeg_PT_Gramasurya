@@ -19,7 +19,7 @@ $id_peg     = $_SESSION['id_peg'];
 $query   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$id_peg'");
 $data    = mysqli_fetch_array($query);
 
-$tampilCuti    = mysqli_query($koneksi, "SELECT * FROM tb_data_cuti WHERE id_peg='$id_peg' ORDER BY tanggal_cuti");
+$tampilCuti    = mysqli_query($koneksi, "SELECT * FROM tb_cuti_tahunan WHERE id_peg='$id_peg' ORDER BY tanggal_cuti");
 
 ?>
 <div class="row">
@@ -71,7 +71,7 @@ $tampilCuti    = mysqli_query($koneksi, "SELECT * FROM tb_data_cuti WHERE id_peg
                                 <td><?php echo $cuti['lama_cuti'] ?> Hari</td>
                                 <td class="text-center">
                                     <a type="button" class="btn btn-success btn-icon btn-sm" data-toggle="modal" data-target="#Detail<?php echo $cuti['id_cuti'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
-                                    <a type="button" class="btn btn-default btn-icon btn-sm" href="javascript:;" title="processed" disabled=""><i class="fa fa-pencil fa-lg"></i></a>
+                                    <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-cuti&id_cuti=<?= $cuti['id_cuti'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
                                     <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $cuti['id_cuti'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
                                 </td>
                             </tr>
@@ -141,11 +141,14 @@ $tampilCuti    = mysqli_query($koneksi, "SELECT * FROM tb_data_cuti WHERE id_peg
                                                     <div class="col-md-9">
                                                         :
                                                         <?php
-                                                        if ($cuti['status'] == 'Process') {
+                                                        $status = mysqli_query($koneksi, "SELECT status FROM tb_approval_cuti_tahunan WHERE id_approval_cuti='$cuti[id_cuti]'");
+                                                        $stat    = mysqli_fetch_array($status);
+
+                                                        if ($stat['status'] == 'Process') {
                                                             echo '<span class="badge badge-primary">PROCESS</span>';
-                                                        } else if ($cuti['status'] == 'Approve') {
+                                                        } else if ($stat['status'] == 'Approve') {
                                                             echo '<span class="badge badge-success">APPROVED</span>';
-                                                        } else if ($cuti['status'] == 'Reject') {
+                                                        } else if ($stat['status'] == 'Reject') {
                                                             echo '<span class="badge badge-danger">REJECTED</span>';
                                                         }
                                                         ?>

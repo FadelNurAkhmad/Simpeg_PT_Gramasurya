@@ -25,7 +25,7 @@ if (isset($_GET['id_cuti_umum'])) {
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Form <small>Edit Cuti <i class="fa fa-angle-right"></i> <i class="fa fa-key"></i> Pegawai: <?= $peg['pegawai_nama'] ?> &nbsp;&nbsp;<i class="fa fa-lock"></i> NIP : <?= $peg == 0 ? '-' : $peg['pegawai_nip']; ?></small></h1>
+<h1 class="page-header">Cuti / Izin <small><i class="fa fa-angle-right"></i> Izin <i class="fa fa-angle-right"></i> Edit Izin <i class="fa fa-key"></i> Pegawai: <?= $peg['pegawai_nama'] ?> &nbsp;&nbsp;<i class="fa fa-lock"></i> NIP : <?= $peg == 0 ? '-' : $peg['pegawai_nip']; ?></small></h1>
 <!-- begin row -->
 <div class="row">
     <!-- begin col-12 -->
@@ -37,14 +37,13 @@ if (isset($_GET['id_cuti_umum'])) {
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Form edit cuti umum</h4>
+                <h4 class="panel-title">Form edit izin</h4>
             </div>
             <div class="panel-body">
                 <form action="index.php?page=edit-cuti-umum&id_cuti_umum=<?= $id_cuti_umum ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Jenis Cuti</label>
+                        <label class="col-md-3 control-label">Jenis Izin<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-6">
                             <?php
                             $dataJ = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY jenis");
@@ -58,13 +57,13 @@ if (isset($_GET['id_cuti_umum'])) {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Keperluan</label>
+                        <label class="col-md-3 control-label">Keperluan<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-6">
                             <textarea type="text" name="keperluan" maxlength="255" class="form-control"><?= $data['keperluan'] ?></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Tanggal Pengajuan</label>
+                        <label class="col-md-3 control-label">Tanggal Pengajuan<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-6">
                             <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
                                 <input type="text" name="tanggal_cuti" value="<?= $data['tanggal_cuti'] ?>" class="form-control" />
@@ -73,7 +72,7 @@ if (isset($_GET['id_cuti_umum'])) {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Tanggal Pelaksanaan</label>
+                        <label class="col-md-3 control-label">Tanggal Pelaksanaan<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
                                 <input type="text" name="tanggal_mulai" value="<?= $data['tanggal_mulai'] ?>" placeholder="Dari" class="form-control" />
@@ -88,7 +87,7 @@ if (isset($_GET['id_cuti_umum'])) {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Lama Cuti</label>
+                        <label class="col-md-3 control-label">Lama Izin<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-6">
                             <input type="text" name="lama_cuti" value="<?= $data['lama_cuti'] ?>" class="form-control" />
                         </div>
