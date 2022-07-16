@@ -720,12 +720,16 @@ $diff = $today->diff($birthday);
 					</div>
 					<div class="col-sm-12">
 						<div class="modal-body">
+							<div class="alert alert-success fade in">
+								<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+								<i class="fa fa-info fa-2x pull-left"></i> Klik "Set" untuk menentukan jabatan sekarang ...
+							</div>
 							<div class="table-responsive">
 								<table class="table table-bordered table-striped">
 									<thead class="thin-border-bottom">
 										<tr>
 											<th width="2%">No<br />&nbsp;</th>
-											<th>Jabatan<br />ESL</th>
+											<th>Jabatan<br />&nbsp;</th>
 											<th>No. SK <br />Tgl. SK</th>
 											<th width="25%">TMT / SK<br />&nbsp;</th>
 											<th width="8%">Status<br />&nbsp;</th>
@@ -740,9 +744,9 @@ $diff = $today->diff($birthday);
 										?>
 											<tr>
 												<td><?= $no ?></td>
-												<td>-&nbsp;<?php echo $jab['jabatan']; ?><br />-&nbsp;<?php echo $jab['eselon']; ?></td>
-												<td>-&nbsp;<?php echo $jab['no_sk']; ?><br />-&nbsp;<?php echo $jab['tgl_sk']; ?></td>
-												<td><?php echo $jab['tmt_jabatan']; ?> s/d <?php echo $jab['sampai_tgl']; ?>
+												<td>-&nbsp;<?php echo $jab['jabatan']; ?></td>
+												<td>-&nbsp;<?php echo $jab['no_sk']; ?><br />-&nbsp;<?php echo ($jab['tgl_sk'] == "0000-00-00") ? "-" : $jab['tgl_sk']; ?></td>
+												<td><?php echo ($jab['tmt_jabatan'] == "0000-00-00") ? "-" : $jab['tmt_jabatan']; ?> s/d <?php echo ($jab['sampai_tgl'] == "0000-00-00") ? "-" : $jab['sampai_tgl']; ?>
 													<br />
 													<?php
 													if ($jab['file'] == "") {
@@ -760,6 +764,7 @@ $diff = $today->diff($birthday);
 													}
 													?>
 												</td>
+
 											</tr>
 										<?php
 										}
@@ -1120,6 +1125,57 @@ $diff = $today->diff($birthday);
 				</div>
 			</div>
 		</div>
+
+		<div id="tunjangan" class="modal fade">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Riwayat Tunjangan</h4>
+					</div>
+					<div class="col-sm-12">
+						<div class="modal-body">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped">
+									<thead class="thin-border-bottom">
+										<tr>
+											<th>No</th>
+											<th>Jenis Tunjangan</th>
+											<th>Nomor</th>
+											<th>Tanggal</th>
+											<th>Terhitung Mulai</th>
+											<th width="6%">View</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+										$no = 0;
+										$tampilTun	= mysqli_query($koneksi, "SELECT * FROM tb_tunjangan WHERE id_peg='$id_peg' ORDER BY tgl_tunjangan DESC");
+										while ($tun = mysqli_fetch_array($tampilTun, MYSQLI_ASSOC)) {
+											$no++
+										?>
+											<tr>
+												<td><?= $no ?></td>
+												<td><?php echo $tun['jns_tunjangan']; ?></td>
+												<td><?php echo $tun['no_tunjangan']; ?></td>
+												<td><?php echo $tun['tgl_tunjangan']; ?></td>
+												<td><?php echo $tun['tgl_terhitung']; ?></td>
+												<td class="tools"><a href="index.php?page=detail-data-tunjangan&id_tunjangan=<?= $tun['id_tunjangan']; ?>" title="view detail" type="button" class="btn btn-warning btn-xs">Detail</a></td>
+											</tr>
+										<?php
+										}
+										?>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div id="kawin" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">

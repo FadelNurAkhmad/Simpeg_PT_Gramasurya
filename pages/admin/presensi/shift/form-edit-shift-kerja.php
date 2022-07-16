@@ -23,7 +23,7 @@ if (isset($_GET['jk_id'])) {
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Shift Kerja <small><i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i></small></h1>
+<h1 class="page-header">Presensi <small><i class="fa fa-angle-right"></i> Konfigurasi Shift <i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i></small></h1>
 <!-- begin row -->
 <!-- begin row -->
 <div class="row">
@@ -41,13 +41,13 @@ if (isset($_GET['jk_id'])) {
             </div>
             <div class="panel-body">
                 <form action="index.php?page=edit-shift-kerja&jk_id=<?= $jk_id ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
-                    
+
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Nama Shift</label>
+                        <label class="col-md-3 control-label">Nama Shift<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-3">
                             <input class="form-control" type="text" name="jk_name" value="<?= $data['jk_name'] ?>" />
                         </div>
-                        <label class="col-md-1 control-label">Kode</label>
+                        <label class="col-md-1 control-label">Kode<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-3">
                             <input class="form-control" type="text" name="jk_kode" value="<?= $data['jk_kode'] ?>" />
                         </div>
@@ -59,14 +59,14 @@ if (isset($_GET['jk_id'])) {
                         </div>
                         <label class="col-md-1 control-label"></label>
                         <div class="col-md-1 form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="jk_durasi" id="flexRadioDefault1" value="1" <?php echo ($data['jk_durasi']=='1')?"checked":""; ?>>
+                            <input class="form-check-input" type="radio" name="jk_durasi" id="flexRadioDefault1" value="1" <?php echo ($data['jk_durasi'] == '1') ? "checked" : ""; ?>>
                             <label class="form-check-label" for="flexRadioDefault1">
                                 Durasi efektif
                             </label>
                         </div>
                         <label class="col-md-1 control-label"></label>
                         <div class="col-md-1 form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="jk_durasi" id="flexRadioDefault2" value="2" <?php echo ($data['jk_durasi']=='2')?"checked":""; ?>>
+                            <input class="form-check-input" type="radio" name="jk_durasi" id="flexRadioDefault2" value="2" <?php echo ($data['jk_durasi'] == '2') ? "checked" : ""; ?>>
                             <label class="form-check-label" for="flexRadioDefault2">
                                 Durasi aktual
                             </label>
@@ -74,38 +74,38 @@ if (isset($_GET['jk_id'])) {
                     </div>
 
                     <hr>
-    
+
                     <div class="form-group">
                         <label class="col-md-2 control-label">Dihitung</label>
                         <div class="col-md-3">
                             <div class="form-inline">
-                                <input class="form-control" type="number" name="jk_countas" value="<?= $data['jk_countas']?>" /> hari
+                                <input class="form-control" type="number" name="jk_countas" value="<?= $data['jk_countas'] ?>" /> hari
                             </div>
                         </div>
                         <div class="col-md-1 form-check">
-                            <input class="form-check-input" name="jk_use_ist" type="checkbox" id="check" onclick="checkedOn()" value="-1" <?= ($data['jk_use_ist'] == "-1")?"checked":"" ?>>
+                            <input class="form-check-input" name="jk_use_ist" type="checkbox" id="check" onclick="checkedOn()" value="-1" <?= ($data['jk_use_ist'] == "-1") ? "checked" : "" ?>>
                             <label class="form-check-label" for="check">Istirahat</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-2"></div>
                         <div class="col-md-2">
-                            <label class="col-md-8 control-label">Masuk</label>
+                            <label class="col-md-8 control-label">Masuk<span aria-required="true" class="text-danger"> * </span></label>
                             <input class="form-control" type="time" name="masuk" id="masuk" value="<?= $data['jk_bcin'] ?>" data-parsley-required="true" />
                         </div>
-                        
+
                         <div class="col-md-2" id="show" style="display:none">
                             <label class="col-md-10 control-label">Istirahat Keluar</label>
-                            <input class="form-control" type="time" name="ist_1" id="ist_1" value="<?= $data['jk_ist1'] ?>" data-parsley-required="true"/>
+                            <input class="form-control" type="time" name="ist_1" id="ist_1" value="<?= $data['jk_ist1'] ?>" data-parsley-required="true" />
                         </div>
-                        
+
                         <div class="col-md-2" id="show2" style="display:none">
                             <label class="col-md-10 control-label">Istirahat Kembali</label>
-                            <input class="form-control" type="time" name="ist_2" id="ist_2" value="<?= $data['jk_ist2'] ?>" data-parsley-required="true"/>
+                            <input class="form-control" type="time" name="ist_2" id="ist_2" value="<?= $data['jk_ist2'] ?>" data-parsley-required="true" />
                         </div>
-                     
+
                         <div class="col-md-2">
-                            <label class="col-md-8 control-label">Pulang</label>
+                            <label class="col-md-8 control-label">Pulang<span aria-required="true" class="text-danger"> * </span></label>
                             <input class="form-control" type="time" name="pulang" id="pulang" value="<?= $data['jk_ecout'] ?>" data-parsley-required="true" />
                         </div>
                     </div>
@@ -125,7 +125,7 @@ if (isset($_GET['jk_id'])) {
                             </div>
                         </div>
                     </div>
-  
+
                     <div class="form-group">
                         <label class="col-md-3 control-label">Durasi setelah jam masuk</label>
                         <div class="col-md-3">
@@ -133,7 +133,7 @@ if (isset($_GET['jk_id'])) {
                                 <input class="form-control" type="number" name="setelah_masuk" value="<?= $data['jk_ecin'] ?>" /> menit
                             </div>
                         </div>
-                        
+
                         <label class="col-md-2 control-label">Durasi setelah jam pulang</label>
                         <div class="col-md-3">
                             <div class="form-inline">
@@ -156,7 +156,7 @@ if (isset($_GET['jk_id'])) {
                             </div>
                         </div>
                     </div>
-  
+
                     <div class="form-group">
                         <!-- <label class="col-md-3 control-label">Durasi minimal dihitung 1/2 hari kerja</label>
                         <div class="col-md-3">
@@ -201,9 +201,9 @@ if (isset($_GET['jk_id'])) {
     var checkBox = document.getElementById("check");
     var show = document.getElementById("show");
     var show2 = document.getElementById("show2");
-    if (checkBox.checked == true){
+    if (checkBox.checked == true) {
         show.style.display = "block";
-         show2.style.display = "block";
+        show2.style.display = "block";
     } else {
         show.style.display = "none";
         show2.style.display = "none";
@@ -214,7 +214,7 @@ if (isset($_GET['jk_id'])) {
         var checkBox = document.getElementById("check");
         var show = document.getElementById("show");
         var show2 = document.getElementById("show2");
-        if (checkBox.checked == true){
+        if (checkBox.checked == true) {
             show.style.display = "block";
             show2.style.display = "block";
         } else {
@@ -222,5 +222,4 @@ if (isset($_GET['jk_id'])) {
             show2.style.display = "none";
         }
     }
-
 </script>

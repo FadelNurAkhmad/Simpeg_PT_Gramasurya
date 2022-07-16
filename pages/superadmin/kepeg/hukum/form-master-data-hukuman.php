@@ -56,7 +56,7 @@ $id_hukuman	= kdauto("tb_hukuman", "");
 			<div class="panel-body">
 				<form action="index.php?page=master-data-hukuman&id_hukuman=<?= $id_hukuman ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<?php
 							$data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
@@ -70,7 +70,7 @@ $id_hukuman	= kdauto("tb_hukuman", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Jenis Hukuman<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Jenis Hukuman<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="hukuman" class="default-select2 form-control">
 								<option value="">...</option>
@@ -83,13 +83,13 @@ $id_hukuman	= kdauto("tb_hukuman", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pejabat Pengesah SK Hukuman<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Pejabat Pengesah SK Hukuman<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="pejabat_sk" maxlength="64" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nomor dan Tanggal Pengesahan SK<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Nomor dan Tanggal Pengesahan SK<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-3">
 							<input type="text" name="no_sk" maxlength="32" class="form-control" />
 						</div>

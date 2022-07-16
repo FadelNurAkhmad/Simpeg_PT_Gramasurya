@@ -57,7 +57,7 @@ $id_penghargaan	= kdauto("tb_penghargaan", "");
 			<div class="panel-body">
 				<form action="index.php?page=master-data-penghargaan&id_penghargaan=<?= $id_penghargaan ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<?php
 							$data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id ASC");
@@ -71,19 +71,19 @@ $id_penghargaan	= kdauto("tb_penghargaan", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nama Penghargaan<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Nama Penghargaan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="penghargaan" maxlength="64" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tahun<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Tahun<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="tahun" maxlength="4" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Negara / Instansi Pemberi<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Negara / Instansi Pemberi<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="pemberi" maxlength="64" class="form-control" />
 						</div>

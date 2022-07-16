@@ -11,7 +11,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Kepegawaian <small><i class="fa fa-angle-right"></i> Dokumen <i class="fa fa-angle-right"></i> Insert&nbsp;</h1>
+<h1 class="page-header">Kepegawaian <small> <i class="fa fa-angle-right"></i> Dokumen <i class="fa fa-angle-right"></i> Insert&nbsp;</h1>
 <!-- end page-header -->
 <?php
 
@@ -58,7 +58,7 @@ $id_dokumen    = kdauto("tb_dokumen", "");
             <div class="panel-body">
                 <form action="index.php?page=master-data-dokumen&id_dokumen=<?= $id_dokumen ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Pegawai</label>
+                        <label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <?php
                             $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id ASC");
@@ -72,13 +72,13 @@ $id_dokumen    = kdauto("tb_dokumen", "");
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Nama Dokumen</label>
+                        <label class="col-md-3 control-label">Nama Dokumen<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <input type="text" name="dokumen" maxlength="128" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">File</label>
+                        <label class="col-md-3 control-label">File<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <input type="file" name="file" maxlength="255" class="form-control" />
                         </div>
@@ -86,7 +86,7 @@ $id_dokumen    = kdauto("tb_dokumen", "");
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-6">
-                            <p>* Max size 500 KB</p>
+                            <p>* Max size 5 MB</p>
                             <p>* Format PDF</p>
                         </div>
                     </div>

@@ -43,7 +43,7 @@ if (isset($_GET['id_jab'])) {
 			<div class="panel-body">
 				<form action="index.php?page=edit-data-jabatan&id_jab=<?= $id_jab ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Jabatan<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Jabatan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<?php
 							$dataJ = mysqli_query($koneksi, "SELECT * FROM pembagian1 ORDER BY pembagian1_nama");

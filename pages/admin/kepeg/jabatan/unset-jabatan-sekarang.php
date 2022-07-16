@@ -9,7 +9,7 @@
     }
     include "../../config/koneksi.php";
 
-    $update1 = mysqli_query($koneksi, "UPDATE tb_jabatan SET status_jab='' WHERE id_jab='$id_peg'");
+    $update1 = mysqli_query($koneksi, "UPDATE tb_jabatan SET status_jab='' WHERE id_jab='$id_jab'");
     $update2 = mysqli_query($koneksi, "UPDATE pegawai SET pembagian1_id='0' WHERE pegawai_id='$id_peg'");
     if ($update1 && $update2) {
         $_SESSION['pesan'] = "Good! unset jabatan sekarang success ...";

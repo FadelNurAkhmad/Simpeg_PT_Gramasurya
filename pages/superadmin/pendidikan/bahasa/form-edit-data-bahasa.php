@@ -43,19 +43,19 @@ if (isset($_GET['id_bhs'])) {
 			<div class="panel-body">
 				<form action="index.php?page=edit-data-bahasa&id_bhs=<?= $id_bhs ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Jenis Bahasa<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Jenis Bahasa<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="jns_bhs" maxlength="32" value="<?= $data['jns_bhs'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Bahasa<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Bahasa<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="bahasa" maxlength="32" value="<?= $data['bahasa'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Kemampuan Bicara<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Kemampuan Bicara<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="kemampuan" class="default-select2 form-control">
 								<option value="Aktif" <?php echo ($data['kemampuan'] == 'Aktif') ? "selected" : ""; ?>>Aktif

@@ -43,13 +43,13 @@ if (isset($_GET['id_dokumen'])) {
             <div class="panel-body">
                 <form action="index.php?page=edit-data-dokumen&id_dokumen=<?= $id_dokumen ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Nama Dokumen<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Nama Dokumen<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <input type="text" name="dokumen" maxlength="128" value="<?= $data['dokumen'] ?>" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">File<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">File<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <input type="file" name="file" maxlength="255" class="form-control" />
                         </div>

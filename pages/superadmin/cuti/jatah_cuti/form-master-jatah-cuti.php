@@ -56,7 +56,7 @@ $id_jatah    = kdauto("tb_jatah_cuti", "");
             <div class="panel-body">
                 <form action="index.php?page=master-jatah-cuti&id_jatah=<?= $id_jatah ?>"" class=" form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <?php
                             $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
@@ -70,7 +70,7 @@ $id_jatah    = kdauto("tb_jatah_cuti", "");
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Periode Jatah Cuti<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Periode Jatah Cuti<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
                                 <input type="text" name="jatah_c_mulai" placeholder="Mulai" class="form-control" />

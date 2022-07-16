@@ -56,7 +56,7 @@ $id_lokasi    = kdauto("tb_tempat", "");
             <div class="panel-body">
                 <form action="index.php?page=master-tempat&id_lokasi=<?= $id_lokasi ?>"" class=" form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <?php
                             $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
@@ -70,19 +70,19 @@ $id_lokasi    = kdauto("tb_tempat", "");
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Nama Lokasi<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Nama Lokasi<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <input type="text" name="nama_lokasi" maxlength="255" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Link Lokasi<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Link Lokasi<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <input type="text" name="link_lokasi" class="form-control" placeholder="Diambil dari salin tautan di gmaps" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Alamat<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Alamat<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <textarea name="alamat" maxlength="255" class="form-control"></textarea>
                         </div>

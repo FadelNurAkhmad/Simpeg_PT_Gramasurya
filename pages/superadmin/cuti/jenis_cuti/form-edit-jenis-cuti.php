@@ -40,7 +40,7 @@ if (isset($_GET['id_jenis'])) {
 			<div class="panel-body">
 				<form action="index.php?page=edit-jenis-cuti&id_jenis=<?= $id_jenis ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nama Jenis Izin<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Nama Jenis Izin<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="jenis" maxlength="255" value="<?= $data['jenis'] ?>" class="form-control" />
 						</div>

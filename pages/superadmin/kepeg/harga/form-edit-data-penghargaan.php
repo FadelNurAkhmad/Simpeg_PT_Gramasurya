@@ -43,19 +43,19 @@ if (isset($_GET['id_penghargaan'])) {
 			<div class="panel-body">
 				<form action="index.php?page=edit-data-penghargaan&id_penghargaan=<?= $id_penghargaan ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nama Penghargaan<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Nama Penghargaan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="penghargaan" maxlength="64" value="<?= $data['penghargaan'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tahun<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Tahun<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="tahun" maxlength="4" value="<?= $data['tahun'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Negara / Instansi Pemberi<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Negara / Instansi Pemberi<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="pemberi" maxlength="64" value="<?= $data['pemberi'] ?>" class="form-control" />
 						</div>

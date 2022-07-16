@@ -216,6 +216,12 @@ $peg		= mysqli_fetch_array($tampilPeg);
 				case 'form-master-cuti':
 					include "../../pages/pegawai/cuti/tahunan_cuti/form-master-cuti.php";
 					break;
+				case 'form-edit-cuti':
+					include "../../pages/pegawai/cuti/tahunan_cuti/form-edit-cuti.php";
+					break;
+				case 'edit-cuti':
+					include "../../pages/pegawai/cuti/tahunan_cuti/edit-cuti.php";
+					break;
 				case 'master-cuti':
 					include "../../pages/pegawai/cuti/tahunan_cuti/master-cuti.php";
 					break;

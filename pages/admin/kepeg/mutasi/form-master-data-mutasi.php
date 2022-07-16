@@ -11,7 +11,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Kepegawaian <small><i class="fa fa-angle-right"></i> Mutasi <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
+<h1 class="page-header">Mutasi <small><i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 function kdauto($tabel, $inisial)
@@ -50,14 +50,13 @@ $id_mutasi	= kdauto("tb_mutasi", "");
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
 				<h4 class="panel-title">Form master data mutasi</h4>
 			</div>
 			<div class="panel-body">
 				<form action="index.php?page=master-data-mutasi&id_mutasi=<?= $id_mutasi ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pegawai</label>
+						<label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-warning"> * </span></label>
 						<div class="col-md-6">
 							<?php
 							$data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
@@ -71,7 +70,7 @@ $id_mutasi	= kdauto("tb_mutasi", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Jenis Mutasi</label>
+						<label class="col-md-3 control-label">Jenis Mutasi<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="jns_mutasi" class="default-select2 form-control">
 								<option value="">...</option>
@@ -85,13 +84,13 @@ $id_mutasi	= kdauto("tb_mutasi", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nomor SK</label>
+						<label class="col-md-3 control-label">Nomor SK<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="no_mutasi" maxlength="32" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tgl Mutasi</label>
+						<label class="col-md-3 control-label">Tgl Mutasi<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
 								<input type="text" name="tgl_mutasi" class="form-control" />

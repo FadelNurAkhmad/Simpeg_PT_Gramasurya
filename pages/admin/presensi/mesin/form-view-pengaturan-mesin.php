@@ -12,7 +12,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Presensi <small><i class="fa fa-angle-right"></i> Pengaturan Mesin&nbsp;</small></h1>
+<h1 class="page-header">Master Setup <small><i class="fa fa-angle-right"></i> Mesin&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 include "../../config/koneksi.php";

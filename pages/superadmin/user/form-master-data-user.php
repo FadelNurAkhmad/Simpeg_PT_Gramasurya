@@ -31,25 +31,25 @@
 			<div class="panel-body">
 				<form action="index.php?page=master-data-user" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Username<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Username<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="id_user" maxlength="32" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nama User<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Nama User<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="nama_user" maxlength="64" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Password<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Password<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="password" name="password" maxlength="255" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Hak Akses<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Hak Akses<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="hak_akses" class="default-select2 form-control">
 								<option value="">...</option>

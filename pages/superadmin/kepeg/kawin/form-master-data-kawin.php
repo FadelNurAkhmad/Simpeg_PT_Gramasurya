@@ -56,7 +56,7 @@ $id_kawin	= kdauto("tb_kawin", "");
 			<div class="panel-body">
 				<form action="index.php?page=master-data-kawin&id_kawin=<?= $id_kawin ?>"" class=" form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nomor dan Tanggal Izin Kawin<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Nomor dan Tanggal Izin Kawin<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-3">
 							<input type="text" name="no_kawin" maxlength="32" class="form-control" />
 						</div>
@@ -68,7 +68,7 @@ $id_kawin	= kdauto("tb_kawin", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<?php
 							$data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
@@ -130,13 +130,13 @@ $id_kawin	= kdauto("tb_kawin", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nama<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Nama<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="nama" maxlength="255" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tempat dan Tanggal Lahir<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Tempat dan Tanggal Lahir<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-3">
 							<input type="text" name="tmp_lahir" maxlength="255" class="form-control" />
 						</div>
@@ -247,7 +247,7 @@ $id_kawin	= kdauto("tb_kawin", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tanggal Ditetapkan<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Tanggal Ditetapkan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<div class="input-group date" id="datepicker-disabled-past4" data-date-format="yyyy-mm-dd">
 								<input type="text" name="tgl_ditetapkan" class="form-control" />
