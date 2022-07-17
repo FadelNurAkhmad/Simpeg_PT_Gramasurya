@@ -1,7 +1,9 @@
 <?php
-$filename    = "Daftar Pegawai";
 
-
+if (isset($_GET['periodeawal']) && isset($_GET['periodeakhir'])) {
+    $periode_awal = $_GET['periodeawal'];
+    $periode_akhir = $_GET['periodeakhir'];
+}
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -121,3 +123,5 @@ while ($peg    = mysqli_fetch_array($expPeg)) {
 $writer = new Xlsx($spreadsheet);
 $file    = "../../assets/excel/$filename.xlsx";
 $writer->save("$file");
+
+header("location:$file");

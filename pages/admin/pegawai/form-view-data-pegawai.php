@@ -1,12 +1,12 @@
-<?php
+<!-- <?php
 
-include "../../config/koneksi.php";
-require '../../assets/plugins/phpspreadsheet/vendor/autoload.php';
-require 'pegawai/export-pegawai.php';
+		include "../../config/koneksi.php";
+		require '../../assets/plugins/phpspreadsheet/vendor/autoload.php';
+		require 'pegawai/export-pegawai.php';
 
 
 
-?>
+		?> -->
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
 	<li>
@@ -17,7 +17,7 @@ require 'pegawai/export-pegawai.php';
 		$_SESSION['pesan'] = "";
 		?>
 	</li>
-	<li><a href="<?php echo $file; ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
+	<li style="text-align:right ;"><a href="index.php?page=export-pegawai&periodeawal=<?= (isset($_POST['periode_awal'])) ? $_POST['periode_awal'] : null ?>&periodeakhir=<?= (isset($_POST['periode_akhir'])) ? $_POST['periode_akhir'] : null ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
 	<li><a href="index.php?page=form-master-data-pegawai" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Add Pegawai</a></li>
 </ol>
 <!-- end breadcrumb -->
