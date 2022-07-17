@@ -43,7 +43,7 @@ if (isset($_GET['id_kawin'])) {
 			<div class="panel-body">
 				<form action="index.php?page=edit-data-kawin&id_kawin=<?= $id_kawin ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nomor dan Tanggal Izin Kawin<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Nomor dan Tanggal Izin Kawin<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-3">
 							<input type="text" name="no_kawin" maxlength="32" value="<?= $data['no_kawin'] ?>" class="form-control" />
 						</div>
@@ -103,13 +103,13 @@ if (isset($_GET['id_kawin'])) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nama<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Nama<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="nama" maxlength="255" value="<?= $data['nama'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tempat dan Tanggal Lahir<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Tempat dan Tanggal Lahir<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-3">
 							<input type="text" name="tmp_lahir" maxlength="255" value="<?= $data['tmp_lahir'] ?>" class="form-control" />
 						</div>
@@ -220,7 +220,7 @@ if (isset($_GET['id_kawin'])) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tanggal Ditetapkan<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Tanggal Ditetapkan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<div class="input-group date" id="datepicker-disabled-past4" data-date-format="yyyy-mm-dd">
 								<input type="text" name="tgl_ditetapkan" value="<?= $data['tgl_ditetapkan'] ?>" class="form-control" />

@@ -47,7 +47,7 @@ if (isset($_GET['id_kategori'])) {
                     <div class="form-group">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Divisi</label>
+                                <label class="col-md-3 control-label">Divisi<span aria-required="true" class="text-danger"> * </span></label>
                                 <div class="col-md-6">
                                     <?php
                                     $div = mysqli_query($koneksi, "SELECT * FROM tb_divisi_kpi ORDER BY divisi ASC");
@@ -61,7 +61,7 @@ if (isset($_GET['id_kategori'])) {
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Tanggal Buat</label>
+                                <label class="col-md-3 control-label">Tanggal Buat<span aria-required="true" class="text-danger"> * </span></label>
                                 <div class="col-md-6">
                                     <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
                                         <input type="text" name="tanggal_kpi" id="tanggal_kpi" value="<?= $kpi['tanggal_kpi'] ?>" class="form-control" />
@@ -75,7 +75,7 @@ if (isset($_GET['id_kategori'])) {
                     <div class="form-group">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Periode</label>
+                                <label class="col-md-3 control-label">Periode<span aria-required="true" class="text-danger"> * </span></label>
                                 <div class="col-md-3">
                                     <select name="bulan" id="bulan" class="default-select2 form-control">
                                         <option value="Januari" <?php echo ($kpi['bulan'] == 'Januari') ? "selected" : ""; ?>>Januari
@@ -114,7 +114,7 @@ if (isset($_GET['id_kategori'])) {
                         <label class="col-md-5 control-label"></label>
                         <div class="col-md-6">
                             <button type="submit" name="edit" value="edit" class="btn btn-primary"><i class="fa fa-edit"></i> &nbsp;Edit</button>&nbsp;
-                            <a type="button" class="btn btn-default active" href="index.php?page=detail-data-pegawai&pegawai_id=<?= $kpi['id_peg'] ?>"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+                            <a type="button" class="btn btn-default active" href="index.php?page=form-view-kpi"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
                         </div>
                     </div>
                 </form>
@@ -192,7 +192,7 @@ if (isset($_GET['id_kategori'])) {
                                                 <div class="modal-body">
                                                     <form action="index.php?page=masterkpi&id_data_kpi=<?= $kpi2['id_data_kpi'] ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
                                                         <div class="form-group col-sm-12">
-                                                            <label class="col-md-3 control-label">Sasaran Kerja</label>
+                                                            <label class="col-md-3 control-label">Sasaran Kerja<span aria-required="true" class="text-warning"> * </span></label>
                                                             <div class="col-md-6">
                                                                 <textarea type="text" name="sasaran_kerja" maxlength="255" class="form-control"><?= $kpi2['sasaran_kerja'] ?></textarea>
                                                             </div>
@@ -284,3 +284,132 @@ if (isset($_GET['id_kategori'])) {
         $(".pesan").fadeOut('slow');
     }, 7000);
 </script>
+
+<!-- <script>
+    $(function() {
+        var count = 0;
+
+        if (count == 0) {
+            $('.btnSave').hide();
+        }
+        $('#btn-tambah').on('click', function() {
+            count += 1;
+            $('#tbl-kpi-body').append(`
+            <tr>
+                        <td>` + count + `</td>
+                        <td>
+                            <input type="text" name="sasaran_kerja[]" class="form-control">
+                        </td>
+                        <td>
+                            <input type="text" name="satuan_kpi[]" class="form-control">
+                        </td>
+                        <td>
+                            <input type="text" name="target_kpi[]" class="form-control">
+                        </td>
+                        <td>
+                            <input type="text" name="bobot[]" class="form-control">
+                        </td>
+                        <td>
+                            <input type="text" name="score[]" class="form-control">
+                        </td>
+                        <td>
+                            <input type="text" name="nilai[]" class="form-control">
+                        </td>
+                        <td>
+                            <input type="text" name="dokumen[]" class="form-control">
+                        </td>
+                        <td>
+                            <input type="text" name="kendala[]" class="form-control">
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-icon btn-sm removeItem"><i class="fa fa-trash-o fa-lg"></i></button>
+                        </td>
+                    </tr>
+                `);
+
+            if (count > 0) {
+                $('.btnSave').show();
+            }
+
+            $('.removeItem').on('click', function() {
+                $(this).closest("tr").remove();
+                count -= 1;
+                if (count == 0) {
+                    $('.btnSave').hide();
+                }
+            })
+        })
+    })
+</script> -->
+
+<!-- <script>
+    $(document).ready(function() {
+        fetch_data();
+
+        function fetch_data() {
+            $.ajax({
+                url: "ambil-data.php",
+                method: "POST",
+                dataType: "json",
+                success: function(data) {
+                    var html = '';
+                    for (var count = 0; count < data.length; count++) {
+                        html += '<tr>';
+                        html += '<td><input type="checkbox" id_data_kpi="' + data[count].id_data_kpi + '" data-sasaran_kerja="' + data[count].sasaran_kerja + '" data-satuan_kpi="' + data[count].satuan_kpi + '" data-target_kpi="' + data[count].target_kpi + '" data-bobot="' + data[count].bobot + '" data-score="' + data[count].score + '" data-nilai="' + data[count].nilai + '" data-dokumen="' + data[count].dokumen + '" data-kendala="' + data[count].kendala + '" class="check_box"  /></td>';
+                        html += '<td>' + data[count].sasaran_kerja + '</td>';
+                        html += '<td>' + data[count].satuan_kpi + '</td>';
+                        html += '<td>' + data[count].target_kpi + '</td>';
+                        html += '<td>' + data[count].bobot + '</td>';
+                        html += '<td>' + data[count].score + '</td>';
+                        html += '<td>' + data[count].nilai + '</td>';
+                        html += '<td>' + data[count].dokumen + '</td>';
+                        html += '<td>' + data[count].kendala + '</td></tr>';
+                    }
+                    $('tbody').html(html);
+                }
+            });
+        }
+
+        $('#update_form').on('click', '.check_box', function() {
+            var html = '';
+            if (this.checked) {
+                html = '<td><input type="checkbox" id_data_kpi="' + $(this).attr('id_data_kpi') + '" data-sasaran_kerja="' + $(this).data('sasaran_kerja') + '" data-satuan_kpi="' + $(this).data('satuan_kpi') + '" data-target_kpi="' + $(this).data('target_kpi') + '" data-bobot="' + $(this).data('bobot') + '" data-score="' + $(this).data('score') + '" data-nilai="' + $(this).data('nilai') + '" data-dokumen="' + $(this).data('dokumen') + '" data-kendala="' + $(this).data('kendala') + '" class="check_box" checked /></td>';
+                html += '<td><input type="text" name="sasaran_kerja[]" class="form-control" value="' + $(this).data("sasaran_kerja") + '" /></td>';
+                html += '<td><input type="text" name="satuan_kpi[]" class="form-control" value="' + $(this).data("satuan_kpi") + '" /></td>';
+                html += '<td><input type="text" name="target_kpi[]" class="form-control" value="' + $(this).data("target_kpi") + '" /></td>';
+                html += '<td><input type="text" name="bobot[]" class="form-control" value="' + $(this).data("bobot") + '" /></td>';
+                html += '<td><input type="text" name="score[]" class="form-control" value="' + $(this).data("score") + '" /></td>';
+                html += '<td><input type="text" name="nilai[]" class="form-control" value="' + $(this).data("nilai") + '" /></td>';
+                html += '<td><input type="text" name="dokumen[]" class="form-control" value="' + $(this).data("dokumen") + '" /></td>';
+                html += '<td><input type="text" name="kendala[]" class="form-control" value="' + $(this).data("kendala") + '" /><input type="hidden" name="hidden_id[]" value="' + $(this).attr('id_data_dokumen') + '" /></td>';
+            } else {
+                html = '<td><input type="checkbox" id_data_kpi="' + $(this).attr('id_data_kpi') + '" data-sasaran_kerja="' + $(this).data('sasaran_kerja') + '" data-satuan_kpi="' + $(this).data('satuan_kpi') + '" data-target_kpi="' + $(this).data('target_kpi') + '" data-bobot="' + $(this).data('bobot') + '" data-score="' + $(this).data('score') + '" data-nilai="' + $(this).data('nilai') + '" data-dokumen="' + $(this).data('dokumen') + '" data-kendala="' + $(this).data('kendala') + '" class="check_box" checked /></td>';
+                html += '<td>' + $(this).data('sasaran_kerja') + '</td>';
+                html += '<td>' + $(this).data('satuan_kpi') + '</td>';
+                html += '<td>' + $(this).data('target_kpi') + '</td>';
+                html += '<td>' + $(this).data('bobot') + '</td>';
+                html += '<td>' + $(this).data('score') + '</td>';
+                html += '<td>' + $(this).data('nilai') + '</td>';
+                html += '<td>' + $(this).data('dokumen') + '</td>';
+                html += '<td>' + $(this).data('kendala') + '</td>';
+            }
+            $(this).closest('tr').html(html);
+            $('#nilai_' + $(this).attr('id_data_kpi') + '').val($(this).data('nilai'));
+        });
+
+        $('#update_form').on('submit', function(event) {
+            event.preventDefault();
+            if ($('.check_box:checked').length > 0) {
+                $.ajax({
+                    url: "multiple_update.php",
+                    method: "POST",
+                    data: $(this).serialize(),
+                    success: function(data) {
+                        alert('Data Berhasil Diubah');
+                        fetch_data();
+                    }
+                })
+            }
+        });
+    });
+</script> -->

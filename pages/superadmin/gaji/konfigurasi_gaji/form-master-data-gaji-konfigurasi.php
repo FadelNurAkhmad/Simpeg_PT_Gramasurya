@@ -58,7 +58,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                     <div class="form-group">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-warning"> * </span></label>
+                                <label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-danger"> * </span></label>
                                 <div class="col-md-6">
                                     <?php
                                     $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
@@ -72,7 +72,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Tanggal<span aria-required="true" class="text-warning"> * </span></label>
+                                <label class="col-md-3 control-label">Tanggal<span aria-required="true" class="text-danger"> * </span></label>
                                 <div class="col-md-6">
                                     <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
                                         <input type="text" name="tanggal_gaji_konfig" id="tanggal_gaji_konfig" class="form-control" required />
@@ -86,7 +86,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                     <div class="form-group">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Periode<span aria-required="true" class="text-warning"> * </span></label>
+                                <label class="col-md-3 control-label">Periode<span aria-required="true" class="text-danger"> * </span></label>
                                 <div class="col-md-3">
                                     <select class="form-control" name="bulan" id="bulan" required>
                                         <?php

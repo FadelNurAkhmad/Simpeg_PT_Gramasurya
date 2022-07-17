@@ -56,7 +56,7 @@ $id_penugasan	= kdauto("tb_penugasan", "");
 			<div class="panel-body">
 				<form action="index.php?page=master-data-penugasan&id_penugasan=<?= $id_penugasan ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<?php
 							$data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id ASC");
@@ -70,25 +70,25 @@ $id_penugasan	= kdauto("tb_penugasan", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Lokasi Tujuan<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Lokasi Tujuan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="tujuan" maxlength="32" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tahun<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Tahun<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="tahun" maxlength="4" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Lama Penugasan (Hari)<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Lama Penugasan (Hari)<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="lama" maxlength="3" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Alasan Penugasan<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Alasan Penugasan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="alasan" maxlength="128" class="form-control" />
 						</div>

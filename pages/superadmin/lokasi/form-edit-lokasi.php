@@ -43,25 +43,25 @@ if (isset($_GET['id_lokasi'])) {
             <div class="panel-body">
                 <form action="index.php?page=edit-lokasi&id_lokasi=<?= $id_lokasi ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Nama Lokasi<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Nama Lokasi<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <input type="text" name="nama_lokasi" maxlength="255" value="<?= $data['nama_lokasi'] ?>" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Latitude<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Latitude<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <input type="text" name="lat" value="<?= $data['lat'] ?>" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Longitude<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Longitude<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <input type="text" name="lng" value="<?= $data['lng'] ?>" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Alamat<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Alamat<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <textarea name="alamat" maxlength="255" class="form-control"><?= $data['alamat'] ?></textarea>
                         </div>

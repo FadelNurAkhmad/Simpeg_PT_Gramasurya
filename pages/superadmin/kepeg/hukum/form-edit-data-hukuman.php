@@ -43,7 +43,7 @@ if (isset($_GET['id_hukuman'])) {
 			<div class="panel-body">
 				<form action="index.php?page=edit-data-hukuman&id_hukuman=<?= $id_hukuman ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Jenis Hukuman<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Jenis Hukuman<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="hukuman" class="default-select2 form-control">
 								<option value="Teguran Lisan" <?php echo ($data['hukuman'] == 'Teguran Lisan') ? "selected" : ""; ?>>Teguran Lisan
@@ -55,13 +55,13 @@ if (isset($_GET['id_hukuman'])) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pejabat Pengesah SK Hukuman<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Pejabat Pengesah SK Hukuman<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="pejabat_sk" maxlength="64" value="<?= $data['pejabat_sk'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nomor dan Tanggal Pengesahan SK<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Nomor dan Tanggal Pengesahan SK<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-3">
 							<input type="text" name="no_sk" maxlength="32" value="<?= $data['no_sk'] ?>" class="form-control" />
 						</div>

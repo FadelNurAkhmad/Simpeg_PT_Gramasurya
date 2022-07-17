@@ -43,11 +43,11 @@ if (isset($_GET['jk_id'])) {
                 <form action="index.php?page=edit-shift-kerja&jk_id=<?= $jk_id ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Nama Shift<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Nama Shift<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-3">
                             <input class="form-control" type="text" name="jk_name" value="<?= $data['jk_name'] ?>" />
                         </div>
-                        <label class="col-md-1 control-label">Kode<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-1 control-label">Kode<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-3">
                             <input class="form-control" type="text" name="jk_kode" value="<?= $data['jk_kode'] ?>" />
                         </div>
@@ -90,7 +90,7 @@ if (isset($_GET['jk_id'])) {
                     <div class="form-group">
                         <div class="col-md-2"></div>
                         <div class="col-md-2">
-                            <label class="col-md-8 control-label">Masuk<span aria-required="true" class="text-warning"> * </span></label>
+                            <label class="col-md-8 control-label">Masuk<span aria-required="true" class="text-danger"> * </span></label>
                             <input class="form-control" type="time" name="masuk" id="masuk" value="<?= $data['jk_bcin'] ?>" data-parsley-required="true" />
                         </div>
 
@@ -105,7 +105,7 @@ if (isset($_GET['jk_id'])) {
                         </div>
 
                         <div class="col-md-2">
-                            <label class="col-md-8 control-label">Pulang<span aria-required="true" class="text-warning"> * </span></label>
+                            <label class="col-md-8 control-label">Pulang<span aria-required="true" class="text-danger"> * </span></label>
                             <input class="form-control" type="time" name="pulang" id="pulang" value="<?= $data['jk_ecout'] ?>" data-parsley-required="true" />
                         </div>
                     </div>

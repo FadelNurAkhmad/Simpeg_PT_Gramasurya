@@ -31,7 +31,7 @@
             <div class="panel-body">
                 <form action="index.php?page=master-data-jadwal-kerja-pegawai" class="form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <?php
                             $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Jadwal Kerja<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Jadwal Kerja<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <?php
                             $jdw = mysqli_query($koneksi, "SELECT * FROM jdw_kerja_m WHERE jdw_kerja_m_type='0' ORDER BY jdw_kerja_m_name ASC");

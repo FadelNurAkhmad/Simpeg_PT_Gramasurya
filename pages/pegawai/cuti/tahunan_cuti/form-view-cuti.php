@@ -71,7 +71,7 @@ $tampilCuti    = mysqli_query($koneksi, "SELECT * FROM tb_cuti_tahunan WHERE id_
                                 <td><?php echo $cuti['lama_cuti'] ?> Hari</td>
                                 <td class="text-center">
                                     <a type="button" class="btn btn-success btn-icon btn-sm" data-toggle="modal" data-target="#Detail<?php echo $cuti['id_cuti'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
-                                    <a type="button" class="btn btn-default btn-icon btn-sm" href="javascript:;" title="processed" disabled=""><i class="fa fa-pencil fa-lg"></i></a>
+                                    <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-cuti&id_cuti=<?= $cuti['id_cuti'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a>
                                     <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $cuti['id_cuti'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
                                 </td>
                             </tr>

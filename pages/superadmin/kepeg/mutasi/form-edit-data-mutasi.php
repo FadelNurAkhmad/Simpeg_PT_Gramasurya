@@ -43,7 +43,7 @@ if (isset($_GET['id_mutasi'])) {
 			<div class="panel-body">
 				<form action="index.php?page=edit-data-mutasi&id_mutasi=<?= $id_mutasi ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">No. SK & Tgl Mutasi<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">No. SK & Tgl Mutasi<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-4">
 							<input type="text" name="no_mutasi" maxlength="32" value="<?= $data['no_mutasi'] ?>" class="form-control" />
 						</div>
@@ -55,7 +55,7 @@ if (isset($_GET['id_mutasi'])) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Jenis Mutasi<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Jenis Mutasi<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="jns_mutasi" class="default-select2 form-control">
 								<option value="Masuk" <?php echo ($data['jns_mutasi'] == 'Masuk') ? "selected" : ""; ?>>Masuk

@@ -40,7 +40,7 @@ if (isset($_GET['id_divisi_kpi'])) {
 			<div class="panel-body">
 				<form action="index.php?page=edit-divisi-kpi&id_divisi_kpi=<?= $id_divisi_kpi ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nama Divisi<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Nama Divisi<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="divisi" maxlength="255" value="<?= $data['divisi'] ?>" class="form-control" />
 						</div>

@@ -84,13 +84,13 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Keperluan<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Keperluan<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <textarea type="text" name="keperluan" maxlength="255" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Tanggal Pengajuan Izin<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Tanggal Pengajuan Izin<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
                                 <input type="text" name="tanggal_cuti" placeholder="Mulai" class="form-control" />
@@ -99,7 +99,7 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Tanggal Pelaksanaan<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Tanggal Pelaksanaan<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
                                 <input type="text" name="tanggal_mulai" placeholder="Dari" class="form-control" />
@@ -114,7 +114,7 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Lama Izin<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Lama Izin<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <input type="text" name="lama_cuti" class="form-control" placeholder="Dalam Hari"></input>
                         </div>

@@ -35,7 +35,7 @@ $data    = mysqli_fetch_array($query);
             <div class="panel-body">
                 <form action="index.php?page=master-cuti-umum&id_peg=<?= $id_peg ?>"" class=" form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Jenis Izin</label>
+                        <label class="col-md-3 control-label">Jenis Izin<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <?php
                             $dataJ = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY jenis");
@@ -49,13 +49,13 @@ $data    = mysqli_fetch_array($query);
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Keperluan</label>
+                        <label class="col-md-3 control-label">Keperluan<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <textarea type="text" name="keperluan" maxlength="255" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Tanggal Pengajuan Izin</label>
+                        <label class="col-md-3 control-label">Tanggal Pengajuan Izin<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
                                 <input type="text" name="tanggal_cuti" placeholder="Mulai" class="form-control" />
@@ -64,7 +64,7 @@ $data    = mysqli_fetch_array($query);
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Tanggal Pelaksanaan</label>
+                        <label class="col-md-3 control-label">Tanggal Pelaksanaan<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
                                 <input type="text" name="tanggal_mulai" placeholder="Dari" class="form-control" />
@@ -79,7 +79,7 @@ $data    = mysqli_fetch_array($query);
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Lama Izin</label>
+                        <label class="col-md-3 control-label">Lama Izin<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <input type="text" name="lama_cuti" class="form-control" placeholder="Dalam Hari"></input>
                         </div>

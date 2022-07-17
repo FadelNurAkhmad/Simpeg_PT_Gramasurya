@@ -70,7 +70,7 @@ $id_mutasi	= kdauto("tb_mutasi", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Jenis Mutasi<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Jenis Mutasi<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="jns_mutasi" class="default-select2 form-control">
 								<option value="">...</option>
@@ -84,13 +84,13 @@ $id_mutasi	= kdauto("tb_mutasi", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nomor SK<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Nomor SK<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="no_mutasi" maxlength="32" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tgl Mutasi<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Tgl Mutasi<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
 								<input type="text" name="tgl_mutasi" class="form-control" />

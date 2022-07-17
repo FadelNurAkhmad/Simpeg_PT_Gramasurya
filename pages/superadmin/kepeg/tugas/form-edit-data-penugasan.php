@@ -43,25 +43,25 @@ if (isset($_GET['id_penugasan'])) {
 			<div class="panel-body">
 				<form action="index.php?page=edit-data-penugasan&id_penugasan=<?= $id_penugasan ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Lokasi Tujuan<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Lokasi Tujuan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="tujuan" maxlength="32" value="<?= $data['tujuan'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Tahun<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Tahun<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="tahun" maxlength="4" value="<?= $data['tahun'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Lama Penugasan (Hari)<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Lama Penugasan (Hari)<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="lama" maxlength="3" value="<?= $data['lama'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Alasan Penugasan<span aria-required="true" class="text-warning"> * </span></label>
+						<label class="col-md-3 control-label">Alasan Penugasan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="alasan" maxlength="128" value="<?= $data['alasan'] ?>" class="form-control" />
 						</div>
