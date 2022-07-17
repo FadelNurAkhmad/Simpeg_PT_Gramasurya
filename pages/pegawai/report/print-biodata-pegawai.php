@@ -33,7 +33,7 @@ $pdf = new MYPDF('P', 'mm', 'Legal', true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Andi Hatmoko');
+$pdf->SetAuthor('ActionTeamSPI');
 $pdf->SetTitle('Report');
 $pdf->SetSubject('TCPDF');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
@@ -77,7 +77,7 @@ $namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$k
 $nama		= mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 
 
-$tampilPeg = mysqli_query($koneksi, "SELECT * FROM pegawai JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id ");
+$tampilPeg = mysqli_query($koneksi, "SELECT * FROM pegawai JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id WHERE pegawai.pegawai_id = '$id_peg'");
 $peg = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 
 //agama
@@ -126,10 +126,10 @@ if ($peg['pegawai_status'] == '1') {
 
 $header = '<p><font size="12" style="text-transform:uppercase"><b> ' . $kep['nama_peru'] . '</b></font>
 			<br /><br />
-			<font size="10" align="center"><u><b>BIODATA PEGAWAI</b></u><font></p>';
+			<font size="10" align="center"><u><b>BIODATA PEGAWAI</b></u></font></p>';
 $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = 10, $header, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
 
-$dpri = '<p><font size="10">I. DATA PRIBADI<font></p>';
+$dpri = '<p><font size="10">I. DATA PRIBADI</font></p>';
 $pdf->writeHTML($dpri, true, false, false, false, '');
 
 $tblpri = '<table cellspacing="0" cellpadding="2" border="0">
@@ -205,7 +205,7 @@ $tblpri .= '<td>: ' . $nm1 . '</td>
 </table>';
 $pdf->writeHTML($tblpri, true, false, false, false, '');
 
-$dkel = '<p><font size="10">II. RIWAYAT KELUARGA<font></p>';
+$dkel = '<p><font size="10">II. RIWAYAT KELUARGA</font></p>';
 $pdf->writeHTML($dkel, true, false, false, false, '');
 
 $tblkel = '<table cellspacing="0" cellpadding="2" border="0">
@@ -247,7 +247,7 @@ while ($ank = mysqli_fetch_array($tampilAnk, MYSQLI_ASSOC)) {
 $tblkel .= '</table>';
 $pdf->writeHTML($tblkel, true, false, false, false, '');
 
-$dpen = '<p><font size="10">III. PENDIDIKAN<font></p>';
+$dpen = '<p><font size="10">III. PENDIDIKAN</font></p>';
 $pdf->writeHTML($dpen, true, false, false, false, '');
 
 $tblpen = '<table cellspacing="0" cellpadding="2" border="0">
@@ -279,7 +279,7 @@ while ($sek = mysqli_fetch_array($tampilSek, MYSQLI_ASSOC)) {
 $tblpen .= '</table>';
 $pdf->writeHTML($tblpen, true, false, false, false, '');
 
-$dbhs = '<p><font size="10">IV. KECAKAPAN BAHASA<font></p>';
+$dbhs = '<p><font size="10">IV. KECAKAPAN BAHASA</font></p>';
 $pdf->writeHTML($dbhs, true, false, false, false, '');
 
 $tblbhs = '<table cellspacing="0" cellpadding="2" border="0">
@@ -303,7 +303,7 @@ while ($bhs = mysqli_fetch_array($tampilBhs, MYSQLI_ASSOC)) {
 $tblbhs .= '</table>';
 $pdf->writeHTML($tblbhs, true, false, false, false, '');
 
-$djab = '<p><font size="10">V. RIWAYAT JABATAN<font></p>';
+$djab = '<p><font size="10">V. RIWAYAT JABATAN</font></p>';
 $pdf->writeHTML($djab, true, false, false, false, '');
 
 $tbljab = '<table cellspacing="0" cellpadding="2" border="0">
@@ -329,7 +329,7 @@ while ($jab = mysqli_fetch_array($tampilJab, MYSQLI_ASSOC)) {
 $tbljab .= '</table>';
 $pdf->writeHTML($tbljab, true, false, false, false, '');
 
-$dpan = '<p><font size="10">VI. RIWAYAT KEPANGKATAN<font></p>';
+$dpan = '<p><font size="10">VI. RIWAYAT KEPANGKATAN</font></p>';
 $pdf->writeHTML($dpan, true, false, false, false, '');
 
 $tblpan = '<table cellspacing="0" cellpadding="2" border="0">
@@ -354,7 +354,7 @@ $tblpan = '<table cellspacing="0" cellpadding="2" border="0">
 $tblpan .= '</table>';
 $pdf->writeHTML($tblpan, true, false, false, false, '');
 
-$dhar = '<p><font size="10">VII. RIWAYAT PENGHARGAAN<font></p>';
+$dhar = '<p><font size="10">VII. RIWAYAT PENGHARGAAN</font></p>';
 $pdf->writeHTML($dhar, true, false, false, false, '');
 
 $tblhar = '<table cellspacing="0" cellpadding="2" border="0">
@@ -378,7 +378,7 @@ while ($har = mysqli_fetch_array($tampilHar, MYSQLI_ASSOC)) {
 $tblhar .= '</table>';
 $pdf->writeHTML($tblhar, true, false, false, false, '');
 
-$dpln = '<p><font size="10">VIII. RIWAYAT PENUGASAN LUAR NEGERI<font></p>';
+$dpln = '<p><font size="10">VIII. RIWAYAT PENUGASAN LUAR NEGERI</font></p>';
 $pdf->writeHTML($dpln, true, false, false, false, '');
 
 $tblpln = '<table cellspacing="0" cellpadding="2" border="0">
@@ -404,7 +404,7 @@ while ($pln = mysqli_fetch_array($tampilPln, MYSQLI_ASSOC)) {
 $tblpln .= '</table>';
 $pdf->writeHTML($tblpln, true, false, false, false, '');
 
-$dhkm = '<p><font size="10">IX. RIWAYAT HUKUMAN<font></p>';
+$dhkm = '<p><font size="10">IX. RIWAYAT HUKUMAN</font></p>';
 $pdf->writeHTML($dhkm, true, false, false, false, '');
 
 $tblhkm = '<table cellspacing="0" cellpadding="2" border="0">

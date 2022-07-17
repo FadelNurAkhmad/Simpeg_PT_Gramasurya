@@ -187,30 +187,15 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-filing bg-info"></i><span>Kepegawaian &nbsp; <span class="label label-warning m-l-5">7</span></span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-master-data-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jabatan</a></li>
-							<!-- <li><a href="index.php?page=form-master-data-pangkat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pangkat</a></li> -->
 							<li><a href="index.php?page=form-master-data-hukuman"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Hukuman</a></li>
 							<li><a href="index.php?page=form-master-data-dokumen"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Dokumen Pegawai</a></li>
-							<!-- <li><a href="index.php?page=form-master-data-diklat"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Diklat</a></li> -->
 							<li><a href="index.php?page=form-master-data-penghargaan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Penghargaan</a></li>
 							<li><a href="index.php?page=form-master-data-penugasan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Penugasan</a></li>
-							<!-- <li><a href="index.php?page=form-master-data-seminar"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Seminar</a></li> -->
-							<!-- <li><a href="index.php?page=form-master-data-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Cuti</a></li> -->
-							<!-- <li><a href="index.php?page=form-master-data-lat-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Latihan Jabatan</a></li> -->
 							<li><a href="index.php?page=form-master-data-tunjangan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Tunjangan</a></li>
 							<li><a href="index.php?page=form-master-data-kawin"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Izin Kawin</a></li>
 						</ul>
 					</li>
-					<!-- <li class="has-sub">
-						<a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-calendar bg-purple"></i><span>Cuti</span></a>
-						<ul class="sub-menu">
-							<li><a href="index.php?page=form-view-cuti-umum"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Cuti Umum</a></li>
-							<li><a href="index.php?page=form-view-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Cuti Tahunan</a></li>
-							<li><a href="index.php?page=form-view-jatah-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jatah Cuti Tahunan</a></li>
-							<li><a href="index.php?page=form-view-jenis-cuti"><i class="menu-icon fa fa-caret-right"></i> &nbsp;List Jenis Cuti Umum</a></li>
-						</ul>
-					</li> -->
-					<!-- <li><a href="index.php?page=form-master-data-mutasi"><i class="ion-arrow-swap bg-grey"></i><span>Mutasi</span></a></li> -->
-					<!-- <li><a href="index.php?page=form-master-data-skp"><i class="ion-social-buffer bg-warning"></i><span>SKP</span></a></li> -->
+
 					<li class="has-sub">
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-social-buffer bg-warning"></i><span>KPI</span></a>
 						<ul class="sub-menu">
@@ -222,7 +207,7 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-compose bg-primary"></i><span>Presensi</span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-view-rekap-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Rekap Presensi</a></li>
-							<li><a href="index.php?page=form-view-data-presensi"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jadwal Kerja Pegawai</a></li>
+							<li><a href="index.php?page=form-view-data-jadwal-kerja-pegawai"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jadwal Kerja Pegawai</a></li>
 							<li><a href="index.php?page=form-view-shift-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Shift</a></li>
 							<li><a href="index.php?page=form-view-hari-jam-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Konfigurasi Jadwal Kerja</a></li>
 						</ul>
@@ -230,10 +215,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					<li class="has-sub">
 						<a href="javascript:;"><i class="ion-arrow-shrink bg-info"></i><span>Rekapitulasi</span> <span class="badge bg-danger pull-right"><span class="ion-stats-bars"></span></span></a>
 						<ul class="sub-menu">
-							<!-- <li><a href="index.php?page=rekap-golongan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Golongan</a></li> -->
 							<li><a href="index.php?page=rekap-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jabatan</a></li>
 							<li><a href="index.php?page=rekap-pendidikan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pendidikan</a></li>
-							<!-- <li><a href="index.php?page=rekap-skpd"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Unit Kerja</a></li> -->
+
 						</ul>
 					</li>
 					<li class="has-sub">
@@ -242,11 +226,8 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 							<li><a href="index.php?page=nominatif"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Nominatif</a></li>
 							<li><a href="index.php?page=daftar-urut-kepangkatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;DUK</a></li>
 							<li><a href="index.php?page=bezetting"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Bezetting</a></li>
-							<!-- <li><a href="index.php?page=keadaan-pegawai"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Keadaan Pegawai</a></li> -->
-							<!-- <li><a href="index.php?page=pre-pensiun"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pensiun</a></li> -->
 						</ul>
 					</li>
-					<!-- <li><a href="index.php?page=pre-report-kgb"><i class="fa fa-file-excel-o bg-success"></i><span>Report KGB</span></a></li> -->
 					<li><a href="index.php?page=backup-data"><i class="ion-ios-cloud bg-blue"></i><span>Backup Database</span></a></li>
 					<!-- begin sidebar minify button -->
 					<li><a href="javascript:;" class="sidebar-minify-btn grey" data-click="sidebar-minify"><i class="ion-ios-arrow-left"></i> <span>Collapse</span></a></li>
@@ -862,23 +843,23 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					include "../../pages/admin/gaji/konfigurasi_gaji/print-detail-konfigurasi-slip-gaji.php";
 					break;
 
-				case 'form-view-data-presensi':
-					include "../../pages/admin/presensi/data_presensi/form-view-data-presensi.php";
+				case 'form-view-data-jadwal-kerja-pegawai':
+					include "../../pages/admin/presensi/jadwal_kerja_pegawai/form-view-data-jadwal-kerja-pegawai.php";
 					break;
-				case 'form-edit-data-presensi':
-					include "../../pages/admin/presensi/data_presensi/form-edit-data-presensi.php";
+				case 'form-edit-data-jadwal-kerja-pegawai':
+					include "../../pages/admin/presensi/jadwal_kerja_pegawai/form-edit-data-jadwal-kerja-pegawai.php";
 					break;
-				case 'edit-data-presensi':
-					include "../../pages/admin/presensi/data_presensi/edit-data-presensi.php";
+				case 'edit-data-jadwal-kerja-pegawai':
+					include "../../pages/admin/presensi/jadwal_kerja_pegawai/edit-data-jadwal-kerja-pegawai.php";
 					break;
-				case 'form-master-data-presensi':
-					include "../../pages/admin/presensi/data_presensi/form-master-data-presensi.php";
+				case 'form-master-data-jadwal-kerja-pegawai':
+					include "../../pages/admin/presensi/jadwal_kerja_pegawai/form-master-data-jadwal-kerja-pegawai.php";
 					break;
-				case 'master-data-presensi':
-					include "../../pages/admin/presensi/data_presensi/master-data-presensi.php";
+				case 'master-data-jadwal-kerja-pegawai':
+					include "../../pages/admin/presensi/jadwal_kerja_pegawai/master-data-jadwal-kerja-pegawai.php";
 					break;
-				case 'delete-data-presensi':
-					include "../../pages/admin/presensi/data_presensi/delete-data-presensi.php";
+				case 'delete-data-jadwal-kerja-pegawai':
+					include "../../pages/admin/presensi/jadwal_kerja_pegawai/delete-data-jadwal-kerja-pegawai.php";
 					break;
 
 				case 'form-view-pengaturan-mesin':
