@@ -80,7 +80,7 @@ $tampilGaji   = mysqli_query(
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete <u><?php echo $data['pegawai_nama'] ?></u> from Database?</h5>
+											<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Anda yakin ingin menghapus data gaji <u><?php echo $data['pegawai_nama'] ?></u> dari Database?</h5>
 										</div>
 										<div class="modal-body" align="center">
 											<a href="index.php?page=delete-data-gaji-konfigurasi&id_gaji_konfig=<?= $data['id_gaji_konfig'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>

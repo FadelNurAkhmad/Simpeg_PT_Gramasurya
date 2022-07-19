@@ -13,33 +13,36 @@
         $bulan              = $_POST['bulan'];
         $tahun              = $_POST['tahun'];
         $tanggal_gaji_konfig = $_POST['tanggal_gaji_konfig'];
-        $gaji_diterima      = $_POST['gaji_diterima'];
-        $gaji_pokok         = $_POST['gaji_pokok'];
-        $tunjangan_tetap    = $_POST['tunjangan_tetap'];
-        $struktural         = $_POST['struktural'];
-        $pendidikan         = $_POST['pendidikan'];
-        $keahlian           = $_POST['keahlian'];
-        $penyesuaian        = $_POST['penyesuaian'];
-        $tunjangan_variabel = $_POST['tunjangan_variabel'];
-        $presensi           = $_POST['presensi'];
-        $uang_makan         = $_POST['uang_makan'];
-        $kehadiran          = $_POST['kehadiran'];
-        $kedisiplinan       = $_POST['kedisiplinan'];
-        $istri_suami        = $_POST['istri_suami'];
-        $anak               = $_POST['anak'];
-        $presensi_pot       = $_POST['presensi_pot'];
-        $uang_makan_pot     = $_POST['uang_makan_pot'];
-        $kehadiran_pot      = $_POST['kehadiran_pot'];
-        $kedisiplinan_pot   = $_POST['kedisiplinan_pot'];
-        $jumlah_pot_var     = $_POST['jumlah_pot_var'];
-        $bpjs               = $_POST['bpjs'];
-        $koperasi           = $_POST['koperasi'];
-        $dapen_muh          = $_POST['dapen_muh'];
-        $lainya             = $_POST['lainya'];
-        $jumlah_pot_wajib   = $_POST['jumlah_pot_wajib'];
+        $gaji_diterima      = str_replace(",", "", $_POST['gaji_diterima']);
+        $gaji_pokok         = str_replace(",", "", $_POST['gaji_pokok']);
+        $tunjangan_tetap    = str_replace(",", "", $_POST['tunjangan_tetap']);
+        $struktural         = str_replace(",", "", $_POST['struktural']);
+        $pendidikan         = str_replace(",", "", $_POST['pendidikan']);
+        $keahlian           = str_replace(",", "", $_POST['keahlian']);
+        $penyesuaian        = str_replace(",", "", $_POST['penyesuaian']);
+        $tunjangan_variabel = str_replace(",", "", $_POST['tunjangan_variabel']);
+        $presensi           = str_replace(",", "", $_POST['presensi']);
+        $uang_makan         = str_replace(",", "", $_POST['uang_makan']);
+        $kehadiran          = str_replace(",", "", $_POST['kehadiran']);
+        $kedisiplinan       = str_replace(",", "", $_POST['kedisiplinan']);
+        $istri_suami        = str_replace(",", "", $_POST['istri_suami']);
+        $anak               = str_replace(",", "", $_POST['anak']);
+        $presensi_pot       = str_replace(",", "", $_POST['presensi_pot']);
+        $uang_makan_pot     = str_replace(",", "", $_POST['uang_makan_pot']);
+        $kehadiran_pot      = str_replace(",", "", $_POST['kehadiran_pot']);
+        $kedisiplinan_pot   = str_replace(",", "", $_POST['kedisiplinan_pot']);
+        $jumlah_pot_var     = str_replace(",", "", $_POST['jumlah_pot_var']);
+        $bpjs               = str_replace(",", "", $_POST['bpjs']);
+        $koperasi           = str_replace(",", "", $_POST['koperasi']);
+        $dapen_muh          = str_replace(",", "", $_POST['dapen_muh']);
+        $lainya             = str_replace(",", "", $_POST['lainya']);
+        $jumlah_pot_wajib   = str_replace(",", "", $_POST['jumlah_pot_wajib']);
 
         if (empty($_POST['bulan']) || empty($_POST['tahun']) || empty($_POST['tanggal_gaji_konfig'])) {
             $_SESSION['pesan'] = "Oops! Please fill all column ...";
+            header("location:index.php?page=form-edit-data-gaji-konfigurasi&id_gaji_konfig=$id_gaji_konfig");
+        } else if ($_POST['gaji_diterima'] == 0) {
+            $_SESSION['pesan'] = "Oops! Jumlah Gaji Diterima belum dihitung ...";
             header("location:index.php?page=form-edit-data-gaji-konfigurasi&id_gaji_konfig=$id_gaji_konfig");
         } else {
             $update = mysqli_query($koneksi, "UPDATE tb_gaji_konfigurasi 

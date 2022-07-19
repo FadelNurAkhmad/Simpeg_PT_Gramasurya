@@ -33,7 +33,7 @@ $data    = mysqli_fetch_array($query);
                 <h4 class="panel-title">Form Pengajuan Izin</h4>
             </div>
             <div class="panel-body">
-                <form action="index.php?page=master-cuti-umum&id_peg=<?= $id_peg ?>"" class=" form-horizontal" method="POST" enctype="multipart/form-data">
+                <form action="index.php?page=master-cuti-umum&id_peg=<?= $id_peg ?>" class=" form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="col-md-3 control-label">Jenis Izin<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">

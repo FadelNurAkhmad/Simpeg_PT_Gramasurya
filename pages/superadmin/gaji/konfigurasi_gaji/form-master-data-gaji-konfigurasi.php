@@ -53,6 +53,10 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                 </div>
                 <h4 class="panel-title">Form Jumlah Gaji Diterima</h4>
             </div>
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+                <i class="fa fa-info fa-2x pull-left"></i> Gunakan button <b>"Hitung"</b> untuk menghitung jumlah gaji yang diterima...
+            </div>
             <div class="panel-body">
                 <form action="index.php?page=master-data-gaji-konfigurasi&id_gaji_konfig=<?= $id_gaji_konfig ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
@@ -100,7 +104,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                 <div class="col-md-3">
                                     <select name="tahun" id="tahun" class="form-control" required>
                                         <?php
-                                        for ($i = 2020; $i < 2031; $i++) {
+                                        for ($i = 2021; $i < 2031; $i++) {
                                             echo '<option value="' . $i . '">' . $i . '</option>';
                                         }
                                         ?>
@@ -111,7 +115,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                 <label class="col-md-3 control-label">Jumlah Gaji Diterima</label>
                                 <div class="col-md-6">
                                     <div class="form-inline">
-                                        Rp. <input type="number" name="gaji_diterima" id="gaji_diterima" value="0" class="form-control" readonly />
+                                        Rp. <input type="text" name="gaji_diterima" id="gaji_diterima" value="0" class="form-control" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -119,6 +123,18 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                     </div>
 
                     <hr>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-3 control-label">Gaji Pokok</label>
+                                <div class="col-md-6">
+                                    <div class="form-inline">
+                                        Rp. <input class="form-control number-separator" type="text" name="gaji_pokok" id="gaji_pokok" value="0" data-parsley-required="true" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <br>
                     <div id="tunj_tetap">
@@ -127,7 +143,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                 <label class="col-md-3 control-label">Tunjangan Tetap</label>
                                 <div class="col-md-6">
                                     <div class="form-inline">
-                                        Rp. <input class="form-control" type="number" name="tunjangan_tetap" id="tunjangan_tetap" value="0" data-parsley-required="true" readonly />
+                                        Rp. <input class="form-control" type="text" name="tunjangan_tetap" id="tunjangan_tetap" value="0" data-parsley-required="true" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +154,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Struktural</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="struktural" id="struktural" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="struktural" id="struktural" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -146,7 +162,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Pendidikan</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="pendidikan" id="pendidikan" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="pendidikan" id="pendidikan" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +170,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Keahlian</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="keahlian" id="keahlian" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="keahlian" id="keahlian" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -162,7 +178,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Penyesuaian</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="penyesuaian" id="penyesuaian" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="penyesuaian" id="penyesuaian" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -179,7 +195,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                 <label class="col-md-3 control-label">Tunjangan Variabel</label>
                                 <div class="col-md-6">
                                     <div class="form-inline">
-                                        Rp. <input class="form-control" type="number" name="tunjangan_variabel" id="tunjangan_variabel" value="0" data-parsley-required="true" readonly />
+                                        Rp. <input class="form-control" type="text" name="tunjangan_variabel" id="tunjangan_variabel" value="0" data-parsley-required="true" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -190,7 +206,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Presensi</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="presensi" id="presensi" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="presensi" id="presensi" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -198,7 +214,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Uang Makan</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="uang_makan" id="uang_makan" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="uang_makan" id="uang_makan" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -206,7 +222,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Kehadiran</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="kehadiran" id="kehadiran" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="kehadiran" id="kehadiran" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -214,7 +230,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Kedisiplinan</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="kedisiplinan" id="kedisiplinan" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="kedisiplinan" id="kedisiplinan" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -222,15 +238,15 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Istri/Suami</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="istri_suami" id="istri_suami" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="istri_suami" id="istri_suami" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="col-md-3 control-label">Anak</label>
+                                    <label class="col-md-3 control-label number-separator">Anak</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="anak" id="anak" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="anak" id="anak" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -257,7 +273,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Presensi</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="presensi_pot" id="presensi_pot" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="presensi_pot" id="presensi_pot" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -265,7 +281,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Uang Makan</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="uang_makan_pot" id="uang_makan_pot" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="uang_makan_pot" id="uang_makan_pot" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -273,7 +289,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Kehadiran</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="kehadiran_pot" id="kehadiran_pot" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="kehadiran_pot" id="kehadiran_pot" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -281,7 +297,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Kedisiplinan</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="kedisiplinan_pot" id="kedisiplinan_pot" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="kedisiplinan_pot" id="kedisiplinan_pot" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -289,7 +305,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Jumlah</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="jumlah_pot_var" id="jumlah_pot_var" value="0" data-parsley-required="true" readonly />
+                                            Rp. <input class="form-control" type="text" name="jumlah_pot_var" id="jumlah_pot_var" value="0" data-parsley-required="true" readonly />
                                         </div>
                                     </div>
                                 </div>
@@ -316,7 +332,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">BPJS</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="bpjs" id="bpjs" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="bpjs" id="bpjs" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -324,7 +340,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Koperasi</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="koperasi" id="koperasi" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="koperasi" id="koperasi" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -332,7 +348,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Dapen Muh</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="dapen_muh" id="dapen_muh" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="dapen_muh" id="dapen_muh" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -340,7 +356,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Lainnya</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="lainya" id="lainya" value="0" data-parsley-required="true" />
+                                            Rp. <input class="form-control number-separator" type="text" name="lainya" id="lainya" value="0" data-parsley-required="true" />
                                         </div>
                                     </div>
                                 </div>
@@ -348,7 +364,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                     <label class="col-md-3 control-label">Jumlah</label>
                                     <div class="col-md-6">
                                         <div class="form-inline">
-                                            Rp. <input class="form-control" type="number" name="jumlah_pot_wajib" id="jumlah_pot_wajib" value="0" data-parsley-required="true" readonly />
+                                            Rp. <input class="form-control" type="text" name="jumlah_pot_wajib" id="jumlah_pot_wajib" value="0" data-parsley-required="true" readonly />
                                         </div>
                                     </div>
                                 </div>
@@ -356,27 +372,21 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                         </div>
                     </div>
 
-                    <hr>
-
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label class="col-md-3 control-label">Gaji Pokok</label>
-                                <div class="col-md-6">
-                                    <div class="form-inline">
-                                        Rp. <input class="form-control" type="number" name="gaji_pokok" id="gaji_pokok" value="0" data-parsley-required="true" />
-                                    </div>
+                            <div class="form-group col-md-12">
+                                <label class="col-md-3 control-label"></label>
+                                <div class="col-md-6 ">
+                                    <a type="button" value="hitung" id="hitung" class="btn btn-danger btn-block"><i class="fa fa-calculator"></i>&nbsp;Hitung</a>&nbsp;
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <br>
+                    <hr>
                     <div class="form-group col-md-6">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-6">
                             <button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>&nbsp;
-                            <a type="reset" value="reset" href="index.php?page=form-master-data-gaji-konfigurasi" class="btn btn-danger"><i class="fa fa-repeat"></i>&nbsp;Reset</a>&nbsp;
                             <a type="button" class="btn btn-default active" href="index.php?page=form-view-data-gaji-konfigurasi"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
                         </div>
                     </div>
@@ -407,72 +417,72 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
     $(document).ready(function() {
 
         $("#tunj_tetap").keyup(function() {
-            var struktural = parseInt($("#struktural").val());
-            var pendidikan = parseInt($("#pendidikan").val());
-            var keahlian = parseInt($("#keahlian").val());
-            var penyesuaian = parseInt($("#penyesuaian").val());
+            var struktural = parseInt($("#struktural").val().replaceAll(',', ''));
+            var pendidikan = parseInt($("#pendidikan").val().replaceAll(',', ''));
+            var keahlian = parseInt($("#keahlian").val().replaceAll(',', ''));
+            var penyesuaian = parseInt($("#penyesuaian").val().replaceAll(',', ''));
 
-            var total_tunj_tetap = parseInt(struktural + pendidikan + keahlian + penyesuaian);
+            var total_tunj_tetap = parseInt(struktural + pendidikan + keahlian + penyesuaian).toLocaleString('en-US');
             $("#tunjangan_tetap").val(total_tunj_tetap);
         });
 
         $("#tunj_variabel").keyup(function() {
-            var presensi = parseInt($("#presensi").val());
-            var uang_makan = parseInt($("#uang_makan").val());
-            var kehadiran = parseInt($("#kehadiran").val());
-            var kedisiplinan = parseInt($("#kedisiplinan").val());
-            var istri_suami = parseInt($("#istri_suami").val());
-            var anak = parseInt($("#anak").val());
+            var presensi = parseInt($("#presensi").val().replaceAll(',', ''));
+            var uang_makan = parseInt($("#uang_makan").val().replaceAll(',', ''));
+            var kehadiran = parseInt($("#kehadiran").val().replaceAll(',', ''));
+            var kedisiplinan = parseInt($("#kedisiplinan").val().replaceAll(',', ''));
+            var istri_suami = parseInt($("#istri_suami").val().replaceAll(',', ''));
+            var anak = parseInt($("#anak").val().replaceAll(',', ''));
 
-            var total_tunj_var = parseInt(presensi + uang_makan + kehadiran + kedisiplinan + istri_suami + anak);
+            var total_tunj_var = parseInt(presensi + uang_makan + kehadiran + kedisiplinan + istri_suami + anak).toLocaleString('en-US');
             $("#tunjangan_variabel").val(total_tunj_var);
         });
 
         $("#potongan_wajib").keyup(function() {
-            var bpjs = parseInt($("#bpjs").val());
-            var koperasi = parseInt($("#koperasi").val());
-            var dapen_muh = parseInt($("#dapen_muh").val());
-            var lainya = parseInt($("#lainya").val());
+            var bpjs = parseInt($("#bpjs").val().replaceAll(',', ''));
+            var koperasi = parseInt($("#koperasi").val().replaceAll(',', ''));
+            var dapen_muh = parseInt($("#dapen_muh").val().replaceAll(',', ''));
+            var lainya = parseInt($("#lainya").val().replaceAll(',', ''));
 
-            var total_wajib = parseInt(bpjs + koperasi + dapen_muh + lainya);
+            var total_wajib = parseInt(bpjs + koperasi + dapen_muh + lainya).toLocaleString('en-US');
             $("#jumlah_pot_wajib").val(total_wajib);
         });
 
         $("#potongan_variabel").keyup(function() {
-            var presensi_pot = parseInt($("#presensi_pot").val());
-            var uang_makan_pot = parseInt($("#uang_makan_pot").val());
-            var kehadiran_pot = parseInt($("#kehadiran_pot").val());
-            var kedisiplinan_pot = parseInt($("#kedisiplinan_pot").val());
+            var presensi_pot = parseInt($("#presensi_pot").val().replaceAll(',', ''));
+            var uang_makan_pot = parseInt($("#uang_makan_pot").val().replaceAll(',', ''));
+            var kehadiran_pot = parseInt($("#kehadiran_pot").val().replaceAll(',', ''));
+            var kedisiplinan_pot = parseInt($("#kedisiplinan_pot").val().replaceAll(',', ''));
 
-            var total_var = parseInt(presensi_pot + uang_makan_pot + kehadiran_pot + kedisiplinan_pot);
+            var total_var = parseInt(presensi_pot + uang_makan_pot + kehadiran_pot + kedisiplinan_pot).toLocaleString('en-US');
             $("#jumlah_pot_var").val(total_var);
         });
 
-        function hitung() {
-            var gaji_pokok = parseInt($("#gaji_pokok").val());
-            var tunjangan_tetap = parseInt($("#tunjangan_tetap").val());
-            var tunjangan_variabel = parseInt($("#tunjangan_variabel").val());
-            var jumlah_pot_var = parseInt($("#jumlah_pot_var").val());
-            var jumlah_pot_wajib = parseInt($("#jumlah_pot_wajib").val());
+        $("#hitung").on("click", function hitung() {
+            var gaji_pokok = parseInt($("#gaji_pokok").val().replaceAll(',', ''));
+            var tunjangan_tetap = parseInt($("#tunjangan_tetap").val().replaceAll(',', ''));
+            var tunjangan_variabel = parseInt($("#tunjangan_variabel").val().replaceAll(',', ''));
+            var jumlah_pot_var = parseInt($("#jumlah_pot_var").val().replaceAll(',', ''));
+            var jumlah_pot_wajib = parseInt($("#jumlah_pot_wajib").val().replaceAll(',', ''));
 
-            var gd = parseInt((gaji_pokok + tunjangan_tetap + tunjangan_variabel) - (jumlah_pot_var + jumlah_pot_wajib));
+            var gd = parseInt((gaji_pokok + tunjangan_tetap + tunjangan_variabel) - (jumlah_pot_var + jumlah_pot_wajib)).toLocaleString('en-US');
             $("#gaji_diterima").val(gd);
 
-        };
+        });
 
-        $("#jumlah_pot_wajib").on("keyup keypress blur change focus", function() {
+        $("#jumlah_pot_wajib").on("keyup keypress keydown blur change focus", function() {
             hitung();
         });
-        $("#jumlah_pot_var").on("keyup keypress blur change focus", function() {
+        $("#jumlah_pot_var").on("keyup keypress keydown blur change focus", function() {
             hitung();
         });
-        $("#tunjangan_variabel").on("keyup keypress blur change focus", function() {
+        $("#tunjangan_variabel").on("keyup keypress keydown blur change focus", function() {
             hitung();
         });
-        $("#tunjangan_tetap").on("keyup keypress blur change focus", function() {
+        $("#tunjangan_tetap").on("keyup keypress keydown blur change focus", function() {
             hitung();
         });
-        $("#gaji_pokok").on("keyup keypress blur change focus", function() {
+        $("#gaji_pokok").on("keyup keypress keydown blur change focus", function() {
             hitung();
         });
 
