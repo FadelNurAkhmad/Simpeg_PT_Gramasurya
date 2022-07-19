@@ -33,7 +33,7 @@ $data    = mysqli_fetch_array($query);
                 <h4 class="panel-title">Form Pengajuan Cuti Tahunan</h4>
             </div>
             <div class="panel-body">
-                <form action="index.php?page=master-cuti&id_peg=<?= $id_peg ?>"" class=" form-horizontal" method="POST" enctype="multipart/form-data">
+                <form action="index.php?page=master-cuti&id_peg=<?= $id_peg ?>" class=" form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="col-md-3 control-label">Janis Cuti<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
@@ -73,8 +73,9 @@ $data    = mysqli_fetch_array($query);
                     <div class="form-group">
                         <label class="col-md-3 control-label">Lama Cuti<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
-                            <input type="text" name="lama_cuti" class="form-control" placeholder="Dalam Hari"></input>
+                            <input type="number" name="lama_cuti" class="form-control" min="1" max="12" placeholder="Dalam Hari"></input>
                         </div>
+                        <label class="control-label"><span aria-required="true" class="text-danger"> * Max 12 Hari </span></label>
                     </div>
                     <div class="form-group">
                         <div class="col-md-6">

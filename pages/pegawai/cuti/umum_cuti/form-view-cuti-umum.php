@@ -19,7 +19,7 @@ $id_peg     = $_SESSION['id_peg'];
 $query   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$id_peg'");
 $data    = mysqli_fetch_array($query);
 
-$tampilCutiUmum    = mysqli_query($koneksi, "SELECT * FROM tb_cuti_umum WHERE id_peg='$id_peg' ORDER BY tanggal_cuti");
+$tampilCutiUmum    = mysqli_query($koneksi, "SELECT * FROM tb_cuti_umum WHERE id_peg='$id_peg' ORDER BY tanggal_cuti DESC");
 
 ?>
 <div class="row">
@@ -45,7 +45,7 @@ $tampilCutiUmum    = mysqli_query($koneksi, "SELECT * FROM tb_cuti_umum WHERE id
                         <tr>
                             <th width="4%">No</th>
                             <th>Jenis Cuti</th>
-                            <th>Keperluan</th>
+                            <th width="15%">Keperluan</th>
                             <th>Tanggal Pengajuan</th>
                             <th>Tanggal Pelaksanaan</th>
                             <th>Lama Cuti</th>

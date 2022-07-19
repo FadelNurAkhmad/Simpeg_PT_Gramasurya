@@ -8,6 +8,7 @@
         $data        = mysqli_fetch_array($query);
         $id_peg      = $data['id_peg'];
         $jumlah_cuti = $data['jumlah_cuti'];
+        $lama_cuti   = $data['lama_cuti'];
         $status      = "Approve";
 
         $cekSisaCuti = mysqli_query($koneksi, "SELECT jatah_c_sisa FROM tb_jatah_cuti WHERE id_peg='$id_peg'");
@@ -28,7 +29,7 @@
                 // $approval = mysqli_query($koneksi, "UPDATE tb_approval_cuti_tahunan SET approval='Aktif' WHERE id_approval_cuti='$id_approval_cuti'");
 
                 if ($cuti) {
-                    $approve = mysqli_query($koneksi, "UPDATE tb_jatah_cuti SET jatah_c_sisa=(jatah_c_sisa-'$jumlah_cuti'), jatah_c_ambil=(jatah_c_ambil+'$jumlah_cuti')  WHERE id_peg='$id_peg'");
+                    $approve = mysqli_query($koneksi, "UPDATE tb_jatah_cuti SET jatah_c_sisa=(jatah_c_sisa-'$lama_cuti'), jatah_c_ambil=(jatah_c_ambil+'$lama_cuti')  WHERE id_peg='$id_peg'");
                     $_SESSION['pesan'] = "Good!  Data cuti berhasil di Approve. ...";
                     header("location:index.php?page=form-view-approval-tahap2");
                 } else {

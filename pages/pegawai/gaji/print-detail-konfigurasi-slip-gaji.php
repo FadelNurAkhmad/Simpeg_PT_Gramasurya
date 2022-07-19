@@ -166,165 +166,196 @@ $html = '<table border="0" cellspacing="0" cellpadding="3">
 			<tr>
 				<td width="3%">&nbsp;</td>
 				<td width="53%"><b>Gaji Pokok</b></td>
-				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['gaji_pokok']) . '</td>
+				<td width="5%"><b>:</b></td>
+				<td width="5%"><b>Rp.</b></td>
+				<td align="right" width="20%"><b> ' . number_format($data['gaji_pokok']) . '</b></td>
 			</tr>
 			<tr>
 				<td width="3%">&nbsp;</td>
 				<td width="53%"><b>Tunjangan Tetap</b></td>
-				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['tunjangan_tetap']) . '</td>
+				<td width="5%"><b>:</b></td>
+				<td width="5%"><b>Rp.</b></td>
+				<td align="right" width="20%"><b> ' . number_format($data['tunjangan_tetap']) . '</b></td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="23%">Struktural</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['struktural']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['struktural']) . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="23%">Pendidikan</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['pendidikan']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['pendidikan']) . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="23%">Keahlian</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['keahlian']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['keahlian']) . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="23%">Penyesuaian</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['penyesuaian']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['penyesuaian']) . '</td>
 			</tr>
 			<tr>
 				<td width="3%">&nbsp;</td>
 				<td width="53%"><b>Tunjangan Variabel</b></td>
-				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['tunjangan_variabel']) . '</td>
+				<td width="5%"><b>:</b></td>
+				<td width="5%"><b>Rp.</b></td>
+				<td align="right" width="20%"><b> ' . number_format($data['tunjangan_variabel']) . '</b></td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="23%">Presensi</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['presensi']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['presensi']) . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="23%">Uang Makan</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['uang_makan']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['uang_makan']) . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="23%">Kehadiran</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['kehadiran']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['kehadiran']) . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="23%">Kedisiplinan</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['kedisiplinan']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['kedisiplinan']) . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="23%">Keluarga Istri/Suami</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['istri_suami']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['istri_suami']) . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="23%">Anak</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['anak']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['anak']) . '</td>
 			</tr>
 			<tr>
 				<td width="45%">&nbsp;</td>
-				<td width="30%">Jumlah</td>
-				<td width="5%">:</td>
-				<td width="20%">Rp. ' . number_format($jumlah_total) . '</td>
+				<td width="25%"><b>Jumlah</b></td>
+				<td width="5%"><b>:</b></td>
+				<td width="5%"><b>Rp.</b></td>
+				<td align="right" width="20%"><b> ' . number_format($jumlah_total) . '</b></td>
 			</tr>
+			<table border="1" cellspacing="0" cellpadding="3">
+			</table>
 			<tr>
 				<td width="3%">&nbsp;</td>
 				<td width="53%"><u><b>Potongan Variabel</b></u></td>
 				<td width="5%"></td>
-				<td width="30%"></td>
+				<td width="25%"></td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="44%">Presensi</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['presensi_pot']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['presensi_pot']) . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="44%">Uang Makan</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['uang_makan_pot']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['uang_makan_pot']) . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="44%">Kehadiran</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['kehadiran_pot']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20\0%"> ' . number_format($data['kehadiran_pot']) . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="44%">Kedisiplinan</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['kedisiplinan_pot']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['kedisiplinan_pot']) . '</td>
 			</tr>
 			<tr>
 				<td width="27%">&nbsp;</td>
-				<td width="48%">Jumlah Potongan Variabel</td>
-				<td width="5%">:</td>
-				<td width="20%">Rp. ' . number_format($data['jumlah_pot_var']) . '</td>
+				<td width="43%"><b>Jumlah Potongan Variabel</b></td>
+				<td width="5%"><b>:</b></td>
+				<td width="5%"><b>Rp.</b></td>
+				<td align="right" width="20%"><b> ' . number_format($data['jumlah_pot_var']) . '</b></td>
 			</tr>
 			<tr>
 				<td width="3%">&nbsp;</td>
 				<td width="53%"><u><b>Potongan Wajib</b></u></td>
 				<td width="5%"></td>
-				<td width="30%"></td>
+				<td width="25%"></td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="44%">BPJS</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['bpjs']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['bpjs']) . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="44%">Koperasi</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['koperasi']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['koperasi']) . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="44%">Dapen Muh</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['dapen_muh']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['dapen_muh']) . '</td>
 			</tr>
 			<tr>
 				<td width="12%">&nbsp;</td>
 				<td width="44%">Lainya</td>
 				<td width="5%">:</td>
-				<td width="30%">Rp. ' . number_format($data['lainya']) . '</td>
+				<td width="5%">Rp.</td>
+				<td align="right" width="20%"> ' . number_format($data['lainya']) . '</td>
 			</tr>
 			<tr>
 				<td width="27%">&nbsp;</td>
-				<td width="48%">Jumlah Potongan Wajib</td>
-				<td width="5%">:</td>
-				<td width="20%">Rp. ' . number_format($data['jumlah_pot_wajib']) . '</td>
+				<td width="43%"><b>Jumlah Potongan Wajib</b></td>
+				<td width="5%"><b>:</b></td>
+				<td width="5%"><b>Rp.</b></td>
+				<td align="right" width="20%"><b> ' . number_format($data['jumlah_pot_wajib']) . '</b></td>
 			</tr>
+			<table border="1" cellspacing="0" cellpadding="3">
+			</table>
 			<tr>
-				<td width="50%">&nbsp;</td>
+				<td width="45%">&nbsp;</td>
 				<td width="25%"><b>Jumlah Gaji Diterima</b></td>
 				<td width="5%"><b>:</b></td>
-				<td width="20%"><b>Rp. ' . number_format($data['gaji_diterima']) . '</b></td>
+				<td width="5%"><b>Rp.</b></td>
+				<td align="right" width="20%"><b> ' . number_format($data['gaji_diterima']) . '</b></td>
 			</tr>
+			<table border="1" cellspacing="0" cellpadding="3">
+			</table>
 		</table>
 		<table border="0" cellspacing="0" cellpadding="3">
 		</table><br /><br /><br />';

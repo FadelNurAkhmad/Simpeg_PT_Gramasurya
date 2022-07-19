@@ -1128,6 +1128,7 @@ while ($row = mysqli_fetch_array($query)) {
     <script src="../../assets/js/form-plugins.demo.min.js"></script>
     <script src="../../assets/js/dashboard.min.js"></script>
     <script src="../../assets/js/apps.min.js"></script>
+    <script src="../../assets/js/autoNumeric.min.js"></script>
 
 
     <!-- ================== END PAGE LEVEL JS ================== -->
