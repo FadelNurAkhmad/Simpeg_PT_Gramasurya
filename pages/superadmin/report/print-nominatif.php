@@ -28,7 +28,7 @@ $pdf = new MYPDF('L', 'mm', 'Legal', true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Andi Hatmoko');
+$pdf->SetAuthor('ActionTeamSPI');
 $pdf->SetTitle('Report');
 $pdf->SetSubject('TCPDF');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
@@ -73,7 +73,6 @@ $namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai  WHERE pegawai_id='$
 $nama		= mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 
 
-
 $header = '<p align="center"><font size="12"><b>DAFTAR NOMINATIF PEGAWAI NEGERI SIPIL</b></font><br />
 			<font size="10" style="text-transform:uppercase">PER ' . date("j F Y") . '<font></p>';
 $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = 10, $header, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
@@ -89,7 +88,6 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				<th colspan="2" width="200" height="30">NAMA, TTL</th>
 				<th rowspan="2" width="100">JENIS KELAMIN</th>
 				<th colspan="2" width="200">JABATAN</th>
-				<th rowspan="2" width="30">ESL</th>
 				<th rowspan="2" width="170">PEND, JURUSAN, T.LULUS</th>
 				<th rowspan="2" width="170">ALAMAT & NO. TELP</th>
 				<th rowspan="2" width="50">KET</th>
@@ -105,10 +103,9 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				<th>3</th>
 				<th>4</th>
 				<th>5</th>
-				<th></th>
+				<th>6</th>
 				<th>7</th>
 				<th>8</th>
-				<th>9</th>
 			</tr>';
 $no = 1;
 $idPeg = mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id= tb_pegawai.pegawai_id INNER JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id");
@@ -125,41 +122,18 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 		$status = 'Aktif';
 	}
 
-	$html .= '<tr>
-							
+	$html .= '<tr>	
 					<td align="center">' . $no++ . '</td>
-					<td colspan="2">' . $peg['pegawai_nama'] . '<br /><br />' . $peg['tempat_lahir'] . ', ' . $peg['tgl_lahir'] . '<br />' . $peg['pegawai_nip'] . '<br />' . $agama . '</td>
+					<td colspan="2">' . $peg['pegawai_nama'] . '<br />' . $peg['tempat_lahir'] . ', ' . $peg['tgl_lahir'] . '<br />' . $peg['pegawai_nip'] . '<br />' . $agama . '</td>
 					<td>' . $gender . '</td>';
 
-	// $idPan = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$peg[pegawai_id]' AND status_pan='Aktif'");
-	// $hpan = mysqli_fetch_array($idPan, MYSQLI_ASSOC);
-	// $pan1 = isset($hpan['pangkat']) ? $hpan['pangkat'] : '';
-	// $gol = isset($hpan['gol']) ? $hpan['gol'] : '';
-	// $tmt = isset($hpan['tmt_pangkat']) ? $hpan['tmt_pangkat'] : '';
-	// $html .= '<td align="center">' . $pan1 . '<br />' . $gol . '</td>
-	// 				<td>' . $tmt . '</td>';
-
 	$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]'");
-	// if(mysqli_num_rows($idJab) > 0) {
-
-	// } else {
-
-	// }
 	$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
 	$jb = isset($hjab['jabatan']) ? $hjab['jabatan'] : '';
 	$jbt = isset($hjab['tmt_jabatan']) ? $hjab['tmt_jabatan'] : '';
 	$html .= '<td>' . $jb . '</td>
-					<td>' . $jbt . '</td>
-					<td align="center">' . '</td>';
+					<td>' . $jbt . '</td>';
 
-	// $idLatjab = mysqli_query($koneksi, "SELECT * FROM tb_lat_jabatan WHERE id_lat_jabatan='$peg[pegawai_id]'");
-	// $hljab = mysqli_fetch_array($idLatjab, MYSQLI_ASSOC);
-	// $hljab1 = isset($hljab['nama_pelatih']) ? $hljab['nama_pelatih'] : '';
-	// $hljab2 = isset($hljab['tahun_lat']) ? $hljab['tahun_lat'] : '';
-	// $hljab3 = isset($hljab['jml_jam']) ? $hljab['jml_jam'] : '';
-	// $html .='<td>'.$hljab1.'</td>
-	// <td align="center">'.$hljab2.'</td>
-	// <td align="center">'.$hljab3.'</td>';
 
 	$idSek = mysqli_query($koneksi, "SELECT * FROM  tb_sekolah  WHERE id_peg='$peg[pegawai_id]' AND status='Akhir' ");
 	$hsek = mysqli_fetch_array($idSek, MYSQLI_ASSOC);
@@ -170,7 +144,7 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 	$html .= '<td>' . $hsek1 . '<br />' . $hsek2 . '<br />' . $hsek3 . '<br />' . $hsek4 . '</td>
 					<td>' . $peg['alamat'] . '<br /><br />' . $peg['pegawai_telp'] . '</td>
 					<td align="center">'  . $status . '</td>
-				</tr>';
+			 </tr>';
 }
 $html .= '</table><br /><br />';
 $html .= '<table cellpadding="1" border="0" align="center">

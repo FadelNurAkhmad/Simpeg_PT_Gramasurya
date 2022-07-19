@@ -11,9 +11,6 @@ $data    = mysqli_fetch_array($sql);
 $jabatan	= mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$data[pembagian1_id]'");
 $jab	= mysqli_fetch_array($jabatan);
 
-$queryPan	= mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$id_peg' AND status_pan='Aktif'");
-$selpan		= mysqli_fetch_array($queryPan);
-
 $queryCuti	= mysqli_query($koneksi, "SELECT * FROM tb_jatah_cuti WHERE id_peg='$id_peg'");
 $jatCuti		= mysqli_fetch_array($queryCuti);
 
@@ -656,7 +653,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 					<i class="fa fa-info fa-2x pull-left"></i> Klik "Detail" untuk menuju halaman preview dan print ...
 				</div>
 				<div class="panel-body">
-					<table id="data-table" class="table table-striped table-bordered nowrap" width="100%">
+					<table class="table table-striped table-bordered nowrap display" width="100%">
 						<thead>
 							<tr>
 								<th width="4%">No</th>
@@ -870,7 +867,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 
 				</div>
 				<div class="table-responsive">
-					<table class="table table-bordered table-striped">
+					<table class="table table-bordered table-striped display">
 						<thead>
 							<tr>
 								<th>No</th>
@@ -1440,62 +1437,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 				</div>
 			</div>
 		</div>
-		<div id="tunjangan" class="modal fade">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Riwayat Tunjangan</h4>
-					</div>
-					<div class="col-sm-12">
-						<div class="modal-body">
-							<div class="table-responsive">
-								<table class="table table-bordered table-striped">
-									<thead class="thin-border-bottom">
-										<tr>
-											<th>No</th>
-											<th>Jenis Tunjangan</th>
-											<th>Nomor</th>
-											<th>Tanggal</th>
-											<th>Terhitung Mulai</th>
-											<th width="10%">
-												<center><i class="fa fa-code fa-lg"></i></center>
-											</th>
-											<th width="6%">View</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php
-										$no = 0;
-										$tampilTun	= mysqli_query($koneksi, "SELECT * FROM tb_tunjangan WHERE id_peg='$id_peg' ORDER BY tgl_tunjangan DESC");
-										while ($tun = mysqli_fetch_array($tampilTun)) {
-											$no++
-										?>
-											<tr>
-												<td><?= $no ?></td>
-												<td><?php echo $tun['jns_tunjangan']; ?></td>
-												<td><?php echo $tun['no_tunjangan']; ?></td>
-												<td><?php echo $tun['tgl_tunjangan']; ?></td>
-												<td><?php echo $tun['tgl_terhitung']; ?></td>
-												<td class="tools">
-													<a href="index.php?page=form-edit-data-tunjangan&id_tunjangan=<?= $tun['id_tunjangan']; ?>" title="edit" type="button" class="btn btn-info btn-icon btn-sm"><i class="fa fa-edit fa-lg"></i></a>&nbsp;
-													<a href="index.php?page=delete-data-tunjangan&id_tunjangan=<?= $tun['id_tunjangan'] ?>" title="delete" type="button" class="btn btn-danger btn-icon btn-sm" onclick="return confirm('Apakah kamu ingin delete == Data Tunjangan == dari Database?');"><i class="fa fa-trash-o fa-lg"></i></a>
-												</td>
-												<td class="tools"><a href="index.php?page=detail-data-tunjangan&id_tunjangan=<?= $tun['id_tunjangan']; ?>" title="view detail" type="button" class="btn btn-warning btn-xs">Detail</a></td>
-											</tr>
-										<?php
-										}
-										?>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-					</div>
-				</div>
-			</div>
-		</div>
+
 		<div id="kawin" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -1564,4 +1506,8 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 	setTimeout(function() {
 		$(".pesan").fadeOut('slow');
 	}, 7000);
+
+	$(document).ready(function() {
+		$('table.display').DataTable();
+	});
 </script>

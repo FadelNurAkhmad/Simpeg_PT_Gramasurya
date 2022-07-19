@@ -260,6 +260,9 @@ $peg		= mysqli_fetch_array($tampilPeg);
 				case 'ganti-password':
 					include "../../pages/pegawai/ganti-password.php";
 					break;
+				case 'print-biodata-pegawai':
+					include "../../pages/pegawai/report/print-biodata-pegawai.php";
+					break;
 
 				default:
 					include '../../pages/pegawai/my-profile.php';

@@ -72,10 +72,6 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 $namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$kep[pimpinan]'");
 $nama		= mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 
-// $pangkat = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[pimpinan]' AND status_pan='Aktif'");
-// $pan	= mysqli_fetch_array($pangkat, MYSQLI_ASSOC);
-// $pan1 = isset($pan['pangkat']) ? $pan['pangkat'] : '';
-
 $header = '<p align="center"><font size="12"><b>DAFTAR URUT KEPANGKATAN PEGAWAI NEGERI SIPIL</b></font><br />
 			<font size="9" style="text-transform:uppercase"> ' . $kep['nama_peru'] . ' TAHUN ' . date('Y') . '<font></p>';
 $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = 10, $header, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'top', $autopadding = true);
@@ -84,11 +80,7 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				<th rowspan="2" width="40">NO</th>
 				<th colspan="2" width="180">NAMA</th>
 				<th rowspan="2" width="120">NIP</th>
-				
 				<th colspan="2" width="180">JABATAN</th>
-				
-				
-				<th colspan="3" width="180">LATIHAN JABATAN</th>
 				<th colspan="3" width="210">PEND AKHIR</th>
 				<th rowspan="2" width="50">KET</th>
 			</tr>
@@ -98,9 +90,6 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				<th width="90">NAMA</th>
 				<th width="90">TMT</th>
 			
-				<th width="90">NAMA</th>
-				<th width="40">THN</th>
-				<th width="50">JML JAM</th>
 				<th width="90">ASAL</th>
 				<th width="60">T.LLS</th>
 				<th width="60">TINGKAT</th>
@@ -112,14 +101,9 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				<th width="90">4</th>
 				<th width="90">5</th>
 				<th width="90">6</th>
-				<th width="40">7</th>
-				<th width="50">8</th>
-				<th width="90">9</th>
-				<th width="60">10</th>
-				<th width="60">11</th>
-				<th width="50">12</th>
-				
-				
+				<th width="60">7</th>
+				<th width="60">8</th>
+				<th width="50">9</th>
 			</tr>';
 $no = 1;
 $idPeg = mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id= tb_pegawai.pegawai_id INNER JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id");
@@ -133,17 +117,7 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 					<td colspan="2">' . $peg['pegawai_nama'] . '<br />' . $peg['tempat_lahir'] . ',' . $peg['tgl_lahir'] . '</td>
 					<td>' . $peg['pegawai_nip'] . '</td>';
 
-	// $idPan = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE (id_peg='$peg[pegawai_id]' AND status_pan='Aktif')");
-	// $hpan = mysqli_fetch_array($idPan, MYSQLI_ASSOC);
-	// $hpan1 = isset($hpan['pangkat']) ? $hpan['pangkat'] : '';
-	// $hpan2 = isset($hpan['gol']) ? $hpan['gol'] : '';
-	// $hpan3 = isset($hpan['tmt_pangkat']) ? $hpan['tmt_pangkat'] : '';
-	// $hpan4 = isset($hpan['tgl_sk']) ? $hpan['tgl_sk'] : '';
-	// $html .= '<td align="center">' . $hpan1 . '<br />' . $hpan2 . '</td>
-	// 				<td>' . $hpan3 . '</td>';
 
-	// $idJab = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE (pembagian1_id='$peg[pembagian1_id]') ");
-	// $hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
 
 	$idjab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]'");
 	$hjabb = mysqli_fetch_array($idjab, MYSQLI_ASSOC);
@@ -152,16 +126,6 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 
 	$html .= '<td>' . $hjab1 . '</td>
 					<td>' . $hjab2 . '</td>';
-
-
-	// $idLatjab = mysqli_query($koneksi, "SELECT * FROM tb_lat_jabatan WHERE id_lat_jabatan='$peg[pegawai_id]'");
-	// $hljab = mysqli_fetch_array($idLatjab, MYSQLI_ASSOC);
-	// $hljab1 = isset($hljab['nama_pelatih']) ? $hljab['nama_pelatih'] : '';
-	// $hljab2 = isset($hljab['tahun_lat']) ? $hljab['tahun_lat'] : '';
-	// $hljab3 = isset($hljab['jml_jam']) ? $hljab['jml_jam'] : '';
-	// $html .= '<td>' . $hljab1 . '</td>
-	// 				<td align="center">' . $hljab2. '</td>
-	// 				<td align="center">' . $hljab3 . '</td>';
 
 	$idSek = mysqli_query($koneksi, "SELECT * FROM  tb_sekolah WHERE id_peg='$peg[pegawai_id]' AND status='Akhir'");
 	$hsek = mysqli_fetch_array($idSek, MYSQLI_ASSOC);
