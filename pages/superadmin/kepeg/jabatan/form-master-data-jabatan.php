@@ -70,6 +70,25 @@ $id_jab	= kdauto("tb_jabatan", "");
 							?>
 						</div>
 					</div>
+
+					<div class="form-group">
+						<label class="col-md-3 control-label">Unit<span aria-required="true" class="text-danger"> * </span></label>
+						<div class="col-md-4">
+							<?php
+							$dataJ = mysqli_query($koneksi, "SELECT * FROM pembagian2 ORDER BY pembagian2_nama");
+							echo '<select name="unit" class="default-select2 form-control">';
+							echo '<option value="">...</option>';
+							while ($rowj = mysqli_fetch_array($dataJ)) {
+								echo '<option value="' . $rowj['pembagian2_nama'] . '">' . $rowj['pembagian2_nama'] . '</option>';
+							}
+							echo '</select>';
+							?>
+						</div>
+						<div class="col-sm-2">
+							<a type="button" class="btn btn-warning btn-sm pull-right" data-toggle="modal" data-target="#unit"><i class="fa fa-plus-circle"></i> Add Unit&nbsp;</a>
+						</div>
+					</div>
+
 					<div class="form-group">
 						<label class="col-md-3 control-label">Jabatan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-4">
@@ -152,7 +171,7 @@ $id_jab	= kdauto("tb_jabatan", "");
 								<input type="text" name="pembagian1_nama" maxlength="32" class="form-control" />
 							</div>
 							<div class="col-md-4">
-								<p>* Ex: Kepala Dinas</p>
+								<p>* Ex: Adiministrator</p>
 							</div>
 							<div class="col-md-2">
 								<button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>
@@ -195,6 +214,87 @@ $id_jab	= kdauto("tb_jabatan", "");
 													</div>
 													<div class="modal-body" align="center">
 														<a href="index.php?page=delete-masterjab&pembagian1_id=<?= $jab['pembagian1_id'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
+													</div>
+													<div class="modal-footer">
+														<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									<?php
+									}
+									?>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer no-margin-top">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="unit" class="modal fade">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Master Data Unit</h4>
+			</div>
+			<div class="col-sm-12">
+				<div class="modal-body">
+					<form action="index.php?page=masterunit" class="form-horizontal" method="POST" enctype="multipart/form-data">
+						<div class="form-group">
+							<label class="col-md-2 control-label">Nama Unit</label>
+							<div class="col-md-4">
+								<input type="text" name="pembagian2_nama" maxlength="32" class="form-control" />
+							</div>
+							<div class="col-md-4">
+								<p>* Ex: Komisaris</p>
+							</div>
+							<div class="col-md-2">
+								<button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>
+							</div>
+						</div>
+					</form>
+					<div class="widget-body">
+						<div class="widget-main">
+							<table class="table table-bordered table-striped">
+								<thead class="thin-border-bottom">
+									<tr>
+										<th width="10%"><i class="fa fa-caret-right"></i> No</th>
+										<th width="70%"><i class="fa fa-caret-right"></i> Nama Jabatan</th>
+										<th width="20%">
+											<center><i class="fa fa-code fa-lg"></i></center>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+									$no = 0;
+									$tampilJ	= mysqli_query($koneksi, "SELECT * FROM pembagian2 ORDER BY pembagian2_nama ASC");
+									while ($jab = mysqli_fetch_array($tampilJ, MYSQLI_ASSOC)) {
+										$no++;
+									?>
+										<tr>
+											<td><?= $no ?></td>
+											<td><?php echo $jab['pembagian2_nama']; ?></td>
+											<td class="tools" align="center">
+												<a href="index.php?page=form-edit-masterunit&pembagian2_id=<?= $jab['pembagian2_id']; ?>" title="edit" type="button" class="btn btn-info btn-icon btn-sm"><i class="fa fa-edit fa-lg"></i></a>&nbsp;&nbsp;
+												<a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Delmasunit<?php echo $jab['pembagian2_id'] ?>" title="delete"><i class="fa-lg fa fa-trash-o"></i></a>
+											</td>
+										</tr>
+										<!-- #modal-dialog -->
+										<div id="Delmasunit<?php echo $jab['pembagian2_id'] ?>" class="modal fade" role="dialog">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Are you sure you want to delete Master Unit <?php echo $jab['pembagian2_nama'] ?> from Database?</h5>
+													</div>
+													<div class="modal-body" align="center">
+														<a href="index.php?page=delete-masterunit&pembagian2_id=<?= $jab['pembagian2_id'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
 													</div>
 													<div class="modal-footer">
 														<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>

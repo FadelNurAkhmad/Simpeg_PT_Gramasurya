@@ -23,7 +23,7 @@ function kdauto($tabel, $inisial)
 	$field      = $fieldInfo->name;
 	$panjang    = $fieldInfo->length;
 	$qry  = mysqli_query($koneksi, "SELECT max(" . $field . ") FROM " . $tabel);
-	$row  = mysqli_fetch_array($qry);
+	$row  = mysqli_fetch_array($qry, MYSQLI_NUM);
 	if ($row[0] == "") {
 		$angka = 0;
 	} else {
@@ -54,6 +54,7 @@ $id_peg	= kdauto("tb_pegawai", "");
 			</div>
 			<div class="panel-body">
 				<form action="index.php?page=master-data-pegawai&pegawai_id=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+					<?= $id_peg ?>
 					<div class="form-group">
 						<label class="col-md-3 control-label">PIN<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
@@ -74,9 +75,8 @@ $id_peg	= kdauto("tb_pegawai", "");
 						<label class="col-md-3 control-label">Status Pegawai<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="pegawai_status" class="default-select2 form-control" id="option" onchange="selectOption()">
-								<option value="">...</option>
-								<option value="0">Non Aktif</option>
 								<option value="1">Aktif</option>
+								<option value="0">Non Aktif</option>
 								<option value="2">Berhenti</option>
 							</select>
 						</div>
@@ -108,15 +108,7 @@ $id_peg	= kdauto("tb_pegawai", "");
 							<input type="text" name="pegawai_nama" maxlength="64" class="form-control" />
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Tanggal Mulai Kerja<span aria-required="true" class="text-danger"> * </span></label>
-						<div class="col-md-3">
-							<div class="input-group date" id="datepicker-disabled-past2" data-date-format="yyyy-mm-dd">
-								<input type="text" name="tgl_mulai_kerja" class="form-control" />
-								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-							</div>
-						</div>
-					</div>
+
 					<div class="form-group">
 						<label class="col-md-3 control-label">Tanggal Masuk Kerja<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-3">
@@ -127,10 +119,18 @@ $id_peg	= kdauto("tb_pegawai", "");
 						</div>
 					</div>
 					<div class="form-group">
+						<label class="col-md-3 control-label">Tanggal Mulai Kerja<span aria-required="true" class="text-danger"> * </span></label>
+						<div class="col-md-3">
+							<div class="input-group date" id="datepicker-disabled-past2" data-date-format="yyyy-mm-dd">
+								<input type="text" name="tgl_mulai_kerja" class="form-control" />
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
 						<label class="col-md-3 control-label">Agama<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="agama" class="default-select2 form-control">
-								<option value="">...</option>
 								<option value="1">Islam</option>
 								<option value="2">Katolik</option>
 								<option value="3">Protestan</option>
@@ -144,7 +144,6 @@ $id_peg	= kdauto("tb_pegawai", "");
 						<label class="col-md-3 control-label">Jenis Kelamin<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="gender" class="default-select2 form-control">
-								<option value="">...</option>
 								<option value="1">Laki-laki</option>
 								<option value="2">Perempuan</option>
 							</select>
@@ -154,7 +153,6 @@ $id_peg	= kdauto("tb_pegawai", "");
 						<label class="col-md-3 control-label">Golongan Darah<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="gol_darah" class="default-select2 form-control">
-								<option value="">...</option>
 								<option value="1">A+</option>
 								<option value="2">B+</option>
 								<option value="3">O+</option>
@@ -170,7 +168,6 @@ $id_peg	= kdauto("tb_pegawai", "");
 						<label class="col-md-3 control-label">Status Pernikahan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<select name="stat_nikah" class="default-select2 form-control">
-								<option value="">...</option>
 								<option value="1">Sudah Menikah</option>
 								<option value="2">Belum Menikah</option>
 								<option value="3">Duda/Janda Meninggal</option>

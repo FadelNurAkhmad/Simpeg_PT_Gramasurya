@@ -502,6 +502,19 @@ while ($row = mysqli_fetch_array($query)) {
                     include "../../pages/superadmin/kepeg/jabatan/delete-masterjab.php";
                     break;
 
+                case 'masterunit':
+                    include "../../pages/superadmin/kepeg/jabatan/masterunit.php";
+                    break;
+                case 'form-edit-masterunit':
+                    include "../../pages/superadmin/kepeg/jabatan/form-edit-masterunit.php";
+                    break;
+                case 'edit-masterunit':
+                    include "../../pages/superadmin/kepeg/jabatan/edit-masterunit.php";
+                    break;
+                case 'delete-masterunit':
+                    include "../../pages/superadmin/kepeg/jabatan/delete-masterunit.php";
+                    break;
+
                 case 'form-master-data-hukuman':
                     include "../../pages/superadmin/kepeg/hukum/form-master-data-hukuman.php";
                     break;

@@ -24,27 +24,21 @@
 		$foto			= $_FILES['foto']['name'];
 
 		$password	= password_hash("123", PASSWORD_DEFAULT);
-		$date_reg	= date("Ymd");
-
-		// $pensiun = new DateTime($tgl_lhr);
-		// $pensiun->modify('+58 year');
-		// $pensiun->format('Y-m-d');
-		// $tgl_pensiun=$pensiun->format('Y-m-d');
 
 		include "../../config/koneksi.php";
-		$cekpin	= mysqli_num_rows(mysqli_query($koneksi, "SELECT pegawai_pin FROM pegawai WHERE pegawai_pin='$_POST[pin]'"));
-		$ceknip	= mysqli_num_rows(mysqli_query($koneksi, "SELECT pegawai_nip FROM pegawai WHERE pegawai_nip='$_POST[nip]'"));
+		$cekpin	= mysqli_num_rows(mysqli_query($koneksi, "SELECT pegawai_pin FROM pegawai WHERE pegawai_pin='$_POST[pegawai_pin]'"));
+		$ceknip	= mysqli_num_rows(mysqli_query($koneksi, "SELECT pegawai_nip FROM pegawai WHERE pegawai_nip='$_POST[pegawai_nip]'"));
 
 		if (empty($_POST['pegawai_pin']) || empty($_POST['pegawai_nip']) || empty($_POST['pegawai_nama']) || empty($_POST['tempat_lahir']) || empty($_POST['tgl_lahir']) || empty($_POST['tgl_mulai_kerja']) || empty($_POST['tgl_masuk_pertama']) || empty($_POST['agama']) || empty($_POST['gender']) || empty($_POST['gol_darah']) || empty($_POST['stat_nikah'])) {
 			$_SESSION['pesan'] = "Oops! Please fill all column ...";
 			header("location:index.php?page=form-master-data-pegawai");
 		} else if ($ceknip > 0 || $cekpin > 0) {
-			$_SESSION['pesan'] = "Oops! Duplikat data ...";
+			$_SESSION['pesan'] = "Oops! NIP atau PIN telah terpakai ...";
 			header("location:index.php?page=form-master-data-pegawai");
 		} else {
 
 			$pegawai_d = mysqli_query($koneksi, "INSERT INTO pegawai_d (pegawai_id, gol_darah, stat_nikah, alamat, agama) VALUES ('$id_peg', '$gol_darah', '$status_nikah', '$alamat', '$agama')");
-			$tb_pegawai = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id, email, foto, sisa_cuti) VALUES ('$id_peg', '$email', '$foto', '$sisa_cuti')");
+			$tb_pegawai = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id, email, foto) VALUES ('$id_peg', '$email', '$foto')");
 
 			if ($pegawai_status == 1) {
 				$query = "INSERT INTO pegawai (pegawai_id, pegawai_pin, pegawai_nip, pegawai_nama, pegawai_alias, pegawai_telp, pegawai_status, tempat_lahir, tgl_lahir, tgl_mulai_kerja, gender, tgl_masuk_pertama) 

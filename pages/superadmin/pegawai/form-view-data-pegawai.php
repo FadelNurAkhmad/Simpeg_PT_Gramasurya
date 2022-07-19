@@ -64,6 +64,7 @@ $tampilResign	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pega
 								<th>NIP</th>
 								<th>Jenis Kelamin</th>
 								<th>TTL</th>
+								<th>Unit</th>
 								<th>Jabatan</th>
 								<th width="10%">Action</th>
 							</tr>
@@ -88,6 +89,19 @@ $tampilResign	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pega
 										?>
 									</td>
 									<td><?php echo (empty($peg['tempat_lahir'])) ? "" : $peg['tempat_lahir'] . "," ?> <?php echo $peg['tgl_lahir'] ?></td>
+									<td><?php
+										// $tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]' AND status_jab='Aktif'");
+										$tampilUnit = mysqli_query($koneksi, "SELECT * FROM pembagian2 WHERE pembagian2_id = '$peg[pembagian2_id]'");
+										$unit    = mysqli_fetch_array($tampilUnit);
+
+										if (isset($unit)) {
+											// echo $jab['jabatan'];
+											echo $unit['pembagian2_nama'];
+										} else {
+											echo "";
+										}
+										?>
+									</td>
 									<td><?php
 										// $tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]' AND status_jab='Aktif'");
 										$tampilJab = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id = '$peg[pembagian1_id]'");

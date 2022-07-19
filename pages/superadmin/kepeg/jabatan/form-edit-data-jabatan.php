@@ -43,12 +43,26 @@ if (isset($_GET['id_jab'])) {
 			<div class="panel-body">
 				<form action="index.php?page=edit-data-jabatan&id_jab=<?= $id_jab ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
+						<label class="col-md-3 control-label">Unit<span aria-required="true" class="text-danger"> * </span></label>
+						<div class="col-md-6">
+							<?php
+							$dataJ = mysqli_query($koneksi, "SELECT * FROM pembagian2 ORDER BY pembagian2_nama");
+							echo '<select name="unit" class="default-select2 form-control">';
+							// echo '<option value="' . $data['unit'] . '">' . $data['unit'] . '</option>';
+							while ($rowj = mysqli_fetch_array($dataJ, MYSQLI_ASSOC)) {
+								echo '<option value="' . $rowj['pembagian2_nama'] . '">' . $rowj['pembagian2_nama'] . '</option>';
+							}
+							echo '</select>';
+							?>
+						</div>
+					</div>
+					<div class="form-group">
 						<label class="col-md-3 control-label">Jabatan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<?php
 							$dataJ = mysqli_query($koneksi, "SELECT * FROM pembagian1 ORDER BY pembagian1_nama");
 							echo '<select name="jabatan" class="default-select2 form-control">';
-							echo '<option value="' . $data['jabatan'] . '">...</option>';
+							// echo '<option value="' . $data['jabatan'] . '">...</option>';
 							while ($rowj = mysqli_fetch_array($dataJ, MYSQLI_ASSOC)) {
 								echo '<option value="' . $rowj['pembagian1_nama'] . '">' . $rowj['pembagian1_nama'] . '</option>';
 							}
