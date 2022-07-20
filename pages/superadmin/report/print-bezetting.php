@@ -28,7 +28,7 @@ $pdf = new MYPDF('P', 'mm', 'Legal', true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Andi Hatmoko');
+$pdf->SetAuthor('ActionTeamSPI');
 $pdf->SetTitle('Report');
 $pdf->SetSubject('TCPDF');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
@@ -71,6 +71,7 @@ $kep	= mysqli_fetch_array($kepala);
 
 $namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$kep[pimpinan]'");
 $nama		= mysqli_fetch_array($namakepala);
+
 
 $header = '<p align="center"><font size="12"><b>DAFTAR BEZETTING</b></font><br />
 			<font size="9" style="text-transform:uppercase">' . $kep['nama_peru'] . ' PERIODE BULAN ' . date('m') . ' TAHUN ' . date('Y') . '<font></p>';
@@ -156,7 +157,6 @@ $html .= '<table cellpadding="1" border="0" align="center">
 				<td></td>
 				<td align="center"><font size="9"><b>' . $nama['pegawai_nama'] . '</b></font></td>
 			</tr>
-			
 			<tr>
 				<td></td>
 				<td></td>
