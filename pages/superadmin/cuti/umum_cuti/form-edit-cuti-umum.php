@@ -75,21 +75,24 @@ if (isset($_GET['id_cuti_umum'])) {
                         <label class="col-md-3 control-label">Tanggal Pelaksanaan<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
-                                <input type="text" name="tanggal_mulai" value="<?= $data['tanggal_mulai'] ?>" placeholder="Dari" class="form-control" />
+                                <input type="text" id="tanggal_mulai" name="tanggal_mulai" value="<?= $data['tanggal_mulai'] ?>" placeholder="Dari" class="form-control" />
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past4" data-date-format="yyyy-mm-dd">
-                                <input type="text" name="tanggal_selesai" value="<?= $data['tanggal_selesai'] ?>" placeholder="Sampai" class="form-control" />
+                                <input type="text" id="tanggal_selesai" name="tanggal_selesai" value="<?= $data['tanggal_selesai'] ?>" placeholder="Sampai" class="form-control" />
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
+                        <label class="col-md-3">
+                            <a type="button" value="hitung" id="hitung" class="btn btn-danger"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Hitung Hari</a>&nbsp;
+                        </label>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Lama Izin<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-6">
-                            <input type="text" name="lama_cuti" value="<?= $data['lama_cuti'] ?>" class="form-control" />
+                            <input type="text" id="lama_cuti" name="lama_cuti" value="<?= $data['lama_cuti'] ?>" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -127,4 +130,32 @@ if (isset($_GET['id_cuti_umum'])) {
     setTimeout(function() {
         $(".pesan").fadeOut('slow');
     }, 7000);
+</script>
+
+<script>
+    function getHitungHari(tanggal_mulai, tanggal_selesai) {
+        var elapsed, daysBeforeFirstSaturday, daysAfterLastSunday;
+        var ifThen = function(a, b, c) {
+            return a == b ? c : a;
+        };
+
+        elapsed = tanggal_selesai - tanggal_mulai;
+        elapsed /= 86400000;
+
+        daysBeforeFirstSunday = (7 - tanggal_mulai.getDay()) % 7;
+        daysAfterLastSunday = tanggal_selesai.getDay();
+
+        elapsed -= (daysBeforeFirstSunday + daysAfterLastSunday);
+        elapsed = (elapsed / 7) * 5;
+        elapsed += ifThen(daysBeforeFirstSunday - 1, -1, 0) + ifThen(daysAfterLastSunday, 6, 5);
+
+        return Math.ceil(elapsed);
+    }
+
+    $("#hitung").on("click", function() {
+        let mulai = document.querySelector('#tanggal_mulai').value,
+            selesai = document.querySelector('#tanggal_selesai').value,
+            hasil = getHitungHari(new Date(mulai), new Date(selesai));
+        document.querySelector('#lama_cuti').value = hasil;
+    })
 </script>

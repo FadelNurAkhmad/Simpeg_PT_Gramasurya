@@ -129,7 +129,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                                 <label class="col-md-3 control-label">Gaji Pokok</label>
                                 <div class="col-md-6">
                                     <div class="form-inline">
-                                        Rp. <input class="form-control number-separator" type="text" name="gaji_pokok" id="gaji_pokok" value="0" data-parsley-required="true" />
+                                        Rp. <input class="form-control number-separator" type="text" name="gaji_pokok" id="gaji_pokok" value="0" data-parsley-required="true" required />
                                     </div>
                                 </div>
                             </div>
@@ -377,7 +377,7 @@ $id_gaji_konfig   = kdauto("tb_gaji_konfigurasi", "");
                             <div class="form-group col-md-12">
                                 <label class="col-md-3 control-label"></label>
                                 <div class="col-md-6 ">
-                                    <a type="button" value="hitung" id="hitung" class="btn btn-danger btn-block"><i class="fa fa-calculator"></i>&nbsp;Hitung</a>&nbsp;
+                                    <a type="button" value="hitung" id="hitung" class="btn btn-danger btn-block"><i class="fa fa-calculator"></i>&nbsp;&nbsp;Hitung</a>&nbsp;
                                 </div>
                             </div>
                         </div>

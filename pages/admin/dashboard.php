@@ -98,7 +98,6 @@ $jtug    = mysqli_num_rows($jmltug);
     <!-- end col-3 -->
 </div>
 <!-- end row -->
-
 <div class="row">
     <!-- begin col-12 -->
     <div class="col-md-12">
@@ -110,15 +109,16 @@ $jtug    = mysqli_num_rows($jmltug);
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title"><i class="ion-stats-bars fa-lg text-warning"></i> &nbsp;Statistik Jabatan</h4>
+                <h4 class="panel-title"><i class="ion-stats-bars fa-lg text-warning"></i> &nbsp;Statistik Unit Kerja</h4>
             </div>
             <div class="panel-body">
-                <div id="container" class="height-sm"></div>
+                <div id="container2" class="height-sm"></div>
             </div>
         </div>
     </div>
     <!-- end col-12 -->
 </div>
+
 
 <div class="row">
     <!-- begin col-6 -->
@@ -151,7 +151,7 @@ $jtug    = mysqli_num_rows($jmltug);
                                 $koneksi,
                                 "SELECT tb_cuti_tahunan.id_cuti, tb_cuti_tahunan.id_peg, tb_cuti_tahunan.tanggal_cuti, tb_cuti_tahunan.tanggal_mulai, tb_cuti_tahunan.tanggal_selesai, tb_cuti_tahunan.lama_cuti, tb_cuti_tahunan.jumlah_cuti, tb_cuti_tahunan.jenis_cuti, tb_cuti_tahunan.keperluan, tb_cuti_tahunan.status, pegawai.pegawai_nip, pegawai.pegawai_nama
     							FROM tb_cuti_tahunan
-    							INNER JOIN pegawai ON tb_cuti_tahunan.id_peg=pegawai.pegawai_id ORDER BY id_cuti DESC LIMIT 6"
+    							INNER JOIN pegawai ON tb_cuti_tahunan.id_peg=pegawai.pegawai_id ORDER BY tanggal_cuti DESC LIMIT 6"
                             );
                             while ($cuti    = mysqli_fetch_array($tampilCuti)) {
                             ?>
@@ -206,7 +206,7 @@ $jtug    = mysqli_num_rows($jmltug);
                                 $koneksi,
                                 "SELECT tb_cuti_umum.id_cuti_umum, tb_cuti_umum.id_peg, tb_cuti_umum.tanggal_cuti, tb_cuti_umum.tanggal_mulai, tb_cuti_umum.tanggal_selesai, tb_cuti_umum.lama_cuti, tb_cuti_umum.jumlah_cuti, tb_cuti_umum.jenis_cuti, tb_cuti_umum.keperluan, tb_cuti_umum.status, pegawai.pegawai_nip, pegawai.pegawai_nama
 								FROM tb_cuti_umum
-								INNER JOIN pegawai ON tb_cuti_umum.id_peg=pegawai.pegawai_id ORDER BY id_cuti_umum DESC LIMIT 6"
+								INNER JOIN pegawai ON tb_cuti_umum.id_peg=pegawai.pegawai_id ORDER BY tanggal_cuti DESC LIMIT 6"
                             );
                             while ($izin    = mysqli_fetch_array($tampilCutiUmum)) {
                             ?>
@@ -252,8 +252,44 @@ $jtug    = mysqli_num_rows($jmltug);
                 <div id="container1" class="height-sm"></div>
             </div>
         </div>
+        <div class="panel panel-inverse" data-sortable-id="index-1">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title"><i class="ion-stats-bars fa-lg text-warning"></i> &nbsp;Statistik Jenis Izin</h4>
+            </div>
+            <div class="panel-body">
+                <div id="container3" class="height-sm"></div>
+            </div>
+        </div>
     </div>
     <!-- end col-6 -->
+
+</div>
+
+<div class="row">
+    <!-- begin col-12 -->
+    <div class="col-md-12">
+        <div class="panel panel-inverse" data-sortable-id="index-1">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title"><i class="ion-stats-bars fa-lg text-warning"></i> &nbsp;Statistik Jabatan</h4>
+            </div>
+            <div class="panel-body">
+                <div id="container" class="height-sm"></div>
+            </div>
+        </div>
+    </div>
+    <!-- end col-12 -->
 </div>
 
 <script src="../../assets/js/highcharts.js" type="text/javascript"></script>
@@ -332,6 +368,90 @@ $jtug    = mysqli_num_rows($jmltug);
                     $data = mysqli_num_rows($query_jumlah);
                 ?> {
                         name: '<?php echo $sek; ?>',
+                        data: [<?php echo $data; ?>]
+                    },
+                <?php
+
+                }
+                ?>
+            ]
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    var chart1; // globally available
+    $(document).ready(function() {
+        chart1 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container2',
+                type: 'column'
+            },
+            title: {
+                text: 'Statistik Unit Kerja'
+            },
+            xAxis: {
+                categories: ['Unit']
+            },
+            yAxis: {
+                title: {
+                    text: 'Jumlah'
+                }
+            },
+            series: [
+                <?php
+                $sql   = "SELECT * FROM pembagian2 GROUP BY pembagian2_nama ORDER BY pembagian2_nama DESC";
+                $query = mysqli_query($koneksi, $sql)  or die(mysqli_error($koneksi));
+                while ($ret = mysqli_fetch_array($query)) {
+                    $unit = $ret['pembagian2_nama'];
+
+                    $sql_jumlah   = "SELECT * FROM tb_jabatan WHERE status_jab='Aktif' AND unit='$unit'";
+                    $query_jumlah = mysqli_query($koneksi, $sql_jumlah) or die(mysqli_error($koneksi));
+                    $data = mysqli_num_rows($query_jumlah);
+                ?> {
+                        name: '<?php echo $unit; ?>',
+                        data: [<?php echo $data; ?>]
+                    },
+                <?php
+
+                }
+                ?>
+            ]
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    var chart1; // globally available
+    $(document).ready(function() {
+        chart1 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container3',
+                type: 'column'
+            },
+            title: {
+                text: 'Statistik Jenis Izin'
+            },
+            xAxis: {
+                categories: ['Jenis Izin']
+            },
+            yAxis: {
+                title: {
+                    text: 'Jumlah'
+                }
+            },
+            series: [
+                <?php
+                $sql   = "SELECT * FROM tb_jenis_cuti GROUP BY jenis ORDER BY jenis DESC";
+                $query = mysqli_query($koneksi, $sql)  or die(mysqli_error($koneksi));
+                while ($ret = mysqli_fetch_array($query)) {
+                    $jenis = $ret['jenis'];
+
+                    $sql_jumlah   = "SELECT * FROM tb_cuti_umum WHERE jenis_cuti='$jenis'";
+                    $query_jumlah = mysqli_query($koneksi, $sql_jumlah) or die(mysqli_error($koneksi));
+                    $data = mysqli_num_rows($query_jumlah);
+                ?> {
+                        name: '<?php echo $jenis; ?>',
                         data: [<?php echo $data; ?>]
                     },
                 <?php

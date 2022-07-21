@@ -259,7 +259,6 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 
 			<!-- tab suami istri -->
 			<div class="tab-pane fade" id="si">
-				<a type="button" class="btn btn-sm btn-warning m-b-10" data-toggle="modal" data-target="#suamiistri"><i class="fa fa-plus-circle"></i> Add Riwayat Suami / Istri&nbsp;</a>
 				<div class="table-responsive">
 					<table class="table table-bordered table-striped">
 						<thead>
@@ -316,56 +315,6 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 				</div>
 			</div>
 			<!-- end tab suami istri -->
-			<!-- modal suami istri -->
-			<div id="suamiistri" class="modal fade">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h4 class="modal-title">
-								<i class="ion-ios-gear text-danger"></i>
-								Riwayat Suami / Istri
-							</h4>
-						</div>
-						<div class="col-sm-12">
-							<div class="modal-body">
-								<form action="index.php?page=masterdok&pegawai_id=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
-									<div class="form-group">
-										<label class="col-md-3 control-label">Nama Dokumen</label>
-										<div class="col-md-6">
-											<input type="text" name="dokumen" maxlength="128" class="form-control" />
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-md-3 control-label">File</label>
-										<div class="col-md-6">
-											<input type="file" name="file" maxlength="255" class="form-control" />
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-md-3 control-label"></label>
-										<div class="col-md-6">
-											<p>* Max size 5 MB</p>
-											<p>* Format PDF</p>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-md-3 control-label"></label>
-										<div class="col-md-6">
-											<button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>&nbsp;
-											<a type="button" class="btn btn-default active" data-dismiss="modal" aria-hidden="true"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-						<div class="modal-footer no-margin-top">
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end modal suami istri -->
-
 
 			<div class="tab-pane fade" id="anak">
 				<div class="table-responsive">
