@@ -274,6 +274,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'import-pegawai':
 					include "../../pages/admin/pegawai/import-pegawai.php";
 					break;
+				case 'export-pegawai':
+					include "../../pages/admin/pegawai/export-pegawai.php";
+					break;
 
 				case 'form-master-data-si':
 					include "../../pages/admin/keluarga/si/form-master-data-si.php";
@@ -289,6 +292,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					break;
 				case 'delete-data-si':
 					include "../../pages/admin/keluarga/si/delete-data-si.php";
+					break;
+				case 'master-si':
+					include "../../pages/admin/keluarga/si/master-si.php";
 					break;
 
 				case 'form-master-data-anak':
@@ -306,6 +312,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'delete-data-anak':
 					include "../../pages/admin/keluarga/anak/delete-data-anak.php";
 					break;
+				case 'master-anak':
+					include "../../pages/admin/keluarga/anak/master-anak.php";
+					break;
 
 				case 'form-master-data-ortu':
 					include "../../pages/admin/keluarga/ortu/form-master-data-ortu.php";
@@ -321,6 +330,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					break;
 				case 'delete-data-ortu':
 					include "../../pages/admin/keluarga/ortu/delete-data-ortu.php";
+					break;
+				case 'master-ortu':
+					include "../../pages/admin/keluarga/ortu/master-ortu.php";
 					break;
 
 				case 'form-master-data-sekolah':
@@ -341,6 +353,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'set-pendidikan-akhir':
 					include "../../pages/admin/pendidikan/sekolah/set-pendidikan-akhir.php";
 					break;
+				case 'master-sekolah':
+					include "../../pages/admin/pendidikan/sekolah/master-sekolah.php";
+					break;
 
 				case 'form-master-data-bahasa':
 					include "../../pages/admin/pendidikan/bahasa/form-master-data-bahasa.php";
@@ -356,6 +371,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					break;
 				case 'delete-data-bahasa':
 					include "../../pages/admin/pendidikan/bahasa/delete-data-bahasa.php";
+					break;
+				case 'master-bahasa':
+					include "../../pages/admin/pendidikan/bahasa/master-bahasa.php";
 					break;
 
 				case 'form-master-data-jabatan':

@@ -1,21 +1,19 @@
 <div class="row">
     <?php
-    ob_start();
     if (isset($_GET['pegawai_id'])) {
         $id_peg = $_GET['pegawai_id'];
     } else {
         die("Error. No ID Selected! ");
     }
 
-
     if ($_POST['save'] == "save") {
-        $nik            = $_POST['nik'];
-        $nama            = $_POST['nama'];
-        $tmp_lhr        = $_POST['tmp_lhr'];
-        $tgl_lhr        = $_POST['tgl_lhr'];
-        $pendidikan        = $_POST['pendidikan'];
-        $pekerjaan        = $_POST['pekerjaan'];
-        $status_hub        = $_POST['status_hub'];
+        $tingkat        = $_POST['tingkat'];
+        $nama_sekolah    = $_POST['nama_sekolah'];
+        $lokasi            = $_POST['lokasi'];
+        $jurusan        = $_POST['jurusan'];
+        $no_ijazah        = $_POST['no_ijazah'];
+        $tgl_ijazah        = $_POST['tgl_ijazah'];
+        $kepala            = $_POST['kepala'];
 
         function kdauto($tabel, $inisial)
         {
@@ -40,26 +38,19 @@
             }
             return $inisial . $tmp . $angka;
         }
-        $id_suamiistri        = kdauto("tb_suamiistri", "");
-
-        $date_reg    = date("Ymd");
+        $id_sekolah    = kdauto("tb_sekolah", "");
 
         include "../../config/koneksi.php";
-        $ceknik    = mysqli_num_rows(mysqli_query($koneksi, "SELECT nik FROM tb_suamiistri WHERE nik='$_POST[nik]'"));
-        $ceksi    = mysqli_num_rows(mysqli_query($koneksi, "SELECT status_hub FROM tb_suamiistri WHERE id_peg='$_POST[id_peg]' AND (status_hub='Suami' OR status_hub='Istri')"));
 
-        if (empty($id_peg) || empty($_POST['nik']) || empty($_POST['nama']) || empty($_POST['tmp_lhr']) || empty($_POST['tgl_lhr']) || empty($_POST['pendidikan']) || empty($_POST['pekerjaan']) || empty($_POST['status_hub'])) {
+        if (empty($id_peg) || empty($_POST['tingkat']) || empty($_POST['nama_sekolah']) || empty($_POST['lokasi']) || empty($_POST['no_ijazah']) || empty($_POST['tgl_ijazah']) || empty($_POST['kepala'])) {
             $_SESSION['pesan'] = "Oops! Please fill all column ...";
             header("location:index.php?page=detail-data-pegawai&pegawai_id=$id_peg");
-        } else if ($ceknik > 0 || $ceksi > 0) {
-            $_SESSION['pesan'] = "Oops! Duplikat data ...";
-            header("location:index.php?page=detail-data-pegawai&pegawai_id=$id_peg");
         } else {
-            $insert = "INSERT INTO tb_suamiistri (id_si, id_peg, nik, nama, tmp_lhr, tgl_lhr, pendidikan, pekerjaan, status_hub, date_reg) VALUES ('$id_suamiistri', '$id_peg', '$nik', '$nama', '$tmp_lhr', '$tgl_lhr', '$pendidikan', '$pekerjaan', '$status_hub', '$date_reg')";
+            $insert = "INSERT INTO tb_sekolah (id_sekolah, id_peg, tingkat, nama_sekolah, lokasi, jurusan, no_ijazah, tgl_ijazah, kepala) VALUES ('$id_sekolah', '$id_peg', '$tingkat', '$nama_sekolah', '$lokasi', '$jurusan', '$no_ijazah', '$tgl_ijazah', '$kepala')";
             $query = mysqli_query($koneksi, $insert);
 
             if ($query) {
-                $_SESSION['pesan'] = "Good! Insert data suami / istri success ...";
+                $_SESSION['pesan'] = "Good! Insert data sekolah success ...";
                 header("location:index.php?page=detail-data-pegawai&pegawai_id=$id_peg");
             } else {
                 echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";

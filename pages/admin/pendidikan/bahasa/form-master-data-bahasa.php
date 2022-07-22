@@ -72,7 +72,7 @@ $id_bhs	= kdauto("tb_bahasa", "");
 					<div class="form-group">
 						<label class="col-md-3 control-label">Jenis Bahasa<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
-							<input type="text" name="jns_bhs" maxlength="32" value="<?= $data['jns_bhs'] ?>" class="form-control" />
+							<input type="text" name="jns_bhs" maxlength="32" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">

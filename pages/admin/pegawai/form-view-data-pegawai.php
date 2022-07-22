@@ -1,11 +1,6 @@
 <?php
 
 include "../../config/koneksi.php";
-require '../../assets/plugins/phpspreadsheet/vendor/autoload.php';
-
-require 'pegawai/export-pegawai.php';
-
-
 
 ?>
 <!-- begin breadcrumb -->
@@ -19,7 +14,7 @@ require 'pegawai/export-pegawai.php';
 		?>
 	</li>
 	<li><a type="button" data-toggle="modal" data-target="#import" class=" btn btn-sm btn-warning m-b-10" title="Import From Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Import</a></li>
-	<li><a href="<?php echo $file; ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
+	<li><a href="index.php?page=export-pegawai" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
 	<li><a href="index.php?page=form-master-data-pegawai" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Add Pegawai</a></li>
 </ol>
 
@@ -156,6 +151,7 @@ $tampilResign	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pega
 						<thead>
 							<tr>
 								<th width="4%">No</th>
+								<th>PIN</th>
 								<th>Nama</th>
 								<th>NIP</th>
 								<th>Jenis Kelamin</th>
@@ -169,10 +165,13 @@ $tampilResign	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pega
 							<?php
 							$no = 0;
 							while ($peg	= mysqli_fetch_array($tampilPeg)) {
-								$no++
+								$no++;
+								$tgl_lahir = new DateTime($peg['tgl_lahir']);
+
 							?>
 								<tr>
 									<td><?php echo $no ?></td>
+									<td><?php echo $peg['pegawai_pin'] ?></td>
 									<td><?php echo $peg['pegawai_nama'] ?></td>
 									<td><a href="index.php?page=detail-data-pegawai&pegawai_id=<?= $peg['pegawai_id'] ?>" title="detail"><?php echo $peg['pegawai_nip']; ?></a></td>
 									<td>
@@ -184,7 +183,7 @@ $tampilResign	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pega
 										}
 										?>
 									</td>
-									<td><?php echo (empty($peg['tempat_lahir'])) ? "" : $peg['tempat_lahir'] . "," ?> <?php echo $peg['tgl_lahir'] ?></td>
+									<td><?php echo (empty($peg['tempat_lahir'])) ? "" : $peg['tempat_lahir'] . "," ?> <?php echo $tgl_lahir->format("d F Y") ?></td>
 									<td><?php
 										// $tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]' AND status_jab='Aktif'");
 										$tampilUnit = mysqli_query($koneksi, "SELECT * FROM pembagian2 WHERE pembagian2_id = '$peg[pembagian2_id]'");
@@ -254,6 +253,7 @@ $tampilResign	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pega
 						<thead>
 							<tr>
 								<th width="4%">No</th>
+								<th>PIN</th>
 								<th>Nama</th>
 								<th>NIP</th>
 								<th>Jenis Kelamin</th>
@@ -269,10 +269,12 @@ $tampilResign	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pega
 							<?php
 							$no = 0;
 							while ($resign	= mysqli_fetch_array($tampilResign)) {
-								$no++
+								$no++;
+								$tgl_lahir2 = new DateTime($resign['tgl_lahir']);
 							?>
 								<tr>
 									<td><?php echo $no ?></td>
+									<td><?php echo $resign['pegawai_pin'] ?></td>
 									<td><?php echo $resign['pegawai_nama'] ?></td>
 									<td><a href="index.php?page=detail-data-pegawai&pegawai_id=<?= $resign['pegawai_id'] ?>" title="detail"><?php echo $resign['pegawai_nip']; ?></a></td>
 									<td>
@@ -284,7 +286,7 @@ $tampilResign	= mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pega
 										}
 										?>
 									</td>
-									<td><?php echo (empty($resign['tempat_lahir'])) ? "" : $resign['tempat_lahir'] . "," ?> <?php echo $resign['tgl_lahir'] ?></td>
+									<td><?php echo (empty($resign['tempat_lahir'])) ? "" : $resign['tempat_lahir'] . "," ?> <?php echo $tgl_lahir2->format("d F Y") ?></td>
 									<td><?php
 										// $tampilJab   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]' AND status_jab='Aktif'");
 										$tampilUnit2 = mysqli_query($koneksi, "SELECT * FROM pembagian2 WHERE pembagian2_id = '$resign[pembagian2_id]'");

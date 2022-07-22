@@ -1,12 +1,10 @@
 <div class="row">
     <?php
-    ob_start();
     if (isset($_GET['pegawai_id'])) {
         $id_peg = $_GET['pegawai_id'];
     } else {
         die("Error. No ID Selected! ");
     }
-
 
     if ($_POST['save'] == "save") {
         $nik            = $_POST['nik'];
@@ -40,26 +38,26 @@
             }
             return $inisial . $tmp . $angka;
         }
-        $id_suamiistri        = kdauto("tb_suamiistri", "");
+        $id_ortu        = kdauto("tb_ortu", "");
 
         $date_reg    = date("Ymd");
 
         include "../../config/koneksi.php";
-        $ceknik    = mysqli_num_rows(mysqli_query($koneksi, "SELECT nik FROM tb_suamiistri WHERE nik='$_POST[nik]'"));
-        $ceksi    = mysqli_num_rows(mysqli_query($koneksi, "SELECT status_hub FROM tb_suamiistri WHERE id_peg='$_POST[id_peg]' AND (status_hub='Suami' OR status_hub='Istri')"));
+        $ceknik    = mysqli_num_rows(mysqli_query($koneksi, "SELECT nik FROM tb_ortu WHERE nik='$_POST[nik]'"));
+        $cekortu    = mysqli_num_rows(mysqli_query($koneksi, "SELECT status_hub FROM tb_ortu WHERE (id_peg='$_POST[id_peg]' AND status_hub='$_POST[status_hub]')"));
 
         if (empty($id_peg) || empty($_POST['nik']) || empty($_POST['nama']) || empty($_POST['tmp_lhr']) || empty($_POST['tgl_lhr']) || empty($_POST['pendidikan']) || empty($_POST['pekerjaan']) || empty($_POST['status_hub'])) {
             $_SESSION['pesan'] = "Oops! Please fill all column ...";
             header("location:index.php?page=detail-data-pegawai&pegawai_id=$id_peg");
-        } else if ($ceknik > 0 || $ceksi > 0) {
+        } else if ($ceknik > 0 || $cekortu > 0) {
             $_SESSION['pesan'] = "Oops! Duplikat data ...";
             header("location:index.php?page=detail-data-pegawai&pegawai_id=$id_peg");
         } else {
-            $insert = "INSERT INTO tb_suamiistri (id_si, id_peg, nik, nama, tmp_lhr, tgl_lhr, pendidikan, pekerjaan, status_hub, date_reg) VALUES ('$id_suamiistri', '$id_peg', '$nik', '$nama', '$tmp_lhr', '$tgl_lhr', '$pendidikan', '$pekerjaan', '$status_hub', '$date_reg')";
+            $insert = "INSERT INTO tb_ortu (id_ortu, id_peg, nik, nama, tmp_lhr, tgl_lhr, pendidikan, pekerjaan, status_hub, date_reg) VALUES ('$id_ortu', '$id_peg', '$nik', '$nama', '$tmp_lhr', '$tgl_lhr', '$pendidikan', '$pekerjaan', '$status_hub', '$date_reg')";
             $query = mysqli_query($koneksi, $insert);
 
             if ($query) {
-                $_SESSION['pesan'] = "Good! Insert data suami / istri success ...";
+                $_SESSION['pesan'] = "Good! Insert data orang tua success ...";
                 header("location:index.php?page=detail-data-pegawai&pegawai_id=$id_peg");
             } else {
                 echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";

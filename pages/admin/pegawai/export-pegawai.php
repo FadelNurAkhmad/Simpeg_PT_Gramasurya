@@ -1,6 +1,9 @@
 <?php
 $filename	= "Daftar Pegawai";
 
+include "../../config/koneksi.php";
+require '../../assets/plugins/phpspreadsheet/vendor/autoload.php';
+
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -121,3 +124,5 @@ while ($peg	= mysqli_fetch_array($expPeg)) {
 $writer = new Xlsx($spreadsheet);
 $file	= "../../assets/excel/$filename.xlsx";
 $writer->save("$file");
+
+header("location:$file");

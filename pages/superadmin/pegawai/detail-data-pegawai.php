@@ -259,6 +259,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 
 			<!-- tab suami istri -->
 			<div class="tab-pane fade" id="si">
+				<a type="button" class="btn btn-sm btn-warning m-b-10" data-toggle="modal" data-target="#suamiistri"><i class="fa fa-plus-circle"></i> Add Suami / Istri&nbsp;</a>
 				<div class="table-responsive">
 					<table class="table table-bordered table-striped">
 						<thead>
@@ -391,7 +392,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 										<label class="col-md-3 control-label"></label>
 										<div class="col-md-6">
 											<button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>&nbsp;
-											<a type="button" class="btn btn-default active" href="./"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+											<a type="button" class="btn btn-default active" data-dismiss="modal" aria-hidden="true"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
 										</div>
 									</div>
 								</form>
@@ -404,8 +405,9 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 			</div>
 			<!-- end modal suami istri -->
 
-
+			<!-- tab anak -->
 			<div class="tab-pane fade" id="anak">
+				<a type="button" class="btn btn-sm btn-warning m-b-10" data-toggle="modal" data-target="#tambahanak"><i class="fa fa-plus-circle"></i> Add Anak&nbsp;</a>
 				<div class="table-responsive">
 					<table class="table table-bordered table-striped">
 						<thead>
@@ -463,7 +465,109 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 					</table>
 				</div>
 			</div>
+			<!-- end tab anak -->
+			<!-- modal anak -->
+			<div id="tambahanak" class="modal fade">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">
+								<i class="ion-ios-gear text-danger"></i>
+								Riwayat Anak
+							</h4>
+						</div>
+						<div class="col-sm-12">
+							<div class="modal-body">
+								<form action="index.php?page=master-anak&pegawai_id=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+									<div class="form-group">
+										<label class="col-md-3 control-label">NIK<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<input type="text" name="nik" maxlength="16" class="form-control" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Nama<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<input type="text" name="nama" maxlength="64" class="form-control" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Tempat, Tanggal Lahir<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-3">
+											<input type="text" name="tmp_lhr" maxlength="64" class="form-control" />
+										</div>
+										<div class="col-md-3">
+											<div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
+												<input type="text" name="tgl_lhr" class="form-control" />
+												<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Jenis Kelamin<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<select name="jk" class="default-select2 form-control">
+												<option value="">...</option>
+												<option value="Laki-laki">Laki-laki</option>
+												<option value="Perempuan">Perempuan</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Pendidikan</label>
+										<div class="col-md-6">
+											<select name="pendidikan" class="default-select2 form-control">
+												<option value="">...</option>
+												<option value="SD">SD</option>
+												<option value="SMP">SMP</option>
+												<option value="SMA">SMA</option>
+												<option value="DI">DI</option>
+												<option value="DII">DII</option>
+												<option value="DIII">DIII</option>
+												<option value="DIV">DIV</option>
+												<option value="S1">S1</option>
+												<option value="S2">S2</option>
+												<option value="S3">S3</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Pekerjaan</label>
+										<div class="col-md-6">
+											<input type="text" name="pekerjaan" maxlength="32" class="form-control" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Status Hubungan<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<select name="status_hub" class="default-select2 form-control">
+												<option value="">...</option>
+												<option value="Anak Kandung">Anak Kandung</option>
+												<option value="Anak Angkat">Anak Angkat</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label"></label>
+										<div class="col-md-6">
+											<button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>&nbsp;
+											<a type="button" class="btn btn-default active" data-dismiss="modal" aria-hidden="true"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="modal-footer no-margin-top">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end modal anak -->
+
+			<!-- tab ortu -->
 			<div class="tab-pane fade" id="ortu">
+				<a type="button" class="btn btn-sm btn-warning m-b-10" data-toggle="modal" data-target="#tambahortu"><i class="fa fa-plus-circle"></i> Add Orang Tua&nbsp;</a>
 				<div class="table-responsive">
 					<table class="table table-bordered table-striped">
 						<thead>
@@ -519,11 +623,103 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 					</table>
 				</div>
 			</div>
+			<!-- end tab ortu -->
+			<!-- modal ortu -->
+			<div id="tambahortu" class="modal fade">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">
+								<i class="ion-ios-gear text-danger"></i>
+								Riwayat Orang Tua
+							</h4>
+						</div>
+						<div class="col-sm-12">
+							<div class="modal-body">
+								<form action="index.php?page=master-ortu&pegawai_id=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+									<div class="form-group">
+										<label class="col-md-3 control-label">NIK<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<input type="text" name="nik" maxlength="16" class="form-control" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Nama<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<input type="text" name="nama" maxlength="64" class="form-control" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Tempat, Tanggal Lahir<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-3">
+											<input type="text" name="tmp_lhr" maxlength="64" class="form-control" />
+										</div>
+										<div class="col-md-3">
+											<div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
+												<input type="text" name="tgl_lhr" class="form-control" />
+												<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Pendidikan<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<select name="pendidikan" class="default-select2 form-control">
+												<option value="">...</option>
+												<option value="SD">SD</option>
+												<option value="SMP">SMP</option>
+												<option value="SMA">SMA</option>
+												<option value="DI">DI</option>
+												<option value="DII">DII</option>
+												<option value="DIII">DIII</option>
+												<option value="DIV">DIV</option>
+												<option value="S1">S1</option>
+												<option value="S2">S2</option>
+												<option value="S3">S3</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Pekerjaan<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<input type="text" name="pekerjaan" maxlength="32" class="form-control" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Status Hubungan<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<select name="status_hub" class="default-select2 form-control">
+												<option value="">...</option>
+												<option value="Ayah Kandung">Ayah Kandung</option>
+												<option value="Ibu Kandung">Ibu Kandung</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label"></label>
+										<div class="col-md-6">
+											<button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>&nbsp;
+											<a type="button" class="btn btn-default active" data-dismiss="modal" aria-hidden="true"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="modal-footer no-margin-top">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end modal ortu -->
+
+			<!-- tab sekolah -->
 			<div class="tab-pane fade" id="sekolah">
 				<div class="alert alert-success fade in">
 					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
 					<i class="fa fa-info fa-2x pull-left"></i> Klik "Setup" untuk menentukan pendidikan terakhir pegawai ...
 				</div>
+				<a type="button" class="btn btn-sm btn-warning m-b-10" data-toggle="modal" data-target="#tambahsekolah"><i class="fa fa-plus-circle"></i> Add Sekolah&nbsp;</a>
 				<div class="table-responsive">
 					<table class="table table-bordered table-striped">
 						<thead>
@@ -606,7 +802,95 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 					</table>
 				</div>
 			</div>
+			<!-- end tab sekolah -->
+			<!-- modal sekolah -->
+			<div id="tambahsekolah" class="modal fade">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">
+								<i class="ion-ios-gear text-danger"></i>
+								Riwayat Sekolah
+							</h4>
+						</div>
+						<div class="col-sm-12">
+							<div class="modal-body">
+								<form action="index.php?page=master-sekolah&pegawai_id=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+									<div class="form-group">
+										<label class="col-md-3 control-label">Tingkat<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<select name="tingkat" class="default-select2 form-control">
+												<option value="">...</option>
+												<option value="SD">SD</option>
+												<option value="SMP">SMP</option>
+												<option value="SMA">SMA</option>
+												<option value="DI">DI</option>
+												<option value="DII">DII</option>
+												<option value="DIII">DIII</option>
+												<option value="DIV">DIV</option>
+												<option value="S1">S1</option>
+												<option value="S2">S2</option>
+												<option value="S3">S3</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Nama Sekolah / Universitas<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<input type="text" name="nama_sekolah" maxlength="64" class="form-control" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Lokasi<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<input type="text" name="lokasi" maxlength="32" class="form-control" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Jurusan</label>
+										<div class="col-md-6">
+											<input type="text" name="jurusan" maxlength="32" class="form-control" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Nomor dan Tanggal Ijazah<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-3">
+											<input type="text" name="no_ijazah" maxlength="32" class="form-control" />
+										</div>
+										<div class="col-md-3">
+											<div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
+												<input type="text" name="tgl_ijazah" class="form-control" />
+												<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Nama KepSek / Rektor<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<input type="text" name="kepala" maxlength="64" class="form-control" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label"></label>
+										<div class="col-md-6">
+											<button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>&nbsp;
+											<a type="button" class="btn btn-default active" data-dismiss="modal" aria-hidden="true"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="modal-footer no-margin-top">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end modal sekolah -->
+
+			<!-- tab bahasa -->
 			<div class="tab-pane fade" id="bahasa">
+				<a type="button" class="btn btn-sm btn-warning m-b-10" data-toggle="modal" data-target="#tambahbahasa"><i class="fa fa-plus-circle"></i> Add Bahasa&nbsp;</a>
 				<div class="table-responsive">
 					<table class="table table-bordered table-striped">
 						<thead>
@@ -656,6 +940,59 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 					</table>
 				</div>
 			</div>
+			<!-- end tab bahasa -->
+			<!-- modal bahasa -->
+			<div id="tambahbahasa" class="modal fade">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">
+								<i class="ion-ios-gear text-danger"></i>
+								Riwayat Bahasa
+							</h4>
+						</div>
+						<div class="col-sm-12">
+							<div class="modal-body">
+								<form action="index.php?page=master-bahasa&pegawai_id=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+									<div class="form-group">
+										<label class="col-md-3 control-label">Jenis Bahasa<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<input type="text" name="jns_bhs" maxlength="32" class="form-control" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Bahasa<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<input type="text" name="bahasa" maxlength="32" class="form-control" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Kemampuan Bicara<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<select name="kemampuan" class="default-select2 form-control">
+												<option value="">...</option>
+												<option value="Aktif">Aktif</option>
+												<option value="Pasif">Pasif</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label"></label>
+										<div class="col-md-6">
+											<button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>&nbsp;
+											<a type="button" class="btn btn-default active" data-dismiss="modal" aria-hidden="true"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="modal-footer no-margin-top">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end modal bahasa -->
 
 			<div class="tab-pane fade" id="kpi">
 				<div class="alert alert-success fade in">
