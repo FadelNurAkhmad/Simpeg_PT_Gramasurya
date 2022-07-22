@@ -56,7 +56,7 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
             <div class="panel-body">
                 <form action="index.php?page=master-cuti-umum&id_cuti_umum=<?= $id_cuti_umum ?>" class=" form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <?php
                             $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
@@ -70,7 +70,7 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Jenis Izin<span aria-required="true" class="text-warning"> * </span></label>
+                        <label class="col-md-3 control-label">Jenis Izin<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <?php
                             $dataJ = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY jenis");

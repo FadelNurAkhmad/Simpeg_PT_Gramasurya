@@ -324,7 +324,7 @@ $tampilCutiUmum    = mysqli_query(
                                             <div class="modal-body" align="center">
                                                 <p>Mohon periksa kembali data pengajuan izin terlampir. Pastikan semua informasi telah <span class="label label-primary">SESUAI</span> !</p>
                                                 <br>
-                                                <a href="index.php?page=status-cuti-umum&true=true&id_cuti_umum=<?= $izin['id_cuti_umum'] ?>" class="btn btn-success">&nbsp; &nbsp;SETUJU&nbsp; &nbsp;</a>
+                                                <a href="index.php?page=status-cuti-umum&true1=true1&id_cuti_umum=<?= $izin['id_cuti_umum'] ?>" class="btn btn-success">&nbsp; &nbsp;SETUJU&nbsp; &nbsp;</a>
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
@@ -342,7 +342,7 @@ $tampilCutiUmum    = mysqli_query(
                                             <div class="modal-body" align="center">
                                                 <p>Mohon periksa kembali data pengajuan izin terlampir. Pastikan semua informasi telah <span class="label label-primary">SESUAI</span> !</p>
                                                 <br>
-                                                <a href="index.php?page=status-cuti-umum&false=false&id_cuti_umum=<?= $izin['id_cuti_umum'] ?>" class="btn btn-danger">&nbsp; &nbsp;YA&nbsp; &nbsp;</a>
+                                                <a href="index.php?page=status-cuti-umum&false1=false1&id_cuti_umum=<?= $izin['id_cuti_umum'] ?>" class="btn btn-danger">&nbsp; &nbsp;YA&nbsp; &nbsp;</a>
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>

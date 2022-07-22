@@ -1,7 +1,7 @@
 <div class="row">
     <?php
     include "../../config/koneksi.php";
-    if (isset($_GET['true']) == 'true') {
+    if (isset($_GET['true1']) == 'true1') {
         $id_approval_umum = $_GET['id_approval_umum'];
 
         $query       = mysqli_query($koneksi, "SELECT * FROM tb_approval_cuti_umum WHERE id_approval_umum='$id_approval_umum'");
@@ -34,7 +34,7 @@
 
     <?php
     include "../../config/koneksi.php";
-    if (isset($_GET['false']) == 'false') {
+    if (isset($_GET['false1']) == 'false1') {
         $id_approval_umum1 = $_GET['id_approval_umum'];
 
         $query1       = mysqli_query($koneksi, "SELECT * FROM tb_approval_cuti_umum WHERE id_approval_umum='$id_approval_umum1'");
