@@ -21,6 +21,7 @@
 		$alamat			= $_POST['alamat'];
 		$telp			= $_POST['pegawai_telp'];
 		$email			= $_POST['email'];
+		$ket			= $_POST['ket'];
 		$foto			= $_FILES['foto']['name'];
 
 		$password	= password_hash("123", PASSWORD_DEFAULT);
@@ -38,7 +39,7 @@
 		} else {
 
 			$pegawai_d = mysqli_query($koneksi, "INSERT INTO pegawai_d (pegawai_id, gol_darah, stat_nikah, alamat, agama) VALUES ('$id_peg', '$gol_darah', '$status_nikah', '$alamat', '$agama')");
-			$tb_pegawai = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id, email, foto) VALUES ('$id_peg', '$email', '$foto')");
+			$tb_pegawai = mysqli_query($koneksi, "INSERT INTO tb_pegawai (pegawai_id, email, foto, ket) VALUES ('$id_peg', '$email', '$foto', '$ket')");
 
 			if ($pegawai_status == 1) {
 				$query = "INSERT INTO pegawai (pegawai_id, pegawai_pin, pegawai_nip, pegawai_nama, pegawai_alias, pegawai_telp, pegawai_status, tempat_lahir, tgl_lahir, tgl_mulai_kerja, gender, tgl_masuk_pertama) 

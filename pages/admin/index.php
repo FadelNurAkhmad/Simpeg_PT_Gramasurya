@@ -271,6 +271,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'ganti-foto':
 					include "../../pages/admin/pegawai/ganti-foto.php";
 					break;
+				case 'import-pegawai':
+					include "../../pages/admin/pegawai/import-pegawai.php";
+					break;
 
 				case 'form-master-data-si':
 					include "../../pages/admin/keluarga/si/form-master-data-si.php";

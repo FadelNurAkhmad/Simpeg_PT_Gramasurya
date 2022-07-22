@@ -131,10 +131,11 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
                                         $peg = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
                                         ?>
                                         <td><?= $cari['pin'] ?></td>
-                                        <td><?= $peg['pegawai_nip'] ?></td>
-                                        <td><?= $peg['pegawai_nama'] ?></td>
+                                        <td><?= isset($peg['pegawai_nip']) ? $peg['pegawai_nip'] : "" ?></td>
+                                        <td><?= isset($peg['pegawai_nama']) ? $peg['pegawai_nama'] : "" ?></td>
                                         <td><?php
-                                            $jabatan    = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$peg[pembagian1_id]'");
+                                            $pembagian1 = isset($peg['pembagian1_id']) ? $peg['pembagian1_id'] : 0;
+                                            $jabatan    = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$pembagian1'");
                                             $jab    = mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
                                             if (isset($jab)) {
                                                 echo $jab['pembagian1_nama'];
@@ -170,17 +171,14 @@ $tampilPeg3    = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_
                                         $tampilPeg = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_pin='$pres[pin]'");
                                         $peg = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
                                         ?>
-                                        <td><?= $pres['pin'] ?></td>
-                                        <td><?= $peg['pegawai_nip'] ?></td>
-                                        <td><?= $peg['pegawai_nama'] ?></td>
+                                        <td><?= isset($pres['pin']) ? $pres['pin'] : "" ?></td>
+                                        <td><?= isset($peg['pegawai_nip']) ? $peg['pegawai_nip'] : "" ?></td>
+                                        <td><?= isset($peg['pegawai_nama']) ? $peg['pegawai_nama'] : "" ?></td>
                                         <td><?php
-                                            $jabatan    = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$peg[pembagian1_id]'");
+                                            $pembagian1 = isset($peg['pembagian1_id']) ? $peg['pembagian1_id'] : 0;
+                                            $jabatan    = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$pembagian1'");
                                             $jab    = mysqli_fetch_array($jabatan, MYSQLI_ASSOC);
-                                            if (isset($jab)) {
-                                                echo $jab['pembagian1_nama'];
-                                            } else {
-                                                echo "";
-                                            }
+                                            echo isset($jab['pembagian1_nama']) ? $jab['pembagian1_nama'] : "";
                                             ?>
                                         </td>
                                         <td><?= $pres['sn'] ?></td>

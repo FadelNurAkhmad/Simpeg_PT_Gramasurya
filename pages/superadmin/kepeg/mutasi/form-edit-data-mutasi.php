@@ -57,14 +57,7 @@ if (isset($_GET['id_mutasi'])) {
 					<div class="form-group">
 						<label class="col-md-3 control-label">Jenis Mutasi<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
-							<select name="jns_mutasi" class="default-select2 form-control">
-								<option value="Masuk" <?php echo ($data['jns_mutasi'] == 'Masuk') ? "selected" : ""; ?>>Masuk
-								<option value="Keluar" <?php echo ($data['jns_mutasi'] == 'Keluar') ? "selected" : ""; ?>>Keluar
-								<option value="Pindah Antar Instansi" <?php echo ($data['jns_mutasi'] == 'Pindah Antar Instansi') ? "selected" : ""; ?>>Pindah Antar Instansi
-								<option value="Pensiun" <?php echo ($data['jns_mutasi'] == 'Pensiun') ? "selected" : ""; ?>>Pensiun
-								<option value="Wafat" <?php echo ($data['jns_mutasi'] == 'Wafat') ? "selected" : ""; ?>>Wafat
-								<option value="Kenaikan Pangkat" <?php echo ($data['jns_mutasi'] == 'Kenaikan Pangkat') ? "selected" : ""; ?>>Kenaikan Pangkat
-							</select>
+							<input type="text" name="jns_mutasi" value="<?= $data['jns_mutasi'] ?>" maxlength="24" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">

@@ -59,9 +59,23 @@ if (isset($_GET['id_setup_peru'])) {
 							<?php
 							$pimpinan = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_status='1'");
 							echo '<select name="pimpinan" class="default-select2 form-control">';
-							echo '<option value="' . (isset($data['pimpinan'])) ? $data['pimpinan'] : "" . '">...</option>';
 							while ($row = mysqli_fetch_array($pimpinan)) {
-								echo '<option value="' . $row['pegawai_id'] . '">' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
+								$pim = ($row['pegawai_id'] == $data['pimpinan']) ? "selected" : "";
+								echo '<option value="' . $row['pegawai_id'] . '" ' . $pim . '>' . $row['pegawai_nama'] . '_' . $row['pegawai_nip'] . '</option>';
+							}
+							echo '</select>';
+							?>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Telp/Hp Helpdesk<span aria-required="true" class="text-danger"> * </span></label>
+						<div class="col-md-6">
+							<?php
+							$helpdesk = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_status='1'");
+							echo '<select name="helpdesk" class="default-select2 form-control">';
+							while ($row2 = mysqli_fetch_array($helpdesk)) {
+								$help = ($row2['pegawai_telp'] == $data['helpdesk']) ? "selected" : "";
+								echo '<option value="' . $row2['pegawai_telp'] . '" ' . $help . '>' . $row2['pegawai_nama'] . ' - ' . $row2['pegawai_telp'] . '</option>';
 							}
 							echo '</select>';
 							?>

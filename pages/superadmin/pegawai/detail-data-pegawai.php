@@ -329,31 +329,70 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 						</div>
 						<div class="col-sm-12">
 							<div class="modal-body">
-								<form action="index.php?page=masterdok&pegawai_id=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+								<form action="index.php?page=master-si&pegawai_id=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 									<div class="form-group">
-										<label class="col-md-3 control-label">Nama Dokumen</label>
+										<label class="col-md-3 control-label">NIK<span aria-required="true" class="text-danger"> * </span></label>
 										<div class="col-md-6">
-											<input type="text" name="dokumen" maxlength="128" class="form-control" />
+											<input type="number" name="nik" maxlength="16" class="form-control" />
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-3 control-label">File</label>
+										<label class="col-md-3 control-label">Nama<span aria-required="true" class="text-danger"> * </span></label>
 										<div class="col-md-6">
-											<input type="file" name="file" maxlength="255" class="form-control" />
+											<input type="text" name="nama" maxlength="64" class="form-control" />
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-3 control-label"></label>
+										<label class="col-md-3 control-label">Tempat, Tanggal Lahir<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-3">
+											<input type="text" name="tmp_lhr" maxlength="64" class="form-control" />
+										</div>
+										<div class="col-md-3">
+											<div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
+												<input type="text" name="tgl_lhr" class="form-control" />
+												<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Pendidikan<span aria-required="true" class="text-danger"> * </span></label>
 										<div class="col-md-6">
-											<p>* Max size 5 MB</p>
-											<p>* Format PDF</p>
+											<select name="pendidikan" class="default-select2 form-control">
+												<option value="">...</option>
+												<option value="SD">SD</option>
+												<option value="SMP">SMP</option>
+												<option value="SMA">SMA</option>
+												<option value="DI">DI</option>
+												<option value="DII">DII</option>
+												<option value="DIII">DIII</option>
+												<option value="DIV">DIV</option>
+												<option value="S1">S1</option>
+												<option value="S2">S2</option>
+												<option value="S3">S3</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Pekerjaan<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<input type="text" name="pekerjaan" maxlength="32" class="form-control" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Status Hubungan<span aria-required="true" class="text-danger"> * </span></label>
+										<div class="col-md-6">
+											<select name="status_hub" class="default-select2 form-control">
+												<option value="">...</option>
+												<option value="Suami">Suami</option>
+												<option value="Istri">Istri</option>
+											</select>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-3 control-label"></label>
 										<div class="col-md-6">
 											<button type="submit" name="save" value="save" class="btn btn-primary"><i class="fa fa-floppy-o"></i> &nbsp;Save</button>&nbsp;
-											<a type="button" class="btn btn-default active" data-dismiss="modal" aria-hidden="true"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
+											<a type="button" class="btn btn-default active" href="./"><i class="ion-arrow-return-left"></i>&nbsp;Cancel</a>
 										</div>
 									</div>
 								</form>
@@ -1051,7 +1090,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 										$no = 0;
 										$tampilJab	= mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$id_peg' ORDER BY tmt_jabatan DESC");
 										while ($jab = mysqli_fetch_array($tampilJab, MYSQLI_ASSOC)) {
-											$no++
+											$no++;
 										?>
 											<tr>
 												<td><?= $no ?></td>
@@ -1081,7 +1120,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 													<a href="index.php?page=delete-data-jabatan&id_jab=<?= $jab['id_jab']; ?>" title="delete" type="button" class="btn btn-danger btn-icon btn-sm" onclick="return confirm('Apakah kamu ingin delete == Data Jabatan == Dari Database?');"><i class="fa fa-trash-o fa-lg"></i></a>
 												</td>
 												<td class="tools">
-													<a href="index.php?page=set-jabatan-sekarang&id_jab=<?= $jab['id_jab']; ?>&pegawai_id=<?= $id_peg ?>&unit=<?= $jab['unit'] ?>&jabatan=<?= $jab['jabatan'] ?>" title="setup sebagai jabatan sekarang" type="button" class="btn btn-success btn-xs" onclick="return confirm('Are you sure you want Setup == Jabatan Sekarang == ?');">Set</a>
+													<a href="index.php?page=set-jabatan-sekarang&id_jab=<?= $jab['id_jab']; ?>&pegawai_id=<?= $id_peg ?>&unit=<?= $jab['unit'] ?>&jabatan=<?= str_replace("&", "-", $jab['jabatan']) ?>" title="setup sebagai jabatan sekarang" type="button" class="btn btn-success btn-xs" onclick="return confirm('Are you sure you want Setup == Jabatan Sekarang == ?');">Set</a>
 													<?php
 													if ($jab['status_jab'] == "Aktif") {
 														echo "<a href='index.php?page=unset-jabatan-sekarang&id_jab=$jab[id_jab]&pegawai_id=$id_peg&unit=$jab[unit]&jabatan=$jab[jabatan]' title='unset jabatan sekarang' type='button' class='btn btn-danger btn-xs' onclick='return confirm(Are you sure you want Unset == Jabatan Sekarang == ?);'>Unset</a>";

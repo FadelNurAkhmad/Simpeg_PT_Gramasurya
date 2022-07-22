@@ -1,6 +1,6 @@
 <div class="row">
     <?php
-    if (isset($_GET['id_jab']) and ($_GET['pegawai_id']) and ($_GET['unit']) and ($_GET['jabatan'])) {
+    if (isset($_GET['id_jab']) and ($_GET['pegawai_id']) or ($_GET['unit']) or ($_GET['jabatan'])) {
         $id_jab = $_GET['id_jab'];
         $unit = $_GET['unit'];
         $jabatan    = $_GET['jabatan'];

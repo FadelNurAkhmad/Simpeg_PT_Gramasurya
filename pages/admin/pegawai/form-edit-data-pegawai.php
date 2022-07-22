@@ -48,9 +48,52 @@ if (isset($_GET['pegawai_id'])) {
 						</div>
 					</div>
 					<div class="form-group">
+						<label class="col-md-3 control-label">Nama Pegawai<span aria-required="true" class="text-danger"> * </span></label>
+						<div class="col-md-6">
+							<input type="text" name="pegawai_nama" maxlength="64" value="<?= $data['pegawai_nama'] ?>" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Tanggal Masuk Kerja<span aria-required="true" class="text-danger"> * </span></label>
+						<div class="col-md-3">
+							<div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
+								<input type="text" value="<?= $data['tgl_masuk_pertama'] ?>" name="tgl_masuk_pertama" class="form-control" />
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Tanggal Mulai Kerja<span aria-required="true" class="text-danger"> * </span></label>
+						<div class="col-md-3">
+							<div class="input-group date" id="datepicker-disabled-past2" data-date-format="yyyy-mm-dd">
+								<input type="text" value="<?= $data['tgl_mulai_kerja'] ?>" name="tgl_mulai_kerja" class="form-control" />
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
 						<label class="col-md-3 control-label">NIP<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="pegawai_nip" maxlength="24" value="<?= $data['pegawai_nip'] ?>" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Status Pegawai<span aria-required="true" class="text-danger"> * </span></label>
+						<div class="col-md-6">
+							<select name="pegawai_status" class="default-select2 form-control" id="option" onchange="selectOption()">
+								<option value="1" <?php echo ($data['pegawai_status'] == '1') ? "selected" : ""; ?>>Aktif
+								<option value="2" <?php echo ($data['pegawai_status'] == '2') ? "selected" : ""; ?>>Non Aktif
+							</select>
+						</div>
+					</div>
+					<div class="form-group" id="resign" style="display:none">
+						<label class="col-md-3 control-label">Tanggal Berhenti</label>
+						<div class="col-md-3">
+							<div class="input-group date" id="datepicker-disabled-past4" data-date-format="yyyy-mm-dd">
+								<input type="text" id="tglResign" value="<?= $data['tgl_resign'] ?>" name="tgl_resign" class="form-control" />
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -65,30 +108,7 @@ if (isset($_GET['pegawai_id'])) {
 							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Nama Pegawai<span aria-required="true" class="text-danger"> * </span></label>
-						<div class="col-md-6">
-							<input type="text" name="pegawai_nama" maxlength="64" value="<?= $data['pegawai_nama'] ?>" class="form-control" />
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Tanggal Mulai Kerja<span aria-required="true" class="text-danger"> * </span></label>
-						<div class="col-md-3">
-							<div class="input-group date" id="datepicker-disabled-past2" data-date-format="yyyy-mm-dd">
-								<input type="text" value=<?= $data['tgl_mulai_kerja'] ?> name="tgl_mulai_kerja" class="form-control" />
-								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-3 control-label">Tanggal Masuk Kerja<span aria-required="true" class="text-danger"> * </span></label>
-						<div class="col-md-3">
-							<div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
-								<input type="text" value=<?= $data['tgl_masuk_pertama'] ?> name="tgl_masuk_pertama" class="form-control" />
-								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-							</div>
-						</div>
-					</div>
+
 					<div class="form-group">
 						<label class="col-md-3 control-label">Agama<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
@@ -146,13 +166,19 @@ if (isset($_GET['pegawai_id'])) {
 					<div class="form-group">
 						<label class="col-md-3 control-label">No. Telp</label>
 						<div class="col-md-6">
-							<input type="text" name="telp" maxlength="12" value="<?= $data['pegawai_telp'] ?>" class="form-control" />
+							<input type="text" name="pegawai_telp" maxlength="12" value="<?= $data['pegawai_telp'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label">Email</label>
 						<div class="col-md-6">
 							<input type="text" name="email" maxlength="64" value="<?= $data['email'] ?>" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Keterangan</label>
+						<div class="col-md-6">
+							<input type="text" name="ket" maxlength="64" value="<?= $data['ket'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -180,4 +206,20 @@ if (isset($_GET['pegawai_id'])) {
 	setTimeout(function() {
 		$(".pesan").fadeOut('slow');
 	}, 7000);
+
+	function selectOption() {
+		var select = document.getElementById("option");
+		var resign = document.getElementById("resign");
+		var tgl = document.getElementById("tglResign");
+
+		if (select.value == "2") {
+			resign.style.display = "block";
+
+		} else {
+			resign.style.display = "none";
+			tgl.value = null;
+		}
+	}
+
+	selectOption();
 </script>

@@ -1,9 +1,9 @@
 <div class="row">
 	<?php
-	if (isset($_GET['id_jab']) and ($_GET['pegawai_id']) and ($_GET['unit']) and ($_GET['jabatan'])) {
+	if (isset($_GET['id_jab']) and ($_GET['pegawai_id']) or ($_GET['unit']) or ($_GET['jabatan'])) {
 		$id_jab = $_GET['id_jab'];
 		$unit = $_GET['unit'];
-		$jabatan	= $_GET['jabatan'];
+		$jabatan	= str_replace("-", "&", $_GET['jabatan']);
 		$id_peg = $_GET['pegawai_id'];
 	} else {
 		die("Error. No Kode Selected! ");
@@ -15,6 +15,7 @@
 
 	$cekUnit = mysqli_query($koneksi, "SELECT * FROM pembagian2 WHERE pembagian2_nama='$unit'");
 	$unitId = mysqli_fetch_array($cekUnit, MYSQLI_ASSOC);
+
 
 	$cekJab = mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_nama='$jabatan'");
 	$jabId = mysqli_fetch_array($cekJab, MYSQLI_ASSOC);

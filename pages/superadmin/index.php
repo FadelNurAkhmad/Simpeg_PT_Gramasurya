@@ -27,7 +27,7 @@ while ($row = mysqli_fetch_array($query)) {
         $cekUsr = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_user WHERE id_peg=$row[pegawai_id]"));
         if ($cekUsr <= 0) {
             $password    = password_hash("123", PASSWORD_DEFAULT);
-            $insertusr = mysqli_query($koneksi, "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, id_peg) VALUES ('$row[pegawai_pin]', '$row[pegawai_nama]', '$password', 'Pegawai', '$row[pegawai_id]')");
+            $insertusr = mysqli_query($koneksi, "INSERT INTO tb_user (id_user, nama_user, password, hak_akses, id_peg) VALUES ('$row[pegawai_nip]', '$row[pegawai_nama]', '$password', 'Pegawai', '$row[pegawai_id]')");
         }
     }
 }
@@ -383,6 +383,9 @@ while ($row = mysqli_fetch_array($query)) {
                 case 'ganti-foto':
                     include "../../pages/superadmin/pegawai/ganti-foto.php";
                     break;
+                case 'import-pegawai':
+                    include "../../pages/superadmin/pegawai/import-pegawai.php";
+                    break;
 
                 case 'form-master-data-si':
                     include "../../pages/superadmin/keluarga/si/form-master-data-si.php";
@@ -398,6 +401,9 @@ while ($row = mysqli_fetch_array($query)) {
                     break;
                 case 'delete-data-si':
                     include "../../pages/superadmin/keluarga/si/delete-data-si.php";
+                    break;
+                case 'master-si':
+                    include "../../pages/superadmin/keluarga/si/master-si.php";
                     break;
 
                 case 'form-master-data-anak':

@@ -28,6 +28,7 @@
 		$alamat			= $_POST['alamat'];
 		$telp			= $_POST['pegawai_telp'];
 		$email			= $_POST['email'];
+		$ket			= $_POST['ket'];
 
 
 		$pensiun = new DateTime($tgl_lhr);
@@ -46,7 +47,7 @@
 			header("location:index.php?page=form-edit-data-pegawai&pegawai_id=$id_peg");
 		} else {
 			$pegawai_d = mysqli_query($koneksi, "UPDATE pegawai_d SET agama='$agama', gol_darah='$gol_darah', stat_nikah='$status_nikah', alamat='$alamat' WHERE pegawai_id='$id_peg'");
-			$tb_pegawai = mysqli_query($koneksi, "UPDATE tb_pegawai SET email='$email', tgl_pensiun='$tgl_pensiun' WHERE pegawai_id='$id_peg'");
+			$tb_pegawai = mysqli_query($koneksi, "UPDATE tb_pegawai SET email='$email', tgl_pensiun='$tgl_pensiun', ket='$ket' WHERE pegawai_id='$id_peg'");
 
 			if ($pegawai_status == 1) {
 				$pegawai = mysqli_query($koneksi, "UPDATE pegawai SET pegawai_pin='$pin', pegawai_nip='$nip', pegawai_nama='$nama', pegawai_status='$pegawai_status', tgl_resign= null  , tempat_lahir='$tempat_lhr', tgl_lahir='$tgl_lhr', gender='$jk', pegawai_telp='$telp' WHERE pegawai_id='$id_peg'");

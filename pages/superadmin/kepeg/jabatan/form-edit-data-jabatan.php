@@ -50,7 +50,8 @@ if (isset($_GET['id_jab'])) {
 							echo '<select name="unit" class="default-select2 form-control">';
 							// echo '<option value="' . $data['unit'] . '">' . $data['unit'] . '</option>';
 							while ($rowj = mysqli_fetch_array($dataJ, MYSQLI_ASSOC)) {
-								echo '<option value="' . $rowj['pembagian2_nama'] . '">' . $rowj['pembagian2_nama'] . '</option>';
+								$unit = ($rowj['pembagian2_id'] == $peg['pembagian2_id']) ? "selected" : "";
+								echo '<option value="' . $rowj['pembagian2_nama'] . '" ' . $unit . '> ' . $rowj['pembagian2_nama'] . '</option>';
 							}
 							echo '</select>';
 							?>
@@ -64,7 +65,8 @@ if (isset($_GET['id_jab'])) {
 							echo '<select name="jabatan" class="default-select2 form-control">';
 							// echo '<option value="' . $data['jabatan'] . '">...</option>';
 							while ($rowj = mysqli_fetch_array($dataJ, MYSQLI_ASSOC)) {
-								echo '<option value="' . $rowj['pembagian1_nama'] . '">' . $rowj['pembagian1_nama'] . '</option>';
+								$jab = ($rowj['pembagian1_id'] == $peg['pembagian1_id']) ? "selected" : "";
+								echo '<option value="' . $rowj['pembagian1_nama'] . '" ' . $jab . '>' . $rowj['pembagian1_nama'] . '</option>';
 							}
 							echo '</select>';
 							?>

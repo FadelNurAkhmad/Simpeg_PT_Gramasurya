@@ -180,7 +180,7 @@ $id_jab	= kdauto("tb_jabatan", "");
 					</form>
 					<div class="widget-body">
 						<div class="widget-main">
-							<table class="table table-bordered table-striped">
+							<table class="table table-bordered table-striped display">
 								<thead class="thin-border-bottom">
 									<tr>
 										<th width="10%"><i class="fa fa-caret-right"></i> No</th>
@@ -261,7 +261,7 @@ $id_jab	= kdauto("tb_jabatan", "");
 					</form>
 					<div class="widget-body">
 						<div class="widget-main">
-							<table class="table table-bordered table-striped">
+							<table class="table table-bordered table-striped display">
 								<thead class="thin-border-bottom">
 									<tr>
 										<th width="10%"><i class="fa fa-caret-right"></i> No</th>
@@ -327,4 +327,8 @@ $id_jab	= kdauto("tb_jabatan", "");
 	setTimeout(function() {
 		$(".pesan").fadeOut('slow');
 	}, 7000);
+
+	$(document).ready(function() {
+		$('table.display').DataTable();
+	});
 </script>
