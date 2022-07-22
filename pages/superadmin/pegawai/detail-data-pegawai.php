@@ -259,7 +259,6 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 
 			<!-- tab suami istri -->
 			<div class="tab-pane fade" id="si">
-				<a type="button" class="btn btn-sm btn-warning m-b-10" data-toggle="modal" data-target="#suamiistri"><i class="fa fa-plus-circle"></i> Add Riwayat Suami / Istri&nbsp;</a>
 				<div class="table-responsive">
 					<table class="table table-bordered table-striped">
 						<thead>
