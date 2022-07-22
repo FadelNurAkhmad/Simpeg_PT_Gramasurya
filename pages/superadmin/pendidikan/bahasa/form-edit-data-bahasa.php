@@ -45,11 +45,7 @@ if (isset($_GET['id_bhs'])) {
 					<div class="form-group">
 						<label class="col-md-3 control-label">Jenis Bahasa<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
-							<select name="jns_bhs" class="default-select2 form-control">
-								<option value="Asing" <?php echo ($data['jns_bhs'] == 'Asing') ? "selected" : ""; ?>>Asing</option>
-								<option value="Lokal" <?php echo ($data['jns_bhs'] == 'Lokal') ? "selected" : ""; ?>>Lokal</option>
-								<option value="Daerah" <?php echo ($data['jns_bhs'] == 'Daerah') ? "selected" : ""; ?>>Daerah</option>
-							</select>
+							<input type="text" name="jns_bhs" maxlength="32" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">

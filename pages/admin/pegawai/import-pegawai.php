@@ -32,6 +32,8 @@ if (isset($_POST['submit'])) {
         return $inisial . $tmp . $angka;
     }
 
+    $tgl_sekarang = date('Ymd'); // Ini akan mengambil waktu sekarang dengan format yyyymmddHHiiss
+    $nama_file_baru = 'data' . $tgl_sekarang . '.xlsx';
 
     $file_name = $_FILES['filexls']['name'];
     $file_data = $_FILES['filexls']['tmp_name'];
@@ -48,8 +50,12 @@ if (isset($_POST['submit'])) {
         $_SESSION['pesan'] = "Oops! File extensions not available. Only xls and xlsx ...";
         header("location:index.php?page=form-view-data-pegawai");
     } else {
-        $reader = PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile($file_data);
-        $spreadsheet = $reader->load($file_data);
+        // $reader = PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile($file_data);
+        move_uploaded_file($file_data, '../../assets/tmp/' . $nama_file_baru);
+
+
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $spreadsheet = $reader->load('../../assets/tmp/' . $nama_file_baru);
         $sheetData = $spreadsheet->getActiveSheet()->toArray();
 
         $jumlahData = 0;
