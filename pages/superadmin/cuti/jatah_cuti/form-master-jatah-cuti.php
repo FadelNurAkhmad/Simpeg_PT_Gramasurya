@@ -73,16 +73,17 @@ $id_jatah    = kdauto("tb_jatah_cuti", "");
                         <label class="col-md-3 control-label">Periode Jatah Cuti<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
-                                <input type="text" name="jatah_c_mulai" placeholder="Mulai" class="form-control" />
+                                <input type="text" id="jatah_c_mulai" name="jatah_c_mulai" placeholder="Mulai" class="form-control" />
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past4" data-date-format="yyyy-mm-dd">
-                                <input type="text" name="jatah_c_akhir" placeholder="Akhir" class="form-control" />
+                                <input type="text" id="jatah_c_akhir" name="jatah_c_akhir" placeholder="Akhir" class="form-control" />
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
+                        <label class="control-label"><span aria-required="true" class="text-danger"> * Per Periode 1 Tahun </span></label>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Jatah Cuti</label>

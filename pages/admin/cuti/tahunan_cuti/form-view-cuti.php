@@ -21,7 +21,7 @@ $tampilCuti    = mysqli_query(
     $koneksi,
     "SELECT tb_cuti_tahunan.id_cuti, tb_cuti_tahunan.id_peg, tb_cuti_tahunan.tanggal_cuti, tb_cuti_tahunan.tanggal_mulai, tb_cuti_tahunan.tanggal_selesai, tb_cuti_tahunan.lama_cuti, tb_cuti_tahunan.jumlah_cuti, tb_cuti_tahunan.jenis_cuti, tb_cuti_tahunan.keperluan, tb_cuti_tahunan.status, pegawai.pegawai_nip, pegawai.pegawai_nama
     FROM tb_cuti_tahunan
-    INNER JOIN pegawai ON tb_cuti_tahunan.id_peg=pegawai.pegawai_id ORDER BY id_cuti DESC"
+    INNER JOIN pegawai ON tb_cuti_tahunan.id_peg=pegawai.pegawai_id ORDER BY tanggal_cuti DESC"
 );
 
 // ambil data status dari tb_approval_cuti_tahunan (Cuti Tahunan)
@@ -38,7 +38,6 @@ $tampilCuti    = mysqli_query(
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
                 <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilCuti); ?></span> rows for "Data Cuti Tahunan"</h4>
             </div>

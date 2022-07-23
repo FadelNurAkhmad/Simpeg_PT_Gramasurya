@@ -33,7 +33,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 	</li>
 	<li><a href="index.php?page=form-view-data-pegawai" title="back" class="btn btn-sm btn-white m-b-10"><i class="fa fa-step-backward"></i> &nbsp;Back</a></li>
 	<li><a class="btn btn-info btn-sm m-b-10" href="index.php?page=form-edit-data-pegawai&pegawai_id=<?= $id_peg ?>" title="edit"><i class="fa fa-pencil fa-lg"></i> &nbsp;Edit</a></li>
-	<li><a href="../../pages/superadmin/report/print-biodata-pegawai.php?pegawai_id=<?= $id_peg ?>" target="_blank" title="print" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-print"></i> &nbsp;Print</a></li>
+	<li><a href="../../pages/admin/report/print-biodata-pegawai.php?pegawai_id=<?= $id_peg ?>" target="_blank" title="print" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-print"></i> &nbsp;Print</a></li>
 
 </ol>
 <!-- end breadcrumb -->
@@ -1456,7 +1456,10 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 													<a href="index.php?page=delete-data-jabatan&id_jab=<?= $jab['id_jab']; ?>" title="delete" type="button" class="btn btn-danger btn-icon btn-sm" onclick="return confirm('Apakah kamu ingin delete == Data Jabatan == Dari Database?');"><i class="fa fa-trash-o fa-lg"></i></a>
 												</td>
 												<td class="tools">
-													<a href="index.php?page=set-jabatan-sekarang&id_jab=<?= $jab['id_jab']; ?>&pegawai_id=<?= $id_peg ?>&unit=<?= $jab['unit'] ?>&jabatan=<?= str_replace("&", "-", $jab['jabatan']) ?>" title="setup sebagai jabatan sekarang" type="button" class="btn btn-success btn-xs" onclick="return confirm('Are you sure you want Setup == Jabatan Sekarang == ?');">Set</a>
+													<?php
+													$jabPeg = (strpos($jab['jabatan'], "&") !== false) ? str_replace("&", "%26", $jab['jabatan']) : $jab['jabatan'];
+													?>
+													<a href="index.php?page=set-jabatan-sekarang&id_jab=<?= $jab['id_jab']; ?>&pegawai_id=<?= $id_peg ?>&unit=<?= $jab['unit'] ?>&jabatan=<?= $jabPeg ?>" title="setup sebagai jabatan sekarang" type="button" class="btn btn-success btn-xs" onclick="return confirm('Are you sure you want Setup == Jabatan Sekarang == ?');">Set</a>
 													<?php
 													if ($jab['status_jab'] == "Aktif") {
 														echo "<a href='index.php?page=unset-jabatan-sekarang&id_jab=$jab[id_jab]&pegawai_id=$id_peg&unit=$jab[unit]&jabatan=$jab[jabatan]' title='unset jabatan sekarang' type='button' class='btn btn-danger btn-xs' onclick='return confirm(Are you sure you want Unset == Jabatan Sekarang == ?);'>Unset</a>";

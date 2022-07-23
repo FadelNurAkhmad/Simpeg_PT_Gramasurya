@@ -20,14 +20,14 @@ include "../../config/koneksi.php";
 $tampilCuti    = mysqli_query(
     $koneksi,
     "SELECT * FROM tb_cuti_tahunan
-    INNER JOIN pegawai ON tb_cuti_tahunan.id_peg=pegawai.pegawai_id ORDER BY id_cuti DESC"
+    INNER JOIN pegawai ON tb_cuti_tahunan.id_peg=pegawai.pegawai_id ORDER BY tanggal_cuti DESC"
 );
 
 // ambil data gabungan tabel pegawai dan tb_cuti_umum (Izin)
 $tampilCutiUmum    = mysqli_query(
     $koneksi,
     "SELECT * FROM tb_cuti_umum
-    INNER JOIN pegawai ON tb_cuti_umum.id_peg=pegawai.pegawai_id ORDER BY id_cuti_umum DESC"
+    INNER JOIN pegawai ON tb_cuti_umum.id_peg=pegawai.pegawai_id ORDER BY tanggal_cuti DESC"
 );
 
 
@@ -97,7 +97,7 @@ $tampilCutiUmum    = mysqli_query(
                                         <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#Reject<?php echo $cuti['id_cuti'] ?>" title="Reject"><i class="fa fa-close"> </i> Reject</a>
                                         <a type="button" class="btn btn-success btn-icon btn-sm" data-toggle="modal" data-target="#Detail<?php echo $cuti['id_cuti'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
                                         <!-- <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-cuti&id_cuti=<?= $cuti['id_cuti'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a> -->
-                                        <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $cuti['id_cuti'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
+                                        <!-- <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $cuti['id_cuti'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a> -->
                                     </td>
                                 </tr>
                                 <!-- #modal-dialog-delete -->
@@ -291,11 +291,11 @@ $tampilCutiUmum    = mysqli_query(
                                         ?>
                                     </td>
                                     <td class="text-center">
-                                        <a type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#Approve<?php echo $izin['id_cuti_umum'] ?>" title="Approve"><i class="fa fa-check"> </i> Approve</a>
-                                        <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#Reject<?php echo $izin['id_cuti_umum'] ?>" title="Reject"><i class="fa fa-close"> </i> Reject</a>
-                                        <a type="button" class="btn btn-success btn-icon btn-sm" data-toggle="modal" data-target="#Detail<?php echo $izin['id_cuti_umum'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
+                                        <a type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#Approve1<?php echo $izin['id_cuti_umum'] ?>" title="Approve"><i class="fa fa-check"> </i> Approve</a>
+                                        <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#Reject1<?php echo $izin['id_cuti_umum'] ?>" title="Reject"><i class="fa fa-close"> </i> Reject</a>
+                                        <a type="button" class="btn btn-success btn-icon btn-sm" data-toggle="modal" data-target="#Detail1<?php echo $izin['id_cuti_umum'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
                                         <!-- <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-cuti-umum&id_cuti_umum=<?= $izin['id_cuti_umum'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a> -->
-                                        <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del1<?php echo $izin['id_cuti_umum'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a>
+                                        <!-- <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del1<?php echo $izin['id_cuti_umum'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a> -->
                                     </td>
                                 </tr>
                                 <!-- #modal-dialog-delete -->
@@ -315,7 +315,7 @@ $tampilCutiUmum    = mysqli_query(
                                     </div>
                                 </div>
                                 <!-- #modal-dialog-approve -->
-                                <div id="Approve<?php echo $izin['id_cuti_umum'] ?>" class="modal fade" role="dialog">
+                                <div id="Approve1<?php echo $izin['id_cuti_umum'] ?>" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -324,7 +324,7 @@ $tampilCutiUmum    = mysqli_query(
                                             <div class="modal-body" align="center">
                                                 <p>Mohon periksa kembali data pengajuan izin terlampir. Pastikan semua informasi telah <span class="label label-primary">SESUAI</span> !</p>
                                                 <br>
-                                                <a href="index.php?page=status-cuti-umum&true=true&id_cuti_umum=<?= $izin['id_cuti_umum'] ?>" class="btn btn-success">&nbsp; &nbsp;SETUJU&nbsp; &nbsp;</a>
+                                                <a href="index.php?page=status-cuti-umum&true1=true1&id_cuti_umum=<?= $izin['id_cuti_umum'] ?>" class="btn btn-success">&nbsp; &nbsp;SETUJU&nbsp; &nbsp;</a>
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
@@ -333,7 +333,7 @@ $tampilCutiUmum    = mysqli_query(
                                     </div>
                                 </div>
                                 <!-- #modal-dialog-reject -->
-                                <div id="Reject<?php echo $izin['id_cuti_umum'] ?>" class="modal fade" role="dialog">
+                                <div id="Reject1<?php echo $izin['id_cuti_umum'] ?>" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -342,7 +342,7 @@ $tampilCutiUmum    = mysqli_query(
                                             <div class="modal-body" align="center">
                                                 <p>Mohon periksa kembali data pengajuan izin terlampir. Pastikan semua informasi telah <span class="label label-primary">SESUAI</span> !</p>
                                                 <br>
-                                                <a href="index.php?page=status-cuti-umum&false=false&id_cuti_umum=<?= $izin['id_cuti_umum'] ?>" class="btn btn-danger">&nbsp; &nbsp;YA&nbsp; &nbsp;</a>
+                                                <a href="index.php?page=status-cuti-umum&false1=false1&id_cuti_umum=<?= $izin['id_cuti_umum'] ?>" class="btn btn-danger">&nbsp; &nbsp;YA&nbsp; &nbsp;</a>
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
@@ -350,7 +350,7 @@ $tampilCutiUmum    = mysqli_query(
                                         </div>
                                     </div>
                                 </div>
-                                <div id="Detail<?php echo $izin['id_cuti_umum'] ?>" class="modal fade" role="dialog">
+                                <div id="Detail1<?php echo $izin['id_cuti_umum'] ?>" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">

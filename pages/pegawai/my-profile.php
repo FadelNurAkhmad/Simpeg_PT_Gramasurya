@@ -6,7 +6,7 @@ $query = "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id = tb
 $sql   = mysqli_query($koneksi, $query);
 $data    = mysqli_fetch_array($sql);
 
-$jabatan	= mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$data[pegawai_id]'");
+$jabatan	= mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_id='$data[pembagian1_id]'");
 $jab	= mysqli_fetch_array($jabatan);
 
 // mengambil data presensi dari mesin
@@ -45,11 +45,9 @@ $diff = $today->diff($birthday);
 			<li class=""><a href="#ortu" data-toggle="tab"><span class="visible-xs">Ortu</span><span class="hidden-xs"><i class="ion-ios-paper fa-lg text-danger"></i> Orang Tua</span></a></li>
 			<li class=""><a href="#sekolah" data-toggle="tab"><span class="visible-xs">Pend</span><span class="hidden-xs"><i class="ion-university fa-lg text-inverse"></i> Pendidikan</span></a></li>
 			<li class=""><a href="#bahasa" data-toggle="tab"><span class="visible-xs">Bhs</span><span class="hidden-xs"><i class="fa fa-language fa-lg text-warning"></i> Bahasa</span></a></li>
-			<!-- <li class=""><a href="#skp" data-toggle="tab"><span class="visible-xs">SKP</span><span class="hidden-xs"><i class="ion-social-buffer fa-lg text-info"></i> SKP</span></a></li> -->
 			<li class=""><a href="#kpi" data-toggle="tab"><span class="visible-xs">KPI</span><span class="hidden-xs"><i class="ion-social-buffer fa-lg text-info"></i> KPI</span></a></li>
 			<li class=""><a href="#gaji" data-toggle="tab"><span class="visible-xs">Gaji</span><span class="hidden-xs"><i class="fa fa-pencil text-inverse"></i> Gaji</span></a></li>
 			<li class=""><a href="#dokumen" data-toggle="tab"><span class="visible-xs">Dokumen</span><span class="hidden-xs"><i class="fa fa-folder-open text-success"></i> Dokumen</span></a></li>
-			<li class=""><a href="#presensi" data-toggle="tab"><span class="visible-xs">Presensi</span><span class="hidden-xs"><i class="fa fa-calendar-check-o text-danger"></i> Presensi</span></a></li>
 		</ul>
 		<div class="tab-content">
 			<div class="tab-pane fade active in" id="profile">
@@ -91,7 +89,7 @@ $diff = $today->diff($birthday);
 													<h5><span class="label label-inverse pull-right"> # Biodata Pegawai </span></h5>
 												</th>
 												<th>
-													<h4><?= $data['pegawai_nama'] ?> <small><?= $jab == 0 ? '-' : $jab['jabatan']; ?></small></h4>
+													<h4><?= $data['pegawai_nama'] ?> <small><?= (isset($jab['pembagian1_id']) ? $jab['pembagian1_nama'] : "-") ?></small></small></h4>
 												</th>
 											</tr>
 										</thead>
@@ -566,116 +564,7 @@ $diff = $today->diff($birthday);
 					</table>
 				</div>
 			</div>
-			<!-- tab presensi -->
-			<div class="tab-pane fade" id="presensi">
-				<div class="alert alert-success fade in">
-					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
-					<i class="fa fa-info fa-2x pull-left"></i> Folder ini dapat digunakan untuk melihat rekap presensi ...
-				</div>
-				<div class="row ">
-					<div class="col-6 col-md-8">
-						<label class="col-md-1 control-label">Periode</label>
-						<form action="" method="POST" enctype="multipart/form-data">
-							<div class="form-group col-md-3">
-								<div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
-									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-									<input type="text" name="periode_awal" placeholder="Dari" class="form-control" />
-								</div>
-							</div>
-							<div class="form-group col-md-3">
-								<div class="input-group date" id="datepicker-disabled-past2" data-date-format="yyyy-mm-dd">
-									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-									<input type="text" name="periode_akhir" placeholder="Sampai" class="form-control" />
-								</div>
-							</div>
-							<div class="form-group col-sm-4 m-b-10">
-								<button type="submit" name="cari" value="cari" class="btn btn-primary"><i class="ion-ios-search-strong"></i> &nbsp;Cari</button>&nbsp;
-								<a href="#" class="btn btn-sm btn-success" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a>
-							</div>
-						</form>
-					</div>
 
-				</div>
-				<div class="table-responsive">
-					<table class="table table-bordered table-striped display">
-						<thead>
-							<tr>
-								<th>No</th>
-								<th>Tanggal</th>
-								<th>Jam</th>
-								<th>NIP</th>
-								<th>Nama</th>
-								<th>PIN</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							if (!empty($_POST['periode_awal']) && !empty($_POST['periode_awal'])) {
-								$tampilCari = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[pegawai_pin]' AND DATE(scan_date) >= '$_POST[periode_awal]' AND DATE(scan_date) <= '$_POST[periode_akhir]'");
-								$no = 0;
-								while ($cari = mysqli_fetch_array($tampilCari, MYSQLI_ASSOC)) {
-									$no++;
-							?>
-									<tr>
-										<td><?php echo $no ?></td>
-										<?php
-										$myvalue = $cari['scan_date'];
-										$datetime = new DateTime($myvalue);
-
-										$date = $datetime->format('Y-m-d');
-										$time = $datetime->format('H:i:s');
-										?>
-										<td><?= $date ?></td>
-										<td><?= $time ?></td>
-										<?php
-										$tampilPeg = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_pin='$cari[pin]'");
-										$peg = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
-										?>
-										<td><?= $peg['pegawai_nip'] ?></td>
-										<td><?= $peg['pegawai_nama'] ?></td>
-										<td><?= $cari['pin'] ?></td>
-									</tr>
-							<?php
-								}
-							}
-							?>
-
-
-							<?php
-							if (empty($_POST['periode_awal']) && empty($_POST['periode_awal'])) {
-								$no = 0;
-								while ($pres    = mysqli_fetch_array($tampilPres, MYSQLI_ASSOC)) {
-									$no++;
-							?>
-									<tr>
-										<td><?php echo $no ?></td>
-										<?php
-										$myvalue = $pres['scan_date'];
-										$datetime = new DateTime($myvalue);
-
-										$tanggal = $datetime->format('Y-m-d');
-										$jam = $datetime->format('H:i:s');
-										?>
-										<td><?= $tanggal ?></td>
-										<td><?= $jam ?></td>
-										<?php
-										$tampilPeg = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_pin='$pres[pin]'");
-										$peg = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
-										?>
-										<td><?= $peg['pegawai_nip'] ?></td>
-										<td><?= $peg['pegawai_nama'] ?></td>
-										<td><?= $pres['pin'] ?></td>
-
-
-									</tr>
-							<?php
-								}
-							}
-							?>
-						</tbody>
-					</table>
-				</div>
-			</div>
 		</div>
 	</div>
 	<div class="col-md-2">
