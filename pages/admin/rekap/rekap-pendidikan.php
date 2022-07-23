@@ -1,10 +1,10 @@
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
-	<li><a href="../../pages/superadmin/rekap/print-rekap-pendidikan.php" target="_blank" title="print" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-print"></i> &nbsp;Print</a></li>
+	<li><a href="../../pages/admin/rekap/print-rekap-pendidikan.php" target="_blank" title="print" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-print"></i> &nbsp;Print</a></li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Rekapitulasi <small>Pegawai Berdasarkan Pendidikan</small></h1>
+<h1 class="page-header">Rekapitulasi <small> <i class="fa fa-angle-right"></i> Pendidikan</small></h1>
 <!-- end page-header -->
 <!-- begin row -->
 <div class="row">

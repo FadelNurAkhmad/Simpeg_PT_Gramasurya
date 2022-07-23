@@ -267,7 +267,7 @@ while ($row = mysqli_fetch_array($query)) {
                     <li class="has-sub">
                         <a href="javascript:;"><i class="ion-arrow-shrink bg-info"></i><span>Rekapitulasi</span> <span class="badge bg-danger pull-right"><span class="ion-stats-bars"></span></span></a>
                         <ul class="sub-menu">
-                            <li><a href="index.php?page=rekap-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jabatan</a></li>
+                            <li><a href="index.php?page=rekap-unit-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Unit Kerja</a></li>
                             <li><a href="index.php?page=rekap-pendidikan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pendidikan</a></li>
 
                         </ul>
@@ -1021,6 +1021,9 @@ while ($row = mysqli_fetch_array($query)) {
                     break;
                 case 'rekap-jabatan':
                     include "../../pages/superadmin/rekap/rekap-jabatan.php";
+                    break;
+                case 'rekap-unit-kerja':
+                    include "../../pages/superadmin/rekap/rekap-unit-kerja.php";
                     break;
                 case 'rekap-pendidikan':
                     include "../../pages/superadmin/rekap/rekap-pendidikan.php";

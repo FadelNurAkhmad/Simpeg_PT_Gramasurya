@@ -74,7 +74,7 @@ $pdf->SetFont('helvetica', '', 10);
 	
 $head ='<table border="0" cellspacing="0" cellpadding="3">
 			<tr>
-				<td width="100" rowspan="3"><img src="../../../assets/img/logo.png" width="78" height="78"/></td>
+				<td width="100" rowspan="3"><img src="../../../assets/img/logo-grama.png" width="78" height="78"/></td>
 				<td width="385" align="center"><font size="11" style="text-transform:uppercase;">PEMERINTAH KABUPATEN '.$kep['kab'].'</font></td>
 				<td width="100" rowspan="3"></td>				
 			</tr>
@@ -162,4 +162,3 @@ $pdf->writeHTML($sign, true, false, false, false, '');
 
 //Close and output PDF document
 $pdf->Output('Rekap_Jabatan_'.date("Ymd").'.pdf', 'I');
-?>

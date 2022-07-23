@@ -215,7 +215,7 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					<li class="has-sub">
 						<a href="javascript:;"><i class="ion-arrow-shrink bg-info"></i><span>Rekapitulasi</span> <span class="badge bg-danger pull-right"><span class="ion-stats-bars"></span></span></a>
 						<ul class="sub-menu">
-							<li><a href="index.php?page=rekap-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jabatan</a></li>
+							<li><a href="index.php?page=rekap-unit-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Unit Kerja</a></li>
 							<li><a href="index.php?page=rekap-pendidikan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pendidikan</a></li>
 
 						</ul>
@@ -947,6 +947,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					break;
 				case 'rekap-pendidikan':
 					include "../../pages/admin/rekap/rekap-pendidikan.php";
+					break;
+				case 'rekap-unit-kerja':
+					include "../../pages/admin/rekap/rekap-unit-kerja.php";
 					break;
 				case 'rekap-skpd':
 					include "../../pages/admin/rekap/rekap-skpd.php";

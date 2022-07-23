@@ -84,8 +84,9 @@ if (isset($_GET['id_cuti'])) {
                     <div class="form-group">
                         <label class="col-md-3 control-label">Lama Cuti<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
-                            <input type="text" id="lama_cuti" name="lama_cuti" value="<?= $data['lama_cuti'] ?>" class="form-control" />
+                            <input type="number" id="lama_cuti" name="lama_cuti" value="<?= $data['lama_cuti'] ?>" min="1" max="12" class="form-control" />
                         </div>
+                        <label class="control-label"><span aria-required="true" class="text-danger"> * Max 12 Hari </span></label>
                     </div>
                     <div class="form-group">
                         <div class="col-md-6">
