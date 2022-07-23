@@ -173,8 +173,8 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
         daysAfterLastSunday = tanggal_selesai.getDay();
 
         elapsed -= (daysBeforeFirstSunday + daysAfterLastSunday);
-        elapsed = (elapsed / 7) * 5;
-        elapsed += ifThen(daysBeforeFirstSunday - 1, -1, 0) + ifThen(daysAfterLastSunday, 6, 5);
+        elapsed = (elapsed / 7) * 6;
+        elapsed += ifThen(daysBeforeFirstSunday, 0, 0) + ifThen(daysAfterLastSunday, 6, 6);
 
         return Math.ceil(elapsed);
     }

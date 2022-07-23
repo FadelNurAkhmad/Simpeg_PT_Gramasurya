@@ -271,70 +271,7 @@ $jtug    = mysqli_num_rows($jmltug);
 
 </div>
 
-<div class="row">
-    <!-- begin col-12 -->
-    <div class="col-md-12">
-        <div class="panel panel-inverse" data-sortable-id="index-1">
-            <div class="panel-heading">
-                <div class="panel-heading-btn">
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                </div>
-                <h4 class="panel-title"><i class="ion-stats-bars fa-lg text-warning"></i> &nbsp;Statistik Jabatan</h4>
-            </div>
-            <div class="panel-body">
-                <div id="container" class="height-sm"></div>
-            </div>
-        </div>
-    </div>
-    <!-- end col-12 -->
-</div>
-
 <script src="../../assets/js/highcharts.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-    var chart1; // globally available
-    $(document).ready(function() {
-        chart1 = new Highcharts.Chart({
-            chart: {
-                renderTo: 'container',
-                type: 'column'
-            },
-            title: {
-                text: 'Statistik Jabatan'
-            },
-            xAxis: {
-                categories: ['Jabatan']
-            },
-            yAxis: {
-                title: {
-                    text: 'Jumlah'
-                }
-            },
-            series: [
-                <?php
-                $sql   = "SELECT * FROM pembagian1 GROUP BY pembagian1_nama ORDER BY pembagian1_nama DESC";
-                $query = mysqli_query($koneksi, $sql)  or die(mysqli_error($koneksi));
-                while ($ret = mysqli_fetch_array($query)) {
-                    $jab = $ret['pembagian1_nama'];
-
-                    $sql_jumlah   = "SELECT * FROM pegawai WHERE pegawai_status='1' AND pembagian1_id=$ret[pembagian1_id]";
-                    $query_jumlah = mysqli_query($koneksi, $sql_jumlah) or die(mysqli_error($koneksi));
-                    $data = mysqli_num_rows($query_jumlah);
-                ?> {
-                        name: '<?php echo $jab; ?>',
-                        data: [<?php echo $data; ?>]
-                    },
-                <?php
-
-                }
-                ?>
-            ]
-        });
-    });
-</script>
 
 
 <script type="text/javascript">

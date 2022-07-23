@@ -165,6 +165,7 @@ $id_cuti    = kdauto("tb_cuti_tahunan", "");
     }, 7000);
 </script>
 
+
 <script>
     function getHitungHari(tanggal_mulai, tanggal_selesai) {
         var elapsed, daysBeforeFirstSaturday, daysAfterLastSunday;
@@ -179,8 +180,8 @@ $id_cuti    = kdauto("tb_cuti_tahunan", "");
         daysAfterLastSunday = tanggal_selesai.getDay();
 
         elapsed -= (daysBeforeFirstSunday + daysAfterLastSunday);
-        elapsed = (elapsed / 7) * 5;
-        elapsed += ifThen(daysBeforeFirstSunday - 1, -1, 0) + ifThen(daysAfterLastSunday, 6, 5);
+        elapsed = (elapsed / 7) * 6;
+        elapsed += ifThen(daysBeforeFirstSunday, 0, 0) + ifThen(daysAfterLastSunday, 6, 6);
 
         return Math.ceil(elapsed);
     }
