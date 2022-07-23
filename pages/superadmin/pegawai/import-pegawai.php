@@ -59,7 +59,6 @@ if (isset($_POST['submit'])) {
             $id_jab         = kdauto("tb_jabatan", "");
 
             // mengambil data dari excel
-            // $pegawai_id = $sheetData[$i]['0'];
             $pegawai_pin = $sheetData[$i]['1'];
             $pegawai_nip = $sheetData[$i]['2'];
             $pegawai_nama = $sheetData[$i]['3'];
@@ -83,13 +82,16 @@ if (isset($_POST['submit'])) {
 
             $alamat = $sheetData[$i]['11'];
 
-            $tgl_mulai_kerja_format = new DateTime($sheetData[$i]['12']);
+            $tgl_masuk_pertama_format = new DateTime($sheetData[$i]['12']);
+            $tgl_masuk_pertama = $tgl_masuk_pertama_format->format("Y-m-d");
+
+            $tgl_mulai_kerja_format = new DateTime($sheetData[$i]['13']);
             $tgl_mulai_kerja = $tgl_mulai_kerja_format->format("Y-m-d");
 
-            $unit = $sheetData[$i]['13'];
-            $jabatan = $sheetData[$i]['14'];
-            $no_telp = $sheetData[$i]['15'];
-            $ket = $sheetData[$i]['16'];
+            $unit = $sheetData[$i]['14'];
+            $jabatan = $sheetData[$i]['15'];
+            $no_telp = $sheetData[$i]['16'];
+            $ket = $sheetData[$i]['17'];
 
             // cek data pada database
             $cekJab = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM pembagian1 WHERE pembagian1_nama = '$jabatan'"));
@@ -110,7 +112,7 @@ if (isset($_POST['submit'])) {
             // cek data pegawai sudah ada atau tidak pada tabel pegawai
             if ($cekPeg <= 0) {
 
-                $query = mysqli_query($koneksi, "INSERT INTO pegawai (pegawai_id, pegawai_pin, pegawai_nip, pegawai_nama, pegawai_alias, pegawai_telp, pegawai_status, tempat_lahir, tgl_lahir, tgl_mulai_kerja, gender) VALUES ('$id_peg', '$pegawai_pin', '$pegawai_nip', '$pegawai_nama', '$pegawai_alias', '$no_telp', '$pegawai_status', '$tempat_lahir', '$tgl_lahir', '$tgl_mulai_kerja', '$gender')");
+                $query = mysqli_query($koneksi, "INSERT INTO pegawai (pegawai_id, pegawai_pin, pegawai_nip, pegawai_nama, pegawai_alias, pegawai_telp, pegawai_status, tempat_lahir, tgl_lahir, tgl_mulai_kerja, tgl_masuk_pertama, gender) VALUES ('$id_peg', '$pegawai_pin', '$pegawai_nip', '$pegawai_nama', '$pegawai_alias', '$no_telp', '$pegawai_status', '$tempat_lahir', '$tgl_lahir', '$tgl_mulai_kerja', '$tgl_masuk_pertama, '$gender')");
 
                 $ambilPegawai = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_id DESC");
                 $peg = mysqli_fetch_array($ambilPegawai, MYSQLI_ASSOC);
