@@ -386,6 +386,9 @@ while ($row = mysqli_fetch_array($query)) {
                 case 'import-pegawai':
                     include "../../pages/superadmin/pegawai/import-pegawai.php";
                     break;
+                case 'export-pegawai':
+                    include "../../pages/superadmin/pegawai/export-pegawai.php";
+                    break;
 
                 case 'form-master-data-si':
                     include "../../pages/superadmin/keluarga/si/form-master-data-si.php";
@@ -421,6 +424,9 @@ while ($row = mysqli_fetch_array($query)) {
                 case 'delete-data-anak':
                     include "../../pages/superadmin/keluarga/anak/delete-data-anak.php";
                     break;
+                case 'master-anak':
+                    include "../../pages/superadmin/keluarga/anak/master-anak.php";
+                    break;
 
                 case 'form-master-data-ortu':
                     include "../../pages/superadmin/keluarga/ortu/form-master-data-ortu.php";
@@ -436,6 +442,9 @@ while ($row = mysqli_fetch_array($query)) {
                     break;
                 case 'delete-data-ortu':
                     include "../../pages/superadmin/keluarga/ortu/delete-data-ortu.php";
+                    break;
+                case 'master-ortu':
+                    include "../../pages/superadmin/keluarga/ortu/master-ortu.php";
                     break;
 
                 case 'form-master-data-sekolah':
@@ -456,6 +465,9 @@ while ($row = mysqli_fetch_array($query)) {
                 case 'set-pendidikan-akhir':
                     include "../../pages/superadmin/pendidikan/sekolah/set-pendidikan-akhir.php";
                     break;
+                case 'master-sekolah':
+                    include "../../pages/superadmin/pendidikan/sekolah/master-sekolah.php";
+                    break;
 
                 case 'form-master-data-bahasa':
                     include "../../pages/superadmin/pendidikan/bahasa/form-master-data-bahasa.php";
@@ -471,6 +483,9 @@ while ($row = mysqli_fetch_array($query)) {
                     break;
                 case 'delete-data-bahasa':
                     include "../../pages/superadmin/pendidikan/bahasa/delete-data-bahasa.php";
+                    break;
+                case 'master-bahasa':
+                    include "../../pages/superadmin/pendidikan/bahasa/master-bahasa.php";
                     break;
 
                 case 'form-master-data-jabatan':

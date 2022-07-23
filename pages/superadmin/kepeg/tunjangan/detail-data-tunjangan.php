@@ -19,11 +19,12 @@ $jab    = mysqli_fetch_array($tampilJab);
 
 $tampilPeru	= mysqli_query($koneksi, "SELECT * FROM tb_setup_peru WHERE id_setup_peru='1'");
 $peru	= mysqli_fetch_array($tampilPeru);
+$perusahaan = isset($peru['pimpinan']) ? $peru['pimpinan'] : "";
 
-$pimpinan	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$peru[pimpinan]'");
+$pimpinan	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$perusahaan'");
 $pim	= mysqli_fetch_array($pimpinan);
 
-$tampilJab2   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peru[pimpinan]'");
+$tampilJab2   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$perusahaan'");
 $jab2    = mysqli_fetch_array($tampilJab2);
 ?>
 <!-- begin page-header -->
@@ -116,7 +117,7 @@ $jab2    = mysqli_fetch_array($tampilJab2);
 					</tr>
 					<tr align="center">
 						<td>&nbsp;</td>
-						<td><span style="color:red"><?= $pim['pegawai_nama'] ?></span></td>
+						<td><span style="color:red"><?= isset($pim['pegawai_nama']) ? $pim['pegawai_nama'] : "" ?></span></td>
 					</tr>
 					<tr align="center">
 						<td>&nbsp;</td>
@@ -124,7 +125,7 @@ $jab2    = mysqli_fetch_array($tampilJab2);
 					</tr>
 					<tr align="center">
 						<td>&nbsp;</td>
-						<td>NIP : <span style="color:red"><?= $pim['pegawai_nip'] ?></span></td>
+						<td>NIP : <span style="color:red"><?= isset($pim['pegawai_nip']) ? $pim['pegawai_nip'] : "" ?></span></td>
 					</tr>
 				</table>
 			</div>

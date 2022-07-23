@@ -41,6 +41,20 @@ if (isset($_GET['pegawai_id'])) {
 			</div>
 			<div class="panel-body">
 				<form action="index.php?page=edit-data-pegawai&pegawai_id=<?= $id_peg ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+					<div class="form-group" style="display:none">
+						<label class="col-md-3 control-label">Record Pegawai<span aria-required="true" class="text-danger"> * </span></label>
+						<div class="col-md-6">
+							<?php
+							$ambilId = mysqli_query($koneksi, "SELECT *FROM pegawai ORDER BY pegawai_id DESC LIMIT 1");
+							$id = mysqli_fetch_array($ambilId);
+
+							$id_explode = explode(".", $id['pegawai_nip']);
+							$recordId = $id_explode[3];
+							?>
+							<input type="text" value="<?= $recordId + 1 ?>" name="record_id" id="record_id" maxlength="24" class="form-control" />
+						</div>
+					</div>
+
 					<div class="form-group">
 						<label class="col-md-3 control-label">PIN<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
@@ -53,11 +67,12 @@ if (isset($_GET['pegawai_id'])) {
 							<input type="text" name="pegawai_nama" maxlength="64" value="<?= $data['pegawai_nama'] ?>" class="form-control" />
 						</div>
 					</div>
+
 					<div class="form-group">
 						<label class="col-md-3 control-label">Tanggal Masuk Kerja<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-3">
 							<div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
-								<input type="text" value="<?= $data['tgl_masuk_pertama'] ?>" name="tgl_masuk_pertama" class="form-control" />
+								<input type="text" name="tgl_masuk_pertama" id="tgl_masuk_pertama" value="<?= $data['tgl_masuk_pertama'] ?>" class="form-control" />
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 							</div>
 						</div>
@@ -66,7 +81,7 @@ if (isset($_GET['pegawai_id'])) {
 						<label class="col-md-3 control-label">Tanggal Mulai Kerja<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-3">
 							<div class="input-group date" id="datepicker-disabled-past2" data-date-format="yyyy-mm-dd">
-								<input type="text" value="<?= $data['tgl_mulai_kerja'] ?>" name="tgl_mulai_kerja" class="form-control" />
+								<input type="text" name="tgl_mulai_kerja" value="<?= $data['tgl_mulai_kerja'] ?>" class="form-control" />
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 							</div>
 						</div>
@@ -74,10 +89,14 @@ if (isset($_GET['pegawai_id'])) {
 
 					<div class="form-group">
 						<label class="col-md-3 control-label">NIP<span aria-required="true" class="text-danger"> * </span></label>
-						<div class="col-md-6">
-							<input type="text" name="pegawai_nip" maxlength="24" value="<?= $data['pegawai_nip'] ?>" class="form-control" />
+						<div class="col-md-4">
+							<input type="text" name="pegawai_nip" id="pegawai_nip" value="<?= $data['pegawai_nip'] ?>" maxlength="24" class="form-control" />
+						</div>
+						<div class="col-sm-2">
+							<a type="button" class="btn btn-success btn-sm pull-right" onclick="generateNip()"><i class="fa fa-plus-circle"></i> Generate NIP&nbsp;</a>
 						</div>
 					</div>
+
 					<div class="form-group">
 						<label class="col-md-3 control-label">Status Pegawai<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
@@ -222,4 +241,20 @@ if (isset($_GET['pegawai_id'])) {
 	}
 
 	selectOption();
+</script>
+
+<script type="text/javascript">
+	function generateNip() {
+		var doc = document.getElementById("tgl_masuk_pertama");
+		var doc2 = document.getElementById("pegawai_nip");
+		var doc3 = document.getElementById("record_id");
+
+		var tgl_masuk_pertama = new Date(doc.value);
+		var tahun = tgl_masuk_pertama.getFullYear();
+		var bulan = ("0" + (tgl_masuk_pertama.getMonth() + 1)).slice(-2);
+		var year2digits = tahun.toString().substring(2);
+
+		doc2.value = "2012." + year2digits + "." + bulan + "." + doc3.value;
+
+	}
 </script>

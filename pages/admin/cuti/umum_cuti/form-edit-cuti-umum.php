@@ -37,14 +37,13 @@ if (isset($_GET['id_cuti_umum'])) {
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
                 <h4 class="panel-title">Form edit izin</h4>
             </div>
             <div class="panel-body">
                 <form action="index.php?page=edit-cuti-umum&id_cuti_umum=<?= $id_cuti_umum ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Jenis Izin</label>
+                        <label class="col-md-3 control-label">Jenis Izin<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-6">
                             <?php
                             $dataJ = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY jenis");
@@ -58,13 +57,13 @@ if (isset($_GET['id_cuti_umum'])) {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Keperluan</label>
+                        <label class="col-md-3 control-label">Keperluan<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-6">
                             <textarea type="text" name="keperluan" maxlength="255" class="form-control"><?= $data['keperluan'] ?></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Tanggal Pengajuan</label>
+                        <label class="col-md-3 control-label">Tanggal Pengajuan<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-6">
                             <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
                                 <input type="text" name="tanggal_cuti" value="<?= $data['tanggal_cuti'] ?>" class="form-control" />
@@ -73,24 +72,27 @@ if (isset($_GET['id_cuti_umum'])) {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Tanggal Pelaksanaan</label>
+                        <label class="col-md-3 control-label">Tanggal Pelaksanaan<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
-                                <input type="text" name="tanggal_mulai" value="<?= $data['tanggal_mulai'] ?>" placeholder="Dari" class="form-control" />
+                                <input type="text" id="tanggal_mulai" name="tanggal_mulai" value="<?= $data['tanggal_mulai'] ?>" placeholder="Dari" class="form-control" />
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past4" data-date-format="yyyy-mm-dd">
-                                <input type="text" name="tanggal_selesai" value="<?= $data['tanggal_selesai'] ?>" placeholder="Sampai" class="form-control" />
+                                <input type="text" id="tanggal_selesai" name="tanggal_selesai" value="<?= $data['tanggal_selesai'] ?>" placeholder="Sampai" class="form-control" />
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
+                        <label class="col-md-3">
+                            <a type="button" value="hitung" id="hitung" class="btn btn-danger"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Hitung Hari</a>&nbsp;
+                        </label>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Lama Izin</label>
+                        <label class="col-md-3 control-label">Lama Izin<span aria-required="true" class="text-warning"> * </span></label>
                         <div class="col-md-6">
-                            <input type="text" name="lama_cuti" value="<?= $data['lama_cuti'] ?>" class="form-control" />
+                            <input type="text" id="lama_cuti" name="lama_cuti" value="<?= $data['lama_cuti'] ?>" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -128,4 +130,32 @@ if (isset($_GET['id_cuti_umum'])) {
     setTimeout(function() {
         $(".pesan").fadeOut('slow');
     }, 7000);
+</script>
+
+<script>
+    function getHitungHari(tanggal_mulai, tanggal_selesai) {
+        var elapsed, daysBeforeFirstSaturday, daysAfterLastSunday;
+        var ifThen = function(a, b, c) {
+            return a == b ? c : a;
+        };
+
+        elapsed = tanggal_selesai - tanggal_mulai;
+        elapsed /= 86400000;
+
+        daysBeforeFirstSunday = (7 - tanggal_mulai.getDay()) % 7;
+        daysAfterLastSunday = tanggal_selesai.getDay();
+
+        elapsed -= (daysBeforeFirstSunday + daysAfterLastSunday);
+        elapsed = (elapsed / 7) * 6;
+        elapsed += ifThen(daysBeforeFirstSunday, 0, 0) + ifThen(daysAfterLastSunday, 6, 6);
+
+        return Math.ceil(elapsed);
+    }
+
+    $("#hitung").on("click", function() {
+        let mulai = document.querySelector('#tanggal_mulai').value,
+            selesai = document.querySelector('#tanggal_selesai').value,
+            hasil = getHitungHari(new Date(mulai), new Date(selesai));
+        document.querySelector('#lama_cuti').value = hasil;
+    })
 </script>

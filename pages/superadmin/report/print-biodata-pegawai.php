@@ -76,7 +76,9 @@ $kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
 $namakepala	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$kep[pimpinan]'");
 $nama		= mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
 
-$tampilPeg = mysqli_query($koneksi, "SELECT * FROM pegawai JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id ");
+
+
+$tampilPeg = mysqli_query($koneksi, "SELECT * FROM pegawai JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id WHERE pegawai.pegawai_id='$id_peg'");
 $peg = mysqli_fetch_array($tampilPeg, MYSQLI_ASSOC);
 
 //agama
@@ -435,7 +437,7 @@ $signa = '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td></td>
 				<td></td>
-				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">AN. PIMPINAN PERUSAHAAN</font></td>
+				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">A.N PERUSAHAAN</font></td>
 			</tr>
 			<tr>
 				<td></td>

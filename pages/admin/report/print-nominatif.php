@@ -28,7 +28,7 @@ $pdf = new MYPDF('L', 'mm', 'Legal', true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Andi Hatmoko');
+$pdf->SetAuthor('ActionTeamSPI');
 $pdf->SetTitle('Report');
 $pdf->SetSubject('TCPDF');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
@@ -85,16 +85,15 @@ $pdf->writeHTML($subhead, true, false, false, false, '');
 $html = '<table border="1" cellspacing="0" cellpadding="3">
 			<tr align="center">
 				<th rowspan="2" width="40" height="50">NO</th>
-				<th colspan="2" width="200" height="30">NAMA, TTL</th>
+				<th colspan="2" width="240" height="30">NAMA, TTL</th>
 				<th rowspan="2" width="100">JENIS KELAMIN</th>
 				<th colspan="2" width="200">JABATAN</th>
-				<th rowspan="2" width="30">ESL</th>
 				<th rowspan="2" width="170">PEND, JURUSAN, T.LULUS</th>
 				<th rowspan="2" width="170">ALAMAT & NO. TELP</th>
 				<th rowspan="2" width="50">KET</th>
 			</tr>
 			<tr align="center">
-				<th colspan="2" width="200">NIP, AGAMA</th>	
+				<th colspan="2" width="240">NIP, AGAMA</th>	
 				<th width="100">NAMA</th>
 				<th width="100">TMT</th>
 			</tr>
@@ -104,10 +103,9 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				<th>3</th>
 				<th>4</th>
 				<th>5</th>
-				<th></th>
+				<th>6</th>
 				<th>7</th>
 				<th>8</th>
-				<th>9</th>
 			</tr>';
 $no = 1;
 $idPeg = mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id= tb_pegawai.pegawai_id INNER JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id");
@@ -124,35 +122,18 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 		$status = 'Aktif';
 	}
 
-	$html .= '<tr>
-							
+	$html .= '<tr>	
 					<td align="center">' . $no++ . '</td>
-					<td colspan="2">' . $peg['pegawai_nama'] . '<br /><br />' . $peg['tempat_lahir'] . ', ' . $peg['tgl_lahir'] . '<br />' . $peg['pegawai_nip'] . '<br />' . $agama . '</td>
+					<td colspan="2">' . $peg['pegawai_nama'] . '<br />' . $peg['tempat_lahir'] . ', ' . $peg['tgl_lahir'] . '<br />' . $peg['pegawai_nip'] . '<br />' . $agama . '</td>
 					<td>' . $gender . '</td>';
 
-	
-
 	$idJab = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$peg[pegawai_id]'");
-	// if(mysqli_num_rows($idJab) > 0) {
-
-	// } else {
-
-	// }
 	$hjab = mysqli_fetch_array($idJab, MYSQLI_ASSOC);
 	$jb = isset($hjab['jabatan']) ? $hjab['jabatan'] : '';
 	$jbt = isset($hjab['tmt_jabatan']) ? $hjab['tmt_jabatan'] : '';
 	$html .= '<td>' . $jb . '</td>
-					<td>' . $jbt . '</td>
-					<td align="center">' . '</td>';
+					<td>' . $jbt . '</td>';
 
-	// $idLatjab = mysqli_query($koneksi, "SELECT * FROM tb_lat_jabatan WHERE id_lat_jabatan='$peg[pegawai_id]'");
-	// $hljab = mysqli_fetch_array($idLatjab, MYSQLI_ASSOC);
-	// $hljab1 = isset($hljab['nama_pelatih']) ? $hljab['nama_pelatih'] : '';
-	// $hljab2 = isset($hljab['tahun_lat']) ? $hljab['tahun_lat'] : '';
-	// $hljab3 = isset($hljab['jml_jam']) ? $hljab['jml_jam'] : '';
-	// $html .='<td>'.$hljab1.'</td>
-	// <td align="center">'.$hljab2.'</td>
-	// <td align="center">'.$hljab3.'</td>';
 
 	$idSek = mysqli_query($koneksi, "SELECT * FROM  tb_sekolah  WHERE id_peg='$peg[pegawai_id]' AND status='Akhir' ");
 	$hsek = mysqli_fetch_array($idSek, MYSQLI_ASSOC);
@@ -163,7 +144,7 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 	$html .= '<td>' . $hsek1 . '<br />' . $hsek2 . '<br />' . $hsek3 . '<br />' . $hsek4 . '</td>
 					<td>' . $peg['alamat'] . '<br /><br />' . $peg['pegawai_telp'] . '</td>
 					<td align="center">'  . $status . '</td>
-				</tr>';
+			 </tr>';
 }
 $html .= '</table><br /><br />';
 $html .= '<table cellpadding="1" border="0" align="center">
@@ -180,7 +161,7 @@ $html .= '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td></td>
 				<td></td>
-				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">DIREKTUR UTAMA</font></td>
+				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">A.N PERUSAHAAN</font></td>
 			</tr>
 			<tr>
 				<td></td>

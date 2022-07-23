@@ -160,6 +160,9 @@ $peg		= mysqli_fetch_array($tampilPeg);
 					<li><a href="./"><i class="ion-ios-pulse-strong bg-blue"></i><span>Profile Saya</span> <span class="badge bg-blue pull-right">HOME</span></a></li>
 					<!-- <li><a href="index.php?page=form-master-cuti&id_user=<?= $_SESSION['id_user'] ?>"><i class="fa fa-calendar bg-pink"></i><span>Form Pengajuan Cuti</span></a></li> -->
 					<li class="has-sub">
+						<a href="index.php?page=form-view-rekap-presensi"><i class="ion-compose bg-warning"></i><span>Rekap Presensi</span></a>
+					</li>
+					<li class="has-sub">
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-calendar bg-pink"></i><span>Form Pengajuan Cuti</span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-master-cuti&pegawai_id=<?= $peg['pegawai_id'] ?>"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pengajuan Cuti Tahunan</a></li>
@@ -252,6 +255,10 @@ $peg		= mysqli_fetch_array($tampilPeg);
 					break;
 				case 'print-cuti-umum':
 					include "../../pages/pegawai/cuti/umum_cuti/print-cuti-umum.php";
+					break;
+
+				case 'form-view-rekap-presensi':
+					include "../../pages/pegawai/presensi/rekap/form-view-rekap-presensi.php";
 					break;
 
 				case 'form-ganti-password':

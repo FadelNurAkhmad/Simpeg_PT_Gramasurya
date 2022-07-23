@@ -60,7 +60,7 @@ $data	= mysqli_fetch_array($query);
 						<tr>
 							<td class="field">Helpdesk</td>
 							<td><?php
-								$noHelpdesk = (isset($data['helpdesk'])) ? $data['helpdesk'] : "";
+								$noHelpdesk = (isset($data['helpdesk'])) ? $data['helpdesk'] : 0;
 								$helpdesk	= mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_telp='$noHelpdesk'");
 								$help	= mysqli_fetch_array($helpdesk);
 								echo (isset($help['pegawai_telp'])) ? $help['pegawai_nama'] . " - " . $help['pegawai_telp'] : "";

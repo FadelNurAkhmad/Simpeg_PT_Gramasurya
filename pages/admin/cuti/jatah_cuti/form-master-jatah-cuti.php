@@ -50,14 +50,13 @@ $id_jatah    = kdauto("tb_jatah_cuti", "");
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
                 <h4 class="panel-title">Form Input Jatah Cuti</h4>
             </div>
             <div class="panel-body">
                 <form action="index.php?page=master-jatah-cuti&id_jatah=<?= $id_jatah ?>"" class=" form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Pegawai</label>
+                        <label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <?php
                             $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
@@ -71,28 +70,27 @@ $id_jatah    = kdauto("tb_jatah_cuti", "");
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Periode Jatah Cuti</label>
+                        <label class="col-md-3 control-label">Periode Jatah Cuti<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
-                                <input type="text" name="jatah_c_mulai" placeholder="Mulai" class="form-control" />
+                                <input type="text" id="jatah_c_mulai" name="jatah_c_mulai" placeholder="Mulai" class="form-control" />
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past4" data-date-format="yyyy-mm-dd">
-                                <input type="text" name="jatah_c_akhir" placeholder="Akhir" class="form-control" />
+                                <input type="text" id="jatah_c_akhir" name="jatah_c_akhir" placeholder="Akhir" class="form-control" />
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
+                        <label class="control-label"><span aria-required="true" class="text-danger"> * Per Periode 1 Tahun </span></label>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Jatah Cuti</label>
                         <div class="col-md-4">
                             <input type="text" name="jatah_c_jml" maxlength="11" class="form-control" placeholder="12" value="12" readonly />
                         </div>
-                        <div class="col-md-2">
-                            <p>* Max 12</p>
-                        </div>
+                        <label class="control-label"><span aria-required="true" class="text-danger"> * Max 12 Hari </span></label>
                     </div>
                     <div class="form-group">
                         <div class="col-md-6">

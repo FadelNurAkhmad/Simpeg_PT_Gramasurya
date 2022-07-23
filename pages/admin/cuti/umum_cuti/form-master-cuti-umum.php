@@ -50,14 +50,13 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
                 <h4 class="panel-title">Form Input Izin</h4>
             </div>
             <div class="panel-body">
-                <form action="index.php?page=master-cuti-umum&id_cuti_umum=<?= $id_cuti_umum ?>"" class=" form-horizontal" method="POST" enctype="multipart/form-data">
+                <form action="index.php?page=master-cuti-umum&id_cuti_umum=<?= $id_cuti_umum ?>" class=" form-horizontal" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Pegawai</label>
+                        <label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <?php
                             $data = mysqli_query($koneksi, "SELECT * FROM pegawai ORDER BY pegawai_nama ASC");
@@ -71,7 +70,7 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Jenis Izin</label>
+                        <label class="col-md-3 control-label">Jenis Izin<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <?php
                             $dataJ = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti ORDER BY jenis");
@@ -85,13 +84,13 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Keperluan</label>
+                        <label class="col-md-3 control-label">Keperluan<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <textarea type="text" name="keperluan" maxlength="255" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Tanggal Pengajuan Izin</label>
+                        <label class="col-md-3 control-label">Tanggal Pengajuan Izin<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
                             <div class="input-group date" id="datepicker-disabled-past1" data-date-format="yyyy-mm-dd">
                                 <input type="text" name="tanggal_cuti" placeholder="Mulai" class="form-control" />
@@ -100,24 +99,27 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Tanggal Pelaksanaan</label>
+                        <label class="col-md-3 control-label">Tanggal Pelaksanaan<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past3" data-date-format="yyyy-mm-dd">
-                                <input type="text" name="tanggal_mulai" placeholder="Dari" class="form-control" />
+                                <input type="text" id="tanggal_mulai" name="tanggal_mulai" placeholder="Dari" class="form-control" />
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="input-group date" id="datepicker-disabled-past4" data-date-format="yyyy-mm-dd">
-                                <input type="text" name="tanggal_selesai" placeholder="Sampai" class="form-control" />
+                                <input type="text" id="tanggal_selesai" name="tanggal_selesai" placeholder="Sampai" class="form-control" />
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
+                        <label class="col-md-3">
+                            <a type="button" value="hitung" id="hitung" class="btn btn-danger"><i class="fa fa-calendar"></i>&nbsp;&nbsp;Hitung Hari</a>&nbsp;
+                        </label>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Lama Izin</label>
+                        <label class="col-md-3 control-label">Lama Izin<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
-                            <input type="text" name="lama_cuti" class="form-control" placeholder="Dalam Hari"></input>
+                            <input type="text" id="lama_cuti" name="lama_cuti" class="form-control" placeholder="Dalam Hari"></input>
                         </div>
                     </div>
                     <div class="form-group">
@@ -125,19 +127,6 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
                             <input type="hidden" id="jumlah_cuti" name="jumlah_cuti" value="1" />
                         </div>
                     </div>
-                    <!-- <div class="form-group">
-                        <label class="col-md-3 control-label">Periode Tahun Cuti</label>
-                        <div class="col-md-6">
-                            <select id="periode" name="periode" class="form-control" required>
-                                <option value="">-- Pilih Periode Tahun Cuti --</option>
-                                <option value="2021">2021</option>
-                                <option value="2022">2022</option>
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
-                            </select>
-                        </div>
-                    </div> -->
                     <div class="form-group">
                         <div class="col-md-6">
                             <input type="hidden" id="status" name="status" value="Process">
@@ -168,4 +157,32 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
     setTimeout(function() {
         $(".pesan").fadeOut('slow');
     }, 7000);
+</script>
+
+<script>
+    function getHitungHari(tanggal_mulai, tanggal_selesai) {
+        var elapsed, daysBeforeFirstSaturday, daysAfterLastSunday;
+        var ifThen = function(a, b, c) {
+            return a == b ? c : a;
+        };
+
+        elapsed = tanggal_selesai - tanggal_mulai;
+        elapsed /= 86400000;
+
+        daysBeforeFirstSunday = (7 - tanggal_mulai.getDay()) % 7;
+        daysAfterLastSunday = tanggal_selesai.getDay();
+
+        elapsed -= (daysBeforeFirstSunday + daysAfterLastSunday);
+        elapsed = (elapsed / 7) * 6;
+        elapsed += ifThen(daysBeforeFirstSunday, 0, 0) + ifThen(daysAfterLastSunday, 6, 6);
+
+        return Math.ceil(elapsed);
+    }
+
+    $("#hitung").on("click", function() {
+        let mulai = document.querySelector('#tanggal_mulai').value,
+            selesai = document.querySelector('#tanggal_selesai').value,
+            hasil = getHitungHari(new Date(mulai), new Date(selesai));
+        document.querySelector('#lama_cuti').value = hasil;
+    })
 </script>

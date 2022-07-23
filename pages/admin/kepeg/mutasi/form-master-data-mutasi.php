@@ -72,15 +72,7 @@ $id_mutasi	= kdauto("tb_mutasi", "");
 					<div class="form-group">
 						<label class="col-md-3 control-label">Jenis Mutasi<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
-							<select name="jns_mutasi" class="default-select2 form-control">
-								<option value="">...</option>
-								<option value="Masuk">Masuk</option>
-								<option value="Keluar">Keluar</option>
-								<option value="Pindah Antar Instansi">Pindah Antar Instansi</option>
-								<option value="Pensiun">Pensiun</option>
-								<option value="Wafat">Wafat</option>
-								<option value="Kenaikan Pangkat">Kenaikan Pangkat</option>
-							</select>
+							<input type="text" name="jns_mutasi" maxlength="24" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">

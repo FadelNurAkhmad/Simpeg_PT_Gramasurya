@@ -1,11 +1,6 @@
 <?php
 
 include "../../config/koneksi.php";
-require '../../assets/plugins/phpspreadsheet/vendor/autoload.php';
-
-require 'pegawai/export-pegawai.php';
-
-
 
 ?>
 <!-- begin breadcrumb -->
@@ -19,7 +14,7 @@ require 'pegawai/export-pegawai.php';
 		?>
 	</li>
 	<li><a type="button" data-toggle="modal" data-target="#import" class=" btn btn-sm btn-warning m-b-10" title="Import From Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Import</a></li>
-	<li><a href="<?php echo $file; ?>" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
+	<li><a href="index.php?page=export-pegawai" class="btn btn-sm btn-success m-b-10" title="Export To Excel"><i class="fa fa-file-excel-o"></i> &nbsp;Export</a></li>
 	<li><a href="index.php?page=form-master-data-pegawai" class="btn btn-sm btn-primary m-b-10"><i class="fa fa-plus-circle"></i> &nbsp;Add Pegawai</a></li>
 </ol>
 
