@@ -59,7 +59,7 @@ if (isset($_POST['submit'])) {
             $id_jab         = kdauto("tb_jabatan", "");
 
             // mengambil data dari excel
-            $pegawai_id = $sheetData[$i]['0'];
+            // $pegawai_id = $sheetData[$i]['0'];
             $pegawai_pin = $sheetData[$i]['1'];
             $pegawai_nip = $sheetData[$i]['2'];
             $pegawai_nama = $sheetData[$i]['3'];

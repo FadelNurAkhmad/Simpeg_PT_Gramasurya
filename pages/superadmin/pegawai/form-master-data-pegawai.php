@@ -135,7 +135,6 @@ $id_peg	= kdauto("tb_pegawai", "");
 						</div>
 					</div>
 
-
 					<div class="form-group">
 						<label class="col-md-3 control-label">Tempat, Tanggal Lahir<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-3">
@@ -148,13 +147,6 @@ $id_peg	= kdauto("tb_pegawai", "");
 							</div>
 						</div>
 					</div>
-
-
-
-
-
-
-
 
 					<div class="form-group">
 						<label class="col-md-3 control-label">Agama<span aria-required="true" class="text-danger"> * </span></label>
@@ -277,19 +269,6 @@ $id_peg	= kdauto("tb_pegawai", "");
 </script>
 
 <script type="text/javascript">
-	// $(document).ready(function() {
-
-	// 	$("#set_nip").keyup(function() {
-	// 		var tgl_masuk_pertama = new Date($("#tgl_masuk_pertama").val());
-	// 		var tahun = tgl_masuk_pertama.getFullYear();
-	// 		var year2digits = tahun.toString().substring(2);
-
-	// 		var pegawai_nip = year2digits;
-	// 		$("#pegawai_nip").val(pegawai_nip);
-	// 	});
-
-	// });
-
 	function generateNip() {
 		var doc = document.getElementById("tgl_masuk_pertama");
 		var doc2 = document.getElementById("pegawai_nip");
