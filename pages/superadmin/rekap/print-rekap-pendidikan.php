@@ -110,13 +110,13 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				<td width="165"><b>JUMLAH PEGAWAI</b></td>	
 			</tr>';
 $no = 0;
-$rekapsek	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY sekolah ORDER BY sekolah DESC");
+$rekapsek	= mysqli_query($koneksi, "SELECT * FROM tb_sekolah GROUP BY tingkat ORDER BY tingkat DESC");
 while ($sek = mysqli_fetch_array($rekapsek)) {
 	$no++;
 	$html .= '<tr>
 				<td align="center">' . $no . '</td>
-				<td>' . $sek['sekolah'] . '</td>';
-	$jml = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' AND sekolah='$sek[sekolah]'");
+				<td>' . $sek['tingkat'] . '</td>';
+	$jml = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' AND sekolah='$sek[tingkat]'");
 	$html .= '<td>' . mysqli_num_rows($jml) . '</td>
 			</tr>';
 }
