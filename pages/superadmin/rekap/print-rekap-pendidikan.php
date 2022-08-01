@@ -66,29 +66,33 @@ $pdf->SetFont('helvetica', '', 10);
 
 include "../../../config/koneksi.php";
 
-$kepala	= mysqli_query($koneksi, "SELECT * FROM tb_setup_bkd WHERE id_setup_bkd='1'");
-$kep	= mysqli_fetch_array($kepala, MYSQLI_ASSOC);
+$tampilPeru    = mysqli_query($koneksi, "SELECT * FROM tb_setup_peru WHERE id_setup_peru='1'");
+$setPeru    = mysqli_fetch_array($tampilPeru);
 
-$namakepala	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE id_peg='$kep[kepala]'");
-$nama		= mysqli_fetch_array($namakepala, MYSQLI_ASSOC);
+$pimpinan    = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$setPeru[pimpinan]'");
+$pim    = mysqli_fetch_array($pimpinan);
 
-$pangkat = mysqli_query($koneksi, "SELECT * FROM tb_pangkat WHERE id_peg='$kep[kepala]' AND status_pan='Aktif'");
-$pan	= mysqli_fetch_array($pangkat, MYSQLI_ASSOC);
+$tampilJab2   = mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_peg='$setPeru[pimpinan]'");
+$jab2    = mysqli_fetch_array($tampilJab2);
+
+$sekolah   = mysqli_query($koneksi, "SELECT * FROM tb_sekolah");
+$seko    = mysqli_fetch_array($sekolah);
+
 
 $head = '<table border="0" cellspacing="0" cellpadding="3">
-			<tr>
-				<td width="100" rowspan="3"><img src="../../../assets/img/logo-grama.png" width="78" height="78"/></td>
-				<td width="385" align="center"><font size="11" style="text-transform:uppercase;">PEMERINTAH KABUPATEN ' . $kep['kab'] . '</font></td>
-				<td width="100" rowspan="3"></td>
-			</tr>
-			<tr>
-				<td align="center"><font size="10" style="text-transform:uppercase;font-weight:bold;">BADAN KEPEGAWAIAN DAERAH</font></td>	
-			</tr>
-			<tr>
-				<td align="center"><font size="10">' . $kep['alamat'] . '</font></td>	
-			</tr>
+		<tr>
+			<td width="100" rowspan="3"><img src="../../../../assets/img/logo.png" width="78" height="78"/></td>
+			<td width="385" align="center"><font size="10" style="text-transform:uppercase;"></font></td>	
+			<td width="100" rowspan="3"></td>
+		</tr>
+		<tr>
+			<td align="center"><font size="12" style="text-transform:uppercase;font-weight:bold;">' . $setPeru['nama_peru'] . '</font></td>	
+		</tr>
+		<tr>
+			<td align="center"><font size="9">' . $setPeru['alamat'] . '</font></td>	
+		</tr>
 		</table>
-		<table border="2" cellspacing="0" cellpadding="3">
+			<table border="2" cellspacing="0" cellpadding="3">
 		</table>';
 $pdf->writeHTML($head, true, false, false, false, '');
 
@@ -106,13 +110,13 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				<td width="165"><b>JUMLAH PEGAWAI</b></td>	
 			</tr>';
 $no = 0;
-$rekapsek	= mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY sekolah ORDER BY sekolah DESC");
-while ($sek = mysqli_fetch_array($rekapsek, MYSQLI_ASSOC)) {
+$rekapsek	= mysqli_query($koneksi, "SELECT * FROM tb_sekolah GROUP BY tingkat ORDER BY tingkat DESC");
+while ($sek = mysqli_fetch_array($rekapsek)) {
 	$no++;
 	$html .= '<tr>
 				<td align="center">' . $no . '</td>
-				<td>' . $sek['sekolah'] . '</td>';
-	$jml = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' AND sekolah='$sek[sekolah]'");
+				<td>' . $sek['tingkat'] . '</td>';
+	$jml = mysqli_query($koneksi, "SELECT * FROM tb_pegawai WHERE status_mut='' AND sekolah='$sek[tingkat]'");
 	$html .= '<td>' . mysqli_num_rows($jml) . '</td>
 			</tr>';
 }
@@ -123,7 +127,7 @@ $sign = '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td width="200"></td>
 				<td width="100"></td>
-				<td width="285">' . $kep['kab'] . ', ' . date("j F Y") . '</td>
+				<td width="285"> Yogyakarta, ' . date("j F Y") . '</td>
 			</tr>
 			<tr>
 				<td></td>
@@ -133,12 +137,12 @@ $sign = '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td></td>
 				<td></td>
-				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">BADAN KEPEGAWAIAN DAERAH</font></td>
+				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">An. PIMPINAN PERUSAHAAN</font></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
-				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">KABUPATEN ' . $kep['kab'] . '</font></td>
+				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">PT GRAMASURYA</font></td>
 			</tr>
 			<tr>
 				<td height="60"></td>
@@ -148,17 +152,17 @@ $sign = '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td></td>
 				<td></td>
-				<td align="center"><font size="9"><b>' . $nama['nama'] . '</b></font></td>
+				<td align="center"><font size="9"><b>' . $pim['pegawai_nama'] . '</b></font></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
-				<td align="center"><font size="9">' . $pan['pangkat'] . '</font></td>
+				<td align="center"><font size="9">' . (isset($jab2['jabatan']) ? $jab2['jabatan'] : "-") . '</font></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
-				<td align="center"><font size="9"><b>NIP. ' . $nama['nip'] . '</b></font></td>
+				<td align="center"><font size="9"><b>NIP. ' . (isset($pim['pegawai_nip']) ? $pim['pegawai_nip'] : "-") . '</b></font></td>
 			</tr>
 		</table>';
 $pdf->writeHTML($sign, true, false, false, false, '');

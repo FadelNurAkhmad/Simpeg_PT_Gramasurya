@@ -1,14 +1,14 @@
 <div class="row">
 	<?php
-	if (isset($_GET['id_hukuman'])) {
-		$id_hukuman = $_GET['id_hukuman'];
+	if (isset($_GET['id_pembinaan'])) {
+		$id_pembinaan = $_GET['id_pembinaan'];
 	} else {
 		die("Error. No ID Selected! ");
 	}
 
 	if ($_POST['save'] == "save") {
 		$id_peg			= $_POST['id_peg'];
-		$hukuman		= $_POST['hukuman'];
+		$pembinaan		= $_POST['pembinaan'];
 		$pejabat_sk		= $_POST['pejabat_sk'];
 		$no_sk			= $_POST['no_sk'];
 		$tgl_sk			= $_POST['tgl_sk'];
@@ -26,16 +26,16 @@
 		// $esl = mysqli_fetch_array($tJ);
 		// $eselon		= $esl['eselon'];
 
-		if (empty($_POST['id_peg']) || empty($_POST['hukuman']) || empty($_POST['pejabat_sk']) || empty($_POST['no_sk']) || empty($_POST['tgl_sk'])) {
+		if (empty($_POST['id_peg']) || empty($_POST['pembinaan']) || empty($_POST['pejabat_sk']) || empty($_POST['no_sk']) || empty($_POST['tgl_sk'])) {
 			$_SESSION['pesan'] = "Oops! Please fill all column ...";
-			header("location:index.php?page=form-master-data-hukuman");
+			header("location:index.php?page=form-master-data-pembinaan");
 		} else {
-			$insert = "INSERT INTO tb_hukuman (id_hukuman, id_peg, hukuman, pejabat_sk, no_sk, tgl_sk, pejabat_pulih, no_pulih, tgl_pulih) VALUES ('$id_hukuman', '$id_peg', '$hukuman', '$pejabat_sk', '$no_sk', '$tgl_sk', '$pejabat_pulih', '$no_pulih', '$tgl_pulih')";
+			$insert = "INSERT INTO tb_pembinaan (id_pembinaan, id_peg, pembinaan, pejabat_sk, no_sk, tgl_sk, pejabat_pulih, no_pulih, tgl_pulih) VALUES ('$id_pembinaan', '$id_peg', '$pembinaan', '$pejabat_sk', '$no_sk', '$tgl_sk', '$pejabat_pulih', '$no_pulih', '$tgl_pulih')";
 			$query = mysqli_query($koneksi, $insert);
 
 			if ($query) {
-				$_SESSION['pesan'] = "Good! Insert data hukuman success ...";
-				header("location:index.php?page=form-master-data-hukuman");
+				$_SESSION['pesan'] = "Good! Insert data pembinaan success ...";
+				header("location:index.php?page=form-master-data-pembinaan");
 			} else {
 				echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
 			}

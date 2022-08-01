@@ -1,7 +1,7 @@
 <div class="row">
     <?php
     include "../../config/koneksi.php";
-    if (isset($_GET['true']) == 'true') {
+    if (isset($_GET['true1']) == 'true1') {
         $id_cuti_umum = $_GET['id_cuti_umum'];
 
         $query       = mysqli_query($koneksi, "SELECT * FROM tb_cuti_umum WHERE id_cuti_umum='$id_cuti_umum'");
@@ -9,6 +9,9 @@
         $id_peg      = $data['id_peg'];
         $jumlah_cuti = $data['jumlah_cuti'];
         $status      = "Approve";
+
+        $queryJenisCuti = mysqli_query($koneksi, "SELECT * FROM tb_jenis_cuti WHERE jenis = '$data[jenis_cuti]'");
+        $tb_jenis_cuti = mysqli_fetch_array($queryJenisCuti, MYSQLI_ASSOC);
 
         if (mysqli_num_rows($query) == 0) {
             $_SESSION['pesan'] = "Oops! Data tidak ditemukan. ...";
@@ -31,7 +34,7 @@
 
     <?php
     include "../../config/koneksi.php";
-    if (isset($_GET['false']) == 'false') {
+    if (isset($_GET['false1']) == 'false1') {
         $id_cuti_umum1 = $_GET['id_cuti_umum'];
 
         $query1       = mysqli_query($koneksi, "SELECT * FROM tb_cuti_umum WHERE id_cuti_umum='$id_cuti_umum1'");

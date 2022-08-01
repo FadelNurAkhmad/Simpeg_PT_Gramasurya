@@ -187,7 +187,7 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="ion-filing bg-info"></i><span>Kepegawaian &nbsp; <span class="label label-warning m-l-5">7</span></span></a>
 						<ul class="sub-menu">
 							<li><a href="index.php?page=form-master-data-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jabatan</a></li>
-							<li><a href="index.php?page=form-master-data-hukuman"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Hukuman</a></li>
+							<li><a href="index.php?page=form-master-data-pembinaan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pembinaan</a></li>
 							<li><a href="index.php?page=form-master-data-dokumen"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Dokumen Pegawai</a></li>
 							<li><a href="index.php?page=form-master-data-penghargaan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Penghargaan</a></li>
 							<li><a href="index.php?page=form-master-data-penugasan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Penugasan</a></li>
@@ -215,7 +215,7 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					<li class="has-sub">
 						<a href="javascript:;"><i class="ion-arrow-shrink bg-info"></i><span>Rekapitulasi</span> <span class="badge bg-danger pull-right"><span class="ion-stats-bars"></span></span></a>
 						<ul class="sub-menu">
-							<li><a href="index.php?page=rekap-jabatan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Jabatan</a></li>
+							<li><a href="index.php?page=rekap-unit-kerja"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Unit Kerja</a></li>
 							<li><a href="index.php?page=rekap-pendidikan"><i class="menu-icon fa fa-caret-right"></i> &nbsp;Pendidikan</a></li>
 
 						</ul>
@@ -271,6 +271,12 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'ganti-foto':
 					include "../../pages/admin/pegawai/ganti-foto.php";
 					break;
+				case 'import-pegawai':
+					include "../../pages/admin/pegawai/import-pegawai.php";
+					break;
+				case 'export-pegawai':
+					include "../../pages/admin/pegawai/export-pegawai.php";
+					break;
 
 				case 'form-master-data-si':
 					include "../../pages/admin/keluarga/si/form-master-data-si.php";
@@ -286,6 +292,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					break;
 				case 'delete-data-si':
 					include "../../pages/admin/keluarga/si/delete-data-si.php";
+					break;
+				case 'master-si':
+					include "../../pages/admin/keluarga/si/master-si.php";
 					break;
 
 				case 'form-master-data-anak':
@@ -303,6 +312,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'delete-data-anak':
 					include "../../pages/admin/keluarga/anak/delete-data-anak.php";
 					break;
+				case 'master-anak':
+					include "../../pages/admin/keluarga/anak/master-anak.php";
+					break;
 
 				case 'form-master-data-ortu':
 					include "../../pages/admin/keluarga/ortu/form-master-data-ortu.php";
@@ -318,6 +330,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					break;
 				case 'delete-data-ortu':
 					include "../../pages/admin/keluarga/ortu/delete-data-ortu.php";
+					break;
+				case 'master-ortu':
+					include "../../pages/admin/keluarga/ortu/master-ortu.php";
 					break;
 
 				case 'form-master-data-sekolah':
@@ -338,6 +353,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 				case 'set-pendidikan-akhir':
 					include "../../pages/admin/pendidikan/sekolah/set-pendidikan-akhir.php";
 					break;
+				case 'master-sekolah':
+					include "../../pages/admin/pendidikan/sekolah/master-sekolah.php";
+					break;
 
 				case 'form-master-data-bahasa':
 					include "../../pages/admin/pendidikan/bahasa/form-master-data-bahasa.php";
@@ -353,6 +371,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					break;
 				case 'delete-data-bahasa':
 					include "../../pages/admin/pendidikan/bahasa/delete-data-bahasa.php";
+					break;
+				case 'master-bahasa':
+					include "../../pages/admin/pendidikan/bahasa/master-bahasa.php";
 					break;
 
 				case 'form-master-data-jabatan':
@@ -435,20 +456,20 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					include "../../pages/admin/kepeg/pangkat/delete-mastergol.php";
 					break;
 
-				case 'form-master-data-hukuman':
-					include "../../pages/admin/kepeg/hukum/form-master-data-hukuman.php";
+				case 'form-master-data-pembinaan':
+					include "../../pages/admin/kepeg/pembinaan/form-master-data-pembinaan.php";
 					break;
-				case 'master-data-hukuman':
-					include "../../pages/admin/kepeg/hukum/master-data-hukuman.php";
+				case 'master-data-pembinaan':
+					include "../../pages/admin/kepeg/pembinaan/master-data-pembinaan.php";
 					break;
-				case 'form-edit-data-hukuman':
-					include "../../pages/admin/kepeg/hukum/form-edit-data-hukuman.php";
+				case 'form-edit-data-pembinaan':
+					include "../../pages/admin/kepeg/pembinaan/form-edit-data-pembinaan.php";
 					break;
-				case 'edit-data-hukuman':
-					include "../../pages/admin/kepeg/hukum/edit-data-hukuman.php";
+				case 'edit-data-pembinaan':
+					include "../../pages/admin/kepeg/pembinaan/edit-data-pembinaan.php";
 					break;
-				case 'delete-data-hukuman':
-					include "../../pages/admin/kepeg/hukum/delete-data-hukuman.php";
+				case 'delete-data-pembinaan':
+					include "../../pages/admin/kepeg/pembinaan/delete-data-pembinaan.php";
 					break;
 
 				case 'form-master-data-dokumen':
@@ -926,6 +947,9 @@ $jmlpeg		= mysqli_num_rows($tampilPeg);
 					break;
 				case 'rekap-pendidikan':
 					include "../../pages/admin/rekap/rekap-pendidikan.php";
+					break;
+				case 'rekap-unit-kerja':
+					include "../../pages/admin/rekap/rekap-unit-kerja.php";
 					break;
 				case 'rekap-skpd':
 					include "../../pages/admin/rekap/rekap-skpd.php";

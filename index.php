@@ -1,6 +1,9 @@
 <?php
 ob_start();
 session_start();
+include "config/koneksi.php";
+$ambilData	= mysqli_query($koneksi, "SELECT helpdesk FROM tb_setup_peru");
+$data	= mysqli_fetch_array($ambilData, MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->

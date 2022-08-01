@@ -28,6 +28,7 @@
 		$alamat			= $_POST['alamat'];
 		$telp			= $_POST['pegawai_telp'];
 		$email			= $_POST['email'];
+		$ket			= $_POST['ket'];
 
 
 		$pensiun = new DateTime($tgl_lhr);
@@ -46,10 +47,10 @@
 			header("location:index.php?page=form-edit-data-pegawai&pegawai_id=$id_peg");
 		} else {
 			$pegawai_d = mysqli_query($koneksi, "UPDATE pegawai_d SET agama='$agama', gol_darah='$gol_darah', stat_nikah='$status_nikah', alamat='$alamat' WHERE pegawai_id='$id_peg'");
-			$tb_pegawai = mysqli_query($koneksi, "UPDATE tb_pegawai SET email='$email', tgl_pensiun='$tgl_pensiun' WHERE pegawai_id='$id_peg'");
+			$tb_pegawai = mysqli_query($koneksi, "UPDATE tb_pegawai SET email='$email', tgl_pensiun='$tgl_pensiun', ket='$ket' WHERE pegawai_id='$id_peg'");
 
 			if ($pegawai_status == 1) {
-				$pegawai = mysqli_query($koneksi, "UPDATE pegawai SET pegawai_pin='$pin', pegawai_nip='$nip', pegawai_nama='$nama', pegawai_status='$pegawai_status', tgl_resign= null  , tempat_lahir='$tempat_lhr', tgl_lahir='$tgl_lhr', gender='$jk', pegawai_telp='$telp' WHERE pegawai_id='$id_peg'");
+				$pegawai = mysqli_query($koneksi, "UPDATE pegawai SET pegawai_pin='$pin', pegawai_nip='$nip', pegawai_nama='$nama', pegawai_status='$pegawai_status', tgl_resign= null  , tempat_lahir='$tempat_lhr', tgl_lahir='$tgl_lhr', tgl_mulai_kerja='$tgl_mulai_kerja', tgl_masuk_pertama='$tgl_masuk_pertama', gender='$jk', pegawai_telp='$telp' WHERE pegawai_id='$id_peg'");
 				$tb_user = mysqli_query($koneksi, "UPDATE tb_user SET id_user='$nip', nama_user='$nama' WHERE id_peg='$id_peg'");
 
 				if ($pegawai && $pegawai_d && $tb_pegawai && $tb_user) {
@@ -60,7 +61,7 @@
 				}
 			} else {
 				if ($pegawai_status == 0) {
-					$pegawai = mysqli_query($koneksi, "UPDATE pegawai SET pegawai_pin='$pin', pegawai_nip='$nip', pegawai_nama='$nama', pegawai_status='$pegawai_status', tgl_resign= null , tempat_lahir='$tempat_lhr', tgl_lahir='$tgl_lhr', gender='$jk', pegawai_telp='$telp' WHERE pegawai_id='$id_peg'");
+					$pegawai = mysqli_query($koneksi, "UPDATE pegawai SET pegawai_pin='$pin', pegawai_nip='$nip', pegawai_nama='$nama', pegawai_status='$pegawai_status', tgl_resign= null , tempat_lahir='$tempat_lhr', tgl_lahir='$tgl_lhr', tgl_mulai_kerja='$tgl_mulai_kerja', tgl_masuk_pertama='$tgl_masuk_pertama', gender='$jk', pegawai_telp='$telp' WHERE pegawai_id='$id_peg'");
 				} else if ($pegawai_status == 2) {
 					$pegawai = mysqli_query($koneksi, "UPDATE pegawai SET pegawai_pin='$pin', pegawai_nip='$nip', pegawai_nama='$nama', pegawai_status='$pegawai_status', tgl_resign= " . (($tgl_resign == "0000-00-00") ? "null" : "'$tgl_resign'") . " , tempat_lahir='$tempat_lhr', tgl_lahir='$tgl_lhr', gender='$jk', pegawai_telp='$telp' WHERE pegawai_id='$id_peg'");
 				}

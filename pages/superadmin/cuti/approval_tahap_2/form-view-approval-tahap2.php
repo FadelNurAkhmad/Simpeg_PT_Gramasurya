@@ -20,14 +20,14 @@ include "../../config/koneksi.php";
 $tampilCuti    = mysqli_query(
     $koneksi,
     "SELECT * FROM tb_approval_cuti_tahunan
-    INNER JOIN pegawai ON tb_approval_cuti_tahunan.id_peg=pegawai.pegawai_id WHERE approval='Aktif' ORDER BY id_approval_cuti DESC"
+    INNER JOIN pegawai ON tb_approval_cuti_tahunan.id_peg=pegawai.pegawai_id WHERE approval='Aktif' ORDER BY tanggal_cuti DESC"
 );
 
 // ambil data gabungan tabel pegawai dan tb_cuti_umum (Izin)
 $tampilCutiUmum    = mysqli_query(
     $koneksi,
     "SELECT * FROM tb_approval_cuti_umum
-    INNER JOIN pegawai ON tb_approval_cuti_umum.id_peg=pegawai.pegawai_id WHERE approval='Aktif' ORDER BY id_approval_umum DESC"
+    INNER JOIN pegawai ON tb_approval_cuti_umum.id_peg=pegawai.pegawai_id WHERE approval='Aktif' ORDER BY tanggal_cuti DESC"
 );
 
 
@@ -265,48 +265,48 @@ $tampilCutiUmum    = mysqli_query(
                         <tbody>
                             <?php
                             $no = 0;
-                            while ($cuti    = mysqli_fetch_array($tampilCutiUmum)) {
+                            while ($izin    = mysqli_fetch_array($tampilCutiUmum)) {
                                 $no++
                             ?>
                                 <tr>
                                     <td><?php echo $no ?></td>
-                                    <td><?php echo $cuti == 0 ? '-' : $cuti['pegawai_nip']; ?></td>
-                                    <td><?php echo $cuti['pegawai_nama'] ?></td>
-                                    <td><?php echo $cuti['tanggal_cuti'] ?></td>
+                                    <td><?php echo $izin == 0 ? '-' : $izin['pegawai_nip']; ?></td>
+                                    <td><?php echo $izin['pegawai_nama'] ?></td>
+                                    <td><?php echo $izin['tanggal_cuti'] ?></td>
                                     <td>
-                                        <?php echo $cuti['tanggal_mulai'] ?>
+                                        <?php echo $izin['tanggal_mulai'] ?>
                                         <b>s/d</b>
-                                        <?php echo $cuti['tanggal_selesai'] ?>
+                                        <?php echo $izin['tanggal_selesai'] ?>
                                     </td>
-                                    <td><?php echo $cuti['lama_cuti'] ?> Hari</td>
-                                    <td><?php echo $cuti['jenis_cuti'] ?></td>
+                                    <td><?php echo $izin['lama_cuti'] ?> Hari</td>
+                                    <td><?php echo $izin['jenis_cuti'] ?></td>
                                     <td><?php
-                                        if ($cuti['status'] == 'Process') {
+                                        if ($izin['status'] == 'Process') {
                                             echo '<span class="badge badge-primary">PROCESS</span>&nbsp;<span class="badge bg-warning">2</span>';
-                                        } else if ($cuti['status'] == 'Approve') {
+                                        } else if ($izin['status'] == 'Approve') {
                                             echo '<span class="badge badge-success">APPROVED</span>&nbsp;<span class="badge bg-warning">2</span>';
-                                        } else if ($cuti['status'] == 'Reject') {
+                                        } else if ($izin['status'] == 'Reject') {
                                             echo '<span class="badge badge-danger">REJECTED</span>';
                                         }
                                         ?>
                                     </td>
                                     <td class="text-center">
-                                        <a type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#Approve<?php echo $cuti['id_approval_umum'] ?>" title="Approve"><i class="fa fa-check"> </i> Approve</a>
-                                        <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#Reject<?php echo $cuti['id_approval_umum'] ?>" title="Reject"><i class="fa fa-close"> </i> Reject</a>
-                                        <a type="button" class="btn btn-success btn-icon btn-sm" data-toggle="modal" data-target="#Detail<?php echo $cuti['id_approval_umum'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
-                                        <!-- <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-cuti-umum&id_approval_umum=<?= $cuti['id_approval_umum'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a> -->
-                                        <!-- <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del<?php echo $cuti['id_approval_umum'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a> -->
+                                        <a type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#Approve1<?php echo $izin['id_approval_umum'] ?>" title="Approve"><i class="fa fa-check"> </i> Approve</a>
+                                        <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#Reject1<?php echo $izin['id_approval_umum'] ?>" title="Reject"><i class="fa fa-close"> </i> Reject</a>
+                                        <a type="button" class="btn btn-success btn-icon btn-sm" data-toggle="modal" data-target="#Detail1<?php echo $izin['id_approval_umum'] ?>" title="detail"><i class="fa fa-folder-open-o fa-lg"></i></a>
+                                        <!-- <a type="button" class="btn btn-info btn-icon btn-sm" href="index.php?page=form-edit-cuti-umum&id_approval_umum=<?= $izin['id_approval_umum'] ?>" title="edit"><i class="fa fa-pencil fa-lg"></i></a> -->
+                                        <!-- <a type="button" class="btn btn-danger btn-icon btn-sm" data-toggle="modal" data-target="#Del1<?php echo $izin['id_approval_umum'] ?>" title="delete"><i class="fa fa-trash-o fa-lg"></i></a> -->
                                     </td>
                                 </tr>
                                 <!-- #modal-dialog-delete -->
-                                <div id="Del<?php echo $cuti['id_approval_umum'] ?>" class="modal fade" role="dialog">
+                                <div id="Del1<?php echo $izin['id_approval_umum'] ?>" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Anda yakin akan menghapus data <u><?php echo $cuti['pegawai_nama'] ?></u> dari Database ?</h5>
+                                                <h5 class="modal-title"><span class="label label-inverse"> # Delete</span> &nbsp; Anda yakin akan menghapus data <u><?php echo $izin['pegawai_nama'] ?></u> dari Database ?</h5>
                                             </div>
                                             <div class="modal-body" align="center">
-                                                <a href="index.php?page=delete-approval-izin-2&id_approval_umum=<?= $cuti['id_approval_umum'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
+                                                <a href="index.php?page=delete-approval-izin-2&id_approval_umum=<?= $izin['id_approval_umum'] ?>" class="btn btn-danger">&nbsp; &nbsp;YES&nbsp; &nbsp;</a>
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
@@ -315,16 +315,16 @@ $tampilCutiUmum    = mysqli_query(
                                     </div>
                                 </div>
                                 <!-- #modal-dialog-approve -->
-                                <div id="Approve<?php echo $cuti['id_approval_umum'] ?>" class="modal fade" role="dialog">
+                                <div id="Approve1<?php echo $izin['id_approval_umum'] ?>" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title"><span class="label label-inverse"> # Approval</span> &nbsp; Anda yakin approve izin <?php echo $cuti['jenis_cuti'] ?> <u><?php echo $cuti['pegawai_nama'] ?></u> ?</h5>
+                                                <h5 class="modal-title"><span class="label label-inverse"> # Approval</span> &nbsp; Anda yakin approve izin <?php echo $izin['jenis_cuti'] ?> <u><?php echo $izin['pegawai_nama'] ?></u> ?</h5>
                                             </div>
                                             <div class="modal-body" align="center">
-                                                <p>Mohon periksa kembali data pengajuan cuti terlampir. Pastikan semua informasi telah <span class="label label-primary">SESUAI</span> !</p>
+                                                <p>Mohon periksa kembali data pengajuan izin terlampir. Pastikan semua informasi telah <span class="label label-primary">SESUAI</span> !</p>
                                                 <br>
-                                                <a href="index.php?page=status-cuti-umum-2&true=true&id_approval_umum=<?= $cuti['id_approval_umum'] ?>" class="btn btn-success">&nbsp; &nbsp;SETUJU&nbsp; &nbsp;</a>
+                                                <a href="index.php?page=status-cuti-umum-2&true1=true1&id_approval_umum=<?= $izin['id_approval_umum'] ?>" class="btn btn-success">&nbsp; &nbsp;SETUJU&nbsp; &nbsp;</a>
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
@@ -333,16 +333,16 @@ $tampilCutiUmum    = mysqli_query(
                                     </div>
                                 </div>
                                 <!-- #modal-dialog-reject -->
-                                <div id="Reject<?php echo $cuti['id_approval_umum'] ?>" class="modal fade" role="dialog">
+                                <div id="Reject1<?php echo $izin['id_approval_umum'] ?>" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title"><span class="label label-inverse"> # Reject</span> &nbsp; Anda yakin reject izin <u><?php echo $cuti['pegawai_nama'] ?></u> ?</h5>
+                                                <h5 class="modal-title"><span class="label label-inverse"> # Reject</span> &nbsp; Anda yakin reject izin <u><?php echo $izin['pegawai_nama'] ?></u> ?</h5>
                                             </div>
                                             <div class="modal-body" align="center">
-                                                <p>Mohon periksa kembali data pengajuan cuti terlampir. Pastikan semua informasi telah <span class="label label-primary">SESUAI</span> !</p>
+                                                <p>Mohon periksa kembali data pengajuan izin terlampir. Pastikan semua informasi telah <span class="label label-primary">SESUAI</span> !</p>
                                                 <br>
-                                                <a href="index.php?page=status-cuti-umum-2&false=false&id_approval_umum=<?= $cuti['id_approval_umum'] ?>" class="btn btn-danger">&nbsp; &nbsp;YA&nbsp; &nbsp;</a>
+                                                <a href="index.php?page=status-cuti-umum-2&false1=false1&id_approval_umum=<?= $izin['id_approval_umum'] ?>" class="btn btn-danger">&nbsp; &nbsp;YA&nbsp; &nbsp;</a>
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
@@ -350,14 +350,14 @@ $tampilCutiUmum    = mysqli_query(
                                         </div>
                                     </div>
                                 </div>
-                                <div id="Detail<?php echo $cuti['id_approval_umum'] ?>" class="modal fade" role="dialog">
+                                <div id="Detail1<?php echo $izin['id_approval_umum'] ?>" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                 <h4 class="modal-title">
                                                     <i class="ion-ios-gear text-danger"></i>
-                                                    Detail Pengajuan Cuti Umum ID_<?php echo $cuti['id_approval_umum'] ?>
+                                                    Detail Pengajuan Cuti Umum ID_<?php echo $izin['id_approval_umum'] ?>
                                                 </h4>
                                             </div>
                                             <div class="col-sm-12">
@@ -365,46 +365,46 @@ $tampilCutiUmum    = mysqli_query(
                                                     <div class="form-group col-sm-12">
                                                         <label class="col-md-3 control-label">NIP</label>
                                                         <div class="col-md-9">
-                                                            : <?php echo $cuti == 0 ? '-' : $cuti['pegawai_nip']; ?>
+                                                            : <?php echo $izin == 0 ? '-' : $izin['pegawai_nip']; ?>
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm-12">
                                                         <label class="col-md-3 control-label">Nama</label>
                                                         <div class="col-md-9">
-                                                            : <?php echo $cuti['pegawai_nama'] ?>
+                                                            : <?php echo $izin['pegawai_nama'] ?>
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm-12">
                                                         <label class="col-md-3 control-label">Jenis Cuti</label>
                                                         <div class="col-md-9">
-                                                            : <?php echo $cuti['jenis_cuti'] ?>
+                                                            : <?php echo $izin['jenis_cuti'] ?>
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm-12">
                                                         <label class="col-md-3 control-label">Keperluan</label>
                                                         <div class="col-md-9">
-                                                            : <?php echo $cuti['keperluan'] ?>
+                                                            : <?php echo $izin['keperluan'] ?>
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm-12">
                                                         <label class="col-md-3 control-label">Tgl Pengajuan</label>
                                                         <div class="col-md-9">
-                                                            : <?php echo $cuti['tanggal_cuti'] ?>
+                                                            : <?php echo $izin['tanggal_cuti'] ?>
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm-12">
                                                         <label class="col-md-3 control-label">Tgl Pelaksanaan</label>
                                                         <div class="col-md-9">
                                                             :
-                                                            <?php echo $cuti['tanggal_mulai'] ?>
+                                                            <?php echo $izin['tanggal_mulai'] ?>
                                                             <b>s/d</b>
-                                                            <?php echo $cuti['tanggal_selesai'] ?>
+                                                            <?php echo $izin['tanggal_selesai'] ?>
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm-12">
                                                         <label class="col-md-3 control-label">Lama Cuti</label>
                                                         <div class="col-md-9">
-                                                            : <?php echo $cuti['lama_cuti'] ?> Hari
+                                                            : <?php echo $izin['lama_cuti'] ?> Hari
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-sm-12">
@@ -412,11 +412,11 @@ $tampilCutiUmum    = mysqli_query(
                                                         <div class="col-md-9">
                                                             :
                                                             <?php
-                                                            if ($cuti['status'] == 'Process') {
+                                                            if ($izin['status'] == 'Process') {
                                                                 echo '<span class="badge badge-primary">PROCESS</span>&nbsp;<span class="badge bg-warning">2</span>';
-                                                            } else if ($cuti['status'] == 'Approve') {
+                                                            } else if ($izin['status'] == 'Approve') {
                                                                 echo '<span class="badge badge-success">APPROVED</span>&nbsp;<span class="badge bg-warning">2</span>';
-                                                            } else if ($cuti['status'] == 'Reject') {
+                                                            } else if ($izin['status'] == 'Reject') {
                                                                 echo '<span class="badge badge-danger">REJECTED</span>';
                                                             }
                                                             ?>

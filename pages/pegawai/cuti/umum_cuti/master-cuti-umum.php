@@ -46,10 +46,10 @@
 
         if (empty($_POST['tanggal_cuti']) || empty($_POST['tanggal_mulai']) || empty($_POST['tanggal_selesai']) || empty($_POST['lama_cuti']) || empty($_POST['jumlah_cuti']) || empty($_POST['jenis_cuti']) || empty($_POST['keperluan']) || empty($_POST['status'])) {
             $_SESSION['pesan'] = "Oops! Please fill all column ...";
-            header("location:index.php?page=form-master-cuti");
+            header("location:index.php?page=form-master-cuti-umum");
         } else if ($cek > 0) {
             $_SESSION['pesan'] = "Oops! Duplikat data ...";
-            header("location:index.php?page=form-master-cuti");
+            header("location:index.php?page=form-master-cuti-umum");
         } else {
             $insert = mysqli_query($koneksi, "INSERT INTO tb_cuti_umum (id_cuti_umum, id_peg, tanggal_cuti, tanggal_mulai, tanggal_selesai, lama_cuti, jumlah_cuti, jenis_cuti, keperluan, status) 
             VALUES ('$id_cuti_umum', '$id_peg', '$tanggal_cuti', '$tanggal_mulai', '$tanggal_selesai', '$lama_cuti', '$jumlah_cuti', '$jenis_cuti', '$keperluan', '$status')");
@@ -57,9 +57,9 @@
             $approval = mysqli_query($koneksi, "INSERT INTO tb_approval_cuti_umum (id_approval_umum, id_peg, tanggal_cuti, tanggal_mulai, tanggal_selesai, lama_cuti, jumlah_cuti, jenis_cuti, keperluan, status) 
             VALUES ('$id_cuti_umum', '$id_peg', '$tanggal_cuti', '$tanggal_mulai', '$tanggal_selesai', '$lama_cuti', '$jumlah_cuti', '$jenis_cuti', '$keperluan', '$status')");
 
-            if ($query && $approval) {
+            if ($insert && $approval) {
                 $_SESSION['pesan'] = "Good! Insert data cuti success ...";
-                header("location:index.php?page=form-master-cuti");
+                header("location:index.php?page=form-master-cuti-umum");
             } else {
                 echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
             }

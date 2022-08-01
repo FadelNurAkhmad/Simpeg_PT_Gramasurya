@@ -12,7 +12,9 @@
 
     if (!empty($id_cuti) && $id_cuti != "") {
         $delete    = mysqli_query($koneksi, "DELETE FROM tb_cuti_tahunan WHERE id_cuti='$id_cuti'");
-        if ($delete) {
+        $delete1   = mysqli_query($koneksi, "DELETE FROM tb_approval_cuti_tahunan WHERE id_approval_cuti='$id_cuti'");
+
+        if ($delete && $delete1) {
             $_SESSION['pesan'] = "Good! delete cuti success ...";
             header("location:index.php?page=form-view-cuti");
         } else {

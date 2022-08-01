@@ -437,12 +437,12 @@ $signa = '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td></td>
 				<td></td>
-				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">BADAN KEPEGAWAIAN DAERAH</font></td>
+				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">A.N PERUSAHAAN</font></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
-				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">KABUPATEN ' . $kep['nama_peru'] . '</font></td>
+				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">'. $kep['nama_peru'] . '</font></td>
 			</tr>
 			<tr>
 				<td height="60"></td>

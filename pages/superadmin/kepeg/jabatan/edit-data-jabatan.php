@@ -1,43 +1,41 @@
 <div class="row">
-<?php
+	<?php
 	if (isset($_GET['id_jab'])) {
-	$id_jab = $_GET['id_jab'];
-	}
-	else {
-		die ("Error. No Kode Selected! ");	
+		$id_jab = $_GET['id_jab'];
+	} else {
+		die("Error. No Kode Selected! ");
 	}
 	include "../../config/koneksi.php";
 	$tampilJab	= mysqli_query($koneksi, "SELECT * FROM tb_jabatan WHERE id_jab='$id_jab'");
-	$hasil	= mysqli_fetch_array ($tampilJab, MYSQLI_ASSOC);
-		$id_peg	=$hasil['id_peg'];
-				
+	$hasil	= mysqli_fetch_array($tampilJab, MYSQLI_ASSOC);
+	$id_peg	= $hasil['id_peg'];
+
 	if ($_POST['edit'] == "edit") {
-	$jabatan		=$_POST['jabatan'];
-	$no_sk			=$_POST['no_sk'];
-	$tgl_sk			=$_POST['tgl_sk'];
-	$tmt_jabatan	=$_POST['tmt_jabatan'];
-	$sampai_tgl		=$_POST['sampai_tgl'];
-	$file			=$_FILES['file']['name'];
-	
-		if (empty($_POST['jabatan'])) {
+		$unit		= $_POST['unit'];
+		$jabatan		= $_POST['jabatan'];
+		$no_sk			= $_POST['no_sk'];
+		$tgl_sk			= $_POST['tgl_sk'];
+		$tmt_jabatan	= $_POST['tmt_jabatan'];
+		$sampai_tgl		= $_POST['sampai_tgl'];
+		$file			= $_FILES['file']['name'];
+
+		if (empty($_POST['jabatan']) || empty($_POST['jabatan'])) {
 			$_SESSION['pesan'] = "Oops! Please fill jabatan column ...";
 			header("location:index.php?page=form-edit-data-jabatan&id_jab=$id_jab");
-		}
-		else{
-		$update= mysqli_query ($koneksi, "UPDATE tb_jabatan SET jabatan='$jabatan', no_sk='$no_sk', tgl_sk='$tgl_sk', tmt_jabatan='$tmt_jabatan', sampai_tgl='$sampai_tgl', file='$file' WHERE id_jab='$id_jab'");
-			if($update){
+		} else {
+			$update = mysqli_query($koneksi, "UPDATE tb_jabatan SET unit='$unit', jabatan='$jabatan', no_sk='$no_sk', tgl_sk='$tgl_sk', tmt_jabatan='$tmt_jabatan', sampai_tgl='$sampai_tgl', file='$file' WHERE id_jab='$id_jab'");
+			if ($update) {
 				$_SESSION['pesan'] = "Good! edit data jabatan success ...";
 				header("location:index.php?page=detail-data-pegawai&pegawai_id=$id_peg");
-			}
-			else {
+			} else {
 				echo "<div class='register-logo'><b>Oops!</b> 404 Error Server.</div>";
 			}
-			if (strlen($file)>0) {
+			if (strlen($file) > 0) {
 				if (is_uploaded_file($_FILES['file']['tmp_name'])) {
-					move_uploaded_file ($_FILES['file']['tmp_name'], "../../assets/file/".$file);
+					move_uploaded_file($_FILES['file']['tmp_name'], "../../assets/file/" . $file);
 				}
 			}
 		}
 	}
-?>
+	?>
 </div>

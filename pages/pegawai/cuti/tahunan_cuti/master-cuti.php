@@ -42,10 +42,21 @@
         }
         $id_cuti       = kdauto("tb_cuti_tahunan", "");
 
+        $cekSisaCuti = mysqli_query($koneksi, "SELECT jatah_c_sisa FROM tb_jatah_cuti WHERE id_peg='$id_peg'");
+        while ($cek = mysqli_fetch_array($cekSisaCuti)) {
+            $sisa = $cek;
+        }
+
         $cek = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tb_cuti_tahunan WHERE tanggal_cuti='$_POST[tanggal_cuti]' AND id_peg='$_POST[id_peg]'"));
 
         if (empty($_POST['tanggal_cuti']) || empty($_POST['tanggal_mulai']) || empty($_POST['tanggal_selesai']) || empty($_POST['lama_cuti']) || empty($_POST['jumlah_cuti']) || empty($_POST['jenis_cuti']) || empty($_POST['keperluan']) || empty($_POST['status'])) {
             $_SESSION['pesan'] = "Oops! Please fill all column ...";
+            header("location:index.php?page=form-master-cuti");
+        } else if ($sisa['jatah_c_sisa'] <= 0) {
+            $_SESSION['pesan'] = "Oops! Sisa cuti telah habis / Belum ditambah jatah cuti ...";
+            header("location:index.php?page=form-master-cuti");
+        } else if ($_POST['lama_cuti'] > 12) {
+            $_SESSION['pesan'] = "Oops! Lama Cuti Max 12 Hari ...";
             header("location:index.php?page=form-master-cuti");
         } else if ($cek > 0) {
             $_SESSION['pesan'] = "Oops! Duplikat data ...";
@@ -57,7 +68,7 @@
             $approval = mysqli_query($koneksi, "INSERT INTO tb_approval_cuti_tahunan (id_approval_cuti, id_peg, tanggal_cuti, tanggal_mulai, tanggal_selesai, lama_cuti, jumlah_cuti, jenis_cuti, keperluan, status) 
             VALUES ('$id_cuti', '$id_peg', '$tanggal_cuti', '$tanggal_mulai', '$tanggal_selesai', '$lama_cuti', '$jumlah_cuti', '$jenis_cuti', '$keperluan', '$status')");
 
-            if ($query && $approval) {
+            if ($insert && $approval) {
                 $_SESSION['pesan'] = "Good! Insert data cuti success ...";
                 header("location:index.php?page=form-master-cuti");
             } else {

@@ -84,7 +84,7 @@ $pdf->writeHTML($subhead, true, false, false, false, '');
 $html = '<table border="1" cellspacing="0" cellpadding="3">
 			<tr align="center">
 				<th rowspan="2" width="40" height="50">NO</th>
-				<th colspan="2" width="200" height="30">NAMA, TTL</th>
+				<th colspan="2" width="240" height="30">NAMA, TTL</th>
 				<th rowspan="2" width="100">JENIS KELAMIN</th>
 				<th colspan="2" width="200">JABATAN</th>
 				<th rowspan="2" width="170">PEND, JURUSAN, T.LULUS</th>
@@ -92,7 +92,7 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				<th rowspan="2" width="50">KET</th>
 			</tr>
 			<tr align="center">
-				<th colspan="2" width="200">NIP, AGAMA</th>	
+				<th colspan="2" width="240">NIP, AGAMA</th>	
 				<th width="100">NAMA</th>
 				<th width="100">TMT</th>
 			</tr>
@@ -160,7 +160,7 @@ $html .= '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td></td>
 				<td></td>
-				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">DIREKTUR UTAMA</font></td>
+				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">A.N PERUSAHAAN</font></td>
 			</tr>
 			<tr>
 				<td></td>

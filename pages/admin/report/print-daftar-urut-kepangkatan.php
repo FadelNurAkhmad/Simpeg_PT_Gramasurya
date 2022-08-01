@@ -78,6 +78,7 @@ $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = 10, $header, $border = 0, $ln 
 $html = '<table border="1" cellspacing="0" cellpadding="3">
 			<tr align="center">
 				<th rowspan="2" width="40">NO</th>
+<<<<<<< HEAD
 				<th colspan="2" width="180">NAMA</th>
 				<th rowspan="2" width="150">NIP</th>
 				
@@ -87,10 +88,18 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 			
 				<th colspan="3" width="270">PEND AKHIR</th>
 				<th rowspan="2" width="90">KET</th>
+=======
+				<th colspan="2" width="210">NAMA</th>
+				<th rowspan="2" width="150">NIP</th>
+				<th colspan="2" width="210">JABATAN</th>
+				<th colspan="3" width="300">PEND AKHIR</th>
+				<th rowspan="2" width="50">KET</th>
+>>>>>>> 93d9e2167c871615cf7ef01909c5dd412191636f
 			</tr>
 			<tr align="center">
-				<th colspan="2" width="180">TTL</th>
+				<th colspan="2" width="210">TTL</th>
 				
+<<<<<<< HEAD
 				<th width="125">NAMA</th>
 				<th width="125">TMT</th>
 			
@@ -112,6 +121,25 @@ $html = '<table border="1" cellspacing="0" cellpadding="3">
 				
 				
 				
+=======
+				<th width="105">NAMA</th>
+				<th width="105">TMT</th>
+			
+				<th width="100">ASAL</th>
+				<th width="100">T.LLS</th>
+				<th width="100">TINGKAT</th>
+			</tr>
+			<tr align="center">
+				<th width="40">1</th>
+				<th colspan="2" width="210">2</th>
+				<th width="150">3</th>
+				<th width="105">4</th>
+				<th width="105">5</th>
+				<th width="100">6</th>
+				<th width="100">7</th>
+				<th width="100">8</th>
+				<th width="50">9</th>
+>>>>>>> 93d9e2167c871615cf7ef01909c5dd412191636f
 			</tr>';
 $no = 1;
 $idPeg = mysqli_query($koneksi, "SELECT * FROM pegawai INNER JOIN tb_pegawai ON pegawai.pegawai_id= tb_pegawai.pegawai_id INNER JOIN pegawai_d ON pegawai.pegawai_id=pegawai_d.pegawai_id");
@@ -119,6 +147,10 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 	if ($peg['pegawai_status'] == '1') {
 		$status = 'Aktif';
 	}
+	if ($peg['pegawai_status'] == '2') {
+		$status = 'Non-Aktif';
+	}
+
 
 	$html .= '<tr>
 					<td align="center">' . $no++ . '</td>
@@ -135,6 +167,7 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 	$html .= '<td>' . $hjab1 . '</td>
 					<td>' . $hjab2 . '</td>';
 
+<<<<<<< HEAD
 
 	// $idLatjab = mysqli_query($koneksi, "SELECT * FROM tb_lat_jabatan WHERE id_lat_jabatan='$peg[pegawai_id]'");
 	// $hljab = mysqli_fetch_array($idLatjab, MYSQLI_ASSOC);
@@ -145,11 +178,14 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 	// 				<td align="center">' . $hljab2. '</td>
 	// 				<td align="center">' . $hljab3 . '</td>';
 
+=======
+>>>>>>> 93d9e2167c871615cf7ef01909c5dd412191636f
 	$idSek = mysqli_query($koneksi, "SELECT * FROM  tb_sekolah WHERE id_peg='$peg[pegawai_id]' AND status='Akhir'");
 	$hsek = mysqli_fetch_array($idSek, MYSQLI_ASSOC);
 	$hsek1 = isset($hsek['nama_sekolah']) ? $hsek['nama_sekolah'] : '';
 	$hsek2 = isset($hsek['tgl_ijazah']) ? $hsek['tgl_ijazah'] : '';
 	$hsek3 = isset($hsek['tingkat']) ? $hsek['tingkat'] : '';
+
 	$html .= '<td>' . $hsek1 . '</td>
 					<td>' . $hsek2 . '</td>
 					<td align="center">' . $hsek3 . '</td>
@@ -157,6 +193,7 @@ while ($peg = mysqli_fetch_array($idPeg, MYSQLI_ASSOC)) {
 				</tr>';
 }
 $html .= '</table><br /><br /><br />';
+
 $html .= '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td width="550"></td>
@@ -171,7 +208,7 @@ $html .= '<table cellpadding="1" border="0" align="center">
 			<tr>
 				<td></td>
 				<td></td>
-				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">DIREKTUR UTAMA</font></td>
+				<td><font size="9" style="text-transform:uppercase;font-weight:bold;">A.N PERUSAHAAN</font></td>
 			</tr>
 			<tr>
 				<td></td>

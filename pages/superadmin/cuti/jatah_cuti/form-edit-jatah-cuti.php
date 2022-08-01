@@ -61,26 +61,23 @@ if (isset($_GET['id_jatah'])) {
                     <div class="form-group">
                         <label class="col-md-3 control-label">Jatah Cuti<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-4">
-                            <input type="text" name="jatah_c_jml" maxlength="11" value="<?= $data['jatah_c_jml'] ?>" class="form-control" /></input>
+                            <input type="number" name="jatah_c_jml" maxlength="11" value="<?= $data['jatah_c_jml'] ?>" class="form-control" readonly /></input>
                         </div>
-                        <div class="col-md-2">
-                            <p>* Max 12</p>
-                        </div>
+                        <label class="control-label"><span aria-required="true" class="text-danger"> * Max 12 Hari </span></label>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Diambil</label>
                         <div class="col-md-4">
-                            <input type="text" name="jatah_c_ambil" value="<?= $data['jatah_c_ambil'] ?>" class="form-control"></input>
+                            <input type="number" name="jatah_c_ambil" value="<?= $data['jatah_c_ambil'] ?>" min="0" max="12" class="form-control"></input>
                         </div>
+                        <label class="control-label"><span aria-required="true" class="text-danger"> * Max 12 Hari </span></label>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Sisa Cuti<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-4">
-                            <input type="text" name="jatah_c_sisa" value="<?= $data['jatah_c_sisa'] ?>" class="form-control"></input>
+                            <input type="number" name="jatah_c_sisa" value="<?= $data['jatah_c_sisa'] ?>" min="0" max="12" class="form-control"></input>
                         </div>
-                        <div class="col-md-2">
-                            <p>* Max 12</p>
-                        </div>
+                        <label class="control-label"><span aria-required="true" class="text-danger"> * Max 12 Hari </span></label>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>

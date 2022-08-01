@@ -21,7 +21,7 @@ $tampilCutiUmum    = mysqli_query(
     $koneksi,
     "SELECT tb_cuti_umum.id_cuti_umum, tb_cuti_umum.id_peg, tb_cuti_umum.tanggal_cuti, tb_cuti_umum.tanggal_mulai, tb_cuti_umum.tanggal_selesai, tb_cuti_umum.lama_cuti, tb_cuti_umum.jumlah_cuti, tb_cuti_umum.jenis_cuti, tb_cuti_umum.keperluan, tb_cuti_umum.status, pegawai.pegawai_nip, pegawai.pegawai_nama
     FROM tb_cuti_umum
-    INNER JOIN pegawai ON tb_cuti_umum.id_peg=pegawai.pegawai_id ORDER BY id_cuti_umum DESC"
+    INNER JOIN pegawai ON tb_cuti_umum.id_peg=pegawai.pegawai_id ORDER BY tanggal_cuti DESC"
 );
 
 ?>
@@ -35,7 +35,6 @@ $tampilCutiUmum    = mysqli_query(
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
                 <h4 class="panel-title">Results <span class="text-info"><?php echo mysqli_num_rows($tampilCutiUmum); ?></span> rows for "Data Izin"</h4>
             </div>
