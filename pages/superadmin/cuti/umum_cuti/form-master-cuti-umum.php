@@ -119,7 +119,7 @@ $id_cuti_umum    = kdauto("tb_cuti_umum", "");
                     <div class="form-group">
                         <label class="col-md-3 control-label">Lama Izin<span aria-required="true" class="text-danger"> * </span></label>
                         <div class="col-md-6">
-                            <input type="text" id="lama_cuti" name="lama_cuti" class="form-control" placeholder="Dalam Hari"></input>
+                            <input type="number" id="lama_cuti" name="lama_cuti" class="form-control" placeholder="Dalam Hari"></input>
                         </div>
                     </div>
                     <div class="form-group">

@@ -88,8 +88,8 @@
 						[
 						<?php 
 						$sql   = "SELECT * FROM tb_pegawai WHERE status_mut='' GROUP BY unit_kerja";
-						$query = mysqli_query($koneksi, $sql )  or die(mysqli_error());
-							while( $ret = mysqli_fetch_array( $query, MYSQLI_ASSOC ) ){
+						$query = mysqli_query($koneksi, $sql )  or die(mysqli_error($koneksi));
+							while( $ret = mysqli_fetch_array( $query, MYSQLI_ASSOC) ){
 									$r	=$ret['unit_kerja'];
 									
 									$nmskpd=mysqli_query($koneksi, "SELECT * FROM tb_unit WHERE id_unit='$r'");
@@ -97,9 +97,9 @@
 									$namaskpd= $nm['nama'];
 									
 									$sql_jumlah   = "SELECT * FROM tb_pegawai WHERE status_mut='' AND unit_kerja='$r'";        
-									$query_jumlah = mysqli_query($koneksi, $sql_jumlah ) or die(mysqli_error());
+									$query_jumlah = mysqli_query($koneksi, $sql_jumlah ) or die(mysqli_error($koneksi));
 									$data = mysqli_num_rows( $query_jumlah );																									
-							?>
+							?>,
 								{
 									name: '<?php echo $namaskpd; ?>',
 									data: [<?php echo $data; ?>]

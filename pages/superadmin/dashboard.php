@@ -98,6 +98,7 @@ $jtug    = mysqli_num_rows($jmltug);
 	<!-- end col-3 -->
 </div>
 <!-- end row -->
+
 <div class="row">
 	<!-- begin col-12 -->
 	<div class="col-md-12">
@@ -268,7 +269,60 @@ $jtug    = mysqli_num_rows($jmltug);
 		</div>
 	</div>
 	<!-- end col-6 -->
+</div>
 
+<div class="row">
+	<!-- begin col-12 -->
+	<div class="col-md-12">
+		<div class="panel panel-inverse" data-sortable-id="index-1">
+			<div class="panel-heading">
+				<div class="panel-heading-btn">
+					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+				</div>
+				<h4 class="panel-title"><i class="ion-ios-calendar fa-lg text-warning"></i> &nbsp;Penghargaan Pegawai</h4>
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table table-bordered table-striped">
+						<thead class="thin-border-bottom">
+							<tr>
+								<th width=""><i class="ace-icon fa fa-lock blue"></i> NIP</th>
+								<th width=""><i class="ace-icon fa fa-caret-right blue"></i> Nama</th>
+								<th width=""><i class="ace-icon fa fa-caret-right blue"></i> Jenis Penghargaan</th>
+								<th width=""><i class="ace-icon fa fa-caret-right blue"></i> Tahun</th>
+								<th width=""><i class="ace-icon fa fa-caret-right blue"></i> Pemberi Penghargaan</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							$tampilPenghargaan    = mysqli_query(
+								$koneksi,
+								"SELECT tb_penghargaan.id_penghargaan, tb_penghargaan.id_peg, tb_penghargaan.penghargaan, tb_penghargaan.tahun, tb_penghargaan.pemberi, pegawai.pegawai_nip, pegawai.pegawai_nama
+								FROM tb_penghargaan
+								INNER JOIN pegawai ON tb_penghargaan.id_peg=pegawai.pegawai_id ORDER BY tahun DESC LIMIT 8"
+							);
+							while ($harga    = mysqli_fetch_array($tampilPenghargaan)) {
+							?>
+								<tr>
+									<td><?php echo $harga == 0 ? '-' : $harga['pegawai_nip']; ?></td>
+									<td><?php echo $harga['pegawai_nama'] ?></td>
+									<td><?php echo $harga['penghargaan'] ?></td>
+									<td><?php echo $harga['tahun'] ?></td>
+									<td><?php echo $harga['pemberi'] ?></td>
+								</tr>
+							<?php
+							}
+							?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end col-12 -->
 </div>
 
 <script src="../../assets/js/highcharts.js" type="text/javascript"></script>

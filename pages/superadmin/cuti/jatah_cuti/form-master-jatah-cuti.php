@@ -88,7 +88,7 @@ $id_jatah    = kdauto("tb_jatah_cuti", "");
                     <div class="form-group">
                         <label class="col-md-3 control-label">Jatah Cuti</label>
                         <div class="col-md-4">
-                            <input type="text" name="jatah_c_jml" maxlength="11" class="form-control" placeholder="12" value="12" readonly />
+                            <input type="number" name="jatah_c_jml" maxlength="11" class="form-control" min="1" max="12" placeholder="12" value="12" readonly />
                         </div>
                         <label class="control-label"><span aria-required="true" class="text-danger"> * Max 12 Hari </span></label>
                     </div>
