@@ -11,7 +11,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Kepegawaian <small> <i class="fa fa-angle-right"></i> Hukuman <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
+<h1 class="page-header">Kepegawaian <small> <i class="fa fa-angle-right"></i> Pembinaan <i class="fa fa-angle-right"></i> Insert&nbsp;</small></h1>
 <!-- end page-header -->
 <?php
 function kdauto($tabel, $inisial)
@@ -37,7 +37,7 @@ function kdauto($tabel, $inisial)
 	}
 	return $inisial . $tmp . $angka;
 }
-$id_hukuman	= kdauto("tb_hukuman", "");
+$id_pembinaan	= kdauto("tb_pembinaan", "");
 ?>
 <!-- begin row -->
 <div class="row">
@@ -51,10 +51,10 @@ $id_hukuman	= kdauto("tb_hukuman", "");
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 				</div>
-				<h4 class="panel-title">Form master data hukuman</h4>
+				<h4 class="panel-title">Form master data pembinaan</h4>
 			</div>
 			<div class="panel-body">
-				<form action="index.php?page=master-data-hukuman&id_hukuman=<?= $id_hukuman ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+				<form action="index.php?page=master-data-pembinaan&id_pembinaan=<?= $id_pembinaan ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label class="col-md-3 control-label">Pegawai<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
@@ -70,9 +70,9 @@ $id_hukuman	= kdauto("tb_hukuman", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Jenis Hukuman<span aria-required="true" class="text-danger"> * </span></label>
+						<label class="col-md-3 control-label">Jenis pembinaan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
-							<select name="hukuman" class="default-select2 form-control">
+							<select name="pembinaan" class="default-select2 form-control">
 								<option value="">...</option>
 								<option value="Teguran Lisan">Teguran Lisan</option>
 								<option value="Teguran Tertulis">Teguran Tertulis</option>
@@ -83,7 +83,7 @@ $id_hukuman	= kdauto("tb_hukuman", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pejabat Pengesah SK Hukuman<span aria-required="true" class="text-danger"> * </span></label>
+						<label class="col-md-3 control-label">Pejabat Pengesah SK pembinaan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="pejabat_sk" maxlength="64" class="form-control" />
 						</div>
@@ -101,13 +101,13 @@ $id_hukuman	= kdauto("tb_hukuman", "");
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pejabat Pemulih Hukuman</label>
+						<label class="col-md-3 control-label">Pejabat Pemulih pembinaan</label>
 						<div class="col-md-6">
 							<input type="text" name="pejabat_pulih" maxlength="64" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nomor dan Tanggal Pemulihan Hukuman</label>
+						<label class="col-md-3 control-label">Nomor dan Tanggal Pemulihan pembinaan</label>
 						<div class="col-md-3">
 							<input type="text" name="no_pulih" maxlength="32" class="form-control" />
 						</div>

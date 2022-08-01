@@ -1,9 +1,9 @@
 <?php
-if (isset($_GET['id_hukuman'])) {
-	$id_hukuman = $_GET['id_hukuman'];
+if (isset($_GET['id_pembinaan'])) {
+	$id_pembinaan = $_GET['id_pembinaan'];
 
 	include "../../config/koneksi.php";
-	$query   = mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE id_hukuman='$id_hukuman'");
+	$query   = mysqli_query($koneksi, "SELECT * FROM tb_pembinaan WHERE id_pembinaan='$id_pembinaan'");
 	$data    = mysqli_fetch_array($query);
 
 	$tampilPeg   = mysqli_query($koneksi, "SELECT * FROM pegawai WHERE pegawai_id='$data[id_peg]'");
@@ -25,7 +25,7 @@ if (isset($_GET['id_hukuman'])) {
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Riwayat <small>Hukuman <i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> Pegawai: <?= $peg['pegawai_nama'] ?></small></h1>
+<h1 class="page-header">Riwayat <small>pembinaan <i class="fa fa-angle-right"></i> Edit <i class="fa fa-key"></i> Pegawai: <?= $peg['pegawai_nama'] ?></small></h1>
 <!-- begin row -->
 <div class="row">
 	<!-- begin col-12 -->
@@ -38,24 +38,24 @@ if (isset($_GET['id_hukuman'])) {
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 				</div>
-				<h4 class="panel-title">Form edit data hukuman</h4>
+				<h4 class="panel-title">Form edit data pembinaan</h4>
 			</div>
 			<div class="panel-body">
-				<form action="index.php?page=edit-data-hukuman&id_hukuman=<?= $id_hukuman ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+				<form action="index.php?page=edit-data-pembinaan&id_pembinaan=<?= $id_pembinaan ?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-md-3 control-label">Jenis Hukuman<span aria-required="true" class="text-danger"> * </span></label>
+						<label class="col-md-3 control-label">Jenis pembinaan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
-							<select name="hukuman" class="default-select2 form-control">
-								<option value="Teguran Lisan" <?php echo ($data['hukuman'] == 'Teguran Lisan') ? "selected" : ""; ?>>Teguran Lisan
-								<option value="Teguran Tertulis" <?php echo ($data['hukuman'] == 'Teguran Tertulis') ? "selected" : ""; ?>>Teguran Tertulis
-								<option value="Tunda Kenaikan Berkala" <?php echo ($data['hukuman'] == 'Tunda Kenaikan Berkala') ? "selected" : ""; ?>>Tunda Kenaikan Berkala
-								<option value="Tunda Kenaikan Pangkat" <?php echo ($data['hukuman'] == 'Tunda Kenaikan Pangkat') ? "selected" : ""; ?>>Tunda Kenaikan Pangkat
-								<option value="Pemberhentian" <?php echo ($data['hukuman'] == 'Pemberhentian') ? "selected" : ""; ?>>Pemberhentian
+							<select name="pembinaan" class="default-select2 form-control">
+								<option value="Teguran Lisan" <?php echo ($data['pembinaan'] == 'Teguran Lisan') ? "selected" : ""; ?>>Teguran Lisan
+								<option value="Teguran Tertulis" <?php echo ($data['pembinaan'] == 'Teguran Tertulis') ? "selected" : ""; ?>>Teguran Tertulis
+								<option value="Tunda Kenaikan Berkala" <?php echo ($data['pembinaan'] == 'Tunda Kenaikan Berkala') ? "selected" : ""; ?>>Tunda Kenaikan Berkala
+								<option value="Tunda Kenaikan Pangkat" <?php echo ($data['pembinaan'] == 'Tunda Kenaikan Pangkat') ? "selected" : ""; ?>>Tunda Kenaikan Pangkat
+								<option value="Pemberhentian" <?php echo ($data['pembinaan'] == 'Pemberhentian') ? "selected" : ""; ?>>Pemberhentian
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pejabat Pengesah SK Hukuman<span aria-required="true" class="text-danger"> * </span></label>
+						<label class="col-md-3 control-label">Pejabat Pengesah SK pembinaan<span aria-required="true" class="text-danger"> * </span></label>
 						<div class="col-md-6">
 							<input type="text" name="pejabat_sk" maxlength="64" value="<?= $data['pejabat_sk'] ?>" class="form-control" />
 						</div>
@@ -73,13 +73,13 @@ if (isset($_GET['id_hukuman'])) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Pejabat Pemulih Hukuman</label>
+						<label class="col-md-3 control-label">Pejabat Pemulih pembinaan</label>
 						<div class="col-md-6">
 							<input type="text" name="pejabat_pulih" maxlength="64" value="<?= $data['pejabat_pulih'] ?>" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-3 control-label">Nomor dan Tanggal Pemulihan Hukuman</label>
+						<label class="col-md-3 control-label">Nomor dan Tanggal Pemulihan pembinaan</label>
 						<div class="col-md-3">
 							<input type="text" name="no_pulih" maxlength="32" value="<?= $data['no_pulih'] ?>" class="form-control" />
 						</div>

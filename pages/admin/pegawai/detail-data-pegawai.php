@@ -1379,7 +1379,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 			<div id="collapseOne" class="panel-collapse collapse in">
 				<div class="panel-body">
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#jabatan" class="btn btn-default"><i class="fa fa-star"></i> Jabatan</a></p>
-					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#hukuman" class="btn btn-default"><i class="fa fa-gavel"></i> Hukuman</a></p>
+					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#pembinaan" class="btn btn-default"><i class="fa fa-gavel"></i> Pembinaan</a></p>
 
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#harga" class="btn btn-default"><i class="fa fa-certificate"></i> Penghargaan</a></p>
 					<p class="pull-right"><a type="button" data-toggle="modal" data-target="#tugas" class="btn btn-default"><i class="fa fa-flag"></i> Penugasan</a></p>
@@ -1484,12 +1484,12 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 			</div>
 		</div>
 
-		<div id="hukuman" class="modal fade">
+		<div id="pembinaan" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Riwayat Hukuman</h4>
+						<h4 class="modal-title">Riwayat Pembinaan</h4>
 					</div>
 					<div class="col-sm-12">
 						<div class="modal-body">
@@ -1498,7 +1498,7 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 									<thead class="thin-border-bottom">
 										<tr>
 											<th rowspan="2">No<br />&nbsp;</th>
-											<th rowspan="2">Jenis Hukuman<br />&nbsp;</th>
+											<th rowspan="2">Jenis Pembinaan<br />&nbsp;</th>
 											<th colspan="3">Surat Keputusan</th>
 											<th colspan="3">Pemulihan</th>
 											<th rowspan="2" width="10%">
@@ -1517,22 +1517,22 @@ $tampilPres    = mysqli_query($koneksi, "SELECT * FROM att_log WHERE pin='$data[
 									<tbody>
 										<?php
 										$no = 0;
-										$tampilHuk	= mysqli_query($koneksi, "SELECT * FROM tb_hukuman WHERE id_peg='$id_peg' ORDER BY tgl_sk");
-										while ($hukum = mysqli_fetch_array($tampilHuk)) {
+										$tampilHuk	= mysqli_query($koneksi, "SELECT * FROM tb_pembinaan WHERE id_peg='$id_peg' ORDER BY tgl_sk");
+										while ($pembinaan = mysqli_fetch_array($tampilHuk)) {
 											$no++
 										?>
 											<tr>
 												<td><?= $no ?></td>
-												<td><?php echo $hukum['hukuman']; ?></td>
-												<td><?php echo $hukum['pejabat_sk']; ?></td>
-												<td><?php echo $hukum['no_sk']; ?></td>
-												<td><?php echo $hukum['tgl_sk']; ?></td>
-												<td><?php echo $hukum['pejabat_pulih']; ?></td>
-												<td><?php echo $hukum['no_pulih']; ?></td>
-												<td><?php echo $hukum['tgl_pulih']; ?></td>
+												<td><?php echo $pembinaan['pembinaan']; ?></td>
+												<td><?php echo $pembinaan['pejabat_sk']; ?></td>
+												<td><?php echo $pembinaan['no_sk']; ?></td>
+												<td><?php echo $pembinaan['tgl_sk']; ?></td>
+												<td><?php echo $pembinaan['pejabat_pulih']; ?></td>
+												<td><?php echo $pembinaan['no_pulih']; ?></td>
+												<td><?php echo $pembinaan['tgl_pulih']; ?></td>
 												<td class="tools">
-													<a href="index.php?page=form-edit-data-hukuman&id_hukuman=<?= $hukum['id_hukuman']; ?>" title="edit" type="button" class="btn btn-info btn-icon btn-sm"><i class="fa fa-edit fa-lg"></i></a>&nbsp;
-													<a href="index.php?page=delete-data-hukuman&id_hukuman=<?= $hukum['id_hukuman'] ?>" title="delete" type="button" class="btn btn-danger btn-icon btn-sm" onclick="return confirm('Apakah kamu ingin delete == Data Hukuman == dari Database?');"><i class="fa fa-trash-o fa-lg"></i></a>
+													<a href="index.php?page=form-edit-data-pembinaan&id_pembinaan=<?= $pembinaan['id_pembinaan']; ?>" title="edit" type="button" class="btn btn-info btn-icon btn-sm"><i class="fa fa-edit fa-lg"></i></a>&nbsp;
+													<a href="index.php?page=delete-data-pembinaan&id_pembinaan=<?= $pembinaan['id_pembinaan'] ?>" title="delete" type="button" class="btn btn-danger btn-icon btn-sm" onclick="return confirm('Apakah kamu ingin delete == Data pembinaan == dari Database?');"><i class="fa fa-trash-o fa-lg"></i></a>
 												</td>
 											</tr>
 										<?php

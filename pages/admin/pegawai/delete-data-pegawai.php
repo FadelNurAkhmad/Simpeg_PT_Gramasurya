@@ -21,7 +21,7 @@
 		$delsek = mysqli_query($koneksi, "DELETE FROM tb_sekolah WHERE id_peg='$id_peg'");
 		$delbhs = mysqli_query($koneksi, "DELETE FROM tb_bahasa WHERE id_peg='$id_peg'");
 		$deljab = mysqli_query($koneksi, "DELETE FROM tb_jabatan WHERE id_peg='$id_peg'");
-		$delhuk = mysqli_query($koneksi, "DELETE FROM tb_hukuman WHERE id_peg='$id_peg'");
+		$delhuk = mysqli_query($koneksi, "DELETE FROM tb_pembinaan WHERE id_peg='$id_peg'");
 		$delpen = mysqli_query($koneksi, "DELETE FROM tb_penghargaan WHERE id_peg='$id_peg'");
 		$deltug = mysqli_query($koneksi, "DELETE FROM tb_penugasan WHERE id_peg='$id_peg'");
 		$delmut = mysqli_query($koneksi, "DELETE FROM tb_mutasi WHERE id_peg='$id_peg'");
